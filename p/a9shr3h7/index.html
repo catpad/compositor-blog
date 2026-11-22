@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поминки по Финнегану: путеводитель</title>
+<meta name="description" content="Практический путеводитель по последней книге Джеймса Джойса: как добраться, где вы окажетесь, кто там живёт и что обязательно посмотреть.">
+<meta name="compositor:paper" content="#F2ECDF">
+<meta name="compositor:ink" content="#1F2421">
+<meta name="compositor:accent" content="#B23A26">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2ECDF;
+  --ink:#1F2421;
+  --accent:#B23A26;
+  --slate:#26302C;
+  --chalk:#ECE8DC;
+  --rule:#CFC5B0;
+  --muted:#5B5F58;
+  --chalk-yellow:#EAD27C;
+  --chalk-blue:#93C6D4;
+  --chalk-pink:#E3A0A0;
+  --chalk-green:#A9CF9A;
+  --display:"Oswald","Arial Narrow",sans-serif;
+  --text:"PT Serif",Georgia,serif;
+  --hand:"Caveat","Comic Sans MS",cursive;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:1.0625rem;line-height:1.62;-webkit-font-smoothing:antialiased}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.page{max-width:66rem;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+a{color:var(--accent)}
+p{margin:0 0 1em}
+em{font-style:italic}
+.en{font-style:italic}
+
+/* running head of the guide */
+.runhead{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--display);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--ink);padding-bottom:.5rem}
+.runhead b{color:var(--accent);font-weight:600}
+
+/* cover */
+.cover{padding:2.25rem 0 1rem}
+.kicker{font-family:var(--display);text-transform:uppercase;letter-spacing:.16em;font-size:.85rem;color:var(--accent);margin:0 0 .5rem}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;margin:0 0 .6rem;letter-spacing:-.005em;text-transform:uppercase}
+.sub{font-size:1.2rem;max-width:40rem;margin:0 0 1.5rem;color:var(--ink)}
+.sub i{color:var(--muted)}
+
+.board{display:block;width:100%;height:auto;border-radius:6px;background:var(--slate);box-shadow:0 0 0 6px #6b4f35,0 0 0 8px #4a3624}
+figure{margin:2rem 0}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:1rem;max-width:40rem}
+figcaption b{font-family:var(--display);font-weight:400;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);font-size:.8rem;margin-right:.4em}
+.scrollbox{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px}
+.scrollbox .board{min-width:640px}
+
+/* sections */
+.sec{display:grid;grid-template-columns:minmax(0,1fr);gap:0 2.5rem;padding:2.5rem 0 1rem;border-top:1px solid var(--rule)}
+.sec>.wide{grid-column:1/-1}
+@media (min-width:960px){
+  .sec{grid-template-columns:minmax(0,40rem) minmax(0,1fr)}
+  .sec>.main{grid-column:1}
+  .sec>aside{grid-column:2;grid-row:2 / span 6}
+}
+.sechead{grid-column:1/-1;display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.1rem}
+.tab{flex:none;font-family:var(--display);font-weight:600;font-size:.95rem;background:var(--accent);color:var(--paper);padding:.2rem .55rem;letter-spacing:.06em}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.55rem,3.6vw,2.1rem);line-height:1.15;margin:0;text-transform:uppercase;letter-spacing:.01em}
+h3{font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:.03em;text-transform:uppercase;margin:1.6rem 0 .5rem;line-height:1.25}
+
+/* fact box */
+.facts{border:2px solid var(--ink);padding:1rem 1.1rem;margin:0 0 1.5rem;background:#F7F2E7}
+.facts h4,.tip h4,.warn h4,.legend h4{font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;margin:0 0 .7rem}
+.facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;font-size:.93rem;line-height:1.4}
+.facts dt{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:.74rem;color:var(--muted);padding-top:.15rem}
+.facts dd{margin:0}
+
+.tip{background:var(--ink);color:var(--paper);padding:1rem 1.1rem;margin:0 0 1.5rem;font-size:.93rem;line-height:1.5}
+.tip h4{color:var(--chalk-yellow);display:flex;align-items:center;gap:.5rem}
+.tip p:last-child,.warn p:last-child{margin:0}
+.warn{border-left:5px solid var(--accent);padding:.6rem 0 .6rem 1rem;margin:0 0 1.5rem;font-size:.93rem;line-height:1.5}
+.warn h4{color:var(--accent);display:flex;align-items:center;gap:.5rem}
+
+.stars{color:var(--accent);letter-spacing:.12em;font-size:1rem;white-space:nowrap}
+.stars .off{color:var(--rule)}
+
+/* icons */
+.ico{width:1.35em;height:1.35em;flex:none;vertical-align:-.3em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* routes */
+.routes{list-style:none;margin:0;padding:0}
+.routes li{display:grid;grid-template-columns:3rem 1fr;gap:.2rem 1rem;padding:1rem 0;border-bottom:1px dotted var(--rule)}
+.routes li:first-child{padding-top:0}
+.routes .ico{width:2.6rem;height:2.6rem;stroke-width:1.3;color:var(--accent)}
+.routes h3{margin:0 0 .3rem}
+.meta{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-family:var(--display);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .5rem}
+.meta span{display:inline-flex;align-items:center;gap:.35rem}
+
+/* legend */
+.legend ol{list-style:none;margin:0;padding:0;counter-reset:pin}
+.legend li{counter-increment:pin;display:grid;grid-template-columns:2rem 1fr;gap:.6rem;padding:.55rem 0;border-bottom:1px dotted var(--rule);font-size:.93rem;line-height:1.45}
+.legend li::before{content:counter(pin);font-family:var(--display);font-weight:600;color:var(--paper);background:var(--accent);border-radius:50%;width:1.6rem;height:1.6rem;display:grid;place-items:center;font-size:.85rem}
+.legend b{font-family:var(--display);font-weight:600;letter-spacing:.03em}
+
+/* residents */
+.residents{display:grid;grid-template-columns:1fr;gap:0;margin:0;padding:0;list-style:none}
+@media (min-width:640px){.residents{grid-template-columns:1fr 1fr;gap:0 2rem}}
+.residents li{padding:.8rem 0;border-bottom:1px dotted var(--rule);font-size:.97rem;line-height:1.5}
+.residents b{font-family:var(--display);font-weight:600;letter-spacing:.03em;display:block;font-size:1.02rem}
+.residents code{font-family:var(--display);color:var(--accent);font-size:.82rem;letter-spacing:.06em}
+
+/* sights */
+.sight{padding:1.1rem 0 1rem;border-bottom:1px solid var(--rule)}
+.sight:first-of-type{padding-top:0}
+.sight-top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.sight h3{margin:0}
+.where{font-family:var(--display);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:.25rem 0 .55rem}
+blockquote{margin:.6rem 0 1rem;padding:0 0 0 1rem;border-left:2px solid var(--ink);font-style:italic}
+blockquote p{margin:0}
+.thunder{font-family:var(--display);font-size:1.05rem;letter-spacing:.04em;word-break:break-all;line-height:1.4;background:var(--slate);color:var(--chalk);padding:.8rem 1rem;margin:.6rem 0 1rem;border-radius:3px}
+
+/* instruments */
+.instrument{display:block;width:100%;margin:1.75rem 0 2rem;min-height:26rem;background:var(--slate);color:var(--chalk);border-radius:6px;box-shadow:0 0 0 6px #6b4f35,0 0 0 8px #4a3624;position:relative;overflow:hidden}
+.instrument[data-instrument="word-suitcase"]{min-height:24rem}
+.instrument[data-instrument="thunderword"]{min-height:22rem}
+.instrument[data-instrument="vico-wheel"]{min-height:30rem}
+.instrument[data-instrument="riverrun-ring"]{min-height:32rem}
+
+/* rating scale */
+.scale{list-style:none;margin:0;padding:0;font-size:.88rem;line-height:1.45}
+.scale li{display:grid;grid-template-columns:5.6rem 1fr;gap:.6rem;padding:.3rem 0}
+.scale .stars{font-size:.85rem}
+
+.bookshelf{list-style:none;padding:0;margin:0}
+.bookshelf li{padding:.5rem 0;border-bottom:1px dotted var(--rule);font-size:.95rem;line-height:1.45}
+
+.end{margin-top:2.5rem;padding-top:1.2rem;border-top:2px solid var(--ink);font-family:var(--display);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+
+@media (max-width:520px){
+  body{font-size:1rem}
+  .page{padding:1rem 1rem 3rem}
+  .facts dl{grid-template-columns:1fr}
+  .facts dt{padding-top:.4rem}
+  .routes li{grid-template-columns:2.4rem 1fr}
+  .routes .ico{width:2.1rem;height:2.1rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/a9shr3h7/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Поминки по Финнегану: путеводитель"><meta property="og:description" content="Практический путеводитель по последней книге Джеймса Джойса: как добраться, где вы окажетесь, кто там живёт и что обязательно посмотреть."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/a9shr3h7/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F2ECDF;border-bottom:1px solid #1F242126;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F2421;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F2421;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1F2421"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F2ECDF" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F2ECDF"/></svg><span>Compositor</span></a><time datetime="2026-11-22T07:04:52.019Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F2421;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-22</time></compositor-bar>
+
+<!-- shared chalk filters and icon sprite -->
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="chalk" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.4" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="1" seed="11" result="g"/>
+      <feColorMatrix in="g" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2.6 0 0 0 -0.55" result="gm"/>
+      <feComposite in="d" in2="gm" operator="in"/>
+    </filter>
+    <filter id="dust" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009" numOctaves="3" seed="2" result="cloud"/>
+      <feColorMatrix in="cloud" type="matrix" values="0 0 0 0 0.92  0 0 0 0 0.91  0 0 0 0 0.86  0.22 0 0 0 -0.07" result="smudge"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="7" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.9  0 0 0 0 0.9  0 0 0 0 0.85  0.16 0 0 0 -0.05" result="specks"/>
+      <feMerge><feMergeNode in="smudge"/><feMergeNode in="specks"/></feMerge>
+      <feComposite in2="SourceAlpha" operator="in"/>
+    </filter>
+    <symbol id="i-boat" viewBox="0 0 32 32"><path d="M4 20h24l-3 6H7z"/><path d="M16 20V5l8 11h-8"/><path d="M3 29c3 0 3-1.5 6-1.5s3 1.5 6 1.5 3-1.5 6-1.5 3 1.5 6 1.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 32 32"><path d="M16 8c-3-2-7-3-11-3v19c4 0 8 1 11 3 3-2 7-3 11-3V5c-4 0-8 1-11 3z"/><path d="M16 8v19"/></symbol>
+    <symbol id="i-voice" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="3"/><path d="M16 5v3M16 24v3M8 9.5l1.6 1.6M22.4 20.9l1.6 1.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 32 32"><circle cx="16" cy="16" r="11"/><path d="M16 9v7l5 3"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 32 32"><path d="M3 16s5-8 13-8 13 8 13 8-5 8-13 8S3 16 3 16z"/><circle cx="16" cy="16" r="3.5"/></symbol>
+    <symbol id="i-lamp" viewBox="0 0 32 32"><path d="M11 20a8 8 0 1 1 10 0v3H11z"/><path d="M12 27h8"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 32 32"><path d="M16 4l13 23H3z"/><path d="M16 13v6M16 23v.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 32 32"><path d="M16 29s9-9 9-16a9 9 0 0 0-18 0c0 7 9 16 9 16z"/><circle cx="16" cy="13" r="3"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <div class="runhead"><span>Путеводитель по книгам · <b>Ирландия, ночь</b></span><span>Направление: Джеймс Джойс, 1939</span></div>
+
+  <header class="cover">
+    <p class="kicker">Город, который строили шестнадцать лет</p>
+    <h1>Поминки по Финнегану</h1>
+    <p class="sub">Путеводитель для тех, кто собирается в последнюю книгу Джеймса Джойса: как туда попасть, на каком языке говорят местные и почему с этой реки никто не возвращается, а только приходит снова. <i>Finnegans Wake, 1939.</i></p>
+
+    <figure>
+      <svg class="board" viewBox="0 0 1000 540" role="img" aria-labelledby="hero-t">
+        <title id="hero-t">Рисунок мелом на доске: лестница, кирпичи и бутылка виски внутри кольца, по которому идут последние слова книги, переходящие в первые.</title>
+        <rect width="1000" height="540" fill="#26302C"/>
+        <rect width="1000" height="540" fill="#fff" filter="url(#dust)"/>
+        <defs>
+          <path id="ring" d="M500,40 a230,230 0 1 1 -0.1,0"/>
+        </defs>
+        <g filter="url(#chalk)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <!-- ring of words -->
+          <circle cx="500" cy="270" r="250" stroke="#ECE8DC" stroke-width="1.6" stroke-dasharray="3 7" opacity=".7"/>
+          <text font-family="Caveat, cursive" font-size="19" fill="#ECE8DC" stroke="none">
+            <textPath href="#ring" textLength="1420" lengthAdjust="spacing">A way a lone a last a loved a long the <tspan fill="#EAD27C">riverrun, past Eve and Adam's, from swerve of shore to bend of bay, brings us by a commodius vicus of recirculation back to Howth Castle and Environs.</tspan></textPath>
+          </text>
+          <!-- title in chalk -->
+          <text x="500" y="158" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="46" fill="#ECE8DC" stroke="none">Finnegans Wake</text>
+          <path d="M392,172 C450,180 560,166 610,174" stroke="#EAD27C" stroke-width="2.5"/>
+          <!-- thunder zigzag -->
+          <path d="M610,196 l-14,26 h14 l-12,28" stroke="#EAD27C" stroke-width="3"/>
+          <path d="M590,204 l-6,4 M624,216 l7,-3 M592,244 l-7,2" stroke="#EAD27C" stroke-width="2"/>
+          <!-- ladder -->
+          <path d="M380,420 L440,170 M425,425 L485,175" stroke="#ECE8DC" stroke-width="4"/>
+          <path d="M386,395 L431,400 M395,357 L440,362 M404,320 L449,325 M413,282 L458,287 M422,245 L467,250 M431,207 L476,212" stroke="#ECE8DC" stroke-width="3"/>
+          <!-- hod on the ground -->
+          <path d="M344,428 L378,396" stroke="#ECE8DC" stroke-width="3"/>
+          <path d="M360,400 L384,384 L392,402 L370,416 Z" stroke="#ECE8DC" stroke-width="2.5"/>
+          <!-- scattered bricks -->
+          <path d="M455,418 l22,-4 l3,11 l-22,4 Z" stroke="#E3A0A0" stroke-width="2.4"/>
+          <path d="M486,428 l20,3 l-2,11 l-20,-3 Z" stroke="#E3A0A0" stroke-width="2.4"/>
+          <path d="M470,402 l19,-8 l4,10 l-19,8 Z" stroke="#E3A0A0" stroke-width="2.4"/>
+          <!-- ground -->
+          <path d="M340,432 C400,428 470,436 540,431 S640,430 662,433" stroke="#ECE8DC" stroke-width="2"/>
+          <!-- bottle -->
+          <path d="M572,300 v-26 h-8 v-12 h28 v12 h-8 v26 c16,8 22,20 22,40 v72 c0,8 -6,12 -14,12 h-28 c-8,0 -14,-4 -14,-12 v-72 c0,-20 6,-32 22,-40 Z" stroke="#ECE8DC" stroke-width="3"/>
+          <path d="M556,350 h48 v38 h-48 Z" stroke="#A9CF9A" stroke-width="2"/>
+          <text x="580" y="375" text-anchor="middle" font-family="Caveat, cursive" font-size="15" fill="#A9CF9A" stroke="none">usquebaugh</text>
+          <!-- splash -->
+          <path d="M580,248 c-4,-10 2,-16 0,-24 M560,240 c-6,-6 -6,-12 -10,-16 M600,240 c6,-6 8,-12 12,-16" stroke="#93C6D4" stroke-width="2.4"/>
+          <circle cx="548" cy="214" r="2.5" fill="#93C6D4" stroke="none"/><circle cx="616" cy="214" r="2.5" fill="#93C6D4" stroke="none"/><circle cx="582" cy="212" r="2" fill="#93C6D4" stroke="none"/>
+          <!-- river -->
+          <path d="M354,452 c22,-8 44,8 66,0 s44,-8 66,0 s44,8 66,0 s44,-8 66,0 s22,4 28,2" stroke="#93C6D4" stroke-width="2.6"/>
+          <path d="M382,472 c20,-7 40,7 60,0 s40,-7 60,0 s40,7 60,0 s20,-3 26,0" stroke="#93C6D4" stroke-width="2"/>
+          <!-- left notes -->
+          <text x="40" y="96" font-family="Caveat, cursive" font-size="30" fill="#EAD27C" stroke="none">стр. 628</text>
+          <path d="M70,112 C80,170 140,190 200,186" stroke="#EAD27C" stroke-width="2.2"/>
+          <path d="M188,178 l14,8 l-14,8" stroke="#EAD27C" stroke-width="2.2"/>
+          <text x="40" y="236" font-family="Caveat, cursive" font-size="24" fill="#ECE8DC" stroke="none">последнее слово:</text>
+          <text x="40" y="268" font-family="Caveat, cursive" font-size="30" fill="#ECE8DC" stroke="none">«the»</text>
+          <text x="40" y="440" font-family="Caveat, cursive" font-size="24" fill="#93C6D4" stroke="none">Лиффи = Анна Ливия</text>
+          <!-- right notes -->
+          <text x="800" y="96" font-family="Caveat, cursive" font-size="30" fill="#EAD27C" stroke="none">стр. 3</text>
+          <path d="M830,112 C820,170 790,200 760,206" stroke="#EAD27C" stroke-width="2.2"/>
+          <text x="790" y="236" font-family="Caveat, cursive" font-size="24" fill="#ECE8DC" stroke="none">первое слово:</text>
+          <text x="790" y="268" font-family="Caveat, cursive" font-size="30" fill="#ECE8DC" stroke="none">«riverrun»</text>
+          <text x="800" y="440" font-family="Caveat, cursive" font-size="24" fill="#E3A0A0" stroke="none">HCE = Howth Castle</text>
+          <text x="800" y="466" font-family="Caveat, cursive" font-size="24" fill="#E3A0A0" stroke="none">and Environs</text>
+        </g>
+      </svg>
+      <figcaption><b>На доске</b>Книга кончается на полуслове и начинается с середины фразы: последние слова 628-й страницы продолжаются первым словом третьей. В центре — инструменты героя ирландской баллады: лестница, с которой он упал, и виски, которое его подняло.</figcaption>
+    </figure>
+  </header>
+
+  <!-- 01 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">01</span><h2>Это не роман, а местность со своей рекой и погодой</h2></div>
+    <div class="main">
+      <p>«Поминки по Финнегану» — последняя книга Джеймса Джойса, автора «Улисса». Её не стоит читать так, как читают роман, с надеждой узнать, что было дальше. Сюжет здесь есть, но он ведёт себя как погода: то проясняется, то уходит в туман. Лучше приезжать в эту книгу как в незнакомый город — с картой, с запасом времени и без обязательства увидеть всё.</p>
+      <p>Город этот — Дублин, увиденный ночью, во сне. Язык — английский, но каждое второе слово в нём приоткрыто на другие языки, и одно слово часто значит сразу несколько вещей. Время ходит по кругу. Жители превращаются друг в друга, в реку, в гору, в камень и в дерево.</p>
+      <p>Название по-английски — <span class="en">Finnegans Wake</span>, без апострофа. Так оно читается двумя способами сразу: «поминки Финнегана» и «Финнеганы, проснитесь». Русское «Поминки по Финнегану» удерживает только первый смысл; второй, пробуждение, путешественнику придётся держать в голове самому.</p>
+      <div class="warn">
+        <h4><svg class="ico"><use href="#i-warn"/></svg>Перед поездкой</h4>
+        <p>Здесь никто не проверяет, сколько вы поняли. Местные сами понимают не всё. Самая частая ошибка новичка — останавливаться на каждом тёмном слове. Идите дальше: город раскрывается при движении.</p>
+      </div>
+    </div>
+    <aside>
+      <div class="facts">
+        <h4>Коротко о направлении</h4>
+        <dl>
+          <dt>Автор</dt><dd>Джеймс Джойс (1882–1941)</dd>
+          <dt>Открыто</dt><dd>4 мая 1939 года; Faber and Faber в Лондоне и Viking в Нью-Йорке</dd>
+          <dt>Строилось</dt><dd>С 1923 по 1939 год; части печатались под рабочим названием <span class="en">Work in Progress</span></dd>
+          <dt>Протяжённость</dt><dd>628 страниц стандартной пагинации</dd>
+          <dt>Районы</dt><dd>Четыре книги, 17 глав</dd>
+          <dt>Язык</dt><dd>Английский с примесью десятков других</dd>
+          <dt>Сложность</dt><dd><span class="stars">★★★★★</span></dd>
+        </dl>
+      </div>
+      <div class="facts">
+        <h4>Как мы оцениваем</h4>
+        <ul class="scale">
+          <li><span class="stars">★★★★★</span><span>Ради этого стоит ехать</span></li>
+          <li><span class="stars">★★★★<span class="off">★</span></span><span>Не пропускайте</span></li>
+          <li><span class="stars">★★★<span class="off">★★</span></span><span>Если будет время</span></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 02 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">02</span><h2>Добраться можно тремя дорогами, и все они короче, чем кажется</h2></div>
+    <div class="main">
+      <ul class="routes">
+        <li>
+          <svg class="ico" aria-hidden="true"><use href="#i-boat"/></svg>
+          <div>
+            <h3>Через балладу</h3>
+            <p class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>Одна песня</span><span>Для всех</span></p>
+            <p>Начните с ирландской уличной баллады «Finnegan's Wake». Тим Финнеган, подносчик кирпичей, срывается с лестницы и разбивается насмерть. На поминках начинается драка, кто-то плещет виски — и покойник садится в гробу. Падение, смерть, воскрешение от «воды жизни» (ирландское <span class="en">uisce beatha</span>, отсюда <span class="en">whiskey</span>) — это и есть план всей книги.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="ico" aria-hidden="true"><use href="#i-book"/></svg>
+          <div>
+            <h3>Через «Улисса»</h3>
+            <p class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>Долгий маршрут</span><span>Для подготовленных</span></p>
+            <p>«Улисс» (1922) — один день в Дублине, 16 июня 1904 года, рассказанный наяву. «Поминки» часто называют его ночной половиной: тот же город, но во сне, где слова расползаются и складываются заново. Кто прошёл «Улисса», узнает улицы, хотя они и переименованы.</p>
+          </div>
+        </li>
+        <li>
+          <svg class="ico" aria-hidden="true"><use href="#i-voice"/></svg>
+          <div>
+            <h3>Через голос автора</h3>
+            <p class="meta"><span><svg class="ico"><use href="#i-clock"/></svg>Несколько минут</span><span>Лучший первый шаг</span></p>
+            <p>В 1929 году Джойс записал на пластинку окончание главы об Анне Ливии Плюрабель. Послушайте её до того, как откроете книгу: станет ясно, что этот текст написан для слуха и что непонятное на странице часто становится понятным вслух.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <aside>
+      <div class="tip">
+        <h4><svg class="ico"><use href="#i-lamp"/></svg>Совет бывалых</h4>
+        <p>Читайте вслух, даже если вы один. Многие каламбуры книги звучат, а не видны: ухо ловит знакомое слово там, где глаз видит бессмыслицу.</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 03 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">03</span><h2>Вся книга помещается между пригородом Чапелизод и мысом Хоут</h2></div>
+    <div class="main">
+      <p>Если разглядеть сквозь сон реальный город, это западная окраина Дублина. Герой держит паб в Чапелизоде у Феникс-парка; мимо течёт Лиффи — она же его жена — и уходит через весь город в Дублинский залив, к мысу Хоут. Первое предложение книги проходит этот путь целиком: от реки, мимо церкви, вдоль берега и залива — к замку Хоут и окрестностям.</p>
+    </div>
+    <figure class="wide">
+      <div class="scrollbox">
+        <svg class="board" viewBox="0 0 1000 600" role="img" aria-labelledby="map-t">
+          <title id="map-t">Карта мелом: река Лиффи течёт с запада через Чапелизод, вдоль Феникс-парка и через Дублин в залив; на северо-востоке мыс Хоут. Шесть пронумерованных мест.</title>
+          <rect width="1000" height="600" fill="#26302C"/>
+          <rect width="1000" height="600" fill="#fff" filter="url(#dust)"/>
+          <g filter="url(#chalk)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <!-- sea hatching -->
+            <g stroke="#93C6D4" stroke-width="1.6" opacity=".55">
+              <path d="M840,300 l18,-6 M880,310 l18,-6 M920,300 l18,-6 M860,350 l18,-6 M900,360 l18,-6 M945,345 l18,-6 M850,410 l18,-6 M895,420 l18,-6 M940,405 l18,-6 M875,470 l18,-6 M920,480 l18,-6 M960,460 l18,-6 M900,530 l18,-6 M950,540 l18,-6 M820,90 l18,-6 M860,70 l18,-6 M900,95 l18,-6 M945,75 l18,-6 M960,120 l18,-6 M830,330 l14,-5 M820,380 l14,-5"/>
+            </g>
+            <!-- coastline with Howth -->
+            <path d="M720,0 C730,80 760,140 820,190 C850,170 900,140 950,150 C990,160 1000,222 978,250 C950,276 880,270 852,242 C834,226 816,232 802,252 C786,282 772,318 790,345 C802,398 830,450 840,520 C846,560 878,588 900,600" stroke="#ECE8DC" stroke-width="3"/>
+            <!-- Howth hill contours -->
+            <path d="M880,215 c15,-22 55,-26 70,-4 c-14,20 -52,24 -70,4 Z" stroke="#ECE8DC" stroke-width="1.6" opacity=".8"/>
+            <path d="M902,212 c8,-9 26,-10 32,-1 c-7,8 -24,9 -32,1 Z" stroke="#ECE8DC" stroke-width="1.4" opacity=".7"/>
+            <!-- Phoenix Park -->
+            <path d="M190,290 C180,230 220,180 300,172 C370,166 430,200 432,250 C434,290 400,306 340,308 C280,310 200,312 190,290 Z" stroke="#A9CF9A" stroke-width="2.4" stroke-dasharray="8 6"/>
+            <g stroke="#A9CF9A" stroke-width="2">
+              <path d="M250,240 v-14 M244,232 l6,-14 l6,14 Z"/>
+              <path d="M300,215 v-14 M294,207 l6,-14 l6,14 Z"/>
+              <path d="M360,250 v-14 M354,242 l6,-14 l6,14 Z"/>
+              <path d="M392,215 v-14 M386,207 l6,-14 l6,14 Z"/>
+              <path d="M280,280 v-12 M275,273 l5,-12 l5,12 Z"/>
+            </g>
+            <text x="262" y="196" font-family="Caveat, cursive" font-size="24" fill="#A9CF9A" stroke="none">Phoenix Park</text>
+            <!-- River Liffey -->
+            <path d="M0,340 C60,330 110,350 170,330 C230,310 280,335 340,320 C420,300 470,330 540,325 C620,318 700,345 790,345" stroke="#93C6D4" stroke-width="4.5"/>
+            <path d="M0,350 C60,340 110,360 170,340 C230,320 280,345 340,330 C420,310 470,340 540,335 C620,328 700,355 790,353" stroke="#93C6D4" stroke-width="1.6" opacity=".7"/>
+            <text x="420" y="372" font-family="Caveat, cursive" font-size="26" fill="#93C6D4" stroke="none">Liffey · Анна Ливия</text>
+            <!-- city -->
+            <g stroke="#ECE8DC" stroke-width="1.8" opacity=".75">
+              <path d="M600,300 h16 v-18 h12 v18 h10 v-26 h14 v26"/>
+              <path d="M660,300 v-14 h12 v14 h10 v-20 h12 v20"/>
+              <path d="M605,370 h14 v14 h12 v-14 h14 v14"/>
+              <path d="M660,372 v14 h12 v-10 h14 v10"/>
+            </g>
+            <text x="612" y="254" font-family="Caveat, cursive" font-size="30" fill="#ECE8DC" stroke="none">Dublin</text>
+            <text x="870" y="388" font-family="Caveat, cursive" font-size="26" fill="#93C6D4" stroke="none">Dublin Bay</text>
+            <text x="895" y="130" font-family="Caveat, cursive" font-size="26" fill="#ECE8DC" stroke="none">Howth</text>
+            <text x="120" y="300" font-family="Caveat, cursive" font-size="22" fill="#ECE8DC" stroke="none">Chapelizod</text>
+            <!-- Adam & Eve's -->
+            <path d="M560,318 v-18 M553,306 h14" stroke="#ECE8DC" stroke-width="2.4"/>
+            <!-- pins -->
+            <g stroke="#E3A0A0" stroke-width="2.6">
+              <circle cx="172" cy="330" r="15"/>
+              <circle cx="330" cy="262" r="15"/>
+              <circle cx="470" cy="318" r="15"/>
+              <circle cx="560" cy="290" r="15"/>
+              <circle cx="808" cy="440" r="15"/>
+              <circle cx="935" cy="190" r="15"/>
+            </g>
+            <g font-family="Caveat, cursive" font-weight="700" font-size="22" fill="#E3A0A0" stroke="none" text-anchor="middle">
+              <text x="172" y="337">1</text><text x="330" y="269">2</text><text x="470" y="325">3</text><text x="560" y="267">4</text><text x="808" y="447">5</text><text x="935" y="197">6</text>
+            </g>
+            <!-- compass -->
+            <g transform="translate(100,110)" stroke="#ECE8DC" stroke-width="2">
+              <circle r="38" opacity=".6"/>
+              <path d="M0,-52 L9,0 L0,52 L-9,0 Z"/>
+              <path d="M-52,0 L0,-7 L52,0 L0,7 Z" opacity=".7"/>
+              <path d="M0,-52 L9,0 L-9,0 Z" fill="#ECE8DC" opacity=".5"/>
+            </g>
+            <text x="100" y="40" text-anchor="middle" font-family="Caveat, cursive" font-weight="700" font-size="24" fill="#ECE8DC" stroke="none">N</text>
+            <text x="40" y="560" font-family="Caveat, cursive" font-size="22" fill="#ECE8DC" stroke="none" opacity=".85">карта по памяти, без масштаба</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Карта</b>Реальная география, на которую лёг сон. Река проведена с запада на восток, как её читает первая фраза книги.</figcaption>
+    </figure>
+    <div class="main">
+      <div class="legend">
+        <h4><svg class="ico"><use href="#i-pin"/></svg>Что отмечено на карте</h4>
+        <ol>
+          <li><span><b>Чапелизод.</b> Пригород на Лиффи у западного края Феникс-парка. Здесь стоит паб героя, и отсюда, собственно, видна вся книга.</span></li>
+          <li><span><b>Феникс-парк.</b> Огромный городской парк. Тут с героем случилось нечто — то ли проступок, то ли недоразумение, — о чём сплетничает весь город на протяжении сотен страниц.</span></li>
+          <li><span><b>Лиффи.</b> Река Дублина. В книге она — Анна Ливия, жена героя; течёт через неё насквозь.</span></li>
+          <li><span><b>«Адам и Ева».</b> Церковь на набережной Лиффи, которую дублинцы так и зовут. Первая фраза проходит мимо неё: <span class="en">past Eve and Adam's</span>.</span></li>
+          <li><span><b>Дублинский залив.</b> <span class="en">From swerve of shore to bend of bay</span> — изгиб берега, по которому идёт та же фраза.</span></li>
+          <li><span><b>Хоут.</b> Мыс на северном краю залива. <span class="en">Howth Castle and Environs</span> — инициалы героя, H. C. E.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">04</span><h2>Местных жителей пять, и каждого Джойс помечал знаком</h2></div>
+    <div class="main">
+      <p>Работая над книгой, Джойс обозначал главных персонажей не именами, а значками-сиглами. Так удобнее: имена здесь меняются постоянно, а значок остаётся. Узнав знак, вы узнаёте жителя в любом обличье.</p>
+    </div>
+    <figure class="wide">
+      <div class="scrollbox">
+        <svg class="board" viewBox="0 0 1000 270" role="img" aria-labelledby="sig-t">
+          <title id="sig-t">Пять сиглов Джойса мелом: E для Ирвикера, треугольник для Анны Ливии, квадратная скобка для Шема, лямбда для Шона, T на боку для Изы.</title>
+          <rect width="1000" height="270" fill="#26302C"/>
+          <rect width="1000" height="270" fill="#fff" filter="url(#dust)"/>
+          <g filter="url(#chalk)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <g stroke="#ECE8DC" stroke-width="1.4" opacity=".45">
+              <path d="M200,30 v210 M400,30 v210 M600,30 v210 M800,30 v210"/>
+            </g>
+            <!-- HCE: E -->
+            <path d="M130,70 H70 V160 H130 M70,115 H118" stroke="#E3A0A0" stroke-width="7"/>
+            <!-- ALP: delta -->
+            <path d="M300,62 L355,162 H245 Z" stroke="#93C6D4" stroke-width="7"/>
+            <!-- Shem: [ -->
+            <path d="M525,62 H478 V162 H525" stroke="#EAD27C" stroke-width="7"/>
+            <!-- Shaun: lambda -->
+            <path d="M650,162 L700,62 L750,162" stroke="#A9CF9A" stroke-width="7"/>
+            <!-- Issy: T on its side -->
+            <path d="M940,62 V162 M940,112 H860" stroke="#ECE8DC" stroke-width="7"/>
+            <g font-family="Caveat, cursive" font-size="27" fill="#ECE8DC" stroke="none" text-anchor="middle">
+              <text x="100" y="212">HCE</text>
+              <text x="300" y="212">ALP</text>
+              <text x="500" y="212">Шем</text>
+              <text x="700" y="212">Шон</text>
+              <text x="900" y="212">Иза</text>
+            </g>
+            <g font-family="Caveat, cursive" font-size="20" fill="#ECE8DC" stroke="none" text-anchor="middle" opacity=".75">
+              <text x="100" y="240">отец · гора · город</text>
+              <text x="300" y="240">мать · река</text>
+              <text x="500" y="240">писака</text>
+              <text x="700" y="240">почтальон</text>
+              <text x="900" y="240">дочь · облако</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Сиглы</b>Знак отца — буква E, которую Джойс поворачивал и клал на бок, будто она падает, как Финнеган с лестницы.</figcaption>
+    </figure>
+    <div class="main wide">
+      <ul class="residents">
+        <li><b>Хемфри Чимпден Ирвикер</b><code>HCE</code> Трактирщик из Чапелизода, муж и отец семейства. Его инициалы прячутся по всей книге в бесчисленных фразах: <span class="en">Howth Castle and Environs</span>, <span class="en">Here Comes Everybody</span> — «вот идут все». Он и есть все: Финнеган, Адам, город, гора.</li>
+        <li><b>Анна Ливия Плюрабель</b><code>ALP</code> Его жена и река Лиффи. Её голосом книга кончается: старая река уходит в море, чтобы на первой странице снова стать рекой.</li>
+        <li><b>Шем-Писака</b><code>SHEM</code> Один из близнецов: сочинитель, изгой, человек слова. В нём многие видят автопортрет Джойса, написанный без всякой жалости к себе.</li>
+        <li><b>Шон-Почтальон</b><code>SHAUN</code> Второй близнец: благополучный, речистый, всеобщий любимец. Он разносит письмо, которое написал не он.</li>
+        <li><b>Иза</b><code>ISSY</code> Дочь, юная и раздвоенная, всё время разговаривает со своим отражением. Отец тайно и смутно в неё влюблён — ещё один повод для ночной вины.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">05</span><h2>Местная валюта — слово, в котором уложены несколько слов</h2></div>
+    <div class="main">
+      <p>Основная единица этой книги — слово-чемодан: два, три, а то и больше слов, сложенных в одно. В нём может лежать английское слово, латинское, имя философа и название улицы — всё сразу. Открывать каждый такой чемодан не обязательно. Но стоит открыть несколько, чтобы понять, как устроен весь багаж.</p>
+      <p>Возьмём <span class="en">chaosmos</span>: хаос и космос в одном слове, беспорядок и порядок одновременно — лучшее описание книги, придуманное ею самой. Или <span class="en">commodius vicus</span> из первой фразы: «удобная» дорога, латинская улица и философ Вико, о котором пойдёт речь ниже.</p>
+    </div>
+    <div class="main">
+      <div class="instrument" data-instrument="word-suitcase">
+  <div class="ws-chips" role="group" aria-label="Слова книги">
+    <button type="button" class="ws-chip" data-k="riverrun" aria-pressed="true">riverrun</button>
+    <button type="button" class="ws-chip" data-k="chaosmos" aria-pressed="false">chaosmos</button>
+    <button type="button" class="ws-chip" data-k="vicus" aria-pressed="false">commodius vicus</button>
+    <button type="button" class="ws-chip" data-k="hce" aria-pressed="false">Here Comes Everybody</button>
+  </div>
+  <div class="ws-stage" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60" aria-label="Слово-чемодан">
+    <div class="ws-lining" aria-hidden="true"></div>
+    <span class="ws-half ws-l" aria-hidden="true">river</span><span class="ws-half ws-r" aria-hidden="true">run</span>
+  </div>
+  <div class="ws-read">
+    <div class="ws-box"><span class="ws-k">раскрыто</span><span class="ws-v" data-o>60 %</span></div>
+    <div class="ws-box"><span class="ws-k">частей</span><span class="ws-v" data-n>2 / 3</span></div>
+    <div class="ws-box ws-formula"><span class="ws-k">состав</span><span class="ws-f" aria-live="polite">riverrun = river + run</span></div>
+  </div>
+  <ol class="ws-parts"></ol>
+</div>
+<style>
+[data-instrument="word-suitcase"]{padding:1.1rem 1.1rem 1.3rem;font-family:var(--text);color:var(--chalk)}
+[data-instrument="word-suitcase"] .ws-chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0 0 .6rem}
+[data-instrument="word-suitcase"] .ws-chip{font:italic 1rem/1.2 var(--text);color:var(--chalk);background:transparent;border:1.5px dashed rgba(236,232,220,.45);border-radius:999px;padding:.32rem .85rem;cursor:pointer}
+[data-instrument="word-suitcase"] .ws-chip[aria-pressed="true"]{border-style:solid;border-color:var(--chalk-yellow);color:var(--chalk-yellow);background:rgba(234,210,124,.08)}
+[data-instrument="word-suitcase"] .ws-chip:focus-visible{outline:2px solid var(--chalk-yellow);outline-offset:2px}
+[data-instrument="word-suitcase"] .ws-stage{position:relative;height:6.5rem;touch-action:pan-y;cursor:ew-resize;border-radius:8px;outline:none;user-select:none;-webkit-user-select:none}
+[data-instrument="word-suitcase"] .ws-stage:focus-visible{box-shadow:0 0 0 2px var(--chalk-yellow)}
+[data-instrument="word-suitcase"] .ws-stage.is-drag{cursor:grabbing}
+[data-instrument="word-suitcase"] .ws-half{position:absolute;top:50%;left:0;font-family:var(--display);font-weight:600;white-space:nowrap;line-height:1;padding:.3em .3em;border:2px solid var(--chalk);color:var(--chalk);background:var(--slate);text-shadow:0 0 1px rgba(236,232,220,.55);will-change:transform}
+[data-instrument="word-suitcase"] .ws-l{border-right:none;border-radius:.28em 0 0 .28em;padding-left:.5em}
+[data-instrument="word-suitcase"] .ws-r{border-left:none;border-radius:0 .28em .28em 0;padding-right:.5em}
+[data-instrument="word-suitcase"] .ws-l::before,[data-instrument="word-suitcase"] .ws-r::after{content:"";position:absolute;top:50%;width:7px;height:44%;background:var(--chalk-yellow);border-radius:2px;transform:translateY(-50%);opacity:.9}
+[data-instrument="word-suitcase"] .ws-l::before{left:-9px}
+[data-instrument="word-suitcase"] .ws-r::after{right:-9px}
+[data-instrument="word-suitcase"] .ws-lining{position:absolute;top:50%;left:0;border-top:2px dashed var(--chalk);border-bottom:2px dashed var(--chalk);background:repeating-linear-gradient(135deg,rgba(0,0,0,.22) 0 6px,rgba(0,0,0,.1) 6px 12px);box-sizing:border-box;will-change:transform,width}
+[data-instrument="word-suitcase"] .ws-read{display:flex;flex-wrap:wrap;gap:.5rem;margin:.4rem 0 0}
+[data-instrument="word-suitcase"] .ws-box{border:1.5px solid rgba(236,232,220,.32);border-radius:4px;padding:.35rem .65rem;display:flex;flex-direction:column;flex:none}
+[data-instrument="word-suitcase"] .ws-formula{flex:1 1 15rem;min-width:0}
+[data-instrument="word-suitcase"] .ws-k{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(236,232,220,.62)}
+[data-instrument="word-suitcase"] .ws-v{font-family:var(--display);font-size:1.25rem;line-height:1.3;font-variant-numeric:tabular-nums;min-width:4.4ch;white-space:nowrap}
+[data-instrument="word-suitcase"] .ws-f{font-family:var(--hand);font-size:1.3rem;line-height:1.15;height:3.45em;overflow:hidden;color:var(--chalk-yellow)}
+[data-instrument="word-suitcase"] .ws-parts{list-style:none;margin:.8rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.6rem;min-height:8.5rem}
+[data-instrument="word-suitcase"] .ws-part{--r:0;--c:var(--chalk);border-top:2px solid var(--c);background:rgba(0,0,0,.15);padding:.5rem .7rem .6rem;opacity:var(--r);clip-path:inset(0 0 calc((1 - var(--r)) * 100%) 0);transform:translateY(calc((1 - var(--r)) * -16px))}
+[data-instrument="word-suitcase"] .ws-pw{font-family:var(--hand);font-weight:700;font-size:1.6rem;line-height:1.05;color:var(--c)}
+[data-instrument="word-suitcase"] .ws-pl{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(236,232,220,.68);margin-top:.15rem}
+[data-instrument="word-suitcase"] .ws-pm{font-size:.9rem;line-height:1.42;margin-top:.25rem}
+@media (prefers-reduced-motion:reduce){[data-instrument="word-suitcase"] *{transition:none!important;animation:none!important}}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="word-suitcase"]');
+if(!root)return;
+const C={blue:'var(--chalk-blue)',yellow:'var(--chalk-yellow)',pink:'var(--chalk-pink)',green:'var(--chalk-green)',chalk:'var(--chalk)'};
+const D={
+riverrun:{lead:'riverrun',l:'river',r:'run',parts:[
+{w:'river',lang:'английский',c:'blue',m:'«река»: Лиффи, она же Анна Ливия.',f:'river'},
+{w:'run',lang:'английский',c:'blue',m:'«бег, течение»: вода, которая не стоит на месте.',f:'+ run'},
+{w:'the ←',lang:'последнее слово · стр. 628',c:'yellow',m:'Фраза бежит назад, к концу книги: «…a long the» замыкается в «the riverrun».',f:'← the'}]},
+chaosmos:{lead:'chaosmos',l:'chaos',r:'mos',parts:[
+{w:'chaos',lang:'греческий',c:'pink',m:'χάος — «зияние, бездна»: беспорядок до начала мира.',f:'chaos'},
+{w:'cosmos',lang:'греческий',c:'pink',m:'κόσμος — «порядок, убранство»: устроенный мир.',f:'+ cosmos'}]},
+vicus:{lead:'commodius vicus',l:'commodius',r:'vicus',parts:[
+{w:'commodious',lang:'английский',c:'blue',m:'«удобный, просторный»: лёгкая дорога.',f:'commodious'},
+{w:'vicus',lang:'латынь',c:'yellow',m:'«улица, квартал, селение».',f:'+ vicus'},
+{w:'Vico',lang:'итальянский · имя',c:'green',m:'Джамбаттиста Вико (1668–1744), философ круговорота истории и её возврата, ricorso.',f:'+ Vico'}]},
+hce:{lead:'HCE',l:'HC',r:'E',parts:[
+{w:'Here Comes Everybody',lang:'английский',c:'pink',m:'«вот идут все»: герой — всякий человек.',f:'Here Comes Everybody'},
+{w:'Howth Castle and Environs',lang:'первая фраза · стр. 3',c:'blue',m:'«замок Хоут и окрестности»: мыс, к которому приходит река.',f:'· Howth Castle and Environs'},
+{w:'Humphrey Chimpden Earwicker',lang:'имя героя',c:'chalk',m:'Хемфри Чимпден Ирвикер, трактирщик из Чапелизода.',f:'· Humphrey Chimpden Earwicker'},
+{w:'Haveth Childers Everywhere',lang:'заглавие · 1930',c:'yellow',m:'«у него повсюду дети»: отрывок книги, изданный отдельно.',f:'· Haveth Childers Everywhere'}]}
+};
+const stage=root.querySelector('.ws-stage'),L=root.querySelector('.ws-l'),R=root.querySelector('.ws-r'),lin=root.querySelector('.ws-lining'),list=root.querySelector('.ws-parts'),outO=root.querySelector('[data-o]'),outN=root.querySelector('[data-n]'),outF=root.querySelector('.ws-f'),chips=root.querySelectorAll('.ws-chip');
+let key='riverrun',o=0.6,gapMin=4,gapMax=200,lw=0,rw=0,cards=[],drag=null;
+const clamp=v=>Math.max(0,Math.min(1,v));
+function el(t,c,txt){const e=document.createElement(t);e.className=c;e.textContent=txt;return e;}
+function build(){
+  const d=D[key];L.textContent=d.l;R.textContent=d.r;list.innerHTML='';
+  cards=d.parts.map(p=>{const li=document.createElement('li');li.className='ws-part';li.style.setProperty('--c',C[p.c]);
+    li.appendChild(el('div','ws-pw',p.w));li.appendChild(el('div','ws-pl',p.lang));li.appendChild(el('div','ws-pm',p.m));list.appendChild(li);return li;});
+  chips.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===key)));
+  stage.setAttribute('aria-label','Слово-чемодан '+d.lead);
+  layout();
+}
+function layout(){
+  const W=stage.clientWidth;if(!W){update();return;}
+  const base=46;L.style.fontSize=R.style.fontSize=base+'px';
+  const s=L.offsetWidth+R.offsetWidth;
+  const fs=Math.max(18,Math.min(base,base*(W*0.56)/s));
+  L.style.fontSize=R.style.fontSize=fs+'px';
+  lw=L.offsetWidth;rw=R.offsetWidth;
+  const h=L.offsetHeight;
+  stage.style.height=Math.round(h+fs*0.9+24)+'px';
+  lin.style.height=h+'px';
+  gapMax=Math.max(gapMin+24,W-lw-rw-30);
+  update();
+}
+function update(){
+  const W=stage.clientWidth,g=gapMin+o*(gapMax-gapMin),cx=W/2;
+  if(W){L.style.transform='translate('+(cx-g/2-lw)+'px,-50%)';R.style.transform='translate('+(cx+g/2)+'px,-50%)';
+    lin.style.transform='translate('+(cx-g/2)+'px,-50%)';lin.style.width=g+'px';}
+  const d=D[key],n=d.parts.length,span=0.86/n;let seen=0;const toks=[];
+  cards.forEach((li,i)=>{const r=clamp((o-(0.08+i*span))/span);li.style.setProperty('--r',r.toFixed(3));li.style.visibility=r>0?'visible':'hidden';if(r>=0.5){seen++;toks.push(d.parts[i].f);}});
+  const pct=Math.round(o*100);
+  outO.textContent=pct+' %';outN.textContent=seen+' / '+n;
+  outF.textContent=d.lead+' = '+(toks.length?toks.join(' '):'…');
+  stage.setAttribute('aria-valuenow',String(pct));
+  stage.setAttribute('aria-valuetext','раскрыто '+pct+' %, частей '+seen+' из '+n);
+}
+chips.forEach(b=>b.addEventListener('click',()=>{if(key!==b.dataset.k){key=b.dataset.k;build();}}));
+stage.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;
+  const r=stage.getBoundingClientRect(),cx=r.left+r.width/2,g=gapMin+o*(gapMax-gapMin);
+  drag={id:e.pointerId,cx:cx,off:Math.abs(e.clientX-cx)-g/2};
+  try{stage.setPointerCapture(e.pointerId);}catch(_){}
+  stage.classList.add('is-drag');
+});
+stage.addEventListener('pointermove',e=>{
+  if(!drag||e.pointerId!==drag.id)return;
+  const g=2*(Math.abs(e.clientX-drag.cx)-drag.off);
+  o=clamp((g-gapMin)/(gapMax-gapMin));update();
+});
+function end(e){if(drag&&e.pointerId===drag.id){drag=null;stage.classList.remove('is-drag');}}
+stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+stage.addEventListener('keydown',e=>{
+  let v=o;
+  if(e.key==='ArrowRight'||e.key==='ArrowUp')v+=0.05;
+  else if(e.key==='ArrowLeft'||e.key==='ArrowDown')v-=0.05;
+  else if(e.key==='PageUp')v+=0.2;else if(e.key==='PageDown')v-=0.2;
+  else if(e.key==='Home')v=0;else if(e.key==='End')v=1;else return;
+  e.preventDefault();o=clamp(v);update();
+});
+if(typeof ResizeObserver!=='undefined'){new ResizeObserver(()=>layout()).observe(stage);}else{window.addEventListener('resize',layout);}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+build();
+})();</script>
+    </div>
+    <aside>
+      <div class="tip">
+        <h4><svg class="ico"><use href="#i-lamp"/></svg>Совет бывалых</h4>
+        <p>Не ищите в чемодане «правильное» содержимое. Джойс укладывал смыслы так, чтобы они лежали все одновременно, а не по очереди.</p>
+      </div>
+      <div class="warn">
+        <h4><svg class="ico"><use href="#i-warn"/></svg>Обмен валюты</h4>
+        <p>Любой перевод этой книги — обмен по невыгодному курсу: часть смыслов неизбежно теряется. Это не вина переводчика, а свойство валюты.</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 06 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">06</span><h2>Что обязательно посмотреть, если времени мало</h2></div>
+    <div class="main">
+
+      <div class="sight">
+        <div class="sight-top"><h3>Первая фраза</h3><span class="stars">★★★★★</span></div>
+        <p class="where"><svg class="ico"><use href="#i-eye"/></svg> Книга I, стр. 3</p>
+        <blockquote><p>riverrun, past Eve and Adam's, from swerve of shore to bend of bay, brings us by a commodius vicus of recirculation back to Howth Castle and Environs.</p></blockquote>
+        <p>Начинается со строчной буквы и с середины мысли: начало у этой фразы на последней странице. Одна строка — и вы уже проплыли весь Дублин и вернулись. Слово <span class="en">recirculation</span> честно предупреждает о том, что ждёт впереди.</p>
+      </div>
+
+      <div class="sight">
+        <div class="sight-top"><h3>Громовые слова</h3><span class="stars">★★★★★</span></div>
+        <p class="where"><svg class="ico"><use href="#i-eye"/></svg> Десять мест по всей книге; первое — стр. 3</p>
+        <p>Десять раз книгу сотрясает гром — слово из ста букв. Последнее длиннее на одну, всего выходит 1001 буква: число ночей Шахерезады. Первый удар звучит, когда Финнеган падает с лестницы:</p>
+        <p class="thunder">bababadalgharaghtakamminarronnkonnbronntonnerronntuonnthunntrovarrhounawnskawntoohoohoordenenthurnuk!</p>
+        <p>Если вслушаться, внутри грохочет слово «гром» на разных языках: французское <span class="en">tonnerre</span>, итальянское <span class="en">tuono</span>, английское <span class="en">thunder</span>, японское <span class="en">kaminari</span>, греческое <span class="en">brontē</span>.</p>
+        <div class="instrument" data-instrument="thunderword">
+  <div class="tw-stage">
+    <canvas aria-hidden="true"></canvas>
+    <div class="tw-thumb" tabindex="0" role="slider" aria-label="Позиция в громовом слове" aria-valuemin="1" aria-valuemax="100" aria-valuenow="37"></div>
+  </div>
+  <div class="tw-read">
+    <div class="tw-box tw-n">
+      <span class="tw-k">буква</span>
+      <span class="tw-v"><span class="tw-num">37</span><span class="tw-of"> / 100</span></span>
+    </div>
+    <div class="tw-box tw-a">
+      <span class="tw-k">амплитуда</span>
+      <span class="tw-v"><span class="tw-amp">0</span><span class="tw-of"> %</span></span>
+    </div>
+    <div class="tw-box tw-root" aria-live="polite">
+      <span class="tw-k">корни грома · <span class="tw-found">1</span>/5</span>
+      <span class="tw-lang">—</span>
+      <span class="tw-word">&nbsp;</span>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="thunderword"]{padding:1.1rem 1.1rem 1rem;font-family:var(--text);color:var(--chalk)}
+[data-instrument="thunderword"] .tw-stage{position:relative;height:248px;touch-action:pan-y;cursor:col-resize;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+[data-instrument="thunderword"] canvas{display:block;width:100%;height:212px}
+[data-instrument="thunderword"] .tw-thumb{position:absolute;top:216px;left:-15px;width:30px;height:30px;border-radius:50%;border:2px solid var(--chalk);background:var(--slate);pointer-events:none;outline:none;box-shadow:0 1px 0 rgba(0,0,0,.35)}
+[data-instrument="thunderword"] .tw-thumb::after{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:2px;margin-left:-1px;background:var(--chalk);opacity:.8;border-radius:1px}
+[data-instrument="thunderword"] .tw-thumb:focus-visible{box-shadow:0 0 0 3px var(--slate),0 0 0 5px var(--chalk-yellow)}
+[data-instrument="thunderword"] .tw-stage.is-drag .tw-thumb{background:var(--chalk-yellow);border-color:var(--chalk-yellow)}
+[data-instrument="thunderword"] .tw-stage.is-drag .tw-thumb::after{background:var(--slate)}
+[data-instrument="thunderword"] .tw-read{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem}
+[data-instrument="thunderword"] .tw-box{border:1px solid rgba(236,232,220,.32);border-radius:3px;padding:.35rem .65rem;height:4.6rem;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+[data-instrument="thunderword"] .tw-k{font-family:var(--display);text-transform:uppercase;letter-spacing:.12em;font-size:.68rem;color:rgba(236,232,220,.66);white-space:nowrap;font-variant-numeric:tabular-nums}
+[data-instrument="thunderword"] .tw-v{font-family:var(--display);font-size:1.65rem;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="thunderword"] .tw-num,[data-instrument="thunderword"] .tw-amp{display:inline-block;width:3ch;text-align:right}
+[data-instrument="thunderword"] .tw-of{font-size:.9rem;color:rgba(236,232,220,.66)}
+[data-instrument="thunderword"] .tw-n,[data-instrument="thunderword"] .tw-a{flex:0 0 7.6rem}
+[data-instrument="thunderword"] .tw-root{flex:1 1 13rem;min-width:0}
+[data-instrument="thunderword"] .tw-lang{font-family:var(--display);text-transform:uppercase;letter-spacing:.1em;font-size:.8rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="thunderword"] .tw-word{font-family:var(--hand);font-size:1.75rem;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+</style>
+<script>(function(){ const root = document.querySelector('[data-instrument="thunderword"]'); if(!root) return;
+const stage=root.querySelector('.tw-stage'), cv=root.querySelector('canvas'), ctx=cv.getContext('2d'), thumb=root.querySelector('.tw-thumb');
+const elN=root.querySelector('.tw-num'), elA=root.querySelector('.tw-amp'), elF=root.querySelector('.tw-found'), elLang=root.querySelector('.tw-lang'), elWord=root.querySelector('.tw-word');
+const cs=getComputedStyle(root);
+const v=(n,f)=>(cs.getPropertyValue(n).trim()||f);
+const CHALK=v('--chalk','#ECE8DC'), YEL=v('--chalk-yellow','#EAD27C'), BLUE=v('--chalk-blue','#93C6D4'), PINK=v('--chalk-pink','#E3A0A0'), GREEN=v('--chalk-green','#A9CF9A'), ORANGE='#E9B27F', BRIGHT='#FFF9E6';
+const DISP=v('--display','Oswald, sans-serif');
+const WORD='bababadalgharaghtakamminarronnkonnbronntonnerronntuonnthunntrovarrhounawnskawntoohoohoordenenthurnuk';
+const L=WORD.length;
+const ROOTS=[
+ {frag:'kamminar',lang:'японский',word:'雷 — kaminari',color:PINK},
+ {frag:'bronnt',lang:'греческий',word:'βροντή — brontē',color:BLUE},
+ {frag:'tonnerr',lang:'французский',word:'tonnerre',color:YEL},
+ {frag:'tuonn',lang:'итальянский',word:'tuono',color:GREEN},
+ {frag:'thunn',lang:'английский',word:'thunder',color:ORANGE}
+].map(r=>{const s=WORD.indexOf(r.frag);return Object.assign(r,{s:s,e:s+r.frag.length-1});}).filter(r=>r.s>=0);
+const letterRoots=Array.from({length:L},(_,i)=>ROOTS.filter(r=>i>=r.s&&i<=r.e));
+function son(c){if('aeiou'.indexOf(c)>=0)return 1;if('rlmnw'.indexOf(c)>=0)return .78;if('vbdgj'.indexOf(c)>=0)return .62;if(c==='h')return .5;return .42;}
+const TP=.38;
+function env(t){if(t<=0)return 0;const u=t/TP;return u*u*Math.exp(2*(1-u));}
+const S=12,N=L*S,wave=new Float32Array(N);
+let seed=1939;const rnd=()=>{seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff;};
+const fr=Array.from(WORD,c=>1.15+.6*(1-son(c))+.25*rnd());
+(function(){let ph=0,nz=0,mx=0;for(let j=0;j<N;j++){const t=(j+.5)/N,i=Math.min(L-1,Math.floor(j/S)),f=(j%S)/S,nx=Math.min(L-1,i+1);const so=son(WORD[i])*(1-f)+son(WORD[nx])*f;ph+=2*Math.PI*fr[i]/S;nz=.72*nz+.28*(rnd()*2-1);const val=env(t)*so*(.68*Math.sin(ph)+.5*nz);wave[j]=val;mx=Math.max(mx,Math.abs(val));}for(let j=0;j<N;j++)wave[j]/=mx;wave.inv=1/mx;})();
+const ampAt=i=>Math.round(env((i+.5)/L)*son(WORD[i])*100);
+const H=212;let W=300,dpr=1;
+let pos=36.5,dir=1;const visited=new Set();const heat=new Float32Array(L);
+const mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;let reduced=!!(mq&&mq.matches);
+const letterAt=p=>Math.max(0,Math.min(L-1,Math.floor(p)));
+function activeRoot(){const c=letterRoots[letterAt(pos)];if(!c.length)return null;if(c.length===1)return c[0];return c.reduce((a,b)=>dir>0?(b.s>a.s?b:a):(b.s<a.s?b:a));}
+function letterColor(i,ar){const c=letterRoots[i].filter(r=>visited.has(r));if(!c.length)return null;if(ar&&c.indexOf(ar)>=0)return ar.color;return c[0].color;}
+function draw(){
+ ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+ const fX=pos/L*W,base=W/L,d=Math.max(2,Math.min(9,30/base-1)),ar=activeRoot();
+ const y0=70,A=56;
+ ctx.lineCap='round';ctx.lineJoin='round';
+ ctx.globalAlpha=.16;ctx.strokeStyle=CHALK;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,y0);ctx.lineTo(W,y0);ctx.stroke();
+ ctx.globalAlpha=.3;ctx.setLineDash([2,5]);
+ for(const sg of [-1,1]){ctx.beginPath();for(let x=0;x<=W;x+=3){const e=Math.min(1,env(x/W)*wave.inv*.95);const y=y0+sg*A*e;x?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.stroke();}
+ ctx.setLineDash([]);
+ const jc=Math.min(N-1,Math.floor(pos*S));
+ for(const pass of [{o:0,a:.92,w:1.5},{o:.8,a:.35,w:1}]){
+  ctx.globalAlpha=pass.a;ctx.lineWidth=pass.w;
+  let cur=null,px=0,py=0;
+  for(let j=0;j<=jc;j++){
+   const col=letterColor(Math.floor(j/S),ar)||CHALK,x=(j+.5)/N*W+pass.o,y=y0-A*wave[j]+pass.o*.5;
+   if(j===0){ctx.beginPath();ctx.moveTo(x,y);cur=col;}
+   else if(col!==cur){ctx.lineTo(x,y);ctx.strokeStyle=cur;ctx.stroke();ctx.beginPath();ctx.moveTo(x,y);cur=col;}
+   else ctx.lineTo(x,y);
+   px=x;py=y;
+  }
+  ctx.strokeStyle=cur;ctx.stroke();
+ }
+ ctx.globalAlpha=1;ctx.fillStyle=BRIGHT;ctx.beginPath();ctx.arc((jc+.5)/N*W,y0-A*wave[jc],2.4,0,Math.PI*2);ctx.fill();
+ ctx.globalAlpha=.5;ctx.strokeStyle=CHALK;ctx.lineWidth=1;ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(fX,4);ctx.lineTo(fX,H-2);ctx.stroke();ctx.setLineDash([]);
+ const X=new Float32Array(L),M=new Float32Array(L);
+ for(let i=0;i<L;i++){const x=(i+.5)/L*W;let t,g;if(x>=fX){const sp=W-fX;t=sp>0?(x-fX)/sp:0;g=(d+1)*t/(d*t+1);X[i]=fX+sp*g;}else{const sp=fX;t=sp>0?(fX-x)/sp:0;g=(d+1)*t/(d*t+1);X[i]=fX-sp*g;}M[i]=(d+1)/((d*t+1)*(d*t+1));}
+ const bl=188,yU=198;
+ ROOTS.forEach(r=>{if(!visited.has(r))return;const act=r===ar;const x1=X[r.s]-base*M[r.s]/2,x2=X[r.e]+base*M[r.e]/2;
+  if(act){ctx.globalAlpha=.14;ctx.fillStyle=r.color;ctx.fillRect(x1,146,x2-x1,58);ctx.globalAlpha=.7;ctx.strokeStyle=r.color;ctx.lineWidth=1.4;ctx.strokeRect(x1+.5,146.5,x2-x1-1,57);}
+  ctx.globalAlpha=act?.95:.55;ctx.strokeStyle=r.color;ctx.lineWidth=act?3:2;ctx.beginPath();
+  for(let x=x1;x<=x2;x+=3){const y=yU+Math.sin(x*.21+r.s)*.9;x===x1?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.stroke();});
+ ctx.textAlign='center';ctx.textBaseline='alphabetic';
+ for(let i=0;i<L;i++){
+  const size=Math.min(36,base*M[i]*1.3),col=letterColor(i,ar),inAct=ar&&i>=ar.s&&i<=ar.e,h=heat[i];
+  if(size<4){ctx.globalAlpha=col?.8:.45+.5*h;ctx.fillStyle=h>.3?YEL:(col||CHALK);ctx.beginPath();ctx.arc(X[i],bl-1.5,.9,0,Math.PI*2);ctx.fill();continue;}
+  ctx.font=size.toFixed(1)+'px '+DISP;
+  ctx.globalAlpha=col?(inAct?1:.75):.55;ctx.fillStyle=col||CHALK;ctx.fillText(WORD[i],X[i],bl);
+  if(h>.02){ctx.globalAlpha=h;ctx.shadowColor=inAct?ar.color:YEL;ctx.shadowBlur=14*h;ctx.fillStyle=inAct?BRIGHT:YEL;ctx.fillText(WORD[i],X[i],bl);ctx.shadowBlur=0;}
+ }
+ ctx.globalAlpha=1;
+}
+function update(){
+ const b=letterAt(pos),ar=activeRoot();
+ elN.textContent=b+1;elA.textContent=ampAt(b);elF.textContent=visited.size;
+ if(ar){elLang.textContent=ar.lang+' · '+ar.frag;elLang.style.color=ar.color;elWord.textContent=ar.word;elWord.style.color=ar.color;}
+ else{elLang.textContent='—';elLang.style.color='';elWord.innerHTML='&nbsp;';elWord.style.color='';}
+ thumb.style.transform='translateX('+(pos/L*W).toFixed(1)+'px)';
+ thumb.setAttribute('aria-valuenow',b+1);
+ thumb.setAttribute('aria-valuetext','буква '+(b+1)+' из 100: '+WORD[b]+(ar?', '+ar.lang+' корень '+ar.frag:''));
+}
+let raf=0,last=0;
+function tick(now){const dt=Math.min(.1,(now-last)/1000);last=now;const k=Math.exp(-dt/.55),c=letterAt(pos);let any=false;
+ for(let i=0;i<L;i++){if(i===c)continue;heat[i]*=k;if(heat[i]<.01)heat[i]=0;else any=true;}heat[c]=1;draw();raf=any?requestAnimationFrame(tick):0;}
+function kick(){if(reduced){draw();return;}if(!raf){last=performance.now();raf=requestAnimationFrame(tick);}}
+function setPos(p){
+ p=Math.max(0,Math.min(L-1e-6,p));const a=letterAt(pos),b=letterAt(p);
+ if(b!==a)dir=b>a?1:-1;else if(p!==pos)dir=p>pos?1:-1;
+ const lo=Math.min(a,b),hi=Math.max(a,b);
+ if(!reduced)for(let k=lo;k<=hi;k++)heat[k]=1;
+ ROOTS.forEach(r=>{if(r.e>=lo&&r.s<=hi)visited.add(r);});
+ pos=p;if(reduced)heat.fill(0);heat[b]=1;update();kick();
+}
+function resize(){W=Math.max(100,stage.clientWidth);dpr=window.devicePixelRatio||1;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);draw();update();}
+let dragging=false;
+function fromEvent(e){const r=stage.getBoundingClientRect();return (e.clientX-r.left)/r.width*L;}
+stage.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;dragging=true;stage.classList.add('is-drag');try{stage.setPointerCapture(e.pointerId);}catch(_){}if(e.pointerType==='mouse')e.preventDefault();thumb.focus({preventScroll:true});setPos(fromEvent(e));});
+stage.addEventListener('pointermove',e=>{if(dragging)setPos(fromEvent(e));});
+const end=e=>{if(!dragging)return;dragging=false;stage.classList.remove('is-drag');try{stage.releasePointerCapture(e.pointerId);}catch(_){}};
+stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+thumb.addEventListener('keydown',e=>{const b=letterAt(pos);let n=null;
+ switch(e.key){case'ArrowRight':case'ArrowUp':n=b+1;break;case'ArrowLeft':case'ArrowDown':n=b-1;break;case'PageUp':n=b+10;break;case'PageDown':n=b-10;break;case'Home':n=0;break;case'End':n=L-1;break;}
+ if(n===null)return;e.preventDefault();n=Math.max(0,Math.min(L-1,n));setPos(n+.5);});
+if(mq){const h=()=>{reduced=mq.matches;if(reduced){if(raf){cancelAnimationFrame(raf);raf=0;}heat.fill(0);heat[letterAt(pos)]=1;}draw();};mq.addEventListener?mq.addEventListener('change',h):mq.addListener&&mq.addListener(h);}
+if(window.ResizeObserver)new ResizeObserver(resize).observe(stage);else window.addEventListener('resize',resize);
+const startLetter=letterAt(pos);ROOTS.forEach(r=>{if(startLetter>=r.s&&startLetter<=r.e)visited.add(r);});heat[startLetter]=1;
+resize();
+if(document.fonts){document.fonts.load('20px '+DISP).then(draw,()=>{});document.fonts.ready.then(draw);}
+})();</script>
+      </div>
+
+      <div class="sight">
+        <div class="sight-top"><h3>Анна Ливия Плюрабель</h3><span class="stars">★★★★★</span></div>
+        <p class="where"><svg class="ico"><use href="#i-eye"/></svg> Книга I, глава 8</p>
+        <blockquote><p>O / tell me all about / Anna Livia! I want to hear all / about Anna Livia.</p></blockquote>
+        <p>Две прачки стирают бельё на разных берегах Лиффи и перекрикиваются через воду, перемывая косточки Анне Ливии. Река ширится, темнеет, голоса слабеют, и к ночи прачки обращаются в дерево и камень. В текст главы вплетены названия сотен рек мира. Самое понятное и самое музыкальное место книги: если вы приехали на один вечер — идите сюда.</p>
+      </div>
+
+      <div class="sight">
+        <div class="sight-top"><h3>Три кварка для мастера Марка</h3><span class="stars">★★★★<span class="off">★</span></span></div>
+        <p class="where"><svg class="ico"><use href="#i-eye"/></svg> Книга II, глава 4</p>
+        <blockquote><p>Three quarks for Muster Mark!</p></blockquote>
+        <p>Насмешливый крик чаек над королём Марком. Физик Мюррей Гелл-Ман в начале 1960-х взял отсюда слово «кварк» для частиц, из которых состоят протоны и нейтроны, — их, как и в строке, три. Редкий случай, когда сувенир из этой книги увезли в учебники физики.</p>
+      </div>
+
+      <div class="sight">
+        <div class="sight-top"><h3>Прощальный монолог реки</h3><span class="stars">★★★★★</span></div>
+        <p class="where"><svg class="ico"><use href="#i-eye"/></svg> Книга IV, последние страницы</p>
+        <p>Анна Ливия на рассвете говорит с мужем и уходит в море, усталая, к холодному отцу-океану. Голос её всё короче, слова тоньше, и книга обрывается на артикле: <span class="en">A way a lone a last a loved a long the</span>. Многие читатели признаются, что ради этих страниц и проделали весь путь.</p>
+      </div>
+
+    </div>
+    <aside>
+      <div class="facts">
+        <h4>Если у вас один вечер</h4>
+        <dl>
+          <dt>Начало</dt><dd>Первая страница — ради кольца и первого грома</dd>
+          <dt>Главное</dt><dd>Глава об Анне Ливии, вслух, целиком</dd>
+          <dt>Финал</dt><dd>Последние страницы, потом снова первая</dd>
+        </dl>
+      </div>
+      <div class="tip">
+        <h4><svg class="ico"><use href="#i-lamp"/></svg>Совет бывалых</h4>
+        <p>Глава об Анне Ливии хороша для первого визита: здесь есть ясная сцена — две женщины, река и сумерки, — и за неё можно держаться.</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 07 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">07</span><h2>Климат циклический: четыре сезона Вико сменяют друг друга без конца</h2></div>
+    <div class="main">
+      <p>Каркас книги Джойс взял у неаполитанского философа Джамбаттисты Вико, автора «Новой науки» (1725). По Вико, история каждого народа проходит три эпохи — богов, героев и людей, — а затем наступает возврат, <span class="en">ricorso</span>, и всё начинается сначала. Эпоху богов открывает удар грома: испуганные люди впервые видят в небе божество.</p>
+      <p>Отсюда и громовые слова, и <span class="en">vicus</span> в первой фразе, и устройство книги. Первые три книги «Поминок» соответствуют трём эпохам, короткая четвёртая — возврату, после которого текст снова приводит к первой странице. Климат здесь не меняется, он вращается.</p>
+      <div class="instrument" data-instrument="vico-wheel">
+  <div class="vw">
+    <canvas class="vw-wheel" tabindex="0" role="slider" aria-label="Колесо Вико: эпохи и книги «Поминок по Финнегану»" aria-valuemin="3" aria-valuemax="628" aria-valuenow="3"></canvas>
+    <div class="vw-read">
+      <div class="vw-age">эпоха богов</div>
+      <div class="vw-book"><span class="vw-bk">Книга I</span><span class="vw-range">стр. 3–216</span></div>
+      <div class="vw-chips"></div>
+      <div class="vw-now"><span>глава <b class="vw-ch">1</b></span><span>стр. <b class="vw-pg">3</b></span></div>
+      <p class="vw-line"></p>
+      <div class="vw-foot"><span class="vw-thunder"></span><span class="vw-circle">круг <b>1</b></span></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="vico-wheel"] .vw{display:flex;flex-wrap:wrap;align-items:center;align-content:center;justify-content:center;gap:1rem 2rem;padding:1.25rem 1.25rem 1.5rem;min-height:30rem;font-family:var(--text);color:var(--chalk)}
+[data-instrument="vico-wheel"] .vw-wheel{display:block;width:min(100%,22rem);aspect-ratio:1/1;touch-action:none;cursor:grab;border-radius:50%;outline:none;-webkit-tap-highlight-color:transparent}
+[data-instrument="vico-wheel"] .vw-wheel.vw-drag{cursor:grabbing}
+[data-instrument="vico-wheel"] .vw-wheel:focus-visible{outline:2px dashed var(--chalk-yellow);outline-offset:4px}
+[data-instrument="vico-wheel"] .vw-read{flex:0 1 17rem;width:17rem;max-width:100%;--vw-c:var(--chalk-yellow)}
+[data-instrument="vico-wheel"] .vw-age{font-family:var(--hand);font-weight:700;font-size:2rem;height:2.5rem;line-height:2.5rem;color:var(--vw-c);white-space:nowrap}
+[data-instrument="vico-wheel"] .vw-book{display:flex;justify-content:space-between;align-items:baseline;height:2.6rem;border-bottom:1px dashed rgba(236,232,220,.4)}
+[data-instrument="vico-wheel"] .vw-bk{font-family:var(--display);font-weight:600;font-size:1.6rem;letter-spacing:.06em;text-transform:uppercase}
+[data-instrument="vico-wheel"] .vw-range{font-family:var(--display);font-size:.8rem;letter-spacing:.08em;opacity:.75;font-variant-numeric:tabular-nums}
+[data-instrument="vico-wheel"] .vw-chips{display:flex;gap:.3rem;height:2.1rem;align-items:center;margin-top:.35rem}
+[data-instrument="vico-wheel"] .vw-chips span{width:1.55rem;height:1.55rem;display:grid;place-items:center;font-family:var(--display);font-size:.78rem;border:1.5px solid rgba(236,232,220,.35);border-radius:50%;color:rgba(236,232,220,.6);font-variant-numeric:tabular-nums}
+[data-instrument="vico-wheel"] .vw-chips span.on{background:var(--vw-c);border-color:var(--vw-c);color:var(--slate);font-weight:600}
+[data-instrument="vico-wheel"] .vw-now{display:flex;gap:1.4rem;align-items:baseline;height:1.8rem;font-family:var(--display);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums;opacity:.9}
+[data-instrument="vico-wheel"] .vw-now b{display:inline-block;min-width:3ch;font-size:1.15rem;font-weight:600;letter-spacing:.02em;color:var(--chalk)}
+[data-instrument="vico-wheel"] .vw-line{margin:.2rem 0 0;height:6em;overflow:hidden;font-size:.92rem;line-height:1.5}
+[data-instrument="vico-wheel"] .vw-foot{display:flex;justify-content:space-between;align-items:center;gap:.5rem;height:1.9rem;margin-top:.4rem;border-top:1px dashed rgba(236,232,220,.4);font-family:var(--display);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="vico-wheel"] .vw-thunder{color:var(--chalk-yellow)}
+[data-instrument="vico-wheel"] .vw-circle{opacity:.8}
+[data-instrument="vico-wheel"] .vw-circle b{display:inline-block;min-width:2ch;text-align:right;font-weight:600}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="vico-wheel"]');
+if(!root)return;
+const cv=root.querySelector('.vw-wheel'),ctx=cv.getContext('2d');
+const read=root.querySelector('.vw-read');
+const el={age:root.querySelector('.vw-age'),bk:root.querySelector('.vw-bk'),range:root.querySelector('.vw-range'),chips:root.querySelector('.vw-chips'),ch:root.querySelector('.vw-ch'),pg:root.querySelector('.vw-pg'),line:root.querySelector('.vw-line'),th:root.querySelector('.vw-thunder'),circ:root.querySelector('.vw-circle b')};
+const css=getComputedStyle(root);
+const v=(n,f)=>(css.getPropertyValue(n)||'').trim()||f;
+const CHALK=v('--chalk','#ECE8DC'),YEL=v('--chalk-yellow','#EAD27C');
+const BOOKS=[
+{n:'I',age:'эпоха богов',c:v('--chalk-yellow','#EAD27C'),s:3,e:216,ch:[
+[3,'Финнеган падает с лестницы, гремит первый гром; на поминках покойника уговаривают лежать смирно.'],
+[30,'Откуда взялось имя Ирвикера; слух о его проступке рождает «Балладу о Персе О’Рейлли».'],
+[48,'Слухи множатся и путаются; Ирвикер заперт в доме, а в дверь ломится незнакомец.'],
+[75,'Ирвикера хоронят, его дело разбирают в суде, свидетели путаются; в конце на сцену выходит Анна Ливия.'],
+[104,'Письмо, которое курица выкопала из мусорной кучи, и учёные толкования каждой его кляксы.'],
+[126,'Викторина из двенадцати вопросов о жителях книги; среди ответов — басня о Муксе и Грайпсе.'],
+[169,'Портрет Шема-Писаки: трусливого изгоя, который пишет самодельными чернилами на собственном теле.'],
+[196,'Две прачки на берегах Лиффи перемывают кости Анне Ливии и к ночи становятся деревом и камнем.']]},
+{n:'II',age:'эпоха героев',c:v('--chalk-pink','#E3A0A0'),s:219,e:399,ch:[
+[219,'Дети играют в сумерках у паба: Шем трижды пытается отгадать загадку девочек о цвете и трижды проигрывает.'],
+[260,'Вечерние уроки: близнецы и Иза за учебниками, поля исписаны пометками, а Шем чертит брату треугольник матери.'],
+[309,'Ночь в пабе: байки о норвежском капитане и о том, как Бакли застрелил русского генерала.'],
+[383,'«Три кварка для мастера Марка!» Четверо старцев подсматривают за Тристаном и Изольдой на корабле.']]},
+{n:'III',age:'эпоха людей',c:v('--chalk-green','#A9CF9A'),s:403,e:590,ch:[
+[403,'Полночь. Шон-Почтальон держит речь, рассказывает басню о Муравье и Кузнечике и уплывает по реке в бочке.'],
+[429,'Шон, теперь Джонт, наставляет двадцать девять девушек и прощается с Изой.'],
+[474,'Йон лежит на кургане; четверо старцев допрашивают его, и сквозь него говорит сам Ирвикер.'],
+[555,'Перед рассветом: родители в спальне, плачущий ребёнок и четыре взгляда на одну постель.']]},
+{n:'IV',age:'рикорсо',c:v('--chalk-blue','#93C6D4'),s:593,e:628,ch:[
+[593,'Рассвет: спор святого Патрика с друидом, ещё одно письмо и прощальный монолог Анны Ливии, уходящей в море.']]}
+];
+const THUNDER=[3,23,44,90,113,257,314,332,414,424];
+let acc=0;const FLAT=[];
+BOOKS.forEach((b,bi)=>{b.cum=acc;b.len=b.e-b.s+1;acc+=b.len;b.ch=b.ch.map((c,i,a)=>({p:c[0],t:c[1],end:i<a.length-1?a[i+1][0]-1:b.e}));b.ch.forEach((c,ci)=>FLAT.push({bi,ci,p:c.p}));});
+const TOTAL=acc,TAU=Math.PI*2;
+function unitOf(p){for(const b of BOOKS)if(p>=b.s&&p<=b.e)return b.cum+(p-b.s)+0.5;return 0.5;}
+const turnOf=p=>unitOf(p)/TOTAL;
+function locate(t){const u=(t-Math.floor(t))*TOTAL;let bi=0;BOOKS.forEach((b,i)=>{if(u>=b.cum)bi=i;});const b=BOOKS[bi];let p=b.s+Math.floor(u-b.cum);if(p>b.e)p=b.e;let ci=0;b.ch.forEach((c,i)=>{if(p>=c.p)ci=i;});return{bi,ci,p};}
+
+const mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduce=mq.matches;
+(mq.addEventListener?mq.addEventListener('change',e=>{reduce=e.matches;vel=0;dirty=true;}):mq.addListener(e=>{reduce=e.matches;}));
+
+let S=0,dpr=1,R=0,cx=0,cy=0,sz=0;
+const off=document.createElement('canvas');
+let T=turnOf(3),vel=0,kbTarget=null,dragging=false,lastInteract=-1e9,dirty=true,visible=true;
+let flashT0=-1e9,bolt=null;
+const AUTO=1/120;
+
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const ang=u=>u/TOTAL*TAU-Math.PI/2;
+function chalkStroke(c,build,color,w,r){c.save();c.strokeStyle=color;c.lineCap='round';c.lineJoin='round';for(let i=0;i<3;i++){c.globalAlpha=i===0?.85:.32;c.lineWidth=w*(i===0?1:.7);c.save();c.translate((r()-.5)*w*.7,(r()-.5)*w*.7);c.beginPath();build(c);c.stroke();c.restore();}c.restore();}
+function chalkText(c,t,x,y){const a=c.globalAlpha;c.fillText(t,x,y);c.globalAlpha=a*.35;c.fillText(t,x+.7,y-.5);c.globalAlpha=a;}
+function tangent(c,t,r,a){c.save();c.rotate(a);c.translate(r,0);c.rotate(Math.PI/2);chalkText(c,t,0,0);c.restore();}
+function arcText(c,t,r,a,span,fs,family){let font=f=>c.font=family.replace('#',f.toFixed(1));font(fs);let w=c.measureText(t).width;const max=r*span;if(w>max){fs*=max/w;font(fs);w=c.measureText(t).width;}let x=-w/2;for(const ch of t){const cw=c.measureText(ch).width;tangent(c,ch,r,a+(x+cw/2)/r);x+=cw;}}
+
+function renderWheel(){
+  const pad=R*0.14;sz=(R+pad)*2;
+  off.width=Math.ceil(sz*dpr);off.height=off.width;
+  const c=off.getContext('2d'),r=rng(7);
+  c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,sz,sz);c.translate(sz/2,sz/2);
+  const hub=R*0.14;
+  BOOKS.forEach(b=>{const a0=ang(b.cum),a1=ang(b.cum+b.len);c.beginPath();c.arc(0,0,R,a0,a1);c.arc(0,0,hub,a1,a0,true);c.closePath();c.globalAlpha=.1;c.fillStyle=b.c;c.fill();c.globalAlpha=1;
+    chalkStroke(c,x=>x.arc(0,0,R*0.955,a0+0.02,a1-0.02),b.c,3,r);});
+  chalkStroke(c,x=>x.arc(0,0,R,0,TAU),CHALK,2.4,r);
+  chalkStroke(c,x=>x.arc(0,0,hub,0,TAU),CHALK,2,r);
+  chalkStroke(c,x=>x.arc(0,0,hub*0.25,0,TAU),CHALK,1.6,r);
+  BOOKS.forEach(b=>{const a=ang(b.cum);chalkStroke(c,x=>{x.moveTo(Math.cos(a)*hub,Math.sin(a)*hub);x.lineTo(Math.cos(a)*R,Math.sin(a)*R);},CHALK,2.2,r);});
+  c.textAlign='center';c.textBaseline='middle';
+  BOOKS.forEach(b=>{
+    b.ch.forEach((ch,i)=>{
+      if(i>0){const a=ang(unitOf(ch.p)-.5);chalkStroke(c,x=>{x.moveTo(Math.cos(a)*R*.92,Math.sin(a)*R*.92);x.lineTo(Math.cos(a)*R,Math.sin(a)*R);},CHALK,1.5,r);}
+      const m=ang((unitOf(ch.p)-.5+unitOf(ch.end)+.5)/2);
+      c.font='600 '+(R*0.068).toFixed(1)+'px Oswald, "Arial Narrow", sans-serif';c.fillStyle=CHALK;c.globalAlpha=.72;tangent(c,String(i+1),R*.86,m);c.globalAlpha=1;
+    });
+    const a0=ang(b.cum),a1=ang(b.cum+b.len),mid=(a0+a1)/2;
+    c.fillStyle=b.c;c.globalAlpha=.95;
+    arcText(c,b.age,R*.69,mid,(a1-a0)*.86,R*.13,'700 #px Caveat, cursive');
+    c.font='600 '+(R*0.17).toFixed(1)+'px Oswald, "Arial Narrow", sans-serif';
+    if(b.len/TOTAL<0.08)c.font='600 '+(R*0.12).toFixed(1)+'px Oswald, "Arial Narrow", sans-serif';
+    tangent(c,b.n,R*.42,mid);c.globalAlpha=1;
+  });
+  THUNDER.forEach(p=>{const a=ang(unitOf(p)-.5);c.save();c.rotate(a);chalkStroke(c,x=>{x.moveTo(R*1.03,0);x.lineTo(R*1.07,-R*.022);x.lineTo(R*1.075,R*.022);x.lineTo(R*1.115,0);},YEL,1.8,r);c.restore();});
+  c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='destination-out';
+  const W=off.width,n=Math.floor(W*W/22);
+  for(let i=0;i<n;i++){c.globalAlpha=.2+r()*.5;c.fillRect(r()*W|0,r()*W|0,1+(r()*1.8|0),1);}
+  c.globalCompositeOperation='source-over';c.globalAlpha=1;
+}
+
+function makeBolt(){const pts=[],x0=cx-R*.72,y0=Math.max(4,cy-R*1.22),x1=cx+R*.02,y1=cy-R*.3,n=7;
+  for(let i=0;i<=n;i++){const t=i/n;let x=x0+(x1-x0)*t,y=y0+(y1-y0)*t;if(i>0&&i<n)x+=(i%2?1:-1)*R*(.07+Math.random()*.08);pts.push([x,y]);}
+  const b=pts[3];bolt={main:pts,branch:[b,[b[0]-R*.22,b[1]+R*.16],[b[0]-R*.3,b[1]+R*.3]]};}
+function poly(pts,prog){let L=0;const seg=[];for(let i=1;i<pts.length;i++){const d=Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]);seg.push(d);L+=d;}
+  let left=L*prog;ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);
+  for(let i=1;i<pts.length&&left>0;i++){const d=seg[i-1],k=Math.min(1,left/d);ctx.lineTo(pts[i-1][0]+(pts[i][0]-pts[i-1][0])*k,pts[i-1][1]+(pts[i][1]-pts[i-1][1])*k);left-=d;}ctx.stroke();}
+function strike(){flashT0=performance.now();makeBolt();if(reduce)setTimeout(()=>{dirty=true;},950);}
+
+function draw(now){
+  if(!S)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,S,S);
+  const ft=now-flashT0,flashing=reduce?ft<900:ft<1100;
+  if(flashing&&!reduce&&ft<260){ctx.fillStyle=CHALK;ctx.globalAlpha=.16*(1-ft/260);ctx.beginPath();ctx.arc(cx,cy,R*1.12,0,TAU);ctx.fill();ctx.globalAlpha=1;}
+  ctx.save();ctx.translate(cx,cy);ctx.rotate(-(T-Math.floor(T))*TAU);ctx.drawImage(off,-sz/2,-sz/2,sz,sz);ctx.restore();
+  ctx.fillStyle=CHALK;ctx.globalAlpha=.92;ctx.beginPath();ctx.moveTo(cx,cy-R+R*.06);ctx.lineTo(cx-R*.065,cy-R-R*.12);ctx.lineTo(cx+R*.065,cy-R-R*.12);ctx.closePath();ctx.fill();
+  ctx.globalAlpha=.4;ctx.strokeStyle=CHALK;ctx.lineWidth=1.2;ctx.stroke();ctx.globalAlpha=1;
+  if(flashing&&bolt){const prog=reduce?1:Math.min(1,ft/160),a=reduce?1:(ft<600?1:Math.max(0,1-(ft-600)/500));
+    ctx.save();ctx.strokeStyle=YEL;ctx.lineCap='round';ctx.lineJoin='round';
+    ctx.globalAlpha=.3*a;ctx.lineWidth=R*.06;poly(bolt.main,prog);
+    ctx.globalAlpha=a;ctx.lineWidth=Math.max(2.5,R*.022);poly(bolt.main,prog);
+    if(prog>=1){ctx.lineWidth=Math.max(1.6,R*.012);poly(bolt.branch,Math.min(1,(ft-160)/120)||1);}
+    ctx.restore();}
+  return flashing;
+}
+
+let key='',lastBi=-1;
+function update(){
+  const L=locate(T),b=BOOKS[L.bi],ch=b.ch[L.ci],circle=Math.max(1,Math.floor(T)+1);
+  const k=L.p+'|'+circle;if(k===key)return;key=k;
+  if(L.bi!==lastBi){lastBi=L.bi;el.age.textContent=b.age;el.bk.textContent='Книга '+b.n;el.range.textContent='стр. '+b.s+'–'+b.e;read.style.setProperty('--vw-c',b.c);
+    el.chips.innerHTML='';b.ch.forEach((c,i)=>{const s=document.createElement('span');s.textContent=i+1;el.chips.appendChild(s);});}
+  [...el.chips.children].forEach((s,i)=>s.classList.toggle('on',i===L.ci));
+  el.ch.textContent=L.ci+1;el.pg.textContent=L.p;el.line.textContent=ch.t;
+  const near=THUNDER.findIndex(p=>Math.abs(p-L.p)<=3);
+  if(near>=0)el.th.textContent='гром '+(near+1)+' из 10 · стр. '+THUNDER[near];
+  else{const nx=THUNDER.find(p=>p>L.p)||THUNDER[0];el.th.textContent='следующий гром · стр. '+nx;}
+  el.circ.textContent=circle;
+  cv.setAttribute('aria-valuenow',L.p);
+  cv.setAttribute('aria-valuetext','Книга '+b.n+', '+b.age+', глава '+(L.ci+1)+', страница '+L.p);
+}
+function setT(n){const prev=T;T=n;if(Math.floor(T)>Math.floor(prev))strike();dirty=true;update();}
+
+function resize(){const w=cv.getBoundingClientRect().width;if(!w)return;S=w;dpr=window.devicePixelRatio||1;cv.width=Math.round(S*dpr);cv.height=cv.width;R=S*.40;cx=S/2;cy=S*.53;renderWheel();if(bolt)makeBolt();dirty=true;}
+if(window.ResizeObserver)new ResizeObserver(resize).observe(cv);else window.addEventListener('resize',resize);
+resize();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(S){renderWheel();dirty=true;}});
+if(window.IntersectionObserver)new IntersectionObserver(es=>{visible=es[0].isIntersecting;}).observe(root);
+
+let lastAng=0,lastMove=0;
+function ptAng(e){const r=cv.getBoundingClientRect(),x=e.clientX-r.left-cx,y=e.clientY-r.top-cy;return{a:Math.atan2(y,x),d:Math.hypot(x,y)};}
+cv.addEventListener('pointerdown',e=>{const p=ptAng(e);dragging=true;kbTarget=null;vel=0;lastAng=p.a;lastMove=performance.now();cv.setPointerCapture(e.pointerId);cv.classList.add('vw-drag');lastInteract=performance.now();});
+cv.addEventListener('pointermove',e=>{if(!dragging)return;const p=ptAng(e);if(p.d<8)return;let d=p.a-lastAng;if(d>Math.PI)d-=TAU;if(d<-Math.PI)d+=TAU;lastAng=p.a;
+  const now=performance.now(),dt=Math.max(1,now-lastMove)/1000;lastMove=now;const dT=-d/TAU;vel=.75*vel+.25*(dT/dt);setT(T+dT);lastInteract=now;});
+function end(){if(!dragging)return;dragging=false;cv.classList.remove('vw-drag');if(reduce||performance.now()-lastMove>120)vel=0;vel=Math.max(-.6,Math.min(.6,vel));lastInteract=performance.now();}
+cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);cv.addEventListener('lostpointercapture',end);
+
+function goTo(list,dir){
+  const ref=kbTarget!==null?kbTarget:T,base=Math.floor(ref),L=locate(ref);
+  let k=0;list.forEach((f,i)=>{if(L.p>=f.p)k=i;});
+  let j,b2=base;
+  if(dir>0){j=k+1;if(j>=list.length){j=0;b2=base+1;}}
+  else{if(L.p>list[k].p)j=k;else{j=k-1;if(j<0){j=list.length-1;b2=base-1;}}}
+  const target=b2+turnOf(list[j].p);vel=0;
+  if(reduce)setT(target);else kbTarget=target;
+}
+const BSTARTS=BOOKS.map(b=>({p:b.s}));
+cv.addEventListener('keydown',e=>{
+  let h=true;
+  switch(e.key){
+    case'ArrowRight':case'ArrowUp':goTo(FLAT,1);break;
+    case'ArrowLeft':case'ArrowDown':goTo(FLAT,-1);break;
+    case'PageDown':goTo(BSTARTS,1);break;
+    case'PageUp':goTo(BSTARTS,-1);break;
+    case'Home':{const t=Math.floor(kbTarget!==null?kbTarget:T)+turnOf(3);reduce?setT(t):kbTarget=t;break;}
+    case'End':{const t=Math.floor(kbTarget!==null?kbTarget:T)+turnOf(593);reduce?setT(t):kbTarget=t;break;}
+    default:h=false;
+  }
+  if(h){e.preventDefault();lastInteract=performance.now();}
+});
+
+let last=performance.now();
+function tick(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(!dragging){
+    if(kbTarget!==null){const d=kbTarget-T;if(Math.abs(d)<2e-4){setT(kbTarget);kbTarget=null;}else setT(T+d*Math.min(1,dt*10));}
+    else if(Math.abs(vel)>2e-4&&!reduce){setT(T+vel*dt);vel*=Math.exp(-dt*2.2);}
+    else{vel=0;if(!reduce&&visible&&now-lastInteract>2500)setT(T+AUTO*dt);}
+  }
+  const fl=now-flashT0<1150;
+  if((dirty||fl)&&visible){draw(now);dirty=false;}
+  requestAnimationFrame(tick);
+}
+update();draw(performance.now());
+requestAnimationFrame(tick);
+})();</script>
+    </div>
+    <aside>
+      <div class="facts">
+        <h4>Сезоны и районы</h4>
+        <dl>
+          <dt>Книга I</dt><dd>Эпоха богов. Восемь глав: падение, слухи, письмо, Шем, Анна Ливия</dd>
+          <dt>Книга II</dt><dd>Эпоха героев. Четыре главы: дети, уроки, ночь в пабе</dd>
+          <dt>Книга III</dt><dd>Эпоха людей. Четыре главы: Шон и его путь</dd>
+          <dt>Книга IV</dt><dd>Возврат. Одна глава: рассвет и уход реки в море</dd>
+        </dl>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 08 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">08</span><h2>Бывалые путешественники советуют не ехать одному</h2></div>
+    <div class="main">
+      <p>У «Поминок» давняя традиция совместного чтения: группы собираются раз в неделю и читают по нескольку страниц вслух, обсуждая каждое слово. Такое путешествие тянется годами, и это никого не смущает — здесь ценят медленный шаг. Если группы рядом нет, возьмите в спутники комментарий.</p>
+      <h3>Что положить в рюкзак</h3>
+      <ul class="bookshelf">
+        <li><b>Джозеф Кэмпбелл и Генри Мортон Робинсон, «A Skeleton Key to Finnegans Wake» (1944).</b> Первый подробный пересказ книги — старая, но надёжная карта.</li>
+        <li><b>Роланд Макхью, «Annotations to Finnegans Wake».</b> Постраничный словарь: что за слово, из какого языка, на что намекает. Носите его, как разговорник.</li>
+        <li><b>Запись Джойса 1929 года.</b> Голос автора, читающего Анну Ливию, — лучший камертон перед дорогой.</li>
+      </ul>
+    </div>
+    <aside>
+      <div class="tip">
+        <h4><svg class="ico"><use href="#i-lamp"/></svg>Совет бывалых</h4>
+        <p>Отмечайте на полях не то, что поняли, а то, что рассмешило. «Поминки» — очень смешная книга, и смех служит здесь лучшим компасом.</p>
+      </div>
+      <div class="warn">
+        <h4><svg class="ico"><use href="#i-warn"/></svg>Местные обычаи</h4>
+        <p>Не спорьте о «настоящем» смысле. Здесь принято соглашаться, что верны сразу несколько.</p>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 09 -->
+  <section class="sec">
+    <div class="sechead"><span class="tab">09</span><h2>Обратного билета нет, потому что дорога назад ведёт к началу</h2></div>
+    <div class="main">
+      <p>В конце путеводителя обычно рассказывают, как уехать. Из «Поминок» уехать нельзя: последняя фраза не закончена, и закончить её можно, только вернувшись на первую страницу. Река впадает в море, море поднимается дождём, дождь снова становится рекой — <span class="en">riverrun</span>. Финнеган падает и встаёт. Книга засыпает и просыпается.</p>
+      <p>Поэтому лучший совет на дорогу такой: дочитав, не закрывайте книгу. Переверните её на третью страницу и прочтите первое слово ещё раз. Оно будет звучать иначе.</p>
+      <div class="instrument" data-instrument="riverrun-ring">
+  <div class="rr-stage">
+    <svg class="rr-svg" viewBox="0 0 520 520" role="slider" tabindex="0" aria-label="Начало чтения" aria-valuemin="1" aria-valuemax="38" aria-valuenow="1" aria-valuetext="«A», стр. 628">
+      <defs>
+        <filter id="rr-chalk" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="3" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <path id="rr-path" d="M260,55 a205,205 0 1 1 0,410 a205,205 0 1 1 0,-410"/>
+        <path id="rr-outer" d="M260,500 a240,240 0 1 1 0,-480 a240,240 0 1 1 0,480"/>
+      </defs>
+      <circle class="rr-wash" cx="260" cy="260" r="207"/>
+      <g class="rr-banks" filter="url(#rr-chalk)"></g>
+      <g class="rr-rot">
+        <g class="rr-rip"></g>
+        <g class="rr-words"></g>
+        <g class="rr-marks" font-size="11"></g>
+      </g>
+      <line class="rr-cut" x1="260" y1="24" x2="260" y2="86"/>
+      <path class="rr-notch" d="M251,6 L269,6 L260,22 Z"/>
+      <text class="rr-meas" x="0" y="-50" font-size="20">A</text>
+      <circle class="rr-band" cx="260" cy="260" r="207" fill="none" stroke="transparent" stroke-width="84"/>
+    </svg>
+    <div class="rr-read" aria-hidden="true">
+      <span class="rr-k">начало</span>
+      <span class="rr-pg">стр. <b>628</b></span>
+      <span class="rr-w">«A»</span>
+      <span class="rr-n">слово <b>1</b> из <b>11</b></span>
+    </div>
+  </div>
+  <p class="rr-line"></p>
+</div>
+<style>
+[data-instrument="riverrun-ring"]{padding:1.25rem 1rem 1.5rem;font-family:var(--text);color:var(--chalk)}
+[data-instrument="riverrun-ring"] .rr-stage{position:relative;width:100%;max-width:30rem;margin:0 auto;aspect-ratio:1/1;touch-action:auto}
+[data-instrument="riverrun-ring"] .rr-svg{display:block;width:100%;height:100%;pointer-events:none;touch-action:none;overflow:visible;border-radius:50%}
+[data-instrument="riverrun-ring"] .rr-svg:focus{outline:none}
+[data-instrument="riverrun-ring"] .rr-svg:focus-visible{outline:2px dashed var(--chalk-yellow);outline-offset:-2px}
+[data-instrument="riverrun-ring"] .rr-band{pointer-events:stroke;cursor:grab}
+[data-instrument="riverrun-ring"] .rr-svg.is-drag .rr-band{cursor:grabbing}
+[data-instrument="riverrun-ring"] .rr-wash{fill:none;stroke:var(--chalk-blue);stroke-width:52;opacity:.09}
+[data-instrument="riverrun-ring"] .rr-svg:focus-visible .rr-wash{opacity:.18}
+[data-instrument="riverrun-ring"] .rr-banks path{fill:none;stroke:var(--chalk-blue);stroke-width:2.2;opacity:.9}
+[data-instrument="riverrun-ring"] .rr-rip path{fill:none;stroke:var(--chalk-blue);stroke-width:1.6;stroke-linecap:round;opacity:.5}
+[data-instrument="riverrun-ring"] .rr-words{font-family:var(--hand);font-weight:700}
+[data-instrument="riverrun-ring"] .rr-words text{fill:var(--chalk)}
+[data-instrument="riverrun-ring"] .rr-words text.rr-b{fill:var(--chalk-yellow)}
+[data-instrument="riverrun-ring"] .rr-words text.rr-cur{fill:var(--chalk-pink)}
+[data-instrument="riverrun-ring"] .rr-tick{stroke:var(--chalk-yellow);stroke-width:1.6;stroke-linecap:round;opacity:.85}
+[data-instrument="riverrun-ring"] .rr-marks text{font-family:var(--display);fill:var(--chalk-yellow);letter-spacing:.06em;opacity:.85}
+[data-instrument="riverrun-ring"] .rr-cut{stroke:var(--chalk-pink);stroke-width:1.5;opacity:.75}
+[data-instrument="riverrun-ring"] .rr-notch{fill:var(--chalk-pink)}
+[data-instrument="riverrun-ring"] .rr-meas{font-family:var(--hand);font-weight:700;visibility:hidden}
+[data-instrument="riverrun-ring"] .rr-read{position:absolute;left:50%;top:50%;width:10.5rem;height:7.6rem;margin:-3.8rem 0 0 -5.25rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;border:1.5px dashed rgba(236,232,220,.3);border-radius:6px;background:rgba(38,48,44,.55);font-variant-numeric:tabular-nums;pointer-events:none;text-align:center}
+[data-instrument="riverrun-ring"] .rr-k{font-family:var(--display);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+[data-instrument="riverrun-ring"] .rr-pg{font-family:var(--display);font-weight:600;font-size:1.9rem;line-height:1;color:var(--chalk);font-variant-numeric:tabular-nums}
+[data-instrument="riverrun-ring"] .rr-pg b{display:inline-block;min-width:2.1em;text-align:left;font-weight:600}
+[data-instrument="riverrun-ring"] .rr-read.is-3 .rr-pg{color:var(--chalk-yellow)}
+[data-instrument="riverrun-ring"] .rr-w{font-family:var(--hand);font-weight:700;font-size:1.45rem;line-height:1.1;height:1.65rem;color:var(--chalk-pink);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="riverrun-ring"] .rr-n{font-family:var(--display);font-size:.72rem;letter-spacing:.08em;opacity:.75;font-variant-numeric:tabular-nums}
+[data-instrument="riverrun-ring"] .rr-n b{font-weight:400;display:inline-block;min-width:1.2em}
+[data-instrument="riverrun-ring"] .rr-line{max-width:36rem;margin:1rem auto 0;padding-top:.9rem;border-top:1px dashed rgba(236,232,220,.25);min-height:7.8em;font-style:italic;font-size:1rem;line-height:1.6}
+[data-instrument="riverrun-ring"] .rr-line .rr-b{color:var(--chalk-yellow)}
+[data-instrument="riverrun-ring"] .rr-line .rr-cur{color:var(--chalk-pink);border-bottom:2px solid var(--chalk-pink)}
+[data-instrument="riverrun-ring"] .rr-seam{display:inline-block;width:2px;height:1.05em;background:var(--chalk-yellow);margin:0 .35em;vertical-align:-.15em}
+[data-instrument="riverrun-ring"] .rr-gap{font-style:normal;font-family:var(--display);font-size:.72rem;letter-spacing:.08em;color:rgba(236,232,220,.55);white-space:nowrap;font-variant-numeric:tabular-nums}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="riverrun-ring"]');if(!root)return;
+const NS='http://www.w3.org/2000/svg',XL='http://www.w3.org/1999/xlink';
+const svg=root.querySelector('.rr-svg'),rot=root.querySelector('.rr-rot'),wordsG=root.querySelector('.rr-words'),
+marks=root.querySelector('.rr-marks'),ripG=root.querySelector('.rr-rip'),banks=root.querySelector('.rr-banks'),
+band=root.querySelector('.rr-band'),path=root.querySelector('#rr-path'),outer=root.querySelector('#rr-outer'),
+meas=root.querySelector('.rr-meas'),rd=root.querySelector('.rr-read'),line=root.querySelector('.rr-line');
+const rdPg=rd.querySelector('.rr-pg b'),rdW=rd.querySelector('.rr-w'),rdN=rd.querySelectorAll('.rr-n b');
+const CX=260,CY=260,R=205,FLOW=2.4;
+const A="A way a lone a last a loved a long the".split(' ');
+const B="riverrun, past Eve and Adam's, from swerve of shore to bend of bay, brings us by a commodius vicus of recirculation back to Howth Castle and Environs.".split(' ');
+const T=A.concat(B),N=T.length,NA=A.length;
+const mod=(a,m)=>((a%m)+m)%m;
+const pt=(r,d)=>{const a=d*Math.PI/180;return[CX+r*Math.sin(a),CY-r*Math.cos(a)]};
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e};
+const ref=(el,id)=>{el.setAttribute('href',id);el.setAttributeNS(XL,'xlink:href',id)};
+[182,232].forEach((r0,k)=>{let d='';for(let p=0;p<=360;p+=2){const a=p*Math.PI/180;const r=r0+1.6*Math.sin(a*9+k*2)+0.7*Math.sin(a*23+k);const q=pt(r,p);d+=(p?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1)}mk('path',{d:d+'Z'},banks)});
+for(let k=0;k<24;k++){[[190,k*15],[226,k*15+7.5]].forEach(([r,a])=>{const p0=pt(r,a),p1=pt(r,a+5);mk('path',{d:'M'+p0[0].toFixed(1)+','+p0[1].toFixed(1)+' A'+r+','+r+' 0 0 1 '+p1[0].toFixed(1)+','+p1[1].toFixed(1)},ripG)})}
+const els=T.map((w,i)=>{const t=mk('text',{'class':i<NA?'rr-a':'rr-b'},wordsG);const tp=mk('textPath',{},t);ref(tp,'#rr-path');tp.textContent=w;return t});
+const C=new Array(N),Bd=new Array(N);
+function layout(){
+  const L=(path.getTotalLength&&path.getTotalLength())||2*Math.PI*R;
+  const W=T.map(w=>{meas.textContent=w;let l=0;try{l=meas.getComputedTextLength()}catch(e){}return l>0?l:w.length*8.4});
+  const tot=W.reduce((a,b)=>a+b,0);
+  const fs=Math.min(18,20*L*0.86/tot);
+  wordsG.setAttribute('font-size',fs.toFixed(2));
+  const w=W.map(x=>x*fs/20),sum=w.reduce((a,b)=>a+b,0),g=(L-sum)/N;
+  let s=g/2;
+  for(let i=0;i<N;i++){els[i].firstChild.setAttribute('startOffset',s.toFixed(2));C[i]=(s+w[i]/2)/L*360;Bd[i]=(s-g/2)/L*360;s+=w[i]+g}
+  Bd[0]=0;
+  while(marks.firstChild)marks.removeChild(marks.firstChild);
+  const Lo=(outer.getTotalLength&&outer.getTotalLength())||2*Math.PI*240;
+  [[Bd[NA],'628 · 3'],[0,'3 ⋯ 628']].forEach(([a,label])=>{
+    const p0=pt(184,a),p1=pt(230,a);
+    mk('line',{'class':'rr-tick',x1:p0[0].toFixed(1),y1:p0[1].toFixed(1),x2:p1[0].toFixed(1),y2:p1[1].toFixed(1)},marks);
+    const t=mk('text',{'text-anchor':'middle'},marks);const tp=mk('textPath',{startOffset:(mod(a+180,360)/360*Lo).toFixed(2)},t);ref(tp,'#rr-outer');tp.textContent=label;
+  });
+}
+let theta=0,vel=0,cur=-1,dragging=false,pauseUntil=0,visible=true;
+const mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+let reduce=!!(mq&&mq.matches);
+function indexAt(){const p=mod(-theta,360);let i=0;for(let k=1;k<N;k++){if(Bd[k]<=p)i=k;else break}return i}
+function clean(w){return w.replace(/[,.]$/,'')}
+function update(i){
+  if(cur>=0)els[cur].classList.remove('rr-cur');
+  els[i].classList.add('rr-cur');cur=i;
+  const on3=i>=NA,pg=on3?'3':'628',n=on3?i-NA+1:i+1,of=on3?B.length:A.length,w=clean(T[i]);
+  rd.classList.toggle('is-3',on3);rdPg.textContent=pg;rdW.textContent='«'+w+'»';rdN[0].textContent=n;rdN[1].textContent=of;
+  svg.setAttribute('aria-valuenow',i+1);
+  svg.setAttribute('aria-valuetext','«'+w+'», стр. '+pg+', слово '+n+' из '+of);
+  let h='';
+  for(let j=0;j<N;j++){
+    const k=(i+j)%N;
+    if(j>0&&k===0)h+=' <span class="rr-gap">⋯ стр. 3 → 628 ⋯</span> ';
+    else if(j>0&&k===NA)h+='<span class="rr-seam" aria-hidden="true"></span>';
+    else if(j>0)h+=' ';
+    h+='<span class="'+(k<NA?'rr-a':'rr-b')+(j===0?' rr-cur':'')+'">'+T[k]+'</span>';
+  }
+  line.innerHTML=h;
+}
+function render(){
+  theta=mod(theta+180,360)-180;
+  rot.setAttribute('transform','rotate('+theta.toFixed(3)+' '+CX+' '+CY+')');
+  const i=indexAt();if(i!==cur)update(i);
+}
+let raf=0,last=0;
+const needLoop=()=>visible&&!reduce;
+function frame(t){
+  raf=0;const dt=last?Math.min(.05,(t-last)/1000):0;last=t;
+  if(!dragging){
+    if(reduce)vel=0;
+    else{const target=t<pauseUntil?0:FLOW;vel+=(target-vel)*(1-Math.exp(-dt/0.8));theta+=vel*dt}
+  }
+  render();
+  if(needLoop())raf=requestAnimationFrame(frame);else last=0;
+}
+function ensure(){if(!raf&&needLoop()){last=0;raf=requestAnimationFrame(frame)}}
+function ang(e){const r=svg.getBoundingClientRect();return Math.atan2(e.clientX-(r.left+r.width/2),-(e.clientY-(r.top+r.height/2)))*180/Math.PI}
+let lastA=0,lastT=0;
+band.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;dragging=true;
+  try{band.setPointerCapture(e.pointerId)}catch(_){}
+  try{svg.focus({preventScroll:true})}catch(_){}
+  lastA=ang(e);lastT=e.timeStamp;vel=0;svg.classList.add('is-drag');e.preventDefault();
+});
+band.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  const a=ang(e),d=mod(a-lastA+180,360)-180,dt=Math.max(1,e.timeStamp-lastT)/1000;
+  theta+=d;vel=Math.max(-240,Math.min(240,vel*0.6+(d/dt)*0.4));lastA=a;lastT=e.timeStamp;render();
+});
+function end(e){
+  if(!dragging)return;dragging=false;svg.classList.remove('is-drag');
+  if(e.timeStamp-lastT>120)vel*=0.2;
+  if(reduce)vel=0;pauseUntil=0;ensure();
+}
+band.addEventListener('pointerup',end);band.addEventListener('pointercancel',end);
+svg.addEventListener('keydown',e=>{
+  let i=cur<0?0:cur;
+  switch(e.key){
+    case'ArrowRight':case'ArrowDown':i=(i+1)%N;break;
+    case'ArrowLeft':case'ArrowUp':i=(i-1+N)%N;break;
+    case'PageDown':i=(i+5)%N;break;
+    case'PageUp':i=(i-5+N)%N;break;
+    case'Home':i=NA;break;
+    case'End':i=NA-1;break;
+    default:return;
+  }
+  e.preventDefault();
+  theta+=mod(-C[i]-theta+180,360)-180;
+  vel=0;pauseUntil=performance.now()+2500;render();ensure();
+});
+if(mq){const f=()=>{reduce=mq.matches;if(reduce)vel=0;ensure()};if(mq.addEventListener)mq.addEventListener('change',f);else if(mq.addListener)mq.addListener(f)}
+if('IntersectionObserver'in window){new IntersectionObserver(es=>{visible=es[0].isIntersecting;ensure()}).observe(root)}
+layout();theta=-C[0];render();ensure();
+if(document.fonts){
+  const re=()=>{layout();cur=cur<0?-1:cur;const i=indexAt();if(i!==cur)update(i);render()};
+  if(document.fonts.ready)document.fonts.ready.then(re);
+  if(document.fonts.addEventListener)document.fonts.addEventListener('loadingdone',re);
+}
+})();</script>
+    </div>
+    <aside>
+      <div class="facts">
+        <h4>Перед отъездом</h4>
+        <dl>
+          <dt>Последнее слово</dt><dd><span class="en">the</span>, стр. 628</dd>
+          <dt>Первое слово</dt><dd><span class="en">riverrun</span>, стр. 3</dd>
+          <dt>Пересадка</dt><dd>Мгновенная, без ожидания</dd>
+          <dt>Визы</dt><dd>Не требуются</dd>
+        </dl>
+      </div>
+      <div class="tip">
+        <h4><svg class="ico"><use href="#i-lamp"/></svg>Совет бывалых</h4>
+        <p>Второй круг всегда проходит легче первого: вы уже знаете жителей по знакам, реку по голосу, а гром по звуку.</p>
+      </div>
+    </aside>
+  </section>
+
+  <div class="end"><span>Поминки по Финнегану · путеводитель</span><span>Конец маршрута — начало маршрута</span></div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Клеточные автоматы: Конвей и другие</title>
+<meta name="description" content="Сказка на ночь о клеточных автоматах: от машины фон Неймана и строчек Вольфрама до «Жизни» Конвея и муравья Лэнгтона.">
+<meta name="compositor:paper" content="#F7F0E4">
+<meta name="compositor:ink" content="#2F2B45">
+<meta name="compositor:accent" content="#D46F5E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F0E4;
+    --ink:#2F2B45;
+    --accent:#D46F5E;
+    --dusk:#77708F;
+    --mist:#E8DECD;
+    --glow:#F2C76B;
+    --display:"Alegreya", Georgia, serif;
+    --text:"Literata", Georgia, serif;
+    --measure:36rem;
+    --wide:52rem;
+    --step--1:0.875rem;
+    --step-0:1.125rem;
+    --step-1:1.375rem;
+    --step-2:1.875rem;
+    --step-3:2.75rem;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--text);
+    font-size:var(--step-0);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .book{
+    padding:4.5rem 1.375rem 5rem;
+  }
+  .book > *{
+    max-width:var(--measure);
+    margin-left:auto;
+    margin-right:auto;
+  }
+  header.cover{
+    text-align:center;
+    margin-bottom:3.5rem;
+  }
+  .cover .eyebrow{
+    font-family:var(--display);
+    font-style:italic;
+    color:var(--dusk);
+    font-size:var(--step-1);
+    margin:0 0 .75rem;
+  }
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:var(--step-3);
+    line-height:1.08;
+    margin:0 auto 1.25rem;
+    max-width:14ch;
+    letter-spacing:-0.005em;
+  }
+  .cover .lede{
+    font-style:italic;
+    color:var(--dusk);
+    margin:0 auto;
+    max-width:28rem;
+  }
+  .chapter-mark{
+    display:block;
+    font-family:var(--display);
+    font-style:italic;
+    color:var(--dusk);
+    font-size:var(--step-1);
+    text-align:center;
+    margin:4.5rem auto .25rem;
+  }
+  h2{
+    font-family:var(--display);
+    font-weight:700;
+    font-size:var(--step-2);
+    line-height:1.2;
+    text-align:center;
+    margin:0 auto 1.75rem;
+    max-width:24ch;
+  }
+  p{margin:0 0 1.15em; hyphens:auto}
+  .opening::first-letter{
+    font-family:var(--display);
+    font-weight:700;
+    color:var(--accent);
+    float:left;
+    font-size:4.1em;
+    line-height:.82;
+    padding:.08em .1em 0 0;
+  }
+  em{font-style:italic}
+  strong{font-weight:600}
+  .alive{color:var(--accent); font-weight:600}
+  .rule-line{
+    font-family:var(--display);
+    font-size:var(--step-1);
+    line-height:1.5;
+    text-align:center;
+    margin:1.75rem auto;
+    padding:1.25rem 1rem;
+    border-top:1px solid var(--mist);
+    border-bottom:1px solid var(--mist);
+  }
+  .rule-line span{display:block}
+  .code{
+    font-family:var(--text);
+    font-variant-numeric:tabular-nums;
+    font-size:.92em;
+    background:var(--mist);
+    padding:.05em .4em;
+    border-radius:6px;
+    white-space:nowrap;
+  }
+  .dinkus{
+    display:flex;
+    justify-content:center;
+    gap:.5rem;
+    margin:3rem auto;
+  }
+  .dinkus i{
+    width:.6rem; height:.6rem;
+    border-radius:3px;
+    background:var(--mist);
+  }
+  .dinkus i:nth-child(2){background:var(--accent)}
+
+  figure.scene{
+    max-width:var(--wide);
+    margin:2.5rem auto;
+    text-align:center;
+  }
+  .scene .row{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    align-items:flex-end;
+    gap:1.25rem 1.75rem;
+  }
+  .scene .panel{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4rem;
+  }
+  .scene svg{display:block; height:auto}
+  .scene .panel span{
+    font-family:var(--display);
+    font-style:italic;
+    color:var(--dusk);
+    font-size:var(--step--1);
+  }
+  .scene .arrow{
+    font-family:var(--display);
+    color:var(--dusk);
+    font-size:var(--step-1);
+    align-self:center;
+    padding-bottom:1.4rem;
+  }
+  figcaption{
+    font-style:italic;
+    color:var(--dusk);
+    font-size:var(--step--1);
+    line-height:1.55;
+    max-width:30rem;
+    margin:1rem auto 0;
+  }
+  .cell-live{fill:var(--accent)}
+
+  .instrument{
+    display:block;
+    width:100%;
+    max-width:var(--wide);
+    margin:2.75rem auto;
+    min-height:22rem;
+    border-radius:var(--radius);
+    background:rgba(232,222,205,.45);
+    box-shadow:inset 0 0 0 1px var(--mist);
+    overflow:hidden;
+  }
+  .instrument[data-instrument="neighbors"]{max-width:30rem; min-height:19rem}
+  .instrument[data-instrument="first-rule"]{min-height:28rem}
+  .instrument[data-instrument="life-garden"]{min-height:32rem}
+  .instrument[data-instrument="rule-chips"]{min-height:30rem}
+  .instrument[data-instrument="langton-ant"]{min-height:30rem}
+
+  .closing{
+    text-align:center;
+    font-family:var(--display);
+    font-style:italic;
+    font-size:var(--step-1);
+    color:var(--dusk);
+    margin-top:3rem;
+  }
+
+  @media (max-width:520px){
+    :root{
+      --step-0:1.0625rem;
+      --step-2:1.6rem;
+      --step-3:2.25rem;
+    }
+    .book{padding:3rem 1.125rem 4rem}
+    .instrument{border-radius:10px}
+    .scene .arrow{display:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="grid" width="16" height="16" patternUnits="userSpaceOnUse">
+      <rect x="1" y="1" width="14" height="14" rx="4" fill="#E8DECD"/>
+    </pattern>
+  </defs>
+</svg>
+
+<main class="book">
+
+  <header class="cover">
+    <p class="eyebrow">Сказка на ночь</p>
+    <h1>Клетки, которые живут по правилам</h1>
+    <p class="lede">О клеточных автоматах: о Джоне Конвее и о тех, кто строил такие миры до него и после.</p>
+  </header>
+
+  <p class="opening">Представь себе тетрадный лист в клетку, который тянется во все стороны без конца. Каждая клеточка на нём может делать только одно из двух: спать или гореть. Больше ничего она не умеет.</p>
+
+  <p>Раз в какое-то время, как будто кто-то тихо щёлкает пальцами, все клетки разом оглядываются на своих соседей и решают, что делать дальше. Решают они не как захотят, а по одному простому правилу, одинаковому для всех. Никто не управляет листом целиком. Никто не рисует на нём картинку. И всё же картинки появляются: растут, кружатся, ползут, а иногда гаснут навсегда.</p>
+
+  <p>Такой лист вместе с правилом называют <strong>клеточным автоматом</strong>. Это сказка о нескольких таких листах и о людях, которые их придумали.</p>
+
+  <span class="chapter-mark">Глава первая</span>
+  <h2>Всё началось с машины, которая умела бы построить саму себя</h2>
+
+  <p>В сороковых годах прошлого века математик Джон фон Нейман задумался о странном вопросе: может ли машина собрать свою точную копию? Живые существа это умеют, так почему бы не устройству?</p>
+
+  <p>Его коллега Станислав Улам, который изучал рост кристаллов на решётке, подсказал ему не строить настоящую машину из шестерёнок, а придумать воображаемый мир из клеток. Фон Нейман так и сделал. Его клетки могли находиться в одном из двадцати девяти состояний, а правило было очень длинным и сложным. Зато в этом мире существовал узор, который, если дать ему время, строил рядом свою копию.</p>
+
+  <p>Книгу об этой машине издали уже после смерти фон Неймана, в 1966 году; её дописал и подготовил Артур Беркс. Мир получился великолепным, но таким громоздким, что поиграть в него перед сном было невозможно. Пришлось подождать, пока кто-нибудь сделает его маленьким.</p>
+
+  <div class="dinkus" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <span class="chapter-mark">Глава вторая</span>
+  <h2>Самый маленький мир помещается в одну строчку</h2>
+
+  <p>Давай начнём с совсем простого. Пусть клетки стоят не на листе, а в одну линию, как бусины на нитке. У каждой бусины двое соседей: слева и справа. Значит, когда бусина решает, гореть ей или спать, она смотрит всего на три клетки: на себя и на двух соседок.</p>
+
+  <p>Три клетки, каждая горит или спит, дают ровно восемь сочетаний. Правило просто говорит для каждого из восьми, какой станет средняя клетка в следующей строчке. Восемь ответов «да» или «нет» можно прочитать как двоичное число от 0 до 255, поэтому всего таких правил 256, и у каждого есть номер. В восьмидесятых годах их подробно изучил Стивен Вольфрам.</p>
+
+  <p>Строчки рисуют одну под другой, и время течёт сверху вниз. Начни с одной горящей бусины и посмотри, что вырастет. Правило 90 рисует треугольник Серпинского: треугольник из треугольников, из треугольников. Правило 30 из той же одной точки разводит такой беспорядок, что его использовали как источник случайных чисел. А правило 110, как доказал Мэтью Кук, способно в принципе выполнить любое вычисление, какое под силу компьютеру.</p>
+
+  <div class="instrument" data-instrument="first-rule">
+  <div class="fr">
+    <div class="fr-top">
+      <div class="fr-hood" role="group" aria-label="ответы правила для восьми окрестностей"></div>
+      <div class="fr-read" aria-live="polite">
+        <span class="fr-lab">правило</span>
+        <span class="fr-num">30</span>
+        <span class="fr-bin" aria-label="двоичная запись"></span>
+      </div>
+    </div>
+    <div class="fr-ctrl">
+      <div class="fr-chips" role="group" aria-label="известные правила">
+        <button type="button" class="fr-chip" data-rule="30" aria-pressed="false">30</button>
+        <button type="button" class="fr-chip" data-rule="90" aria-pressed="false">90</button>
+        <button type="button" class="fr-chip" data-rule="110" aria-pressed="false">110</button>
+        <button type="button" class="fr-chip" data-rule="184" aria-pressed="false">184</button>
+      </div>
+      <div class="fr-seg" role="group" aria-label="начальная строка">
+        <button type="button" data-mode="single" aria-pressed="true">одна клетка</button>
+        <button type="button" data-mode="random" aria-pressed="false">случайная строка</button>
+      </div>
+    </div>
+    <div class="fr-wrap"><canvas class="fr-cv" role="img"></canvas></div>
+  </div>
+</div>
+<style>
+[data-instrument="first-rule"] .fr{padding:1.25rem 1.25rem 1.4rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="first-rule"] .fr-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem 1.25rem}
+[data-instrument="first-rule"] .fr-hood{flex:1 1 19rem;display:grid;grid-template-columns:repeat(8,1fr);gap:.3rem;max-width:30rem}
+[data-instrument="first-rule"] .fr-col{appearance:none;border:0;background:transparent;padding:.45rem .2rem .5rem;border-radius:10px;cursor:pointer;display:flex;justify-content:center;touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:background-color .15s}
+[data-instrument="first-rule"] .fr-col:hover{background:rgba(232,222,205,.7)}
+[data-instrument="first-rule"] .fr-col:focus-visible,
+[data-instrument="first-rule"] .fr-chip:focus-visible,
+[data-instrument="first-rule"] .fr-seg button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+[data-instrument="first-rule"] .fr-stack{width:100%;max-width:3.1rem;display:block}
+[data-instrument="first-rule"] .fr-tri,
+[data-instrument="first-rule"] .fr-arow{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+[data-instrument="first-rule"] .fr-arow{margin-top:.5rem}
+[data-instrument="first-rule"] .fr-tri i,
+[data-instrument="first-rule"] .fr-ans{display:block;aspect-ratio:1/1;border-radius:28%;background:var(--mist)}
+[data-instrument="first-rule"] .fr-tri i.on{background:var(--accent)}
+[data-instrument="first-rule"] .fr-ans{grid-column:2;box-shadow:0 0 0 2px var(--paper),0 0 0 3px rgba(119,112,143,.45);transition:background-color .18s}
+[data-instrument="first-rule"] .fr-col.is-on .fr-ans{background:var(--accent)}
+[data-instrument="first-rule"] .fr-read{flex:0 0 9.5rem;width:9.5rem;height:5.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--paper);border-radius:10px;box-shadow:inset 0 0 0 1px var(--mist);font-variant-numeric:tabular-nums lining-nums}
+[data-instrument="first-rule"] .fr-lab{font-family:var(--display);font-style:italic;color:var(--dusk);font-size:var(--step--1);line-height:1.2}
+[data-instrument="first-rule"] .fr-num{font-size:var(--step-2);font-weight:600;line-height:1.15;min-width:3.2ch;text-align:center}
+[data-instrument="first-rule"] .fr-bin{font-size:var(--step--1);letter-spacing:.14em;line-height:1.3;color:var(--dusk)}
+[data-instrument="first-rule"] .fr-bin b{font-weight:600;color:var(--accent)}
+[data-instrument="first-rule"] .fr-ctrl{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.75rem;margin:1.1rem 0 .9rem}
+[data-instrument="first-rule"] .fr-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+[data-instrument="first-rule"] .fr-chip{appearance:none;font:inherit;font-size:var(--step--1);font-variant-numeric:tabular-nums;color:var(--ink);background:var(--paper);border:1px solid var(--mist);border-radius:999px;padding:.28rem .85rem;min-width:3.4rem;cursor:pointer;touch-action:manipulation;transition:background-color .15s,color .15s}
+[data-instrument="first-rule"] .fr-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+[data-instrument="first-rule"] .fr-seg{display:flex;background:var(--paper);border:1px solid var(--mist);border-radius:999px;padding:3px}
+[data-instrument="first-rule"] .fr-seg button{appearance:none;border:0;font-family:var(--display);font-style:italic;font-size:var(--step--1);color:var(--dusk);background:transparent;border-radius:999px;padding:.22rem .8rem;cursor:pointer;touch-action:manipulation;transition:background-color .15s,color .15s}
+[data-instrument="first-rule"] .fr-seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="first-rule"] .fr-wrap{background:var(--paper);border-radius:10px;padding:.5rem;box-shadow:inset 0 0 0 1px var(--mist)}
+[data-instrument="first-rule"] .fr-cv{display:block;width:100%;height:12rem}
+@media (max-width:520px){
+  [data-instrument="first-rule"] .fr{padding:1rem .75rem 1.1rem}
+  [data-instrument="first-rule"] .fr-hood{gap:.15rem}
+  [data-instrument="first-rule"] .fr-col{padding:.4rem .1rem .45rem}
+  [data-instrument="first-rule"] .fr-ctrl{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="first-rule"] *{transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="first-rule"]');
+if(!root)return;
+const hood=root.querySelector('.fr-hood'),numEl=root.querySelector('.fr-num'),binEl=root.querySelector('.fr-bin');
+const chips=[...root.querySelectorAll('.fr-chip')],segs=[...root.querySelectorAll('.fr-seg button')];
+const wrap=root.querySelector('.fr-wrap'),cv=root.querySelector('.fr-cv'),ctx=cv.getContext('2d');
+const cs=getComputedStyle(root);
+const css=(n,f)=>(cs.getPropertyValue(n)||'').trim()||f;
+const ACC=css('--accent','#D46F5E'),MIST=css('--mist','#E8DECD');
+const reduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+let rule=30,mode='single',seed=20240611,focusIdx=0;
+const btns=[];
+for(let i=0;i<8;i++){
+  const n=7-i,bits=[(n>>2)&1,(n>>1)&1,n&1];
+  const b=document.createElement('button');
+  b.type='button';b.className='fr-col';b.tabIndex=i===0?0:-1;
+  b.innerHTML='<span class="fr-stack" aria-hidden="true"><span class="fr-tri">'+bits.map(v=>'<i'+(v?' class="on"':'')+'></i>').join('')+'</span><span class="fr-arow"><i class="fr-ans"></i></span></span>';
+  b._n=n;b._pat=bits.join('');
+  b.addEventListener('click',()=>{focusIdx=i;setRule(rule^(1<<n))});
+  b.addEventListener('keydown',e=>{
+    let j=null;
+    if(e.key==='ArrowRight')j=(i+1)%8;
+    else if(e.key==='ArrowLeft')j=(i+7)%8;
+    else if(e.key==='Home')j=0;
+    else if(e.key==='End')j=7;
+    else if(e.key==='ArrowUp'){e.preventDefault();if(!((rule>>n)&1))setRule(rule|(1<<n));return}
+    else if(e.key==='ArrowDown'){e.preventDefault();if((rule>>n)&1)setRule(rule&~(1<<n));return}
+    if(j!==null){e.preventDefault();btns[i].tabIndex=-1;btns[j].tabIndex=0;btns[j].focus();focusIdx=j}
+  });
+  hood.appendChild(b);btns.push(b);
+}
+function ui(){
+  btns.forEach(b=>{const on=(rule>>b._n)&1;b.classList.toggle('is-on',!!on);b.setAttribute('aria-pressed',on?'true':'false');b.setAttribute('aria-label',b._pat+' → '+(on?'горит':'спит'))});
+  numEl.textContent=String(rule);
+  binEl.innerHTML=rule.toString(2).padStart(8,'0').split('').map(d=>d==='1'?'<b>1</b>':'0').join('');
+  chips.forEach(c=>c.setAttribute('aria-pressed',+c.dataset.rule===rule?'true':'false'));
+  segs.forEach(s=>s.setAttribute('aria-pressed',s.dataset.mode===mode?'true':'false'));
+}
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+let W=0,H=0,cols=0,rows=0,cell=8,grid=[],drawn=0,raf=0;
+function firstRow(){
+  const r=new Uint8Array(cols);
+  if(mode==='single')r[(cols-1)/2]=1;
+  else{const g=rng(seed);for(let x=0;x<cols;x++)r[x]=g()<.5?1:0}
+  return r;
+}
+function compute(){
+  const g=[firstRow()];
+  for(let y=1;y<rows;y++){
+    const p=g[y-1],q=new Uint8Array(cols);
+    for(let x=0;x<cols;x++){
+      const idx=(p[(x-1+cols)%cols]<<2)|(p[x]<<1)|p[(x+1)%cols];
+      q[x]=(rule>>idx)&1;
+    }
+    g.push(q);
+  }
+  return g;
+}
+function rr(x,y,s,r){ctx.moveTo(x+r,y);ctx.arcTo(x+s,y,x+s,y+s,r);ctx.arcTo(x+s,y+s,x,y+s,r);ctx.arcTo(x,y+s,x,y,r);ctx.arcTo(x,y,x+s,y,r);ctx.closePath()}
+function drawRow(y){
+  const row=grid[y],yy=y*cell,gap=Math.max(1,cell*.16),s=cell-gap,r=s*.3;
+  ctx.clearRect(0,yy,W,cell);
+  for(let v=0;v<2;v++){
+    ctx.beginPath();
+    for(let x=0;x<cols;x++)if(row[x]===v)rr(x*cell+gap/2,yy+gap/2,s,r);
+    ctx.fillStyle=v?ACC:MIST;ctx.fill();
+  }
+}
+function label(){cv.setAttribute('aria-label','Правило '+rule+': '+rows+' поколений, '+(mode==='single'?'из одной клетки':'из случайной строки'))}
+function render(animate){
+  if(!cols)return;
+  cancelAnimationFrame(raf);
+  grid=compute();label();
+  if(!animate||reduce.matches){for(let y=0;y<rows;y++)drawRow(y);drawn=rows;return}
+  drawn=0;
+  const t0=performance.now(),dur=380+rows*7;
+  const step=t=>{
+    const k=Math.min(rows,Math.ceil((t-t0)/dur*rows));
+    while(drawn<k)drawRow(drawn++);
+    if(drawn<rows)raf=requestAnimationFrame(step);
+  };
+  raf=requestAnimationFrame(step);
+}
+function resize(){
+  const w=cv.clientWidth;if(!w)return;
+  const dpr=window.devicePixelRatio||1;
+  if(Math.abs(w-W)<.5&&cv.width===Math.round(w*dpr))return;
+  W=w;
+  const target=W<480?7:8;
+  cols=Math.floor(W/target);if(cols%2===0)cols--;cols=Math.max(cols,21);
+  cell=W/cols;rows=(cols+1)/2;H=rows*cell;
+  cv.style.height=H+'px';
+  cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  ctx.setTransform(cv.width/W,0,0,cv.height/H,0,0);
+  render(false);
+}
+function setRule(r){rule=r&255;ui();render(true)}
+chips.forEach(c=>c.addEventListener('click',()=>setRule(+c.dataset.rule)));
+segs.forEach(s=>s.addEventListener('click',()=>{
+  const m=s.dataset.mode;
+  if(m==='random')seed=(Math.random()*4294967296)>>>0;
+  if(m===mode&&m==='single')return;
+  mode=m;ui();render(true);
+}));
+ui();
+if(window.ResizeObserver)new ResizeObserver(()=>resize()).observe(wrap);
+else window.addEventListener('resize',resize);
+resize();
+})();</script>
+
+  <span class="chapter-mark">Глава третья</span>
+  <h2>Конвей придумал игру, в которую не нужно играть</h2>
+
+  <p>В 1970 году английский математик Джон Хортон Конвей искал правило, при котором клеточный мир не вымирал бы сразу и не захлёбывался бы ростом, а жил бы непредсказуемо и долго. Он перепробовал много вариантов, раскладывая фишки на доске для го. Наконец нашёлся тот, что ему понравился. Конвей назвал его «Жизнью».</p>
+
+  <p>В октябре того же года Мартин Гарднер рассказал о «Жизни» в своей колонке в журнале Scientific American, и в неё стали играть по всему миру, сначала на бумаге, потом на первых компьютерах. Хотя «играть», конечно, громкое слово: игрок только расставляет клетки в самом начале, а дальше просто смотрит.</p>
+
+  <p>В «Жизни» у каждой клетки восемь соседей: четверо по сторонам и четверо по углам. Правило помещается в три строчки:</p>
+
+  <div class="rule-line">
+    <span>Спящая клетка, у которой ровно <span class="alive">три</span> горящих соседа, загорается.</span>
+    <span>Горящая клетка с <span class="alive">двумя или тремя</span> соседями продолжает гореть.</span>
+    <span>Все остальные гаснут: от одиночества или от тесноты.</span>
+  </div>
+
+  <p>Попробуй сама или сам: зажги несколько соседей вокруг средней клетки и посмотри, что с ней случится в следующий миг.</p>
+
+  <div class="instrument" data-instrument="neighbors">
+  <div class="nb-wrap">
+    <div class="nb-grid" role="group" aria-label="Клетка и её восемь соседей">
+      <button type="button" class="nb-cell" data-i="0"></button>
+      <button type="button" class="nb-cell" data-i="1"></button>
+      <button type="button" class="nb-cell" data-i="2"></button>
+      <button type="button" class="nb-cell" data-i="3"></button>
+      <button type="button" class="nb-cell nb-center" data-i="4"></button>
+      <button type="button" class="nb-cell" data-i="5"></button>
+      <button type="button" class="nb-cell" data-i="6"></button>
+      <button type="button" class="nb-cell" data-i="7"></button>
+      <button type="button" class="nb-cell" data-i="8"></button>
+    </div>
+    <div class="nb-readout" aria-live="polite">
+      <div class="nb-count">соседей: <span class="nb-n">0</span></div>
+      <div class="nb-fate"></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="neighbors"]{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--text);
+  color:var(--ink);
+}
+[data-instrument="neighbors"] .nb-wrap{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:1.4rem;
+  padding:2rem 1.25rem 1.75rem;
+  width:100%;
+}
+[data-instrument="neighbors"] .nb-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.7rem;
+  width:min(15rem,100%);
+  touch-action:manipulation;
+}
+[data-instrument="neighbors"] .nb-cell{
+  position:relative;
+  aspect-ratio:1/1;
+  width:100%;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:var(--radius);
+  background:var(--paper);
+  box-shadow:inset 0 0 0 2px var(--mist);
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .22s ease, box-shadow .22s ease, transform .12s ease;
+}
+[data-instrument="neighbors"] .nb-cell:hover{
+  box-shadow:inset 0 0 0 2px var(--dusk);
+}
+[data-instrument="neighbors"] .nb-cell:active{
+  transform:scale(.96);
+}
+[data-instrument="neighbors"] .nb-cell[aria-pressed="true"]{
+  background:var(--accent);
+  box-shadow:inset 0 0 0 2px var(--accent);
+}
+[data-instrument="neighbors"] .nb-cell:focus{outline:none}
+[data-instrument="neighbors"] .nb-cell:focus-visible{
+  outline:3px solid var(--ink);
+  outline-offset:3px;
+}
+[data-instrument="neighbors"] .nb-center::before{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  width:.5rem; height:.5rem;
+  margin:-.25rem 0 0 -.25rem;
+  border-radius:50%;
+  background:var(--dusk);
+  opacity:.35;
+  transition:opacity .22s ease;
+}
+[data-instrument="neighbors"] .nb-center[aria-pressed="true"]::before{
+  background:var(--paper);
+  opacity:.55;
+}
+[data-instrument="neighbors"] .nb-center::after{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:calc(var(--radius) + 7px);
+  border:4px solid var(--accent);
+  opacity:0;
+  transform:scale(.9);
+  pointer-events:none;
+  transition:opacity .35s ease, transform .35s ease;
+}
+[data-instrument="neighbors"] .nb-center.nb-future::after{
+  opacity:.42;
+  transform:scale(1);
+}
+[data-instrument="neighbors"] .nb-readout{
+  width:min(18rem,100%);
+  height:4.6rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.15rem;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+  overflow:hidden;
+}
+[data-instrument="neighbors"] .nb-count{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:var(--step-0);
+  color:var(--dusk);
+  line-height:1.3;
+}
+[data-instrument="neighbors"] .nb-n{
+  display:inline-block;
+  min-width:1ch;
+  font-style:normal;
+  font-weight:700;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums lining-nums;
+}
+[data-instrument="neighbors"] .nb-fate{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:var(--step-1);
+  line-height:1.3;
+  color:var(--ink);
+  transition:color .22s ease;
+}
+[data-instrument="neighbors"] .nb-fate.nb-alive{color:var(--accent)}
+@media (max-width:520px){
+  [data-instrument="neighbors"] .nb-fate{font-size:var(--step-0)}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="neighbors"] .nb-cell,
+  [data-instrument="neighbors"] .nb-center::before,
+  [data-instrument="neighbors"] .nb-center::after,
+  [data-instrument="neighbors"] .nb-fate{transition:none}
+  [data-instrument="neighbors"] .nb-cell:active{transform:none}
+}
+</style>
+<script>(function(){
+  const root = document.querySelector('[data-instrument="neighbors"]');
+  if(!root) return;
+  const cells = Array.prototype.slice.call(root.querySelectorAll('.nb-cell'));
+  const center = cells[4];
+  const nOut = root.querySelector('.nb-n');
+  const fateOut = root.querySelector('.nb-fate');
+  const names = ['сверху слева','сверху','сверху справа','слева','центральная клетка','справа','снизу слева','снизу','снизу справа'];
+  const state = [1,0,1, 0,0,0, 0,1,0];
+  let focusIdx = 4;
+
+  function render(){
+    let n = 0;
+    for(let i=0;i<9;i++){ if(i!==4 && state[i]) n++; }
+    const alive = !!state[4];
+    let fate, next;
+    if(alive){
+      if(n<2){ fate='погаснет от одиночества'; next=false; }
+      else if(n>3){ fate='погаснет от тесноты'; next=false; }
+      else { fate='выживет'; next=true; }
+    } else {
+      if(n===3){ fate='родится'; next=true; }
+      else { fate='останется спать'; next=false; }
+    }
+    cells.forEach(function(c,i){
+      const on = !!state[i];
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      c.setAttribute('aria-label', names[i] + (on ? ', горит' : ', спит'));
+      c.tabIndex = (i===focusIdx) ? 0 : -1;
+    });
+    center.classList.toggle('nb-future', next);
+    nOut.textContent = n;
+    fateOut.textContent = fate;
+    fateOut.classList.toggle('nb-alive', next);
+  }
+
+  cells.forEach(function(c,i){
+    c.addEventListener('click', function(){
+      state[i] = state[i] ? 0 : 1;
+      focusIdx = i;
+      render();
+    });
+    c.addEventListener('focus', function(){
+      if(focusIdx!==i){ focusIdx = i; cells.forEach(function(x,j){ x.tabIndex = j===i?0:-1; }); }
+    });
+    c.addEventListener('keydown', function(e){
+      let r = Math.floor(i/3), col = i%3, handled = true;
+      switch(e.key){
+        case 'ArrowUp': r = Math.max(0,r-1); break;
+        case 'ArrowDown': r = Math.min(2,r+1); break;
+        case 'ArrowLeft': col = Math.max(0,col-1); break;
+        case 'ArrowRight': col = Math.min(2,col+1); break;
+        case 'Home': r=0; col=0; break;
+        case 'End': r=2; col=2; break;
+        default: handled = false;
+      }
+      if(handled){
+        e.preventDefault();
+        focusIdx = r*3+col;
+        cells.forEach(function(x,j){ x.tabIndex = j===focusIdx?0:-1; });
+        cells[focusIdx].focus();
+      }
+    });
+  });
+
+  render();
+})();</script>
+
+  <p>Из этих трёх строчек рождается удивительное население. Одни узоры застывают навсегда, как камешки на дне. Другие мигают на месте, словно маленькие маяки.</p>
+
+  <figure class="scene">
+    <div class="row">
+      <div class="panel">
+        <svg viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Блок: квадрат из четырёх горящих клеток">
+          <rect width="64" height="64" fill="url(#grid)"/>
+          <rect class="cell-live" x="17" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+        </svg>
+        <span>блок</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 96 80" width="96" height="80" role="img" aria-label="Улей: шесть горящих клеток шестиугольником">
+          <rect width="96" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="65" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="49" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>улей</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Мигалка: три горящие клетки в ряд по горизонтали">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="17" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="33" width="14" height="14" rx="4"/>
+        </svg>
+        <span>мигалка, вдох</span>
+      </div>
+      <div class="arrow" aria-hidden="true">⇄</div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Мигалка: те же три клетки, теперь по вертикали">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>мигалка, выдох</span>
+      </div>
+    </div>
+    <figcaption>Блок и улей не меняются никогда: каждой их клетке хватает соседей, а пустым клеткам рядом их не хватает. Мигалка поворачивается туда и обратно на каждом шагу.</figcaption>
+  </figure>
+
+  <p>А некоторые узоры путешествуют. Самый знаменитый из них, <em>планер</em>, нашёл Ричард Гай в том же 1970 году. Это всего пять клеток. За четыре шага планер меняет форму, возвращается к прежней и оказывается на одну клетку дальше по диагонали. И так он может идти вечно, пока на что-нибудь не наткнётся.</p>
+
+  <figure class="scene">
+    <div class="row">
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Планер, шаг 0">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="17" y="1" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="1" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+        </svg>
+        <span>шаг 0</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Планер, шаг 1">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="1" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>шаг 1</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Планер, шаг 2">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="1" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="49" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>шаг 2</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Планер, шаг 3">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="17" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="49" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>шаг 3</span>
+      </div>
+      <div class="panel">
+        <svg viewBox="0 0 80 80" width="80" height="80" role="img" aria-label="Планер, шаг 4: та же форма, что на шаге 0, сдвинутая на одну клетку вправо и вниз">
+          <rect width="80" height="80" fill="url(#grid)"/>
+          <rect class="cell-live" x="33" y="17" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="33" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="17" y="49" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="33" y="49" width="14" height="14" rx="4"/>
+          <rect class="cell-live" x="49" y="49" width="14" height="14" rx="4"/>
+        </svg>
+        <span>шаг 4</span>
+      </div>
+    </div>
+    <figcaption>На четвёртом шаге планер снова выглядит как на нулевом, только стоит на клетку правее и ниже.</figcaption>
+  </figure>
+
+  <p>Конвей пообещал пятьдесят долларов тому, кто найдёт конечный узор, растущий бесконечно, или докажет, что такого нет. Уже в 1970 году Билл Госпер со своими друзьями построил <em>планерное ружьё</em>: узор, который сам стоит на месте и раз в тридцать шагов выпускает новый планер. Пятьдесят долларов достались ему.</p>
+
+  <p>Из ружей, планеров и узоров, которые их ловят, позже собрали логические схемы, а из схем вычислитель. Оказалось, что «Жизнь», как и правило 110, умеет в принципе посчитать всё, что умеет компьютер. Три строчки правил хватило на целую вселенную.</p>
+
+  <p>Вот сад, в котором можно посеять что угодно. Зажигай клетки, запускай время, останавливай его и смотри.</p>
+
+  <div class="instrument" data-instrument="life-garden">
+  <div class="lg-field">
+    <canvas class="lg-canvas" tabindex="0" aria-label="Поле «Жизни», 64 на 40 клеток, края сомкнуты в тор"></canvas>
+  </div>
+  <div class="lg-panel">
+    <div class="lg-row">
+      <button type="button" class="lg-switch" role="switch" aria-checked="false">
+        <span class="lg-track" aria-hidden="true"><span class="lg-knob"></span></span>
+        <span class="lg-state">стоит</span>
+      </button>
+      <button type="button" class="lg-btn lg-step">шаг</button>
+      <button type="button" class="lg-btn lg-clear">очистить</button>
+      <div class="lg-counters">
+        <div class="lg-count"><span class="lg-cap">поколение</span><output class="lg-num lg-gen">0</output></div>
+        <div class="lg-count"><span class="lg-cap">живых</span><output class="lg-num lg-live">0</output></div>
+      </div>
+    </div>
+    <div class="lg-row lg-chips">
+      <button type="button" class="lg-chip" data-p="glider">планер</button>
+      <button type="button" class="lg-chip" data-p="blinker">мигалка</button>
+      <button type="button" class="lg-chip" data-p="r">R-пентамино</button>
+      <button type="button" class="lg-chip" data-p="gun">ружьё Госпера</button>
+      <button type="button" class="lg-chip" data-p="random">случайный посев</button>
+    </div>
+    <div class="lg-row lg-speed">
+      <label class="lg-cap" for="lg-rate">темп</label>
+      <input id="lg-rate" class="lg-range" type="range" min="0" max="100" step="1" value="62">
+      <output class="lg-num lg-rate-out" for="lg-rate">10 пок./с</output>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="life-garden"]{padding:1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="life-garden"] .lg-field{border-radius:10px;overflow:hidden;background:var(--paper);box-shadow:0 0 0 1px var(--mist)}
+[data-instrument="life-garden"] .lg-canvas{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair;outline:none;border-radius:10px}
+[data-instrument="life-garden"] .lg-canvas:focus-visible{box-shadow:inset 0 0 0 3px var(--accent)}
+[data-instrument="life-garden"] .lg-panel{display:flex;flex-direction:column;gap:.7rem;margin-top:.85rem}
+[data-instrument="life-garden"] .lg-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem}
+[data-instrument="life-garden"] .lg-btn,
+[data-instrument="life-garden"] .lg-chip,
+[data-instrument="life-garden"] .lg-switch{font:inherit;font-size:var(--step--1);color:var(--ink);background:var(--paper);border:1px solid var(--mist);border-radius:999px;padding:.35rem .85rem;cursor:pointer;line-height:1.3}
+[data-instrument="life-garden"] .lg-btn:hover,
+[data-instrument="life-garden"] .lg-chip:hover,
+[data-instrument="life-garden"] .lg-switch:hover{border-color:var(--dusk)}
+[data-instrument="life-garden"] .lg-chip{font-family:var(--display);font-style:italic;font-size:var(--step-0);padding:.2rem .8rem}
+[data-instrument="life-garden"] button:focus-visible,
+[data-instrument="life-garden"] .lg-range:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="life-garden"] .lg-switch{display:inline-flex;align-items:center;gap:.5rem;padding-left:.45rem}
+[data-instrument="life-garden"] .lg-track{position:relative;width:2.2rem;height:1.25rem;border-radius:999px;background:var(--mist);transition:background .2s}
+[data-instrument="life-garden"] .lg-knob{position:absolute;top:.15rem;left:.15rem;width:.95rem;height:.95rem;border-radius:50%;background:var(--paper);box-shadow:0 1px 2px rgba(47,43,69,.3);transition:transform .2s}
+[data-instrument="life-garden"] .lg-switch[aria-checked="true"] .lg-track{background:var(--accent)}
+[data-instrument="life-garden"] .lg-switch[aria-checked="true"] .lg-knob{transform:translateX(.95rem)}
+[data-instrument="life-garden"] .lg-state{display:inline-block;min-width:3.2em;text-align:left}
+[data-instrument="life-garden"] .lg-counters{display:flex;gap:1rem;margin-left:auto}
+[data-instrument="life-garden"] .lg-count{display:flex;align-items:baseline;gap:.4rem}
+[data-instrument="life-garden"] .lg-cap{font-family:var(--display);font-style:italic;color:var(--dusk);font-size:var(--step--1)}
+[data-instrument="life-garden"] .lg-num{display:inline-block;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";min-width:5ch;text-align:right;font-weight:600;font-size:var(--step--1)}
+[data-instrument="life-garden"] .lg-rate-out{min-width:9ch;font-weight:400}
+[data-instrument="life-garden"] .lg-speed{flex-wrap:nowrap}
+[data-instrument="life-garden"] .lg-range{flex:1;min-width:6rem;-webkit-appearance:none;appearance:none;height:1.6rem;background:transparent;cursor:pointer;touch-action:pan-y}
+[data-instrument="life-garden"] .lg-range::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--mist)}
+[data-instrument="life-garden"] .lg-range::-moz-range-track{height:6px;border-radius:3px;background:var(--mist)}
+[data-instrument="life-garden"] .lg-range::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;margin-top:-7px;border-radius:50%;background:var(--accent);border:2px solid var(--paper);box-shadow:0 1px 3px rgba(47,43,69,.3)}
+[data-instrument="life-garden"] .lg-range::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+@media (max-width:520px){
+  [data-instrument="life-garden"]{padding:.7rem}
+  [data-instrument="life-garden"] .lg-counters{margin-left:0;width:100%;justify-content:space-between}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="life-garden"]');
+if(!root)return;
+const W=64,H=40,N=W*H;
+const canvas=root.querySelector('.lg-canvas'),ctx=canvas.getContext('2d');
+const sw=root.querySelector('.lg-switch'),stateEl=root.querySelector('.lg-state');
+const genEl=root.querySelector('.lg-gen'),liveEl=root.querySelector('.lg-live');
+const range=root.querySelector('.lg-range'),rateOut=root.querySelector('.lg-rate-out');
+const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let a=new Uint8Array(N),b=new Uint8Array(N);const trail=new Float32Array(N);
+let gen=0,running=false,rate=10,acc=0,last=0,dirty=true,visible=true;
+let cssW=0,cell=0,dpr=1;
+let kx=Math.floor(W/2),ky=Math.floor(H/2),kbd=false;
+const C={};
+function readColors(){const s=getComputedStyle(root);const g=(n,f)=>(s.getPropertyValue(n)||'').trim()||f;
+C.paper=g('--paper','#F7F0E4');C.ink=g('--ink','#2F2B45');C.accent=g('--accent','#D46F5E');C.mist=g('--mist','#E8DECD');}
+readColors();
+const P={
+glider:['.O.','..O','OOO'],
+blinker:['OOO'],
+r:['.OO','OO.','.O.'],
+gun:['........................O...........','......................O.O...........','............OO......OO............OO','...........O...O....OO............OO','OO........O.....O...OO..............','OO........O...O.OO....O.O...........','..........O.....O.......O...........','...........O...O....................','............OO......................']
+};
+function count(){let n=0;for(let i=0;i<N;i++)n+=a[i];return n;}
+function updateReadouts(){genEl.textContent=gen.toLocaleString('ru-RU');liveEl.textContent=count().toLocaleString('ru-RU');}
+function clearAll(){a.fill(0);trail.fill(0);gen=0;acc=0;dirty=true;updateReadouts();}
+function plant(name){
+  clearAll();
+  if(name==='random'){for(let i=0;i<N;i++)a[i]=Math.random()<0.28?1:0;}
+  else{const rows=P[name],h=rows.length,w=rows[0].length,ox=Math.floor((W-w)/2),oy=Math.floor((H-h)/2);
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(rows[y][x]==='O')a[((oy+y+H)%H)*W+((ox+x+W)%W)]=1;}
+  dirty=true;updateReadouts();
+}
+function step(){
+  for(let y=0;y<H;y++){
+    const ym=((y+H-1)%H)*W,y0=y*W,yp=((y+1)%H)*W;
+    for(let x=0;x<W;x++){
+      const xm=(x+W-1)%W,xp=(x+1)%W;
+      const c=a[ym+xm]+a[ym+x]+a[ym+xp]+a[y0+xm]+a[y0+xp]+a[yp+xm]+a[yp+x]+a[yp+xp];
+      const i=y0+x,was=a[i],v=(c===3||(c===2&&was))?1:0;
+      b[i]=v;
+      if(was&&!v)trail[i]=1;else if(v||reduce)trail[i]=0;
+    }
+  }
+  const t=a;a=b;b=t;gen++;dirty=true;
+}
+function setRun(on){running=on;sw.setAttribute('aria-checked',on?'true':'false');stateEl.textContent=on?'идёт':'стоит';acc=0;}
+function rateFrom(v){return 0.5*Math.pow(120,v/100);}
+function updateRate(){rate=rateFrom(+range.value);rateOut.textContent=(rate<10?rate.toFixed(1):Math.round(rate).toString()).replace('.',',')+' пок./с';}
+function resize(){
+  const r=canvas.parentElement.getBoundingClientRect();
+  cssW=Math.max(160,r.width);cell=cssW/W;dpr=window.devicePixelRatio||1;
+  const cssH=cell*H;
+  canvas.style.height=cssH+'px';
+  canvas.width=Math.round(cssW*dpr);canvas.height=Math.round(cssH*dpr);
+  dirty=true;render();
+}
+function rr(x,y,s,r){if(ctx.roundRect)ctx.roundRect(x,y,s,s,r);else ctx.rect(x,y,s,s);}
+function render(){
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle=C.paper;ctx.fillRect(0,0,cssW,cell*H);
+  const pad=cell*0.08,s=cell-pad*2,r=Math.min(4,s*0.28);
+  ctx.fillStyle=C.mist;ctx.globalAlpha=0.35;ctx.beginPath();
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x;if(!a[i]&&trail[i]<=0)rr(x*cell+pad,y*cell+pad,s,r);}
+  ctx.fill();
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x,t=trail[i];
+    if(!a[i]&&t>0){ctx.globalAlpha=0.35+0.65*t;ctx.beginPath();rr(x*cell+pad,y*cell+pad,s,r);ctx.fill();}}
+  ctx.globalAlpha=1;ctx.fillStyle=C.accent;ctx.beginPath();
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(a[y*W+x])rr(x*cell+pad,y*cell+pad,s,r);
+  ctx.fill();
+  if(kbd&&document.activeElement===canvas){ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.beginPath();rr(kx*cell+1,ky*cell+1,cell-2,Math.min(5,cell*0.3));ctx.stroke();}
+  dirty=false;
+}
+function frame(now){
+  const dt=last?Math.min(250,now-last):16;last=now;
+  if(running&&visible){
+    acc+=dt;const iv=1000/rate;let k=0;
+    while(acc>=iv&&k<4){step();acc-=iv;k++;}
+    if(k===4)acc=Math.min(acc,iv);
+    if(k)updateReadouts();
+  }
+  if(!reduce){let any=false;const d=dt/420;
+    for(let i=0;i<N;i++)if(trail[i]>0){trail[i]=Math.max(0,trail[i]-d);any=true;}
+    if(any)dirty=true;}
+  if(dirty&&visible)render();
+  requestAnimationFrame(frame);
+}
+/* drawing */
+let drawing=false,mode=1,px=-1,py=-1,pid=null;
+function cellAt(e){const r=canvas.getBoundingClientRect();
+  return[Math.max(0,Math.min(W-1,Math.floor((e.clientX-r.left)/r.width*W))),Math.max(0,Math.min(H-1,Math.floor((e.clientY-r.top)/r.height*H)))];}
+function setCell(x,y,v){const i=y*W+x;if(a[i]!==v){a[i]=v;trail[i]=v?0:(reduce?0:1);dirty=true;}}
+function line(x0,y0,x1,y1){let dx=Math.abs(x1-x0),dy=-Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1,e=dx+dy;
+  for(;;){setCell(x0,y0,mode);if(x0===x1&&y0===y1)break;const e2=2*e;if(e2>=dy){e+=dy;x0+=sx;}if(e2<=dx){e+=dx;y0+=sy;}}}
+canvas.addEventListener('pointerdown',e=>{
+  if(e.button!==undefined&&e.button>0)return;
+  e.preventDefault();kbd=false;
+  const[x,y]=cellAt(e);mode=a[y*W+x]?0:1;drawing=true;pid=e.pointerId;px=x;py=y;
+  try{canvas.setPointerCapture(pid);}catch(_){}
+  setCell(x,y,mode);updateReadouts();
+});
+canvas.addEventListener('pointermove',e=>{
+  if(!drawing||e.pointerId!==pid)return;
+  const[x,y]=cellAt(e);if(x===px&&y===py)return;
+  line(px,py,x,y);px=x;py=y;updateReadouts();
+});
+function endDraw(e){if(e.pointerId===pid){drawing=false;pid=null;}}
+canvas.addEventListener('pointerup',endDraw);canvas.addEventListener('pointercancel',endDraw);
+canvas.addEventListener('keydown',e=>{
+  const k=e.key;let used=true;
+  if(k==='ArrowLeft')kx=(kx+W-1)%W;else if(k==='ArrowRight')kx=(kx+1)%W;
+  else if(k==='ArrowUp')ky=(ky+H-1)%H;else if(k==='ArrowDown')ky=(ky+1)%H;
+  else if(k===' '||k==='Enter'){const i=ky*W+kx;mode=a[i]?0:1;setCell(kx,ky,mode);updateReadouts();}
+  else used=false;
+  if(used){e.preventDefault();kbd=true;dirty=true;}
+});
+canvas.addEventListener('focus',()=>{dirty=true;});
+canvas.addEventListener('blur',()=>{dirty=true;});
+/* controls */
+sw.addEventListener('click',()=>setRun(!running));
+root.querySelector('.lg-step').addEventListener('click',()=>{setRun(false);step();updateReadouts();});
+root.querySelector('.lg-clear').addEventListener('click',()=>{clearAll();});
+root.querySelectorAll('.lg-chip').forEach(btn=>btn.addEventListener('click',()=>plant(btn.dataset.p)));
+range.addEventListener('input',updateRate);
+updateRate();
+if('ResizeObserver' in window)new ResizeObserver(resize).observe(canvas.parentElement);
+else window.addEventListener('resize',resize);
+if('IntersectionObserver' in window)new IntersectionObserver(es=>{es.forEach(en=>{visible=en.isIntersecting;if(visible){dirty=true;last=0;}});}).observe(root);
+plant('gun');
+resize();
+setRun(!reduce);
+requestAnimationFrame(frame);
+})();</script>
+
+  <div class="dinkus" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <span class="chapter-mark">Глава четвёртая</span>
+  <h2>Стоит поменять одно число в правиле, и мир становится другим</h2>
+
+  <p>Правило Конвея можно записать совсем коротко: <span class="code">B3/S23</span>. Буква B означает рождение (birth): спящая клетка загорается, если у неё три соседа. Буква S означает выживание (survival): горящая клетка остаётся, если соседей два или три.</p>
+
+  <p>Если записать так, сразу хочется попробовать другие числа. Люди и попробовали. В мире <span class="code">B36/S23</span>, который называют HighLife, почти всё как у Конвея, но живёт узор, который делает свои копии, как когда-то мечтал фон Нейман. В мире «Семена», <span class="code">B2/S</span>, ни одна клетка не доживает до следующего шага, а всё равно поле вспыхивает и разлетается, будто одуванчик. В мире «День и ночь», <span class="code">B3678/S34678</span>, горящие и спящие острова ведут себя одинаково, словно отражения друг друга.</p>
+
+  <p>Собери своё правило и посмотри, каким окажется мир, если начать с одной и той же горсти случайных клеток.</p>
+
+  <div class="instrument" data-instrument="rule-chips">
+  <div class="rc-top">
+    <div class="rc-rows">
+      <div class="rc-row" data-kind="b">
+        <span class="rc-rowlabel" id="rc-lb">рождение</span>
+        <div class="rc-chips" role="group" aria-labelledby="rc-lb"></div>
+      </div>
+      <div class="rc-row" data-kind="s">
+        <span class="rc-rowlabel" id="rc-ls">выживание</span>
+        <div class="rc-chips" role="group" aria-labelledby="rc-ls"></div>
+      </div>
+    </div>
+    <div class="rc-readout" aria-live="polite">
+      <span class="rc-rule">B3/S23</span>
+      <span class="rc-name">Жизнь</span>
+    </div>
+  </div>
+  <div class="rc-presets" role="group" aria-label="известные правила">
+    <button type="button" class="rc-preset" data-b="3" data-s="23">Жизнь</button>
+    <button type="button" class="rc-preset" data-b="36" data-s="23">HighLife</button>
+    <button type="button" class="rc-preset" data-b="2" data-s="">Семена</button>
+    <button type="button" class="rc-preset" data-b="3678" data-s="34678">День и ночь</button>
+    <button type="button" class="rc-preset" data-b="3" data-s="12345">Лабиринт</button>
+  </div>
+  <div class="rc-field">
+    <canvas class="rc-canvas" role="img" aria-label="Поле 80 на 50 клеток, свёрнутое в тор"></canvas>
+  </div>
+  <div class="rc-bar">
+    <button type="button" class="rc-btn rc-seed">новый посев</button>
+    <button type="button" class="rc-btn rc-run" role="switch" aria-checked="true"><span class="rc-knob" aria-hidden="true"></span><span class="rc-runlabel">идёт</span></button>
+    <span class="rc-stat"><span class="rc-statlabel">поколение</span><span class="rc-num rc-gen">0</span></span>
+    <span class="rc-stat"><span class="rc-statlabel">живых</span><span class="rc-num rc-pct">0,0 %</span></span>
+  </div>
+</div>
+<style>
+[data-instrument="rule-chips"]{padding:1.25rem 1.25rem 1.1rem;font-family:var(--text);color:var(--ink);font-size:var(--step--1);line-height:1.4}
+[data-instrument="rule-chips"] button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+[data-instrument="rule-chips"] button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+[data-instrument="rule-chips"] .rc-top{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:center;justify-content:space-between}
+[data-instrument="rule-chips"] .rc-rows{display:flex;flex-direction:column;gap:.55rem;flex:1 1 22rem;min-width:0}
+[data-instrument="rule-chips"] .rc-row{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .75rem}
+[data-instrument="rule-chips"] .rc-rowlabel{font-family:var(--display);font-style:italic;color:var(--dusk);font-size:var(--step-0);width:6.2em}
+[data-instrument="rule-chips"] .rc-chips{display:grid;grid-template-columns:repeat(9,minmax(0,2.3rem));gap:.3rem;flex:1 1 auto;max-width:22rem}
+[data-instrument="rule-chips"] .rc-chip{aspect-ratio:1;min-height:1.9rem;padding:0;border:1px solid var(--mist);background:var(--paper);border-radius:8px;font-variant-numeric:tabular-nums;font-size:var(--step-0);transition:background .15s,color .15s,border-color .15s}
+[data-instrument="rule-chips"] .rc-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper);font-weight:600}
+[data-instrument="rule-chips"] .rc-readout{display:flex;flex-direction:column;align-items:center;justify-content:center;width:13.5rem;height:4.6rem;background:var(--paper);border-radius:10px;box-shadow:inset 0 0 0 1px var(--mist);flex:0 0 auto}
+[data-instrument="rule-chips"] .rc-rule{font-variant-numeric:tabular-nums lining-nums;font-size:var(--step-0);font-weight:600;white-space:nowrap;letter-spacing:.02em}
+[data-instrument="rule-chips"] .rc-name{font-family:var(--display);font-style:italic;color:var(--dusk);font-size:var(--step-0);height:1.5em;white-space:nowrap}
+[data-instrument="rule-chips"] .rc-presets{display:flex;flex-wrap:wrap;gap:.4rem;margin:1rem 0 .9rem}
+[data-instrument="rule-chips"] .rc-preset{border:1px solid var(--mist);background:transparent;border-radius:999px;padding:.3rem .8rem;font-family:var(--display);font-size:var(--step-0)}
+[data-instrument="rule-chips"] .rc-preset[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+[data-instrument="rule-chips"] .rc-field{width:100%;border-radius:10px;overflow:hidden;background:var(--paper);box-shadow:inset 0 0 0 1px var(--mist)}
+[data-instrument="rule-chips"] .rc-canvas{display:block;width:100%;aspect-ratio:80/50;touch-action:pan-y}
+[data-instrument="rule-chips"] .rc-bar{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1rem;margin-top:.9rem}
+[data-instrument="rule-chips"] .rc-btn{border:1px solid var(--mist);background:var(--paper);border-radius:999px;padding:.35rem .9rem;font-size:var(--step--1)}
+[data-instrument="rule-chips"] .rc-run{display:inline-flex;align-items:center;gap:.5rem;width:7.2rem}
+[data-instrument="rule-chips"] .rc-knob{position:relative;width:2rem;height:1.1rem;border-radius:999px;background:var(--mist);flex:0 0 auto;transition:background .2s}
+[data-instrument="rule-chips"] .rc-knob::after{content:"";position:absolute;top:.15rem;left:.15rem;width:.8rem;height:.8rem;border-radius:50%;background:var(--paper);box-shadow:0 0 0 1px rgba(47,43,69,.15);transition:transform .2s}
+[data-instrument="rule-chips"] .rc-run[aria-checked="true"] .rc-knob{background:var(--accent)}
+[data-instrument="rule-chips"] .rc-run[aria-checked="true"] .rc-knob::after{transform:translateX(.9rem)}
+[data-instrument="rule-chips"] .rc-stat{display:inline-flex;align-items:baseline;gap:.4rem;margin-left:auto}
+[data-instrument="rule-chips"] .rc-stat + .rc-stat{margin-left:0}
+[data-instrument="rule-chips"] .rc-statlabel{font-family:var(--display);font-style:italic;color:var(--dusk)}
+[data-instrument="rule-chips"] .rc-num{display:inline-block;text-align:right;font-variant-numeric:tabular-nums lining-nums;font-weight:600;background:var(--paper);border-radius:6px;padding:.1rem .45rem;box-shadow:inset 0 0 0 1px var(--mist)}
+[data-instrument="rule-chips"] .rc-gen{width:4.6em}
+[data-instrument="rule-chips"] .rc-pct{width:4.8em}
+@media (max-width:520px){
+[data-instrument="rule-chips"]{padding:1rem .85rem}
+[data-instrument="rule-chips"] .rc-readout{width:100%}
+[data-instrument="rule-chips"] .rc-stat{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+[data-instrument="rule-chips"] *{transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="rule-chips"]');
+if(!root)return;
+const W=80,H=50,N=W*H,DENS=0.33,INTERVAL=110;
+const NAMES={"B3/S23":"Жизнь","B36/S23":"HighLife","B2/S":"Семена","B3678/S34678":"День и ночь","B3/S12345":"Лабиринт"};
+let birth=1<<3,surv=(1<<2)|(1<<3),seed=1970,gen=0;
+let cur=new Uint8Array(N),nxt=new Uint8Array(N);
+const rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+let running=!rm.matches,visible=true,raf=0,last=0;
+const canvas=root.querySelector('.rc-canvas'),ctx=canvas.getContext('2d');
+const ruleEl=root.querySelector('.rc-rule'),nameEl=root.querySelector('.rc-name');
+const genEl=root.querySelector('.rc-gen'),pctEl=root.querySelector('.rc-pct');
+const runBtn=root.querySelector('.rc-run'),runLabel=root.querySelector('.rc-runlabel');
+const presets=[...root.querySelectorAll('.rc-preset')];
+const rows={};
+root.querySelectorAll('.rc-row').forEach(function(row){
+  const kind=row.dataset.kind,box=row.querySelector('.rc-chips');rows[kind]=[];
+  for(let d=0;d<=8;d++){
+    const b=document.createElement('button');b.type='button';b.className='rc-chip';b.textContent=d;
+    b.dataset.kind=kind;b.dataset.d=d;
+    b.setAttribute('aria-label',(kind==='b'?'рождение ':'выживание ')+d);
+    box.appendChild(b);rows[kind].push(b);
+  }
+});
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function reseed(){const r=mulberry32(seed);for(let i=0;i<N;i++)cur[i]=r()<DENS?1:0;gen=0;}
+function step(){
+  for(let y=0;y<H;y++){
+    const ym=((y+H-1)%H)*W,y0=y*W,yp=((y+1)%H)*W;
+    for(let x=0;x<W;x++){
+      const xm=(x+W-1)%W,xp=(x+1)%W;
+      const n=cur[ym+xm]+cur[ym+x]+cur[ym+xp]+cur[y0+xm]+cur[y0+xp]+cur[yp+xm]+cur[yp+x]+cur[yp+xp];
+      nxt[y0+x]=cur[y0+x]?(surv>>n)&1:(birth>>n)&1;
+    }
+  }
+  const t=cur;cur=nxt;nxt=t;gen++;
+}
+function digits(m){let s='';for(let d=0;d<=8;d++)if(m>>d&1)s+=d;return s;}
+function maskOf(str){let m=0;for(const c of str)m|=1<<(+c);return m;}
+function ruleStr(){return 'B'+digits(birth)+'/S'+digits(surv);}
+function updateRuleUI(){
+  const r=ruleStr();ruleEl.textContent=r;nameEl.textContent=NAMES[r]||'\u00a0';
+  rows.b.forEach(function(b,d){b.setAttribute('aria-pressed',birth>>d&1?'true':'false');});
+  rows.s.forEach(function(b,d){b.setAttribute('aria-pressed',surv>>d&1?'true':'false');});
+  presets.forEach(function(p){p.setAttribute('aria-pressed',(maskOf(p.dataset.b)===birth&&maskOf(p.dataset.s)===surv)?'true':'false');});
+}
+function updateStats(){
+  let live=0;for(let i=0;i<N;i++)live+=cur[i];
+  genEl.textContent=gen;
+  pctEl.textContent=(live/N*100).toFixed(1).replace('.',',')+'\u00a0%';
+}
+function cssVar(n,f){const v=getComputedStyle(root).getPropertyValue(n).trim();return v||f;}
+let colLive,colDead,colBg;
+function readColors(){colLive=cssVar('--accent','#D46F5E');colDead=cssVar('--mist','#E8DECD');colBg=cssVar('--paper','#F7F0E4');}
+let cssW=0,cssH=0,dpr=1;
+function resize(){
+  const w=canvas.clientWidth;if(!w)return;
+  dpr=window.devicePixelRatio||1;cssW=w;cssH=w*H/W;
+  canvas.width=Math.round(cssW*dpr);canvas.height=Math.round(cssH*dpr);
+  draw();
+}
+function cells(val,cs,inset,rad){
+  ctx.beginPath();
+  const sz=cs-inset*2,hasRR=typeof ctx.roundRect==='function';
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    if(cur[y*W+x]!==val)continue;
+    const px=x*cs+inset,py=y*cs+inset;
+    if(hasRR)ctx.roundRect(px,py,sz,sz,rad);else ctx.rect(px,py,sz,sz);
+  }
+  ctx.fill();
+}
+function draw(){
+  if(!cssW)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle=colBg;ctx.fillRect(0,0,cssW,cssH);
+  const cs=cssW/W,inset=Math.max(.4,cs*.09),rad=cs*.28;
+  ctx.fillStyle=colDead;ctx.globalAlpha=.7;cells(0,cs,inset,rad);
+  ctx.globalAlpha=1;ctx.fillStyle=colLive;cells(1,cs,inset,rad);
+}
+function loop(t){
+  raf=0;
+  if(!running)return;
+  if(visible&&t-last>=INTERVAL){last=t;step();draw();updateStats();}
+  raf=requestAnimationFrame(loop);
+}
+function startLoop(){if(running&&!raf)raf=requestAnimationFrame(loop);}
+function setRunning(v){
+  running=v;runBtn.setAttribute('aria-checked',v?'true':'false');runLabel.textContent=v?'идёт':'стоит';
+  if(v)startLoop();else if(raf){cancelAnimationFrame(raf);raf=0;}
+}
+function applyRule(){reseed();updateRuleUI();draw();updateStats();last=performance.now();}
+root.querySelectorAll('.rc-chip').forEach(function(b){
+  b.addEventListener('click',function(){
+    const d=+b.dataset.d;
+    if(b.dataset.kind==='b')birth^=1<<d;else surv^=1<<d;
+    applyRule();
+  });
+  b.addEventListener('keydown',function(e){
+    const d=+b.dataset.d,k=b.dataset.kind;let tgt=null;
+    if(e.key==='ArrowRight')tgt=rows[k][Math.min(8,d+1)];
+    else if(e.key==='ArrowLeft')tgt=rows[k][Math.max(0,d-1)];
+    else if(e.key==='ArrowDown'||e.key==='ArrowUp')tgt=rows[k==='b'?'s':'b'][d];
+    else if(e.key==='Home')tgt=rows[k][0];
+    else if(e.key==='End')tgt=rows[k][8];
+    if(tgt){e.preventDefault();tgt.focus();}
+  });
+});
+presets.forEach(function(p){
+  p.addEventListener('click',function(){birth=maskOf(p.dataset.b);surv=maskOf(p.dataset.s);applyRule();});
+});
+root.querySelector('.rc-seed').addEventListener('click',function(){
+  seed=(Math.random()*4294967296)>>>0;applyRule();
+});
+runBtn.addEventListener('click',function(){setRunning(!running);});
+if('ResizeObserver' in window){new ResizeObserver(function(){resize();}).observe(canvas);}
+else window.addEventListener('resize',resize);
+if('IntersectionObserver' in window){
+  new IntersectionObserver(function(en){visible=en[0].isIntersecting;}).observe(root);
+}
+if(rm.addEventListener)rm.addEventListener('change',function(e){if(e.matches)setRunning(false);});
+readColors();reseed();updateRuleUI();updateStats();resize();setRunning(running);
+})();</script>
+
+  <span class="chapter-mark">Глава пятая</span>
+  <h2>Муравей сначала долго путается, а потом уходит прямо</h2>
+
+  <p>Последний житель этой книжки совсем не похож на других. В 1986 году Крис Лэнгтон придумал муравья, который ходит по клетчатому полю. Сначала всё поле белое. Правило у муравья такое:</p>
+
+  <div class="rule-line">
+    <span>На белой клетке он поворачивает направо.</span>
+    <span>На чёрной клетке поворачивает налево.</span>
+    <span>Потом перекрашивает клетку, на которой стоял, и делает шаг вперёд.</span>
+  </div>
+
+  <p>Первые несколько сотен шагов муравей рисует аккуратные симметричные узоры. Потом начинается путаница: клочковатое пятно растёт во все стороны, и кажется, что так будет всегда. Но примерно через десять тысяч шагов муравей вдруг начинает строить ровную дорожку, повторяя одни и те же сто четыре шага, и уходит по ней по диагонали. Никто не знает простого объяснения, почему это происходит. Это проверили только тем, что много раз запускали муравья и смотрели.</p>
+
+  <div class="instrument" data-instrument="langton-ant">
+  <div class="la-field">
+    <canvas class="la-canvas" tabindex="0" role="img" aria-label="Поле муравья Лэнгтона, 120 на 90 клеток"></canvas>
+  </div>
+  <div class="la-bar">
+    <div class="la-reads">
+      <div class="la-read"><span class="la-k">шаг</span><output class="la-steps">0</output></div>
+      <div class="la-read"><span class="la-k">сейчас</span><output class="la-state">узоры</output></div>
+    </div>
+    <div class="la-btns">
+      <button type="button" class="la-btn la-play" aria-pressed="false">стоит</button>
+      <button type="button" class="la-btn la-reset">заново</button>
+      <button type="button" class="la-btn la-jump">+1000 шагов</button>
+    </div>
+    <label class="la-speed">
+      <span class="la-k">темп</span>
+      <input class="la-range" type="range" min="0" max="1000" value="547" aria-label="Шагов за кадр">
+      <output class="la-spf">30</output>
+      <span class="la-k">шагов за кадр</span>
+    </label>
+  </div>
+</div>
+<style>
+[data-instrument="langton-ant"]{padding:1.1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="langton-ant"] .la-field{background:var(--paper);border-radius:10px;box-shadow:inset 0 0 0 1px var(--mist);overflow:hidden;padding:6px}
+[data-instrument="langton-ant"] .la-canvas{display:block;width:100%;aspect-ratio:4/3;touch-action:pan-y pinch-zoom;cursor:crosshair;border-radius:6px;outline:none}
+[data-instrument="langton-ant"] .la-canvas:focus-visible{box-shadow:0 0 0 3px var(--accent)}
+[data-instrument="langton-ant"] .la-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.75rem 1.25rem;margin-top:.9rem}
+[data-instrument="langton-ant"] .la-reads{display:flex;gap:1rem}
+[data-instrument="langton-ant"] .la-read{display:flex;align-items:baseline;gap:.4rem}
+[data-instrument="langton-ant"] .la-k{font-family:var(--display);font-style:italic;color:var(--dusk);font-size:var(--step--1)}
+[data-instrument="langton-ant"] output{font-variant-numeric:tabular-nums;font-size:var(--step-0);display:inline-block;white-space:nowrap}
+[data-instrument="langton-ant"] .la-steps{width:7ch;text-align:right}
+[data-instrument="langton-ant"] .la-state{width:7.5ch;font-family:var(--display);font-weight:700;color:var(--accent)}
+[data-instrument="langton-ant"] .la-spf{width:3.5ch;text-align:right}
+[data-instrument="langton-ant"] .la-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+[data-instrument="langton-ant"] .la-btn{font-family:var(--display);font-size:var(--step--1);color:var(--ink);background:var(--paper);border:1px solid var(--mist);border-radius:999px;padding:.35rem .95rem;cursor:pointer;min-width:5.5rem}
+[data-instrument="langton-ant"] .la-btn:hover{border-color:var(--dusk)}
+[data-instrument="langton-ant"] .la-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="langton-ant"] .la-play[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+[data-instrument="langton-ant"] .la-speed{display:flex;align-items:center;gap:.5rem;flex:1 1 18rem}
+[data-instrument="langton-ant"] .la-range{flex:1;min-width:6rem;accent-color:var(--accent)}
+[data-instrument="langton-ant"] .la-range:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="langton-ant"]');
+if(!root)return;
+const cv=root.querySelector('.la-canvas'),ctx=cv.getContext('2d');
+const elSteps=root.querySelector('.la-steps'),elState=root.querySelector('.la-state'),elSpf=root.querySelector('.la-spf');
+const bPlay=root.querySelector('.la-play'),bReset=root.querySelector('.la-reset'),bJump=root.querySelector('.la-jump'),range=root.querySelector('.la-range');
+const W=120,H=90,P=104,R=P+1;
+const DX=[0,1,0,-1],DY=[-1,0,1,0];
+const grid=new Uint8Array(W*H);
+const hx=new Int32Array(R),hy=new Int32Array(R);
+let ax,ay,dir,ux,uy,steps,run,pdx,pdy;
+let running=false,visible=false,started=false,raf=0,acc=0,spf=30,focused=false,kx=60,ky=40,dpr=1;
+const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):null;
+let reduced=!!(mq&&mq.matches);
+let col={paper:'#F7F0E4',ink:'#2F2B45',glow:'#F2C76B',accent:'#D46F5E'};
+function readColors(){const s=getComputedStyle(root);for(const k in col){const v=s.getPropertyValue('--'+k).trim();if(v)col[k]=v;}}
+function reset(){grid.fill(0);ax=60;ay=45;dir=0;ux=0;uy=0;steps=0;run=0;pdx=pdy=1e9;hx[0]=0;hy[0]=0;acc=0;}
+function step(){
+  const i=ay*W+ax;
+  dir=grid[i]?(dir+3)&3:(dir+1)&3;
+  grid[i]^=1;
+  ax=(ax+DX[dir]+W)%W;ay=(ay+DY[dir]+H)%H;
+  ux+=DX[dir];uy+=DY[dir];steps++;
+  const k=steps%R;hx[k]=ux;hy[k]=uy;
+  if(steps>=P){const j=(steps-P)%R,dx=ux-hx[j],dy=uy-hy[j];
+    if(dx===pdx&&dy===pdy)run++;else{run=0;pdx=dx;pdy=dy;}}
+}
+function state(){if(run>=3*P&&(pdx||pdy))return'дорога';return steps<500?'узоры':'путаница';}
+function draw(){
+  const w=cv.width,h=cv.height;if(!w||!h)return;
+  ctx.globalAlpha=1;ctx.fillStyle=col.paper;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle=col.ink;ctx.globalAlpha=.82;ctx.beginPath();
+  for(let y=0;y<H;y++){const y0=Math.round(y*h/H),y1=Math.round((y+1)*h/H);
+    for(let x=0;x<W;x++){if(grid[y*W+x]){const x0=Math.round(x*w/W),x1=Math.round((x+1)*w/W);ctx.rect(x0,y0,x1-x0,y1-y0);}}}
+  ctx.fill();ctx.globalAlpha=1;
+  const cw=w/W,ch=h/H;
+  if(focused){ctx.strokeStyle=col.accent;ctx.lineWidth=Math.max(1.5*dpr,1);ctx.strokeRect(kx*cw-cw*.2,ky*ch-ch*.2,cw*1.4,ch*1.4);}
+  const r=Math.max(cw*.8,3*dpr);
+  ctx.beginPath();ctx.arc((ax+.5)*cw,(ay+.5)*ch,r,0,Math.PI*2);
+  ctx.fillStyle=col.glow;ctx.fill();ctx.lineWidth=dpr;ctx.strokeStyle=col.ink;ctx.globalAlpha=.65;ctx.stroke();ctx.globalAlpha=1;
+}
+function ui(){
+  const s=steps.toLocaleString('ru-RU');if(elSteps.textContent!==s)elSteps.textContent=s;
+  const st=state();if(elState.textContent!==st)elState.textContent=st;
+  bPlay.textContent=running?'идёт':'стоит';bPlay.setAttribute('aria-pressed',running?'true':'false');
+}
+function fmtSpf(){elSpf.textContent=spf<10?spf.toLocaleString('ru-RU',{minimumFractionDigits:1,maximumFractionDigits:1}):String(Math.round(spf));}
+function tick(){raf=0;if(!running||!visible)return;acc+=spf;let n=acc|0;acc-=n;while(n-->0)step();draw();ui();raf=requestAnimationFrame(tick);}
+function kick(){if(running&&visible&&!raf)raf=requestAnimationFrame(tick);}
+function size(){const r=cv.getBoundingClientRect();dpr=window.devicePixelRatio||1;
+  const w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;}readColors();draw();}
+function cellAt(e){const r=cv.getBoundingClientRect();const x=Math.floor((e.clientX-r.left)/r.width*W),y=Math.floor((e.clientY-r.top)/r.height*H);
+  if(x<0||y<0||x>=W||y>=H)return -1;return y*W+x;}
+let drag=null;
+function paintLine(a,b,v){const x0=a%W,y0=(a/W)|0,x1=b%W,y1=(b/W)|0,n=Math.max(Math.abs(x1-x0),Math.abs(y1-y0),1);
+  for(let i=1;i<=n;i++){const x=Math.round(x0+(x1-x0)*i/n),y=Math.round(y0+(y1-y0)*i/n);grid[y*W+x]=v;}}
+cv.addEventListener('pointerdown',e=>{const c=cellAt(e);if(c<0)return;
+  drag={id:e.pointerId,val:grid[c]^1,last:c,pend:c,applied:false};
+  if(e.pointerType!=='touch'){grid[c]=drag.val;drag.applied=true;try{cv.setPointerCapture(e.pointerId);}catch(_){}draw();}});
+cv.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const c=cellAt(e);
+  if(!drag.applied){grid[drag.pend]=drag.val;drag.applied=true;}
+  if(c>=0&&c!==drag.last){paintLine(drag.last,c,drag.val);drag.last=c;}draw();});
+cv.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.id)return;if(!drag.applied){grid[drag.pend]=drag.val;}drag=null;draw();});
+cv.addEventListener('pointercancel',()=>{drag=null;});
+cv.addEventListener('focus',()=>{focused=true;draw();});
+cv.addEventListener('blur',()=>{focused=false;draw();});
+cv.addEventListener('keydown',e=>{let used=true;
+  if(e.key==='ArrowLeft')kx=(kx+W-1)%W;else if(e.key==='ArrowRight')kx=(kx+1)%W;
+  else if(e.key==='ArrowUp')ky=(ky+H-1)%H;else if(e.key==='ArrowDown')ky=(ky+1)%H;
+  else if(e.key===' '||e.key==='Enter')grid[ky*W+kx]^=1;else used=false;
+  if(used){e.preventDefault();draw();}});
+bPlay.addEventListener('click',()=>{running=!running;started=true;ui();kick();});
+bReset.addEventListener('click',()=>{reset();draw();ui();});
+bJump.addEventListener('click',()=>{for(let i=0;i<1000;i++)step();draw();ui();});
+range.addEventListener('input',()=>{spf=Math.pow(500,range.value/1000);fmtSpf();});
+if(mq){const f=()=>{reduced=mq.matches;if(reduced){running=false;ui();}};mq.addEventListener?mq.addEventListener('change',f):mq.addListener&&mq.addListener(f);}
+reset();
+if(reduced)for(let i=0;i<500;i++)step();
+spf=Math.pow(500,range.value/1000);fmtSpf();
+if('ResizeObserver'in window)new ResizeObserver(size).observe(cv);else window.addEventListener('resize',size);
+size();ui();
+if('IntersectionObserver'in window){
+  new IntersectionObserver(es=>{for(const en of es){visible=en.isIntersecting;
+    if(visible&&!started&&!reduced){running=true;started=true;ui();}
+    kick();}},{threshold:.25}).observe(root);
+}else{visible=true;if(!reduced){running=true;started=true;ui();}kick();}
+})();</script>
+
+  <div class="dinkus" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <span class="chapter-mark">Послесловие</span>
+  <h2>Простое правило не обещает простой жизни</h2>
+
+  <p>Фон Нейман хотел понять, как вещь может повторить саму себя. Вольфрам разложил по полочкам все правила для одной строчки. Конвей нашёл три строчки, из которых растёт целый зоопарк. Лэнгтон пустил по полю муравья, которого никто до конца не понимает.</p>
+
+  <p>У всех этих миров одна общая тайна. Каждая клетка знает только своих соседей и одно правило. Ни одна не знает, что вместе они рисуют треугольник, запускают планер или прокладывают дорожку. Узор не живёт ни в одной клетке. Он живёт между ними.</p>
+
+  <p>Джон Конвей умер в апреле 2020 года. Он придумал много другого, гораздо более глубокого, и порой ворчал, что больше всего его помнят за «Жизнь». Но планеры, которые он отпустил в 1970 году, всё ещё летят по миллионам экранов.</p>
+
+  <p class="closing">Погаси клетки. Спокойной ночи.</p>
+
+</main>
+</body>
+</html>

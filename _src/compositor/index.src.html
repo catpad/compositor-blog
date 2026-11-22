@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compositor</title>
+<style>
+/*FONTS*/
+:root{
+  /* A quiet frame around loud pages: newsprint paper, ink, one accent. Each post may recolor the frame with its own three tones.
+     Layout: a single centered measure for chrome and discussion; the post itself runs full width. */
+  --paper:#EEEDE6;
+  --ink:#15181D;
+  --accent:#1D3BC4;
+  --alarm:#C2311F;
+  --muted:color-mix(in srgb,var(--ink) 62%,var(--paper));
+  --hair:color-mix(in srgb,var(--ink) 18%,var(--paper));
+  --wash:color-mix(in srgb,var(--ink) 6%,var(--paper));
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+
+/* bar */
+.bar{display:flex;align-items:center;gap:16px;min-height:52px;padding:8px 20px;border-bottom:1px solid var(--hair)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em}
+.brand svg{width:22px;height:22px;flex:none}
+.bar .sp{flex:1}
+.acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{appearance:none;border:1.5px solid var(--ink);background:transparent;border-radius:999px;padding:7px 16px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap;min-height:34px}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--accent);border-color:var(--accent)}
+.btn.quiet{border-color:var(--hair)}
+.btn.quiet:hover{border-color:var(--ink);background:transparent;color:var(--ink)}
+.btn.warn{border-color:var(--alarm);color:var(--alarm)}
+.btn.warn:hover{background:var(--alarm);color:var(--paper)}
+.btn:disabled{opacity:.4;cursor:default;pointer-events:none}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--hair);color:var(--muted);white-space:nowrap}
+.tag.live{border-color:var(--accent);color:var(--accent)}
+
+/* home: one markup, many faces */
+.home{min-height:100vh;font-family:var(--body);--tw:800}
+.home .hw{max-width:var(--w,760px);margin:0 auto;padding:0 20px}
+.home h1,.home h2{font-family:var(--display)}
+.home .when,.home .num,.home .meta,.home .tag,.home .foot{font-family:var(--meta)}
+.stylebar{display:flex;align-items:center;justify-content:flex-end;gap:6px;padding:12px 0 0;flex-wrap:wrap}
+.sb{appearance:none;border:1px solid var(--hair);background:transparent;color:var(--ink);border-radius:999px;min-height:32px;padding:5px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.sb:hover,.sb[aria-expanded="true"]{border-color:var(--ink)}
+.sb b{font-weight:500}
+.sb.step{width:32px;padding:0;font-size:15px;letter-spacing:0}
+.sbpanel{margin-top:10px;padding:14px;border:1px solid var(--hair);background:var(--wash);display:grid;gap:12px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:8px;max-height:330px;overflow-y:auto;padding:2px}
+.tile{appearance:none;cursor:pointer;text-align:left;border:1px solid rgba(128,128,128,.45);border-top:6px solid var(--a);background:var(--p);color:var(--i);padding:9px 10px 10px;min-height:62px;display:grid;gap:3px;font:500 13px/1.2 system-ui,sans-serif;border-radius:2px}
+.tile small{font:400 10.5px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+.tile.on{outline:2.5px solid var(--accent);outline-offset:2px}
+.home .mast{padding:44px 0 26px;border-bottom:3px solid var(--ink)}
+.home .lock{display:flex;align-items:center;gap:clamp(14px,3vw,26px)}
+.home .mast svg{width:clamp(50px,10vw,92px);height:clamp(50px,10vw,92px);flex:none}
+.home .mast h1{font-weight:900;font-size:clamp(42px,10.5vw,96px);line-height:.95;letter-spacing:-.025em;overflow-wrap:anywhere}
+.home .mast p{margin-top:16px;color:var(--muted)}
+.home .rowhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0 8px}
+.home .meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.posts{list-style:none;margin:0;padding:0}
+.post a{text-decoration:none;display:block}
+.post .when{color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.post h2{font-weight:var(--tw);font-size:clamp(25px,4.4vw,36px);line-height:1.08;letter-spacing:-.012em;overflow-wrap:anywhere}
+.post a:hover h2{color:var(--accent)}
+.post .sum{color:var(--muted);font-size:16.5px;max-width:34em}
+.post .num{display:none;font-variant-numeric:tabular-nums}
+.post .draft{display:inline-block;vertical-align:middle;margin:0 .6em .18em 0;padding:4px 9px 3px;background:#FFD400;color:#111;border:2px solid #111;border-radius:3px;font:700 12px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;font-style:normal;white-space:nowrap}
+.home .empty{padding:44px 0;color:var(--muted);font-style:italic}
+.home .foot{padding:26px 0 60px;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.f-u .mast h1,.f-u .post h2{text-transform:uppercase;letter-spacing:0}
+.f-i .post h2{font-style:italic}
+.f-l{--tw:400}
+.f-l .mast h1{font-weight:400}
+.f-c .mast{text-align:center}.f-c .lock{justify-content:center}
+.f-r .post a,.f-r .sbpanel{border-radius:18px}
+/* list */
+.lay-list .post{border-bottom:1px solid var(--hair)}
+.lay-list .post a{display:grid;grid-template-columns:104px 1fr;gap:6px 22px;padding:24px 0;align-items:baseline}
+.lay-list .sum,.lay-list .tag{grid-column:2}.lay-list .tag{justify-self:start}
+/* front page */
+.lay-front{--w:1180px}
+.lay-front .mast{border-top:1px solid var(--ink);border-bottom:4px double var(--ink);padding:26px 0 20px;margin-top:14px}
+.lay-front .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:0 34px;padding-top:6px}
+.lay-front .post{padding:20px 0;border-bottom:1px solid var(--hair)}
+.lay-front .post h2{font-size:clamp(22px,2.4vw,29px);margin:6px 0 8px}
+.lay-front .post:first-child{grid-column:1/-1;border-bottom:1px solid var(--ink);padding-bottom:26px}
+.lay-front .post:first-child h2{font-size:clamp(38px,7.4vw,88px);line-height:.98;margin:8px 0 14px}
+.lay-front .post:first-child .sum{font-size:19px;max-width:44em}
+/* card grid */
+.lay-grid{--w:1180px}
+.lay-grid .posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px;padding-top:14px}
+.lay-grid .post a{display:flex;flex-direction:column;gap:10px;height:100%;min-height:236px;border:1.5px solid var(--ink);padding:22px}
+.lay-grid .post a:hover{background:var(--wash)}
+.lay-grid .post h2{font-size:clamp(23px,2.5vw,30px)}
+.lay-grid .post .when{order:9;margin-top:auto;padding-top:10px}
+.f-b.lay-grid .post a{border-width:4px;box-shadow:7px 7px 0 var(--ink)}
+/* dense index */
+.lay-index{--w:860px}
+.lay-index .post{border-bottom:1px dotted var(--muted)}
+.lay-index .post a{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:baseline;padding:12px 0}
+.lay-index .post .num{display:inline;color:var(--accent);font-size:12px}
+.lay-index .post h2{font-size:clamp(19px,2.6vw,24px);letter-spacing:0}
+.lay-index .sum,.lay-index .tag{display:none}
+.lay-index .post .when{order:3}
+/* stacked giant titles */
+.lay-stack{--w:1140px}
+.lay-stack .post{border-bottom:1px solid var(--hair)}
+.lay-stack .post a{padding:26px 0 30px}
+.lay-stack .post h2{font-size:clamp(42px,9.4vw,124px);line-height:.94;letter-spacing:-.03em;margin:8px 0 14px}
+/* timeline */
+.lay-timeline{--w:860px}
+.lay-timeline .posts{border-left:2px solid var(--ink);margin:26px 0 0 150px}
+.lay-timeline .post a{position:relative;padding:0 0 38px 30px}
+.lay-timeline .post a::before{content:"";position:absolute;left:-8px;top:9px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:2px solid var(--accent)}
+.lay-timeline .post a:hover::before{background:var(--accent)}
+.lay-timeline .post .when{position:absolute;left:-180px;top:10px;width:150px;text-align:right}
+.lay-timeline .post h2{margin-bottom:6px}
+/* text columns */
+.lay-columns{--w:1140px}
+.lay-columns .posts{columns:2;column-gap:46px;column-rule:1px solid var(--hair);padding-top:24px}
+.lay-columns .post{break-inside:avoid;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--hair)}
+.lay-columns .post h2{margin:6px 0 8px}
+/* terminal */
+.lay-terminal{--w:920px}
+.lay-terminal .mast{border-bottom:1px dashed var(--muted);padding:26px 0 16px}
+.lay-terminal .mast svg{display:none}
+.lay-terminal .mast h1{font-size:20px;font-weight:700;letter-spacing:0}
+.lay-terminal .mast h1::before{content:"$ cat ";color:var(--accent)}
+.lay-terminal .mast p{font-size:14px;margin-top:8px}
+.lay-terminal .post a{display:grid;grid-template-columns:auto 1fr;gap:2px 18px;padding:7px 0}
+.lay-terminal .post h2{font-size:16px;font-weight:400;letter-spacing:0;line-height:1.4}
+.lay-terminal .post h2::before{content:"> ";color:var(--accent)}
+.lay-terminal .post .when{font-size:13px;letter-spacing:0;text-transform:none;line-height:1.7}
+.lay-terminal .sum{grid-column:2;font-size:13.5px}.lay-terminal .tag{grid-column:2;justify-self:start}
+/* colour tiles */
+.lay-tiles{--w:1180px}
+.lay-tiles .posts{display:grid;grid-template-columns:repeat(2,1fr);margin-top:18px;border:2px solid var(--ink)}
+.lay-tiles .post a{display:flex;flex-direction:column;gap:12px;min-height:300px;height:100%;padding:30px}
+.lay-tiles .post:nth-child(4n+2) a,.lay-tiles .post:nth-child(4n+3) a{background:var(--ink);color:var(--paper)}
+.lay-tiles .post:nth-child(5n+1) a{background:var(--accent);color:var(--paper)}
+.lay-tiles .post a .sum,.lay-tiles .post a .when{color:inherit;opacity:.78}
+.lay-tiles .post a:hover h2{color:inherit;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.lay-tiles .post .num{display:block;font-size:13px;letter-spacing:.14em}
+.lay-tiles .post h2{font-size:clamp(28px,3.6vw,48px);margin-top:auto}
+/* catalogue table */
+.lay-catalog{--w:1140px}
+.lay-catalog .posts{border:1.5px solid var(--ink);border-bottom:0;margin-top:18px}
+.lay-catalog .post{border-bottom:1.5px solid var(--ink)}
+.lay-catalog .post a{display:grid;grid-template-columns:54px 1.15fr 1.9fr 130px;gap:20px;padding:16px 14px;align-items:baseline}
+.lay-catalog .post a:hover{background:var(--wash)}
+.lay-catalog .post .num{display:inline;font-size:12px}
+.lay-catalog .post h2{font-size:clamp(18px,2vw,22px);letter-spacing:0}
+.lay-catalog .post .when{order:9;text-align:right}
+.lay-catalog .sum{font-size:15px;max-width:none}.lay-catalog .tag{display:none}
+.f-b.lay-catalog .posts,.f-b.lay-catalog .post{border-width:3px}
+/* poster bands */
+.lay-poster .hw.body{max-width:none;padding:0}
+.lay-poster .hw.body>.hw{max-width:none;padding:0 clamp(20px,5vw,80px)!important}
+.lay-poster .post a{display:grid;grid-template-columns:1fr auto;gap:8px 30px;align-items:end;padding:clamp(28px,5vw,70px) clamp(20px,5vw,80px);border-bottom:1px solid var(--ink)}
+.lay-poster .post:nth-child(even) a{background:var(--ink);color:var(--paper)}
+.lay-poster .post:nth-child(even) a .sum,.lay-poster .post:nth-child(even) a .when{color:inherit;opacity:.75}
+.lay-poster .post h2{font-size:clamp(36px,8vw,112px);line-height:.95;letter-spacing:-.02em;grid-column:1}
+.lay-poster .post .when,.lay-poster .post .sum,.lay-poster .post .tag{grid-column:1}
+.lay-poster .post .num{display:block;grid-column:2;grid-row:1/span 3;font-family:var(--display);font-size:clamp(60px,13vw,190px);line-height:.8;font-weight:900;color:var(--accent)}
+.lay-poster .foot,.lay-poster .empty{padding-left:clamp(20px,5vw,80px);padding-right:clamp(20px,5vw,80px)}
+/* masthead at the side */
+.lay-sidebar{--w:1180px}
+.lay-sidebar .cols{display:grid;grid-template-columns:300px 1fr;gap:56px;align-items:start}
+.lay-sidebar .mast{position:sticky;top:20px;border-bottom:0;border-top:3px solid var(--ink);padding-top:22px}
+.lay-sidebar .lock{flex-direction:column;align-items:flex-start;gap:14px}
+.lay-sidebar .mast h1{font-size:clamp(34px,4vw,46px)}
+.lay-sidebar .post{border-top:1px solid var(--hair)}
+.lay-sidebar .rowhead{border-top:3px solid var(--ink);padding-top:22px}
+.lay-sidebar .post a{padding:22px 0 24px}
+.lay-sidebar .post h2{margin:6px 0 8px}
+@media (max-width:760px){
+  .lay-front .posts,.lay-tiles .posts{grid-template-columns:1fr}
+  .lay-columns .posts{columns:1}
+  .lay-timeline .posts{margin-left:6px}
+  .lay-timeline .post .when{position:static;display:block;width:auto;text-align:left;margin-bottom:4px}
+  .lay-catalog .post a{grid-template-columns:34px 1fr;gap:6px 12px}
+  .lay-catalog .sum,.lay-catalog .post .when{grid-column:2;text-align:left}
+  .lay-sidebar .cols{grid-template-columns:1fr;gap:0}
+  .lay-sidebar .mast{position:static}
+  .lay-list .post a{grid-template-columns:1fr}
+  .lay-list .sum,.lay-list .tag{grid-column:1}
+  .lay-poster .post a{grid-template-columns:1fr}
+  .lay-poster .post .num{grid-column:1;grid-row:auto;font-size:54px}
+  .lay-index .post a{grid-template-columns:auto 1fr}
+  .lay-index .post .when{grid-column:2}
+}
+
+/* post */
+#frame{display:block;width:100%;border:0;height:82vh;background:var(--paper)}
+.studio{border-bottom:1px solid var(--hair);background:var(--wash)}
+.studio .wrap{padding-top:18px;padding-bottom:20px;display:grid;gap:14px}
+.field{display:grid;gap:7px}
+.field label,.lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+textarea,input[type=text],input[type=url]{width:100%;font-family:var(--body);font-size:17px;line-height:1.45;color:var(--ink);background:var(--paper);border:1.5px solid var(--hair);border-radius:3px;padding:11px 13px;resize:vertical}
+textarea:focus,input:focus{outline:none;border-color:var(--ink)}
+.line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{appearance:none;border:1px solid var(--hair);background:var(--paper);border-radius:999px;padding:5px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;cursor:pointer;min-height:30px}
+.chip:hover{border-color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.note{font-size:14.5px;color:var(--muted);min-height:1.5em}
+.note.bad{color:var(--alarm)}
+
+/* thread */
+.thread{border-top:3px solid var(--ink);margin-top:0;padding:34px 0 80px}
+.thread h2{font-weight:800;font-size:30px;letter-spacing:-.012em}
+.thread .count{color:var(--muted);margin:6px 0 22px;height:1.4em}
+.say{display:grid;gap:10px;margin-bottom:8px}
+.say textarea{min-height:92px}
+.say .line{justify-content:space-between}
+.who{font-size:15px;color:var(--muted)}
+ol.cs{list-style:none;margin:0;padding:0}
+ol.cs ol.cs{margin-left:clamp(14px,4vw,30px);border-left:1px solid var(--hair);padding-left:clamp(12px,3vw,20px)}
+.c{padding:18px 0 4px;border-top:1px solid var(--hair)}
+ol.cs ol.cs .c{border-top:0;padding-top:12px}
+.c header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.c .name{font-weight:650}
+.c time{color:var(--muted)}
+.c .body{margin:5px 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}
+.c .ops{display:flex;gap:14px}
+.link{appearance:none;border:0;background:none;padding:4px 0;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer}
+.link:hover{color:var(--ink)}
+.c .say{margin:8px 0 10px}
+
+/* compose */
+.compose{padding:40px 0 90px;display:grid;gap:30px}
+.compose h1{font-weight:900;font-size:clamp(38px,8vw,64px);line-height:1;letter-spacing:-.022em}
+.compose .lead{color:var(--muted);margin-top:10px}
+.compose textarea.big{min-height:170px}
+.drop{border:1.5px dashed var(--hair);border-radius:3px;padding:22px;text-align:center;color:var(--muted);cursor:pointer;background:var(--paper)}
+.drop.over,.drop:hover{border-color:var(--ink);color:var(--ink)}
+.files{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.files li{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--hair);font-size:15.5px}
+.files .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files .s{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap}
+.files .s.bad{color:var(--alarm)}
+
+.tawrap{position:relative}
+.selmenu{position:absolute;z-index:5;display:flex;align-items:center;gap:2px;height:38px;padding:3px;background:var(--ink);border-radius:8px;box-shadow:0 6px 18px rgba(21,24,29,.25);white-space:nowrap}
+.selmenu button{appearance:none;border:0;background:transparent;color:var(--paper);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;height:32px;min-width:32px;padding:0 10px;border-radius:6px;cursor:pointer}
+.selmenu button:hover{background:color-mix(in srgb,var(--paper) 22%,transparent)}
+.selmenu button.b{font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:0}
+.selmenu button.i{font-family:var(--body);font-style:italic;font-size:16px;letter-spacing:0}
+.selmenu input{width:230px;height:32px;padding:4px 9px;font-size:15px;border:0;border-radius:6px}
+.blocks{display:grid;gap:10px}
+.block{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:12px 12px 12px 6px;border:1.5px solid var(--hair);border-radius:3px;background:var(--paper)}
+.block.order{border-left:4px solid var(--accent);background:var(--wash)}
+.block.order .lbl{color:var(--accent)}
+.block.lift{box-shadow:0 6px 18px rgba(21,24,29,.18);position:relative;z-index:2}
+.bb{display:grid;gap:7px;min-width:0}
+.bstack{display:grid;gap:8px}
+.grip{appearance:none;border:0;background:none;cursor:grab;touch-action:none;font-size:15px;line-height:1;letter-spacing:-2px;color:var(--muted);padding:8px 6px;min-width:26px;min-height:34px}
+.grip:active{cursor:grabbing}
+.grip:hover{color:var(--ink)}
+.block .s{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.block .s.bad{color:var(--alarm)}
+.adder{padding-top:2px}
+.picker{display:grid;gap:9px}
+.grid{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;height:186px;overflow-y:auto;padding:10px;border:1.5px solid var(--hair);border-radius:3px;background:var(--paper)}
+.pickdesc{height:3em;overflow:hidden}
+.maker{display:grid;gap:10px}
+.pics{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.pics:empty{display:none}
+.pic{margin:0;display:grid;gap:6px}
+.pic img{display:block;width:100%;height:auto;border:1px solid var(--hair);background:#fff}
+.pic figcaption{display:grid;gap:2px;font-size:14px}
+.pic .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+
+/* press: composing state */
+.press{padding:44px 0 18px;display:grid;gap:16px}
+.press h1{font-weight:900;font-size:clamp(34px,7vw,56px);line-height:1.02;letter-spacing:-.02em}
+.press .meter{display:flex;gap:26px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);padding:10px 0}
+.press .meter div{display:grid;gap:2px}
+.press .meter b{font-family:var(--mono);font-weight:500;font-size:19px;font-variant-numeric:tabular-nums;height:1.5em;white-space:nowrap}
+.press{padding-bottom:18px}
+.stage{max-width:1240px;margin:0 auto;padding:0 20px 70px}
+.preview{display:block;width:100%;height:clamp(420px,70vh,860px);border:1px solid var(--hair);background:var(--paper)}
+.rule{height:2px;background:var(--hair);position:relative;overflow:hidden}
+.rule::after{content:"";position:absolute;inset:0 60% 0 0;background:var(--ink);animation:run 1.6s ease-in-out infinite alternate}
+.rule.still::after{animation:none;inset:0}
+@keyframes run{to{inset:0 0 0 60%}}
+@media (prefers-reduced-motion:reduce){.rule::after{animation:none;inset:0 0 0 0;opacity:.35}}
+
+.state{padding:70px 0;color:var(--muted)}
+@media (max-width:560px){
+  body{font-size:16px}
+  .bar{padding:8px 14px}
+  .brand span{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app"><div class="wrap state">Opening…</div></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ───────────── the standing instructions every page is composed under ───────────── */
+const RULES = `You are the compositor of a publication called Compositor. Each post is one self-contained, interactive web page that you design and build from the author's brief, materials and wishes. Your standard is a page a reader remembers: beautiful, elegant, simple.
+
+OUTPUT
+Reply with one complete HTML document and nothing else: it starts with <!DOCTYPE html> and ends with </html>. No Markdown fences, no commentary before or after.
+
+WHAT THE AUTHOR GIVES YOU
+- A brief: what the post is about. Write the post in the language of the brief.
+- Materials: pasted text, files (each with the exact URL to use), and link addresses. You cannot open links; cite them as plain <a href> links where they belong, and never claim to have read them.
+- A style for the page (optional) and wishes in the author's own words: how the page should look and behave. The author's wishes outrank the style, and both outrank every default below.
+
+WHERE THE PAGE RUNS (hard constraints)
+- It is shown inside a frame that grows to the page's full height. Never use vh/svh units, position:fixed, height:100% on html or body, or window scroll events. Use IntersectionObserver when something should start as it comes into view.
+- All CSS and JavaScript are inline in the document. Fonts may come from Google Fonts through a <link>. A library may load from cdnjs.cloudflare.com with an exact version, only when it does real work. Nothing else loads from the network: no remote images, no fetch, no trackers, no iframes.
+- Use the author's files only by the exact URLs given (for example /_blob/abc123). Never invent a file URL. Images need alt text. Audio and video get controls.
+- No alert/confirm/prompt, no localStorage or cookies, no forms that submit anywhere.
+- Do not build a comments section, a site header, navigation or a footer for the site: the platform adds its own bar above and a discussion below.
+
+REQUIRED METADATA (the platform reads these)
+<title> — the post's title, a short real name.
+<meta name="description" content="…"> — one plain sentence for the index.
+<meta name="compositor:paper" content="#RRGGBB">, <meta name="compositor:ink" content="#RRGGBB">, <meta name="compositor:accent" content="#RRGGBB"> — the page's background, text and accent colors. Ink on paper must be clearly readable.
+Set <html lang> to the post's language.
+
+DESIGN
+- Choose the form that suits the subject when the author names none: a newspaper front page, an essay with instruments in the margin, an atlas plate, a lab notebook, a museum label. Commit to one idea of the page and carry it through.
+- Typography first: one display face used with restraint, one text face, a small scale kept consistently, body lines near 65 characters. 4 to 6 named color tokens in :root; one accent that means something.
+- The page is complete the moment it loads: nothing important waits for a click or a scroll to appear. It works at phone width (about 390px) and on a wide screen; wide figures scroll inside their own box.
+- Headings are complete phrases that say something true about what follows.
+- No filler, no lorem ipsum, no emoji as decoration, no gradient washes, no rows of identical rounded cards.
+- Illustrations follow the ILLUSTRATIONS line of the request. They are never crude: use the author's pictures, real data drawn as careful graphics, or typography. When asked to draw, draw inline SVG with real care and detail in the named style; if you cannot draw something well, leave it out.
+
+INTERACTIVITY
+Follow the INTERACTIVITY line of the request. "None" means a still page with nothing to operate. When interactive parts are wanted, these rules hold:
+- Every interactive part must help the reader understand the subject: it lets them change the thing the text is about and see the consequence. If it would only decorate, leave it out. Some parts may simply be animation.
+- Prefer direct manipulation: the reader drags the thing itself. A slider must change something along its whole travel; a control that flips one thing is a switch. Never use a native <select>; use buttons or chips.
+- Controls belong to the subject, never to the rendering. Readouts sit in fixed-size boxes with tabular numerals so nothing jumps when values change.
+- No instruction labels on instruments ("drag me", "hover here") and no remarks about how the page is made. Labels appear only when they report something: a value, a state, a result.
+- Use pointer events so touch works; set touch-action so the page can still scroll; give draggable things keyboard arrows and a visible focus state; honour prefers-reduced-motion. Draw canvases at devicePixelRatio and redraw on resize.
+
+TRUTH
+- Use only what the author supplied and what is well established. Do not invent quotations, figures, dates or sources. Where a fact is missing, leave it out or mark the place plainly as [to be supplied by the author].`;
+
+const MODEL = 'claude-opus-5-5';
+const PAGE_STYLES = [
+['Press','Newspaper front page','Masthead, a strong headline, columns with hairline rules, a lead story and sidebars.'],
+['Press','Tabloid extra','Huge condensed headline, heavy black bars, short urgent paragraphs, one loud accent.'],
+['Press','Sunday supplement','Generous magazine spread: big opening image or figure, drop cap, pull quotes, wide margins.'],
+['Press','Long-read magazine','One calm column, large serif text, chapter breaks, figures that span the full width.'],
+['Press','Scientific journal','Title, abstract, numbered sections, two columns, numbered figures with captions, references.'],
+['Press','Encyclopedia entry','Dense reference page: definition first, small headings, side notes, cross-references, tables.'],
+['Press','Field guide','Entries with identification marks, range, season, small plates and quick comparison keys.'],
+['Press','Farmer’s almanac','Old almanac: tables, small woodcut ornaments, dates, sayings, compact justified text.'],
+['Press','Museum catalogue','Quiet catalogue page: plate, catalogue number, provenance, short scholarly essay.'],
+['Press','Travel guidebook','Practical sections, boxed tips, maps, ratings, icons for getting there and what to see.'],
+['Press','Cookbook page','Ingredients column, numbered method, timings, a note from the cook, one hero picture.'],
+['Press','Children’s picture book','Very large friendly type, one idea per spread, big pictures, warm colors.'],
+['Press','Pulp paperback','Lurid cover typography, yellowed paper, chapter numerals, cheap-print texture.'],
+['Press','Photocopied zine','Cut-and-paste layout, typewriter and marker type, high-contrast black on white, taped edges.'],
+['Press','Letterpress broadside','One sheet, wood type in several sizes, centered lines, ornaments, heavy impression.'],
+['Press','Typewritten dossier','Monospaced report with stamps, paper clips, redactions, file numbers and margin notes.'],
+['Press','Victorian playbill','Stacked lines in many display faces, pointing hands, rules and flourishes, one ink.'],
+['Press','Telegram','Short capital lines, STOP between sentences, form fields, stamps and time marks.'],
+['Press','Pocket dictionary','Headword, pronunciation, numbered senses, tiny italic labels, thumb index.'],
+['Press','Annual report','Sober corporate pages: key figures large, clean charts, short statements, lots of white.'],
+['Movements','Swiss International','Strict grid, grotesque sans, flush-left text, asymmetry, one signal color, no ornament.'],
+['Movements','Bauhaus','Primary colors, circles, squares and triangles, geometric sans, diagonal energy.'],
+['Movements','Constructivist poster','Red, black and cream, diagonals, photomontage blocks, bold slab or sans capitals.'],
+['Movements','Art Nouveau','Flowing plant lines, ornamental borders, muted greens and golds, elegant curved lettering.'],
+['Movements','Art Deco','Symmetry, sunbursts, stepped forms, gold on deep navy or black, tall elegant capitals.'],
+['Movements','De Stijl','White field, black grid lines, blocks of red, blue and yellow, nothing diagonal.'],
+['Movements','Brutalist web','Raw default-looking type, hard borders, visible structure, harsh contrast, no polish.'],
+['Movements','Memphis','Squiggles, terrazzo dots, clashing pastels with black, playful tilted shapes.'],
+['Movements','Psychedelic poster','Melting hand lettering, vibrating complementary colors, dense swirling ornament.'],
+['Movements','Japanese minimal','Much empty space, small precise type, one seal-red mark, quiet asymmetry.'],
+['Movements','Ukiyo-e print','Flat color areas, fine outlines, soft indigo and vermilion, cartouche titles.'],
+['Movements','Illuminated manuscript','Decorated initials, red rubrics, gold accents, ruled columns, marginal drawings.'],
+['Movements','Renaissance treatise','Classical proportions, roman type, engraved diagrams, marginal notes, printer’s device.'],
+['Movements','Mid-century modern','Warm off-white, mustard, teal and orange, simple shapes, friendly geometric sans.'],
+['Movements','Punk collage','Ransom-note letters, torn paper, safety-pin energy, black, white and one acid color.'],
+['Movements','White-cube gallery','Almost nothing: white wall, small grey labels, large single objects, perfect spacing.'],
+['Movements','Dada','Type at every angle and size, absurd juxtapositions, cut newspaper, deliberate disorder.'],
+['Movements','Futurist','Words in motion: speed lines, exploding type, steep diagonals, metallic contrast.'],
+['Movements','Arts and Crafts','Dense leaf borders, heavy old-style type, two inks, honest handmade feeling.'],
+['Movements','Pop art','Ben-Day dots, thick outlines, flat bright color, speech balloons, repetition.'],
+['Science','Lab notebook','Ruled or squared paper, dated entries, measurements, sketches, corrections left visible.'],
+['Science','Blueprint','White lines on deep blue, dimension arrows, title block, technical lettering.'],
+['Science','Engineering manual','Numbered procedures, exploded diagrams, warning boxes, part tables, plain sans.'],
+['Science','Patent drawing','Fine black line figures with numbered callouts, formal claims, sheet numbers.'],
+['Science','Star atlas','Dark sky plates, constellation lines, magnitude dots, coordinate grid, fine labels.'],
+['Science','Nautical chart','Depth soundings, compass roses, pale blue shallows, coast outlines, small notes.'],
+['Science','Topographic map','Contour lines, relief tints, grid references, a careful legend and scale bar.'],
+['Science','Botanical plate','Delicate specimen drawings with numbered details, Latin names, cream paper.'],
+['Science','Anatomy atlas','Large labelled figures with leader lines, layered views, restrained flesh and ink tones.'],
+['Science','Chalkboard lecture','Dark slate, chalk handwriting, boxed formulas, arrows, half-erased traces.'],
+['Science','Graph-paper notebook','Blue squared paper, pencil plots, hand-ruled tables, coloured-pencil highlights.'],
+['Science','Mission control','Dark consoles, monospaced telemetry, status lights, timelines and trajectory plots.'],
+['Science','Observatory log','Night entries, sky conditions, instrument settings, small plots, careful timestamps.'],
+['Science','Natural history museum','Specimen cases, typed labels, dioramas described in captions, brass and wood tones.'],
+['Science','Weather bureau','Synoptic charts, isobars, station symbols, forecast tables, calm official type.'],
+['Science','Geology survey','Strata columns, cross-sections with patterns, map sheets, sample numbers.'],
+['Science','Math textbook','Definitions, theorems and proofs in boxes, margin figures, worked examples, exercises.'],
+['Science','Periodic-table poster','Everything arranged as a grid of uniform cells with a color-coded legend.'],
+['Science','Medical chart','Clean clinical forms, vital-sign curves, checkboxes, cool blues and white.'],
+['Science','Expedition journal','Weathered pages, route sketches, daily entries, pressed specimens, pencil and ink.'],
+['Screen','Terminal','Black screen, monospaced green or amber text, prompts, ASCII frames, blinking cursor.'],
+['Screen','Early web 1996','Grey background, blue links, centered headings, tables, tiled textures, hit counter mood.'],
+['Screen','Pixel-art game','Chunky pixels, limited palette, tile maps, sprites, a status bar with hearts and score.'],
+['Screen','Spreadsheet','Everything in cells: column letters, row numbers, formulas bar, conditional colors.'],
+['Screen','Control dashboard','Dense panels of gauges, sparklines and big numbers, dark neutral ground.'],
+['Screen','Text adventure','Second-person narration, a parser prompt, room descriptions, inventory list.'],
+['Screen','Vaporwave','Pink and cyan gradients, grids to the horizon, classical busts, wide spaced type.'],
+['Screen','Cyberpunk neon','Night city glow, magenta and electric blue, glitch lines, angular HUD frames.'],
+['Screen','E-ink reader','Pure greys, book serif, no color, calm page turns, generous leading.'],
+['Screen','Slide deck','One idea per screen-sized panel, huge statements, simple diagrams, speaker-note asides.'],
+['Screen','Teletext','Blocky mosaic graphics, eight bright colors on black, fixed 40-column text, page numbers.'],
+['Screen','Operating system 1984','White desktop, pinstripe title bars, bitmap icons, crisp black-and-white windows.'],
+['Screen','Arcade cabinet','Marquee lettering, high-score table, attract-mode energy, scanlines.'],
+['Screen','Chat transcript','The story told as message bubbles with timestamps, typing dots and attachments.'],
+['Screen','Code editor','Dark editor panes, syntax colors, line numbers, tabs, a file tree as navigation.'],
+['Screen','Subway information display','Dot-matrix lines, arrivals board, line colors, pictograms, strict order.'],
+['Story','Scrolling documentary','Full-width scenes that change as the reader moves down, short captions, strong pacing.'],
+['Story','Film noir','High-contrast black and white, venetian-blind shadows, hard-boiled captions.'],
+['Story','Silent-film intertitles','Ornate title cards on black, flickering frames, piano-era flourish.'],
+['Story','Dark and cinematic','Black ground, very large type, long pauses, slow motion only where it tells the story.'],
+['Story','Comic strip','Panels, gutters, speech balloons, sound effects, clear ink lines and flat color.'],
+['Story','Graphic novel','Moody full-bleed panels, sparse captions, a limited palette, cinematic angles.'],
+['Story','Bedtime storybook','Soft colors, rounded serif, small scenes between paragraphs, gentle rhythm.'],
+['Story','Detective case board','Pinned photos, string between clues, typed notes, map with marked spots.'],
+['Story','Theatre programme','Cast list, acts and scenes, director’s note, elegant centered typography.'],
+['Story','Travel diary','Dated pages, ticket stubs, small sketches, handwriting beside typed notes.'],
+['Story','Set of postcards','Each part is a card: picture side, message side, stamps and postmarks.'],
+['Story','Scrapbook','Layered clippings, tape, captions in pen, uneven edges, affectionate clutter.'],
+['Story','A letter','One personal letter: salutation, handwriting or typewriter, folds, a postscript.'],
+['Story','Oral history','Voices in turn: names, quotes set large, portraits or initials, dates and places.'],
+['Story','Timeline wall','One long line through the page with events hanging from it at true intervals.'],
+['Story','Fairy tale','Decorated borders, an illuminated first letter, woodland ornaments, “once upon a time” pace.'],
+['Story','Court transcript','Speaker labels, numbered lines, exhibits, stage directions in brackets.'],
+['Story','Choose-your-path','Short scenes ending in choices; the page remembers the path the reader took.'],
+['Objects','Museum wall','Images large and calm, short labels, one quiet interaction per exhibit.'],
+['Objects','Cabinet of curiosities','Compartments of odd objects, handwritten tags, dark wood and velvet tones.'],
+['Objects','Deck of cards','Content as cards to turn, sort and lay out, with suits, ranks or categories.'],
+['Objects','Board game','A track or map as the page, tokens, rules box, chance cards.'],
+['Objects','Recipe card','Index card with ruled lines, a red header line, handwriting, a stain or two.'],
+['Objects','Boarding pass','Ticket stubs, gate and seat fields, barcodes, perforations, airport type.'],
+['Objects','Railway timetable','Columns of stations and times, footnote symbols, a schematic route map.'],
+['Objects','Restaurant menu','Courses as sections, short descriptions, prices as figures, a house special box.'],
+['Objects','Record sleeve','Square cover art, track list, liner notes, catalogue number, spine text.'],
+['Objects','Wall calendar','Month grids, moon phases, notes in the squares, one picture per month.'],
+['Objects','Seed packet','Small illustrated packets with sowing tables, depth and spacing icons.'],
+['Objects','Instruction leaflet','Folded sheet, numbered pictograms, multilingual feel, warnings in triangles.'],
+['Objects','Trading cards','Portrait, stats bars, rarity mark, flavor text; a collection to browse.'],
+['Objects','Museum audio guide','Numbered stops, a play control per stop, short spoken-style texts.'],
+['Objects','Shop window','Objects arranged on shelves with price tags and a hand-painted sign.'],
+['Objects','Passport','Stamps, visas, guilloche patterns, machine-readable lines, small formal type.'],
+['Objects','Field station noticeboard','Pinned sheets, duty rosters, weather slips, maps, pushpins.'],
+['Objects','Tarot spread','Illustrated cards laid in a pattern, each with a title and a reading.'],
+['Objects','Architect’s model','Plans, sections and an axonometric, scale figures, pale card and thin lines.'],
+['Objects','Pharmacy label','Clean label typography, dosage tables, pictograms, clinical green or blue.']
+];
+const PIC_STYLES = [
+['Print','Copperplate engraving','Fine parallel and cross-hatched lines, black ink on cream, 18th-century book plate.'],
+['Print','Woodcut','Bold carved black shapes, visible gouge marks, strong contrast, slightly rough edges.'],
+['Print','Linocut','Chunky cut shapes in two or three flat inks, small registration offsets.'],
+['Print','Etching','Delicate scratchy lines, soft plate tone, deep shadows built from hatching.'],
+['Print','Risograph','Two or three overprinted spot colors, grain, misregistration, flat shapes.'],
+['Print','Halftone newsprint','Dots of varying size in one ink, coarse screen, newspaper photograph feeling.'],
+['Print','Screenprint poster','Flat opaque layers, limited bright colors, crisp stencil edges.'],
+['Print','Ukiyo-e woodblock','Fine outlines, flat color gradients, indigo and vermilion, stylized waves and clouds.'],
+['Print','Lithograph','Soft crayon textures, rich blacks, tonal shading, poster-era warmth.'],
+['Print','Stipple','Tone built entirely from tiny dots, scientific-illustration precision.'],
+['Print','Letterpress ornament','Decorative rules, fleurons and simple pictorial cuts in one ink.'],
+['Print','Comic ink','Confident brush outlines, spot blacks, Ben-Day dot shading, flat color.'],
+['Drawing','Pen and ink','Clean contour lines with hatching for shade, no color.'],
+['Drawing','Pencil sketch','Light construction lines, soft graphite shading, unfinished edges.'],
+['Drawing','Charcoal','Broad smudged darks, lifted highlights, expressive rough marks.'],
+['Drawing','Ink wash','Brush strokes in diluted black, wet edges, large areas left empty.'],
+['Drawing','Single continuous line','The whole picture from one unbroken line of even weight.'],
+['Drawing','Cross-hatching','Volume from layers of crossing lines, dense in shadow, open in light.'],
+['Drawing','Chalk on blackboard','White and colored chalk lines on dark slate, dusty texture.'],
+['Drawing','Marker sketch','Quick confident marker lines with flat grey and one color accent.'],
+['Drawing','Silhouette','Solid black shapes against a plain ground, detail only in the outline.'],
+['Drawing','Architectural sketch','Loose ruled lines, perspective guides, scale figures, light wash.'],
+['Paint','Botanical watercolor','Transparent washes, precise edges, specimen on white, subtle color shifts.'],
+['Paint','Gouache storybook','Opaque matte colors, simple friendly shapes, visible brush texture.'],
+['Paint','Oil-painting impasto','Thick directional strokes, rich color, strong light and shadow.'],
+['Paint','Pointillism','Small dots of pure color that mix in the eye, shimmering light.'],
+['Paint','Cubist','Objects broken into angled planes seen from several sides, muted earth colors.'],
+['Paint','Fresco','Chalky pigments, soft cracks, large simple figures, faded warmth.'],
+['Paint','Folk art','Flat bright shapes, symmetrical flowers and animals, decorative borders.'],
+['Paint','Cave painting','Ochre and charcoal animals on rough rock, hand stencils, simple energy.'],
+['Paint','Medieval illumination','Flat jewel colors, gold leaf, patterned backgrounds, stylized figures.'],
+['Paint','Art Nouveau panel','Whiplash curves, flowers and hair as ornament, muted gold and green, framed panel.'],
+['Paint','Art Deco poster','Streamlined shapes, airbrushed gradients, strong perspective, metallic accents.'],
+['Paint','Mid-century illustration','Limited palette, offset textures, stylized geometric figures, cheerful.'],
+['Technical','Blueprint line drawing','White technical lines on blue, dimensions, section marks.'],
+['Technical','Patent figure','Even black outlines, numbered callouts, hatching for sections, no color.'],
+['Technical','Cutaway','The object opened to show its inside, layers labelled by leader lines.'],
+['Technical','Exploded view','Parts pulled apart along axes with dashed alignment lines.'],
+['Technical','Scientific diagram','Clean schematic shapes, arrows, consistent line weights, restrained color.'],
+['Technical','Cartographic map','Coastlines, relief hatching, rivers, a compass rose and scale bar.'],
+['Technical','Star chart','Dots sized by brightness, constellation lines, coordinate circles on dark blue.'],
+['Technical','Isometric','Everything on a 30-degree grid, clean faces in three tones, no perspective.'],
+['Technical','Anatomical plate','Layered structures, careful shading, numbered parts on pale paper.'],
+['Technical','Circuit schematic','Symbols, right-angle wires, labels, ordered left-to-right flow.'],
+['Graphic','Flat vector','Simple shapes, solid colors, no outlines, generous negative space.'],
+['Graphic','Paper cut-out','Layered paper shapes with soft drop shadows, slightly uneven scissor edges.'],
+['Graphic','Low-poly','Faceted triangles with flat shading, crystalline forms.'],
+['Graphic','Pixel art','Hard square pixels, a palette of at most sixteen colors, dithering.'],
+['Graphic','Bauhaus geometric','Circles, squares, triangles, primary colors and black on off-white.'],
+['Graphic','Constructivist','Red and black diagonals, wedges, circles, stencil forms.'],
+['Graphic','Stained glass','Jewel-colored panes separated by dark lead lines, glowing light.'],
+['Graphic','Mosaic','Small tiles following the forms, grout lines, shimmering variation.'],
+['Graphic','Neon sign','Glowing tube lines on a dark wall, soft halo, a few colors.'],
+['Graphic','Synthwave','Sunset gradient, grid floor, chrome, magenta and cyan glow.'],
+['Graphic','Heraldry','Shields, charges, mantling and mottos in flat tinctures with bold outlines.'],
+['Graphic','Tarot card','Framed symbolic scene, title banner, ornamental border, limited palette.'],
+['Graphic','Embroidery','Stitches as lines, thread texture, simple motifs on linen.'],
+['Graphic','Origami','Folded paper planes with crease lines and soft shading.'],
+['Graphic','Collage','Cut photographs and papers suggested by textured shapes, overlapping at odd angles.'],
+['Graphic','Minimal pictogram','A few perfect shapes on a grid, one weight, instantly readable.']
+];
+const INTER = {
+  none: ['Still page', 'None. A still page: nothing to operate. Careful typography and pictures carry it.'],
+  some: ['A few instruments', 'Some. One or two instruments, placed where operating the idea helps the reader most.'],
+  rich: ['Working instruments throughout', 'Rich. Several instruments across the page, each letting the reader operate the idea itself; some parts may run as animation. The page should feel alive under the hand.']
+};
+const ASPECTS = [['Wide', 1600, 900], ['Square', 1200, 1200], ['Tall', 1000, 1400]];
+const TYPES = {png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',gif:'image/gif',webp:'image/webp',svg:'image/svg+xml',
+  mp4:'video/mp4',m4v:'video/mp4',m4a:'video/mp4',webm:'video/webm',weba:'video/webm',pdf:'application/pdf',
+  csv:'text/csv',md:'text/markdown',json:'application/json',txt:'text/plain'};
+const AUDIO = {m4a:1,weba:1};
+
+/* ───────────── small helpers ───────────── */
+const $ = (s, r) => (r || document).querySelector(s);
+const el = (tag, attrs, ...kids) => {
+  const n = document.createElement(tag);
+  for (const k in (attrs || {})) {
+    const v = attrs[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') n.className = v; else if (k === 'text') n.textContent = v;
+    else if (k.slice(0, 2) === 'on') n.addEventListener(k.slice(2), v); else n.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat()) if (c != null && c !== false) n.append(c);
+  return n;
+};
+const rid = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => 'abcdefghijklmnopqrstuvwxyz0123456789'[b % 36]).join('');
+const bytes = s => new Blob([s]).size;
+const kb = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(n < 10240 ? 1 : 0) + ' kB' : (n / 1048576).toFixed(1) + ' MB';
+const dateOf = iso => { try { return new Date(iso).toLocaleDateString(undefined, {year: 'numeric', month: 'short', day: 'numeric'}); } catch (e) { return ''; } };
+const ago = iso => {
+  const s = (Date.now() - new Date(iso).getTime()) / 1000;
+  if (!(s >= 0) || s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s / 60) + ' min ago';
+  if (s < 86400) return Math.floor(s / 3600) + ' h ago';
+  if (s < 86400 * 7) return Math.floor(s / 86400) + ' d ago';
+  return dateOf(iso);
+};
+const hex = v => /^#[0-9a-f]{6}$/i.test(String(v || '').trim()) ? String(v).trim() : null;
+const MARK = () => { const d = document.createElement('div');
+  d.innerHTML = '<svg viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="8" fill="currentColor"/><text x="60" y="99" font-family="Playfair Display, Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="var(--paper)" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="var(--paper)"/></svg>';
+  return d.firstChild; };
+const sayErr = e => (e && (e.message || e.code)) || 'Something went wrong.';
+
+/* ───────────── platform capabilities (with a local stand-in for development) ───────────── */
+const DEV = !window.claude && (location.protocol === 'file:' || location.hostname === 'localhost');
+const cap = {db: null, sample: null, assets: null, user: null};
+const me = {id: null, canEdit: false, isOwner: false, canWrite: null};
+const names = {};
+const htmlCache = new Map();
+
+function devClaude() {
+  const docs = new Map(), subs = new Set(), blobs = new Map();
+  const snapDoc = p => ({id: p.split('/').pop(), exists: docs.has(p), data: () => docs.get(p), metadata: {fromCache: false, hasPendingWrites: false}});
+  const fire = () => subs.forEach(f => f());
+  const docRef = p => ({id: p.split('/').pop(), path: p,
+    get: async () => snapDoc(p), set: async d => { docs.set(p, JSON.parse(JSON.stringify(d))); fire(); },
+    update: async d => { docs.set(p, Object.assign({}, docs.get(p), JSON.parse(JSON.stringify(d)))); fire(); },
+    delete: async () => { docs.delete(p); fire(); },
+    onSnapshot: next => { const f = () => next(snapDoc(p)); subs.add(f); setTimeout(f, 30); return () => subs.delete(f); }});
+  const colRef = p => { const q = () => ({docs: [...docs.keys()].filter(k => k.startsWith(p + '/') && k.split('/').length === p.split('/').length + 1).sort().map(snapDoc)});
+    return {path: p, doc: id => docRef(p + '/' + (id || rid(10))), get: async () => q(),
+      onSnapshot: next => { const f = () => next(q()); subs.add(f); setTimeout(f, 30); return () => subs.delete(f); }}; };
+  const db = {doc: docRef, collection: colRef};
+  const assets = {upload: async (blob, o) => { const id = rid(32); blobs.set(id, blob); if ((o && o.type || blob.type).startsWith('text/')) htmlCache.set(id, await blob.text());
+    return {id, url: URL.createObjectURL(blob), sizeBytes: blob.size, contentType: (o && o.type) || blob.type}; }};
+  const user = {id: async () => 'dev-author', isOwner: async () => true, canEdit: async () => true, can: async () => true, profiles: async ids => Object.fromEntries(ids.map(i => [i, {name: 'Dev Author'}]))};
+  const sample = async (input, o) => {
+    const src = typeof input === 'string' ? input : input[0].content;
+    (window.__calls = window.__calls || []).push((o.model || o.modelTier) + '/' + (o.effort || '-'));
+    if (window.__fail > 0) { window.__fail--; throw {code: 'empty_completion', message: 'Claude returned no text for this prompt'}; }
+    await new Promise(r => setTimeout(r, 120));
+    const done = async text => { if (text.indexOf('<!DOCTYPE') === 0) for (let i = 1; i <= 8; i++) { await new Promise(r => setTimeout(r, window.__slow || 60)); o.onText && o.onText({text: text.slice(0, Math.ceil(text.length * i / 8)), delta: ''}); } else o.onText && o.onText({text, delta: text});
+      return {text, truncated: false, modelTierApplied: 'complex', modelApplied: o.model}; };
+    if (src.indexOf('You are an illustrator') === 0) return done('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#234"/><circle cx="800" cy="450" r="260" fill="#e9c46a"/></svg>');
+    if (src.indexOf('You are building one interactive instrument') === 0) { const id = src.match(/id: ([a-z0-9-]+)/)[1];
+      return done('<div class="instrument" data-instrument="' + id + '"><input type="range" value="40"><b>40</b></div><style>[data-instrument="' + id + '"]{padding:16px;border:1px solid #999;margin:16px 0}</style><script>(function(){const root=document.querySelector(\'[data-instrument="' + id + '"]\');root.querySelector("input").oninput=function(e){root.querySelector("b").textContent=e.target.value}})();<\/script>'); }
+    if (src.indexOf('EDIT FORMAT') > 0) return done('<<<<<<< FIND\n<p>Stand-in page.</p>\n=======\n<p>Stand-in page, revised.</p>\n>>>>>>> END');
+    const brief = src.split('BRIEF\n')[1] || 'Untitled', title = brief.split('\n')[0].slice(0, 60), two = src.indexOf('STEP 1 OF 2') > 0;
+    return done('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>' + title + '</title><meta name="description" content="A stand-in page composed locally."><meta name="compositor:paper" content="#F4F1E8"><meta name="compositor:ink" content="#1B1B1B"><meta name="compositor:accent" content="#B5391F"><style>body{margin:0;font-family:Georgia,serif;background:#F4F1E8;color:#1B1B1B;padding:48px 24px}h1{font-size:54px;margin:0 0 16px}main{max-width:680px;margin:auto}</style></head><body><main><h1>' + title + '</h1><p>Stand-in page.</p>' +
+      (src.indexOf('The ids are: ') > 0 ? '<pre>' + (src.split('IN READING ORDER\n')[1] || '').split('\n\nMATERIALS')[0].replace(/</g, '&lt;') + '</pre>' + src.split('The ids are: ')[1].split('.')[0].split(', ').map(i => '<div class="instrument" data-instrument="' + i + '"></div>').join('') :
+       src.indexOf('OWN WORDS') > 0 ? '<pre>' + (src.split('IN READING ORDER\n')[1] || '').split('\n\nMATERIALS')[0].replace(/</g, '&lt;') + '</pre>' :
+       two ? '<div class="instrument" data-instrument="tide-height" data-brief="Shows tide height; the reader drags the moon."></div><div class="instrument" data-instrument="two" data-brief="Second."></div>' : '') + '</main></body></html>');
+  };
+  sample.limits = async () => ({maxPromptBytes: 262144, images: {maxCount: 8, maxInputBytes: 2e7, mediaTypes: ['image/jpeg', 'image/png', 'image/webp', 'image/gif']}});
+  window.__dev = {docs, blobs, fire, text: htmlCache};
+  return {use: async n => ({db, assets, user, sample})[n] || null};
+}
+
+async function boot() {
+  const claude = window.claude || (DEV ? devClaude() : null);
+  if (!claude) { $('#app').replaceChildren(el('div', {class: 'wrap state', text: 'This publication opens inside Claude.'})); return; }
+  const [db, user, assets, sample] = await Promise.all(['db', 'user', 'assets', 'sample'].map(n => claude.use(n).catch(() => null)));
+  Object.assign(cap, {db, user, assets, sample});
+  if (user) {
+    const [id, ce, io, cw] = await Promise.all([user.id(), user.canEdit(), user.isOwner(), user.can('data.write')].map(p => Promise.resolve(p).catch(() => null)));
+    me.id = id || null; me.canEdit = !!ce; me.isOwner = !!io; me.canWrite = cw;
+  }
+  if (!db) { $('#app').replaceChildren(el('div', {class: 'wrap state', text: 'Sign in to Claude to read this publication.'})); return; }
+  subscribe();
+  addEventListener('hashchange', route);
+  addEventListener('message', onFrameMessage);
+  route();
+}
+
+/* ───────────── data ───────────── */
+const store = {posts: null, comments: [], loaded: false, slow: false};
+function subscribe() {
+  const timer = setTimeout(() => { if (!store.loaded) { store.slow = true; render(); } }, 10000);
+  cap.db.collection('posts').onSnapshot(snap => {
+    clearTimeout(timer); store.loaded = true; store.slow = false;
+    store.posts = snap.docs.map(d => Object.assign({id: d.id}, d.data())).sort((a, b) => String(b.publishedAt || b.createdAt).localeCompare(String(a.publishedAt || a.createdAt)));
+    onData('posts');
+  }, () => { clearTimeout(timer); store.loaded = true; store.posts = store.posts || []; onData('posts'); });
+  cap.db.doc('site/config').onSnapshot(d => { store.site = d.exists ? d.data() : null; if (view.name === 'home' && !(job && job.active) && !home.name) render(); }, () => {});
+  cap.db.collection('comments').onSnapshot(snap => {
+    const all = [];
+    for (const d of snap.docs) for (const it of ((d.data() || {}).items || [])) if (it && it.id && it.post) all.push({id: String(it.id), post: String(it.post), parent: it.parent ? String(it.parent) : null, text: String(it.text || ''), at: String(it.at || ''), by: d.id});
+    store.comments = all.sort((a, b) => a.at.localeCompare(b.at));
+    onData('comments');
+  }, () => {});
+}
+const visible = p => p && (p.status === 'published' || me.canEdit);
+const postById = id => (store.posts || []).find(p => p.id === id) || null;
+const curVersion = p => (p.versions || []).find(v => v.n === p.current) || (p.versions || [])[(p.versions || []).length - 1] || null;
+
+async function loadHtml(asset) {
+  if (htmlCache.has(asset)) return htmlCache.get(asset);
+  const r = await fetch('/_blob/' + asset);
+  if (!r.ok) throw new Error('The page file could not be loaded.');
+  const t = await r.text(); htmlCache.set(asset, t); return t;
+}
+async function resolveNames(ids) {
+  const need = [...new Set(ids)].filter(i => i && !(i in names));
+  if (!need.length || !cap.user || !cap.user.profiles) return;
+  try { const ps = await cap.user.profiles(need); for (const i of need) names[i] = (ps[i] && ps[i].name) || ''; } catch (e) { for (const i of need) names[i] = ''; }
+}
+
+/* ───────────── routing ───────────── */
+const view = {name: 'home', id: null};
+let job = null;            // a composition in progress
+let studioOpen = false;
+function route() {
+  const h = location.hash.replace(/^#/, '');
+  if (h === 'new' && me.canEdit) { view.name = 'new'; view.id = null; }
+  else if (h.slice(0, 2) === 'p-') { view.name = 'post'; view.id = h.slice(2); }
+  else { view.name = 'home'; view.id = null; }
+  studioOpen = false; shown.key = null;
+  render(); scrollTo(0, 0);
+}
+function onData(kind) {
+  if (job && job.active) return;                               // the press owns the screen
+  if (view.name === 'post') { if (kind === 'comments') renderThread(); else renderPost(false); }
+  else if (view.name === 'home') render();
+}
+function setTheme(t) {
+  const s = document.body.style;
+  s.setProperty('--paper', (t && hex(t.paper)) || '#EEEDE6'); s.setProperty('--ink', (t && hex(t.ink)) || '#15181D'); s.setProperty('--accent', (t && hex(t.accent)) || '#1D3BC4');
+}
+function render() {
+  if (job && job.active) return renderPress();
+  if (view.name === 'new') return renderCompose();
+  if (view.name === 'post') return renderPost(true);
+  renderHome();
+}
+function bar(...right) {
+  return el('header', {class: 'bar'}, el('a', {class: 'brand', href: '#', 'aria-label': 'Compositor, all posts'}, MARK(), el('span', {text: 'Compositor'})), el('span', {class: 'sp'}), el('div', {class: 'acts'}, right));
+}
+
+/* ───────────── home ───────────── */
+const HOME_THEMES = [
+['Newsprint','Paper','list','#EEEDE6','#15181D','#1D3BC4','Playfair Display','Source Serif 4','IBM Plex Mono',''],
+['Broadsheet','Paper','front','#F3F0E6','#141414','#9B1B1B','Old Standard TT','PT Serif','PT Mono','c'],
+['Evening Edition','Paper','front','#E9E4D4','#1E1A16','#1F4E46','Playfair Display','Lora','IBM Plex Mono','cu'],
+['Literary Review','Paper','columns','#F6F2EA','#2A2420','#7A2E2E','Cormorant Garamond','EB Garamond','EB Garamond','ci'],
+['Library Card','Paper','catalog','#F4EBD2','#2B2A26','#B33A2B','PT Mono','PT Mono','PT Mono',''],
+['Almanac','Paper','timeline','#F1E9D8','#2C2416','#8A5A1B','Vollkorn','Vollkorn','PT Mono',''],
+['Manuscript','Paper','list','#EFE3C8','#3A2A18','#8C1C13','Forum','Alegreya','Alegreya','c'],
+['Letterpress','Paper','stack','#EDE8DC','#1C1C1C','#C1272D','Yeseva One','PT Serif','PT Mono',''],
+['Field Notes','Paper','index','#EFE9DA','#2F3A2F','#B4532A','Bitter','Bitter','JetBrains Mono',''],
+['Quiet Gallery','Paper','list','#FFFFFF','#111111','#6B6B6B','Tenor Sans','Inter','Inter','l'],
+['Museum Label','Paper','grid','#F7F7F4','#222222','#8B6B3D','Jost','Jost','Jost','l'],
+['Monograph','Paper','sidebar','#FAF8F3','#1B1B1B','#3B5B7A','Spectral','Spectral','IBM Plex Mono',''],
+['Typewriter','Paper','index','#F2EFE6','#222222','#A61B1B','PT Mono','PT Mono','PT Mono',''],
+['Kraft','Paper','catalog','#C9A66B','#2B1D0E','#7B2D26','Kelly Slab','PT Mono','PT Mono','u'],
+['Swiss Grid','Modern','catalog','#FFFFFF','#0A0A0A','#E30613','Inter','Inter','Inter',''],
+['Signal Red','Modern','stack','#E30613','#FFFFFF','#0A0A0A','Inter','Inter','Inter','u'],
+['Bauhaus','Modern','tiles','#F2E9D8','#1A1A1A','#D62828','Jost','Jost','Jost','u'],
+['De Stijl','Modern','tiles','#FFFFFF','#111111','#1D4ED8','Montserrat','Montserrat','Montserrat','u'],
+['Constructivist','Modern','poster','#EDE4D0','#111111','#C8102E','Oswald','PT Sans','PT Mono','u'],
+['Brutal','Modern','catalog','#FFFFFF','#000000','#0000FF','Roboto Mono','Roboto Mono','Roboto Mono','ub'],
+['Soft Sans','Modern','grid','#F5F3EF','#26262B','#5B5BD6','Manrope','Manrope','Manrope','r'],
+['Studio','Modern','sidebar','#F2F2F2','#111111','#FF4F00','Unbounded','Golos Text','JetBrains Mono',''],
+['Big Type','Modern','stack','#F4F4F0','#0D0D0D','#3A3A3A','Unbounded','Inter','JetBrains Mono','u'],
+['Rounded','Modern','grid','#FFF8F0','#2B2140','#FF6B6B','Comfortaa','Rubik','Rubik','r'],
+['Geometric','Modern','index','#FAFAFA','#1F2937','#0EA5E9','Geologica','Geologica','JetBrains Mono',''],
+['Editorial Sans','Modern','front','#FFFFFF','#111111','#0B5FFF','Montserrat','PT Sans','PT Mono','c'],
+['Midnight Press','Dark','list','#0F1115','#E8E6DF','#E0B34A','Playfair Display','Source Serif 4','IBM Plex Mono',''],
+['Night Broadsheet','Dark','front','#121212','#EDEAE0','#D94F3D','Old Standard TT','PT Serif','PT Mono','c'],
+['Terminal Green','Dark','terminal','#06110A','#6CF58A','#B8FFC6','JetBrains Mono','JetBrains Mono','JetBrains Mono',''],
+['Amber CRT','Dark','terminal','#140C02','#FFB000','#FFD98A','Fira Code','Fira Code','Fira Code',''],
+['Blueprint','Dark','catalog','#0B3C8C','#EAF2FF','#FFD166','Kelly Slab','PT Mono','PT Mono','u'],
+['Observatory','Dark','timeline','#0B1026','#DDE3F5','#F2C14E','Cormorant Garamond','Literata','JetBrains Mono',''],
+['Cinema','Dark','poster','#0A0A0A','#F5F5F5','#E50914','Oswald','PT Sans','PT Mono','u'],
+['Neon','Dark','grid','#0D0221','#F6F1FF','#FF2A6D','Tektur','Exo 2','JetBrains Mono','r'],
+['Synthwave','Dark','stack','#1A1033','#FDE7FF','#05D9E8','Russo One','Exo 2','Roboto Mono','u'],
+['Charcoal','Dark','sidebar','#1C1C1E','#EDEDED','#9AE6B4','Manrope','Manrope','JetBrains Mono',''],
+['Deep Sea','Dark','columns','#072A38','#E6F4F1','#F4A261','Prata','Literata','PT Mono',''],
+['Ink Wash','Dark','index','#1A1A1A','#E9E4D8','#C8442D','Prata','PT Serif','PT Mono',''],
+['Art Deco','Colour','front','#0F2A3D','#F3E6C4','#D4AF37','Poiret One','Jost','Jost','cu'],
+['Art Nouveau','Colour','columns','#EEF0E1','#2F3B2A','#A8763E','Forum','Lora','Lora','c'],
+['Ukiyo','Colour','timeline','#F3EBDD','#1F2A44','#C8442D','Prata','PT Serif','PT Mono',''],
+['Terracotta','Colour','grid','#F2DFCF','#3B1F14','#B5482A','Yeseva One','Lora','PT Mono',''],
+['Mint','Colour','index','#E6F4EA','#123524','#0B7A53','Rubik','Rubik','Roboto Mono',''],
+['Lavender','Colour','list','#EFEAFB','#2A1F4D','#6D3FD9','Playfair Display','Golos Text','JetBrains Mono','i'],
+['Sunflower','Colour','tiles','#FFD23F','#1B1B1B','#D7263D','Unbounded','Rubik','Roboto Mono','u'],
+['Rose','Colour','stack','#FBE9EC','#3D0C1B','#C2185B','Cormorant Garamond','EB Garamond','PT Mono','i'],
+['Ocean','Colour','poster','#DCEEF6','#0B2545','#13678A','Montserrat','PT Sans','PT Mono','u'],
+['Olive Grove','Colour','sidebar','#E9E6D0','#2D3319','#7A8B2F','Vollkorn','Vollkorn','PT Mono',''],
+['Pixel','Playful','grid','#1B1F3B','#F8F8F2','#50FA7B','Press Start 2P','Pixelify Sans','Pixelify Sans','b'],
+['Zine','Playful','tiles','#FFFFFF','#111111','#FF3EA5','Rubik Mono One','PT Mono','PT Mono','u'],
+['Handwritten','Playful','list','#FBF7EC','#2B2B2B','#2A6FDB','Caveat','PT Serif','Caveat',''],
+['Comic','Playful','grid','#FFF6D6','#111111','#E63946','Dela Gothic One','Rubik','Rubik','br'],
+['Postcard','Playful','columns','#F7F1E3','#264653','#E76F51','Lobster','Alegreya','PT Mono','c'],
+['Chalkboard','Playful','timeline','#1F3A34','#F4F1DE','#F2CC8F','Caveat','Alegreya','Caveat',''],
+['Candy','Playful','poster','#FFE3F1','#33124A','#FF5DA2','Comfortaa','Rubik','Rubik',''],
+['Arcade','Playful','terminal','#000000','#FFFFFF','#FFEA00','Press Start 2P','Pixelify Sans','Pixelify Sans','']
+];
+const LAYOUT_NAMES = {list: 'List', front: 'Front page', grid: 'Cards', index: 'Index', stack: 'Big titles', timeline: 'Timeline', columns: 'Columns', terminal: 'Terminal', tiles: 'Tiles', catalog: 'Table', poster: 'Bands', sidebar: 'Side masthead'};
+const BUNDLED = {'Playfair Display': 1, 'Source Serif 4': 1, 'IBM Plex Mono': 1};
+const ONE_WEIGHT = {'Prata': 1, 'Yeseva One': 1, 'Tenor Sans': 1, 'Lobster': 1, 'Russo One': 1, 'Forum': 1, 'Kelly Slab': 1, 'Poiret One': 1, 'Press Start 2P': 1, 'Dela Gothic One': 1, 'Rubik Mono One': 1, 'PT Mono': 1};
+const MONOS = {'PT Mono': 1, 'Roboto Mono': 1, 'JetBrains Mono': 1, 'Fira Code': 1, 'IBM Plex Mono': 1, 'Press Start 2P': 1};
+const SERIFS = {'Playfair Display': 1, 'Source Serif 4': 1, 'Old Standard TT': 1, 'PT Serif': 1, 'Lora': 1, 'Cormorant Garamond': 1, 'EB Garamond': 1, 'Vollkorn': 1, 'Forum': 1, 'Alegreya': 1, 'Yeseva One': 1, 'Bitter': 1, 'Spectral': 1, 'Literata': 1, 'Prata': 1};
+const fontStack = f => '"' + f + '",' + (MONOS[f] ? 'ui-monospace,Menlo,Consolas,monospace' : SERIFS[f] ? 'Georgia,"Times New Roman",serif' : 'system-ui,-apple-system,"Segoe UI",Arial,sans-serif');
+const fontsAsked = {};
+function wantFont(f) {
+  if (BUNDLED[f] || fontsAsked[f]) return; fontsAsked[f] = 1;
+  const l = document.createElement('link'); l.rel = 'stylesheet';
+  l.href = 'https://fonts.googleapis.com/css2?family=' + f.replace(/ /g, '+') + (ONE_WEIGHT[f] ? '' : ':wght@400;700') + '&display=swap';
+  document.head.appendChild(l);
+}
+const home = {name: null, open: false, group: 'All'};
+const themeBy = n => HOME_THEMES.find(t => t[0] === n) || HOME_THEMES[0];
+function homeChoice() { let mine = null; try { mine = localStorage.getItem('compositor.home'); } catch (e) {} return themeBy(home.name || mine || (store.site && store.site.theme) || 'Newsprint'); }
+function dressHome(node, t) {
+  [t[6], t[7], t[8]].forEach(wantFont);
+  const b = document.body.style; b.setProperty('--paper', t[3]); b.setProperty('--ink', t[4]); b.setProperty('--accent', t[5]);
+  node.className = 'home lay-' + t[2] + ' ' + t[9].split('').map(f => 'f-' + f).join(' ');
+  node.style.setProperty('--display', fontStack(t[6])); node.style.setProperty('--body', fontStack(t[7])); node.style.setProperty('--meta', fontStack(t[8]));
+}
+function pickHome(name) { home.name = name; try { localStorage.setItem('compositor.home', name); } catch (e) {} renderHome(); }
+
+function renderHome() {
+  document.title = 'Compositor';
+  const app = $('#app'), t = homeChoice();
+  const posts = (store.posts || []).filter(visible);
+  const pub = posts.filter(p => p.status === 'published'), drafts = posts.filter(p => p.status !== 'published');
+  const all = drafts.concat(pub);
+  const item = (p, i) => el('li', {class: 'post'}, el('a', {href: '#p-' + p.id},
+    el('span', {class: 'num', text: String(all.length - i).padStart(2, '0')}), el('time', {class: 'when', text: dateOf(p.publishedAt || p.createdAt)}), el('h2', null, p.status !== 'published' ? el('span', {class: 'draft', text: 'Draft'}) : null, p.title || 'Untitled'),
+    p.summary ? el('p', {class: 'sum', text: p.summary}) : null));
+  /* style selector */
+  const idx = HOME_THEMES.indexOf(t), step = d => pickHome(HOME_THEMES[(idx + d + HOME_THEMES.length) % HOME_THEMES.length][0]);
+  const groups = ['All'].concat([...new Set(HOME_THEMES.map(x => x[1]))]);
+  const panel = home.open ? el('div', {class: 'sbpanel'},
+    el('div', {class: 'chips'}, groups.map(g => el('button', {class: 'chip' + (home.group === g ? ' on' : ''), type: 'button', 'aria-pressed': String(home.group === g), text: g, onclick: () => { home.group = g; renderHome(); }}))),
+    el('div', {class: 'tiles', role: 'listbox', 'aria-label': 'Styles for this page'}, HOME_THEMES.filter(x => home.group === 'All' || x[1] === home.group).map(x =>
+      el('button', {class: 'tile' + (x === t ? ' on' : ''), type: 'button', role: 'option', 'aria-selected': String(x === t), style: '--p:' + x[3] + ';--i:' + x[4] + ';--a:' + x[5], onclick: () => pickHome(x[0])}, x[0], el('small', {text: LAYOUT_NAMES[x[2]]})))),
+    me.isOwner ? el('div', {class: 'line'}, el('button', {class: 'sb', type: 'button', text: (store.site && store.site.theme) === t[0] ? 'This is the default for readers' : 'Make this the default for readers',
+      onclick: async () => { try { await cap.db.doc('site/config').set({theme: t[0]}); store.site = {theme: t[0]}; } catch (err) {} home.open = false; renderHome(); }})) : null) : null;
+  const sb = el('div', {class: 'stylebar'},
+    el('button', {class: 'sb step', type: 'button', 'aria-label': 'Previous style', text: '‹', onclick: () => step(-1)}),
+    el('button', {class: 'sb', type: 'button', 'aria-expanded': String(home.open), onclick: () => { home.open = !home.open; renderHome(); }}, 'Style · ', el('b', {text: t[0]})),
+    el('button', {class: 'sb step', type: 'button', 'aria-label': 'Next style', text: '›', onclick: () => step(1)}));
+  const mast = el('header', {class: 'mast'}, el('div', {class: 'lock'}, MARK(), el('h1', {text: 'Compositor'})), el('p', {text: 'Every idea gets a page of its own, set for it and alive under the hand.'}));
+  const head = el('div', {class: 'rowhead'}, el('span', {class: 'meta', text: !store.loaded ? (store.slow ? 'The posts cannot be reached yet' : 'Opening') : pub.length + (pub.length === 1 ? ' post' : ' posts')}),
+    me.canEdit && cap.sample && cap.assets ? el('a', {class: 'btn solid', href: '#new', text: 'New post'}) : null);
+  const list = all.length ? el('ol', {class: 'posts'}, all.map(item)) : (store.loaded ? el('p', {class: 'empty', text: 'Nothing has been published yet.'}) : null);
+  const foot = el('p', {class: 'foot', text: 'Pages composed by Claude'});
+  const keep = scrollY, tilesAt = app.querySelector('.tiles') ? app.querySelector('.tiles').scrollTop : 0;
+  const node = el('div', {class: 'home'}, el('div', {class: 'hw'}, sb, panel),
+    t[2] === 'sidebar' ? el('div', {class: 'hw body'}, el('div', {class: 'cols'}, mast, el('div', null, head, list, foot)))
+                       : el('div', {class: 'hw body'}, el('div', {class: 'hw', style: 'padding:0'}, mast, head), list, foot));
+  dressHome(node, t);
+  app.replaceChildren(node);
+  if (home.open) { const tl = node.querySelector('.tiles'); if (tl) tl.scrollTop = tilesAt; scrollTo(0, keep); }
+}
+
+/* ───────────── compose ───────────── */
+const draft = {plain: false, editing: null, kind: 'ai', title: '', blocks: [{id: 'k1', type: 'text', text: ''}], seq: 1, brief: '', look: '', links: [], files: [], style: null, inter: 'none', interNote: '', picStyle: null, selfDraw: false};
+const KINDS = {ai: ['Written for me', 'You give the subject and materials; the text, the design and the page are made for you.'],
+  page: ['A ready page', 'A finished HTML page you made elsewhere becomes the post exactly as it is. Nothing is rewritten and Claude is not asked. The page must carry everything it needs inside one file.'],
+  own: ['My own words', 'You write the text. It is set word for word; the design, the layout and the placing of your materials are done for you. Between your paragraphs you can order an instrument, an animation, a picture or a passage of text.']};
+const BLOCKS = {text: ['My text', 'Write here. # heading, **bold**, > quote and - lists are honoured.'], inst: ['Instrument', 'What should the reader operate here, and what should it show?'],
+  anim: ['Animation', 'What should move here, and what should it show?'], draw: ['Picture to draw', 'Describe the picture. It is drawn in the picture style chosen below.'],
+  write: ['Text to write', 'What should be written here for you? Give the point and the length.'], file: ['File', 'Caption (optional)'], page: ['Ready page', 'Caption (optional)'], embed: ['Video or post', ''], link: ['Link', 'What this link is (optional)']};
+const pageCheck = file => { const ext = (file.name.split('.').pop() || '').toLowerCase(); return {ext, bad: ext !== 'html' && ext !== 'htm' ? 'Choose an .html file' : file.size > 20 * 1048576 ? 'Over 20 MB' : ''}; };
+const fileCheck = file => { const ext = (file.name.split('.').pop() || '').toLowerCase();
+  return {ext, bad: !TYPES[ext] ? 'This file type cannot be stored' : file.size > 20 * 1048576 ? 'Over 20 MB' : ext === 'svg' && file.size > 2 * 1048576 ? 'Over 2 MB' : ''}; };
+
+function parseEmbed(t) {
+  t = String(t || '').trim(); if (!/^https?:\/\/\S+$/i.test(t)) return null;
+  let m = t.match(/^https?:\/\/(?:www\.|m\.)?youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|live\/|embed\/)([\w-]{6,})/i) || t.match(/^https?:\/\/youtu\.be\/([\w-]{6,})/i);
+  if (m) return {p: 'youtube', key: m[1], url: t};
+  m = t.match(/^https?:\/\/(?:www\.|mobile\.)?(?:twitter|x)\.com\/([A-Za-z0-9_]{1,15})\/status\/(\d+)/i);
+  if (m) return {p: 'x', key: m[1], url: t};
+  return null;
+}
+const embedName = em => !em ? 'Paste the address of a YouTube video or a post on X' : em.p === 'youtube' ? 'YouTube video' : 'Post on X by @' + em.key;
+function caretXY(ta, pos) {
+  const m = document.createElement('div'), cs = getComputedStyle(ta);
+  ['fontFamily', 'fontSize', 'fontWeight', 'fontStyle', 'letterSpacing', 'lineHeight', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderTopWidth', 'borderRightWidth', 'borderBottomWidth', 'borderLeftWidth', 'boxSizing', 'wordSpacing', 'tabSize', 'textIndent'].forEach(k => { m.style[k] = cs[k]; });
+  Object.assign(m.style, {position: 'absolute', visibility: 'hidden', left: '-9999px', top: '0', whiteSpace: 'pre-wrap', overflowWrap: 'break-word', width: ta.offsetWidth + 'px', borderStyle: 'solid'});
+  m.textContent = ta.value.slice(0, pos); const sp = document.createElement('span'); sp.textContent = ta.value.slice(pos) || '.'; m.appendChild(sp); document.body.appendChild(m);
+  const r = {x: sp.offsetLeft, y: sp.offsetTop - ta.scrollTop, h: parseFloat(cs.lineHeight) || 24}; m.remove(); return r;
+}
+function setText(ta, value, a, b) { ta.value = value; ta.setSelectionRange(a, b); ta.dispatchEvent(new Event('input', {bubbles: true})); ta.focus(); }
+function mdWrap(ta, mark) {
+  const v = ta.value, a = ta.selectionStart, b = ta.selectionEnd, n = mark.length; if (a === b) return;
+  if (v.slice(a - n, a) === mark && v.slice(b, b + n) === mark) setText(ta, v.slice(0, a - n) + v.slice(a, b) + v.slice(b + n), a - n, b - n);
+  else if (v.slice(a, a + n) === mark && v.slice(b - n, b) === mark && b - a >= 2 * n) setText(ta, v.slice(0, a) + v.slice(a + n, b - n) + v.slice(b), a, b - 2 * n);
+  else setText(ta, v.slice(0, a) + mark + v.slice(a, b) + mark + v.slice(b), a + n, b + n);
+}
+function mdLine(ta, prefix) {
+  const v = ta.value, a = ta.selectionStart, ls = v.lastIndexOf('\n', a - 1) + 1; let le = v.indexOf('\n', a); if (le < 0) le = v.length;
+  const line = v.slice(ls, le), had = (line.match(/^#+\s+/) || [''])[0], bare = line.slice(had.length), next = had === prefix ? bare : prefix + bare;
+  setText(ta, v.slice(0, ls) + next + v.slice(le), ls + (next.length - bare.length), ls + next.length);
+}
+function mdLink(ta, a, b, url) { const v = ta.value, t = v.slice(a, b); setText(ta, v.slice(0, a) + '[' + t + '](' + url + ')' + v.slice(b), a + 1, a + 1 + t.length); }
+/* the menu that appears over a selection in a text block */
+function selectionMenu(ta, wrap) {
+  const bar = el('div', {class: 'selmenu', hidden: true, role: 'toolbar', 'aria-label': 'Mark up the selected text'});
+  let linking = null;
+  const btn = (label, title, cls, fn) => el('button', {type: 'button', class: cls || '', title, 'aria-label': title, onmousedown: e => e.preventDefault(), onclick: fn}, label);
+  const tools = () => { linking = null; bar.replaceChildren(btn('B', 'Bold', 'b', () => mdWrap(ta, '**')), btn('I', 'Italic', 'i', () => mdWrap(ta, '*')),
+    btn('Heading', 'Heading', '', () => mdLine(ta, '# ')), btn('Subheading', 'Subheading', '', () => mdLine(ta, '## ')),
+    btn('Link', 'Make the selection a link', '', () => { linking = [ta.selectionStart, ta.selectionEnd]; ask(); })); };
+  const ask = () => { const inp = el('input', {type: 'url', placeholder: 'https://', 'aria-label': 'Address of the link'});
+    const ok = () => { const u = inp.value.trim(), r = linking; tools(); if (/^https?:\/\/\S+$/i.test(u) && r) mdLink(ta, r[0], r[1], u); else ta.focus(); };
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ok(); } if (e.key === 'Escape') { tools(); ta.focus(); } });
+    inp.addEventListener('blur', () => setTimeout(() => { if (linking && document.activeElement !== inp) { tools(); place(); } }, 150));
+    bar.replaceChildren(inp, btn('Add', 'Add the link', '', ok)); inp.focus(); };
+  const place = () => {
+    if (linking) return;
+    if (document.activeElement !== ta || ta.selectionStart === ta.selectionEnd) { bar.hidden = true; return; }
+    bar.hidden = false;
+    const c = caretXY(ta, ta.selectionStart), w = bar.offsetWidth || 300, h = bar.offsetHeight || 36;
+    let top = ta.offsetTop + c.y - h - 8; if (top < -h - 4 || c.y < 0) top = ta.offsetTop + Math.max(c.y, 0) + c.h + 8;
+    bar.style.top = top + 'px'; bar.style.left = clamp(ta.offsetLeft + c.x - 24, 0, Math.max(0, wrap.offsetWidth - w)) + 'px';
+  };
+  ['select', 'keyup', 'mouseup', 'focus', 'scroll', 'input'].forEach(ev => ta.addEventListener(ev, () => setTimeout(place, 0)));
+  ta.addEventListener('blur', () => setTimeout(place, 120));
+  tools(); return bar;
+}
+const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+
+function blockEditor() {
+  const host = el('div', {class: 'blocks'});
+  const draw = () => host.replaceChildren(...draft.blocks.map(row).map((n, i) => { const t = draft.blocks[i].type; if (draft.plain && t !== 'text' && t !== 'file' && t !== 'embed') n.hidden = true; return n; }), adder());
+  const moveTo = (from, to) => { if (to < 0 || to >= draft.blocks.length || to === from) return; const x = draft.blocks.splice(from, 1)[0]; draft.blocks.splice(to, 0, x); draw(); const g = host.children[to] && host.children[to].querySelector('.grip'); g && g.focus(); };
+  const row = (b, i) => {
+    const grip = el('button', {class: 'grip', type: 'button', 'aria-label': 'Move this block', text: '⋮⋮'});
+    grip.addEventListener('keydown', e => { if (e.key === 'ArrowUp') { e.preventDefault(); moveTo(i, i - 1); } if (e.key === 'ArrowDown') { e.preventDefault(); moveTo(i, i + 1); } });
+    let body;
+    if (b.type === 'file' || b.type === 'page') {
+      const inp = el('input', {type: 'file', hidden: true, accept: b.type === 'page' ? '.html,.htm,text/html' : null, onchange: e => { const f = e.target.files[0]; if (f) { Object.assign(b, {file: f, asset: null}, b.type === 'page' ? pageCheck(f) : fileCheck(f)); draw(); } }});
+      const capt = el('input', {type: 'text', placeholder: BLOCKS.file[1], 'aria-label': 'Caption'}); capt.value = b.text || ''; capt.addEventListener('input', () => { b.text = capt.value; });
+      body = el('div', {class: 'bstack'}, el('div', {class: 'line'}, el('button', {class: 'btn quiet', type: 'button', text: b.file || b.asset ? 'Change file' : b.type === 'page' ? 'Choose an HTML file' : 'Choose file', onclick: () => inp.click()}), inp,
+        el('span', {class: 's' + (b.bad ? ' bad' : ''), text: b.file ? (b.bad || b.file.name + ' · ' + kb(b.file.size)) : b.asset ? b.asset.name : ''})), capt);
+    } else if (b.type === 'embed') {
+      const u = el('input', {type: 'url', placeholder: 'https://', 'aria-label': 'Address of the video or post'}); u.value = b.url || '';
+      const what = el('span', {class: 's', text: embedName(parseEmbed(b.url))});
+      const n = el('input', {type: 'text', 'aria-label': 'Title or words'}); n.value = b.text || '';
+      const hint = () => { const em = parseEmbed(b.url); n.placeholder = em && em.p === 'x' ? 'The words of the post, if you want them shown' : 'The title of the video, if you want one shown'; what.textContent = embedName(em); };
+      u.addEventListener('input', () => { b.url = u.value; hint(); }); n.addEventListener('input', () => { b.text = n.value; }); hint();
+      body = el('div', {class: 'bstack'}, what, u, n);
+    } else if (b.type === 'link') {
+      const u = el('input', {type: 'url', placeholder: 'https://', 'aria-label': 'Link address'}); u.value = b.url || ''; u.addEventListener('input', () => { b.url = u.value; });
+      const n = el('input', {type: 'text', placeholder: BLOCKS.link[1], 'aria-label': 'Note on the link'}); n.value = b.text || ''; n.addEventListener('input', () => { b.text = n.value; });
+      body = el('div', {class: 'bstack'}, u, n);
+    } else {
+      const ta = el('textarea', {rows: b.type === 'text' ? '6' : '2', placeholder: BLOCKS[b.type][1], 'aria-label': BLOCKS[b.type][0]}); ta.value = b.text || '';
+      ta.addEventListener('input', () => { b.text = ta.value; });
+      if (b.type === 'text') {
+        ta.addEventListener('paste', e => {
+          const t = ((e.clipboardData && e.clipboardData.getData('text')) || '').trim(), em = parseEmbed(t);
+          if (em) {                                                    // a video or a post: it becomes its own block, splitting the text here
+            e.preventDefault();
+            const before = ta.value.slice(0, ta.selectionStart).replace(/\s+$/, ''), after = ta.value.slice(ta.selectionEnd).replace(/^\s+/, '');
+            const add = [{id: 'k' + (++draft.seq), type: 'embed', url: em.url, text: ''}, {id: 'k' + (++draft.seq), type: 'text', text: after}];
+            if (before) { b.text = before; draft.blocks.splice(i + 1, 0, ...add); } else draft.blocks.splice(i, 1, ...add);
+            draw(); const at = host.querySelectorAll('.block')[before ? i + 1 : i]; const f = at && at.querySelector('input[type=text]'); f && f.focus();
+          } else if (/^https?:\/\/\S+$/i.test(t) && ta.selectionStart !== ta.selectionEnd) { e.preventDefault(); mdLink(ta, ta.selectionStart, ta.selectionEnd, t); }
+        });
+        const wrap = el('div', {class: 'tawrap'}, ta); wrap.append(selectionMenu(ta, wrap)); body = wrap;
+      } else body = ta;
+    }
+    const node = el('div', {class: 'block' + (b.type === 'text' ? '' : ' order'), 'data-type': b.type}, grip, el('div', {class: 'bb'}, el('span', {class: 'lbl', text: BLOCKS[b.type][0]}), body),
+      el('button', {class: 'link', type: 'button', text: 'Remove', onclick: () => { draft.blocks.splice(i, 1); draw(); }}));
+    /* drag the grip to reorder */
+    grip.addEventListener('pointerdown', e => {
+      if (e.button) return; e.preventDefault(); grip.setPointerCapture(e.pointerId); node.classList.add('lift');
+      let at = i;
+      const onMove = ev => { const sibs = [...host.querySelectorAll('.block')]; let to = sibs.length - 1;
+        for (let k = 0; k < sibs.length; k++) { const r = sibs[k].getBoundingClientRect(); if (ev.clientY < r.top + r.height / 2) { to = k; break; } }
+        const cur = sibs.indexOf(node); if (to !== cur) { host.insertBefore(node, to > cur ? sibs[to].nextSibling : sibs[to]); } at = [...host.querySelectorAll('.block')].indexOf(node); };
+      const onUp = () => { grip.removeEventListener('pointermove', onMove); grip.removeEventListener('pointerup', onUp); grip.removeEventListener('pointercancel', onUp); node.classList.remove('lift');
+        if (at !== i) { const x = draft.blocks.splice(i, 1)[0]; draft.blocks.splice(at, 0, x); } draw(); };
+      grip.addEventListener('pointermove', onMove); grip.addEventListener('pointerup', onUp); grip.addEventListener('pointercancel', onUp);
+    });
+    return node;
+  };
+  const adder = () => el('div', {class: 'chips adder'}, Object.keys(BLOCKS).filter(t => !draft.plain || t === 'text' || t === 'file' || t === 'embed').map(t => el('button', {class: 'chip', type: 'button', text: '+ ' + (draft.plain && t === 'file' ? 'Picture' : BLOCKS[t][0]),
+    onclick: () => { draft.blocks.push({id: 'k' + (++draft.seq), type: t, text: ''}); draw(); const last = host.querySelectorAll('.block'); const f = last[last.length - 1].querySelector('textarea,input[type=url],.btn'); f && f.focus(); }})));
+  draw();
+  return host;
+}
+
+const styleOf = (list, name) => list.find(i => i[1] === name) || null;
+const slug = t => String(t).toLowerCase().replace(/[^a-z0-9Ѐ-ӿ]+/gi, '-').replace(/^-|-$/g, '').slice(0, 28) || 'picture';
+
+function stylePicker(items, get, set, label) {
+  const groups = ['All'].concat([...new Set(items.map(i => i[0]))]);
+  let g = 'All', q = '';
+  const grid = el('div', {class: 'grid', role: 'listbox', 'aria-label': label});
+  const desc = el('p', {class: 'note pickdesc'});
+  const tabs = el('div', {class: 'chips'});
+  const search = el('input', {type: 'text', placeholder: 'Search ' + items.length + ' styles', 'aria-label': 'Search ' + label});
+  const showSel = () => { const s = styleOf(items, get()); desc.textContent = s ? s[1] + '. ' + s[2] : 'No style chosen.'; };
+  const draw = () => {
+    tabs.replaceChildren(...groups.map(x => el('button', {class: 'chip' + (x === g ? ' on' : ''), type: 'button', text: x, 'aria-pressed': String(x === g), onclick: () => { g = x; draw(); }})));
+    const ql = q.trim().toLowerCase();
+    const list = items.filter(i => (g === 'All' || i[0] === g) && (!ql || (i[1] + ' ' + i[2]).toLowerCase().includes(ql)));
+    grid.replaceChildren(...list.map(i => el('button', {class: 'chip' + (get() === i[1] ? ' on' : ''), type: 'button', role: 'option', 'aria-selected': String(get() === i[1]), text: i[1],
+      onclick: () => { set(get() === i[1] ? null : i[1]); draw(); }, onmouseenter: () => { desc.textContent = i[1] + '. ' + i[2]; }, onmouseleave: showSel, onfocus: () => { desc.textContent = i[1] + '. ' + i[2]; }, onblur: showSel})));
+    if (!list.length) grid.append(el('span', {class: 'note', text: 'No style matches.'}));
+    showSel();
+  };
+  search.addEventListener('input', () => { q = search.value; draw(); });
+  draw();
+  return el('div', {class: 'picker'}, search, tabs, grid, desc);
+}
+
+/* pictures drawn by Claude as standalone SVG, in a chosen style */
+function picPrompt(subject, st, a) {
+  return 'You are an illustrator. Draw ONE picture as a single standalone SVG and reply with only the SVG, starting with <svg and ending with </svg>. No Markdown, no commentary.\n\n' +
+    'SUBJECT\n' + subject + '\n\nSTYLE\n' + (st ? st[1] + '. ' + st[2] : 'Choose the style that suits the subject and keep to it strictly.') +
+    '\n\nREQUIREMENTS\n- Root element: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + a[1] + ' ' + a[2] + '">. No width or height attributes.\n' +
+    '- The picture fills the whole frame and includes its background.\n- Careful and detailed: build forms from many considered shapes and lines, with light, shade and texture rendered the way the style renders them. Never crude, never a diagram unless the style is one.\n' +
+    '- Use presentation attributes only. No <style>, no <script>, no <foreignObject>, no animation, no external references or embedded images. Gradients, patterns, clip paths, masks and filters defined in <defs> are welcome.\n' +
+    '- No lettering unless the subject asks for it.';
+}
+function extractSvg(text) {
+  const t = String(text || ''), a = t.indexOf('<svg'), b = t.lastIndexOf('</svg>');
+  if (a < 0 || b < a) return null;
+  const svg = t.slice(a, b + 6);
+  try { const d = new DOMParser().parseFromString(svg, 'image/svg+xml'); if (d.querySelector('parsererror') || d.documentElement.nodeName !== 'svg') return null; } catch (e) { return null; }
+  return svg;
+}
+function rasterize(url, a) {
+  return new Promise((ok, no) => { const im = new Image();
+    im.onload = () => { try { const c = document.createElement('canvas'); c.width = 1024; c.height = Math.round(1024 * a[2] / a[1]); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); c.toBlob(b => b ? ok(b) : no(), 'image/png'); } catch (e) { no(e); } };
+    im.onerror = no; im.src = url; });
+}
+function pictureMaker(getStyle, onAdd) {
+  let asp = 0, ctl = null, n = 0;
+  const ta = el('textarea', {rows: '2', placeholder: 'Describe a picture: a lighthouse in a storm, a cutaway of a beehive, a portrait of a tired clockmaker.', 'aria-label': 'Describe a picture'});
+  const note = el('span', {class: 'note'});
+  const shelf = el('div', {class: 'pics'});
+  const aspChips = el('div', {class: 'chips'});
+  const drawAsp = () => aspChips.replaceChildren(...ASPECTS.map((a, i) => el('button', {class: 'chip' + (i === asp ? ' on' : ''), type: 'button', text: a[0], 'aria-pressed': String(i === asp), onclick: () => { asp = i; drawAsp(); }})));
+  const addCard = p => { const card = el('figure', {class: 'pic'}, el('img', {src: p.url, alt: p.desc}), el('figcaption', null, el('span', {class: 'n', text: p.desc}), el('span', {class: 'line'},
+    el('button', {class: 'link', type: 'button', text: 'Use in the post', onclick: async e => { const b = e.currentTarget; b.disabled = true; try { await onAdd(p); card.remove(); } catch (err) { b.disabled = false; note.textContent = sayErr(err); note.className = 'note bad'; } }}),
+    el('button', {class: 'link', type: 'button', text: 'Discard', onclick: () => card.remove()})))); shelf.prepend(card); };
+  const btn = el('button', {class: 'btn', type: 'button', text: 'Draw', onclick: async () => {
+    if (ctl) { stopJob(ctl); return; }
+    const subject = ta.value.trim(); if (!subject) { ta.focus(); return; }
+    const st = getStyle(), a = ASPECTS[asp], t0 = Date.now();
+    ctl = {text: '', phase: '', ctls: new Set(), stopped: false}; btn.textContent = 'Stop'; note.className = 'note'; note.textContent = 'Drawing 0 s';
+    const tick = setInterval(() => { note.textContent = 'Drawing ' + Math.floor((Date.now() - t0) / 1000) + ' s'; }, 1000);
+    try {
+      const svg = (await askSafe(picPrompt(subject, st, a), {j: ctl, show: false, label: 'Drawing', accept: extractSvg})).val;
+      const file = new File([svg], 'picture-' + (++n) + '-' + slug(subject) + '.svg', {type: 'image/svg+xml'});
+      const url = URL.createObjectURL(file), png = await rasterize(url, a).catch(() => null);
+      addCard({file, url, png, desc: subject + (st ? ', ' + st[1].toLowerCase() : '')});
+      clearInterval(tick); note.textContent = '';
+    } catch (e) { clearInterval(tick); note.textContent = (e && SAMPLE_COPY[e.code]) || 'This drawing did not come out. Draw again, or describe it more simply.'; note.className = 'note'; }
+    ctl = null; btn.textContent = 'Draw';
+  }});
+  drawAsp();
+  return el('div', {class: 'maker'}, ta, el('div', {class: 'line'}, aspChips, btn, note), shelf);
+}
+
+function renderCompose() {
+  setTheme(null); document.title = 'New post · Compositor';
+  const filesUl = el('ul', {class: 'files'});
+  const linksUl = el('ul', {class: 'files'});
+  const note = el('p', {class: 'note'});
+  const drawFiles = () => filesUl.replaceChildren(...draft.files.map((f, i) => el('li', null, el('span', {class: 'n', text: f.file.name}),
+    el('span', {class: 's' + (f.bad ? ' bad' : ''), text: f.bad || (f.drawn ? 'Drawn · ' : '') + kb(f.file.size)}), el('button', {class: 'link', type: 'button', text: 'Remove', onclick: () => { draft.files.splice(i, 1); drawFiles(); }}))));
+  const drawLinks = () => linksUl.replaceChildren(...draft.links.map((u, i) => el('li', null, el('span', {class: 'n', text: u}), el('span', {class: 's'}),
+    el('button', {class: 'link', type: 'button', text: 'Remove', onclick: () => { draft.links.splice(i, 1); drawLinks(); }}))));
+  const addFiles = list => { for (const file of list) draft.files.push(Object.assign({file}, fileCheck(file))); drawFiles(); };
+  const pick = el('input', {type: 'file', multiple: true, hidden: true, id: 'pick', onchange: e => { addFiles(e.target.files); e.target.value = ''; }});
+  const drop = el('div', {class: 'drop', role: 'button', tabindex: '0', text: 'Drop images, video, PDF or text here, or choose files',
+    onclick: () => pick.click(), onkeydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick.click(); } },
+    ondragover: e => { e.preventDefault(); drop.classList.add('over'); }, ondragleave: () => drop.classList.remove('over'),
+    ondrop: e => { e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); }});
+  const brief = el('textarea', {class: 'big', id: 'brief', placeholder: 'What is this post about? Notes, an outline, a finished text, a rough idea: anything you have.'}); brief.value = draft.brief;
+  brief.addEventListener('input', () => { draft.brief = brief.value; });
+  const look = el('textarea', {id: 'look', rows: '3', placeholder: 'Anything to add in your own words: colors, mood, what must come first, what to avoid.'}); look.value = draft.look;
+  look.addEventListener('input', () => { draft.look = look.value; });
+  const link = el('input', {type: 'url', id: 'link', placeholder: 'https://'});
+  const addLink = () => { const u = link.value.trim(); if (/^https?:\/\/\S+$/i.test(u) && !draft.links.includes(u)) { draft.links.push(u); link.value = ''; drawLinks(); } };
+  link.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addLink(); } });
+  const interChips = el('div', {class: 'chips'}), interDesc = el('p', {class: 'note pickdesc'});
+  const drawInter = () => { interChips.replaceChildren(...Object.keys(INTER).map(k => el('button', {class: 'chip' + (draft.inter === k ? ' on' : ''), type: 'button', 'aria-pressed': String(draft.inter === k), text: INTER[k][0], onclick: () => { draft.inter = k; drawInter(); }})));
+    interDesc.textContent = INTER[draft.inter][1].replace(/^\w+\. /, ''); };
+  const interNote = el('textarea', {id: 'internote', rows: '2', placeholder: 'What should the reader be able to operate? Leave empty to let the page decide.'}); interNote.value = draft.interNote;
+  interNote.addEventListener('input', () => { draft.interNote = interNote.value; });
+  const self = el('button', {class: 'chip' + (draft.selfDraw ? ' on' : ''), type: 'button', 'aria-pressed': String(draft.selfDraw), text: 'Let the page draw its own illustrations in this style',
+    onclick: () => { draft.selfDraw = !draft.selfDraw; self.classList.toggle('on', draft.selfDraw); self.setAttribute('aria-pressed', String(draft.selfDraw)); }});
+  const own = draft.kind === 'own', ready = draft.kind === 'page', plain = own && draft.plain;
+  const kindDesc = el('p', {class: 'note pickdesc', text: draft.kind === 'own' && draft.plain ? 'Your text is set as it is, in one good typeface on a white sheet. Your own marks are honoured: # heading, ## subheading, **bold**, *italic*, and pictures between the blocks. No design is added and Claude is not asked.' : KINDS[draft.kind][1]});
+  const kindChips = el('div', {class: 'chips'}, Object.keys(KINDS).map(k => el('button', {class: 'chip' + (draft.kind === k ? ' on' : ''), type: 'button', 'aria-pressed': String(draft.kind === k), text: KINDS[k][0],
+    onclick: () => { if (draft.kind !== k && !draft.editing) { draft.kind = k; renderCompose(); } }})));
+  const plainSw = el('button', {class: 'chip' + (draft.plain ? ' on' : ''), type: 'button', 'aria-pressed': String(draft.plain), text: 'Without style: plain text on a white sheet', onclick: () => { if (!draft.editing) { draft.plain = !draft.plain; renderCompose(); } }});
+  const ptitle = el('input', {type: 'text', id: 'ptitle', placeholder: 'The title of the post'}); ptitle.value = draft.title; ptitle.addEventListener('input', () => { draft.title = ptitle.value; });
+  const readyPick = el('input', {type: 'file', hidden: true, accept: '.html,.htm,text/html', onchange: e => { const f = e.target.files[0]; if (f) { draft.ready = Object.assign({file: f}, pageCheck(f)); renderCompose(); } }});
+  const readyRow = el('div', {class: 'line'}, el('button', {class: 'btn quiet', type: 'button', text: draft.ready ? 'Change file' : 'Choose an HTML file', onclick: () => readyPick.click()}), readyPick,
+    el('span', {class: 'note' + (draft.ready && draft.ready.bad ? ' bad' : ''), text: draft.ready ? (draft.ready.bad || draft.ready.file.name + ' · ' + kb(draft.ready.file.size)) : ''}));
+  const go = el('button', {class: 'btn solid', type: 'button', text: ready ? 'Make it a post' : plain ? (draft.editing ? 'Save the text' : 'Set the text') : 'Compose the page', onclick: () => {
+    if (draft.kind === 'page') { if (!draft.ready || draft.ready.bad) { note.textContent = 'Choose the HTML file first.'; note.className = 'note bad'; return; } importPage(note, go); return; }
+    if (draft.kind === 'ai' && !draft.brief.trim()) { note.textContent = 'Say what the post is about first.'; note.className = 'note bad'; brief.focus(); return; }
+    if (draft.kind === 'own' && !draft.blocks.some(b => b.type === 'text' && (b.text || '').trim())) { note.textContent = 'Write at least one block of your own text first.'; note.className = 'note bad'; return; }
+    if (plain) { savePlain(note, go); return; }
+    startCompose();
+  }});
+  $('#app').replaceChildren(bar(el('a', {class: 'btn quiet', href: draft.editing ? '#p-' + draft.editing : '#', text: 'Close', onclick: () => { if (draft.editing) { draft.editing = null; draft.plain = false; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}]; } }})), el('div', {class: 'wrap compose'},
+    el('div', null, el('h1', {text: draft.editing ? 'Edit the text' : 'New post'}), el('p', {class: 'lead', text: 'Give the subject, the materials and the look. The page is designed and built for you, then you revise it in plain words.'})),
+    el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'Kind of post'}), kindChips, kindDesc, own ? el('div', {class: 'chips'}, plainSw) : null),
+    own || ready ? el('div', {class: 'field'}, el('label', {for: 'ptitle', text: ready ? 'Title (optional: the page\'s own title is used otherwise)' : 'Title'}), ptitle) : el('div', {class: 'field'}, el('label', {for: 'brief', text: 'Subject'}), brief),
+    own ? el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'The post, block by block'}), blockEditor()) : null,
+    ready ? el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'The page'}), readyRow) : null,
+    ready || plain ? null : el('div', {class: 'field'}, el('span', {class: 'lbl', text: own ? 'Materials to place where they fit best' : 'Materials'}), drop, pick, filesUl,
+      el('div', {class: 'line'}, link, el('button', {class: 'btn quiet', type: 'button', text: 'Add link', onclick: addLink})), linksUl,
+      el('p', {class: 'note', text: own ? 'Links are cited by address and are not opened. Audio is accepted as M4A or WebM.' : 'Links are cited by address and are not opened. Paste any text the page should use into Subject. Audio is accepted as M4A or WebM.'})),
+    ready || plain ? null : el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'Style of the page'}), stylePicker(PAGE_STYLES, () => draft.style, v => { draft.style = v; }, 'page styles'), look),
+    own || ready ? null : el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'Interactivity'}), interChips, interDesc, interNote),
+    ready || plain ? null : el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'Pictures'}), stylePicker(PIC_STYLES, () => draft.picStyle, v => { draft.picStyle = v; }, 'picture styles'),
+      pictureMaker(() => styleOf(PIC_STYLES, draft.picStyle), async p => { draft.files.push({file: p.file, ext: 'svg', bad: '', drawn: true, png: p.png, desc: p.desc}); drawFiles(); }),
+      el('div', {class: 'chips'}, self)),
+    el('div', {class: 'line'}, go, note)));
+  drawFiles(); drawLinks(); drawInter();
+}
+
+/* ───────────── the press: asking Claude and showing the page being set ───────────── */
+const PREVIEW_CSS = '@keyframes cmp-in{from{opacity:0}}body *{animation:cmp-in .7s ease backwards}' +
+  '.instrument:empty{min-height:120px;outline:1.5px dashed currentColor;outline-offset:-2px;animation:cmp-wait 1.3s ease-in-out infinite alternate}@keyframes cmp-wait{from{opacity:.5}to{opacity:.12}}' +
+  '@media (prefers-reduced-motion:reduce){body *,.instrument:empty{animation:none}}';
+function renderPress() {
+  setTheme(null); document.title = 'Composing · Compositor';
+  const j = job;
+  const phase = el('b', {text: j.phase}), size = el('b', {text: '0 kB'}), time = el('b', {text: '0:00'});
+  const rule = el('div', {class: 'rule'}), note = el('p', {class: 'note'});
+  const pv = el('iframe', {class: 'preview', title: 'The page as it is being set'});
+  const stop = el('button', {class: 'btn quiet', type: 'button', text: 'Stop', onclick: () => stopJob(j)});
+  const back = el('button', {class: 'btn', type: 'button', text: 'Back', hidden: true, onclick: () => { job = null; render(); }});
+  const again = el('button', {class: 'btn solid', type: 'button', text: 'Continue', hidden: true, onclick: () => j.retry()});
+  $('#app').replaceChildren(bar(), el('div', {class: 'wrap press'}, el('h1', {text: j.title}),
+    el('div', {class: 'meter'}, el('div', null, el('span', {class: 'mono', text: 'Stage'}), phase), el('div', null, el('span', {class: 'mono', text: 'Written'}), size), el('div', null, el('span', {class: 'mono', text: 'Elapsed'}), time)),
+    rule, el('div', {class: 'line'}, stop, again, back), note), el('div', {class: 'stage'}, pv));
+
+  /* the preview: the stream is written straight into a live document, so the page builds the way a slow page loads */
+  const st = {src: null, styled: false};
+  const doc = () => pv.contentDocument;
+  const atEnd = () => { try { const w = pv.contentWindow, d = doc().documentElement; return w.scrollY + w.innerHeight >= d.scrollHeight - 120; } catch (e) { return true; } };
+  const dress = () => { try { if (!st.styled && doc().head) { const s = doc().createElement('style'); s.textContent = PREVIEW_CSS; doc().head.appendChild(s); st.styled = true; } } catch (e) {} };
+  const whole = html => { try { const d = doc(); d.open(); d.write(html); d.close(); st.src = html; st.styled = false; dress(); } catch (e) {} };
+  const feed = () => {
+    let t = j.text || '';
+    const a = t.search(/<!doctype html|<html[\s>]/i); if (a < 0) return;
+    t = t.slice(a);
+    const lo = t.toLowerCase(), so = lo.lastIndexOf('<script'), sc = lo.lastIndexOf('</scr' + 'ipt>');
+    if (so > sc) t = t.slice(0, so);                                           // never run half a script
+    const lt = t.lastIndexOf('<'); if (lt > t.lastIndexOf('>')) t = t.slice(0, lt);   // nor write half a tag
+    try {
+      const follow = atEnd(), d = doc();
+      if (st.src === null || t.slice(0, st.src.length) !== st.src) { d.open(); st.src = ''; st.styled = false; }
+      const delta = t.slice(st.src.length);
+      if (delta) { d.write(delta); st.src = t; dress(); if (follow) pv.contentWindow.scrollTo(0, d.documentElement.scrollHeight); }
+    } catch (e) {}
+  };
+  j.show = html => whole(html);
+  j.place = (id, frag) => { try { const d = doc(), at = d.querySelector('[data-instrument="' + id + '"]'); if (!at) return;
+      if (!frag) { at.remove(); return; }
+      const r = d.createRange(); r.selectNode(at); const f = r.createContextualFragment(frag); at.replaceWith(f);
+      const now = d.querySelector('[data-instrument="' + id + '"]'); now && now.scrollIntoView({block: 'center', behavior: 'smooth'}); } catch (e) {} };
+  if (j.current) { const c = j.current(); if (c) whole(c); }
+
+  j.paint = () => {
+    phase.textContent = j.phase; size.textContent = kb(bytes(j.text || '') + (j.extra || 0));
+    const s = Math.floor((Date.now() - j.t0) / 1000); time.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    if (j.stream) feed();
+    if (j.error) { note.textContent = j.error; note.className = 'note'; rule.classList.add('still'); stop.hidden = true; back.hidden = false; again.hidden = !j.retry; }
+    else { note.textContent = j.notes.length ? j.notes[j.notes.length - 1] : ''; rule.classList.remove('still'); stop.hidden = false; back.hidden = true; again.hidden = true; }
+  };
+  clearInterval(j.tick); j.tick = setInterval(() => { if (job !== j) return clearInterval(j.tick); if (!j.error) j.paint(); }, 350);
+  j.paint();
+}
+const SAMPLE_COPY = {not_granted: 'Claude was not allowed for this page. Allow it and continue; nothing is lost.', rate_limited: 'Claude has reached its usage limit for now. Nothing is lost: continue when the limit resets.',
+  prompt_too_large: 'The text is too long for one request. Shorten the subject and continue.', cancelled: 'Stopped. Continue to take it up again from here.',
+  session_expired: 'Sign in to Claude again, then continue.', sampling_disabled: 'Claude is not available for this account.', not_declared: 'Claude is not available on this page.', capability_disabled: 'Claude is not available in this view.'};
+
+function extractPage(text, lenient) {
+  let t = String(text || '');
+  const a = t.search(/<!doctype html|<html[\s>]/i), b = t.toLowerCase().lastIndexOf('</html>');
+  if (a < 0) return null;
+  if (b > a) t = t.slice(a, b + 7);
+  else {
+    if (!lenient) return null;
+    t = t.slice(a).replace(/```\s*$/, '');
+    const lo = t.toLowerCase();
+    if (lo.indexOf('<body') < 0 || lo.length < 3000) return null;
+    if (lo.lastIndexOf('<script') > lo.lastIndexOf('</scr' + 'ipt>')) t = t.slice(0, lo.lastIndexOf('<script'));      // drop an unfinished script
+    if (lo.lastIndexOf('<style') > lo.lastIndexOf('</style>')) return null;
+    t = t.replace(/<[^>]*$/, '') + '\n</body></html>';
+  }
+  return /<body[\s>]/i.test(t) ? t : null;
+}
+function readMeta(page) {
+  const d = new DOMParser().parseFromString(page, 'text/html');
+  const m = n => { const e = d.querySelector('meta[name="' + n + '"]'); return e ? (e.getAttribute('content') || '').trim() : ''; };
+  return {title: (d.title || '').trim().slice(0, 140), summary: m('description').slice(0, 300),
+    theme: {paper: hex(m('compositor:paper')), ink: hex(m('compositor:ink')), accent: hex(m('compositor:accent'))}};
+}
+const HARD = {not_granted: 1, rate_limited: 1, session_expired: 1, sampling_disabled: 1, cancelled: 1, not_declared: 1, capability_disabled: 1, prompt_too_large: 1};
+const LADDER = [{model: MODEL, modelTier: 'complex', effort: 'medium'}, {model: MODEL, modelTier: 'complex', effort: 'low'}, {modelTier: 'default', effort: 'low'}, {modelTier: 'default'}];
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function stopJob(j) { j.stopped = true; (j.ctls || []).forEach(c => c.abort()); }
+
+async function ask(prompt, images, j, cfg, show) {
+  let turns = [{role: 'user', content: prompt}], whole = '', model = '';
+  for (let round = 0; round < 4; round++) {
+    if (j.stopped) throw {code: 'cancelled'};
+    const ctl = new AbortController(); (j.ctls || (j.ctls = new Set())).add(ctl);
+    const base = whole;
+    const opts = Object.assign({cache: false, signal: ctl.signal, onText: u => { if (show !== false) j.text = base + u.text; }}, cfg);
+    if (round === 0 && images && images.length) opts.images = images;
+    let res;
+    try { res = await cap.sample(turns, opts); }
+    catch (e) { j.ctls.delete(ctl); if (e && typeof e.text === 'string') e.text = base + e.text; else if (e && base) e.text = base; throw e; }
+    j.ctls.delete(ctl);
+    whole = base + res.text; model = res.modelApplied || (res.modelTierApplied ? res.modelTierApplied + ' tier' : '');
+    if (!res.truncated) break;
+    if (bytes(prompt) + bytes(whole) > 240000) break;
+    turns = [{role: 'user', content: prompt}, {role: 'assistant', content: whole}, {role: 'user', content: 'You were cut off by the length limit. Continue from exactly the character where you stopped. Do not repeat anything already written and do not add any commentary.'}];
+  }
+  return {text: whole, model};
+}
+/* Tries the same job several different ways: less deliberation, then the everyday model. A partial answer that already satisfies `accept` is kept. */
+async function askSafe(prompt, o) {
+  let last = null, images = o.images;
+  for (let i = 0; i < LADDER.length; i++) {
+    if (i) { o.j.phase = (o.label || 'Working') + ', another way'; o.j.paint && o.j.paint(); await wait(1200); }
+    try {
+      const out = await ask(prompt, i < 2 ? images : null, o.j, LADDER[i], o.show);
+      const val = o.accept ? (o.accept(out.text) || (o.lenient ? o.lenient(out.text) : null)) : out.text;
+      if (val != null) return {val, model: out.model, text: out.text};
+      last = {code: 'incomplete'};
+    } catch (e) {
+      if (e && HARD[e.code]) throw e;
+      last = e || {code: 'upstream_error'};
+      if (e && (e.code === 'image_rejected' || e.code === 'images_unavailable')) images = null;
+      if (e && e.text && o.lenient) { const v = o.lenient(e.text); if (v != null) return {val: v, model: '', text: e.text}; }
+    }
+  }
+  throw last;
+}
+function fileLines(files) {
+  return files.length ? files.map(f => '- ' + f.name + ' (' + f.type + ', ' + kb(f.size) + (f.audio ? ', audio only' : '') + (f.desc ? ', a drawn picture: ' + f.desc : '') + ') → URL: /_blob/' + f.id).join('\n') : '(none)';
+}
+
+const INSTR_RULES = `- It lets the reader change the thing the text is about and see the consequence. It must compute real values, correctly.
+- It shows a meaningful state the moment it loads; nothing waits for a click to appear.
+- Prefer direct manipulation: the reader drags the thing itself. A slider must change something along its whole travel; a control that flips one thing is a switch. Never a native <select>.
+- Controls belong to the subject, never to the rendering. Readouts sit in fixed-size boxes with tabular numerals so nothing jumps.
+- No instruction labels ("drag me") and no remarks about how it is made. Labels only report a value, a state or a result.
+- Pointer events so touch works; touch-action set so the page still scrolls; arrow keys and a visible focus state on draggable things; honour prefers-reduced-motion; canvases drawn at devicePixelRatio and redrawn on resize.
+- It lives in a frame that grows with the page: no vh units, no position:fixed, no window scroll events, no network, no alert, no localStorage.
+- Use the page's CSS variables, fonts and language so it belongs to the page. Keep it compact: one instrument, well made.`;
+const MOUNT = /<div\b[^>]*\bdata-instrument="([a-z0-9-]+)"[^>]*>\s*<\/div>/gi;
+const esc = t => String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'})[c]);
+
+function step1(level) {
+  return '\n\nHOW TO BUILD IT: STEP 1 OF 2\nBuild the whole page now: structure, every word of text, all CSS, the pictures. Do not write the interactive instruments in this step. Where an instrument belongs, put exactly one empty placeholder element with nothing inside it:\n' +
+    '<div class="instrument" data-instrument="short-id" data-brief="What it shows, what the reader operates, what changes in response."></div>\n' +
+    'Use ' + (level === 'some' ? 'one or two' : 'three to five') + ' placeholders, each with its own id of lowercase letters and hyphens. Give .instrument its layout in CSS (width, margins, a min-height that fits) so the page already looks composed. The instruments are built in step 2 and inherit this page\'s CSS variables and fonts.';
+}
+function instrPrompt(ctx, page, id, brief, kind) {
+  return 'You are building one interactive instrument for a page of the publication Compositor. Reply with only an HTML fragment: no Markdown, no commentary.\n\nTHE INSTRUMENT\nid: ' + id + '\nWhat it must do: ' + brief +
+    (kind === 'anim' ? '\nThis one is an ANIMATION: it runs by itself in a calm loop, needs no controls beyond an optional play and pause, starts when it comes into view (IntersectionObserver), and shows a telling still frame under prefers-reduced-motion.' : '') +
+    (ctx.interNote ? '\nThe author wants the reader to be able to operate: ' + ctx.interNote : '') +
+    '\n\nFRAGMENT FORMAT (exactly these three parts, in this order)\n<div class="instrument" data-instrument="' + id + '"> …markup… </div>\n<style> …every selector starts with [data-instrument="' + id + '"]… </style>\n<script>(function(){ const root = document.querySelector(\'[data-instrument="' + id + '"]\'); … })();<\/script>\n\nRULES\n' + INSTR_RULES +
+    '\n\nSUBJECT MATTER FROM THE AUTHOR\n' + ctx.brief.slice(0, 20000) + '\n\nTHE PAGE IT LIVES IN (the empty placeholder with this id marks the spot)\n' + page.slice(0, 120000);
+}
+function takeFragment(id) {
+  return text => {
+    let t = String(text || '');
+    const a = t.search(/<div\b[^>]*data-instrument=/i), b = Math.max(t.toLowerCase().lastIndexOf('</scr' + 'ipt>') + 9, t.toLowerCase().lastIndexOf('</style>') + 8);
+    if (a < 0 || b < a + 20) return null;
+    t = t.slice(a, b);
+    return t.indexOf('data-instrument="' + id + '"') >= 0 && /<script[\s>]/i.test(t) && /<\/script>/i.test(t) ? t : null;
+  };
+}
+/* The last resort: a plain, well-set page made here from the author's own words and pictures. */
+function localPage(ctx) {
+  const lines = ctx.brief.split(/\n+/).map(x => x.trim().replace(/^#+\s*/, '')).filter(Boolean), title = (lines[0] || 'Untitled').slice(0, 120);
+  const pics = ctx.files.filter(f => /^image\//.test(f.type)).map(f => '<figure><img src="/_blob/' + f.id + '" alt="' + esc(f.desc || f.name) + '"></figure>').join('\n');
+  const vids = ctx.files.filter(f => /^video\//.test(f.type) || f.audio).map(f => f.audio ? '<audio controls src="/_blob/' + f.id + '"></audio>' : '<video controls src="/_blob/' + f.id + '"></video>').join('\n');
+  return '<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + esc(title) + '</title>' +
+    '<meta name="description" content="' + esc((lines[1] || title).slice(0, 200)) + '"><meta name="compositor:paper" content="#EEEDE6"><meta name="compositor:ink" content="#15181D"><meta name="compositor:accent" content="#1D3BC4">' +
+    '<style>body{margin:0;background:#EEEDE6;color:#15181D;font:19px/1.6 Georgia,"Times New Roman",serif}main{max-width:680px;margin:0 auto;padding:64px 22px 80px}h1{font-size:clamp(40px,8vw,72px);line-height:1;letter-spacing:-.02em;margin:0 0 28px}' +
+    'p{margin:0 0 1em}figure{margin:28px 0}img,video{max-width:100%;height:auto;display:block}audio{width:100%;margin:20px 0}a{color:#1D3BC4}</style></head><body><main><h1>' + esc(title) + '</h1>\n' +
+    lines.slice(1).map(x => '<p>' + esc(x) + '</p>').join('\n') + '\n' + pics + '\n' + vids +
+    (ctx.links.length ? '<p>' + ctx.links.map(u => '<a href="' + esc(u) + '">' + esc(u) + '</a>').join('<br>') + '</p>' : '') + '</main></body></html>';
+}
+
+async function importPage(note, btn) {
+  btn.disabled = true; note.className = 'note'; note.textContent = 'Storing the page';
+  try {
+    const text = await draft.ready.file.text(), page = extractPage(text, true) || text, meta = readMeta(page);
+    const up = await cap.assets.upload(new Blob([page], {type: 'text/plain'}), {type: 'text/plain'}); htmlCache.set(up.id, page);
+    const now = new Date().toISOString(), id = rid(8);
+    await cap.db.doc('posts/' + id).set({kind: 'page', title: (draft.title.trim() || meta.title || draft.ready.file.name.replace(/\.html?$/i, '')).slice(0, 140), summary: meta.summary, theme: meta.theme, status: 'draft',
+      createdAt: now, publishedAt: null, by: me.id, brief: '', instructions: '', links: [], files: [], current: 1, versions: [{n: 1, asset: up.id, at: now, note: 'Brought in as a ready page', model: '', notes: []}]});
+    draft.ready = null; draft.title = ''; location.hash = 'p-' + id;
+  } catch (e) { btn.disabled = false; note.textContent = 'The page could not be stored. Try again.'; }
+}
+/* A video or a post from outside. The card is always there; the real player or post takes its place only when it proves it has loaded. */
+function embedHtml(em, text) {
+  const t = (text || '').trim(), u = esc(em.url);
+  if (em.p === 'youtube') return '<div class="cmp-embed" data-p="youtube" data-live="https://www.youtube-nocookie.com/embed/' + esc(em.key) + '?enablejsapi=1&amp;rel=0">' +
+    '<a class="cmp-video" href="' + u + '"><span class="cmp-play" aria-hidden="true"></span><span class="cmp-cap"><small>YouTube</small><strong>' + (t ? inlineMd(t) : 'Watch the video') + '</strong></span></a></div>';
+  return '<div class="cmp-embed" data-p="x" data-live="https://platform.twitter.com/embed/Tweet.html?dnt=true&amp;id=' + esc((em.url.match(/status\/(\d+)/) || [])[1] || '') + '">' +
+    '<a class="cmp-said" href="' + u + '"><span class="cmp-who"><span class="cmp-face" aria-hidden="true">' + esc(em.key.charAt(0).toUpperCase()) + '</span><span><strong>@' + esc(em.key) + '</strong><small>Post on X</small></span></span>' +
+    (t ? '<span class="cmp-words">' + inlineMd(t) + '</span>' : '') + '<small class="cmp-open">Open the post on X</small></a></div>';
+}
+const EMBED_LIVE = '<style data-compositor-embed>.cmp-embed{position:relative;margin:2em auto;max-width:720px;font-style:normal}.cmp-embed iframe{display:block;border:0;width:100%}.cmp-embed iframe.cmp-wait{position:absolute;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none}' +
+  '.cmp-video{display:block;position:relative;aspect-ratio:16/9;background:#0f0f0f;color:#fff;text-decoration:none;border-radius:12px;overflow:hidden}.cmp-play{position:absolute;left:50%;top:50%;width:72px;height:50px;margin:-25px 0 0 -36px;border-radius:14px;background:#f03}' +
+  '.cmp-play::after{content:"";position:absolute;left:28px;top:14px;border-left:20px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}.cmp-video:hover .cmp-play{background:#ff2b4f}' +
+  '.cmp-cap{position:absolute;left:0;right:0;bottom:0;padding:44px 20px 16px;display:grid;gap:3px;background:linear-gradient(transparent,rgba(0,0,0,.82));font:400 16px/1.3 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}.cmp-cap small{font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}.cmp-cap strong{font-size:19px;font-weight:600;overflow-wrap:anywhere}' +
+  '.cmp-said{display:grid;gap:12px;max-width:550px;margin:0 auto;padding:16px 18px;border:1px solid rgba(128,128,128,.45);border-radius:14px;background:#fff;color:#0f1419;text-decoration:none;font:400 17px/1.4 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}' +
+  '.cmp-who{display:flex;align-items:center;gap:10px}.cmp-who>span:last-child{display:grid}.cmp-who small{color:#536471;font-size:14px}.cmp-face{flex:none;width:42px;height:42px;border-radius:50%;background:#0f1419;color:#fff;display:grid;place-items:center;font-weight:700}' +
+  '.cmp-words{font-size:20px;line-height:1.35;overflow-wrap:anywhere}.cmp-open{color:#1d6fd0;font-size:14px}.cmp-embed.cmp-on>a{display:none}</style>' +
+  '<script data-compositor-embed>(function(){var es=document.querySelectorAll(".cmp-embed[data-live]"),fs=[];for(var k=0;k<es.length;k++)(function(box,k){var f=document.createElement("iframe");f.className="cmp-wait";f.title=box.getAttribute("data-p")==="youtube"?"Video":"Post";' +
+  'f.setAttribute("allow","accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen");f.setAttribute("allowfullscreen","");var u=box.getAttribute("data-live");if(box.getAttribute("data-p")==="youtube"&&self.origin&&self.origin!=="null")u+="&origin="+encodeURIComponent(self.origin);f.src=u;box.appendChild(f);fs.push([f,box]);' +
+  'if(box.getAttribute("data-p")==="youtube"){var n=0,t=setInterval(function(){try{f.contentWindow.postMessage(JSON.stringify({event:"listening",id:"c"+k,channel:"widget"}),"*")}catch(e){}if(++n>12)clearInterval(t)},700)}})(es[k],k);' +
+  'addEventListener("message",function(e){for(var k=0;k<fs.length;k++){var f=fs[k][0],box=fs[k][1];if(e.source!==f.contentWindow||!/(youtube|twitter|x)\\./.test(e.origin||""))continue;' +
+  'if(box.getAttribute("data-p")==="youtube"){if(!box.classList.contains("cmp-on")){f.className="";f.style.aspectRatio="16/9";f.style.borderRadius="12px";box.classList.add("cmp-on")}}' +
+  'else{var d=e.data;try{if(typeof d==="string")d=JSON.parse(d)}catch(x){}var m=d&&d["twttr.embed"],h=m&&m.params&&m.params[0]&&m.params[0].height;if(h>40){f.className="";f.style.height=Math.ceil(h)+"px";f.style.maxWidth="550px";f.style.margin="0 auto";box.classList.add("cmp-on")}}}})})();</scr' + 'ipt>';
+
+/* A ready page set inside a post: a frame that loads the stored page and grows to its height. Placed by the platform, never written by Claude. */
+const embedTag = (id, title) => '<iframe class="compositor-embed" data-embed="/_blob/' + id + '" title="' + esc(title || 'Embedded page') + '" style="display:block;width:100%;height:640px;border:0"></iframe>';
+const EMBED_RUNTIME = '<script data-compositor-embed>(function(){var H=\'<scr\'+\'ipt>(function(){var d=document.documentElement;function s(){try{parent.postMessage({embed:1,h:Math.ceil(d.getBoundingClientRect().height)},"*")}catch(e){}}if(window.ResizeObserver)new ResizeObserver(s).observe(d);addEventListener("load",s);setInterval(s,1500);s()})();</scr\'+\'ipt>\';' +
+  'var fs=document.querySelectorAll("iframe[data-embed]");for(var k=0;k<fs.length;k++)(function(f){fetch(f.getAttribute("data-embed")).then(function(r){return r.text()}).then(function(t){var i=t.toLowerCase().lastIndexOf("</body>");f.srcdoc=i<0?t+H:t.slice(0,i)+H+t.slice(i)}).catch(function(){})})(fs[k]);' +
+  'addEventListener("message",function(e){if(!e.data||e.data.embed!==1)return;for(var k=0;k<fs.length;k++)if(fs[k].contentWindow===e.source)fs[k].style.height=Math.min(Math.max(e.data.h,120),40000)+"px"})})();</scr' + 'ipt>';
+
+const SERIF_FACES = "@font-face{font-family:\"Source Serif 4\";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-cyrillic-wght-normal.woff2) format(\"woff2\");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:\"Source Serif 4\";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-greek-wght-normal.woff2) format(\"woff2\");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:\"Source Serif 4\";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin-wght-normal.woff2) format(\"woff2\");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:\"Source Serif 4\";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-cyrillic-wght-italic.woff2) format(\"woff2\");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:\"Source Serif 4\";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-greek-wght-italic.woff2) format(\"woff2\");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:\"Source Serif 4\";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin-wght-italic.woff2) format(\"woff2\");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}";
+function inlineMd(t) {
+  return esc(t).replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, '<a href="$2">$1</a>')
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/(^|[^*])\*([^*\n]+)\*/g, '$1<em>$2</em>')
+    .replace(/(^|[\s(])_([^_\n]+)_(?=$|[\s).,;:!?])/g, '$1<em>$2</em>');
+}
+function blockMd(text) {
+  const out = []; let para = [], list = [], quote = [];
+  const flush = () => { if (para.length) out.push('<p>' + para.map(inlineMd).join('<br>') + '</p>'); if (list.length) out.push('<ul>' + list.map(x => '<li>' + inlineMd(x) + '</li>').join('') + '</ul>');
+    if (quote.length) out.push('<blockquote><p>' + quote.map(inlineMd).join('<br>') + '</p></blockquote>'); para = []; list = []; quote = []; };
+  for (const raw of String(text).replace(/\r/g, '').split('\n')) {
+    const l = raw.trim(); let m;
+    if (!l) flush();
+    else if ((m = l.match(/^##+\s+(.*)$/))) { flush(); out.push('<h3>' + inlineMd(m[1]) + '</h3>'); }
+    else if ((m = l.match(/^#\s+(.*)$/))) { flush(); out.push('<h2>' + inlineMd(m[1]) + '</h2>'); }
+    else if ((m = l.match(/^[-•]\s+(.*)$/))) { if (para.length || quote.length) flush(); list.push(m[1]); }
+    else if ((m = l.match(/^>\s?(.*)$/))) { if (para.length || list.length) flush(); quote.push(m[1]); }
+    else { if (list.length || quote.length) flush(); para.push(l); }
+  }
+  flush(); return out.join('\n');
+}
+function plainPage(title, blocks) {
+  const body = blocks.map(b => {
+    if (b.type === 'text') return blockMd(b.text || '');
+    if (b.type === 'embed') { const em = parseEmbed(b.url); return em ? embedHtml(em, b.text) : ''; }
+    if (b.type === 'file' && b.asset) { const a = b.asset, cap = (b.text || '').trim(), u = '/_blob/' + a.id;
+      const media = a.audio ? '<audio controls src="' + u + '"></audio>' : /^video\//.test(a.type) ? '<video controls src="' + u + '"></video>' : /^image\//.test(a.type) ? '<img src="' + u + '" alt="' + esc(cap || a.name) + '">' : '<a href="' + u + '">' + esc(a.name) + '</a>';
+      return '<figure>' + media + (cap ? '<figcaption>' + inlineMd(cap) + '</figcaption>' : '') + '</figure>'; }
+    return '';
+  }).filter(Boolean).join('\n');
+  const first = (blocks.find(b => b.type === 'text' && (b.text || '').trim()) || {text: ''}).text.trim().split('\n')[0].replace(/^#+\s*/, '').replace(/[*_]/g, '');
+  return '<!DOCTYPE html>\n<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>' + esc(title) + '</title>' +
+    '<meta name="description" content="' + esc(first.slice(0, 200)) + '"><meta name="compositor:paper" content="#FFFFFF"><meta name="compositor:ink" content="#1A1A1A"><meta name="compositor:accent" content="#1A1A1A">\n<style>' + SERIF_FACES +
+    'body{margin:0;background:#fff;color:#1a1a1a;font:20px/1.62 "Source Serif 4",Georgia,"Times New Roman",serif;-webkit-font-smoothing:antialiased;font-kerning:normal}' +
+    'main{max-width:680px;margin:0 auto;padding:72px 22px 96px}h1{font-size:clamp(34px,6vw,46px);line-height:1.12;font-weight:700;letter-spacing:-.012em;margin:0 0 1.1em}' +
+    'h2{font-size:30px;line-height:1.2;font-weight:700;letter-spacing:-.008em;margin:1.9em 0 .55em}h3{font-size:22px;line-height:1.3;font-weight:700;margin:1.7em 0 .45em}' +
+    'p{margin:0 0 1.05em}ul{margin:0 0 1.05em;padding-left:1.2em}li{margin:.25em 0}blockquote{margin:1.4em 0;padding-left:1.1em;border-left:2px solid #1a1a1a;font-style:italic}blockquote p{margin:0}' +
+    'a{color:inherit;text-underline-offset:3px}figure{margin:2em 0}img,video{display:block;max-width:100%;height:auto}audio{width:100%}figcaption{font-size:16px;line-height:1.45;color:#666;margin-top:.6em}' +
+    '@media (max-width:520px){body{font-size:18px}main{padding:44px 18px 70px}}</style></head>\n<body><main>\n<h1>' + esc(title) + '</h1>\n' + body + '\n</main>' + (body.indexOf('cmp-embed') >= 0 ? EMBED_LIVE : '') + '</body></html>';
+}
+async function savePlain(note, btn) {
+  btn.disabled = true; note.className = 'note'; note.textContent = 'Storing';
+  try {
+    const blocks = draft.blocks.filter(b => (b.type === 'text' && (b.text || '').trim()) || (b.type === 'file' && (b.asset || (b.file && !b.bad))) || (b.type === 'embed' && parseEmbed(b.url)));
+    for (const b of blocks) { if (b.type !== 'file' || b.asset) continue;
+      note.textContent = 'Storing ' + b.file.name.slice(0, 30);
+      const r = await cap.assets.upload(b.file, {type: TYPES[b.ext]}); b.asset = {id: r.id, name: b.file.name, type: AUDIO[b.ext] ? 'audio' : r.contentType, size: r.sizeBytes, audio: !!AUDIO[b.ext], desc: b.text || ''}; }
+    const firstText = (blocks.find(b => b.type === 'text') || {text: ''}).text.trim().split('\n')[0].replace(/^#+\s*/, '');
+    const title = (draft.title.trim() || firstText || 'Untitled').slice(0, 140);
+    const page = plainPage(title, blocks), meta = readMeta(page);
+    const up = await cap.assets.upload(new Blob([page], {type: 'text/plain'}), {type: 'text/plain'}); htmlCache.set(up.id, page);
+    const now = new Date().toISOString(), files = blocks.filter(b => b.asset).map(b => b.asset);
+    const source = blocks.map(b => ({type: b.type, text: (b.text || '').slice(0, 60000), url: b.url || '', asset: b.asset ? b.asset.id : ''}));
+    const old = draft.editing ? postById(draft.editing) : null;
+    let id;
+    if (old) { id = old.id; const n = Math.max(0, ...(old.versions || []).map(v => v.n)) + 1;
+      await cap.db.doc('posts/' + id).update({title, summary: meta.summary, theme: meta.theme, files, source, current: n, versions: (old.versions || []).concat([{n, asset: up.id, at: now, note: 'Text edited', model: '', notes: []}])}); }
+    else { id = rid(8);
+      await cap.db.doc('posts/' + id).set({kind: 'plain', title, summary: meta.summary, theme: meta.theme, status: 'draft', createdAt: now, publishedAt: null, by: me.id, brief: '', instructions: '', links: [], files, source,
+        current: 1, versions: [{n: 1, asset: up.id, at: now, note: 'Plain text', model: '', notes: []}]}); }
+    draft.editing = null; draft.plain = false; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
+    if (location.hash === '#p-' + id) route(); else location.hash = 'p-' + id;
+  } catch (e) { btn.disabled = false; note.textContent = 'This could not be stored. Try again.'; }
+}
+function editPlain(p) {
+  draft.kind = 'own'; draft.plain = true; draft.editing = p.id; draft.title = p.title || '';
+  draft.blocks = (p.source || []).map(b => ({id: 'k' + (++draft.seq), type: b.type, text: b.text || '', url: b.url || '', asset: b.asset ? ((p.files || []).find(f => f.id === b.asset) || null) : null}));
+  if (!draft.blocks.length) draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
+  location.hash = 'new';
+}
+
+function newJob(title) { return {active: true, title, phase: 'Preparing', text: '', t0: Date.now(), error: null, notes: [], stopped: false, ctls: new Set()}; }
+function pause(j, e) {
+  const code = e && e.code;
+  j.error = SAMPLE_COPY[code] || 'This step did not go through. Nothing is lost: continue to take it up again from here.';
+  j.paint && j.paint();
+}
+
+async function startCompose() {
+  const j = job = newJob('Setting the page');
+  const st = {uploaded: [], ctx: null, page: null, model: '', done: {}};
+  j.retry = () => { j.error = null; j.stopped = false; j.active = true; if (!st.page) j.text = ''; renderPress(); run(); };
+  const run = async () => {
+    try {
+      /* 1. store the files */
+      const good = draft.files.filter(f => !f.bad);
+      for (const f of good) {
+        if (f.asset) continue;
+        j.phase = 'Storing ' + f.file.name.slice(0, 28); j.paint && j.paint();
+        try { const r = await cap.assets.upload(f.file, {type: TYPES[f.ext]}); f.asset = {id: r.id, name: f.file.name, type: AUDIO[f.ext] ? 'audio' : r.contentType, size: r.sizeBytes, audio: !!AUDIO[f.ext], desc: f.desc || ''}; }
+        catch (e) { f.bad = 'Could not be stored'; j.notes.push('“' + f.file.name + '” could not be stored and was left out.'); }
+      }
+      st.uploaded = good.filter(f => f.asset).map(f => f.asset);
+      const own = draft.kind === 'own';
+      if (own) {
+        /* files that sit in blocks, then the pictures ordered in blocks */
+        for (const b of draft.blocks) {
+          if (b.type !== 'file' || !b.file || b.bad || b.asset) continue;
+          j.phase = 'Storing ' + b.file.name.slice(0, 28); j.paint && j.paint();
+          try { const r = await cap.assets.upload(b.file, {type: TYPES[b.ext]}); b.asset = {id: r.id, name: b.file.name, type: AUDIO[b.ext] ? 'audio' : r.contentType, size: r.sizeBytes, audio: !!AUDIO[b.ext], desc: b.text || ''}; }
+          catch (e) { b.bad = 'Could not be stored'; j.notes.push('“' + b.file.name + '” could not be stored and was left out.'); }
+        }
+        for (const b of draft.blocks) {
+          if (b.type !== 'page' || !b.file || b.bad || b.asset) continue;
+          j.phase = 'Storing ' + b.file.name.slice(0, 28); j.paint && j.paint();
+          try { const text = await b.file.text(), r = await cap.assets.upload(new Blob([extractPage(text, true) || text], {type: 'text/plain'}), {type: 'text/plain'});
+            b.asset = {id: r.id, name: b.file.name, type: 'ready page', size: r.sizeBytes, audio: false, desc: b.text || ''}; }
+          catch (e) { b.bad = 'Could not be stored'; j.notes.push('“' + b.file.name + '” could not be stored and was left out.'); }
+        }
+        const orders = draft.blocks.filter(b => b.type === 'draw' && (b.text || '').trim() && !b.asset && !b.failed);
+        for (let n = 0; n < orders.length; n++) {
+          const b = orders[n]; j.phase = 'Drawing pictures, ' + (n + 1) + ' of ' + orders.length; j.paint && j.paint();
+          try {
+            const svg = (await askSafe(picPrompt(b.text.trim(), styleOf(PIC_STYLES, draft.picStyle), ASPECTS[0]), {j, label: 'Drawing', accept: extractSvg})).val;
+            const file = new File([svg], 'picture-' + b.id + '-' + slug(b.text) + '.svg', {type: 'image/svg+xml'});
+            const r = await cap.assets.upload(file, {type: 'image/svg+xml'});
+            b.asset = {id: r.id, name: file.name, type: r.contentType, size: r.sizeBytes, audio: false, desc: b.text.trim()};
+            b.png = await rasterize(URL.createObjectURL(file), ASPECTS[0]).catch(() => null);
+          } catch (e) { if (e && HARD[e.code]) throw e; b.failed = true; j.notes.push('One picture could not be drawn (' + b.text.trim().slice(0, 70) + '). Ask for it in Revise.'); }
+        }
+      }
+      if (!st.ctx && own) {
+        const blocks = draft.blocks, ps = styleOf(PAGE_STYLES, draft.style), is = styleOf(PIC_STYLES, draft.picStyle);
+        let images = [], seen = [], lim = null;
+        try { lim = await cap.sample.limits(); } catch (e) {}
+        const look = (blob, name) => { if (lim && lim.images && images.length < lim.images.maxCount) { images.push(blob); seen.push(name); } };
+        const briefs = {}, embeds = {}, verify = [], lines = [], inBlocks = [];
+        let n = 0;
+        for (const b of blocks) {
+          const t = (b.text || '').trim();
+          if (b.type === 'text' && t) { lines.push('[' + (++n) + ' TEXT, word for word]\n' + t); verify.push(t); }
+          else if ((b.type === 'inst' || b.type === 'anim') && t) { briefs[b.id] = {brief: t, kind: b.type}; lines.push('[' + (++n) + ' ' + (b.type === 'inst' ? 'INSTRUMENT' : 'ANIMATION') + ' id=' + b.id + '] ' + t + '\nPut the placeholder for id ' + b.id + ' here.'); }
+          else if (b.type === 'draw' && b.asset) { inBlocks.push(b.asset); lines.push('[' + (++n) + ' PICTURE, drawn for this spot] ' + b.asset.name + ' → URL: /_blob/' + b.asset.id + ' (' + b.asset.desc + ')'); if (b.png) look(b.png, b.asset.name); }
+          else if (b.type === 'write' && t) lines.push('[' + (++n) + ' WRITE] Write this passage yourself, in the author\'s language and voice: ' + t);
+          else if (b.type === 'file' && b.asset) { inBlocks.push(b.asset); lines.push('[' + (++n) + ' FILE for this spot] ' + b.asset.name + ' (' + b.asset.type + ') → URL: /_blob/' + b.asset.id + (t ? ' Caption, word for word: ' + t : ''));
+            if (lim && lim.images && lim.images.mediaTypes.includes(TYPES[b.ext])) look(b.file, b.asset.name); }
+          else if (b.type === 'embed' && parseEmbed(b.url)) { const em = parseEmbed(b.url); embeds[b.id] = embedHtml(em, t); lines.push('[' + (++n) + ' ' + (em.p === 'youtube' ? 'VIDEO' : 'POST FROM X') + ' id=' + b.id + '] The platform sets ' + (em.p === 'youtube' ? 'a video player' : 'a quoted post') + ' here, up to 720px wide and centred. Put the placeholder for id ' + b.id + ' here.'); }
+          else if (b.type === 'page' && b.asset) { embeds[b.id] = embedTag(b.asset.id, t || b.asset.name); lines.push('[' + (++n) + ' READY PAGE id=' + b.id + '] A complete page the author made elsewhere is set here by the platform as a full-width frame. Put the placeholder for id ' + b.id + ' here, outside any narrow text column, with no side padding that would squeeze it.' + (t ? ' Caption, word for word: ' + t : '')); }
+          else if (b.type === 'link' && /^https?:\/\//i.test((b.url || '').trim())) lines.push('[' + (++n) + ' LINK for this spot] ' + b.url.trim() + (t ? ' — ' + t : ''));
+        }
+        for (const f of good) { if (!f.asset) continue; if (f.drawn && f.png) look(f.png, f.file.name); else if (lim && lim.images && lim.images.mediaTypes.includes(TYPES[f.ext])) look(f.file, f.file.name); }
+        const ids = Object.keys(briefs), slots = ids.concat(Object.keys(embeds));
+        const core = 'KIND OF POST: THE AUTHOR\'S OWN WORDS\nThe author wrote this post and their text is final. Set every TEXT block word for word and in the given order: do not rewrite, shorten, expand, translate or correct it, and add no sentences of your own except in blocks marked WRITE and in short labels a figure needs. ' +
+          'Simple Markdown in the text (# headings, **bold**, *italic*, > quotes, - lists, [links](url)) is formatting to honour, not characters to show. You may lift a sentence as a pull quote, word for word. Your work is the design: the form of the page, the typography, the rhythm, and placing every material intelligently and beautifully.' +
+          '\n\nTITLE\n' + (draft.title.trim() || '(none given: use the first heading or a short title drawn from the text)') +
+          '\n\nTHE POST, BLOCK BY BLOCK, IN READING ORDER\n' + lines.join('\n\n') +
+          '\n\nMATERIALS TO PLACE WHERE THEY FIT BEST\nFILES\n' + fileLines(st.uploaded) + '\nLINKS\n' + (draft.links.length ? draft.links.map(u => '- ' + u).join('\n') : '(none)') +
+          (seen.length ? '\n\nAttached for you to look at, in this order: ' + seen.join(', ') + '.' : '') +
+          '\n\nSTYLE OF THE PAGE\n' + (ps ? ps[1] + '. ' + ps[2] : '(none chosen: choose the form that suits the text)') +
+          '\n\nWISHES IN THE AUTHOR\'S WORDS\n' + (draft.look.trim() || '(none)') +
+          '\n\nINTERACTIVITY\n' + (ids.length ? 'Only the INSTRUMENT and ANIMATION blocks above. Nothing else on the page is interactive.' : 'None. A still page.') +
+          '\n\nILLUSTRATIONS\n' + (draft.selfDraw ? 'Besides the author\'s pictures, you may draw illustrations as inline SVG in this style: ' + (is ? is[1] + '. ' + is[2] : 'one consistent style that suits the page') : 'Use only the pictures given. Draw none of your own.');
+        const step = slots.length ? '\n\nHOW TO BUILD IT: STEP 1 OF 2\nBuild the whole page now. Do not write the instruments or animations in this step. At the place of each INSTRUMENT, ANIMATION or READY PAGE block put exactly one empty placeholder with that block\'s id and nothing inside it: <div class="instrument" data-instrument="ID"></div>. ' +
+          'The ids are: ' + slots.join(', ') + '. Add no other placeholders. Give .instrument its layout in CSS (width, margins, a min-height that fits) so the page already looks composed.' : '';
+        st.ctx = {own: true, core, images, step, briefs, embeds, verify, brief: verify.join('\n\n'), inter: ids.length ? 'rich' : 'none', interNote: '', files: st.uploaded.concat(inBlocks), links: draft.links.slice(),
+          source: blocks.map(b => ({type: b.type, text: (b.text || '').slice(0, 20000), url: b.url || '', asset: b.asset ? b.asset.id : ''}))};
+        st.uploaded = st.ctx.files;
+      }
+      if (!st.ctx) {
+        let images = [], seen = [];
+        try { const lim = await cap.sample.limits(); if (lim && lim.images) for (const f of good) { if (!f.asset || images.length >= lim.images.maxCount) continue;
+            if (f.drawn && f.png) { images.push(f.png); seen.push(f.file.name); } else if (lim.images.mediaTypes.includes(TYPES[f.ext])) { images.push(f.file); seen.push(f.file.name); } } } catch (e) {}
+        const ps = styleOf(PAGE_STYLES, draft.style), is = styleOf(PIC_STYLES, draft.picStyle);
+        const core = 'BRIEF\n' + draft.brief.trim().slice(0, 180000) +
+          '\n\nSTYLE OF THE PAGE\n' + (ps ? ps[1] + '. ' + ps[2] : '(none chosen: choose the form yourself)') +
+          '\n\nWISHES IN THE AUTHOR\'S WORDS\n' + (draft.look.trim() || '(none)') +
+          '\n\nINTERACTIVITY\n' + INTER[draft.inter][1] + (draft.inter !== 'none' && draft.interNote.trim() ? '\nThe author wants the reader to be able to operate: ' + draft.interNote.trim() : '') +
+          '\n\nILLUSTRATIONS\n' + (draft.selfDraw ? 'Draw the illustrations the page needs yourself, as inline SVG, in this style: ' + (is ? is[1] + '. ' + is[2] : 'one consistent style of your choice that suits the page') + ' Also use the author\'s pictures listed under FILES.' : 'Use only the pictures listed under FILES. Draw none of your own, apart from charts and diagrams the content needs.') +
+          '\n\nFILES\n' + fileLines(st.uploaded) + (seen.length ? '\nAttached for you to look at, in this order: ' + seen.join(', ') + '.' : '') +
+          '\n\nLINKS\n' + (draft.links.length ? draft.links.map(u => '- ' + u).join('\n') : '(none)');
+        st.ctx = {core, images, brief: draft.brief.trim(), inter: draft.inter, interNote: draft.interNote.trim(), files: st.uploaded, links: draft.links.slice()};
+      }
+      const ctx = st.ctx;
+      /* 2. the page itself, without instruments */
+      if (!st.page) {
+        j.phase = 'Setting the page'; j.stream = true; j.paint && j.paint();
+        try {
+          const r = await askSafe(RULES + '\n\n────────\n' + ctx.core + (ctx.own ? ctx.step : ctx.inter === 'none' ? '' : step1(ctx.inter)) + '\n\nNow reply with the complete HTML document.',
+            {images: ctx.images, j, label: 'Setting the page', accept: t => extractPage(t), lenient: t => extractPage(t, true)});
+          st.page = r.val; st.model = r.model;
+        } catch (e) {
+          if (e && HARD[e.code]) throw e;
+          st.page = localPage(ctx); st.model = 'a plain setting';
+          j.notes.push('Claude could not set this page, so it was set plainly from your own text. Use Revise to ask for the design again.');
+        }
+      }
+      j.stream = false; j.text = st.page; j.current = () => st.page.replace(MOUNT, (m, id) => id in st.done ? st.done[id] : m);
+      j.show && j.show(j.current());
+      /* 3. the instruments, two at a time; one that fails is left out, the page still ships */
+      const mounts = []; st.page.replace(MOUNT, (m, id) => { if (!mounts.some(x => x.id === id)) mounts.push({m, id, brief: ((m.match(/data-brief="([^"]*)"/) || [])[1] || '').replace(/&quot;/g, '"').replace(/&amp;/g, '&')}); return m; });
+      if (ctx.briefs) { for (const x of mounts) { if (ctx.briefs[x.id]) { x.brief = ctx.briefs[x.id].brief; x.kind = ctx.briefs[x.id].kind; } else st.done[x.id] = (ctx.embeds && ctx.embeds[x.id]) || ''; }
+        j.show && j.show(j.current());
+        for (const id of Object.keys(ctx.briefs)) if (!mounts.some(x => x.id === id)) j.notes.push('No place was left for one ordered block (' + ctx.briefs[id].brief.slice(0, 70) + '). Ask for it in Revise.'); }
+      const todo = mounts.filter(x => !(x.id in st.done)).slice(0, 8);
+      let halted = null, built = Object.keys(st.done).length;
+      const work = async x => {
+        if (halted) return;
+        const sub = {text: '', phase: '', ctls: j.ctls, get stopped() { return j.stopped; }};
+        try { const r = await askSafe(instrPrompt(ctx, st.page, x.id, x.brief, x.kind), {j: sub, label: 'Building', accept: takeFragment(x.id)}); st.done[x.id] = r.val; j.extra = (j.extra || 0) + bytes(r.val); j.place && j.place(x.id, r.val); }
+        catch (e) { if (e && HARD[e.code]) halted = halted || e; else { st.done[x.id] = ''; j.place && j.place(x.id, ''); j.notes.push('One instrument was left out (' + (x.brief || x.id).slice(0, 90) + '). Ask for it in Revise.'); } }
+        built++; j.phase = 'Building instruments, ' + built + ' of ' + mounts.length; j.paint && j.paint();
+      };
+      if (todo.length) { j.phase = 'Building instruments, ' + built + ' of ' + mounts.length; j.paint && j.paint();
+        const q = todo.slice(); await Promise.all([0, 1].map(async () => { while (q.length && !halted) await work(q.shift()); })); }
+      if (halted && halted.code !== 'cancelled' && !Object.values(st.done).some(Boolean)) { /* keep going: ship the page without them */ }
+      if (halted && halted.code === 'cancelled') throw halted;
+      if (halted) j.notes.push('The instruments were not finished (' + (SAMPLE_COPY[halted.code] || 'Claude became unavailable') + ') Ask for them in Revise.');
+      let page = st.page.replace(MOUNT, (m, id) => st.done[id] || '');
+      if (ctx.embeds && Object.keys(ctx.embeds).length) {
+        const lost = Object.keys(ctx.embeds).filter(id => !mounts.some(x => x.id === id)).map(id => ctx.embeds[id]).join('\n');       // no place was left: set them at the end
+        const at = page.toLowerCase().lastIndexOf('</body>'), tail = lost + EMBED_RUNTIME + EMBED_LIVE;
+        page = at < 0 ? page + tail : page.slice(0, at) + tail + page.slice(at);
+      }
+      if (ctx.verify) { /* was the author's text really set word for word? */
+        const flat = t => String(t).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+        const body = flat(new DOMParser().parseFromString(page, 'text/html').body.textContent || '');
+        let miss = 0, all = 0;
+        for (const t of ctx.verify) for (const para of t.split(/\n\s*\n/)) { const f = flat(para.replace(/\]\([^)]*\)/g, ']')); if (f.length < 12) continue; all++; if (body.indexOf(f) < 0) miss++; }
+        if (miss) j.notes.push(miss + ' of your ' + all + ' paragraphs ' + (miss === 1 ? 'does' : 'do') + ' not appear word for word. Read the page against your text.');
+      }
+      await finish(j, {text: page, model: st.model}, null, 'First setting', Object.assign({kind: ctx.own ? 'own' : 'ai', brief: ctx.brief.slice(0, 60000), instructions: draft.look.trim(), style: draft.style || '', inter: draft.inter, picStyle: draft.picStyle || '', links: ctx.links, files: st.uploaded.slice()}, ctx.own ? Object.assign({source: ctx.source}, draft.title.trim() ? {title: draft.title.trim().slice(0, 140)} : {}) : {}));
+      draft.brief = ''; draft.look = ''; draft.links = []; draft.files = []; draft.interNote = ''; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
+    } catch (e) { pause(j, e); }
+  };
+  renderPress(); scrollTo(0, 0); run();
+}
+
+/* Revision by small exact edits; a whole new page only when the change is a restyle. */
+const EDIT = /<<<<<<< FIND\r?\n([\s\S]*?)\r?\n=======\r?\n?([\s\S]*?)\r?\n?>>>>>>> END/g;
+function applyEdits(page, text) {
+  let out = page, ok = 0; const missed = [];
+  for (const m of String(text || '').matchAll(EDIT)) {
+    const i = out.indexOf(m[1]);
+    if (m[1] && i >= 0) { out = out.slice(0, i) + m[2] + out.slice(i + m[1].length); ok++; } else missed.push(m[1]);
+  }
+  return {out, ok, missed};
+}
+async function startRevise(post, instruction, images) {
+  const j = job = newJob('Resetting the page');
+  j.retry = () => { j.error = null; j.stopped = false; j.active = true; renderPress(); run(); };
+  const run = async () => {
+    try {
+      const cur = await loadHtml(curVersion(post).asset);
+      j.current = () => cur; j.show && j.show(cur);
+      const head = RULES + '\n\n────────\nThis is a REVISION of the page below. Change only what the author asks and keep everything else exactly as it is. For interactivity, style and illustrations, follow what the author asks now.' + (post.kind === 'own' ? ' The words on this page are the author\'s own: never rewrite them unless the author asks for exactly that.' : '') + ' Frames with the attribute data-embed, blocks with the class cmp-embed, and the style and script marked data-compositor-embed are set by the platform: keep them exactly as they are.' + '\n\nFILES AVAILABLE\n' +
+        fileLines(post.files || []) + (images && images.length ? '\nThe newly drawn picture(s) are attached for you to look at.' : '') + '\n\nTHE AUTHOR ASKS\n' + instruction.trim();
+      const edits = head + '\n\nEDIT FORMAT\nReply with one or more edit blocks and nothing else:\n<<<<<<< FIND\nan exact, character-for-character piece of the current page, long enough to occur only once\n=======\nwhat replaces it\n>>>>>>> END\n' +
+        'To insert, FIND the neighbouring line and repeat it in the replacement next to the new material. Only if the author asks to restyle or rebuild the whole page, reply instead with the complete new HTML document.\n\nCURRENT PAGE\n' + cur;
+      if (bytes(edits) > 250000) throw {code: 'prompt_too_large'};
+      j.phase = 'Reading the page'; j.paint && j.paint();
+      let page = null, model = '';
+      const im = images && images.length ? images.slice(0, 4) : null;
+      const accept = t => { const whole = extractPage(t); if (whole) return whole; const r = applyEdits(cur, t); if (r.ok && !r.missed.length) return r.out; return null; };
+      const lenient = t => { if (/<!doctype html/i.test(t)) return null; const r = applyEdits(cur, t); if (r.ok) { if (r.missed.length) j.notes.push(r.missed.length + ' of the changes could not be placed and ' + (r.missed.length === 1 ? 'was' : 'were') + ' left out.'); return r.out; } return null; };
+      try { const r = await askSafe(edits, {images: im, j, label: 'Making the change', show: false, accept, lenient}); page = r.val; model = r.model; j.show && j.show(page); await wait(900); }
+      catch (e) {
+        if (e && HARD[e.code]) throw e;
+        j.phase = 'Resetting the whole page'; j.text = ''; j.current = null; j.stream = true; j.paint && j.paint();
+        const r = await askSafe(head + '\n\nReply with the complete updated HTML document.\n\nCURRENT PAGE\n' + cur, {images: im, j, label: 'Resetting the whole page', accept: t => extractPage(t), lenient: t => extractPage(t, true)});
+        page = r.val; model = r.model;
+      }
+      await finish(j, {text: page, model}, post, instruction.trim().slice(0, 140), null);
+    } catch (e) { pause(j, e); }
+  };
+  renderPress(); scrollTo(0, 0); run();
+}
+async function finish(j, out, post, note, fresh) {
+  const page = extractPage(out.text, true) || out.text;
+  j.phase = 'Filing the page'; j.paint && j.paint();
+  const meta = readMeta(page);
+  const up = await cap.assets.upload(new Blob([page], {type: 'text/plain'}), {type: 'text/plain'});
+  htmlCache.set(up.id, page);
+  const now = new Date().toISOString();
+  let id, body;
+  if (post) {
+    id = post.id;
+    const n = Math.max(0, ...(post.versions || []).map(v => v.n)) + 1;
+    body = {title: meta.title || post.title, summary: meta.summary || post.summary, theme: meta.theme, current: n,
+      versions: (post.versions || []).concat([{n, asset: up.id, at: now, note, model: out.model, notes: j.notes.slice(0, 8)}])};
+    await cap.db.doc('posts/' + id).update(body);
+  } else {
+    id = rid(8);
+    body = Object.assign({title: meta.title || 'Untitled', summary: meta.summary, theme: meta.theme, status: 'draft', createdAt: now, publishedAt: null, by: me.id,
+      current: 1, versions: [{n: 1, asset: up.id, at: now, note, model: out.model, notes: j.notes.slice(0, 8)}]}, fresh);
+    await cap.db.doc('posts/' + id).set(body);
+  }
+  j.active = false; clearInterval(j.tick); job = null;
+  if (location.hash === '#p-' + id) route(); else location.hash = 'p-' + id;
+}
+
+/* ───────────── post ───────────── */
+const shown = {key: null};
+const HELPER = '<script>(function(){var d=document.documentElement;function s(){try{parent.postMessage({compositor:1,h:Math.ceil(d.getBoundingClientRect().height)},"*")}catch(e){}}' +
+  'if(window.ResizeObserver)new ResizeObserver(s).observe(d);addEventListener("load",s);setInterval(s,1500);s();' +
+  'document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href")||"";' +
+  'if(/^https?:/i.test(h)){a.target="_blank";a.rel="noopener"}else if(h.charAt(0)==="#"){e.preventDefault();var t=document.getElementById(decodeURIComponent(h.slice(1)));' +
+  'if(t)parent.postMessage({compositor:1,to:t.getBoundingClientRect().top},"*")}},true)})();<\/script>';
+function withHelper(page) {
+  const i = page.toLowerCase().lastIndexOf('</body>');
+  return i < 0 ? page + HELPER : page.slice(0, i) + HELPER + page.slice(i);
+}
+function onFrameMessage(e) {
+  const f = $('#frame');
+  if (!f || e.source !== f.contentWindow || !e.data || e.data.compositor !== 1) return;
+  if (typeof e.data.h === 'number' && e.data.h > 40) f.style.height = Math.min(e.data.h, 60000) + 'px';
+  if (typeof e.data.to === 'number') scrollTo({top: f.getBoundingClientRect().top + scrollY + e.data.to - 12, behavior: 'smooth'});
+}
+function renderPost(full) {
+  const app = $('#app');
+  if (!store.loaded) { if (full) app.replaceChildren(bar(), el('div', {class: 'wrap state', text: store.slow ? 'The post cannot be reached yet.' : 'Opening…'})); return; }
+  const p = postById(view.id);
+  if (!visible(p)) { setTheme(null); app.replaceChildren(bar(), el('div', {class: 'wrap state', text: 'This post is not here.'})); shown.key = null; return; }
+  const v = curVersion(p);
+  setTheme(p.theme); document.title = (p.title || 'Untitled') + ' · Compositor';
+  const key = p.id + ':' + (v ? v.asset : '');
+  if (shown.key !== key) {
+    shown.key = key;
+    const frame = el('iframe', {id: 'frame', title: p.title || 'Post', sandbox: 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms', allowfullscreen: true});
+    app.replaceChildren(el('div', {id: 'top'}), el('main', null, frame), el('div', {id: 'thread'}));
+    if (v) loadHtml(v.asset).then(t => { if (shown.key === key) frame.srcdoc = withHelper(t); })
+      .catch(e => { if (shown.key === key) frame.replaceWith(el('div', {class: 'wrap state', text: sayErr(e)})); });
+  }
+  renderTop(p);
+  renderThread();
+}
+let studioEl = null, studioImgs = [];
+function buildStudio(p) {
+  const ta = el('textarea', {id: 'ask', rows: '3', placeholder: 'What should change? “Make the headline shorter.” “Put the chart first and let me drag the year.”'});
+  const add = t => { ta.value = (ta.value.trim() ? ta.value.trim() + '\n' : '') + t; ta.focus(); };
+  const note = el('p', {class: 'note'}), vers = el('div', {class: 'chips'});
+  let tab = null, st = null, pst = null;
+  const panel = el('div', {class: 'field'});
+  const tabs = el('div', {class: 'chips'});
+  const drawTabs = () => {
+    tabs.replaceChildren(
+      el('button', {class: 'chip', type: 'button', text: 'Add interactivity', onclick: () => add('Add interactive instruments where operating the idea helps the reader understand it: let the reader change the thing the text is about and see the consequence.')}),
+      el('button', {class: 'chip', type: 'button', text: 'Make it a still page', onclick: () => add('Remove the interactive parts and make this a still page.')}),
+      el('button', {class: 'chip' + (tab === 'style' ? ' on' : ''), type: 'button', 'aria-pressed': String(tab === 'style'), text: 'Restyle', onclick: () => { tab = tab === 'style' ? null : 'style'; drawTabs(); }}),
+      el('button', {class: 'chip' + (tab === 'pic' ? ' on' : ''), type: 'button', 'aria-pressed': String(tab === 'pic'), text: 'Draw a picture', onclick: () => { tab = tab === 'pic' ? null : 'pic'; drawTabs(); }}));
+    stylePanel.hidden = tab !== 'style'; picPanel.hidden = tab !== 'pic';
+  };
+  const stylePanel = el('div', {class: 'field'}, stylePicker(PAGE_STYLES, () => st, v => { st = v; const s = styleOf(PAGE_STYLES, v); if (s) add('Restyle the whole page as “' + s[1] + '”: ' + s[2] + ' Keep the content and every working part.'); }, 'page styles'));
+  const picPanel = el('div', {class: 'field'}, stylePicker(PIC_STYLES, () => pst, v => { pst = v; }, 'picture styles'),
+    pictureMaker(() => styleOf(PIC_STYLES, pst), async pic => {
+      const cur = postById(p.id) || p, r = await cap.assets.upload(pic.file, {type: 'image/svg+xml'});
+      await cap.db.doc('posts/' + p.id).update({files: (cur.files || []).concat([{id: r.id, name: pic.file.name, type: r.contentType, size: r.sizeBytes, audio: false, desc: pic.desc}])});
+      if (pic.png) studioImgs.push(pic.png);
+      add('Add the drawn picture “' + pic.file.name + '” (URL /_blob/' + r.id + ') where it fits best.');
+    }));
+  const s = el('section', {class: 'studio'}, el('div', {class: 'wrap'},
+    el('div', {class: 'field'}, el('label', {for: 'ask', text: 'Revise in plain words'}), ta), tabs, stylePanel, picPanel,
+    el('div', {class: 'line'}, el('button', {class: 'btn solid', type: 'button', text: 'Reset the page', onclick: () => { if (ta.value.trim()) { const im = studioImgs; studioImgs = []; startRevise(postById(p.id) || p, ta.value, im); } else ta.focus(); }}),
+      el('span', {class: 'lbl', text: 'Versions'}), vers), note));
+  s.dataset.post = p.id;
+  s.sync = q => { const v = curVersion(q);
+    note.textContent = (v && v.model ? 'Version ' + v.n + ' was set by ' + v.model + '. ' : '') + ((v && v.notes) || []).join(' ');
+    vers.replaceChildren(...(q.versions || []).map(x => el('button', {class: 'chip' + (x.n === q.current ? ' on' : ''), type: 'button', title: x.note || '', 'aria-pressed': String(x.n === q.current), text: 'v' + x.n,
+      onclick: async () => { if (x.n !== q.current) { try { await cap.db.doc('posts/' + q.id).update({current: x.n}); } catch (e) {} } }}))); };
+  drawTabs();
+  return s;
+}
+function renderTop(p) {
+  const top = $('#top'); if (!top) return;
+  if (!me.canEdit) { top.replaceChildren(bar()); return; }
+  const pub = p.status === 'published';
+  const setStatus = async s => { try { await cap.db.doc('posts/' + p.id).update(s === 'published' ? {status: s, publishedAt: p.publishedAt || new Date().toISOString()} : {status: s}); } catch (e) {} };
+  let armed = false;
+  const del = el('button', {class: 'btn quiet', type: 'button', text: 'Delete', onclick: async () => {
+    if (!armed) { armed = true; del.textContent = 'Delete for good?'; del.className = 'btn warn'; setTimeout(() => { armed = false; del.textContent = 'Delete'; del.className = 'btn quiet'; }, 4000); return; }
+    try { await cap.db.doc('posts/' + p.id).delete(); location.hash = ''; } catch (e) {}
+  }});
+  const b = bar(el('span', {class: 'tag' + (pub ? ' live' : ''), text: pub ? 'Published' : 'Draft'}),
+    p.kind === 'plain' ? (cap.assets ? el('button', {class: 'btn', type: 'button', text: 'Edit text', onclick: () => editPlain(postById(p.id) || p)}) : null) :
+    cap.sample && cap.assets ? el('button', {class: 'btn' + (studioOpen ? ' solid' : ''), type: 'button', 'aria-expanded': String(studioOpen), text: 'Revise', onclick: () => { studioOpen = !studioOpen; renderTop(postById(p.id) || p); }}) : null,
+    el('button', {class: 'btn' + (pub ? '' : ' solid'), type: 'button', text: pub ? 'Unpublish' : 'Publish', onclick: () => setStatus(pub ? 'draft' : 'published')}), del);
+  if (!studioOpen) { studioEl = null; top.replaceChildren(b); return; }
+  if (!studioEl || studioEl.dataset.post !== p.id || !studioEl.isConnected) studioEl = buildStudio(p);
+  studioEl.sync(p);
+  if (top.firstChild) top.firstChild.replaceWith(b); else top.append(b);
+  if (studioEl.parentNode !== top) top.append(studioEl);
+}
+
+/* ───────────── discussion ───────────── */
+let replyTo = null;
+async function myItems() { const s = await cap.db.doc('comments/' + me.id).get(); return s.exists ? ((s.data() || {}).items || []).slice() : []; }
+async function postComment(post, parent, text) {
+  const items = await myItems();
+  items.push({id: rid(10), post, parent: parent || null, text: text.slice(0, 4000), at: new Date().toISOString()});
+  await cap.db.doc('comments/' + me.id).set({items});
+}
+async function removeComment(c) {
+  const ref = cap.db.doc('comments/' + c.by), s = await ref.get();
+  if (!s.exists) return;
+  await ref.set({items: ((s.data() || {}).items || []).filter(i => i.id !== c.id)});
+}
+function sayForm(post, parent, onDone) {
+  const ta = el('textarea', {placeholder: parent ? 'Your reply' : 'Add to the discussion', 'aria-label': parent ? 'Your reply' : 'Your comment', maxlength: '4000'});
+  const note = el('span', {class: 'note'});
+  const send = el('button', {class: 'btn solid', type: 'submit', text: parent ? 'Reply' : 'Post'});
+  const form = el('form', {class: 'say', onsubmit: async e => {
+    e.preventDefault(); const t = ta.value.trim(); if (!t) { ta.focus(); return; }
+    send.disabled = true; note.textContent = ''; note.className = 'note';
+    try { await postComment(post, parent, t); ta.value = ''; onDone && onDone(); renderThread(); }
+    catch (err) { note.textContent = 'This could not be posted. Your access may be read-only.'; note.className = 'note bad'; }
+    send.disabled = false;
+  }}, ta, el('div', {class: 'line'}, note, el('span', {class: 'line'}, parent ? el('button', {class: 'btn quiet', type: 'button', text: 'Cancel', onclick: () => { replyTo = null; renderThread(); }}) : null, send)));
+  return form;
+}
+function renderThread() {
+  const host = $('#thread'); if (!host || view.name !== 'post') return;
+  const p = postById(view.id); if (!p) return;
+  if (p.status !== 'published') { host.replaceChildren(); return; }
+  const list = store.comments.filter(c => c.post === p.id);
+  const ids = new Set(list.map(c => c.id));
+  const kids = pid => list.filter(c => (c.parent && ids.has(c.parent) ? c.parent : null) === pid);
+  const canSay = !!me.id && me.canWrite !== false;
+  const draftText = {}; host.querySelectorAll('.c .say textarea').forEach(t => { draftText.reply = t.value; }); const mainTa = host.querySelector(':scope > .wrap > .say textarea'); if (mainTa) draftText.main = mainTa.value;
+  const node = c => {
+    const mine = c.by === me.id, name = names[c.by] || (c.by in names ? 'Someone' : '…');
+    return el('li', {class: 'c'}, el('header', null, el('span', {class: 'name', text: name}), c.by === p.by ? el('span', {class: 'tag', text: 'Author'}) : null, el('time', {class: 'mono', datetime: c.at, text: ago(c.at)})),
+      el('p', {class: 'body', text: c.text}),
+      el('div', {class: 'ops'}, canSay ? el('button', {class: 'link', type: 'button', text: 'Reply', onclick: () => { replyTo = c.id; renderThread(); const t = $('#thread .c .say textarea'); t && t.focus(); }}) : null,
+        mine || me.isOwner ? el('button', {class: 'link', type: 'button', text: 'Delete', onclick: () => removeComment(c).catch(() => {})}) : null),
+      replyTo === c.id ? sayForm(p.id, c.id, () => { replyTo = null; }) : null,
+      kids(c.id).length ? el('ol', {class: 'cs'}, kids(c.id).map(node)) : null);
+  };
+  const main = canSay ? sayForm(p.id, null) : el('p', {class: 'note', text: 'The discussion is open to contributors of this publication.'});
+  host.replaceChildren(el('div', {class: 'wrap thread'}, el('h2', {text: 'Discussion'}),
+    el('p', {class: 'count mono', text: list.length ? list.length + (list.length === 1 ? ' comment' : ' comments') : 'No comments yet'}), main, el('ol', {class: 'cs'}, kids(null).map(node))));
+  if (draftText.main) { const t = host.querySelector(':scope > .wrap > .say textarea'); if (t) t.value = draftText.main; }
+  if (draftText.reply) { const t = host.querySelector('.c .say textarea'); if (t) t.value = draftText.reply; }
+  const need = list.map(c => c.by).filter(i => !(i in names));
+  if (need.length) resolveNames(need).then(() => { if (view.name === 'post') renderThread(); });
+}
+
+boot();
+})();
+</script>
+</body>
+</html>

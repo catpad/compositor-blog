@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Бабочки на коре, вьюрки и случай: как отбор меняет популяции и как это увидели в природе.">
+<meta name="compositor:paper" content="#EEEDE6">
+<meta name="compositor:ink" content="#15181D">
+<meta name="compositor:accent" content="#236B45">
+<title>Естественный отбор</title>
+<style>
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/playfair-display-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/playfair-display-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-greek-wght-normal.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-cyrillic-wght-italic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-greek-wght-italic.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(fonts/source-serif-4-latin-wght-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  /* Газетная полоса, выпуск второй: та же бумага и чернила, цвет выпуска — мох (всё, что выживает и закрепляется),
+     красный — всё, что съедено или исчезло. Сетка в 12 колонок с волосяными линейками. */
+  --paper:#EEEDE6;
+  --paper-2:#E3E2D9;
+  --ink:#15181D;
+  --ink-2:#555A62;
+  --hair:rgba(21,24,29,.2);
+  --line:#236B45;
+  --alarm:#D2331F;
+  --display:"Playfair Display","Georgia","Times New Roman",serif;
+  --body:"Source Serif 4","Georgia","Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
+  font-feature-settings:"kern","liga";-webkit-font-smoothing:antialiased}
+.page{max-width:1280px;margin:0 auto;padding:22px 28px 56px}
+p{margin:0}
+p+p{margin-top:.7em}
+h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance}
+math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Source Serif 4",serif}
+.v{font-style:italic;white-space:nowrap}
+.nb{white-space:nowrap}
+
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding:7px 0 6px}
+.mast b{font-weight:500}
+.head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:32px;align-items:end;padding:18px 0 22px;border-bottom:1px solid var(--ink)}
+.head h1{grid-column:1/-1;font-weight:900;font-size:clamp(40px,9.6vw,124px);line-height:.96;letter-spacing:-.025em;margin:0 0 20px -.04em}
+.deck{grid-column:1/8;font-size:clamp(19px,2vw,25px);line-height:1.34;font-style:italic}
+.stop{grid-column:8/-1;border-left:1px solid var(--hair);padding-left:24px;font-size:15.5px;line-height:1.45}
+.kick{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.kick.acc{color:var(--line)}
+.kick.red{color:var(--alarm)}
+
+.row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:32px;padding:26px 0 30px;border-bottom:1px solid var(--ink)}
+.row>*{min-width:0}
+.ruleL{border-left:1px solid var(--hair);padding-left:32px;margin-left:-16px}
+h2{font-weight:800;font-size:clamp(25px,2.7vw,36px);line-height:1.1;letter-spacing:-.012em;margin-bottom:14px}
+h3{font-weight:700;font-size:19px;line-height:1.2;margin-bottom:8px}
+.cols2{columns:2;column-gap:28px}
+.cols2 p{break-inside:avoid-column}
+.small{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+
+.side{grid-column:1/4;display:flex;flex-direction:column;gap:22px}
+.side section+section{border-top:1px solid var(--hair);padding-top:18px}
+#c-plate{height:236px;margin-bottom:10px;background:var(--paper-2)}
+.formula{overflow-x:auto;padding:6px 0 10px;font-size:25px}
+dl.terms{margin:0;display:grid;gap:9px;font-size:15px;line-height:1.4}
+dl.terms dt{font-weight:650;display:inline}
+dl.terms dd{display:inline;margin:0;color:var(--ink-2)}
+
+.lead{grid-column:4/-1}
+.fig1{display:grid;grid-template-columns:1.22fr 1fr;gap:18px;margin-top:20px}
+canvas{display:block;width:100%;touch-action:pan-y;outline:none;-webkit-user-select:none;user-select:none}
+canvas.grab{cursor:grab}
+canvas.grab.grabbing{cursor:grabbing}
+canvas:focus-visible,button:focus-visible,.tl-rail:focus-visible{outline:2px solid var(--line);outline-offset:3px}
+#c-trunk{height:440px;cursor:crosshair}
+#c-hist{height:440px}
+#c-soot{height:70px;margin-top:8px}
+.cap{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+
+.read{display:flex;flex-wrap:wrap;gap:0;margin:14px 0 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.read>div{padding:9px 22px 10px 0;margin-right:22px;border-right:1px solid var(--hair)}
+.read>div:last-of-type{border-right:0}
+.read dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.read dd{margin:2px 0 0;font-family:var(--mono);font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;white-space:pre;height:1.5em;line-height:1.5em}
+.read .grow{flex:1;border:0;margin:0;padding:0}
+.play{align-self:center;flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);cursor:pointer;position:relative;padding:0}
+.play:hover{background:var(--ink)}
+.play::before{content:"";position:absolute;left:16px;top:12px;border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent}
+.play:hover::before{border-left-color:var(--paper)}
+.play.on::before{left:13px;top:13px;width:5px;height:14px;border:0;border-left:5px solid var(--ink);border-right:5px solid var(--ink)}
+.play.on:hover::before{border-color:var(--paper)}
+
+.cond-text{grid-column:1/5}
+.cond-fig{grid-column:5/-1}
+#c-beak{height:400px;margin-top:14px}
+.sws{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:flex;align-items:center;gap:10px;font-family:var(--body);font-size:15.5px;line-height:1.2;color:var(--ink);background:var(--paper);
+  border:1.5px solid var(--ink);border-radius:999px;padding:7px 16px 7px 8px;cursor:pointer;text-align:left}
+.sw i{flex:none;width:34px;height:20px;border-radius:999px;border:1.5px solid var(--ink);position:relative;background:var(--paper)}
+.sw i::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:var(--ink);transition:transform .18s}
+.sw[aria-pressed="true"] i{background:var(--line);border-color:var(--line)}
+.sw[aria-pressed="true"] i::after{transform:translateX(14px);background:var(--paper)}
+.sw[aria-pressed="false"]{color:var(--ink-2);border-color:var(--ink-2)}
+.sw[aria-pressed="false"] span{text-decoration:line-through;text-decoration-thickness:1px}
+
+.half{grid-column:span 6}
+#c-drift{height:340px}
+#c-nrail{height:64px;margin-top:4px}
+#c-fit{height:404px}
+.lede{max-width:34em}
+.half .read>div{padding-right:14px;margin-right:14px}
+.half .read dd{font-size:16.5px}
+
+.tl{grid-column:1/-1}
+.tl-rail{position:relative;height:74px;margin:22px 22px 0;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.tl-rail.grabbing{cursor:grabbing}
+.tl-line{position:absolute;left:0;right:0;top:20px;height:1px;background:var(--ink)}
+.tl-fill{position:absolute;left:0;top:19px;height:3px;background:var(--line);width:0}
+.tl-st{position:absolute;top:0;width:0;height:74px;pointer-events:none}
+.tl-st i{position:absolute;left:-4.5px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
+.tl-st.past i{background:var(--line);border-color:var(--line)}
+.tl-st span{position:absolute;top:38px;left:0;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);white-space:nowrap}
+.tl-st.act span{color:var(--ink);font-weight:500}
+.tl-st.first span{transform:translateX(-12px)}
+.tl-st.last span{transform:translateX(calc(-100% + 12px))}
+.tl-handle{position:absolute;top:4px;left:0;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:var(--paper);border:2px solid var(--line);box-shadow:0 2px 0 rgba(21,24,29,.18)}
+.tl-handle::after{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--line)}
+.tl-panel{display:grid;grid-template-columns:minmax(200px,.7fr) 1.9fr 1.5fr;column-gap:32px;margin-top:14px;border-top:1px solid var(--hair);padding-top:18px}
+.tl-date{font-family:var(--display);font-weight:800;font-size:clamp(34px,4.2vw,56px);line-height:1.05;letter-spacing:-.02em;height:1.2em;white-space:nowrap}
+.tl-text{font-size:18px;line-height:1.42;height:7.2em;overflow:hidden}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:7px 10px;margin-top:2px}
+.chip{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;line-height:1.25;height:34px;display:flex;align-items:center;padding:0 10px;border:1.5px solid var(--hair);color:var(--ink-2);transition:background .3s,color .3s,border-color .3s}
+.chip.on{background:var(--line);border-color:var(--line);color:var(--paper)}
+
+.status{grid-column:1/-1}
+.status-cols{display:grid;grid-template-columns:repeat(3,1fr);column-gap:32px}
+.status-cols>div+div{border-left:1px solid var(--hair);padding-left:32px;margin-left:-16px}
+.colophon{padding-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;line-height:1.6;color:var(--ink-2)}
+
+@media (max-width:1040px){
+  .side{grid-column:1/-1;order:2;flex-direction:row;gap:28px;margin-top:28px;padding-top:24px;border-top:1px solid var(--hair)}
+  .lead.ruleL,.cond-fig.ruleL{border-left:0;padding-left:0;margin-left:0}
+  .side section{flex:1;min-width:0}
+  .side section+section{border-top:0;padding-top:0;border-left:1px solid var(--hair);padding-left:28px}
+  .lead{grid-column:1/-1}
+  .cond-text,.cond-fig{grid-column:1/-1}
+  .cond-text{margin-bottom:18px}
+  .half{grid-column:1/-1}
+  .half.ruleL{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--hair);margin-top:28px;padding-top:26px}
+  .deck{grid-column:1/-1}
+  .stop{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--hair);margin-top:18px;padding-top:14px}
+  .tl-panel{grid-template-columns:1fr 1fr}
+  .tl-date{grid-column:1/-1;margin-bottom:8px}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .page{padding:14px 16px 40px}
+  .row,.head{column-gap:0}
+  .side{flex-direction:column}
+  .side section+section{border-left:0;padding-left:0;border-top:1px solid var(--hair);padding-top:18px}
+  .cols2{columns:1}
+  .fig1{grid-template-columns:1fr}
+  #c-trunk{height:400px}
+  #c-hist{height:280px}
+  #c-beak{height:340px}
+  #c-fit{height:340px}
+  .read>div{padding-right:14px;margin-right:14px}
+  .read dd{font-size:16px}
+  .tl-rail{margin:22px 14px 0}
+  .tl-st span{display:none}
+  .tl-st.act span,.tl-st.first span,.tl-st.last span{display:block}
+  .tl-st.act:not(.first):not(.last) span{background:var(--paper);padding:0 4px;z-index:1}
+  .tl-panel{grid-template-columns:1fr}
+  .tl-text{height:9em;margin-bottom:14px}
+  .status-cols{grid-template-columns:1fr;row-gap:18px}
+  .status-cols>div+div{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--hair);padding-top:16px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="mast"><b>Одна идея на полосу</b><span>№ 2 · воскресенье, 22 ноября 2026 года</span><span>Биология</span></div>
+
+<header class="head">
+  <h1>Естественный отбор</h1>
+  <p class="deck">В 1859 году Чарльз Дарвин объяснил, откуда у живого берётся приспособленность. Потомки чуть отличаются друг от друга, отличия наследуются, а выживают не все.</p>
+  <div class="stop">
+    <span class="kick acc">К дате</span>
+    <p>Во вторник, 24 ноября, книге «Происхождение видов» исполняется 167 лет. Первый тираж в 1250 экземпляров книготорговцы разобрали в день выхода.</p>
+  </div>
+</header>
+
+<div class="row">
+  <aside class="side">
+    <section>
+      <canvas id="c-plate" role="img" aria-label="Светлая и тёмная формы берёзовой пяденицы"></canvas>
+      <h3>Две формы одной бабочки отличаются одним геном</h3>
+      <p class="small">Берёзовая пяденица, <i>Biston betularia</i>. Слева светлая форма <i>typica</i>, справа тёмная <i>carbonaria</i>. Тёмный вариант гена доминирует: бабочке хватает одной его копии, чтобы родиться чёрной.</p>
+    </section>
+    <section>
+      <h3>Главная формула отбора умещается в три буквы</h3>
+      <div class="formula">
+        <math display="block"><mi>R</mi><mo>=</mo><msup><mi>h</mi><mn>2</mn></msup><mo>&#183;</mo><mi>S</mi></math>
+      </div>
+      <p class="small"><i>S</i> показывает, насколько оставившие потомство отличаются от среднего. <i>h</i>² означает долю отличий, которая передаётся по наследству. <i>R</i> равно сдвигу, который получат дети.</p>
+    </section>
+    <section>
+      <h3>Четыре термина помогают читать эту полосу</h3>
+      <dl class="terms">
+        <div><dt>Приспособленность.</dt> <dd>Число потомков, доживших до собственного размножения.</dd></div>
+        <div><dt>Аллель.</dt> <dd>Один из вариантов гена.</dd></div>
+        <div><dt>Мутация.</dt> <dd>Случайная ошибка при копировании ДНК. Из мутаций берутся новые варианты.</dd></div>
+        <div><dt>Дрейф.</dt> <dd>Случайные колебания частот, не связанные с пользой.</dd></div>
+      </dl>
+    </section>
+  </aside>
+
+  <article class="lead ruleL">
+    <span class="kick">Суть идеи</span>
+    <h2>Птицы съедают заметных бабочек, и популяция меняет цвет</h2>
+    <div class="cols2">
+      <p>На стволе сидят бабочки двух форм. Каждое поколение птицы съедают часть из них, и чаще тех, кого лучше видно на коре. Уцелевшие оставляют потомство, а цвет передаётся по наследству.</p>
+      <p>Добавьте копоти: лишайник погибнет, кора потемнеет, и через несколько поколений ствол заполнят тёмные бабочки. Ни одна из них не меняется при жизни, меняется состав популяции. Можно охотиться и самому: щелчок по бабочке её съедает.</p>
+    </div>
+    <div class="fig1">
+      <div>
+        <div class="cap">Ствол дерева</div>
+        <canvas id="c-trunk" role="img" aria-label="Бабочки на коре"></canvas>
+      </div>
+      <div>
+        <div class="cap">Состав популяции</div>
+        <canvas id="c-hist" role="img" aria-label="Доля тёмных бабочек по поколениям"></canvas>
+      </div>
+    </div>
+    <canvas id="c-soot" class="grab" tabindex="0" role="slider" aria-label="Копоть в воздухе"></canvas>
+    <dl class="read">
+      <div><dt>Поколение</dt><dd id="r-gen"> </dd></div>
+      <div><dt>Тёмных бабочек</dt><dd id="r-dark"> </dd></div>
+      <div><dt>Съедено светлых</dt><dd id="r-el"> </dd></div>
+      <div><dt>Съедено тёмных</dt><dd id="r-ed"> </dd></div>
+      <span class="grow"></span>
+      <button class="play" id="play" type="button" aria-label="Запустить смену поколений"></button>
+    </dl>
+  </article>
+</div>
+
+<div class="row">
+  <article class="cond-text">
+    <span class="kick">Из чего состоит механизм</span>
+    <h2>Отбор работает только при трёх условиях сразу</h2>
+    <p>На Галапагосах у земляных вьюрков измеряют глубину клюва. В засуху остаются только крупные твёрдые семена, и птицы с глубоким клювом выживают чаще.</p>
+    <p>Столбики показывают, какие клювы есть в популяции. Зелёным отмечены те, кто оставил потомство. Передвиньте выгодный размер и следите, догонит ли его популяция.</p>
+    <p>Уберите любое из трёх условий, и погоня прекращается. Одинаковым птицам не из кого выбирать. Без наследования дети начинают с прежнего места. Без связи между клювом и выживанием популяция бредёт наугад.</p>
+  </article>
+  <div class="cond-fig ruleL">
+    <div class="sws">
+      <button class="sw" id="sw-v" type="button" aria-pressed="true"><i></i><span>Птицы отличаются друг от друга</span></button>
+      <button class="sw" id="sw-h" type="button" aria-pressed="true"><i></i><span>Дети похожи на родителей</span></button>
+      <button class="sw" id="sw-s" type="button" aria-pressed="true"><i></i><span>От клюва зависит выживание</span></button>
+    </div>
+    <canvas id="c-beak" class="grab" tabindex="0" role="slider" aria-label="Выгодная глубина клюва"></canvas>
+    <dl class="read">
+      <div><dt>Выгодный клюв</dt><dd id="r-opt"> </dd></div>
+      <div><dt>Средний клюв</dt><dd id="r-mean"> </dd></div>
+      <div><dt>Родители отличаются на (S)</dt><dd id="r-S"> </dd></div>
+      <div><dt>Сдвиг у детей (R)</dt><dd id="r-R"> </dd></div>
+    </dl>
+  </div>
+</div>
+
+<div class="row">
+  <article class="half">
+    <span class="kick red">Соперник отбора</span>
+    <h2>В маленькой популяции случай сильнее отбора</h2>
+    <p class="lede">Новый вариант гена даёт преимущество в три процента и поначалу есть у каждой десятой особи. Двадцать четыре одинаковые популяции стартуют с этого места. В большой популяции вариант уверенно побеждает везде. В маленькой его судьбу решает случай: кому просто повезло оставить потомство.</p>
+    <div class="cap" style="margin-top:16px">Доля особей с новым вариантом</div>
+    <canvas id="c-drift" role="img" aria-label="Частота варианта в двадцати четырёх популяциях"></canvas>
+    <canvas id="c-nrail" class="grab" tabindex="0" role="slider" aria-label="Размер популяции"></canvas>
+    <dl class="read">
+      <div><dt>Особей в популяции</dt><dd id="r-N"> </dd></div>
+      <div><dt>Вариант закрепился</dt><dd id="r-fix"> </dd></div>
+      <div><dt>Вариант исчез</dt><dd id="r-lost"> </dd></div>
+    </dl>
+  </article>
+  <article class="half ruleL">
+    <span class="kick">Проверка на природе</span>
+    <h2>Бабочки Манчестера почернели за полвека и посветлели обратно</h2>
+    <p class="lede">Первую чёрную пяденицу поймали в Манчестере в 1848 году, к 1895 году чёрных стало 98 процентов. Когда воздух очистили, всё пошло назад. Потяните кривую к точкам наблюдений: её крутизна и есть сила отбора. В такой простой модели подъёму нужно преимущество около <span id="t-rise">20</span>&nbsp;процентов за поколение, спаду около <span id="t-fall">15</span>.</p>
+    <div class="cap" style="margin-top:16px">Доля тёмных бабочек в окрестностях Манчестера</div>
+    <canvas id="c-fit" class="grab" tabindex="0" role="slider" aria-label="Сила отбора"></canvas>
+    <dl class="read">
+      <div><dt>Преимущество незаметных</dt><dd id="r-s"> </dd></div>
+      <div><dt>Промах на подъёме</dt><dd id="r-er"> </dd></div>
+      <div><dt>Промах на спаде</dt><dd id="r-ef"> </dd></div>
+    </dl>
+  </article>
+</div>
+
+<div class="row">
+  <article class="tl">
+    <span class="kick">От догадки до гена</span>
+    <h2>Отбор сначала вывели из рассуждений, потом увидели в природе</h2>
+    <div class="tl-rail" id="tl-rail" tabindex="0" role="slider" aria-label="Год на ленте событий">
+      <div class="tl-line"></div><div class="tl-fill" id="tl-fill"></div>
+      <div class="tl-handle" id="tl-handle"></div>
+    </div>
+    <div class="tl-panel">
+      <div class="tl-date" id="tl-date"> </div>
+      <p class="tl-text" id="tl-text"> </p>
+      <div>
+        <div class="cap">Что к этому году уже есть</div>
+        <div class="chips" id="tl-chips">
+          <span class="chip">идея отбора</span><span class="chip">законы наследования</span>
+          <span class="chip">математическая теория</span><span class="chip">молекула наследственности</span>
+          <span class="chip">отбор измерен в природе</span><span class="chip">найден ген бабочки</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="row" style="border-bottom:3px solid var(--ink)">
+  <article class="status">
+    <span class="kick acc">Положение дел</span>
+    <h2>Отбор давно перестал быть гипотезой, спорят о его доле</h2>
+    <div class="status-cols">
+      <div><h3>Что установлено</h3><p>Отбор много раз измерен напрямую: у бабочек на коре, у вьюрков после засухи, у бактерий в колбах и в больницах, где за считаные годы распространяется устойчивость к антибиотикам. Три условия выполняются почти везде, поэтому он идёт постоянно.</p></div>
+      <div><h3>О чём спорят</h3><p>Какую долю изменений в ДНК создаёт отбор, а какую закрепляет случай. На что именно он действует: на гены, на особей или на группы. Насколько предсказуем его результат, если запустить всё заново.</p></div>
+      <div><h3>Чего отбор не умеет</h3><p>Он не заглядывает вперёд и не заказывает нужные мутации, а только перебирает то, что уже есть. Формула «выживает сильнейший» неточна: выигрывает тот, кто оставил больше потомков.</p></div>
+    </div>
+  </article>
+</div>
+<p class="colophon">Бабочки на стволе и вьюрки в столбиках — модели с усиленным отбором, чтобы перемены были видны за минуту. Точки на графике Манчестера: наблюдения Эдлстона (1848, 1864), сводка 1895 года, ловушки Кларков в Колди-Коммон (1959, 1991), учёты 2002 года.</p>
+
+</div>
+<script>
+(function(){
+'use strict';
+const C={ink:'#15181D',ink2:'#555A62',acc:'#236B45',red:'#D2331F',paper:'#EEEDE6',paper2:'#E3E2D9',hair:'rgba(21,24,29,.16)',hair2:'rgba(21,24,29,.34)'};
+const ACC='35,107,69',RED='210,51,31';
+const MONO='"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
+const SERIF='"Source Serif 4",Georgia,serif';
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const MINUS='−';
+const all=[];
+function rng(seed){let a=seed>>>0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+const gauss=r=>Math.sqrt(-2*Math.log(1-r()+1e-12))*Math.cos(6.283185307*r());
+const R0=rng(20261122);
+
+function canvas(id,draw){
+  const cv=$(id),ctx=cv.getContext('2d'),o={cv,ctx,w:0,h:0,dirty:true};
+  const fit=()=>{const r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);
+    o.w=r.width;o.h=r.height;o.d=d;cv.width=Math.max(1,Math.round(r.width*d));cv.height=Math.max(1,Math.round(r.height*d));
+    ctx.setTransform(d,0,0,d,0,0);o.dirty=true;};
+  new ResizeObserver(fit).observe(cv);fit();
+  o.paint=()=>{if(o.dirty&&o.w>0){o.dirty=false;ctx.clearRect(0,0,o.w,o.h);draw(ctx,o.w,o.h);}};
+  all.push(o);return o;
+}
+function dragger(el,move,start,end){
+  let on=false;
+  const p=e=>{const r=el.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top,r.width,r.height];};
+  el.addEventListener('pointerdown',e=>{on=true;try{el.setPointerCapture(e.pointerId);}catch(_){}
+    el.classList.add('grabbing');start&&start();move.apply(null,p(e));});
+  el.addEventListener('pointermove',e=>{if(on)move.apply(null,p(e));});
+  const stop=()=>{if(on){on=false;el.classList.remove('grabbing');end&&end();}};
+  el.addEventListener('pointerup',stop);el.addEventListener('pointercancel',stop);
+}
+function keys(el,fn){el.addEventListener('keydown',e=>{
+  const k={ArrowLeft:-1,ArrowRight:1,ArrowUp:1,ArrowDown:-1}[e.key];
+  if(k){e.preventDefault();fn(k*(e.shiftKey?5:1));}});}
+function txt(ctx,s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.s||11)+'px '+(o.f||MONO);ctx.fillStyle=o.c||C.ink2;
+  ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'alphabetic';ctx.fillText(s,x,y);}
+function seg(ctx,x1,y1,x2,y2,c,w,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=c;ctx.lineWidth=w||1;
+  ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([]);}
+const F=(v,d)=>v.toFixed(d).replace('.',',').replace('-',MINUS);
+const group=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+function handle(ctx,x,y,col,r){r=r||9;
+  ctx.beginPath();ctx.arc(x,y+1.5,r,0,7);ctx.fillStyle='rgba(21,24,29,.2)';ctx.fill();
+  ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.arc(x,y,r-5,0,7);ctx.fillStyle=col;ctx.fill();}
+function grip(ctx,hx,y0,y1){
+  seg(ctx,hx,y0-8,hx,y1+6,C.ink,1.5);
+  ctx.beginPath();ctx.roundRect(hx-9,y0-6,18,34,5);ctx.fillStyle='rgba(21,24,29,.2)';ctx.fill();
+  ctx.beginPath();ctx.roundRect(hx-9,y0-8,18,34,5);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.75;ctx.stroke();
+  for(let i=-1;i<=1;i++)seg(ctx,hx+i*3.5,y0+2,hx+i*3.5,y0+16,C.ink,1);}
+
+/* ════════ бабочка ════════ */
+function fore(c,s){c.beginPath();c.moveTo(s*.05,-.25);
+  c.bezierCurveTo(s*.34,-.52,s*.76,-.58,s*1.0,-.33);
+  c.bezierCurveTo(s*.97,-.14,s*.82,.08,s*.62,.2);
+  c.bezierCurveTo(s*.42,.17,s*.2,.09,s*.05,.05);c.closePath();}
+function hind(c,s){c.beginPath();c.moveTo(s*.05,-.02);
+  c.bezierCurveTo(s*.3,.0,s*.6,.08,s*.73,.2);
+  c.bezierCurveTo(s*.78,.42,s*.55,.64,s*.31,.62);
+  c.bezierCurveTo(s*.18,.58,s*.08,.42,s*.05,.26);c.closePath();}
+function drawMoth(c,R,dark,seed,shadow){
+  const r=rng(seed);c.save();c.scale(R,R);c.lineJoin='round';
+  const base=dark?['#2A2523','#171413']:['#ECE9DD','#D3CFC0'];
+  const wings=[[hind,-1],[hind,1],[fore,-1],[fore,1]];
+  if(shadow){c.save();c.shadowColor='rgba(0,0,0,.26)';c.shadowBlur=.06*R;c.shadowOffsetY=.03*R;c.fillStyle=base[1];
+    for(const [f,s] of wings){f(c,s);c.fill();}c.restore();}
+  for(const [f,s] of wings){
+    const isF=f===fore;
+    f(c,s);const g=c.createRadialGradient(s*.05,-.05,.02,s*.4,0,.95);g.addColorStop(0,base[0]);g.addColorStop(1,base[1]);c.fillStyle=g;c.fill();
+    c.save();f(c,s);c.clip();
+    /* жилки */
+    c.lineWidth=.006;c.strokeStyle=dark?'rgba(120,108,98,.32)':'rgba(90,84,74,.28)';
+    const n=isF?7:6;for(let i=0;i<n;i++){const a=isF?(-.62+i*.19):(.02+i*.24);c.beginPath();c.moveTo(s*.06,isF?-.12:.08);
+      c.quadraticCurveTo(s*(.06+.5*Math.cos(a)),(isF?-.12:.08)+.5*Math.sin(a)*.9,s*(.06+1.1*Math.cos(a)),(isF?-.12:.08)+1.1*Math.sin(a));c.stroke();}
+    if(!dark){
+      /* поперечные волнистые перевязи */
+      for(const rad of(isF?[.36,.66]:[.42])){c.beginPath();
+        for(let k=0;k<=24;k++){const a=(isF?-1.15:-.2)+k/24*(isF?1.75:1.6),rr=rad+.018*Math.sin(k*1.3+rad*9)+(r()-.5)*.022;
+          const x=s*(.05+rr*Math.cos(a)),y=(isF?-.1:.06)+rr*Math.sin(a);k?c.lineTo(x,y):c.moveTo(x,y);}
+        c.strokeStyle='rgba(38,33,29,'+(.32+.2*r()).toFixed(2)+')';c.lineWidth=.008+.008*r();c.setLineDash([.03+.03*r(),.012]);c.stroke();c.setLineDash([]);}
+      /* перец */
+      for(let i=0;i<(isF?330:190);i++){const x=s*(r()*1.02),y=-.6+r()*1.25,rr=.004+.013*r()*r();
+        c.fillStyle='rgba(28,24,21,'+(.35+.55*r()).toFixed(2)+')';c.beginPath();c.ellipse(x,y,rr*(1+r()),rr,r()*3,0,7);c.fill();}
+      for(let i=0;i<24;i++){const x=s*(r()*1.02),y=-.6+r()*1.25;c.fillStyle='rgba(120,112,92,.22)';c.beginPath();c.arc(x,y,.02+.03*r(),0,7);c.fill();}
+    }else{
+      for(let i=0;i<70;i++){const x=s*(r()*1.02),y=-.6+r()*1.25;c.fillStyle='rgba(96,86,78,'+(.1+.2*r()).toFixed(2)+')';c.beginPath();c.arc(x,y,.004+.012*r(),0,7);c.fill();}
+      const g2=c.createLinearGradient(0,-.5,s*1,.3);g2.addColorStop(0,'rgba(110,84,60,.16)');g2.addColorStop(1,'rgba(0,0,0,0)');c.fillStyle=g2;c.fillRect(-1.1,-.7,2.2,1.5);
+    }
+    /* тёмная кайма по краю */
+    f(c,s);c.lineWidth=.05;c.strokeStyle=dark?'rgba(0,0,0,.45)':'rgba(70,62,54,.2)';c.stroke();
+    c.restore();
+    f(c,s);c.lineWidth=.012;c.strokeStyle=dark?'rgba(0,0,0,.8)':'rgba(52,46,40,.42)';c.stroke();
+  }
+  /* усики */
+  c.lineCap='round';c.strokeStyle=dark?'#0E0C0B':'#3B352F';c.lineWidth=.014;
+  for(const s of[-1,1]){c.beginPath();c.moveTo(s*.025,-.3);c.quadraticCurveTo(s*.1,-.48,s*.33,-.6);c.stroke();
+    c.lineWidth=.006;for(let k=1;k<9;k++){const t=k/9,x=s*(.025*(1-t)*(1-t)+2*.1*t*(1-t)+.33*t*t),y=-.3*(1-t)*(1-t)-2*.48*t*(1-t)-.6*t*t;
+      c.beginPath();c.moveTo(x,y);c.lineTo(x+s*.025,y+.03);c.stroke();}c.lineWidth=.014;}
+  /* тело */
+  const bg=c.createLinearGradient(-.1,0,.1,0);
+  if(dark){bg.addColorStop(0,'#0F0D0C');bg.addColorStop(.5,'#2A2522');bg.addColorStop(1,'#0F0D0C');}
+  else{bg.addColorStop(0,'#BDB8A6');bg.addColorStop(.5,'#F3F0E6');bg.addColorStop(1,'#BDB8A6');}
+  c.fillStyle=bg;c.beginPath();c.ellipse(0,.1,.07,.3,0,0,7);c.fill();
+  c.beginPath();c.ellipse(0,-.17,.095,.13,0,0,7);c.fill();
+  c.beginPath();c.arc(0,-.3,.055,0,7);c.fill();
+  c.strokeStyle=dark?'rgba(70,62,56,.5)':'rgba(40,35,30,.45)';c.lineWidth=.008;
+  for(let k=0;k<7;k++){const y=-.02+k*.055,wd=.07*Math.sqrt(Math.max(0,1-Math.pow((y-.1)/.3,2)));c.beginPath();c.moveTo(-wd,y);c.quadraticCurveTo(0,y+.02,wd,y);c.stroke();}
+  for(let i=0;i<46;i++){const a=r()*6.28,rr=r();const x=.09*rr*Math.cos(a),y=-.17+.125*rr*Math.sin(a);
+    c.strokeStyle=dark?'rgba(80,72,66,.5)':'rgba(48,42,36,.5)';c.lineWidth=.006;c.beginPath();c.moveTo(x,y);c.lineTo(x+(r()-.5)*.02,y+.03);c.stroke();}
+  if(dark)for(const s of[-1,1]){c.fillStyle='rgba(235,230,215,.85)';c.beginPath();c.arc(s*.085,-.24,.014,0,7);c.fill();}
+  c.restore();
+}
+const SPX=168,NVAR=5,SPR={0:[],1:[]};
+for(const d of[0,1])for(let v=0;v<NVAR;v++){const cv=document.createElement('canvas');cv.width=cv.height=SPX;const c=cv.getContext('2d');
+  c.translate(SPX/2,SPX/2);drawMoth(c,SPX/2*.86,!!d,901+v*37+d*1000,true);SPR[d].push(cv);}
+
+canvas('c-plate',(ctx,w,h)=>{
+  const R=Math.min(w/4.55,h/1.62);
+  ctx.save();ctx.translate(w*.27,h*.47);ctx.rotate(-.07);drawMoth(ctx,R,false,4242,true);ctx.restore();
+  ctx.save();ctx.translate(w*.73,h*.47);ctx.rotate(.06);drawMoth(ctx,R,true,7171,true);ctx.restore();
+  txt(ctx,'f. typica',w*.27,h-14,{a:'center',f:SERIF,s:13.5,c:C.ink});txt(ctx,'f. carbonaria',w*.73,h-14,{a:'center',f:SERIF,s:13.5,c:C.ink});
+});
+
+/* ════════ кора ════════ */
+function makeBark(sooty,seed){
+  const W=960,H=600,cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d'),r=rng(seed);
+  c.fillStyle=sooty?'#2A2623':'#D8D5C9';c.fillRect(0,0,W,H);
+  const blobs=sooty?['#352F2B','#211D1B','#3B342F','#1A1715']:['#E6E3D5','#D0D4C4','#C6CBBB','#DCD7C0','#C3C0B2','#EDEBE0','#BDC3B3'];
+  for(let i=0;i<(sooty?170:260);i++){const x=r()*W,y=r()*H,rad=14+r()*(sooty?70:58),col=blobs[r()*blobs.length|0];
+    const g=c.createRadialGradient(x,y,0,x,y,rad);g.addColorStop(0,col);g.addColorStop(.55,col);g.addColorStop(1,col+'00');
+    c.globalAlpha=.3+.45*r();c.fillStyle=g;c.beginPath();c.ellipse(x,y,rad*(.7+r()*.7),rad,r()*3,0,7);c.fill();}
+  c.globalAlpha=1;
+  if(!sooty){/* розетки лишайника с фестончатым краем */
+    for(let i=0;i<70;i++){const x=r()*W,y=r()*H,rad=9+r()*30,n=9+(r()*8|0),ph=r()*6;
+      c.beginPath();for(let k=0;k<=60;k++){const a=k/60*6.2832,rr=rad*(1+.13*Math.sin(a*n+ph)+.06*Math.sin(a*3+ph));const px=x+rr*Math.cos(a),py=y+rr*Math.sin(a)*.9;k?c.lineTo(px,py):c.moveTo(px,py);}
+      c.closePath();c.fillStyle=['rgba(230,230,219,.55)','rgba(204,210,194,.5)','rgba(220,215,190,.45)'][r()*3|0];c.fill();
+      c.strokeStyle='rgba(108,116,96,.42)';c.lineWidth=1;c.stroke();
+      c.strokeStyle='rgba(120,128,108,.22)';for(let q=.35;q<1;q+=.3){c.beginPath();c.ellipse(x,y,rad*q,rad*q*.9,0,0,7);c.stroke();}}
+  }
+  /* трещины коры */
+  for(let i=0;i<(sooty?46:34);i++){let x=r()*W,y=r()*H*.9;const len=40+r()*230;c.beginPath();c.moveTo(x,y);
+    for(let t=0;t<len;t+=8){x+=(r()-.5)*5;y+=8;c.lineTo(x,y);}
+    c.strokeStyle=sooty?'rgba(0,0,0,'+(.45+.4*r()).toFixed(2)+')':'rgba(64,56,46,'+(.25+.3*r()).toFixed(2)+')';c.lineWidth=.8+r()*2.6;c.lineCap='round';c.stroke();
+    if(sooty){c.strokeStyle='rgba(96,86,76,.16)';c.lineWidth=1;c.translate(2.5,0);c.stroke();c.translate(-2.5,0);}}
+  /* чечевички */
+  for(let i=0;i<(sooty?50:70);i++){const x=r()*W,y=r()*H,l=5+r()*18;
+    c.strokeStyle=sooty?'rgba(8,7,6,.6)':'rgba(58,50,42,'+(.28+.3*r()).toFixed(2)+')';c.lineWidth=1+r()*1.8;c.beginPath();c.moveTo(x,y);c.lineTo(x+l,y+(r()-.5)*2);c.stroke();}
+  /* крап */
+  for(let i=0;i<(sooty?1500:3400);i++){const x=r()*W,y=r()*H,rr=.5+1.5*r()*r();
+    c.fillStyle=sooty?(r()<.12?'rgba(110,100,90,.3)':'rgba(6,5,5,.5)'):'rgba(30,26,22,'+(.3+.5*r()).toFixed(2)+')';
+    c.beginPath();c.ellipse(x,y,rr*(1+r()),rr,r()*3,0,7);c.fill();}
+  return cv;
+}
+const BARK=[makeBark(false,11),makeBark(true,29)];
+
+/* ════════ 1. Ствол ════════ */
+const NM=44,KEAT=18,T_IN=.35,T_HUNT=1.25,T_OUT=.3;
+const S1={soot:.06,gen:0,phase:'in',t:0,moths:[],hist:[],el:0,ed:0,pecks:0,nextPeck:0,play:!reduce,rings:[]};
+function place(){const pts=[];let tries=0;
+  while(pts.length<NM&&tries<6000){tries++;const x=.07+R0()*.86,y=.09+R0()*.82;let ok=true;
+    for(const p of pts){const dx=(p[0]-x)*1.25,dy=p[1]-y;if(dx*dx+dy*dy<.0098){ok=false;break;}}if(ok)pts.push([x,y]);}
+  while(pts.length<NM)pts.push([.07+R0()*.86,.09+R0()*.82]);return pts;}
+function spawn(al){const pts=place();S1.moths=al.map((a,i)=>({x:pts[i][0],y:pts[i][1],rot:(R0()-.5)*2.4+(R0()<.25?3.14:0),a,dark:(a[0]|a[1])?1:0,v:R0()*NVAR|0,alive:true,die:0}));
+  S1.phase='in';S1.t=0;S1.el=0;S1.ed=0;S1.pecks=0;}
+function share(){let d=0;for(const m of S1.moths)d+=m.dark;return d/S1.moths.length;}
+function record(){S1.hist.push({g:S1.gen,d:share(),s:S1.soot});if(S1.hist.length>400)S1.hist.shift();hist.dirty=true;read1();}
+function weight(m){const tone=m.dark?.14:.86,bark=.84-.7*S1.soot,c=Math.abs(tone-bark);return .3+2.6*Math.pow(c,1.2);}
+function eat(m,now){if(!m.alive)return;m.alive=false;m.die=now;S1.pecks++;if(m.dark)S1.ed++;else S1.el++;S1.rings.push({x:m.x,y:m.y,at:now});read1();trunk.dirty=true;}
+function peck(now){const al=S1.moths.filter(m=>m.alive);if(!al.length)return;let tot=0;const ws=al.map(m=>{const w=weight(m);tot+=w;return w;});
+  let u=R0()*tot;for(let i=0;i<al.length;i++){u-=ws[i];if(u<=0){eat(al[i],now);return;}}eat(al[al.length-1],now);}
+function breed(){const sv=S1.moths.filter(m=>m.alive),kids=[];
+  for(let i=0;i<NM;i++){const A=sv[R0()*sv.length|0],B=sv[R0()*sv.length|0],a=[A.a[R0()<.5?0:1],B.a[R0()<.5?0:1]];
+    for(let j=0;j<2;j++)if(R0()<.004)a[j]=1-a[j];kids.push(a);}
+  S1.gen++;spawn(kids);record();}
+(function(){const al=[];for(let i=0;i<NM;i++)al.push(i<3?[1,0]:[0,0]);spawn(al);S1.phase='hunt';S1.t=.2;S1.nextPeck=.3;})();
+const trunk=canvas('c-trunk',(ctx,w,h)=>{
+  ctx.drawImage(BARK[0],0,0,w,h);ctx.globalAlpha=S1.soot;ctx.drawImage(BARK[1],0,0,w,h);ctx.globalAlpha=1;
+  const g=ctx.createLinearGradient(0,0,w,0);g.addColorStop(0,'rgba(10,8,6,.5)');g.addColorStop(.16,'rgba(10,8,6,0)');g.addColorStop(.8,'rgba(10,8,6,0)');g.addColorStop(1,'rgba(10,8,6,.55)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  const SP=clamp(w/8.6,46,70),now=performance.now();trunk.sp=SP;
+  const ain=S1.phase==='in'?clamp(S1.t/T_IN,0,1):1,aout=S1.phase==='out'?1:1;
+  for(const m of S1.moths){let a=ain*aout,sc=1;
+    if(!m.alive){const u=(now-m.die)/320;if(u>=1)continue;a*=1-u;sc=1-.35*u;}
+    ctx.save();ctx.translate(m.x*w,m.y*h);ctx.rotate(m.rot);ctx.scale(sc,sc);ctx.globalAlpha=a;ctx.drawImage(SPR[m.dark][m.v],-SP/2,-SP/2,SP,SP);ctx.restore();}
+  ctx.globalAlpha=1;
+  for(const q of S1.rings){const u=(now-q.at)/520;if(u>1)continue;
+    ctx.beginPath();ctx.arc(q.x*w,q.y*h,SP*.3+u*SP*.42,0,7);ctx.strokeStyle='rgba('+RED+','+(1-u).toFixed(2)+')';ctx.lineWidth=2.25;ctx.stroke();}
+  ctx.strokeStyle=C.ink;ctx.lineWidth=1;ctx.strokeRect(.5,.5,w-1,h-1);
+});
+const hist=canvas('c-hist',(ctx,w,h)=>{
+  const L=40,R=12,T=14,B=h-30,H=S1.hist,g1=Math.max(40,S1.gen+2),g0=Math.max(0,g1-60),X=g=>L+(g-g0)/(g1-g0)*(w-L-R),Y=v=>B-v*(B-T);
+  ctx.save();ctx.beginPath();ctx.rect(L,T-4,w-L-R,B-T+4);ctx.clip();
+  if(H.length){ctx.beginPath();ctx.moveTo(X(H[0].g),B);for(const p of H){ctx.lineTo(X(p.g),Y(p.s));ctx.lineTo(X(p.g+1),Y(p.s));}
+    ctx.lineTo(X(H[H.length-1].g+1),B);ctx.closePath();ctx.fillStyle='rgba(21,24,29,.11)';ctx.fill();}
+  ctx.restore();
+  for(let v=0;v<=1.001;v+=.25){seg(ctx,L,Y(v),w-R,Y(v),v?C.hair:C.ink,1);txt(ctx,Math.round(v*100)+'%',L-7,Y(v),{a:'right',b:'middle',s:10.5});}
+  const st=g1-g0>45?10:5;for(let g=Math.ceil(g0/st)*st;g<=g1;g+=st){seg(ctx,X(g),B,X(g),B+4,C.ink,1);if(X(g)<w-R-82)txt(ctx,String(g),X(g),B+17,{a:'center'});}
+  ctx.save();ctx.beginPath();ctx.rect(L,T-4,w-L-R,B-T+8);ctx.clip();
+  ctx.beginPath();H.forEach((p,i)=>{const x=X(p.g),y=Y(p.d);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin='round';ctx.stroke();
+  if(H.length){const p=H[H.length-1];ctx.beginPath();ctx.arc(X(p.g),Y(p.d),4.5,0,7);ctx.fillStyle=C.ink;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();}
+  ctx.restore();
+  seg(ctx,L+10,T+9,L+34,T+9,C.ink,2);txt(ctx,'доля тёмных бабочек',L+42,T+13,{c:C.ink});
+  ctx.fillStyle='rgba(21,24,29,.16)';ctx.fillRect(L+10,T+21,24,11);txt(ctx,'копоть в воздухе',L+42,T+31,{c:C.ink});
+  txt(ctx,'поколения',w-R,B+17,{a:'right'});
+});
+const soot=canvas('c-soot',(ctx,w,h)=>{
+  const L=14,R=14,y0=14,y1=30,X=s=>L+s*(w-L-R);soot.geo={L,R};
+  const g=ctx.createLinearGradient(L,0,w-R,0);g.addColorStop(0,'#DCD9CB');g.addColorStop(.5,'#8A847A');g.addColorStop(1,'#1D1A18');
+  ctx.fillStyle=g;ctx.fillRect(L,y0,w-L-R,y1-y0);ctx.strokeStyle=C.ink;ctx.lineWidth=1;ctx.strokeRect(L+.5,y0+.5,w-L-R-1,y1-y0-1);
+  txt(ctx,'чистый воздух',L,y1+20);txt(ctx,'густая копоть',w-R,y1+20,{a:'right'});
+  grip(ctx,X(S1.soot),y0+3,y1+6);
+});
+function read1(){$('r-gen').textContent=String(S1.gen).padStart(4,' ');$('r-dark').textContent=(Math.round(share()*100)+'%').padStart(4,' ');
+  $('r-el').textContent=String(S1.el).padStart(2,' ');$('r-ed').textContent=String(S1.ed).padStart(2,' ');}
+function setSoot(s){S1.soot=clamp(s,0,1);soot.dirty=trunk.dirty=true;$('c-soot').setAttribute('aria-valuetext',Math.round(S1.soot*100)+'%');}
+function setPlay(v){S1.play=v;$('play').classList.toggle('on',v);$('play').setAttribute('aria-label',v?'Остановить смену поколений':'Запустить смену поколений');}
+dragger($('c-soot'),(x,y,w)=>{const g=soot.geo;setSoot((x-g.L)/(w-g.L-g.R));});
+keys($('c-soot'),k=>setSoot(S1.soot+k*.04));
+$('play').addEventListener('click',()=>setPlay(!S1.play));
+$('c-trunk').addEventListener('pointerdown',e=>{const r=e.currentTarget.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+  let best=null,bd=1e9;for(const m of S1.moths){if(!m.alive)continue;const dx=m.x*r.width-x,dy=m.y*r.height-y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=m;}}
+  const lim=(trunk.sp||56)*.5;if(best&&bd<lim*lim&&S1.phase!=='out'&&S1.pecks<NM-6)eat(best,performance.now());});
+function tick1(dt,now){
+  if(S1.rings.length){S1.rings=S1.rings.filter(q=>now-q.at<520);trunk.dirty=true;}
+  if(!S1.play)return;
+  S1.t+=dt;trunk.dirty=true;
+  if(S1.phase==='in'){if(S1.t>=T_IN){S1.phase='hunt';S1.t=0;S1.nextPeck=.12;}}
+  else if(S1.phase==='hunt'){
+    while(S1.pecks<KEAT&&S1.t>=S1.nextPeck){peck(now);S1.nextPeck+=(T_HUNT-.3)/KEAT;}
+    if(S1.t>=T_HUNT&&S1.pecks>=KEAT){S1.phase='out';S1.t=0;}
+  }else if(S1.t>=T_OUT)breed();
+}
+
+/* ════════ 2. Три условия ════════ */
+const NB=300,Z0=7,Z1=13,BW=.25,NBIN=Math.round((Z1-Z0)/BW);
+const S2={v:true,h:true,s:true,opt:10.9,pop:new Float32Array(NB),par:new Float32Array(NB),bars:new Float32Array(NBIN),pbars:new Float32Array(NBIN),tb:new Float32Array(NBIN),tp:new Float32Array(NBIN),mean:9.5,S:0,R:0,acc:0,play:true};
+for(let i=0;i<NB;i++)S2.pop[i]=S2.par[i]=9.5+.55*gauss(R0);
+const meanOf=a=>{let s=0;for(let i=0;i<a.length;i++)s+=a[i];return s/a.length;};
+function bins(a,out){out.fill(0);for(let i=0;i<a.length;i++){const b=Math.floor((a[i]-Z0)/BW);if(b>=0&&b<NBIN)out[b]+=1/a.length;}}
+function step2(){
+  const pop=S2.pop,m0=meanOf(pop),cum=new Float32Array(NB);let tot=0;
+  for(let i=0;i<NB;i++){const d=pop[i]-S2.opt;tot+=S2.s?Math.exp(-d*d/2.42):1;cum[i]=tot;}
+  const par=S2.par;for(let i=0;i<NB;i++){const u=R0()*tot;let lo=0,hi=NB-1;while(lo<hi){const md=lo+hi>>1;if(cum[md]<u)lo=md+1;else hi=md;}par[i]=pop[lo];}
+  const mp=meanOf(par),nx=new Float32Array(NB);
+  for(let i=0;i<NB;i++){let z;
+    if(!S2.v)z=S2.h?mp:9.5;
+    else if(S2.h)z=par[i]+.22*gauss(R0);
+    else z=9.5+.55*gauss(R0);
+    nx[i]=clamp(z,Z0+.05,Z1-.05);}
+  bins(pop,S2.tb);bins(par,S2.tp);
+  S2.S=mp-m0;S2.pop=nx;S2.mean=meanOf(nx);S2.R=S2.mean-m0;read2();
+}
+bins(S2.pop,S2.tb);bins(S2.par,S2.tp);S2.bars.set(S2.tb);S2.pbars.set(S2.tp);
+const beak=canvas('c-beak',(ctx,w,h)=>{
+  const L=14,R=14,T=40,B=h-34,X=z=>L+(z-Z0)/(Z1-Z0)*(w-L-R),bw=(w-L-R)/NBIN;beak.geo={L,R};
+  let mx=.2;for(let i=0;i<NBIN;i++)mx=Math.max(mx,S2.bars[i],S2.pbars[i]);beak.mx=beak.mx?beak.mx+(mx-beak.mx)*.08:mx;const Y=v=>B-v/Math.max(beak.mx,.2)*(B-T)*.96;
+  seg(ctx,L,B,w-R,B,C.ink,1);
+  for(let z=Z0;z<=Z1;z++){seg(ctx,X(z),B,X(z),B+4,C.ink,1);txt(ctx,z+(z===Z1?' мм':''),X(z),B+17,{a:z===Z0?'left':z===Z1?'right':'center'});}
+  if(w>460)txt(ctx,'глубина клюва',X(10.5),B+31,{a:'center'});
+  const ox=X(S2.opt);
+  ctx.fillStyle='rgba('+ACC+',.07)';ctx.fillRect(X(S2.opt-1.1),T-6,X(S2.opt+1.1)-X(S2.opt-1.1),B-T+6);
+  for(let i=0;i<NBIN;i++){const v=S2.bars[i];if(v>.0008){const x=L+i*bw,y=Y(v);ctx.fillStyle=C.paper2;ctx.fillRect(x+1,y,bw-2,B-y);ctx.strokeStyle=C.ink;ctx.lineWidth=1.25;ctx.strokeRect(x+1.5,y+.5,bw-3,B-y-.5);}}
+  for(let i=0;i<NBIN;i++){const v=S2.pbars[i];if(v>.0008){const x=L+i*bw,y=Y(v);ctx.fillStyle='rgba('+ACC+',.5)';ctx.fillRect(x+4,y,bw-8,B-y);}}
+  const mxp=X(S2.dm||S2.mean);seg(ctx,mxp,T-2,mxp,B,C.ink,1,[2,3]);
+  ctx.beginPath();ctx.moveTo(mxp,B+1);ctx.lineTo(mxp-5,B+9);ctx.lineTo(mxp+5,B+9);ctx.closePath();ctx.fillStyle=C.ink;ctx.fill();
+  seg(ctx,ox,T-12,ox,B,C.acc,1.75);handle(ctx,ox,T-14,C.acc,10);
+  const lx=w>460?L+4:L;ctx.fillStyle=C.paper2;ctx.fillRect(lx,2,22,11);ctx.strokeStyle=C.ink;ctx.lineWidth=1.25;ctx.strokeRect(lx+.5,2.5,21,10);txt(ctx,'вся популяция',lx+30,12,{c:C.ink});
+  const lx2=lx+150;ctx.fillStyle='rgba('+ACC+',.5)';ctx.fillRect(lx2,2,22,11);txt(ctx,'оставили потомство',lx2+30,12,{c:C.ink});
+});
+function read2(){$('r-opt').textContent=F(S2.opt,1)+' мм';$('r-mean').textContent=F(S2.mean,2)+' мм';
+  $('r-S').textContent=(S2.S<0?'':'+')+F(S2.S,2)+' мм';$('r-R').textContent=(S2.R<0?'':'+')+F(S2.R,2)+' мм';
+  $('c-beak').setAttribute('aria-valuetext',F(S2.opt,1)+' мм');}
+function setOpt(z){S2.opt=clamp(Math.round(z*20)/20,7.6,12.4);beak.dirty=true;read2();}
+dragger($('c-beak'),(x,y,w)=>{const g=beak.geo;setOpt(Z0+(x-g.L)/(w-g.L-g.R)*(Z1-Z0));});
+keys($('c-beak'),k=>setOpt(S2.opt+k*.1));
+[['sw-v','v'],['sw-h','h'],['sw-s','s']].forEach(p=>$(p[0]).addEventListener('click',e=>{S2[p[1]]=!S2[p[1]];e.currentTarget.setAttribute('aria-pressed',String(S2[p[1]]));}));
+function tick2(dt){
+  if(!reduce||S2.kick){S2.acc+=dt;if(S2.acc>=.3){S2.acc=0;step2();}}
+  let ch=false;const k=Math.min(1,dt*9);
+  for(let i=0;i<NBIN;i++){const a=S2.tb[i]-S2.bars[i],b=S2.tp[i]-S2.pbars[i];if(Math.abs(a)>1e-4||Math.abs(b)>1e-4)ch=true;S2.bars[i]+=a*k;S2.pbars[i]+=b*k;}
+  const dm=(S2.dm===undefined?S2.mean:S2.dm);S2.dm=dm+(S2.mean-dm)*k;if(ch||Math.abs(S2.mean-dm)>1e-3)beak.dirty=true;
+}
+if(reduce){$('c-beak').addEventListener('pointerdown',()=>{S2.kick=true;});['sw-v','sw-h','sw-s'].forEach(i=>$(i).addEventListener('click',()=>{S2.kick=true;}));}
+
+/* ════════ 3. Дрейф ════════ */
+const NR=24,TG=300,ZS=[];(function(){const r=rng(77);for(let i=0;i<NR;i++){const a=new Float32Array(TG);for(let t=0;t<TG;t++)a[t]=gauss(r);ZS.push(a);}})();
+const S3={ln:3,paths:[],fix:0,lost:0};
+function runDrift(){const N=Math.pow(10,S3.ln),s=.03;S3.paths=[];S3.fix=S3.lost=0;
+  for(let i=0;i<NR;i++){const a=new Float32Array(TG+1);let p=.1;a[0]=p;
+    for(let t=0;t<TG;t++){if(p>0&&p<1){const ps=p*(1+s)/(1+p*s);p=ps+Math.sqrt(ps*(1-ps)/(2*N))*ZS[i][t];if(p<=1/(2*N))p=0;else if(p>=1-1/(2*N))p=1;}a[t+1]=p;}
+    S3.paths.push(a);if(p===1)S3.fix++;else if(p===0)S3.lost++;}
+  S3.det=new Float32Array(TG+1);let p=.1;S3.det[0]=p;for(let t=0;t<TG;t++){p=p*(1+s)/(1+p*s);S3.det[t+1]=p;}
+}
+const drift=canvas('c-drift',(ctx,w,h)=>{
+  const L=40,R=12,T=12,B=h-30,X=t=>L+t/TG*(w-L-R),Y=p=>B-p*(B-T);
+  for(let v=0;v<=1.001;v+=.25){seg(ctx,L,Y(v),w-R,Y(v),v?C.hair:C.ink,1);txt(ctx,Math.round(v*100)+'%',L-7,Y(v),{a:'right',b:'middle',s:10.5});}
+  for(let t=0;t<=TG;t+=50){seg(ctx,X(t),B,X(t),B+4,C.ink,1);txt(ctx,String(t),X(t),B+17,{a:t===0?'left':t===TG?'right':'center'});}
+  if(w>420)txt(ctx,'поколения',X(125),B+17,{a:'center'});
+  ctx.lineJoin='round';
+  for(const a of S3.paths){const e=a[TG];ctx.beginPath();for(let t=0;t<=TG;t+=2){const x=X(t),y=Y(a[t]);t?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+    ctx.strokeStyle=e===1?'rgba('+ACC+',.62)':e===0?'rgba('+RED+',.6)':'rgba(21,24,29,.4)';ctx.lineWidth=1.15;ctx.stroke();}
+  ctx.beginPath();for(let t=0;t<=TG;t+=2){const x=X(t),y=Y(S3.det[t]);t?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.strokeStyle=C.ink;ctx.lineWidth=1.75;ctx.setLineDash([5,4]);ctx.stroke();ctx.setLineDash([]);
+  const lx=X(TG)-8;
+  seg(ctx,lx-176,B-46,lx-152,B-46,C.ink,1.75,[5,4]);txt(ctx,'путь без случайностей',lx,B-42,{a:'right',c:C.ink});
+  seg(ctx,lx-176,B-28,lx-152,B-28,'rgba('+ACC+',.9)',1.5);txt(ctx,'вариант закрепился  ',lx,B-24,{a:'right',c:C.ink});
+  seg(ctx,lx-176,B-10,lx-152,B-10,'rgba('+RED+',.9)',1.5);txt(ctx,'вариант исчез       ',lx,B-6,{a:'right',c:C.ink});
+});
+const nrail=canvas('c-nrail',(ctx,w,h)=>{
+  const L=40,R=12,X=l=>L+(l-1)/4*(w-L-R),y0=10,y1=34;nrail.geo={L,R};
+  seg(ctx,L,y1,w-R,y1,C.ink,1);
+  for(let l=1;l<=5;l++){seg(ctx,X(l),y1,X(l),y1+4,C.ink,1);txt(ctx,group(Math.pow(10,l)),X(l),y1+17,{a:l===1?'left':l===5?'right':'center'});
+    if(l<5)for(let k=2;k<10;k++){const x=X(l+Math.log10(k));seg(ctx,x,y1-(k===5?9:5),x,y1,'rgba(21,24,29,.42)',1);}}
+  ctx.fillStyle='rgba('+ACC+',.1)';ctx.fillRect(L,y0,X(S3.ln)-L,y1-y0);
+  grip(ctx,X(S3.ln),y0+2,y1+2);
+});
+function set3(ln){S3.ln=clamp(ln,1,5);runDrift();drift.dirty=nrail.dirty=true;
+  const N=Math.pow(10,S3.ln),Nr=N<100?Math.round(N):N<1000?Math.round(N/10)*10:N<10000?Math.round(N/100)*100:Math.round(N/1000)*1000;
+  $('r-N').textContent=group(Nr).padStart(7,' ');$('r-fix').textContent='в '+String(S3.fix).padStart(2,' ')+' из 24';$('r-lost').textContent='в '+String(S3.lost).padStart(2,' ')+' из 24';
+  $('c-nrail').setAttribute('aria-valuetext',group(Nr)+' особей');}
+dragger($('c-nrail'),(x,y,w)=>{const g=nrail.geo;set3(1+(x-g.L)/(w-g.L-g.R)*4);});
+keys($('c-nrail'),k=>set3(S3.ln+k*.1));
+
+/* ════════ 4. Манчестер ════════ */
+const DATA=[[1848,1,9,-8,'left'],[1864,55,10,4,'left'],[1895,98,0,20,'center'],[1959,93,9,4,'left'],[1991,26,10,4,'left'],[2002,10,0,-11,'center']];
+const Y0=1840,Y1=2010,RISE=[1848,1900],FALL=[1975,2010];
+function curve(s,rise){const out=[];let q=Math.sqrt(rise?.99:.10);const a=rise?RISE:FALL;
+  for(let y=a[0];y<=a[1];y++){out.push([y,(1-q*q)*100]);q=rise?q*(1-s*q)/(1-s*q*q):q*(1-s*(1-q))/(1-s*(1-q*q));}return out;}
+const at=(s,rise,yr)=>{const c=curve(s,rise),a=rise?RISE:FALL,i=clamp(Math.round(yr)-a[0],0,c.length-1);return c[i][1];};
+function solve(rise,yr,pct){let lo=.004,hi=.9;for(let i=0;i<34;i++){const md=(lo+hi)/2,v=at(md,rise,yr);if((v<pct)===rise)lo=md;else hi=md;}return (lo+hi)/2;}
+const S4={s:.08,hy:1991,rise:false};
+function errs(s){const er=(Math.abs(at(s,true,1864)-55)+Math.abs(at(s,true,1895)-98))/2,ef=(Math.abs(at(s,false,1991)-26)+Math.abs(at(s,false,2002)-10))/2;return [er,ef];}
+function best(rise){let b=0,be=1e9;for(let s=.01;s<.8;s+=.005){const e=errs(s)[rise?0:1];if(e<be){be=e;b=s;}}return b;}
+const fit=canvas('c-fit',(ctx,w,h)=>{
+  const L=40,R=14,T=14,B=h-30,X=y=>L+(y-Y0)/(Y1-Y0)*(w-L-R),Y=v=>B-v/100*(B-T);fit.geo={L,R,T,B};
+  ctx.fillStyle='rgba(21,24,29,.07)';ctx.fillRect(X(1848),T,X(1956)-X(1848),B-T);
+  txt(ctx,w>460?'век угольной копоти':'копоть',X(1902),B-9,{a:'center'});
+  seg(ctx,X(1956),T,X(1956),B,C.ink2,1,[2,3]);if(w>460){txt(ctx,'1956: закон',X(1956)-8,Y(44),{a:'right'});txt(ctx,'о чистом воздухе',X(1956)-8,Y(44)+14,{a:'right'});}else txt(ctx,'1956',X(1956)-6,Y(42),{a:'right'});
+  for(let v=0;v<=100;v+=25){seg(ctx,L,Y(v),w-R,Y(v),v?C.hair:C.ink,1);txt(ctx,v+'%',L-7,Y(v),{a:'right',b:'middle',s:10.5});}
+  for(let y=1850;y<=2000;y+=(w>460?25:50)){seg(ctx,X(y),B,X(y),B+4,C.ink,1);txt(ctx,String(y),X(y),B+17,{a:'center'});}
+  for(const rise of[true,false]){const c=curve(S4.s,rise);ctx.beginPath();c.forEach((p,i)=>{i?ctx.lineTo(X(p[0]),Y(p[1])):ctx.moveTo(X(p[0]),Y(p[1]));});
+    ctx.strokeStyle=C.acc;ctx.lineWidth=2.25;ctx.lineJoin='round';ctx.stroke();}
+  for(const d of DATA){const x=X(d[0]),y=Y(d[1]);ctx.beginPath();ctx.arc(x,y,5,0,7);ctx.fillStyle=C.ink;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();
+    txt(ctx,String(d[0]),x+d[2],y+d[3],{a:d[4],c:C.ink,w:500,s:10.5});}
+  handle(ctx,X(S4.hy),Y(at(S4.s,S4.rise,S4.hy)),C.acc,10);
+});
+function set4(s){S4.s=clamp(s,.004,.9);fit.dirty=true;const e=errs(S4.s);
+  $('r-s').textContent=(F(S4.s*100,1)+' %').padStart(6,' ');$('r-er').textContent=(F(e[0],0)+' п. п.').padStart(9,' ');$('r-ef').textContent=(F(e[1],0)+' п. п.').padStart(9,' ');
+  $('c-fit').setAttribute('aria-valuetext',F(S4.s*100,1)+' %');}
+dragger($('c-fit'),(x,y,w,h)=>{const g=fit.geo,yr=Y0+(x-g.L)/(w-g.L-g.R)*(Y1-Y0),pct=clamp((g.B-y)/(g.B-g.T)*100,1,99);
+  if(fit.side===undefined)fit.side=yr<1937;S4.rise=fit.side;const a=S4.rise?[1853,1900]:[1980,2010];S4.hy=Math.round(clamp(yr,a[0],a[1]));
+  set4(solve(S4.rise,S4.hy,S4.rise?clamp(pct,2,99):clamp(pct,1,89)));},()=>{fit.side=undefined;});
+keys($('c-fit'),k=>set4(S4.s+k*.005));
+$('t-rise').textContent=Math.round(best(true)*100);$('t-fall').textContent=Math.round(best(false)*100);
+
+/* ════════ 5. Лента ════════ */
+const EV=[
+ {y:'1798',t:'Томас Мальтус пишет, что людей становится больше быстрее, чем еды. Через сорок лет эта мысль подскажет Дарвину главное: выживают не все.',k:0},
+ {y:'1838',t:'Дарвин читает Мальтуса и записывает идею отбора в записную книжку. Публиковать её он не решается двадцать лет.',k:1},
+ {y:'1858',t:'Альфред Уоллес присылает Дарвину очерк с той же идеей. Первого июля обе работы зачитывают в Линнеевском обществе в Лондоне.',k:1},
+ {y:'1859',t:'Двадцать четвёртого ноября выходит «Происхождение видов». Механизм наследования Дарвину неизвестен, и это самое слабое место книги.',k:1},
+ {y:'1866',t:'Грегор Мендель публикует опыты с горохом: признаки передаются отдельными неделимыми задатками. Статью почти никто не замечает.',k:2},
+ {y:'1900',t:'Три ботаника независимо друг от друга заново открывают законы Менделя. Начинается генетика.',k:2},
+ {y:'1930',t:'Рональд Фишер показывает, что менделевская наследственность и дарвиновский отбор складываются в одну математическую теорию.',k:3},
+ {y:'1953',t:'Уотсон и Крик публикуют структуру ДНК. Становится понятно, что именно копируется и где возникают ошибки.',k:4},
+ {y:'1955',t:'Бернард Кеттлуэлл выпускает меченых пядениц в закопчённом и в чистом лесу. Птицы чаще съедают тех, кто заметнее на коре.',k:5},
+ {y:'1968',t:'Мотоо Кимура показывает, что большая часть изменений в ДНК нейтральна и закрепляется случайно. У отбора появляется постоянный соперник.',k:5},
+ {y:'1977',t:'Засуха на острове Дафне-Майор. Питер и Розмари Грант измеряют, как за одно поколение у вьюрков стал глубже клюв.',k:5},
+ {y:'1988',t:'Ричард Ленски запускает двенадцать одинаковых популяций кишечной палочки. С тех пор в них сменилось больше семидесяти пяти тысяч поколений.',k:5},
+ {y:'2016',t:'Найдена мутация, сделавшая пяденицу чёрной: «прыгающий» участок ДНК встроился в ген cortex. По расчётам, это случилось около 1819 года.',k:6}
+];
+const TL={pos:EV.length-1,target:null,act:-1,st:[]};
+(function(){const rail=$('tl-rail');
+  EV.forEach((e,i)=>{const d=document.createElement('div');d.className='tl-st'+(i===0?' first':i===EV.length-1?' last':'');d.style.left=(i/(EV.length-1)*100)+'%';
+    d.innerHTML='<i></i><span>'+e.y+'</span>';rail.insertBefore(d,$('tl-handle'));TL.st.push(d);});
+  dragger(rail,(x,y,w)=>{TL.target=null;setTL(x/w*(EV.length-1));},null,()=>{TL.target=Math.round(TL.pos);});
+  keys(rail,k=>{TL.target=clamp(Math.round(TL.pos)+Math.sign(k),0,EV.length-1);});
+})();
+function setTL(pos){TL.pos=clamp(pos,0,EV.length-1);const pc=TL.pos/(EV.length-1)*100;
+  $('tl-handle').style.left=pc+'%';$('tl-fill').style.width=pc+'%';
+  const a=Math.round(TL.pos);TL.st.forEach((d,i)=>d.classList.toggle('past',i<=TL.pos+1e-6));
+  if(a===TL.act)return;TL.act=a;const e=EV[a];
+  TL.st.forEach((d,i)=>d.classList.toggle('act',i===a));
+  $('tl-date').textContent=e.y;$('tl-text').textContent=e.t;
+  [].forEach.call($('tl-chips').children,(c,i)=>c.classList.toggle('on',i<e.k));
+  $('tl-rail').setAttribute('aria-valuetext',e.y);}
+function tickTL(dt){if(TL.target!==null){const d=TL.target-TL.pos;if(Math.abs(d)<.002){setTL(TL.target);TL.target=null;}else setTL(TL.pos+d*Math.min(1,dt*14));}}
+
+/* ════════ запуск ════════ */
+setPlay(S1.play);record();setSoot(S1.soot);read2();set3(3);set4(S4.s);setTL(EV.length-1);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>all.forEach(o=>o.dirty=true));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+  tick1(dt,now);tick2(dt);tickTL(dt);
+  for(const o of all)o.paint();
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Compositor</title>
+<link>https://catpad.github.io/compositor-blog/</link>
+<description>Every idea gets a page of its own, set for it and alive under the hand.</description>
+<atom:link href="https://catpad.github.io/compositor-blog/feed.xml" rel="self" type="application/rss+xml"/>
+<lastBuildDate>Sun, 22 Nov 2026 12:13:26 GMT</lastBuildDate>
+<item>
+<title>Пробный пост без стиля</title>
+<link>https://catpad.github.io/compositor-blog/p/q653puwx/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/q653puwx/</guid>
+<pubDate>Sun, 22 Nov 2026 12:13:26 GMT</pubDate>
+<description>Отметка «Without style» добавлена и опубликована: такой пост — это ваш текст одним шрифтом на белом листе, без дизайна и без участия Claude.</description>
+</item>
+<item>
+<title>Поминки по Финнегану: путеводитель</title>
+<link>https://catpad.github.io/compositor-blog/p/a9shr3h7/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/a9shr3h7/</guid>
+<pubDate>Sun, 22 Nov 2026 07:04:52 GMT</pubDate>
+<description>Практический путеводитель по последней книге Джеймса Джойса: как добраться, где вы окажетесь, кто там живёт и что обязательно посмотреть.</description>
+</item>
+<item>
+<title>Как работают большие языковые модели</title>
+<link>https://catpad.github.io/compositor-blog/p/uv7oq1ja/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/uv7oq1ja/</guid>
+<pubDate>Sun, 22 Nov 2026 06:36:49 GMT</pubDate>
+<description>Объяснение того, как большая языковая модель режет текст на токены, взвешивает их вниманием и предсказывает следующее слово, оформленное как дешёвый бульварный покетбук.</description>
+</item>
+<item>
+<title>Одиссея</title>
+<link>https://catpad.github.io/compositor-blog/p/48ixqrj3/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/48ixqrj3/</guid>
+<pubDate>Sun, 22 Nov 2026 06:27:50 GMT</pubDate>
+<description>Пробная страница в духе таблоидного экстренного выпуска: путь Одиссея домой, карта его скитаний и краткий пересказ истории.</description>
+</item>
+<item>
+<title>Клеточные автоматы: Конвей и другие</title>
+<link>https://catpad.github.io/compositor-blog/p/79br1hnt/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/79br1hnt/</guid>
+<pubDate>Sun, 22 Nov 2026 06:06:08 GMT</pubDate>
+<description>Сказка на ночь о клеточных автоматах: от машины фон Неймана и строчек Вольфрама до «Жизни» Конвея и муравья Лэнгтона.</description>
+</item>
+<item>
+<title>Лаборатория наложений</title>
+<link>https://catpad.github.io/compositor-blog/p/jzvxboxf/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/jzvxboxf/</guid>
+<pubDate>Sun, 22 Nov 2026 04:42:28 GMT</pubDate>
+<description>Книга, написанная с ИИ, в которой голос одного мира накладывается на другой мир: Швейк в Средиземье, Чехов на космической станции, боги на выборах.</description>
+</item>
+<item>
+<title>Естественный отбор</title>
+<link>https://catpad.github.io/compositor-blog/p/selection/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/selection/</guid>
+<pubDate>Sun, 22 Nov 2026 03:47:00 GMT</pubDate>
+<description>Бабочки на коре, вьюрки и случай: как отбор меняет популяции и как это увидели в природе.</description>
+</item>
+<item>
+<title>Гипотеза Римана</title>
+<link>https://catpad.github.io/compositor-blog/p/riemann/</link>
+<guid isPermaLink="true">https://catpad.github.io/compositor-blog/p/riemann/</guid>
+<pubDate>Sun, 22 Nov 2026 03:10:00 GMT</pubDate>
+<description>Все нетривиальные нули дзета-функции лежат на одной прямой: полоса с живыми графиками о самой известной задаче математики.</description>
+</item>
+</channel>
+</rss>

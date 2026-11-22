@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Все нетривиальные нули дзета-функции лежат на одной прямой: полоса с живыми графиками о самой известной задаче математики.">
+<meta name="compositor:paper" content="#EEEDE6">
+<meta name="compositor:ink" content="#15181D">
+<meta name="compositor:accent" content="#1D3BC4">
+<title>Гипотеза Римана</title>
+<style>
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(../../fonts/playfair-display-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Playfair Display";font-style:normal;font-weight:400 900;font-display:swap;src:url(../../fonts/playfair-display-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-greek-wght-normal.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-cyrillic-wght-italic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-greek-wght-italic.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}
+@font-face{font-family:"Source Serif 4";font-style:italic;font-weight:200 900;font-display:swap;src:url(../../fonts/source-serif-4-latin-wght-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../../fonts/ibm-plex-mono-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(../../fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(../../fonts/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(../../fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  /* Газетная полоса: холодная бумага, чернила, ультрамарин для критической прямой, красный для всего, что с неё сошло.
+     Сетка в 12 колонок с волосяными линейками между материалами. */
+  --paper:#EEEDE6;
+  --paper-2:#E3E2D9;
+  --ink:#15181D;
+  --ink-2:#555A62;
+  --hair:rgba(21,24,29,.2);
+  --line:#1D3BC4;
+  --alarm:#D2331F;
+  --display:"Playfair Display","Georgia","Times New Roman",serif;
+  --body:"Source Serif 4","Georgia","Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;
+  font-feature-settings:"kern","liga";-webkit-font-smoothing:antialiased}
+.page{max-width:1280px;margin:0 auto;padding:22px 28px 56px}
+p{margin:0}
+p+p{margin-top:.7em}
+h1,h2,h3{margin:0;font-family:var(--display);text-wrap:balance}
+em{font-style:italic}
+math{font-family:"STIX Two Math","Cambria Math","Latin Modern Math","Source Serif 4",serif}
+.v{font-style:italic;white-space:nowrap}
+.nb{white-space:nowrap}
+
+/* шапка */
+.mast{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);padding:7px 0 6px}
+.mast b{font-weight:500}
+.head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:32px;align-items:end;padding:18px 0 22px;border-bottom:1px solid var(--ink)}
+.head h1{grid-column:1/-1;font-weight:900;font-size:clamp(46px,10.2vw,132px);line-height:.94;letter-spacing:-.025em;margin:0 0 20px -.04em}
+.deck{grid-column:1/8;font-size:clamp(19px,2vw,25px);line-height:1.34;font-style:italic}
+.stop{grid-column:8/-1;border-left:1px solid var(--hair);padding-left:24px;font-size:15.5px;line-height:1.45}
+.kick{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.kick.blue{color:var(--line)}
+.kick.red{color:var(--alarm)}
+
+/* сетка материалов */
+.row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:32px;padding:26px 0 30px;border-bottom:1px solid var(--ink)}
+.row>*{min-width:0}
+.ruleL{border-left:1px solid var(--hair);padding-left:32px;margin-left:-16px}
+h2{font-weight:800;font-size:clamp(25px,2.7vw,36px);line-height:1.1;letter-spacing:-.012em;margin-bottom:14px}
+h3{font-weight:700;font-size:19px;line-height:1.2;margin-bottom:8px}
+.cols2{columns:2;column-gap:28px}
+.cols2 p{break-inside:avoid-column}
+.small{font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+
+/* левая колонка */
+.side{grid-column:1/4;display:flex;flex-direction:column;gap:22px}
+.side section+section{border-top:1px solid var(--hair);padding-top:18px}
+.portrait{display:flex;gap:16px;align-items:center;margin-bottom:12px}
+.portrait img{width:112px;height:112px;border-radius:50%;object-fit:cover;filter:grayscale(1) contrast(1.12);mix-blend-mode:multiply;flex:none;max-width:100%}
+.portrait h3{margin:0;font-size:22px}
+.portrait span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-2)}
+.formula{overflow-x:auto;padding:8px 0 10px;font-size:19px}
+dl.terms{margin:0;display:grid;gap:9px;font-size:15px;line-height:1.4}
+dl.terms dt{font-weight:650;display:inline}
+dl.terms dd{display:inline;margin:0;color:var(--ink-2)}
+
+/* главный материал */
+.lead{grid-column:4/-1}
+.fig1{display:grid;grid-template-columns:minmax(210px,.34fr) 1fr;gap:18px;margin-top:20px}
+canvas{display:block;width:100%;touch-action:pan-y;outline:none;-webkit-user-select:none;user-select:none}
+canvas.grab{cursor:grab}
+canvas.grab.grabbing{cursor:grabbing}
+canvas:focus-visible,button:focus-visible{outline:2px solid var(--line);outline-offset:3px}
+#c-strip{height:540px;touch-action:none}
+#c-plane{height:540px}
+.cap{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin-bottom:6px}
+
+.read{display:flex;flex-wrap:wrap;gap:0;margin:14px 0 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.read>div{padding:9px 22px 10px 0;margin-right:22px;border-right:1px solid var(--hair)}
+.read>div:last-of-type{border-right:0}
+.read dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
+.read dd{margin:2px 0 0;font-family:var(--mono);font-size:19px;font-weight:500;font-variant-numeric:tabular-nums;white-space:pre;height:1.5em;line-height:1.5em}
+.read .grow{flex:1;border:0;margin:0;padding:0}
+.play{align-self:center;flex:none;width:42px;height:42px;border-radius:50%;border:1.5px solid var(--ink);background:var(--paper);cursor:pointer;position:relative;padding:0}
+.play:hover{background:var(--ink)}
+.play::before{content:"";position:absolute;left:16px;top:12px;border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent}
+.play:hover::before{border-left-color:var(--paper)}
+.play.on::before{left:13px;top:13px;width:5px;height:14px;border:0;border-left:5px solid var(--ink);border-right:5px solid var(--ink)}
+.play.on:hover::before{border-color:var(--paper)}
+
+/* лестница */
+.stairs-text{grid-column:1/5}
+.stairs-fig{grid-column:5/-1}
+#c-stairs{height:500px}
+#c-rail{height:76px;margin-top:4px}
+.eq{overflow-x:auto;margin:14px 0 12px;padding:10px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);font-size:18px}
+
+/* пара */
+.half{grid-column:span 6}
+#c-rogue,#c-count{height:400px;margin-top:16px}
+.lede{max-width:34em}
+
+.half .read>div{padding-right:14px;margin-right:14px}
+.half .read dd{font-size:16.5px}
+
+/* лента */
+.tl{grid-column:1/-1}
+.tl-rail{position:relative;height:74px;margin:22px 22px 0;touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none}
+.tl-rail.grabbing{cursor:grabbing}
+.tl-line{position:absolute;left:0;right:0;top:20px;height:1px;background:var(--ink)}
+.tl-fill{position:absolute;left:0;top:19px;height:3px;background:var(--line);width:0}
+.tl-st{position:absolute;top:0;width:0;height:74px;pointer-events:none}
+.tl-st i{position:absolute;left:-4.5px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
+.tl-st.past i{background:var(--line);border-color:var(--line)}
+.tl-st span{position:absolute;top:38px;left:0;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--ink-2);white-space:nowrap}
+.tl-st.act span{color:var(--ink);font-weight:500}
+.tl-st.first span{transform:translateX(-12px)}
+.tl-st.last span{transform:translateX(calc(-100% + 12px))}
+.tl-handle{position:absolute;top:4px;left:0;width:34px;height:34px;margin-left:-17px;border-radius:50%;background:var(--paper);border:2px solid var(--line);box-shadow:0 2px 0 rgba(21,24,29,.18)}
+.tl-handle::after{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--line)}
+.tl-panel{display:grid;grid-template-columns:minmax(330px,1.15fr) 1.8fr 1.4fr;column-gap:32px;margin-top:14px;border-top:1px solid var(--hair);padding-top:18px}
+.tl-date{font-family:var(--display);font-weight:800;font-size:clamp(30px,3.3vw,42px);line-height:1.1;letter-spacing:-.015em;height:1.25em;white-space:nowrap}
+.tl-text{font-size:18px;line-height:1.42;height:7.2em;overflow:hidden}
+.gauge+.gauge{margin-top:16px}
+.gauge .cap{margin-bottom:7px}
+.bar{position:relative;height:16px;border:1.5px solid var(--ink);background:var(--paper)}
+.bar b{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--line);transition:width .45s cubic-bezier(.3,.7,.2,1)}
+.bar.dots b{width:100%!important;background:radial-gradient(circle at 3px 50%,var(--line) 1.6px,transparent 2.2px) 0 0/14px 100% repeat-x}
+.bar.claim b{background:repeating-linear-gradient(135deg,var(--line) 0 2px,transparent 2px 7px)}
+.gval{font-family:var(--mono);font-size:15px;font-weight:500;margin-top:6px;height:1.5em;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* статус */
+.status{grid-column:1/-1}
+.status-cols{display:grid;grid-template-columns:repeat(3,1fr);column-gap:32px}
+.status-cols>div+div{border-left:1px solid var(--hair);padding-left:32px;margin-left:-16px}
+.colophon{padding-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;line-height:1.6;color:var(--ink-2)}
+
+@media (max-width:1040px){
+  .side{grid-column:1/-1;order:2;flex-direction:row;gap:28px;margin-top:28px;padding-top:24px;border-top:1px solid var(--hair)}
+  .lead.ruleL,.stairs-fig.ruleL{border-left:0;padding-left:0;margin-left:0}
+  .side section{flex:1;min-width:0}
+  .side section+section{border-top:0;padding-top:0;border-left:1px solid var(--hair);padding-left:28px}
+  .lead{grid-column:1/-1}
+  .stairs-text,.stairs-fig{grid-column:1/-1}
+  .stairs-text{margin-bottom:18px}
+  .half{grid-column:1/-1}
+  .half.ruleL{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--hair);margin-top:28px;padding-top:26px}
+  .deck{grid-column:1/-1}
+  .stop{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--hair);margin-top:18px;padding-top:14px}
+  .tl-panel{grid-template-columns:1fr 1fr}
+  .tl-date{grid-column:1/-1;margin-bottom:8px}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .page{padding:14px 16px 40px}
+  .row,.head{column-gap:0}
+  .side{flex-direction:column}
+  .side section+section{border-left:0;padding-left:0;border-top:1px solid var(--hair);padding-top:18px}
+  .cols2{columns:1}
+  .fig1{grid-template-columns:1fr}
+  #c-strip{height:440px}
+  #c-plane{height:360px}
+  #c-stairs{height:420px}
+  #c-rogue,#c-count{height:360px}
+  .read>div{padding-right:14px;margin-right:14px}
+  .read dd{font-size:16px}
+  .tl-rail{margin:22px 14px 0}
+  .tl-st span{display:none}
+  .tl-st.act span,.tl-st.first span,.tl-st.last span{display:block}
+  .tl-st.act:not(.first):not(.last) span{background:var(--paper);padding:0 4px;z-index:1}
+  .tl-panel{grid-template-columns:1fr}
+  .tl-text{height:9em;margin-bottom:14px}
+  .status-cols{grid-template-columns:1fr;row-gap:18px}
+  .status-cols>div+div{border-left:0;padding-left:0;margin-left:0;border-top:1px solid var(--hair);padding-top:16px}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/riemann/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Гипотеза Римана"><meta property="og:description" content="Все нетривиальные нули дзета-функции лежат на одной прямой: полоса с живыми графиками о самой известной задаче математики."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/riemann/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#EEEDE6;border-bottom:1px solid #15181D26;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15181D;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15181D;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#15181D"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#EEEDE6" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#EEEDE6"/></svg><span>Compositor</span></a><time datetime="2026-11-22T03:10:00.000Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15181D;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-22</time></compositor-bar>
+<div class="page">
+
+<div class="mast"><b>Одна идея на полосу</b><span>№ 1 · воскресенье, 22 ноября 2026 года</span><span>Математика</span></div>
+
+<header class="head">
+  <h1>Гипотеза Римана</h1>
+  <p class="deck">В 1859 году Бернхард Риман предположил, что все нетривиальные нули дзета-функции лежат на одной прямой. От этого зависит, насколько ровно простые числа рассыпаны среди остальных.</p>
+  <div class="stop">
+    <span class="kick blue">Срочно в номер</span>
+    <p>20 ноября математик Левент Альпёге объявил, что вместе с Claude нашёл доказательство. 21 ноября сообщества Lean и Mathlib сообщили, что машинная проверка пройдена. Прочесть и понять рассуждение людям ещё предстоит.</p>
+  </div>
+</header>
+
+<!-- ───────── главный материал ───────── -->
+<div class="row">
+  <aside class="side">
+    <section>
+      <div class="portrait">
+        <img src="../../riemann.jpg" alt="Бернхард Риман, портрет 1863 года" width="112" height="112">
+        <div><h3>Бернхард Риман</h3><span>1826–1866</span></div>
+      </div>
+      <p class="small">Статья «О числе простых чисел, не превышающих данной величины» заняла несколько страниц и осталась его единственной работой по теории чисел. Гипотезе в ней отведена одна фраза: Риман назвал её «весьма вероятной» и отложил поиски доказательства.</p>
+    </section>
+    <section>
+      <h3>Формула Эйлера связывает все числа с простыми</h3>
+      <div class="formula">
+        <math display="block"><mi>ζ</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mi>∞</mi></munderover><mfrac><mn>1</mn><msup><mi>n</mi><mi>s</mi></msup></mfrac><mo>=</mo><munder><mo>∏</mo><mi>p</mi></munder><mfrac><mn>1</mn><mrow><mn>1</mn><mo>−</mo><msup><mi>p</mi><mrow><mo>−</mo><mi>s</mi></mrow></msup></mrow></mfrac></math>
+      </div>
+      <p class="small">Слева в сумме стоят все натуральные числа, справа в произведении только простые. Поэтому любое знание о ζ превращается в знание о простых числах.</p>
+    </section>
+    <section>
+      <h3>Четыре термина помогают читать эту полосу</h3>
+      <dl class="terms">
+        <div><dt>Нуль.</dt> <dd>Число <span class="v">s</span>, при котором ζ(<span class="v">s</span>) = 0.</dd></div>
+        <div><dt>Тривиальные нули.</dt> <dd>Числа −2, −4, −6 и так далее. С ними всё ясно.</dd></div>
+        <div><dt>Критическая полоса.</dt> <dd>Область <span class="nb">0 &lt; Re <i>s</i> &lt; 1</span>. Все остальные нули лежат в ней.</dd></div>
+        <div><dt>Критическая прямая.</dt> <dd>Середина полосы, <span class="nb">Re <i>s</i> = ½</span>.</dd></div>
+      </dl>
+    </section>
+  </aside>
+
+  <article class="lead ruleL">
+    <span class="kick">Суть гипотезы</span>
+    <h2>На критической прямой <span class="nb">дзета-функция</span> раз за разом обращается в нуль</h2>
+    <div class="cols2">
+      <p>Дзета-функция берёт комплексное число <span class="v">s</span> и возвращает другое комплексное число ζ(<span class="v">s</span>). Слева показана точка <span class="v">s</span> в критической полосе, справа след, который за ней рисует ζ(<span class="v">s</span>).</p>
+      <p>Пока точка поднимается по прямой <span class="nb">Re <i>s</i> = ½</span>, след снова и снова проходит точно через 0. Каждое такое прохождение и есть нуль. Стоит увести точку с прямой в сторону, и след начинает промахиваться. Риман предположил, что так будет на любой высоте.</p>
+    </div>
+    <div class="fig1">
+      <div>
+        <div class="cap">Плоскость <i>s</i></div>
+        <canvas id="c-strip" class="grab" tabindex="0" role="slider" aria-label="Точка s в критической полосе"></canvas>
+      </div>
+      <div>
+        <div class="cap">Плоскость ζ(<i>s</i>)</div>
+        <canvas id="c-plane" role="img" aria-label="След значений дзета-функции"></canvas>
+      </div>
+    </div>
+    <dl class="read">
+      <div><dt>Точка s</dt><dd id="r-s"> </dd></div>
+      <div><dt>Значение ζ(s)</dt><dd id="r-z"> </dd></div>
+      <div><dt>Расстояние до нуля</dt><dd id="r-a"> </dd></div>
+      <div><dt>Нулей ниже точки</dt><dd id="r-n"> </dd></div>
+      <span class="grow"></span>
+      <button class="play" id="play" type="button" aria-label="Пустить точку вверх по прямой"></button>
+    </dl>
+  </article>
+</div>
+
+<!-- ───────── лестница простых ───────── -->
+<div class="row">
+  <article class="stairs-text">
+    <span class="kick">Зачем нужны нули</span>
+    <h2>Нули <span class="nb">дзета-функции</span> складываются в лестницу простых чисел</h2>
+    <p>У лестницы ψ(<span class="v">x</span>) есть ступенька на каждом простом числе <span class="v">p</span> и на каждой его степени. Высота ступеньки равна ln <span class="v">p</span>.</p>
+    <div class="eq">
+      <math display="block"><mi>ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>x</mi><mo>−</mo><munder><mo>∑</mo><mi>ρ</mi></munder><mfrac><msup><mi>x</mi><mi>ρ</mi></msup><mi>ρ</mi></mfrac><mo>−</mo><mi>ln</mi><mspace width="0.17em"/><mn>2</mn><mi>π</mi><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mspace width="0.17em"/><mi>ln</mi><mspace width="0.1em"/><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>x</mi><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo stretchy="false">)</mo></math>
+    </div>
+    <p>Риман нашёл способ собрать эту лестницу из волн: каждый нуль ρ даёт одну волну. Без нулей от формулы остаётся гладкая линия, почти прямая. Первый нуль добавляет длинное колебание, следующие всё более частые, и ступеньки проступают ровно там, где стоят простые числа.</p>
+    <p>Положение простых чисел целиком записано в нулях. Знать все нули означает знать все простые.</p>
+  </article>
+  <div class="stairs-fig ruleL">
+    <canvas id="c-stairs" role="img" aria-label="Лестница простых чисел и её приближение суммой волн"></canvas>
+    <canvas id="c-rail" class="grab" tabindex="0" role="slider" aria-label="Высота, до которой учтены нули"></canvas>
+    <dl class="read">
+      <div><dt>Нулей в сумме</dt><dd id="r-N"> </dd></div>
+      <div><dt>Верхний нуль</dt><dd id="r-g"> </dd></div>
+      <div><dt>Среднее расхождение с лестницей</dt><dd id="r-e"> </dd></div>
+    </dl>
+  </div>
+</div>
+
+<!-- ───────── беглый нуль и счёт ───────── -->
+<div class="row">
+  <article class="half">
+    <span class="kick red">Что стоит на кону</span>
+    <h2>Один нуль в стороне от прямой раскачал бы счёт простых</h2>
+    <p class="lede">Нуль с вещественной частью σ даёт волну размаха <span class="v">x</span><sup>σ</sup>. На прямой <span class="nb">σ = ½</span>, и все волны растут одинаково, как √<span class="v">x</span>. Нуль правее прямой дал бы волну, которая растёт быстрее остальных и с ростом <span class="v">x</span> заглушает их все. Нули ходят зеркальными парами, поэтому сдвиг влево ничем не лучше.</p>
+    <canvas id="c-rogue" class="grab" tabindex="0" role="slider" aria-label="Вещественная часть нуля"></canvas>
+    <dl class="read">
+      <div><dt>Re нуля</dt><dd id="r-sg"> </dd></div>
+      <div><dt>Волна при x = 10⁶ выше √x</dt><dd id="r-amp"> </dd></div>
+    </dl>
+  </article>
+  <article class="half ruleL">
+    <span class="kick">Проверка на числах</span>
+    <h2>Прогноз числа простых ошибается меньше, чем на √<i>x</i> · ln <i>x</i></h2>
+    <p class="lede">Количество простых до <span class="v">x</span> обозначают π(<span class="v">x</span>), а лучший гладкий прогноз для него называется li(<span class="v">x</span>). Если гипотеза верна, разность между ними при <span class="v">x</span> ≥ 2657 не превышает √<span class="v">x</span> · ln <span class="v">x</span> / 8π. Настоящий счёт простых держится далеко под этим потолком.</p>
+    <canvas id="c-count" class="grab" tabindex="0" role="slider" aria-label="Число x"></canvas>
+    <dl class="read">
+      <div><dt>x</dt><dd id="r-x"> </dd></div>
+      <div><dt>π(x)</dt><dd id="r-pi"> </dd></div>
+      <div><dt>li(x)</dt><dd id="r-li"> </dd></div>
+      <div><dt>Разность</dt><dd id="r-d"> </dd></div>
+      <div><dt>Потолок</dt><dd id="r-b"> </dd></div>
+    </dl>
+  </article>
+</div>
+
+<!-- ───────── лента ───────── -->
+<div class="row">
+  <article class="tl">
+    <span class="kick">167 лет в одной строке</span>
+    <h2>Доля нулей на прямой росла больше ста лет</h2>
+    <div class="tl-rail" id="tl-rail" tabindex="0" role="slider" aria-label="Год на ленте событий">
+      <div class="tl-line"></div><div class="tl-fill" id="tl-fill"></div>
+      <div class="tl-handle" id="tl-handle"></div>
+    </div>
+    <div class="tl-panel">
+      <div class="tl-date" id="tl-date"> </div>
+      <p class="tl-text" id="tl-text"> </p>
+      <div>
+        <div class="gauge">
+          <div class="cap">Доказано, что на прямой лежит</div>
+          <div class="bar" id="tl-bar"><b></b></div>
+          <div class="gval" id="tl-frac"> </div>
+        </div>
+        <div class="gauge">
+          <div class="cap">Проверено прямым счётом</div>
+          <div class="gval" id="tl-num"> </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- ───────── статус ───────── -->
+<div class="row" style="border-bottom:3px solid var(--ink)">
+  <article class="status">
+    <span class="kick blue">Положение дел на 22 ноября 2026 года</span>
+    <h2>Машина проверила доказательство, людям ещё предстоит его прочесть</h2>
+    <div class="status-cols">
+      <div><h3>Что подтверждено</h3><p>По совместному заявлению сообществ Lean и Mathlib, формальное доказательство компилируется, проходит несколько независимых проверяющих программ и доказывает именно то утверждение, которое записано в библиотеке Mathlib. Тем же методом закрыта и обобщённая гипотеза для L-функций Дирихле.</p></div>
+      <div><h3>Что ещё впереди</h3><p>Доказательство выложено как 175 187 файлов на языке Lean, около 17 миллионов строк. Математикам предстоит понять, почему оно работает. Институт Клэя вручает свой миллион долларов только после публикации и двух лет проверки сообществом.</p></div>
+      <div><h3>Что это меняет</h3><p>Сотни теорем о простых числах десятилетиями начинались словами «если гипотеза Римана верна». Если результат устоит, эта оговорка исчезает у всех разом, а потолок ошибки √<span class="v">x</span> · ln <span class="v">x</span> становится теоремой.</p></div>
+    </div>
+  </article>
+</div>
+<p class="colophon">Нули взяты с шестью знаками после запятой. Потолок √x · ln x / 8π установил Лоуэлл Шёнфельд в 1976 году. Портрет Римана: фотография 1863 года.</p>
+
+</div>
+<script>
+(function(){
+'use strict';
+const C={ink:'#15181D',ink2:'#555A62',blue:'#1D3BC4',red:'#D2331F',paper:'#EEEDE6',paper2:'#E3E2D9',hair:'rgba(21,24,29,.16)',hair2:'rgba(21,24,29,.34)'};
+const MONO='"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace';
+const SERIF='"Source Serif 4",Georgia,serif';
+const ZEROS=[14.134725, 21.02204, 25.010858, 30.424876, 32.935062, 37.586178, 40.918719, 43.327073, 48.005151, 49.773832, 52.970321, 56.446248, 59.347044, 60.831779, 65.112544, 67.079811, 69.546402, 72.067158, 75.704691, 77.14484, 79.337375, 82.910381, 84.735493, 87.425275, 88.809111, 92.491899, 94.651344, 95.870634, 98.831194, 101.317851, 103.725538, 105.446623, 107.168611, 111.029536, 111.874659, 114.320221, 116.22668, 118.790783, 121.370125, 122.946829, 124.256819, 127.516684, 129.578704, 131.087689, 133.497737, 134.75651, 138.116042, 139.736209, 141.123707, 143.111846, 146.000982, 147.422765, 150.05352, 150.925258, 153.024694, 156.112909, 157.597592, 158.849988, 161.188964, 163.03071, 165.537069, 167.18444, 169.094515, 169.911976, 173.411537, 174.754192, 176.441434, 178.377408, 179.916484, 182.207078, 184.874468, 185.598784, 187.228923, 189.416159, 192.026656, 193.079727, 195.265397, 196.876482, 198.01531, 201.264752, 202.493595, 204.189672, 205.394697, 207.906259, 209.57651, 211.690863, 213.347919, 214.547045, 216.169539, 219.067596, 220.714919, 221.430706, 224.007, 224.983325, 227.421444, 229.337413, 231.250189, 231.987235, 233.693404, 236.52423, 237.76982, 239.555478, 241.049158, 242.823272, 244.070898, 247.13699, 248.10199, 249.57369, 251.014948, 253.069987, 255.306256, 256.380714, 258.610439, 259.874407, 260.805085, 263.573894, 265.557852, 266.614974, 267.921915, 269.970449, 271.494056, 273.459609, 275.587493, 276.45205, 278.250744, 279.229251, 282.465115, 283.211186, 284.835964, 286.667445, 287.911921, 289.579855, 291.846291, 293.558434, 294.96537, 295.573255, 297.979277, 299.840326, 301.649325, 302.69675, 304.864371, 305.728913, 307.219496, 310.109463, 311.165142, 312.427801, 313.985286, 315.475616, 317.734806, 318.853104, 321.160134, 322.144559, 323.46697, 324.862866, 327.443901, 329.033072, 329.95324, 331.474468, 333.645379, 334.211355, 336.84185, 338.339993, 339.858217, 341.042261, 342.054878, 344.661703, 346.347871, 347.272678, 349.316261, 350.408419, 351.878649, 353.4889, 356.017575, 357.151302, 357.952685, 359.743755, 361.289362, 363.331331, 364.736024, 366.21271, 367.993575, 368.968438, 370.050919, 373.061928, 373.864874, 375.825913, 376.324092, 378.43668, 379.872975, 381.484469, 383.443529, 384.956117, 385.861301, 387.22289, 388.846128, 391.456084, 392.245083, 393.427744, 395.58287, 396.381854];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=id=>document.getElementById(id);
+const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+const MINUS='−';
+const all=[];
+
+function canvas(id,draw){
+  const cv=$(id),ctx=cv.getContext('2d'),o={cv,ctx,w:0,h:0,dirty:true};
+  const fit=()=>{const r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);
+    o.w=r.width;o.h=r.height;cv.width=Math.max(1,Math.round(r.width*d));cv.height=Math.max(1,Math.round(r.height*d));
+    ctx.setTransform(d,0,0,d,0,0);o.dirty=true;};
+  new ResizeObserver(fit).observe(cv);fit();
+  o.paint=()=>{if(o.dirty&&o.w>0){o.dirty=false;ctx.clearRect(0,0,o.w,o.h);draw(ctx,o.w,o.h);}};
+  all.push(o);return o;
+}
+function dragger(el,move,start,end){
+  let on=false;
+  const p=e=>{const r=el.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top,r.width,r.height];};
+  el.addEventListener('pointerdown',e=>{on=true;try{el.setPointerCapture(e.pointerId);}catch(_){}
+    el.classList.add('grabbing');start&&start();move.apply(null,p(e));});
+  el.addEventListener('pointermove',e=>{if(on)move.apply(null,p(e));});
+  const stop=()=>{if(on){on=false;el.classList.remove('grabbing');end&&end();}};
+  el.addEventListener('pointerup',stop);el.addEventListener('pointercancel',stop);
+}
+function keys(el,fn){el.addEventListener('keydown',e=>{
+  const k={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[e.key];
+  if(k){e.preventDefault();fn(k[0]*(e.shiftKey?5:1),k[1]*(e.shiftKey?5:1));}});}
+function txt(ctx,s,x,y,o){o=o||{};ctx.font=(o.w||400)+' '+(o.s||11)+'px '+(o.f||MONO);ctx.fillStyle=o.c||C.ink2;
+  ctx.textAlign=o.a||'left';ctx.textBaseline=o.b||'alphabetic';ctx.fillText(s,x,y);}
+function seg(ctx,x1,y1,x2,y2,c,w,dash){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.strokeStyle=c;ctx.lineWidth=w||1;
+  ctx.setLineDash(dash||[]);ctx.stroke();ctx.setLineDash([]);}
+const F=(v,d)=>v.toFixed(d).replace('.',',');
+const sgn=(v,d)=>(v<0?MINUS:'+')+F(Math.abs(v),d);
+const group=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+function handle(ctx,x,y,col,r){r=r||9;
+  ctx.beginPath();ctx.arc(x,y+1.5,r,0,7);ctx.fillStyle='rgba(21,24,29,.2)';ctx.fill();
+  ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=col;ctx.lineWidth=2;ctx.stroke();
+  ctx.beginPath();ctx.arc(x,y,r-5,0,7);ctx.fillStyle=col;ctx.fill();}
+
+/* ── дзета-функция: формула Эйлера — Маклорена ── */
+const NZ=64,LN=new Float64Array(NZ+1);for(let n=1;n<=NZ;n++)LN[n]=Math.log(n);
+function zeta(sr,si){
+  let re=0,im=0;
+  for(let n=1;n<NZ;n++){const m=Math.exp(-sr*LN[n]),a=-si*LN[n];re+=m*Math.cos(a);im+=m*Math.sin(a);}
+  const m=Math.exp(-sr*LN[NZ]),a=-si*LN[NZ],pr=m*Math.cos(a),pi=m*Math.sin(a);
+  re+=pr/2;im+=pi/2;
+  const dr=sr-1,dd=dr*dr+si*si;
+  if(dd<1e-14)return [1e9,0];
+  re+=NZ*(pr*dr+pi*si)/dd;im+=NZ*(pi*dr-pr*si)/dd;
+  let tr=pr/NZ,ti=pi/NZ,x,y;const co=[1/12,-1/720,1/30240,-1/1209600],n2=NZ*NZ;
+  x=tr*sr-ti*si;y=tr*si+ti*sr;tr=x;ti=y;
+  re+=co[0]*tr;im+=co[0]*ti;
+  for(let k=1;k<4;k++){
+    const a1=sr+2*k-1,a2=sr+2*k;
+    x=tr*a1-ti*si;y=tr*si+ti*a1;tr=x;ti=y;
+    x=tr*a2-ti*si;y=tr*si+ti*a2;tr=x/n2;ti=y/n2;
+    re+=co[k]*tr;im+=co[k]*ti;
+  }
+  return [re,im];
+}
+
+/* ════════ 1. Полоса и след ════════ */
+const DT=0.02,TMAX=50,M=Math.round(TMAX/DT)+1,PR=new Float64Array(M),PI=new Float64Array(M);
+const S1={sig:.5,t:reduce?ZEROS[1]:23.4,play:!reduce,hold:0,pathSig:null,pulses:[]};
+function buildPath(){if(S1.pathSig===S1.sig)return;S1.pathSig=S1.sig;
+  for(let k=0;k<M;k++){const z=zeta(S1.sig,k*DT);PR[k]=clamp(z[0],-60,60);PI[k]=clamp(z[1],-60,60);}}
+const SV={s0:-.5,s1:1.5,t0:0,t1:51.5};
+let shade=null;
+function buildShade(){
+  const W=100,H=258,cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const c=cv.getContext('2d'),im=c.createImageData(W,H);
+  for(let j=0;j<H;j++)for(let i=0;i<W;i++){
+    const s=SV.s0+(i+.5)/W*(SV.s1-SV.s0),t=SV.t1-(j+.5)/H*(SV.t1-SV.t0),z=zeta(s,t);
+    const v=-.5*Math.log(z[0]*z[0]+z[1]*z[1]);
+    const a=Math.round(clamp((v-.75)/2.6,0,1)*clamp((t-4)/5,0,1)*5)/5*.46,q=(j*W+i)*4;
+    im.data[q]=21;im.data[q+1]=24;im.data[q+2]=29;im.data[q+3]=a*255;}
+  c.putImageData(im,0,0);shade=cv;
+}
+const strip=canvas('c-strip',(ctx,w,h)=>{
+  const L=34,R=50,T=12,B=30,X=s=>L+(s-SV.s0)/(SV.s1-SV.s0)*(w-L-R),Y=t=>h-B-(t-SV.t0)/(SV.t1-SV.t0)*(h-T-B);
+  strip.geo={L,R,T,B};
+  if(shade){ctx.imageSmoothingEnabled=true;ctx.drawImage(shade,L,T,w-L-R,h-T-B);}
+  ctx.fillStyle='rgba(29,59,196,.055)';ctx.fillRect(X(0),T,X(1)-X(0),h-T-B);
+  seg(ctx,X(0),T,X(0),h-B,C.hair2,1);seg(ctx,X(1),T,X(1),h-B,C.hair2,1);
+  seg(ctx,L,h-B,w-R,h-B,C.ink,1);
+  for(let t=10;t<=50;t+=10){seg(ctx,L-4,Y(t),L,Y(t),C.ink,1);txt(ctx,String(t),L-7,Y(t),{a:'right',b:'middle'});}
+  txt(ctx,'Im',L-7,T+4,{a:'right',b:'middle'});
+  [[0,'0'],[.5,'½'],[1,'1']].forEach(p=>{seg(ctx,X(p[0]),h-B,X(p[0]),h-B+4,C.ink,1);
+    txt(ctx,p[1],X(p[0]),h-B+17,{a:'center',c:p[0]===.5?C.blue:C.ink2,w:p[0]===.5?500:400});});
+  txt(ctx,'Re',w-R+8,h-B+17);
+  seg(ctx,X(.5),T,X(.5),h-B,C.blue,1.75);
+  for(const g of ZEROS){if(g>TMAX)break;const past=g<=S1.t;
+    ctx.beginPath();ctx.arc(X(.5),Y(g),3.6,0,7);ctx.fillStyle=past?C.blue:C.paper;ctx.fill();ctx.strokeStyle=C.blue;ctx.lineWidth=1.5;ctx.stroke();
+    txt(ctx,F(g,2),X(1)+7,Y(g),{b:'middle',s:10.5,c:past?C.ink:C.ink2});}
+  const now=performance.now();
+  for(const p of S1.pulses){const u=(now-p.at)/900;if(u<0||u>1)continue;
+    ctx.beginPath();ctx.arc(X(.5),Y(p.g),4+u*26,0,7);ctx.strokeStyle='rgba(29,59,196,'+(1-u)*.8+')';ctx.lineWidth=1.5;ctx.stroke();}
+  const col=S1.sig===.5?C.blue:C.red,hx=X(S1.sig),hy=Y(S1.t);
+  seg(ctx,L,hy,hx-10,hy,col,1,[2,3]);
+  handle(ctx,hx,hy,col);
+});
+const plane=canvas('c-plane',(ctx,w,h)=>{
+  const sc=Math.min(w/7.3,h/6.9),X=r=>w/2+(r-1)*sc,Y=i=>h/2-i*sc;
+  const r0=Math.ceil((0-w/2)/sc+1),r1=Math.floor((w-w/2)/sc+1),i1=Math.floor(h/2/sc);
+  for(let r=r0;r<=r1;r++)if(r)seg(ctx,X(r),0,X(r),h,C.hair,1);
+  for(let i=-i1;i<=i1;i++)if(i)seg(ctx,0,Y(i),w,Y(i),C.hair,1);
+  seg(ctx,0,Y(0),w,Y(0),C.ink,1);seg(ctx,X(0),0,X(0),h,C.ink,1);
+  for(let r=r0;r<=r1;r++)if(r)txt(ctx,(r<0?MINUS:'')+Math.abs(r),X(r),Y(0)+15,{a:'center',s:10.5});
+  for(let i=-i1;i<=i1;i++)if(i)txt(ctx,(i<0?MINUS:'')+Math.abs(i)+'i',X(0)-7,Y(i),{a:'right',b:'middle',s:10.5});
+  txt(ctx,'Re ζ',w-8,Y(0)-8,{a:'right'});txt(ctx,'Im ζ',X(0)+9,13);
+  buildPath();
+  const col=S1.sig===.5?C.blue:C.red,rgb=S1.sig===.5?'29,59,196':'210,51,31';
+  const K=Math.min(M-1,Math.floor(S1.t/DT)),f=S1.t/DT-K,CH=40;
+  ctx.lineJoin='round';ctx.lineCap='round';ctx.lineWidth=1.9;
+  const k0=S1.sig>.9?Math.min(K,Math.round(2/DT)):0;
+  for(let c=0;c<CH;c++){const a=k0+Math.floor((K-k0)*c/CH),b=k0+Math.floor((K-k0)*(c+1)/CH);if(b<=a)continue;
+    ctx.beginPath();ctx.moveTo(X(PR[a]),Y(PI[a]));for(let k=a+1;k<=b;k++)ctx.lineTo(X(PR[k]),Y(PI[k]));
+    const u=(c+1)/CH;ctx.strokeStyle='rgba('+rgb+','+(.1+.9*u*u*u).toFixed(3)+')';ctx.stroke();}
+  const K2=Math.min(M-1,K+1),zr=PR[K]+(PR[K2]-PR[K])*f,zi=PI[K]+(PI[K2]-PI[K])*f;
+  ctx.beginPath();ctx.moveTo(X(PR[K]),Y(PI[K]));ctx.lineTo(X(zr),Y(zi));ctx.strokeStyle=col;ctx.stroke();
+  const now=performance.now();
+  for(const p of S1.pulses){const u=(now-p.at)/900;if(u<0||u>1)continue;
+    ctx.beginPath();ctx.arc(X(0),Y(0),9+u*46,0,7);ctx.strokeStyle='rgba(29,59,196,'+(1-u)*.8+')';ctx.lineWidth=1.75;ctx.stroke();}
+  ctx.beginPath();ctx.arc(X(0),Y(0),8,0,7);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.75;ctx.stroke();
+  txt(ctx,'0',X(0),Y(0)+.5,{a:'center',b:'middle',c:C.ink,w:500,s:10.5});
+  ctx.beginPath();ctx.arc(X(zr),Y(zi),5,0,7);ctx.fillStyle=col;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=1.5;ctx.stroke();
+  S1.z=[zr,zi];
+});
+function read1(){
+  const z=zeta(S1.sig,S1.t);let n=0;while(n<ZEROS.length&&ZEROS[n]<=S1.t)n++;
+  $('r-s').textContent=F(S1.sig,3)+' + '+F(S1.t,3).padStart(6,' ')+'i';
+  $('r-z').textContent=sgn(z[0],3)+' '+(z[1]<0?MINUS:'+')+' '+F(Math.abs(z[1]),3)+'i';
+  $('r-a').textContent=F(Math.min(99.999,Math.hypot(z[0],z[1])),3).padStart(6,' ');
+  $('r-n').textContent=String(n).padStart(2,' ');
+  $('c-strip').setAttribute('aria-valuetext','s = '+F(S1.sig,2)+' + '+F(S1.t,2)+'i');
+}
+function set1(sig,t){S1.sig=sig;S1.t=clamp(t,.2,TMAX);strip.dirty=plane.dirty=true;read1();}
+function setPlay(v){S1.play=v;S1.hold=0;$('play').classList.toggle('on',v);
+  $('play').setAttribute('aria-label',v?'Остановить точку':'Пустить точку вверх по прямой');}
+dragger($('c-strip'),(x,y,w,h)=>{const g=strip.geo;
+  let s=SV.s0+(x-g.L)/(w-g.L-g.R)*(SV.s1-SV.s0),t=SV.t0+(h-g.B-y)/(h-g.T-g.B)*(SV.t1-SV.t0);
+  s=clamp(s,0,1);if(Math.abs(s-.5)<.04)s=.5;set1(Math.round(s*1000)/1000,t);},()=>setPlay(false));
+keys($('c-strip'),(dx,dy)=>{setPlay(false);let s=clamp(Math.round((S1.sig+dx*.05)*100)/100,0,1);set1(s,S1.t+dy*.1);});
+$('play').addEventListener('click',()=>{if(!S1.play){if(S1.t>=TMAX-.05)S1.t=.2;S1.sig=.5;}setPlay(!S1.play);set1(S1.sig,S1.t);});
+function tick1(dt,now){
+  if(S1.play){
+    if(S1.hold>0){S1.hold-=dt;if(S1.hold<=0)set1(.5,.2);}
+    else{const t0=S1.t,t1=Math.min(TMAX,t0+1.7*dt);
+      for(const g of ZEROS){if(g>TMAX)break;if(g>t0&&g<=t1)S1.pulses.push({g,at:now});}
+      set1(.5,t1);if(t1>=TMAX)S1.hold=1.6;}
+  }
+  if(S1.pulses.length){S1.pulses=S1.pulses.filter(p=>now-p.at<900);strip.dirty=plane.dirty=true;}
+}
+
+/* ════════ 2. Лестница из волн ════════ */
+const GMAX=400,XA=1,XB=41.5;
+const STEPS=[];(function(){for(let p=2;p<XB;p++){let pr=true;for(let d=2;d*d<=p;d++)if(p%d===0){pr=false;break;}
+  if(pr)for(let q=p,k=1;q<XB;q*=p,k++)STEPS.push({x:q,p,k,h:Math.log(p)});}STEPS.sort((a,b)=>a.x-b.x);})();
+const psi=x=>{let s=0;for(const st of STEPS){if(st.x<x)s+=st.h;else if(st.x===x)s+=st.h/2;else break;}return s;};
+const S2={T:102.5,N:0,intro:reduce?2:0,u:0};
+const countN=T=>{let n=0;while(n<ZEROS.length&&ZEROS[n]<=T)n++;return n;};
+function approx(x,N){const L=Math.log(x),rt=Math.sqrt(x);let s=0;
+  for(let k=0;k<N;k++){const g=ZEROS[k];s+=(.5*Math.cos(g*L)+g*Math.sin(g*L))/(.25+g*g);}
+  return x-2*rt*s-1.8378770664093453-.5*Math.log(1-1/(x*x));}
+const stairs=canvas('c-stairs',(ctx,w,h)=>{
+  const L=38,R=12,T=12,B=h-140,X=x=>L+(x-XA)/(XB-XA)*(w-L-R),Y=v=>B-(v+2)/(40.5+2)*(B-T),N=S2.N;
+  for(let v=0;v<=40;v+=10){seg(ctx,L,Y(v),w-R,Y(v),v?C.hair:C.hair2,1);txt(ctx,String(v),L-7,Y(v),{a:'right',b:'middle'});}
+  seg(ctx,L,B,w-R,B,C.ink,1);
+  const narrow=w<520;
+  let lp=-99,lq=-99;
+  for(const st of STEPS){const x=X(st.x);
+    if(st.k===1){seg(ctx,x,B,x,B+5,C.ink,1.25);if(x-lp>=15){lp=x;txt(ctx,String(st.p),x,B+18,{a:'center',c:C.ink,w:500});}}
+    else{seg(ctx,x,B,x,B+3,C.ink2,1);if(!narrow&&x-lq>=18){lq=x;txt(ctx,st.p+['','','²','³','⁴','⁵'][st.k],x,B+31,{a:'center',s:10});}}}
+  ctx.beginPath();ctx.moveTo(X(XA),Y(0));let acc=0;
+  for(const st of STEPS){ctx.lineTo(X(st.x),Y(acc));acc+=st.h;ctx.lineTo(X(st.x),Y(acc));}
+  ctx.lineTo(X(XB),Y(acc));ctx.strokeStyle=C.ink;ctx.lineWidth=1.4;ctx.lineJoin='miter';ctx.stroke();
+  ctx.save();ctx.beginPath();ctx.rect(L,T-6,w-L-R,B-T+6);ctx.clip();
+  ctx.beginPath();const x0=1.6;let err=0,cnt=0;
+  for(let px=X(x0);px<=w-R;px+=1){const x=XA+(px-L)/(w-L-R)*(XB-XA),v=approx(x,N);
+    if(px===X(x0))ctx.moveTo(px,Y(v));else ctx.lineTo(px,Y(v));
+    if(x>2){err+=Math.abs(v-psi(x));cnt++;}}
+  ctx.strokeStyle=C.blue;ctx.lineWidth=1.9;ctx.lineJoin='round';ctx.stroke();ctx.restore();
+  S2.err=err/cnt;
+  seg(ctx,L+10,T+9,L+34,T+9,C.ink,1.4);txt(ctx,'лестница простых ψ(x)',L+42,T+13,{c:C.ink});
+  seg(ctx,L+10,T+27,L+34,T+27,C.blue,1.9);txt(ctx,'сумма волн от нулей',L+42,T+31,{c:C.ink});
+  /* волна верхнего нуля */
+  const wt=h-72,wb=h-10,wm=(wt+wb)/2;
+  seg(ctx,L,wm,w-R,wm,C.hair2,1);
+  txt(ctx,N?'волна нуля № '+N:'волн пока нет',L,wt-12,{c:C.ink});
+  if(N){const g=ZEROS[N-1],den=Math.sqrt(.25+g*g);ctx.beginPath();
+    for(let px=X(x0);px<=w-R;px+=1){const x=XA+(px-L)/(w-L-R)*(XB-XA),Lx=Math.log(x);
+      const v=-(.5*Math.cos(g*Lx)+g*Math.sin(g*Lx))/den*Math.sqrt(x/XB);
+      const y=wm-v*(wb-wt)/2*.92;if(px===X(x0))ctx.moveTo(px,y);else ctx.lineTo(px,y);}
+    ctx.strokeStyle=C.blue;ctx.lineWidth=1.3;ctx.stroke();}
+});
+const rail=canvas('c-rail',(ctx,w,h)=>{
+  const L=38,R=12,X=g=>L+g/GMAX*(w-L-R),y0=12,y1=44,hx=X(S2.T);
+  rail.geo={L,R};
+  ctx.fillStyle='rgba(29,59,196,.08)';ctx.fillRect(L,y0,hx-L,y1-y0);
+  seg(ctx,L,y1,w-R,y1,C.ink,1);
+  for(let g=0;g<=GMAX;g+=100){seg(ctx,X(g),y1,X(g),y1+4,C.ink,1);txt(ctx,String(g),X(g),y1+17,{a:g===GMAX?'right':g?'center':'left'});}
+  if(w>520)txt(ctx,'высота нуля, Im ρ',X(200)+26,y1+17);
+  for(let k=0;k<ZEROS.length;k++){const on=k<S2.N,x=X(ZEROS[k]);seg(ctx,x,on?y0+3:y0+11,x,y1,on?C.blue:'rgba(21,24,29,.42)',1);}
+  seg(ctx,hx,y0-8,hx,y1+6,C.ink,1.5);
+  ctx.beginPath();ctx.roundRect(hx-9,y0-6,18,34,5);ctx.fillStyle='rgba(21,24,29,.2)';ctx.fill();
+  ctx.beginPath();ctx.roundRect(hx-9,y0-8,18,34,5);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C.ink;ctx.lineWidth=1.75;ctx.stroke();
+  for(let i=-1;i<=1;i++)seg(ctx,hx+i*3.5,y0+2,hx+i*3.5,y0+16,C.ink,1);
+});
+function set2(T){S2.T=clamp(T,0,GMAX);S2.N=countN(S2.T);stairs.dirty=rail.dirty=true;stairs.paint();
+  $('r-N').textContent=String(S2.N).padStart(3,' ');
+  $('r-g').textContent=S2.N?('Im ρ = '+F(ZEROS[S2.N-1],3).padStart(7,' ')):'нулей нет       ';
+  $('r-e').textContent=F(S2.err,3);
+  $('c-rail').setAttribute('aria-valuetext',S2.N+' нулей');}
+dragger($('c-rail'),(x,y,w)=>{const g=rail.geo;set2((x-g.L)/(w-g.L-g.R)*GMAX);},()=>{S2.intro=2;});
+keys($('c-rail'),(dx,dy)=>{S2.intro=2;const n=clamp(S2.N+dx+dy,0,ZEROS.length);set2(n?ZEROS[n-1]+.01:0);});
+function tick2(dt){
+  if(S2.intro===1){S2.u=Math.min(1,S2.u+dt/6.5);const e=S2.u*S2.u*(3-2*S2.u);set2(102.5*e);if(S2.u>=1)S2.intro=2;}
+}
+if(!reduce&&'IntersectionObserver' in window){new IntersectionObserver((es,ob)=>{for(const e of es)if(e.isIntersecting&&S2.intro===0){S2.intro=1;S2.u=0;ob.disconnect();}},{threshold:.55}).observe($('c-stairs'));}
+
+/* ════════ 3. Беглый нуль ════════ */
+const S3={sig:.5,intro:reduce?2:0,u:0},G1=ZEROS[0];
+const rogue=canvas('c-rogue',(ctx,w,h)=>{
+  const L=44,R=14,X=s=>L+s*(w-L-R),bt=14,bb=74,bm=(bt+bb)/2,d=Math.abs(S3.sig-.5),col=d?C.red:C.blue;
+  rogue.geo={L,R};
+  ctx.fillStyle=C.paper2;ctx.fillRect(L,bt,w-L-R,bb-bt);ctx.strokeStyle=C.hair2;ctx.lineWidth=1;ctx.strokeRect(L+.5,bt+.5,w-L-R-1,bb-bt-1);
+  seg(ctx,X(.5),bt-6,X(.5),bb+6,C.blue,1.75);
+  [[0,'0'],[.5,'½'],[1,'1']].forEach(p=>txt(ctx,p[1],X(p[0]),bb+20,{a:p[0]===0?'left':p[0]===1?'right':'center',c:p[0]===.5?C.blue:C.ink2,w:p[0]===.5?500:400}));
+  txt(ctx,'Re',L-8,bm,{a:'right',b:'middle'});
+  if(d){seg(ctx,X(S3.sig),bm,X(1-S3.sig),bm,C.red,1,[2,3]);
+    ctx.beginPath();ctx.arc(X(1-S3.sig),bm,7,0,7);ctx.fillStyle=C.paper2;ctx.fill();ctx.strokeStyle=C.red;ctx.lineWidth=1.5;ctx.stroke();}
+  handle(ctx,X(S3.sig),bm,col,10);
+  /* волна в единицах √x, симметричная логарифмическая шкала */
+  const pt=118,pb=h-34,pm=(pt+pb)/2,PX=u=>L+u/6*(w-L-R),sy=v=>{const a=Math.abs(v);return (v<0?-1:1)*(a<=1?a:1+Math.log10(a));},PY=v=>pm-sy(v)/4*(pb-pt)/2;
+  ctx.fillStyle='rgba(29,59,196,.07)';ctx.fillRect(L,PY(1),w-L-R,PY(-1)-PY(1));
+  [1,10,100,1000].forEach(v=>{seg(ctx,L,PY(v),w-R,PY(v),C.hair,1);seg(ctx,L,PY(-v),w-R,PY(-v),C.hair,1);
+    txt(ctx,v===1?'√x':'×'+v,L-7,PY(v),{a:'right',b:'middle',s:10.5});});
+  seg(ctx,L,pm,w-R,pm,C.hair2,1);seg(ctx,L,pb,w-R,pb,C.ink,1);
+  ['1','10','10²','10³','10⁴','10⁵','10⁶'].forEach((s,i)=>{seg(ctx,PX(i),pb,PX(i),pb+4,C.ink,1);txt(ctx,s,PX(i),pb+17,{a:i===0?'left':i===6?'right':'center'});});
+  if(w>460)txt(ctx,'x',PX(5.5),pb+17,{a:'center',f:SERIF,s:13});
+  ctx.save();ctx.beginPath();ctx.rect(L,pt-2,w-L-R,pb-pt+4);ctx.clip();
+  if(d){ctx.beginPath();ctx.moveTo(PX(0),PY(1));ctx.lineTo(PX(6),PY(Math.pow(10,6*d)));ctx.moveTo(PX(0),PY(-1));ctx.lineTo(PX(6),PY(-Math.pow(10,6*d)));
+    ctx.strokeStyle='rgba(210,51,31,.55)';ctx.lineWidth=1;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);}
+  ctx.beginPath();const n=Math.round((w-L-R)*2);
+  for(let i=0;i<=n;i++){const u=6*i/n,lx=u*2.302585092994046,v=Math.exp(d*lx)*Math.cos(G1*lx),x=PX(u),y=PY(v);if(i)ctx.lineTo(x,y);else ctx.moveTo(x,y);}
+  ctx.strokeStyle=col;ctx.lineWidth=1.5;ctx.lineJoin='round';ctx.stroke();ctx.restore();
+});
+function read3(){const a=Math.pow(10,6*Math.abs(S3.sig-.5));
+  $('r-sg').textContent=F(S3.sig,3);
+  $('r-amp').textContent=(a<100?'в '+F(a,1)+' раза':'в '+a.toFixed(0)+' раз').padEnd(11,' ');
+  $('c-rogue').setAttribute('aria-valuetext','Re = '+F(S3.sig,2));}
+function set3(s){s=clamp(s,0,1);if(Math.abs(s-.5)<.012)s=.5;S3.sig=s;rogue.dirty=true;read3();}
+dragger($('c-rogue'),(x,y,w)=>{const g=rogue.geo;S3.intro=2;set3((x-g.L)/(w-g.L-g.R));});
+keys($('c-rogue'),(dx,dy)=>{S3.intro=2;set3(Math.round((S3.sig+(dx+dy)*.02)*100)/100);});
+function tick3(dt){if(S3.intro===1){S3.u+=dt/3.4;if(S3.u>=1){S3.intro=2;set3(.5);return;}
+  const e=Math.sin(Math.PI*S3.u);S3.sig=.5+.17*e*e;rogue.dirty=true;read3();}}
+if(!reduce&&'IntersectionObserver' in window){new IntersectionObserver((es,ob)=>{for(const e of es)if(e.isIntersecting&&S3.intro===0){S3.intro=1;S3.u=0;ob.disconnect();}},{threshold:.7}).observe($('c-rogue'));}
+
+/* ════════ 4. Счёт простых ════════ */
+const LIM=1e7,BL=12;let sieve=null,blocks=null,curve=null;
+const S4={lx:6};
+function li(x){const u=Math.log(x);let s=.5772156649015329+Math.log(u),t=1;for(let k=1;k<300;k++){t*=u/k;s+=t/k;if(t/k<1e-13*s)break;}return s;}
+function primePi(x){x=Math.floor(x);const b=x>>BL;let c=blocks[b];for(let i=b<<BL;i<=x;i++)c+=sieve[i];return c;}
+function buildSieve(){
+  sieve=new Uint8Array(LIM+1).fill(1);sieve[0]=sieve[1]=0;
+  for(let i=2;i*i<=LIM;i++)if(sieve[i])for(let j=i*i;j<=LIM;j+=i)sieve[j]=0;
+  blocks=new Uint32Array((LIM>>BL)+2);let c=0;
+  for(let i=0;i<=LIM;i++){if((i&((1<<BL)-1))===0)blocks[i>>BL]=c;c+=sieve[i];}
+  curve=[];for(let i=0;i<=900;i++){const lx=2+5*i/900,x=Math.pow(10,lx);curve.push([lx,li(x)-primePi(x)]);}
+  count.dirty=true;set4(S4.lx);
+}
+const bound=x=>Math.sqrt(x)*Math.log(x)/(8*Math.PI);
+const count=canvas('c-count',(ctx,w,h)=>{
+  const L=44,R=14,T=14,B=h-34,X=lx=>L+(lx-2)/5*(w-L-R),Y=v=>B-clamp(Math.log10(Math.max(v,1e-3)),-.2,4.2)/4*(B-T);
+  count.geo={L,R};
+  [1,10,100,1000,10000].forEach(v=>{seg(ctx,L,Y(v),w-R,Y(v),C.hair,1);txt(ctx,v===10000?'10⁴':String(v),L-7,Y(v),{a:'right',b:'middle',s:10.5});});
+  seg(ctx,L,B,w-R,B,C.ink,1);
+  ['10²','10³','10⁴','10⁵','10⁶','10⁷'].forEach((s,i)=>{seg(ctx,X(i+2),B,X(i+2),B+4,C.ink,1);txt(ctx,s,X(i+2),B+17,{a:i===0?'left':i===5?'right':'center'});});
+  if(w>460)txt(ctx,'x',X(6.5),B+17,{a:'center',f:SERIF,s:13});
+  ctx.beginPath();const l0=Math.log10(2657);for(let i=0;i<=200;i++){const lx=l0+(7-l0)*i/200,y=Y(bound(Math.pow(10,lx)));if(i)ctx.lineTo(X(lx),y);else ctx.moveTo(X(lx),y);}
+  ctx.strokeStyle=C.blue;ctx.lineWidth=1.75;ctx.stroke();
+  ctx.beginPath();ctx.moveTo(X(l0),Y(bound(2657)));ctx.lineTo(X(7),Y(bound(1e7)));ctx.lineTo(X(7),B);ctx.lineTo(X(l0),B);ctx.closePath();ctx.fillStyle='rgba(29,59,196,.045)';ctx.fill();
+  seg(ctx,L+10,T+9,L+34,T+9,C.blue,1.75);txt(ctx,'потолок √x · ln x / 8π',L+42,T+13,{c:C.ink});
+  seg(ctx,L+10,T+27,L+34,T+27,C.ink,1.3);txt(ctx,'разность li(x) − π(x)',L+42,T+31,{c:C.ink});
+  if(curve){ctx.beginPath();curve.forEach((p,i)=>{const y=Y(p[1]);if(i)ctx.lineTo(X(p[0]),y);else ctx.moveTo(X(p[0]),y);});
+    ctx.strokeStyle=C.ink;ctx.lineWidth=1.3;ctx.lineJoin='round';ctx.stroke();
+    }
+  const cx=X(S4.lx),x=Math.pow(10,S4.lx);
+  seg(ctx,cx,T,cx,B,C.ink,1,[2,3]);
+  if(x>=2657){ctx.beginPath();ctx.arc(cx,Y(bound(x)),4,0,7);ctx.fillStyle=C.blue;ctx.fill();}
+  if(sieve)handle(ctx,cx,Y(li(x)-primePi(x)),C.ink,8);
+});
+function set4(lx){S4.lx=clamp(lx,2,7);count.dirty=true;if(!sieve)return;
+  const x=Math.round(Math.pow(10,S4.lx)),p=primePi(x),l=li(x);
+  $('r-x').textContent=group(x).padStart(10,' ');$('r-pi').textContent=group(p).padStart(7,' ');
+  $('r-li').textContent=group(l).padStart(7,' ');$('r-d').textContent=F(l-p,1).padStart(5,' ');
+  $('r-b').textContent=x>=2657?F(bound(x),1).padStart(6,' '):'     —';
+  $('c-count').setAttribute('aria-valuetext','x = '+x);}
+dragger($('c-count'),(x,y,w)=>{const g=count.geo;set4(2+(x-g.L)/(w-g.L-g.R)*5);});
+keys($('c-count'),(dx,dy)=>set4(S4.lx+(dx+dy)*.05));
+
+/* ════════ 5. Лента ════════ */
+const EV=[
+ {y:'1859',d:'1859',t:'Риман высказывает гипотезу в короткой статье о количестве простых чисел и вручную находит несколько первых нулей.',f:0,k:'',fl:'пока ничего не доказано',n:'несколько нулей, вручную'},
+ {y:'1896',d:'1896',t:'Адамар и Валле-Пуссен доказывают, что на краю полосы, при Re s = 1, нулей нет. Из этого следует закон распределения простых чисел.',f:0,k:'',fl:'пока ничего не доказано',n:'несколько нулей, вручную'},
+ {y:'1900',d:'1900',t:'Давид Гильберт включает гипотезу в список двадцати трёх проблем для нового века под восьмым номером.',f:0,k:'',fl:'пока ничего не доказано',n:'несколько нулей, вручную'},
+ {y:'1903',d:'1903',t:'Йорген Грам вычисляет первые пятнадцать нулей. Все они лежат на прямой.',f:0,k:'',fl:'пока ничего не доказано',n:'первые 15 нулей'},
+ {y:'1914',d:'1914',t:'Годфри Харди доказывает, что на прямой лежит бесконечно много нулей. Какую долю от всех они составляют, остаётся неизвестным.',f:0,k:'dots',fl:'бесконечно много нулей',n:'первые 79 нулей'},
+ {y:'1942',d:'1942',t:'Атле Сельберг доказывает, что нули на прямой составляют положительную долю от всех, пусть и очень малую.',f:1.2,k:'',fl:'положительная доля нулей',n:'первые 1 041 нуль'},
+ {y:'1953',d:'1953',t:'Алан Тьюринг проверяет гипотезу на манчестерском компьютере. Это один из первых случаев, когда теорему о числах проверяет машина.',f:1.2,k:'',fl:'положительная доля нулей',n:'первые 1 104 нуля'},
+ {y:'1974',d:'1974',t:'Норман Левинсон доказывает, что на прямой лежит больше трети всех нулей.',f:34.2,k:'',fl:'больше 1/3 всех нулей',n:'первые 3,5 млн нулей'},
+ {y:'1986',d:'1986',t:'Ван де Люн, те Риле и Винтер проверяют первые полтора миллиарда нулей. Исключений нет.',f:34.2,k:'',fl:'больше 1/3 всех нулей',n:'первые 1,5 млрд нулей'},
+ {y:'1989',d:'1989',t:'Брайан Конри поднимает доказанную долю выше двух пятых.',f:40.88,k:'',fl:'больше 2/5 всех нулей',n:'первые 1,5 млрд нулей'},
+ {y:'2000',d:'2000',t:'Институт Клэя называет гипотезу одной из семи задач тысячелетия и назначает за решение миллион долларов.',f:40.88,k:'',fl:'больше 2/5 всех нулей',n:'первые 1,5 млрд нулей'},
+ {y:'2004',d:'2004',t:'Ксавье Гурдон проверяет первые десять триллионов нулей. Все лежат на прямой.',f:40.88,k:'',fl:'больше 2/5 всех нулей',n:'первые 10 трлн нулей'},
+ {y:'2020',d:'2020',t:'Пратт, Роблес, Захареску и Цайндлер доводят долю до пяти двенадцатых. За тридцать лет рекорд вырос меньше чем на один процент.',f:41.7,k:'',fl:'больше 5/12 всех нулей',n:'первые 10 трлн нулей'},
+ {y:'авг 2026',d:'Август 2026',t:'Выходит статья, написанная Claude: на прямой лежит больше двух третей нулей, и все они простые. Прежний рекорд побит в полтора раза.',f:66.7,k:'',fl:'больше 2/3 всех нулей',n:'первые 10 трлн нулей'},
+ {y:'20 ноя',d:'20 ноября 2026',t:'Левент Альпёге публикует четырёхстраничную заметку: вместе с Claude найдено полное доказательство, записанное на языке Lean. Тот же метод покрывает обобщённую гипотезу.',f:100,k:'claim',fl:'заявлено: все нули',n:'первые 10 трлн нулей'},
+ {y:'21 ноя',d:'21 ноября 2026',t:'Сообщества Lean и Mathlib выпускают совместное заявление: формальное доказательство проходит независимые проверки, и они уверены в его правильности.',f:100,k:'',fl:'все нули, проверено машиной',n:'первые 10 трлн нулей'}
+];
+const TL={pos:EV.length-1,target:null,act:-1,st:[]};
+(function(){const rail=$('tl-rail');
+  EV.forEach((e,i)=>{const d=document.createElement('div');d.className='tl-st'+(i===0?' first':i===EV.length-1?' last':'');d.style.left=(i/(EV.length-1)*100)+'%';
+    d.innerHTML='<i></i><span>'+e.y+'</span>';rail.insertBefore(d,$('tl-handle'));TL.st.push(d);});
+  dragger(rail,(x,y,w)=>{TL.target=null;setTL(x/w*(EV.length-1));},null,()=>{TL.target=Math.round(TL.pos);});
+  keys(rail,(dx,dy)=>{TL.target=clamp(Math.round(TL.pos)+Math.sign(dx+dy),0,EV.length-1);});
+})();
+function setTL(pos){TL.pos=clamp(pos,0,EV.length-1);const pc=TL.pos/(EV.length-1)*100;
+  $('tl-handle').style.left=pc+'%';$('tl-fill').style.width=pc+'%';
+  const a=Math.round(TL.pos);TL.st.forEach((d,i)=>d.classList.toggle('past',i<=TL.pos+1e-6));
+  if(a===TL.act)return;TL.act=a;const e=EV[a];
+  TL.st.forEach((d,i)=>d.classList.toggle('act',i===a));
+  $('tl-date').textContent=e.d;$('tl-text').textContent=e.t;$('tl-frac').textContent=e.fl;$('tl-num').textContent=e.n;
+  const bar=$('tl-bar');bar.className='bar'+(e.k?' '+e.k:'');bar.firstElementChild.style.width=e.f+'%';
+  $('tl-rail').setAttribute('aria-valuetext',e.d);}
+function tickTL(dt){if(TL.target!==null){const d=TL.target-TL.pos;if(Math.abs(d)<.002){setTL(TL.target);TL.target=null;}else setTL(TL.pos+d*Math.min(1,dt*14));}}
+
+/* ════════ запуск ════════ */
+buildShade();setPlay(S1.play);set1(S1.sig,S1.t);
+S2.N=countN(S2.T);S2.err=0;set2(reduce?S2.T:S2.T);set3(.5);set4(6);setTL(EV.length-1);
+setTimeout(buildSieve,60);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>all.forEach(o=>o.dirty=true));
+let last=performance.now();
+function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+  tick1(dt,now);tick2(dt);tick3(dt);tickTL(dt);
+  for(const o of all)o.paint();
+  requestAnimationFrame(frame);}
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

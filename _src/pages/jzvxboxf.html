@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лаборатория наложений</title>
+<meta name="description" content="Книга, написанная с ИИ, в которой голос одного мира накладывается на другой мир: Швейк в Средиземье, Чехов на космической станции, боги на выборах.">
+<meta name="compositor:paper" content="#0C0B0A">
+<meta name="compositor:ink" content="#EBE5D8">
+<meta name="compositor:accent" content="#E0A84A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Literata:ital,opsz,wght@0,7..72,300;1,7..72,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0c0b0a;
+  --ink:#ebe5d8;
+  --dim:#8c857a;
+  --line:#2b2824;
+  --lamp:#e0a84a;
+  --display:'Cormorant Garamond', Georgia, serif;
+  --text:'Literata', Georgia, serif;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-weight:300;
+  font-size:1.125rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--ink);text-decoration-color:var(--lamp);text-underline-offset:.22em;text-decoration-thickness:1px}
+a:hover{color:var(--lamp)}
+a:focus-visible{outline:1px solid var(--lamp);outline-offset:4px}
+
+main{max-width:38rem;margin:0 auto;padding:7rem 1.5rem 6rem}
+
+.lede{
+  font-size:clamp(1.2rem, 2.4vw, 1.45rem);
+  line-height:1.6;
+  margin:0 0 5rem;
+}
+
+.titles{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.titles li{
+  display:grid;
+  grid-template-columns:2.6rem 1fr;
+  gap:0 .8rem;
+  padding:1.6rem 0;
+  border-bottom:1px solid var(--line);
+}
+.titles .n{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:1.1rem;
+  color:var(--lamp);
+  line-height:1.5;
+  font-variant-numeric:tabular-nums;
+}
+.titles .t{
+  font-family:var(--display);
+  font-style:italic;
+  font-weight:400;
+  font-size:clamp(1.35rem, 3vw, 1.7rem);
+  line-height:1.25;
+}
+
+.etc{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:clamp(1.35rem, 3vw, 1.7rem);
+  color:var(--dim);
+  margin:2rem 0 4.5rem 3.4rem;
+}
+
+.book-link{
+  font-family:var(--display);
+  font-style:italic;
+  font-size:1.5rem;
+}
+</style>
+</head>
+<body>
+<main>
+  <p class="lede">Эта книга — своего рода лаборатория. Я написал её вместе с ИИ, и в ней я беру голос, жанр или закон одного мира и переношу его в другой — чтобы посмотреть, что получится.</p>
+
+  <ol class="titles">
+    <li><span class="n">I</span><span class="t">Приключения солдата Швейка в мире Толкина — на войне в Средиземье.</span></li>
+    <li><span class="n">II</span><span class="t">Рассказ Чехова, действие которого происходит на космической станции.</span></li>
+    <li><span class="n">III</span><span class="t">Мир Тлёна Борхеса, наложенный на Нью-Кробюзон.</span></li>
+    <li><span class="n">IV</span><span class="t">Советское партсобрание, каким его описал бы Сорокин в стиле Маркеса.</span></li>
+    <li><span class="n">V</span><span class="t">Как живётся настоящим людям, если их реальность — B-movie, где вампиры, инопланетяне и картонные деревья?</span></li>
+    <li><span class="n">VI</span><span class="t">Боги всех религий проводят предвыборные кампании. В кого верить больше?</span></li>
+  </ol>
+
+  <p class="etc">И так далее.</p>
+
+  <a class="book-link" href="https://www.dropbox.com/scl/fi/fh1913th021pr8dc18pj9/decalaylum2-FINAL.pdf?rlkey=cfx5ab1de54kv271kz9orh743&amp;dl=0">PDF</a>
+</main>
+</body>
+</html>

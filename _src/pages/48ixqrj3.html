@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Одиссея</title>
+<meta name="description" content="Пробная страница в духе таблоидного экстренного выпуска: путь Одиссея домой, карта его скитаний и краткий пересказ истории.">
+<meta name="compositor:paper" content="#F4F1E8">
+<meta name="compositor:ink" content="#0B0B0B">
+<meta name="compositor:accent" content="#E3120B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@700;800;900&family=Fira+Sans+Condensed:wght@500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F1E8;
+    --ink:#0B0B0B;
+    --smoke:#5E5A52;
+    --shadow:#E7E2D4;
+    --bone:#FFFFFF;
+    --accent:#E3120B;
+    --display:"Fira Sans Extra Condensed", "Arial Narrow", sans-serif;
+    --label:"Fira Sans Condensed", "Arial Narrow", sans-serif;
+    --text:"PT Serif", Georgia, serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--text);
+    font-size:19px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{padding:0 20px 96px}
+
+  /* Masthead */
+  .title-card{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 0 10px;
+    text-align:center;
+    border-bottom:3px solid var(--ink);
+  }
+  .kicker{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:24px 0 0;
+    padding:10px 14px;
+    background:var(--ink);
+    color:var(--bone);
+    font-family:var(--label);
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    text-align:left;
+  }
+  .kicker::before{content:"";flex:none;width:14px;height:14px;background:var(--accent)}
+  h1{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(72px, 23vw, 280px);
+    line-height:.82;
+    letter-spacing:-.005em;
+    text-transform:uppercase;
+    margin:.08em 0 0;
+  }
+  .title-rule{
+    height:14px;
+    background:var(--ink);
+    border:0;
+    margin:16px 0 0;
+  }
+
+  /* Deck */
+  .lede{
+    max-width:1040px;
+    margin:18px auto 0;
+    padding:14px 18px 16px;
+    background:var(--accent);
+    color:var(--bone);
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(26px, 4.6vw, 44px);
+    line-height:1.02;
+    text-transform:uppercase;
+    letter-spacing:.005em;
+  }
+
+  /* Prose */
+  .prose{max-width:34em;margin:0 auto}
+  h2{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(38px, 7vw, 66px);
+    line-height:.94;
+    text-transform:uppercase;
+    margin:0 0 26px;
+    padding-top:14px;
+    border-top:12px solid var(--ink);
+  }
+  .prose p{margin:0 0 .9em}
+  .prose p:first-of-type{font-weight:700;font-size:1.08em;line-height:1.5}
+  .prose p:first-of-type::first-letter{
+    font-family:var(--display);
+    font-weight:900;
+    float:left;
+    font-size:4.2em;
+    line-height:.8;
+    padding:.08em .1em .04em;
+    margin:.06em .14em 0 0;
+    background:var(--ink);
+    color:var(--bone);
+  }
+  .accent{color:var(--accent)}
+
+  /* Figures */
+  figure{margin:0}
+  .plate{
+    max-width:1040px;
+    margin:28px auto 0;
+  }
+  .plate svg{display:block;width:100%;height:auto}
+  .caption{
+    position:relative;
+    max-width:1040px;
+    margin:12px auto 0;
+    padding-left:24px;
+    font-family:var(--label);
+    font-weight:600;
+    font-size:17px;
+    line-height:1.35;
+    color:var(--ink);
+  }
+  .caption::before{content:"";position:absolute;left:0;top:.3em;width:12px;height:12px;background:var(--accent)}
+  .slate{
+    display:flex;
+    align-items:stretch;
+    flex-wrap:wrap;
+    max-width:1040px;
+    margin:84px auto 0;
+    background:var(--ink);
+    color:var(--bone);
+  }
+  .slate .reel{
+    display:flex;
+    align-items:center;
+    padding:10px 14px;
+    background:var(--accent);
+    color:var(--bone);
+    font-family:var(--label);
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  .slate .name{
+    flex:1 1 auto;
+    min-width:0;
+    margin:0;
+    padding:10px 16px 12px;
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(26px, 4.4vw, 42px);
+    line-height:1;
+    text-transform:uppercase;
+  }
+
+  .instrument{
+    display:block;
+    width:100%;
+    max-width:1040px;
+    margin:0 auto;
+    min-height:440px;
+    background:var(--shadow);
+    border:4px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  .instrument[data-instrument="k3"]{min-height:560px}
+
+  .history{margin-top:104px}
+  .pull{
+    margin:36px 0;
+    padding:16px 20px 18px;
+    background:var(--ink);
+    color:var(--bone);
+    border-left:12px solid var(--accent);
+    font-family:var(--display);
+    font-weight:900;
+    font-size:34px;
+    line-height:1.02;
+    text-transform:uppercase;
+  }
+  .end{
+    margin:56px auto 0;
+    text-align:center;
+    font-family:var(--display);
+    font-weight:800;
+    letter-spacing:.5em;
+    font-size:16px;
+    color:var(--smoke);
+  }
+
+  @media (max-width:560px){
+    body{font-size:18px}
+    .kicker{font-size:12.5px;letter-spacing:.14em;margin-top:16px}
+    .title-rule{height:10px}
+    h2{border-top-width:9px}
+    .slate{margin-top:68px}
+    .instrument{min-height:360px;border-width:3px}
+    .instrument[data-instrument="k3"]{min-height:460px}
+    .pull{font-size:27px;border-left-width:9px}
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="title-card">
+    <p class="kicker">Гомер · песнь первая и последняя</p>
+    <h1>Одиссея</h1>
+    <hr class="title-rule">
+  </header>
+
+  <p class="lede">Эта страница должна проверить как все работает!</p>
+
+  <figure class="plate">
+    <svg viewBox="0 0 800 340" role="img" aria-label="Гравюра на дереве: чёрный корабль с полосатым парусом идёт по резным волнам под полной луной">
+      <defs>
+        <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2"/>
+        </filter>
+      </defs>
+      <g filter="url(#rough)">
+        <rect x="6" y="6" width="788" height="328" fill="#E7E1D3"/>
+        <!-- sky gouges -->
+        <g stroke="#0E0E0D" stroke-linecap="round" fill="none">
+          <path d="M20 30 H260 M300 30 H780" stroke-width="7"/>
+          <path d="M20 48 H230 M330 48 H780" stroke-width="6"/>
+          <path d="M20 64 H210 M355 64 H780" stroke-width="5"/>
+          <path d="M20 79 H200 M368 79 H780" stroke-width="4.4"/>
+          <path d="M20 93 H195 M372 93 H780" stroke-width="3.8"/>
+          <path d="M20 106 H196 M370 106 H780" stroke-width="3.2"/>
+          <path d="M20 118 H202 M362 118 H780" stroke-width="2.7"/>
+          <path d="M20 129 H214 M350 129 H780" stroke-width="2.2"/>
+          <path d="M20 139 H236 M326 139 H780" stroke-width="1.8"/>
+          <path d="M40 149 H760" stroke-width="1.4"/>
+          <path d="M70 158 H730" stroke-width="1"/>
+        </g>
+        <!-- moon -->
+        <circle cx="283" cy="88" r="58" fill="none" stroke="#0E0E0D" stroke-width="5"/>
+        <g stroke="#0E0E0D" stroke-width="2.2" stroke-linecap="round">
+          <path d="M300 52 l14 10 M306 70 l18 8 M296 104 l22 6 M286 124 l16 4"/>
+        </g>
+        <!-- sea -->
+        <path d="M6 196 C80 180 140 206 210 192 S330 178 400 194 S540 206 610 190 S730 182 794 196 V334 H6 Z" fill="#0E0E0D"/>
+        <g stroke="#E7E1D3" stroke-linecap="round" fill="none">
+          <path d="M28 222 c22 -10 44 -10 66 0 M130 214 c26 -12 52 -12 78 0 M520 220 c24 -10 48 -10 72 0 M640 212 c22 -10 44 -10 66 0" stroke-width="4"/>
+          <path d="M60 252 c30 -14 60 -14 90 0 s60 14 90 0 M480 250 c30 -14 60 -14 90 0 s60 14 90 0" stroke-width="3.4"/>
+          <path d="M14 284 c36 -14 72 -14 108 0 s72 14 108 0 s72 -14 108 0 s72 14 108 0 s72 -14 108 0 s72 14 108 0 s72 -14 108 0" stroke-width="3"/>
+          <path d="M40 314 c40 -12 80 -12 120 0 s80 12 120 0 s80 -12 120 0 s80 12 120 0 s80 -12 120 0 s80 12 120 0" stroke-width="2.4"/>
+          <path d="M700 240 l40 -6 M720 262 l50 -4 M90 238 l-46 -4" stroke-width="2"/>
+        </g>
+        <!-- ship -->
+        <path d="M272 214 L548 210 C536 238 506 252 470 254 L346 256 C314 254 290 240 272 214 Z" fill="#0E0E0D"/>
+        <path d="M548 210 C566 196 572 178 566 160 C576 176 578 198 560 214 Z" fill="#0E0E0D"/>
+        <path d="M272 214 C262 204 258 192 262 180 C268 196 276 204 286 212 Z" fill="#0E0E0D"/>
+        <g stroke="#E7E1D3" stroke-width="3" stroke-linecap="round">
+          <path d="M300 228 H520 M318 240 H500"/>
+        </g>
+        <g stroke="#0E0E0D" stroke-width="4" stroke-linecap="round">
+          <path d="M318 246 l-26 40 M352 250 l-22 42 M386 252 l-16 42 M420 252 l-10 42 M454 252 l-4 40 M488 250 l4 38"/>
+        </g>
+        <rect x="405" y="60" width="7" height="156" fill="#0E0E0D"/>
+        <path d="M342 74 H478 L470 196 H350 Z" fill="#0E0E0D"/>
+        <g stroke="#E7E1D3" stroke-width="5">
+          <path d="M346 100 H474 M348 128 H472 M349 156 H471"/>
+        </g>
+        <path d="M336 72 H484" stroke="#0E0E0D" stroke-width="7" stroke-linecap="round"/>
+        <path d="M408 62 L360 72 M408 62 L456 72 M412 216 L548 210" stroke="#0E0E0D" stroke-width="1.8"/>
+        <circle cx="526" cy="222" r="5" fill="#E7E1D3"/>
+        <!-- frame -->
+        <rect x="6" y="6" width="788" height="328" fill="none" stroke="#0E0E0D" stroke-width="10"/>
+      </g>
+    </svg>
+  </figure>
+  <p class="caption">Ночь. Море. Один корабль и человек, которому некуда спешить, кроме как домой.</p>
+
+  <div class="slate">
+    <span class="reel">Плёнка 1</span>
+    <h3 class="name">Одиссей возвращается домой</h3>
+  </div>
+  <div class="instrument" data-instrument="k2">
+  <div class="k2-wrap">
+    <div class="k2-map">
+      <svg class="k2-svg" viewBox="96 70 640 340" role="img" aria-label="Схема пути Одиссея от Трои до Итаки по Средиземному морю"></svg>
+    </div>
+    <div class="k2-side">
+      <div class="k2-read"><span class="k2-lab">Год вдали от дома</span><span class="k2-val" data-r="year">10,0</span></div>
+      <div class="k2-read"><span class="k2-lab">Телемаху</span><span class="k2-val" data-r="tele">≈ 10 лет</span></div>
+      <div class="k2-read"><span class="k2-lab">Его кораблей</span><span class="k2-val" data-r="ships">12</span></div>
+      <div class="k2-read"><span class="k2-lab">Пройдено</span><span class="k2-val" data-r="km">0 км</span></div>
+      <div class="k2-read k2-where"><span class="k2-lab">Где</span><span class="k2-wn" data-r="where">Троя</span><span class="k2-note" data-r="note"></span></div>
+    </div>
+  </div>
+  <div class="k2-time">
+    <button class="k2-play" type="button" aria-label="Пауза" aria-pressed="true">
+      <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path class="k2-ic" d="M5 3h3v14H5zM12 3h3v14h-3z" fill="currentColor"/></svg>
+    </button>
+    <div class="k2-rail" role="slider" tabindex="0" aria-label="Год вдали от дома" aria-valuemin="10" aria-valuemax="20" aria-valuenow="10">
+      <div class="k2-bar"><div class="k2-fill"></div></div>
+      <div class="k2-thumb"></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="k2"]{padding:20px;color:var(--ink);font-family:var(--text)}
+[data-instrument="k2"] .k2-wrap{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:20px;align-items:start}
+[data-instrument="k2"] .k2-map{background:var(--bone);border:2px solid var(--ink)}
+[data-instrument="k2"] .k2-svg{display:block;width:100%;height:auto}
+[data-instrument="k2"] .k2-side{display:grid;gap:10px}
+[data-instrument="k2"] .k2-read{border:2px solid var(--ink);background:var(--bone);padding:7px 12px 8px;min-width:0}
+[data-instrument="k2"] .k2-lab{display:block;font-family:var(--label);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="k2"] .k2-val{display:block;font-family:var(--display);font-weight:800;font-size:28px;line-height:1.15;height:1.15em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden}
+[data-instrument="k2"] .k2-where{grid-column:1/-1}
+[data-instrument="k2"] .k2-wn{display:block;font-family:var(--display);font-weight:900;font-size:22px;text-transform:uppercase;line-height:1.2;height:1.2em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="k2"] .k2-note{display:block;font-style:italic;font-size:15px;line-height:1.4;height:2.8em;color:var(--ink);overflow:hidden;font-variant-numeric:tabular-nums}
+[data-instrument="k2"] .k2-time{display:flex;align-items:flex-start;gap:16px;margin-top:18px}
+[data-instrument="k2"] .k2-play{flex:none;width:40px;height:40px;display:grid;place-items:center;background:var(--ink);color:var(--bone);border:2px solid var(--ink);cursor:pointer;padding:0}
+[data-instrument="k2"] .k2-play:hover{background:var(--accent);border-color:var(--accent)}
+[data-instrument="k2"] .k2-play:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="k2"] .k2-rail{flex:1;position:relative;height:48px;touch-action:pan-y;cursor:pointer;outline:none;margin-right:6px}
+[data-instrument="k2"] .k2-bar{position:absolute;left:0;right:0;top:11px;height:18px;background:var(--bone);border:2px solid var(--ink);overflow:hidden}
+[data-instrument="k2"] .k2-rail:focus-visible .k2-bar{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="k2"] .k2-blk{position:absolute;top:0;bottom:0;background:rgba(11,11,11,.12);border-left:1px solid var(--ink);font-family:var(--label);font-weight:700;font-size:11px;line-height:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);padding-left:4px;white-space:nowrap;overflow:hidden;text-overflow:clip}
+[data-instrument="k2"] .k2-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--accent);opacity:.55;pointer-events:none}
+[data-instrument="k2"] .k2-thumb{position:absolute;top:5px;left:0;width:6px;height:30px;margin-left:-3px;background:var(--ink);pointer-events:none}
+[data-instrument="k2"] .k2-tick{position:absolute;top:32px;font-family:var(--label);font-weight:600;font-size:12px;color:var(--smoke);transform:translateX(-50%);font-variant-numeric:tabular-nums}
+[data-instrument="k2"] .k2-tick:first-of-type{transform:none}
+[data-instrument="k2"] .k2-tick.k2-last{transform:translateX(-100%)}
+[data-instrument="k2"] .k2-grat{stroke:var(--ink);stroke-opacity:.08;stroke-width:1;fill:none}
+[data-instrument="k2"] .k2-route{stroke:var(--smoke);stroke-opacity:.7;fill:none;stroke-linejoin:round}
+[data-instrument="k2"] .k2-trail{stroke:var(--accent);fill:none;stroke-linejoin:round;stroke-linecap:round}
+[data-instrument="k2"] .k2-dot{fill:var(--bone);stroke:var(--smoke)}
+[data-instrument="k2"] .k2-dot.k2-on{fill:var(--ink);stroke:var(--ink)}
+[data-instrument="k2"] .k2-dot.k2-cur{fill:var(--accent);stroke:var(--ink)}
+[data-instrument="k2"] .k2-txt{fill:var(--ink);font-family:var(--label);font-weight:700;letter-spacing:.04em}
+[data-instrument="k2"] .k2-txt.k2-home{fill:var(--accent)}
+[data-instrument="k2"] .k2-ship{fill:var(--accent);stroke:var(--ink);stroke-linejoin:round}
+@media (max-width:720px){
+  [data-instrument="k2"]{padding:14px}
+  [data-instrument="k2"] .k2-wrap{grid-template-columns:1fr;gap:14px}
+  [data-instrument="k2"] .k2-side{grid-template-columns:1fr 1fr;order:-1;gap:8px}
+  [data-instrument="k2"] .k2-val{font-size:24px}
+}
+</style>
+<script>(function(){
+  const root = document.querySelector('[data-instrument="k2"]');
+  if(!root) return;
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const SPY = 3.4; /* seconds of animation per year */
+
+  const S = [
+    {n:'Троя', lat:39.96, lon:26.24, stay:0, note:'десять лет войны позади, флот уходит'},
+    {n:'Исмар, киконы', lat:40.90, lon:25.60, stay:.02, note:'набег; киконы бьют в ответ'},
+    {n:'Лотофаги', lat:33.80, lon:10.90, stay:.02, note:'девять дней бури; цветок забвения'},
+    {n:'Пещера Полифема', lat:37.75, lon:15.00, stay:.02, note:'Одиссей назвался Никем'},
+    {n:'Остров Эола', lat:38.50, lon:14.95, stay:.08, note:'месяц у Эола; мешок с ветрами'},
+    {n:'У берегов Итаки', lat:38.30, lon:20.20, stay:0, note:'команда развязывает мешок', wp:1},
+    {n:'Остров Эола', lat:38.50, lon:14.95, stay:.01, note:'Эол больше не помогает', dup:4},
+    {n:'Лестригоны', lat:41.40, lon:9.20, stay:.02, note:'разбиты все корабли, кроме одного', ships:1},
+    {n:'Остров Цирцеи', lat:41.20, lon:13.05, stay:1, note:''},
+    {n:'Аид', lat:40.84, lon:14.08, stay:.01, note:'совет прорицателя Тиресия'},
+    {n:'Остров Цирцеи', lat:41.20, lon:13.05, stay:.01, note:'снова у Цирцеи, последний совет', dup:8},
+    {n:'Сирены', lat:40.58, lon:14.43, stay:0, note:'Одиссей привязан к мачте'},
+    {n:'Сцилла и Харибда', lat:38.25, lon:15.63, stay:0, note:'Сцилла забирает шестерых'},
+    {n:'Тринакия', lat:37.00, lon:15.20, stay:.08, note:'спутники съели быков Гелиоса', out:0},
+    {n:'Огигия, Калипсо', lat:36.05, lon:14.25, stay:7, note:''},
+    {n:'Схерия, феаки', lat:39.60, lon:19.90, stay:.01, note:'выслушали и везут домой'},
+    {n:'Итака', lat:38.40, lon:20.67, stay:0, note:'дома, нищим стариком'}
+  ];
+  const N = S.length;
+  const P = S.map(s => ({x:(s.lon-5)*32, y:(44-s.lat)*38}));
+  const rad = Math.PI/180;
+  function hav(a,b){
+    const dl=(b.lat-a.lat)*rad, dn=(b.lon-a.lon)*rad;
+    const h=Math.sin(dl/2)**2+Math.cos(a.lat*rad)*Math.cos(b.lat*rad)*Math.sin(dn/2)**2;
+    return 2*6371*Math.asin(Math.sqrt(h));
+  }
+  const D=[], cum=[0]; let Dt=0;
+  for(let i=0;i<N-1;i++){ D[i]=hav(S[i],S[i+1]); Dt+=D[i]; cum[i+1]=cum[i]+D[i]; }
+  const stays = S.reduce((a,s)=>a+s.stay,0);
+  const travel = 10 - stays;
+  const segs=[]; let tt=10;
+  S.forEach((s,i)=>{
+    segs.push({k:'s',i,t0:tt,t1:tt+s.stay}); tt+=s.stay;
+    if(i<N-1){ const d=travel*D[i]/Dt; segs.push({k:'l',i,t0:tt,t1:tt+d}); tt+=d; }
+  });
+  const T_END = tt;
+
+  function find(T){
+    if(T<=10+1e-9) return segs[0];
+    if(T>=T_END-1e-9) return segs[segs.length-1];
+    for(const g of segs) if(T<g.t1) return g;
+    return segs[segs.length-1];
+  }
+  function shipsAt(g){
+    let s=12;
+    for(let j=0;j<=g.i;j++){
+      if(S[j].ships!=null) s=S[j].ships;
+      if((j<g.i||g.k==='l') && S[j].out!=null) s=S[j].out;
+    }
+    return s;
+  }
+  const comma = (v,d) => v.toFixed(d).replace('.',',');
+  function yrs(n){const a=n%10,b=n%100; return (a===1&&b!==11)?'год':(a>=2&&a<=4&&(b<12||b>14))?'года':'лет';}
+
+  /* ---- SVG ---- */
+  const svg = root.querySelector('.k2-svg');
+  const VBW = 640;
+  function el(tag, attrs, parent){ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); (parent||svg).appendChild(e); return e; }
+  let gd='';
+  for(let lon=6;lon<=28;lon+=2){ const x=(lon-5)*32; gd+='M'+x+' 60V420'; }
+  for(let lat=34;lat<=43;lat++){ const y=(44-lat)*38; gd+='M90 '+y+'H740'; }
+  el('path',{d:gd,class:'k2-grat'});
+  const route = el('polyline',{class:'k2-route',points:P.map(p=>p.x+','+p.y).join(' ')});
+  const trail = el('polyline',{class:'k2-trail',points:''});
+  const dots = [];
+  S.forEach((s,i)=>{ if(s.dup==null && !s.wp){ dots.push({i, c:el('circle',{cx:P[i].x,cy:P[i].y,r:4,class:'k2-dot'})}); } });
+  const lTroy = el('text',{class:'k2-txt'}); lTroy.textContent='Троя';
+  const lHome = el('text',{class:'k2-txt'}); lHome.textContent='Итака';
+  const lCur = el('text',{class:'k2-txt'});
+  const ship = el('g',{});
+  el('path',{class:'k2-ship',d:'M-9 1 L9 1 L6 5.5 L-6.5 5.5 Z M-0.6 1 V-11 H0.6 V1 Z M-5.5 -10 H5.5 L4.5 -1.5 H-4.5 Z'},ship);
+
+  let k=1;
+  function rescale(){
+    const w = svg.getBoundingClientRect().width || VBW;
+    k = VBW / w;
+    const fs = (12*k).toFixed(2);
+    [lTroy,lHome,lCur].forEach(t=>t.setAttribute('font-size',fs));
+    lTroy.setAttribute('x',P[0].x-9*k); lTroy.setAttribute('y',P[0].y+4*k); lTroy.setAttribute('text-anchor','end');
+    lHome.setAttribute('x',P[N-1].x+9*k); lHome.setAttribute('y',P[N-1].y+14*k);
+    route.setAttribute('stroke-width',(1.2*k).toFixed(2));
+    route.setAttribute('stroke-dasharray',(3*k).toFixed(2)+' '+(4*k).toFixed(2));
+    trail.setAttribute('stroke-width',(2.2*k).toFixed(2));
+    dots.forEach(d=>{ const big = d.i===0||d.i===N-1; d.c.setAttribute('r',((big?5:3.6)*k).toFixed(2)); d.c.setAttribute('stroke-width',(1.2*k).toFixed(2)); });
+    ship.querySelector('path').setAttribute('stroke-width',(0.6).toFixed(2));
+    render(T);
+  }
+
+  /* ---- timeline ---- */
+  const rail = root.querySelector('.k2-rail');
+  const bar = root.querySelector('.k2-bar');
+  const fill = root.querySelector('.k2-fill');
+  const thumb = root.querySelector('.k2-thumb');
+  segs.forEach(g=>{
+    if(g.k==='s' && S[g.i].stay>=.5){
+      const b=document.createElement('div'); b.className='k2-blk';
+      b.style.left=((g.t0-10)*10)+'%'; b.style.width=((g.t1-g.t0)*10)+'%';
+      b.textContent = g.i===8 ? 'Цирцея' : 'Калипсо';
+      bar.insertBefore(b, fill);
+    }
+  });
+  for(let y=10;y<=20;y+=2){
+    const t=document.createElement('span'); t.className='k2-tick'+(y===20?' k2-last':'');
+    t.style.left=((y-10)*10)+'%'; t.textContent=y; rail.appendChild(t);
+  }
+
+  const R = {}; root.querySelectorAll('[data-r]').forEach(e=>R[e.dataset.r]=e);
+  function setText(key,v){ if(R[key].textContent!==v) R[key].textContent=v; }
+
+  let T = reduce ? 20 : 10;
+
+  function render(Tv, now){
+    const g = find(Tv);
+    let x,y,dir,where,note,km;
+    if(g.k==='s'){
+      const i=g.i; x=P[i].x; y=P[i].y; km=cum[i];
+      dir = i===0 ? -1 : (P[i].x>=P[i-1].x?1:-1);
+      where = S[i].n;
+      const into = Math.max(0, Math.min(g.t1-g.t0, Tv-g.t0));
+      if(i===8) note = 'у Цирцеи: '+comma(into*12,1)+' из 12 мес.';
+      else if(i===14) note = 'у Калипсо: '+comma(into,1)+' из 7 лет';
+      else note = S[i].note;
+    } else {
+      const i=g.i, f=(g.t1>g.t0)?(Tv-g.t0)/(g.t1-g.t0):0;
+      x=P[i].x+(P[i+1].x-P[i].x)*f; y=P[i].y+(P[i+1].y-P[i].y)*f;
+      km=cum[i]+D[i]*f;
+      dir = P[i+1].x>=P[i].x?1:-1;
+      where = '→ '+S[i+1].n;
+      if(i===14) note='в море, на плоту';
+      else if(i===15) note='в море, на корабле феаков';
+      else note = f>.5 ? S[i+1].note : 'в море';
+    }
+    const reached = g.i;
+    const pts=[]; for(let j=0;j<=reached;j++) pts.push(P[j].x+','+P[j].y);
+    if(g.k==='l') pts.push(x.toFixed(1)+','+y.toFixed(1));
+    trail.setAttribute('points',pts.join(' '));
+    const curIdx = g.k==='s' ? (S[g.i].dup!=null?S[g.i].dup:g.i) : -1;
+    dots.forEach(d=>{
+      d.c.classList.toggle('k2-on', d.i<=reached);
+      d.c.classList.toggle('k2-cur', d.i===curIdx);
+    });
+    const home = Tv>=T_END-1e-9;
+    lHome.classList.toggle('k2-home', home);
+    if(curIdx>0 && curIdx<N-1){
+      const right = P[curIdx].x>600;
+      lCur.textContent = S[curIdx].n;
+      lCur.setAttribute('text-anchor', right?'end':'start');
+      lCur.setAttribute('x', P[curIdx].x+(right?-9:9)*k);
+      lCur.setAttribute('y', P[curIdx].y-8*k);
+      lCur.style.display='';
+    } else lCur.style.display='none';
+    const bob = (now && !reduce) ? Math.sin(now/650)*0.9*k : 0;
+    const s = 1.15*k;
+    ship.setAttribute('transform','translate('+x.toFixed(2)+' '+(y-3*k+bob).toFixed(2)+') scale('+(dir*s).toFixed(3)+' '+s.toFixed(3)+')');
+
+    const Td = Math.min(20, Tv);
+    const n = Math.floor(Td+1e-9);
+    setText('year', comma(Td,1));
+    setText('tele', '≈ '+n+' '+yrs(n));
+    setText('ships', String(shipsAt(g)));
+    setText('km', Math.round(km).toLocaleString('ru-RU')+' км');
+    setText('where', where);
+    setText('note', note);
+    const pct = (Td-10)*10;
+    fill.style.width = pct+'%';
+    thumb.style.left = pct+'%';
+    rail.setAttribute('aria-valuenow', Td.toFixed(1));
+    rail.setAttribute('aria-valuetext', comma(Td,1)+' '+yrs(n)+' вдали от дома; '+where);
+  }
+
+  /* ---- playback ---- */
+  const btn = root.querySelector('.k2-play');
+  const icon = root.querySelector('.k2-ic');
+  let playing = !reduce, visible = false, raf = 0, last = 0, hold = 0;
+  function tick(now){
+    raf = 0;
+    const dt = last ? Math.min(.1,(now-last)/1000) : 0;
+    last = now;
+    if(T>=20){ hold+=dt; if(hold>2.6){ T=10; hold=0; } }
+    else T = Math.min(20, T+dt/SPY);
+    render(T, now);
+    schedule();
+  }
+  function schedule(){ if(playing && visible && !raf) raf=requestAnimationFrame(tick); }
+  function stop(){ if(raf) cancelAnimationFrame(raf); raf=0; last=0; }
+  function setPlaying(p){
+    playing = p;
+    btn.setAttribute('aria-label', p?'Пауза':'Пуск');
+    btn.setAttribute('aria-pressed', p?'true':'false');
+    icon.setAttribute('d', p?'M5 3h3v14H5zM12 3h3v14h-3z':'M5 3l12 7-12 7z');
+    if(!p){ stop(); render(T); }
+    else { if(T>=20){ T=10; hold=0; } schedule(); }
+  }
+  btn.addEventListener('click', ()=>setPlaying(!playing));
+
+  function setT(v){ T = Math.max(10, Math.min(20, v)); hold=0; render(T); }
+  function fromX(cx){ const r=bar.getBoundingClientRect(); setT(10+10*Math.max(0,Math.min(1,(cx-r.left)/r.width))); }
+  rail.addEventListener('pointerdown', e=>{
+    if(e.button!==undefined && e.button!==0) return;
+    setPlaying(false);
+    rail.setPointerCapture(e.pointerId);
+    rail.focus({preventScroll:true});
+    fromX(e.clientX);
+    e.preventDefault();
+  });
+  rail.addEventListener('pointermove', e=>{ if(rail.hasPointerCapture(e.pointerId)) fromX(e.clientX); });
+  rail.addEventListener('keydown', e=>{
+    const step={ArrowRight:.1,ArrowUp:.1,ArrowLeft:-.1,ArrowDown:-.1,PageUp:1,PageDown:-1}[e.key];
+    if(step!=null){ setPlaying(false); setT(Math.round((T+step)*10)/10); e.preventDefault(); }
+    else if(e.key==='Home'){ setPlaying(false); setT(10); e.preventDefault(); }
+    else if(e.key==='End'){ setPlaying(false); setT(20); e.preventDefault(); }
+  });
+
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{
+      es.forEach(en=>{ visible = en.isIntersecting; if(!visible) stop(); else schedule(); });
+    },{threshold:.25}).observe(root);
+  } else { visible = true; }
+
+  if('ResizeObserver' in window) new ResizeObserver(rescale).observe(svg);
+  else window.addEventListener('resize', rescale);
+
+  setPlaying(playing);
+  rescale();
+})();</script>
+
+  <div class="slate">
+    <span class="reel">Улика 2</span>
+    <h3 class="name">Карта</h3>
+  </div>
+  <div class="instrument" data-instrument="k3">
+  <div class="k3-wrap">
+    <svg class="k3-map" viewBox="0 0 1000 602" role="group" aria-label="Карта скитаний Одиссея от Трои до Итаки">
+      <rect class="k3-sea" x="0" y="0" width="1000" height="602"></rect>
+      <g class="k3-grid"></g>
+      <g class="k3-land"></g>
+      <path class="k3-route-all" d=""></path>
+      <path class="k3-route-done" d=""></path>
+      <g class="k3-stops"></g>
+      <g class="k3-labels"></g>
+      <g class="k3-ship" tabindex="0" role="slider" aria-label="Корабль Одиссея">
+        <circle class="k3-hit" r="26"></circle>
+        <circle class="k3-halo" r="15"></circle>
+        <circle class="k3-body" r="8"></circle>
+      </g>
+    </svg>
+    <div class="k3-time">
+      <div class="k3-rail"></div>
+      <div class="k3-stays"></div>
+      <div class="k3-fill"></div>
+      <div class="k3-ticks"></div>
+      <div class="k3-axis"></div>
+      <div class="k3-handle" tabindex="0" role="slider" aria-label="Время в пути, лет"></div>
+    </div>
+    <div class="k3-read">
+      <div class="k3-box k3-ep"><span class="k3-k k3-ep-t">—</span><span class="k3-ep-n">—</span></div>
+      <div class="k3-box"><span class="k3-k">Пройдено, км</span><span class="k3-v k3-km">0</span></div>
+      <div class="k3-box"><span class="k3-k">Морских миль</span><span class="k3-v k3-nm">0</span></div>
+      <div class="k3-box"><span class="k3-k">Лет в пути</span><span class="k3-v k3-yr">0</span><span class="k3-s k3-dy"></span></div>
+      <div class="k3-box"><span class="k3-k">Кораблей</span><span class="k3-v k3-sh">12</span></div>
+      <div class="k3-box"><span class="k3-k">Спутников</span><span class="k3-v k3-mn">57</span><span class="k3-s">на его корабле</span></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="k3"] .k3-wrap{padding:18px;color:var(--ink);font-family:var(--text)}
+[data-instrument="k3"] .k3-map{display:block;width:100%;height:auto;touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none;border:2px solid var(--ink)}
+[data-instrument="k3"] .k3-sea{fill:var(--bone)}
+[data-instrument="k3"] .k3-grid line{stroke:rgba(11,11,11,.08);stroke-width:1}
+[data-instrument="k3"] .k3-grid text{font-family:var(--label);font-weight:600;font-size:12px;fill:var(--smoke)}
+[data-instrument="k3"] .k3-land path{fill:#D6CFBD;stroke:var(--ink);stroke-width:1.1;stroke-linejoin:round}
+[data-instrument="k3"] .k3-route-all{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-dasharray:3 6;opacity:.55}
+[data-instrument="k3"] .k3-route-done{fill:none;stroke:var(--accent);stroke-width:3.5;stroke-linejoin:round;stroke-linecap:round}
+[data-instrument="k3"] .k3-stops circle{fill:var(--bone);stroke:var(--ink);stroke-width:1.5}
+[data-instrument="k3"] .k3-stops circle.k3-seen{fill:var(--ink);stroke:var(--ink)}
+[data-instrument="k3"] .k3-labels text{font-family:var(--label);font-weight:700;font-size:15px;fill:var(--smoke);letter-spacing:.03em;text-transform:uppercase;paint-order:stroke;stroke:var(--bone);stroke-width:4px}
+[data-instrument="k3"] .k3-labels text.k3-on{fill:var(--ink)}
+[data-instrument="k3"].k3-narrow .k3-labels text{display:none;font-size:30px;stroke-width:7px}
+[data-instrument="k3"].k3-narrow .k3-labels text.k3-on{display:block}
+[data-instrument="k3"].k3-narrow .k3-grid text{font-size:22px}
+[data-instrument="k3"] .k3-ship{cursor:grab;touch-action:none;outline:none}
+[data-instrument="k3"] .k3-ship.k3-drag{cursor:grabbing}
+[data-instrument="k3"] .k3-hit{fill:transparent}
+[data-instrument="k3"] .k3-halo{fill:var(--accent);opacity:.22;stroke:var(--ink);stroke-width:0}
+[data-instrument="k3"] .k3-body{fill:var(--accent);stroke:var(--ink);stroke-width:2}
+[data-instrument="k3"] .k3-ship.k3-raft .k3-body{fill:var(--bone);stroke:var(--accent);stroke-width:3}
+[data-instrument="k3"] .k3-ship:focus-visible .k3-halo{opacity:1;fill:none;stroke-width:3}
+[data-instrument="k3"] .k3-time{position:relative;height:58px;margin:14px 9px 0;touch-action:pan-y;cursor:pointer}
+[data-instrument="k3"] .k3-rail{position:absolute;left:0;right:0;top:19px;height:4px;background:var(--ink);opacity:.35}
+[data-instrument="k3"] .k3-fill{position:absolute;left:0;top:19px;height:4px;background:var(--accent);width:0}
+[data-instrument="k3"] .k3-stays span{position:absolute;top:14px;height:14px;background:rgba(11,11,11,.16)}
+[data-instrument="k3"] .k3-ticks span{position:absolute;top:13px;width:2px;height:16px;margin-left:-1px;background:var(--ink)}
+[data-instrument="k3"] .k3-axis span{position:absolute;top:34px;transform:translateX(-50%);font-family:var(--label);font-weight:600;font-size:13px;color:var(--smoke);font-variant-numeric:tabular-nums}
+[data-instrument="k3"] .k3-axis span.k3-unit{transform:none;right:0}
+[data-instrument="k3"] .k3-handle{position:absolute;top:11px;left:0;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--accent);border:3px solid var(--ink);cursor:grab;touch-action:none;outline:none}
+[data-instrument="k3"] .k3-handle:focus-visible{box-shadow:0 0 0 3px var(--shadow),0 0 0 6px var(--ink)}
+[data-instrument="k3"] .k3-read{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:2px;background:var(--ink);border:2px solid var(--ink);margin-top:10px}
+[data-instrument="k3"] .k3-box{background:var(--bone);height:74px;padding:8px 12px;display:flex;flex-direction:column;justify-content:flex-start;overflow:hidden}
+[data-instrument="k3"] .k3-ep{grid-column:1/-1;height:68px}
+[data-instrument="k3"] .k3-k{font-family:var(--label);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--smoke);white-space:nowrap}
+[data-instrument="k3"] .k3-ep-t{color:var(--accent)}
+[data-instrument="k3"] .k3-ep-n{font-family:var(--display);font-weight:900;font-size:22px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+[data-instrument="k3"] .k3-v{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums;margin-top:2px;white-space:nowrap}
+[data-instrument="k3"] .k3-s{font-family:var(--label);font-weight:500;font-size:12px;color:var(--smoke);font-variant-numeric:tabular-nums;white-space:nowrap}
+@media (max-width:560px){
+  [data-instrument="k3"] .k3-wrap{padding:12px}
+  [data-instrument="k3"] .k3-ep-n{font-size:18px}
+  [data-instrument="k3"] .k3-v{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="k3"] *{transition:none!important;animation:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="k3"]');
+if(!root)return;
+const NS='http://www.w3.org/2000/svg';
+const K=63.4,C=Math.cos(38*Math.PI/180);
+const P=(lat,lon)=>[(lon-8)*K*C,(42.5-lat)*K];
+const $=s=>root.querySelector(s);
+const svg=$('.k3-map'),ship=$('.k3-ship'),handle=$('.k3-handle'),track=$('.k3-time');
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+
+const LAND=[
+[[11,43],[11.0,42.9],[11.2,42.4],[12.0,41.9],[12.6,41.45],[13.06,41.23],[13.7,41.25],[14.0,40.85],[14.3,40.8],[14.4,40.6],[14.9,40.6],[15.0,40.3],[15.6,40.05],[15.8,39.6],[16.05,39.0],[16.2,38.7],[15.85,38.65],[15.72,38.25],[15.76,37.95],[16.06,37.92],[16.6,38.4],[17.15,38.95],[17.1,39.4],[16.5,39.7],[16.9,40.4],[17.4,40.4],[18.0,40.15],[18.4,39.8],[18.5,40.15],[18.0,40.65],[17.0,41.1],[16.0,41.5],[15.9,41.9],[15.0,42.1],[14.2,42.5],[13.9,43]],
+[[12.4,37.8],[12.6,38.1],[13.3,38.2],[14.0,38.0],[15.1,38.15],[15.58,38.28],[15.3,37.8],[15.1,37.5],[15.3,37.0],[15.1,36.7],[14.5,36.75],[14.0,37.1],[13.2,37.5],[12.6,37.6]],
+[[9.15,41.25],[9.8,40.9],[9.65,40.0],[9.6,39.2],[9.05,39.1],[8.4,38.95],[8.4,39.6],[8.5,40.2],[8.2,40.9],[8.9,40.95]],
+[[9.15,41.4],[9.4,41.6],[9.55,42.2],[9.5,42.8],[9.3,43.0],[8.6,42.4],[8.7,41.9],[8.8,41.5]],
+[[7,37.0],[9.8,37.3],[10.3,36.9],[11.1,37.05],[10.5,36.2],[11.1,35.6],[10.9,35.0],[10.1,34.3],[10.3,33.6],[11.2,33.2],[12.0,32.9],[13,32.9],[15.2,32.3],[15.8,31.4],[20,30.5],[20.1,32.2],[21.5,32.9],[23,32.6],[25,31.8],[29,31.0],[29,30],[7,30]],
+[[19.4,43],[19.5,41.3],[19.4,40.8],[19.35,40.4],[20.0,39.7],[20.2,39.35],[20.7,39.05],[20.8,38.8],[21.1,38.35],[21.9,38.35],[22.9,38.05],[22.4,38.0],[21.8,38.25],[21.4,38.15],[21.1,37.9],[21.6,37.5],[21.7,36.8],[22.1,36.9],[22.4,36.4],[22.8,36.75],[23.2,36.44],[23.05,37.0],[22.75,37.6],[23.2,37.9],[23.7,37.9],[24.05,37.7],[24.0,38.2],[23.6,38.3],[22.8,38.9],[23.0,39.3],[22.7,39.6],[22.5,40.2],[22.9,40.6],[23.7,40.2],[23.9,40.7],[24.4,40.9],[25.4,40.9],[26.0,40.8],[26.3,40.95],[26.8,40.6],[27.5,41.0],[29,41.1],[29,43]],
+[[22.8,38.95],[23.6,38.7],[24.6,38.1],[24.5,37.95],[23.5,38.5],[23.0,38.8]],
+[[29,40.6],[27.3,40.4],[26.7,40.4],[26.2,40.05],[26.1,39.5],[26.8,39.4],[26.7,38.9],[26.9,38.4],[26.3,38.3],[27.2,37.9],[27.3,37.3],[27.6,36.7],[29,36.8]],
+[[23.5,35.3],[24.3,35.36],[25.5,35.3],[26.3,35.2],[26.1,35.0],[24.7,34.95],[23.6,35.2]],
+[[19.65,39.8],[19.95,39.75],[20.1,39.4],[19.85,39.45],[19.65,39.7]],
+[[20.4,38.35],[20.6,38.45],[20.75,38.1],[20.5,38.1]],
+[[20.62,38.5],[20.72,38.45],[20.68,38.33],[20.62,38.38]],
+[[14.18,36.08],[14.35,36.05],[14.57,35.82],[14.4,35.82],[14.2,36.0]],
+[[14.9,38.5],[14.98,38.5],[14.97,38.43],[14.9,38.44]],
+[[10.75,33.85],[11.05,33.85],[11.05,33.65],[10.75,33.7]],
+[[25.85,39.3],[26.4,39.38],[26.6,39.05],[26.1,39.0]],
+[[25.9,38.55],[26.15,38.55],[26.0,38.2],[25.85,38.3]]
+];
+
+const R=[
+['Троя',39.96,26.24,0,0,'Двенадцать кораблей уходят от сожжённого города',[10,5]],
+['Исмар',40.88,25.52,.02,.03,'Киконы: с каждого корабля гибнут шестеро',[10,-4]],
+['Мыс Малея',36.44,23.20,.06,.06,'Северный ветер сносит флот мимо дома',[-10,20,1]],
+['Лотофаги',33.80,10.90,.09,.10,'Лотос, от которого забывают дорогу домой',[10,5]],
+['Циклопы',37.56,15.17,.13,.15,'Полифем съедает шестерых',[-10,5,1]],
+[null,38.20,15.62],
+['Эолия',38.47,14.95,.17,.25,'Месяц у Эола и мешок с ветрами',[-10,-6,1]],
+[null,38.20,15.62],[null,37.80,15.70],[null,38.10,18.60],
+['Итака в виду',38.50,20.35,.28,.28,'Команда развязывает мешок у самого берега',0],
+[null,38.25,18.60],[null,37.92,15.66],[null,38.26,15.62],
+['Эолия',38.47,14.95,.30,.31,'Эол прогоняет проклятых богами',0],
+['Лестригоны',41.39,9.16,.34,.35,'Великаны разбивают одиннадцать кораблей',[10,-8]],
+['Ээя',41.23,13.06,.37,1.37,'Год у Цирцеи; при отплытии гибнет Эльпенор',[-8,-10,1]],
+['Аид',40.84,14.08,1.39,1.40,'Тень Тиресия указывает путь',[10,-6]],
+['Ээя',41.23,13.06,1.42,1.43,'Похороны Эльпенора',0],
+['Сирены',40.58,14.43,1.45,1.45,'Привязан к мачте и слушает',[10,16]],
+['Сцилла и Харибда',38.24,15.64,1.46,1.46,'Сцилла хватает шестерых',[12,-2]],
+['Тринакия',37.00,15.33,1.47,1.56,'Быки Гелиоса; молния разбивает корабль',[10,10]],
+['Харибда',38.22,15.60,1.57,1.57,'Один, на обломке мачты',0],
+['Огигия',36.05,14.25,1.60,8.60,'Семь лет у Калипсо',[-10,5,1]],
+['Схерия',39.62,19.92,8.66,8.70,'Феаки слушают и везут его домой',[-10,-8,1]],
+['Итака',38.42,20.67,8.72,8.72,'Дом',[10,16]]
+];
+const V=R.map(r=>({n:r[0],lat:r[1],lon:r[2],a:r[3],d:r[4],note:r[5],lab:r[6],p:P(r[1],r[2])}));
+const rad=x=>x*Math.PI/180;
+function hav(A,B){const dLa=rad(B.lat-A.lat),dLo=rad(B.lon-A.lon);const h=Math.sin(dLa/2)**2+Math.cos(rad(A.lat))*Math.cos(rad(B.lat))*Math.sin(dLo/2)**2;return 2*6371*Math.asin(Math.sqrt(h));}
+V[0].km=0;
+for(let i=1;i<V.length;i++)V[i].km=V[i-1].km+hav(V[i-1],V[i]);
+for(let i=0;i<V.length;i++){if(V[i].n)continue;let p=i-1;while(!V[p].n)p--;let q=i+1;while(!V[q].n)q++;
+  const t=V[p].d+(V[i].km-V[p].km)/(V[q].km-V[p].km)*(V[q].a-V[p].d);V[i].a=V[i].d=t;}
+const N=V.length,T=V[N-1].a;
+const keyTimes=[...new Set(V.filter(v=>v.n).flatMap(v=>[v.a,v.d]))].sort((a,b)=>a-b);
+
+/* build map */
+const grid=$('.k3-grid');
+for(let la=34;la<=42;la+=2){const y=P(la,8)[1];mk('line',{x1:0,x2:1000,y1:y,y2:y},grid);const t=mk('text',{x:6,y:y-5},grid);t.textContent=la+'°';}
+for(let lo=10;lo<=26;lo+=4){const x=P(40,lo)[0];mk('line',{x1:x,x2:x,y1:0,y2:602},grid);const t=mk('text',{x:x+5,y:594},grid);t.textContent=lo+'°';}
+const land=$('.k3-land');
+LAND.forEach(poly=>{mk('path',{d:'M'+poly.map(c=>P(c[1],c[0]).map(n=>n.toFixed(1)).join(' ')).join('L')+'Z'},land);});
+const pts=arr=>'M'+arr.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L');
+$('.k3-route-all').setAttribute('d',pts(V.map(v=>v.p)));
+const stopsG=$('.k3-stops'),labG=$('.k3-labels');
+const dots=[],labels={};
+V.forEach((v,i)=>{if(!v.n)return;dots.push({i,el:mk('circle',{cx:v.p[0],cy:v.p[1],r:4.5},stopsG)});
+  if(v.lab){const t=mk('text',{x:v.p[0]+v.lab[0],y:v.p[1]+v.lab[1],'text-anchor':v.lab[2]?'end':'start'},labG);t.textContent=v.n;labels[v.n]=t;}});
+
+/* build timeline */
+const pct=t=>(t/T*100)+'%';
+const stays=$('.k3-stays'),ticks=$('.k3-ticks'),axis=$('.k3-axis');
+V.forEach(v=>{if(!v.n)return;
+  if(v.d-v.a>=0.05){const s=document.createElement('span');s.style.left=pct(v.a);s.style.width=((v.d-v.a)/T*100)+'%';stays.appendChild(s);}
+  const k=document.createElement('span');k.style.left=pct(v.a);ticks.appendChild(k);});
+for(let y=0;y<=8;y++){const s=document.createElement('span');s.style.left=pct(y);s.textContent=y;axis.appendChild(s);}
+const unit=document.createElement('span');unit.className='k3-unit';unit.textContent='лет';axis.appendChild(unit);
+
+/* state */
+let t=0.37;
+function where(t){
+  t=Math.max(0,Math.min(T,t));
+  for(let j=0;j<N;j++){const v=V[j];
+    if(t>=v.a-1e-9&&t<=v.d+1e-9)return{j,at:true,x:v.p[0],y:v.p[1],km:v.km};
+    if(j<N-1&&t>v.d&&t<V[j+1].a){const w=V[j+1],f=(t-v.d)/(w.a-v.d);
+      return{j,at:false,x:v.p[0]+(w.p[0]-v.p[0])*f,y:v.p[1]+(w.p[1]-v.p[1])*f,km:v.km+(w.km-v.km)*f};}}
+  const v=V[N-1];return{j:N-1,at:true,x:v.p[0],y:v.p[1],km:v.km};
+}
+function crew(t){let ships=12,men=57;
+  if(t>=.02-1e-9)men-=6; if(t>=.13-1e-9)men-=6; if(t>=.34-1e-9)ships=1;
+  if(t>1.37+1e-9)men-=1; if(t>=1.46-1e-9)men-=6; if(t>1.56+1e-9){ships=0;men=0;}
+  return{ships,men};}
+const fmt=n=>Math.round(n).toLocaleString('ru-RU');
+const dec=n=>n.toFixed(2).replace('.',',');
+const el={epT:$('.k3-ep-t'),epN:$('.k3-ep-n'),km:$('.k3-km'),nm:$('.k3-nm'),yr:$('.k3-yr'),dy:$('.k3-dy'),sh:$('.k3-sh'),mn:$('.k3-mn'),done:$('.k3-route-done'),fill:$('.k3-fill')};
+
+function update(){
+  const w=where(t),c=crew(t);
+  ship.setAttribute('transform','translate('+w.x.toFixed(1)+' '+w.y.toFixed(1)+')');
+  ship.classList.toggle('k3-raft',c.ships===0);
+  const path=V.slice(0,w.j+1).map(v=>v.p);if(!w.at)path.push([w.x,w.y]);
+  el.done.setAttribute('d',path.length>1?pts(path):'');
+  let title,note,place;
+  const v=V[w.j];
+  if(w.at&&v.n){title=v.d-v.a>=0.05?(t<v.d?'Стоянка':'Отплытие'):'Здесь';title=v.n===V[0].n&&t===0?'Начало':title;note=v.n+' · '+v.note;place=v.n;}
+  else{let q=w.j+1;while(q<N-1&&!V[q].n)q++;let p=w.j;while(p>0&&!V[p].n)p--;
+    title='В море · курс: '+V[q].n;note='Позади: '+V[p].n+' · '+V[p].note;place=V[q].n;}
+  el.epT.textContent=title;el.epN.textContent=note;
+  el.km.textContent=fmt(w.km);el.nm.textContent=fmt(w.km/1.852);
+  el.yr.textContent=dec(t);el.dy.textContent='≈ '+fmt(t*365.25)+' дн.';
+  el.sh.textContent=c.ships;el.mn.textContent=c.men;
+  for(const k in labels)labels[k].classList.toggle('k3-on',k===place);
+  dots.forEach(d=>d.el.classList.toggle('k3-seen',V[d.i].a<=t+1e-9));
+  el.fill.style.width=pct(t);handle.style.left=pct(t);
+  const vt=note+'; '+fmt(w.km)+' км; '+dec(t)+' лет';
+  [ship,handle].forEach(h=>{h.setAttribute('aria-valuemin','0');h.setAttribute('aria-valuemax',T.toFixed(2));h.setAttribute('aria-valuenow',t.toFixed(2));h.setAttribute('aria-valuetext',vt);});
+}
+function setT(n){t=Math.max(0,Math.min(T,n));update();}
+
+/* map dragging */
+function svgPt(e){const m=svg.getScreenCTM();if(!m)return null;return new DOMPoint(e.clientX,e.clientY).matrixTransform(m.inverse());}
+function nearest(px,py){
+  const cand=[];let minD=Infinity;
+  for(let j=0;j<N-1;j++){const A=V[j].p,B=V[j+1].p,dx=B[0]-A[0],dy=B[1]-A[1],L=dx*dx+dy*dy;
+    let f=L?((px-A[0])*dx+(py-A[1])*dy)/L:0;f=Math.max(0,Math.min(1,f));
+    const d=Math.hypot(px-(A[0]+dx*f),py-(A[1]+dy*f));
+    cand.push({d,tc:V[j].d+f*(V[j+1].a-V[j].d)});if(d<minD)minD=d;}
+  let best=null;cand.forEach(c=>{if(c.d<=minD+12&&(!best||Math.abs(c.tc-t)<Math.abs(best.tc-t)))best=c;});
+  return{d:minD,tc:best.tc};
+}
+let mapDrag=false;
+svg.addEventListener('pointerdown',e=>{const p=svgPt(e);if(!p)return;const n=nearest(p.x,p.y);
+  const onShip=ship.contains(e.target);if(!onShip&&n.d>40)return;
+  mapDrag=true;svg.setPointerCapture(e.pointerId);ship.classList.add('k3-drag');
+  if(!onShip)setT(n.tc);ship.focus({preventScroll:true});e.preventDefault();});
+svg.addEventListener('pointermove',e=>{if(!mapDrag)return;const p=svgPt(e);if(p)setT(nearest(p.x,p.y).tc);});
+const endMap=()=>{mapDrag=false;ship.classList.remove('k3-drag');};
+svg.addEventListener('pointerup',endMap);svg.addEventListener('pointercancel',endMap);
+
+/* timeline dragging */
+let tDrag=false;
+const tFromX=e=>{const r=track.getBoundingClientRect();return (e.clientX-r.left)/r.width*T;};
+track.addEventListener('pointerdown',e=>{tDrag=true;track.setPointerCapture(e.pointerId);setT(tFromX(e));handle.focus({preventScroll:true});});
+track.addEventListener('pointermove',e=>{if(tDrag)setT(tFromX(e));});
+const endT=()=>{tDrag=false;};
+track.addEventListener('pointerup',endT);track.addEventListener('pointercancel',endT);
+
+/* keyboard */
+function stepKey(dir){if(dir>0){const n=keyTimes.find(k=>k>t+1e-6);setT(n===undefined?T:n);}
+  else{const n=[...keyTimes].reverse().find(k=>k<t-1e-6);setT(n===undefined?0:n);}}
+ship.addEventListener('keydown',e=>{const k=e.key;
+  if(k==='ArrowRight'||k==='ArrowUp'){stepKey(1);}else if(k==='ArrowLeft'||k==='ArrowDown'){stepKey(-1);}
+  else if(k==='Home'){setT(0);}else if(k==='End'){setT(T);}else return;e.preventDefault();});
+handle.addEventListener('keydown',e=>{const k=e.key,s=e.shiftKey?0.25:0.01;
+  if(k==='ArrowRight'||k==='ArrowUp')setT(t+s);else if(k==='ArrowLeft'||k==='ArrowDown')setT(t-s);
+  else if(k==='PageUp')stepKey(1);else if(k==='PageDown')stepKey(-1);
+  else if(k==='Home')setT(0);else if(k==='End')setT(T);else return;e.preventDefault();});
+
+/* size */
+const fit=()=>root.classList.toggle('k3-narrow',root.clientWidth<640);
+if('ResizeObserver' in window)new ResizeObserver(fit).observe(root);else window.addEventListener('resize',fit);
+fit();update();
+})();</script>
+
+  <article class="prose history">
+    <h2>Двадцать лет ушло у него на дорогу к собственному порогу</h2>
+    <p>Его звали Одиссей, царь Итаки, маленького каменистого острова. Хитрее его в Греции никого не было. Когда ахейцы отправились под Трою, пошёл и он. Война тянулась десять лет и закончилась его идеей: деревянный конь, а в брюхе у коня — солдаты.</p>
+    <p>Дальше должно было быть просто: сесть на корабль и плыть домой. Не вышло. В пещере циклопа Полифема он назвался Никем, ослепил великана и ушёл, но не удержался и крикнул ему своё настоящее имя. Циклоп оказался сыном Посейдона. С этого дня море работало против него.</p>
+    <blockquote class="pull">С этого дня море работало против него.</blockquote>
+    <p>Эол дал ему мешок с ветрами — команда развязала мешок у самой Итаки. Лестригоны разбили его флот. Цирцея превратила его людей в свиней. Он спускался к мёртвым, чтобы спросить дорогу у прорицателя Тиресия. Слушал сирен, привязанный к мачте. Прошёл между Сциллой и Харибдой. Его спутники съели быков бога Солнца — и за это погибли все до одного.</p>
+    <p>Семь лет его держала у себя нимфа Калипсо. Потом его, голого и чужого, выбросило на берег феаков. Они его выслушали и отвезли домой.</p>
+    <p>А дома его давно похоронили. Во дворце хозяйничали женихи, ели его хлеб и сватались к его жене. Пенелопа ждала и тянула время. Сын Телемах вырос без отца. Одиссей вошёл в свой дом нищим стариком, и узнал его только старый пёс Аргус. Потом был лук, который никто, кроме хозяина, не мог натянуть. И одна длинная ночь, после которой во дворце снова стало тихо.</p>
+    <p class="end">— <span class="accent">■</span> —</p>
+  </article>
+
+</main>
+</body>
+</html>

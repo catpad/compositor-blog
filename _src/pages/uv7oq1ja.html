@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как работают большие языковые модели</title>
+<meta name="description" content="Объяснение того, как большая языковая модель режет текст на токены, взвешивает их вниманием и предсказывает следующее слово, оформленное как дешёвый бульварный покетбук.">
+<meta name="compositor:paper" content="#E6D49C">
+<meta name="compositor:ink" content="#221912">
+<meta name="compositor:accent" content="#C0261A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#e6d49c;
+  --page:#f0e2b2;
+  --ink:#221912;
+  --blood:#c0261a;
+  --mustard:#e9b72a;
+  --night:#1b1a2a;
+}
+html{background:var(--paper);}
+body{
+  margin:0;
+  color:var(--ink);
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .38 0 0 0 0 .27 0 0 0 0 .1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+  font-family:"PT Serif",Georgia,"Times New Roman",serif;
+  font-size:17px;
+  line-height:1.5;
+}
+.page{max-width:41rem;margin:0 auto;padding:26px 14px 48px;}
+.frame{
+  background-color:var(--page);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .12 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.28'/%3E%3Cpath d='M17 23h1v1h-1zM96 61h1v1h-1zM131 12h1v1h-1zM44 128h1v1h-1zM120 140h2v1h-2z' fill='%23705a36'/%3E%3C/svg%3E");
+  box-shadow:inset 0 0 38px rgba(130,90,30,.28), 7px 7px 0 rgba(34,25,18,.22);
+}
+a{color:var(--blood);text-decoration-thickness:1px;text-underline-offset:2px;}
+a:visited{color:var(--blood);}
+a:focus-visible{outline:2px solid var(--blood);outline-offset:2px;}
+
+/* cover */
+.cover{
+  position:relative;overflow:hidden;
+  background:var(--night);color:var(--page);
+  padding:0 28px 28px;
+  border-bottom:7px solid var(--mustard);
+}
+.cover .rays{position:absolute;left:0;top:0;width:100%;height:100%;display:block;}
+.cover > *:not(.rays){position:relative;}
+.mast-top{
+  margin:0 -28px;padding:7px 28px;
+  background:var(--blood);color:var(--mustard);
+  font-family:"Oswald",sans-serif;font-weight:500;
+  font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;
+}
+.badge-row{display:flex;justify-content:flex-end;margin:16px -6px -24px 0;}
+.badge{
+  position:relative;width:118px;height:118px;transform:rotate(11deg);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.badge svg{position:absolute;left:0;top:0;width:100%;height:100%;}
+.badge span{
+  position:relative;font-family:"Oswald",sans-serif;font-weight:700;
+  text-transform:uppercase;color:var(--mustard);font-size:.86rem;line-height:1.05;letter-spacing:.04em;
+}
+.badge span i{display:block;font-style:normal;color:var(--page);font-size:.7rem;margin:1px 0;}
+h1{
+  margin:0 0 .45em;font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;
+  line-height:.94;
+}
+.h1-a{
+  display:block;font-weight:500;font-size:1.45rem;letter-spacing:.22em;color:var(--page);
+  margin-bottom:.3em;
+}
+.h1-b{
+  display:block;font-size:clamp(2.6rem,10.5vw,4.5rem);color:var(--mustard);letter-spacing:.005em;
+  text-shadow:.05em .05em 0 var(--blood), .09em .09em 0 #000;
+  transform:rotate(-2deg);transform-origin:left center;max-width:9.5em;
+}
+.sub{
+  max-width:30rem;margin:0;padding-top:.7em;border-top:2px solid var(--mustard);
+  font-style:italic;font-size:1rem;line-height:1.45;color:var(--page);
+  text-align:left !important;text-indent:0 !important;
+}
+
+.inner{padding:22px 28px 30px;}
+.fleuron{display:block;width:200px;max-width:70%;height:18px;margin:1.3em auto;}
+
+/* text */
+p,ul,ol{max-width:36rem;margin-left:auto;margin-right:auto;}
+p{
+  margin-top:0;margin-bottom:.15em;text-align:justify;
+  hyphens:auto;-webkit-hyphens:auto;text-indent:1.4em;
+}
+h2 + p, .chap + h2 + p, table + p, .saw + p, ul + p{text-indent:0;}
+.initial::first-letter{
+  float:left;font-family:"Oswald",sans-serif;font-size:4.1em;line-height:.86;font-weight:700;
+  color:var(--blood);padding:.04em .1em 0 0;text-shadow:.05em .05em 0 var(--ink);
+}
+ul{padding-left:0;list-style:none;margin-top:.5em;margin-bottom:.6em;}
+li{
+  position:relative;padding-left:1.4em;margin-bottom:.35em;
+  text-align:justify;hyphens:auto;-webkit-hyphens:auto;
+}
+li::before{
+  content:"";position:absolute;left:.2em;top:.5em;width:8px;height:8px;
+  background:var(--blood);border:1px solid var(--ink);
+}
+code,.mono{font-family:"PT Mono","Courier New",monospace;font-size:.9em;}
+b{font-weight:700;}
+
+/* chapter heads */
+.chap{text-align:center;margin:2.6em 0 .25em;font-family:"Oswald",sans-serif;line-height:1;}
+.chap span{
+  display:block;font-size:.76rem;font-weight:500;letter-spacing:.42em;padding-left:.42em;
+  text-transform:uppercase;color:var(--blood);margin-bottom:.3em;
+}
+.chap b{
+  display:inline-block;min-width:1.3em;font-size:3.7rem;font-weight:700;color:var(--ink);
+  text-shadow:.055em .05em 0 var(--blood);
+  border-top:5px solid var(--ink);border-bottom:1px solid var(--ink);padding:.1em .35em .04em;
+}
+h2{
+  text-align:center;font-family:"Oswald",sans-serif;font-size:1.42rem;line-height:1.16;font-weight:600;
+  margin:.35em auto .8em;max-width:32rem;letter-spacing:.005em;
+}
+
+/* sayings */
+.saw{
+  max-width:26rem;margin:1.5em auto 1.6em;padding:.65em 1em .7em;
+  background:var(--mustard);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);
+  transform:rotate(-1.2deg);
+  text-align:center;text-align-last:center;text-indent:0;font-style:italic;font-weight:700;font-size:1.04rem;line-height:1.35;
+}
+.saw::before{
+  content:"Присловье";display:table;margin:0 auto .4em;padding:.18em .7em .14em;
+  background:var(--blood);color:var(--page);font-style:normal;font-weight:500;
+  font-family:"Oswald",sans-serif;font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+}
+
+/* contents */
+table.toc{margin:.6em auto 0;border-collapse:collapse;width:100%;max-width:36rem;font-size:.97rem;}
+table.toc caption,table.dates caption,table.tally caption{
+  font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.26em;font-size:.9rem;
+  background:var(--ink);color:var(--mustard);padding:.32em .5em .28em;
+}
+table.toc td{padding:4px 4px;border-bottom:1px dotted #8f7a50;vertical-align:baseline;}
+table.toc td.n{
+  width:2.6em;text-align:right;padding-right:.9em;color:var(--blood);
+  font-family:"Oswald",sans-serif;font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums;
+}
+table.toc tr:last-child td{border-bottom:3px solid var(--ink);}
+table.toc a{color:var(--ink);text-decoration:none;}
+table.toc a:hover,table.toc a:focus-visible{color:var(--blood);text-decoration:underline;}
+
+/* figures */
+table.fig{width:100%;margin:1.4em 0 1.4em;border-collapse:separate;border-spacing:0;}
+table.fig > tbody > tr > td, table.fig td{padding:0;}
+.sheet{
+  border:2px solid var(--ink);background:var(--page);box-shadow:5px 5px 0 var(--ink);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.sheet svg{display:block;width:100%;height:auto;}
+.sheet.wide svg{min-width:540px;}
+.cap{
+  font-size:.87rem;line-height:1.38;padding:11px 4px 0 !important;
+  text-align:justify;text-align-last:center;font-style:italic;
+  hyphens:auto;-webkit-hyphens:auto;
+}
+.cap b{
+  font-style:normal;font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--blood);
+}
+
+/* dates */
+table.dates{width:100%;max-width:36rem;margin:1.2em auto 1.2em;border-collapse:collapse;font-size:.93rem;}
+table.dates td{padding:6px 7px;border-bottom:1px solid #b39d6a;vertical-align:top;text-align:left;}
+table.dates tr:last-child td{border-bottom:3px solid var(--ink);}
+table.dates td.yr{
+  width:3.6em;font-family:"Oswald",sans-serif;font-weight:700;font-size:1.1rem;line-height:1.2;
+  color:var(--blood);font-variant-numeric:tabular-nums;
+  border-right:2px solid var(--ink);text-align:center;
+}
+
+/* glossary */
+table.gloss{
+  width:100%;max-width:36rem;margin:.8em auto;border-collapse:collapse;font-size:.93rem;
+  border-bottom:3px solid var(--ink);
+}
+table.gloss th,table.gloss td{padding:6px 8px;vertical-align:top;text-align:left;}
+table.gloss td{border-top:1px solid #b39d6a;}
+table.gloss td + td{border-left:1px solid #b39d6a;hyphens:auto;-webkit-hyphens:auto;}
+table.gloss th{
+  font-family:"Oswald",sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.2em;font-size:.82rem;
+  background:var(--ink);color:var(--mustard);
+}
+table.gloss td:first-child{
+  white-space:nowrap;font-family:"Oswald",sans-serif;font-weight:600;font-size:1rem;color:var(--blood);
+}
+
+/* limitations */
+table.note{
+  max-width:36rem;width:100%;margin:1.2em auto 1.4em;border-collapse:collapse;
+  border:3px solid var(--ink);background:#f3d677;box-shadow:6px 6px 0 var(--blood);
+  font-size:.95rem;
+}
+table.note td{padding:14px 18px 12px;}
+table.note .moon{display:block;width:30px;height:30px;margin:0 auto 8px;}
+table.note p{text-indent:0;margin-bottom:.55em;}
+.note b{
+  font-family:"Oswald",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.92em;
+  color:var(--blood);
+}
+
+/* tally */
+table.tally{margin:1.2em auto 0;border-collapse:collapse;font-size:.93rem;min-width:15rem;}
+table.tally td{padding:4px 8px;border-bottom:1px dotted #8f7a50;}
+table.tally td.v{
+  text-align:right;font-variant-numeric:tabular-nums;color:var(--blood);
+  font-family:"Oswald",sans-serif;font-weight:700;font-size:1.05rem;min-width:3em;
+}
+table.tally tr:last-child td{border-bottom:3px solid var(--ink);}
+.top{
+  text-align:center;font-size:.85rem;margin:.8em 0 0;text-indent:0;text-align-last:center;
+  font-family:"Oswald",sans-serif;text-transform:uppercase;letter-spacing:.18em;
+}
+
+@media (max-width:480px){
+  body{font-size:16px;}
+  .cover{padding:0 16px 22px;}
+  .mast-top{margin:0 -16px;padding:7px 16px;font-size:.68rem;letter-spacing:.16em;}
+  .badge-row{margin:12px -4px -18px 0;}
+  .badge{width:96px;height:96px;}
+  .badge span{font-size:.72rem;}
+  .badge span i{font-size:.6rem;}
+  .h1-a{font-size:1.15rem;}
+  .inner{padding:16px 14px 22px;}
+  h2{font-size:1.24rem;}
+  .chap b{font-size:3.1rem;}
+  table.gloss td:first-child{white-space:normal;}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="pencil" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="2" cy="2" r="0.95" fill="#221912" fill-opacity="0.75"/>
+    </pattern>
+    <pattern id="hatchDense" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#221912"/>
+    </pattern>
+    <pattern id="hatchCross" width="3.6" height="3.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="1.8" cy="1.8" r="1.35" fill="#c0261a"/>
+    </pattern>
+    <pattern id="coverDots" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+      <circle cx="2.5" cy="2.5" r="1" fill="#e9b72a" fill-opacity="0.22"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M1 1.5 L8.5 5 L1 8.6" fill="none" stroke="#221912" stroke-width="1.3" stroke-linecap="round"/>
+    </marker>
+    <polygon id="ray" points="0,0 -70,-820 70,-820"/>
+    <polygon id="spike" points="0,-49.5 5.2,-36 -5.2,-36" fill="#c0261a"/>
+    <polygon id="star" points="0,-6 1.47,-2.02 5.71,-1.85 2.38,0.77 3.53,4.85 0,2.5 -3.53,4.85 -2.38,0.77 -5.71,-1.85 -1.47,-2.02"/>
+    <symbol id="orn" viewBox="0 0 240 20">
+      <g stroke="#221912" fill="none">
+        <path d="M6 10 H90" stroke-width="2.2"/><path d="M150 10 H234" stroke-width="2.2"/>
+      </g>
+      <use href="#star" transform="translate(101 10) scale(1.1)" fill="#221912"/>
+      <use href="#star" transform="translate(120 9.6) scale(1.6)" fill="#c0261a"/>
+      <use href="#star" transform="translate(139 10) scale(1.1)" fill="#221912"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="page">
+<div class="frame">
+
+<div class="cover">
+  <svg class="rays" viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+    <rect width="600" height="420" fill="#1b1a2a"/>
+    <g transform="translate(500 470)" fill="#6e1812">
+      <use href="#ray" transform="rotate(-80)"/><use href="#ray" transform="rotate(-64)"/>
+      <use href="#ray" transform="rotate(-48)"/><use href="#ray" transform="rotate(-32)"/>
+      <use href="#ray" transform="rotate(-16)"/><use href="#ray"/>
+      <use href="#ray" transform="rotate(16)"/><use href="#ray" transform="rotate(32)"/>
+    </g>
+    <rect width="600" height="420" fill="url(#coverDots)"/>
+  </svg>
+
+  <div class="mast-top"><span>Лист для любознательного читателя</span></div>
+
+  <div class="badge-row">
+    <div class="badge">
+      <svg viewBox="-50 -50 100 100" aria-hidden="true" focusable="false">
+        <use href="#spike"/><use href="#spike" transform="rotate(22.5)"/><use href="#spike" transform="rotate(45)"/><use href="#spike" transform="rotate(67.5)"/>
+        <use href="#spike" transform="rotate(90)"/><use href="#spike" transform="rotate(112.5)"/><use href="#spike" transform="rotate(135)"/><use href="#spike" transform="rotate(157.5)"/>
+        <use href="#spike" transform="rotate(180)"/><use href="#spike" transform="rotate(202.5)"/><use href="#spike" transform="rotate(225)"/><use href="#spike" transform="rotate(247.5)"/>
+        <use href="#spike" transform="rotate(270)"/><use href="#spike" transform="rotate(292.5)"/><use href="#spike" transform="rotate(315)"/><use href="#spike" transform="rotate(337.5)"/>
+        <circle r="38" fill="#c0261a"/>
+        <circle r="33" fill="none" stroke="#e9b72a" stroke-width="1.2"/>
+      </svg>
+      <span>Десять глав<i>·</i>шесть рисунков</span>
+    </div>
+  </div>
+
+  <h1><span class="h1-a">Как работают</span> <span class="h1-b">большие языковые модели</span></h1>
+  <p class="sub">Что происходит внутри ChatGPT, Claude, Gemini и их родственников, когда вы задаёте вопрос, а в ответ строка за строкой появляется текст</p>
+</div>
+
+<div class="inner">
+
+<svg class="fleuron" aria-hidden="true"><use href="#orn"/></svg>
+
+<table class="toc">
+  <caption>Содержание</caption>
+  <tr><td class="n">I</td><td><a href="#s1">Модель угадывает следующий кусочек текста</a></td></tr>
+  <tr><td class="n">II</td><td><a href="#s2">Текст режут на токены</a></td></tr>
+  <tr><td class="n">III</td><td><a href="#s3">Токены становятся точками в пространстве</a></td></tr>
+  <tr><td class="n">IV</td><td><a href="#s4">Внимание связывает слова друг с другом</a></td></tr>
+  <tr><td class="n">V</td><td><a href="#s5">Трансформер: одна пара операций много раз</a></td></tr>
+  <tr><td class="n">VI</td><td><a href="#s6">На выходе — распределение вероятностей</a></td></tr>
+  <tr><td class="n">VII</td><td><a href="#s7">Обучение на собственных ошибках</a></td></tr>
+  <tr><td class="n">VIII</td><td><a href="#s8">Из предсказателя — в собеседника</a></td></tr>
+  <tr><td class="n">IX</td><td><a href="#s9">Честные ограничения</a></td></tr>
+  <tr><td class="n">X</td><td><a href="#s10">Словарик</a></td></tr>
+</table>
+
+<div class="chap"><span>Глава</span><b>I</b></div>
+<h2 id="s1">Языковая модель угадывает следующий кусочек текста — и больше ничего</h2>
+
+<p class="initial">В основе любой большой языковой модели лежит удивительно скромная задача: по началу текста предсказать, что идёт дальше. Не весь ответ целиком, а только следующий маленький фрагмент. Модель выдаёт его, приписывает к уже написанному и снова спрашивает себя: а что теперь? Так, шаг за шагом, и складывается абзац, письмо или программа.</p>
+
+<p>Слово «большая» здесь означает две вещи. Во-первых, модель обучена на огромном количестве текста — книгах, статьях, коде, страницах интернета. Во-вторых, у неё очень много <i>параметров</i>: настраиваемых чисел, в которых и хранится всё, что она «вынесла» из обучения. У современных моделей их от миллиардов до сотен миллиардов.</p>
+
+<p>Всё, что кажется пониманием, рассуждением или знанием фактов, возникает как побочный продукт этой одной задачи. Чтобы хорошо угадывать продолжение текста о химии, приходится в каком-то виде усвоить химию; чтобы продолжать диалоги — усвоить, как люди отвечают на вопросы.</p>
+
+<p class="saw">Слово за словом — вот и строка.</p>
+
+<div class="chap"><span>Глава</span><b>II</b></div>
+<h2 id="s2">Прежде чем что-то считать, текст режут на токены</h2>
+
+<p>Модель не видит буквы и не видит слова. Она работает с <b>токенами</b> — кусочками текста, которые встречаются достаточно часто, чтобы получить собственный номер. Частое короткое слово может быть одним токеном, длинное или редкое — распасться на несколько. Пробел обычно прилипает к началу следующего кусочка.</p>
+
+<p>Словарь токенов составляется до обучения, автоматически, по статистике частот: самые частые сочетания символов склеиваются в один токен. В словаре обычно десятки тысяч, а то и больше сотни тысяч записей. Каждому токену соответствует номер, и дальше модель имеет дело только с последовательностью номеров.</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet">
+<svg viewBox="0 0 560 230" role="img" aria-label="Фраза «Модели предсказывают токены», разрезанная на шесть токенов, у каждого из которых есть номер">
+  <rect width="560" height="230" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5" fill="none">
+    <line x1="8" y1="112" x2="552" y2="112"/>
+    <line x1="8" y1="148" x2="552" y2="148"/>
+    <line x1="8" y1="192" x2="552" y2="192" stroke-dasharray="3 5"/>
+  </g>
+  <g filter="url(#pencil)">
+    <text x="280" y="44" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="25" fill="#221912">Модели предсказывают токены</text>
+    <path d="M280 58 C 281 70, 279 82, 280 96" fill="none" stroke="#221912" stroke-width="1.3" marker-end="url(#arr)"/>
+    <text x="294" y="84" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">режем на кусочки</text>
+
+    <g fill="none" stroke="#221912" stroke-width="1.5">
+      <rect x="30" y="112" width="90" height="36"/>
+      <rect x="128" y="112" width="76" height="36"/>
+      <rect x="212" y="112" width="64" height="36"/>
+      <rect x="284" y="112" width="80" height="36"/>
+      <rect x="372" y="112" width="90" height="36"/>
+      <rect x="470" y="112" width="36" height="36"/>
+    </g>
+    <g fill="none" stroke="#221912" stroke-width="0.6" stroke-opacity="0.6">
+      <rect x="33" y="115" width="84" height="30"/>
+      <rect x="131" y="115" width="70" height="30"/>
+      <rect x="215" y="115" width="58" height="30"/>
+      <rect x="287" y="115" width="74" height="30"/>
+      <rect x="375" y="115" width="84" height="30"/>
+      <rect x="473" y="115" width="30" height="30"/>
+    </g>
+    <rect x="212" y="112" width="64" height="36" fill="url(#hatch)"/>
+    <rect x="470" y="112" width="36" height="36" fill="url(#hatch)"/>
+    <g font-family="'PT Mono', monospace" font-size="17" fill="#221912" text-anchor="middle">
+      <text x="75" y="136">Модели</text>
+      <text x="166" y="136">·пред</text>
+      <text x="244" y="136">сказ</text>
+      <text x="324" y="136">ывают</text>
+      <text x="417" y="136">·токен</text>
+      <text x="488" y="136">ы</text>
+    </g>
+    <g stroke="#221912" stroke-width="1" fill="none">
+      <path d="M75 150 L75 178"/><path d="M166 150 L166 178"/><path d="M244 150 L244 178"/>
+      <path d="M324 150 L324 178"/><path d="M417 150 L417 178"/><path d="M488 150 L488 178"/>
+    </g>
+    <g fill="none" stroke="#c0261a" stroke-width="1.3">
+      <ellipse cx="75" cy="193" rx="26" ry="13"/><ellipse cx="166" cy="193" rx="26" ry="13"/>
+      <ellipse cx="244" cy="193" rx="26" ry="13"/><ellipse cx="324" cy="193" rx="26" ry="13"/>
+      <ellipse cx="417" cy="193" rx="26" ry="13"/><ellipse cx="488" cy="193" rx="20" ry="13"/>
+    </g>
+    <g font-family="'PT Mono', monospace" font-size="13" fill="#c0261a" text-anchor="middle">
+      <text x="75" y="197">2187</text><text x="166" y="197">905</text><text x="244" y="197">6610</text>
+      <text x="324" y="197">1432</text><text x="417" y="197">3071</text><text x="488" y="197">41</text>
+    </g>
+    <text x="528" y="220" text-anchor="end" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#76603f">номера условные</text>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 1.</b> Одна фраза — шесть токенов. Точкой отмечен пробел, приклеенный к началу кусочка. Как именно режется текст, зависит от словаря конкретной модели.</td></tr>
+</table>
+
+<p>Отсюда несколько знакомых странностей. Модели бывает трудно посчитать буквы в слове: она видит не буквы, а кусочки. А тексты на русском часто дробятся мельче, чем на английском, потому что в обучающих данных английского больше и под него в словаре больше цельных токенов.</p>
+
+<p class="saw">Мельче режешь — дольше читаешь.</p>
+
+<div class="chap"><span>Глава</span><b>III</b></div>
+<h2 id="s3">Каждый токен превращается в точку в пространстве смыслов</h2>
+
+<p>Номер сам по себе ничего не говорит: токен 2187 не «ближе» к 2188, чем к 9000. Поэтому первым делом каждый номер заменяется на <b>вектор</b> — длинный список чисел, обычно из сотен или тысяч элементов. Такой вектор называют <b>эмбеддингом</b>. Его значения не задаются вручную, а подбираются во время обучения.</p>
+
+<p>Получается, что каждый токен — это точка в многомерном пространстве. После обучения близкие по употреблению слова оказываются рядом: животные с животными, фрукты с фруктами. Ещё в работах о векторных представлениях слов заметили, что некоторые направления в таком пространстве несут смысл: сдвиг от «мужчины» к «женщине» похож на сдвиг от «короля» к «королеве».</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet">
+<svg viewBox="0 0 560 380" role="img" aria-label="Набросок двумерной проекции пространства эмбеддингов: животные, фрукты и люди образуют группы, а стрелки мужчина—женщина и король—королева параллельны">
+  <rect width="560" height="380" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5">
+    <line x1="60" y1="270" x2="530" y2="270"/><line x1="60" y1="210" x2="530" y2="210"/>
+    <line x1="60" y1="150" x2="530" y2="150"/><line x1="60" y1="90" x2="530" y2="90"/>
+    <line x1="160" y1="30" x2="160" y2="330"/><line x1="260" y1="30" x2="260" y2="330"/>
+    <line x1="360" y1="30" x2="360" y2="330"/><line x1="460" y1="30" x2="460" y2="330"/>
+  </g>
+  <g filter="url(#pencil)">
+    <path d="M50 330 L530 331" stroke="#221912" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+    <path d="M60 342 L59 28" stroke="#221912" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+    <text x="528" y="352" text-anchor="end" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">измерение 1</text>
+    <text x="70" y="26" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">измерение 2</text>
+    <text x="300" y="372" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#76603f">на деле измерений сотни и тысячи; здесь — плоская тень</text>
+
+    <ellipse cx="150" cy="128" rx="74" ry="52" fill="url(#hatch)" stroke="#221912" stroke-width="1"/>
+    <ellipse cx="402" cy="282" rx="78" ry="44" fill="url(#hatch)" stroke="#221912" stroke-width="1"/>
+    <ellipse cx="150" cy="128" rx="70" ry="48" fill="none" stroke="#221912" stroke-width="0.5"/>
+    <ellipse cx="402" cy="282" rx="74" ry="40" fill="none" stroke="#221912" stroke-width="0.5"/>
+
+    <g fill="#221912">
+      <circle cx="128" cy="104" r="4"/><circle cx="178" cy="126" r="4"/><circle cx="140" cy="156" r="4"/>
+      <circle cx="380" cy="266" r="4"/><circle cx="428" cy="282" r="4"/><circle cx="392" cy="302" r="4"/>
+    </g>
+    <g fill="#c0261a">
+      <circle cx="270" cy="232" r="4.5"/><circle cx="350" cy="194" r="4.5"/>
+      <circle cx="300" cy="112" r="4.5"/><circle cx="380" cy="74" r="4.5"/>
+    </g>
+    <g font-family="'PT Serif', serif" font-style="italic" font-size="17" fill="#221912">
+      <text x="96" y="96">кошка</text><text x="186" y="122">собака</text><text x="104" y="178">лошадь</text>
+      <text x="334" y="258">яблоко</text><text x="436" y="280">груша</text><text x="402" y="318">слива</text>
+      <text x="206" y="252">мужчина</text><text x="358" y="210">женщина</text>
+      <text x="246" y="104">король</text><text x="390" y="70">королева</text>
+    </g>
+    <path d="M274 230 L344 197" stroke="#c0261a" stroke-width="1.8" fill="none" marker-end="url(#arr)"/>
+    <path d="M304 110 L374 77" stroke="#c0261a" stroke-width="1.8" fill="none" marker-end="url(#arr)"/>
+    <g stroke="#221912" stroke-width="0.8" stroke-dasharray="4 4" stroke-opacity="0.7" fill="none">
+      <path d="M270 228 L300 118"/><path d="M350 190 L380 80"/>
+    </g>
+    <text x="392" y="146" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">тот же сдвиг</text>
+    <path d="M388 140 C 372 132, 354 120, 346 102" stroke="#5a4630" stroke-width="0.8" fill="none"/>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 2.</b> Упрощённый набросок: слова, которые употребляются похоже, ложатся рядом, а некоторые направления повторяются — классическая иллюстрация из исследований векторных представлений слов.</td></tr>
+</table>
+
+<p>Модели нужно знать и то, где стоит токен. «Собака укусила человека» и «человек укусил собаку» состоят почти из одних и тех же кусочков. Поэтому к эмбеддингу добавляют сведения о <b>позиции</b> токена в тексте.</p>
+
+<div class="chap"><span>Глава</span><b>IV</b></div>
+<h2 id="s4">Механизм внимания позволяет словам смотреть друг на друга</h2>
+
+<p>Эмбеддинг слова сам по себе один и тот же в любом тексте. Но смысл зависит от соседей: «ключ» от двери и «ключ» в лесу — разные вещи. Главная находка, на которой держатся современные модели, — <b>механизм внимания</b>. Он позволяет каждому токену заглянуть в остальные и собрать от них то, что ему нужно.</p>
+
+<p>Упрощённо это устроено так. Каждый токен формулирует «запрос» — что он ищет, — а каждый токен предлагает «ключ» — чем он может быть полезен. Чем лучше запрос совпадает с ключом, тем больше вес связи. Затем токен забирает «значения» остальных, смешанные пропорционально этим весам, и обновляет свой вектор.</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet wide">
+<svg viewBox="0 0 660 300" role="img" aria-label="Фраза «Кошка не прыгнула через забор, потому что она устала». От слова «она» к предыдущим словам идут дуги; самая толстая — к слову «Кошка»">
+  <rect width="660" height="300" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5">
+    <line x1="10" y1="274" x2="650" y2="274"/>
+    <line x1="10" y1="240" x2="650" y2="240" stroke-dasharray="2 6"/>
+  </g>
+  <g filter="url(#pencil)">
+    <rect x="30" y="246" width="72" height="28" fill="url(#hatchDense)" opacity="0.45"/>
+    <g fill="none" stroke="#221912" stroke-linecap="round">
+      <path d="M540 236 Q 302 14 66 236" stroke-width="7" stroke="#c0261a"/>
+      <path d="M540 236 Q 302 26 66 236" stroke-width="0.8" stroke-opacity="0.6"/>
+      <path d="M540 236 Q 445 110 350 236" stroke-width="3" stroke-opacity="0.85"/>
+      <path d="M540 236 Q 370 70 200 236" stroke-width="1.6" stroke-opacity="0.75"/>
+      <path d="M540 236 Q 329 50 118 236" stroke-width="0.9" stroke-opacity="0.55"/>
+      <path d="M540 236 Q 411 92 282 236" stroke-width="0.8" stroke-opacity="0.5"/>
+      <path d="M540 236 Q 485 148 430 236" stroke-width="0.8" stroke-opacity="0.5"/>
+      <path d="M540 236 Q 514 180 488 236" stroke-width="0.8" stroke-opacity="0.5"/>
+    </g>
+    <ellipse cx="540" cy="260" rx="26" ry="17" fill="none" stroke="#221912" stroke-width="1.5"/>
+    <ellipse cx="540" cy="260" rx="22" ry="13.5" fill="none" stroke="#221912" stroke-width="0.6"/>
+    <g font-family="'PT Serif', serif" font-size="18" fill="#221912" text-anchor="middle">
+      <text x="66" y="266" font-weight="700">Кошка</text>
+      <text x="118" y="266">не</text>
+      <text x="200" y="266">прыгнула</text>
+      <text x="282" y="266">через</text>
+      <text x="350" y="266">забор,</text>
+      <text x="430" y="266">потому</text>
+      <text x="488" y="266">что</text>
+      <text x="540" y="266" font-weight="700">она</text>
+      <text x="612" y="266" fill="#a48f62">устала</text>
+    </g>
+    <text x="300" y="104" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="16" fill="#c0261a">сильнее всего: «она» = кошка</text>
+    <text x="612" y="292" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#96805a">ещё не написано</text>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 3.</b> Толщина дуги — вес внимания от токена «она» к предыдущим словам. Связи нарисованы для наглядности, а не сняты с настоящей модели. На слова после себя токен смотреть не может: их ещё нет.</td></tr>
+</table>
+
+<p>Внимание считается не одним способом, а сразу несколькими параллельными «головами». Одна голова может следить за грамматическими связями, другая — за тем, к кому относится местоимение, третья — за повторяющимися фрагментами. Что именно выучит каждая, никто не задаёт: это тоже результат обучения.</p>
+
+<p>В моделях, которые пишут текст, действует важное правило: токен видит только то, что стоит <i>до</i> него. Иначе задача угадать следующий кусочек была бы нечестной — ответ лежал бы прямо перед глазами.</p>
+
+<p class="saw">Скажи, кто твои соседи, — скажу, что ты значишь.</p>
+
+<div class="chap"><span>Глава</span><b>V</b></div>
+<h2 id="s5">Трансформер — это одна и та же пара операций, повторённая много раз</h2>
+
+<p>Архитектура, в которой всё это собрано, называется <b>трансформер</b>. Её описали исследователи Google в 2017 году в статье «Attention Is All You Need» («Внимание — это всё, что вам нужно»). Почти все большие языковые модели сегодня построены на ней.</p>
+
+<table class="dates">
+  <caption>Памятные даты</caption>
+  <tr><td class="yr">2013</td><td>Работы исследователей Google о векторных представлениях слов (word2vec); в них показан сдвиг «король → королева».</td></tr>
+  <tr><td class="yr">2017</td><td>Статья «Attention Is All You Need»: описана архитектура трансформер.</td></tr>
+  <tr><td class="yr">2022</td><td>В ноябре открыт общий доступ к ChatGPT — собеседнику, дообученному на отзывах людей.</td></tr>
+</table>
+
+<p>Трансформер — это стопка одинаковых по устройству блоков. В каждом два шага. Сначала <b>внимание</b>: токены обмениваются информацией. Затем <b>полносвязная сеть</b>: каждый токен по отдельности пропускает свой обновлённый вектор через набор вычислений, где, как считается, хранится значительная часть выученных закономерностей и фактов. Выход одного блока становится входом следующего. Блоков бывают десятки.</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet">
+<svg viewBox="0 0 560 570" role="img" aria-label="Набросок трансформера: внизу токены, над ними стопка объёмных блоков, в каждом слой внимания и полносвязный слой; наверху столбики вероятностей следующего токена">
+  <rect width="560" height="570" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5">
+    <line x1="170" y1="20" x2="170" y2="550"/><line x1="390" y1="20" x2="390" y2="550"/>
+    <line x1="280" y1="20" x2="280" y2="550" stroke-dasharray="2 6"/>
+  </g>
+  <g filter="url(#pencil)">
+    <g fill="none" stroke="#221912" stroke-width="1.3">
+      <rect x="168" y="512" width="48" height="30"/><rect x="226" y="512" width="80" height="30"/><rect x="316" y="512" width="76" height="30"/>
+    </g>
+    <g font-family="'PT Mono', monospace" font-size="15" fill="#221912" text-anchor="middle">
+      <text x="192" y="532">За</text><text x="266" y="532">·окном</text><text x="354" y="532">·идёт</text>
+    </g>
+    <g stroke="#221912" stroke-width="1.1" fill="none">
+      <path d="M192 508 L192 452" marker-end="url(#arr)"/><path d="M266 508 L266 452" marker-end="url(#arr)"/><path d="M354 508 L354 452" marker-end="url(#arr)"/>
+    </g>
+    <text x="402" y="488" font-family="'PT Serif', serif" font-style="italic" font-size="14" fill="#5a4630">номер → вектор</text>
+    <text x="402" y="506" font-family="'PT Serif', serif" font-style="italic" font-size="14" fill="#5a4630">+ позиция</text>
+
+    <g>
+      <polygon points="390,380 420,362 420,426 390,444" fill="url(#hatchDense)" stroke="#221912" stroke-width="1.2"/>
+      <polygon points="170,380 200,362 420,362 390,380" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+      <rect x="170" y="380" width="220" height="64" fill="#f0e2b2" stroke="#221912" stroke-width="1.5"/>
+      <line x1="172" y1="412" x2="388" y2="412" stroke="#221912" stroke-width="0.8"/>
+      <text x="280" y="402" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#c0261a">слой внимания</text>
+      <text x="280" y="434" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#221912">полносвязный слой</text>
+    </g>
+    <path d="M280 360 L280 340" stroke="#221912" stroke-width="1.1" marker-end="url(#arr)"/>
+    <g>
+      <polygon points="390,270 420,252 420,316 390,334" fill="url(#hatchDense)" stroke="#221912" stroke-width="1.2"/>
+      <polygon points="170,270 200,252 420,252 390,270" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+      <rect x="170" y="270" width="220" height="64" fill="#f0e2b2" stroke="#221912" stroke-width="1.5"/>
+      <line x1="172" y1="302" x2="388" y2="302" stroke="#221912" stroke-width="0.8"/>
+      <text x="280" y="292" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#c0261a">слой внимания</text>
+      <text x="280" y="324" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#221912">полносвязный слой</text>
+    </g>
+    <g fill="#221912"><circle cx="294" cy="206" r="2.6"/><circle cx="294" cy="220" r="2.6"/><circle cx="294" cy="234" r="2.6"/></g>
+    <g>
+      <polygon points="390,120 420,102 420,166 390,184" fill="url(#hatchDense)" stroke="#221912" stroke-width="1.2"/>
+      <polygon points="170,120 200,102 420,102 390,120" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+      <rect x="170" y="120" width="220" height="64" fill="#f0e2b2" stroke="#221912" stroke-width="1.5"/>
+      <line x1="172" y1="152" x2="388" y2="152" stroke="#221912" stroke-width="0.8"/>
+      <text x="280" y="142" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#c0261a">слой внимания</text>
+      <text x="280" y="174" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#221912">полносвязный слой</text>
+    </g>
+    <path d="M440 110 C 452 112, 450 150, 452 240 C 452 262, 458 268, 468 270 C 458 272, 452 278, 452 300 C 450 390, 452 440, 440 442" fill="none" stroke="#221912" stroke-width="1.3"/>
+    <text x="474" y="264" font-family="'Oswald', sans-serif" font-weight="700" font-size="24" fill="#c0261a">× N</text>
+    <text x="474" y="284" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#5a4630">десятки</text>
+    <text x="474" y="300" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#5a4630">блоков</text>
+    <path d="M280 98 L280 82" stroke="#221912" stroke-width="1.1" marker-end="url(#arr)"/>
+    <line x1="196" y1="76" x2="366" y2="76" stroke="#221912" stroke-width="1"/>
+    <rect x="204" y="28" width="22" height="48" fill="url(#hatchDense)" stroke="#221912" stroke-width="1"/>
+    <rect x="236" y="46" width="22" height="30" fill="url(#hatch)" stroke="#221912" stroke-width="1"/>
+    <rect x="268" y="64" width="22" height="12" fill="url(#hatch)" stroke="#221912" stroke-width="1"/>
+    <rect x="300" y="68" width="22" height="8" fill="url(#hatch)" stroke="#221912" stroke-width="1"/>
+    <rect x="332" y="72" width="22" height="4" fill="none" stroke="#221912" stroke-width="1"/>
+    <text x="378" y="48" font-family="'PT Serif', serif" font-style="italic" font-size="14" fill="#5a4630">вероятности</text>
+    <text x="378" y="66" font-family="'PT Serif', serif" font-style="italic" font-size="14" fill="#5a4630">следующего токена</text>
+    <text x="104" y="42" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#c0261a">дождь?</text>
+    <path d="M152 40 C 172 38, 188 38, 200 44" fill="none" stroke="#5a4630" stroke-width="0.8"/>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 4.</b> Токены превращаются в векторы, проходят через стопку блоков и на выходе дают оценку для каждого токена из словаря: насколько вероятно, что он будет следующим.</td></tr>
+</table>
+
+<p>Можно представить вектор каждого токена как черновик, который передают по цепочке редакторов. Каждый блок дописывает в него что-то своё: сначала простое — какая это часть речи, — потом всё более сложное: о ком речь, какой у текста тон, что логично сказать дальше. К верху стопки в векторе последнего токена скопилось всё нужное для предсказания.</p>
+
+<div class="chap"><span>Глава</span><b>VI</b></div>
+<h2 id="s6">На выходе получается не слово, а распределение вероятностей</h2>
+
+<p>Последний блок выдаёт для каждого токена из словаря число, а затем эти числа превращаются в вероятности, которые в сумме дают единицу. Модель не говорит «следующее слово — дождь». Она говорит: «дождь — очень вероятно, снег — вероятно, человек — маловероятно, но возможно».</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet">
+<svg viewBox="0 0 560 300" role="img" aria-label="Набросок столбчатой диаграммы вероятностей продолжения фразы «За окном идёт»: дождь, снег, град, человек, время">
+  <rect width="560" height="300" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5">
+    <line x1="270" y1="58" x2="270" y2="262" stroke-dasharray="2 5"/>
+    <line x1="390" y1="58" x2="390" y2="262" stroke-dasharray="2 5"/>
+    <line x1="20" y1="102" x2="540" y2="102"/><line x1="20" y1="142" x2="540" y2="142"/>
+    <line x1="20" y1="182" x2="540" y2="182"/><line x1="20" y1="222" x2="540" y2="222"/>
+  </g>
+  <g filter="url(#pencil)">
+    <text x="280" y="38" text-anchor="middle" font-family="'PT Serif', serif" font-style="italic" font-size="22" fill="#221912">«За окном идёт …»</text>
+    <path d="M150 56 L151 266" stroke="#221912" stroke-width="1.4" fill="none"/>
+    <g font-family="'PT Serif', serif" font-size="17" fill="#221912" text-anchor="end">
+      <text x="138" y="88">дождь</text><text x="138" y="128">снег</text><text x="138" y="168">град</text>
+      <text x="138" y="208">человек</text><text x="138" y="248">время</text>
+    </g>
+    <rect x="151" y="70" width="312" height="24" fill="url(#hatchDense)" stroke="#221912" stroke-width="1.2"/>
+    <rect x="151" y="110" width="186" height="24" fill="url(#hatchCross)" stroke="#221912" stroke-width="1.2"/>
+    <rect x="151" y="150" width="42" height="24" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+    <rect x="151" y="190" width="30" height="24" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+    <rect x="151" y="230" width="18" height="24" fill="url(#hatch)" stroke="#221912" stroke-width="1.2"/>
+    <g font-family="'PT Mono', monospace" font-size="14" fill="#c0261a">
+      <text x="472" y="87">52%</text><text x="346" y="127">31%</text><text x="202" y="167">7%</text>
+      <text x="190" y="207">5%</text><text x="178" y="247">3%</text>
+    </g>
+    <text x="540" y="288" text-anchor="end" font-family="'PT Serif', serif" font-style="italic" font-size="13" fill="#76603f">числа условные; остаток — тысячи других токенов</text>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 5.</b> Модель оценивает все возможные продолжения сразу. Какое из них будет написано, решает следующий шаг — выборка.</td></tr>
+</table>
+
+<p>Дальше из этого распределения выбирают один токен. Если всегда брать самый вероятный, текст выходит предсказуемым и склонным к повторам. Поэтому обычно токен тянут случайно, но с учётом вероятностей. Параметр <b>температура</b> регулирует, насколько смело: при низкой температуре модель почти всегда выбирает фаворита, при высокой — чаще рискует. Именно поэтому на один и тот же вопрос модель может ответить по-разному.</p>
+
+<p>Выбранный токен приписывается к тексту, и весь путь через стопку блоков повторяется ради следующего. Длинный ответ — это сотни и тысячи таких проходов.</p>
+
+<p class="saw">Вероятно — ещё не наверняка.</p>
+
+<div class="chap"><span>Глава</span><b>VII</b></div>
+<h2 id="s7">Модель учится на собственных ошибках, миллиарды раз подряд</h2>
+
+<p>Вначале все параметры модели — случайные числа, и её предсказания — бессмыслица. Обучение устроено просто по идее и грандиозно по масштабу. Берут кусок настоящего текста, показывают модели начало и смотрят, какую вероятность она дала тому токену, который на самом деле шёл дальше. Чем меньше эта вероятность, тем больше ошибка.</p>
+
+<p>Затем алгоритм <b>обратного распространения ошибки</b> вычисляет, в какую сторону подвинуть каждый из миллиардов параметров, чтобы ошибка стала чуть меньше. Параметры сдвигают на крошечный шаг — это называется <b>градиентным спуском</b> — и переходят к следующему куску текста. Учителю не нужно размечать данные: правильный ответ всегда содержится в самом тексте. Этот этап называют <b>предобучением</b>, и он требует огромных вычислительных мощностей.</p>
+
+<table class="fig" role="presentation"><tr><td class="sheet">
+<svg viewBox="0 0 560 260" role="img" aria-label="Набросок кривой обучения: ошибка предсказания быстро падает в начале и затем медленно выравнивается">
+  <rect width="560" height="260" fill="#f0e2b2"/>
+  <g stroke="#cdb87e" stroke-width="0.5">
+    <line x1="70" y1="80" x2="530" y2="80"/><line x1="70" y1="140" x2="530" y2="140"/>
+    <line x1="70" y1="200" x2="530" y2="200"/>
+    <line x1="190" y1="30" x2="190" y2="230"/><line x1="310" y1="30" x2="310" y2="230"/><line x1="430" y1="30" x2="430" y2="230"/>
+  </g>
+  <g filter="url(#pencil)">
+    <path d="M70 236 L534 235" stroke="#221912" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+    <path d="M70 244 L69 24" stroke="#221912" stroke-width="1.4" fill="none" marker-end="url(#arr)"/>
+    <text x="80" y="24" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">ошибка предсказания</text>
+    <text x="530" y="256" text-anchor="end" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#5a4630">шаги обучения</text>
+    <path d="M76 52 C 110 120, 150 152, 210 168 S 360 192, 524 200 L524 236 L76 236 Z" fill="url(#hatch)" opacity="0.55"/>
+    <path d="M76 48 L82 64 L86 58 L92 82 L97 76 L103 100 L109 96 L116 118 L122 112 L130 132 L138 128 L148 146 L158 142 L170 158 L182 156 L196 168 L210 166 L226 176 L242 174 L260 182 L280 181 L300 188 L322 186 L346 192 L370 191 L396 196 L422 195 L450 199 L478 198 L506 201 L524 201" fill="none" stroke="#221912" stroke-width="0.8" stroke-opacity="0.55"/>
+    <path d="M76 52 C 110 120, 150 152, 210 168 S 360 192, 524 200" fill="none" stroke="#c0261a" stroke-width="2.6"/>
+    <text x="250" y="132" font-family="'PT Serif', serif" font-style="italic" font-size="15" fill="#221912">сначала — быстро, потом — всё медленнее</text>
+  </g>
+</svg>
+</td></tr>
+<tr><td class="cap"><b>Рис. 6.</b> Характерная форма кривой обучения, без масштаба: тонкая дрожащая линия — ошибка на отдельных кусках текста, толстая — её сглаженный ход.</td></tr>
+</table>
+
+<p class="saw">Ошибся — подвинь; подвинул — ошибись меньше.</p>
+
+<div class="chap"><span>Глава</span><b>VIII</b></div>
+<h2 id="s8">После предобучения модель учат быть собеседником</h2>
+
+<p>Модель, прошедшая только предобучение, умеет продолжать тексты, но не обязательно отвечать на вопросы. На вопрос она может ответить списком похожих вопросов — ведь в интернете так тоже бывает. Чтобы получился помощник, нужен второй этап.</p>
+
+<ul>
+  <li><b>Дообучение на примерах.</b> Модели показывают диалоги, где на запрос дан хороший ответ, и продолжают обучать её на них тем же способом.</li>
+  <li><b>Обучение с подкреплением на основе отзывов людей</b> (по-английски RLHF). Люди сравнивают несколько ответов модели и отмечают, какой лучше. По этим оценкам модель подстраивают так, чтобы она чаще давала ответы, которые люди считают полезными, честными и безопасными.</li>
+</ul>
+
+<p>В диалоге модель по-прежнему делает одно и то же — предсказывает продолжение. Просто теперь продолжаемый текст выглядит как разговор, и наиболее вероятным продолжением стала реплика внимательного помощника.</p>
+
+<div class="chap"><span>Глава</span><b>IX</b></div>
+<h2 id="s9">У этого устройства есть честные ограничения</h2>
+
+<table class="note" role="presentation"><tr><td>
+<svg class="moon" viewBox="0 0 40 40" aria-hidden="true">
+  <path d="M25 3 A17 17 0 1 0 25 37 A13 13 0 1 1 25 3 Z" fill="#221912"/>
+  <path d="M31 12 l1.2 3 3 1.2 -3 1.2 -1.2 3 -1.2 -3 -3 -1.2 3 -1.2 Z" fill="#c0261a"/>
+</svg>
+<p><b>Уверенные ошибки.</b> Модель выдаёт правдоподобное продолжение, а правдоподобное не всегда истинно. Она может уверенно назвать несуществующую книгу или перепутать даты. Такие выдумки называют галлюцинациями.</p>
+<p><b>Знания с датой.</b> Всё, что модель знает «сама по себе», взято из обучающих данных. О событиях после их сбора она не знает, если сведения не переданы ей прямо в разговоре.</p>
+<p><b>Ограниченное окно.</b> Модель одновременно видит лишь определённое число токенов — своё контекстное окно. Всё, что в него не поместилось, для неё не существует.</p>
+<p style="margin-bottom:0"><b>Нет памяти между разговорами.</b> Сами параметры во время беседы не меняются. Модель «помнит» разговор только потому, что весь его текст снова подаётся ей на вход.</p>
+</td></tr></table>
+
+<p>Насколько то, что делает модель, можно называть пониманием, — вопрос, о котором исследователи спорят. Бесспорно другое: из простой задачи «угадай следующий токен», повторённой в огромном масштабе, выросли системы, которые переводят, пишут код и объясняют сложные вещи. В том числе, как видите, и самих себя.</p>
+
+<p class="saw">Не то правда, что гладко сказано.</p>
+
+<div class="chap"><span>Глава</span><b>X</b></div>
+<h2 id="s10">Словарик: десять слов, которых хватит для начала</h2>
+
+<table class="gloss">
+  <tr><th>Термин</th><th>Что это значит</th></tr>
+  <tr><td>Токен</td><td>Кусочек текста с собственным номером в словаре модели: слово, часть слова или знак.</td></tr>
+  <tr><td>Эмбеддинг</td><td>Вектор чисел, которым модель представляет токен; близкие по употреблению токены получают близкие векторы.</td></tr>
+  <tr><td>Параметры</td><td>Настраиваемые числа модели; в них хранится всё, что она усвоила при обучении.</td></tr>
+  <tr><td>Внимание</td><td>Механизм, через который каждый токен взвешивает остальные и собирает от них нужную информацию.</td></tr>
+  <tr><td>Трансформер</td><td>Архитектура из повторяющихся блоков «внимание + полносвязная сеть», описанная в 2017 году.</td></tr>
+  <tr><td>Контекстное окно</td><td>Наибольшее число токенов, которое модель может учитывать одновременно.</td></tr>
+  <tr><td>Температура</td><td>Параметр выборки: чем выше, тем чаще модель выбирает менее вероятные продолжения.</td></tr>
+  <tr><td>Предобучение</td><td>Основной этап обучения: предсказаниеследующего токена на огромном корпусе текстов.</td></tr>
+  <tr><td>Градиентный спуск</td><td>Способ обучения: параметры понемногу сдвигают в сторону, уменьшающую ошибку.</td></tr>
+  <tr><td>RLHF</td><td>Обучение с подкреплением на основе отзывов людей: модель подстраивают под ответы, которые люди оценили выше.</td></tr>
+</table>
+
+<svg class="fleuron" aria-hidden="true"><use href="#orn"/></svg>
+
+<table class="tally">
+  <caption>На этой странице</caption>
+  <tr><td>Рисунков</td><td class="v">6</td></tr>
+  <tr><td>Разделов</td><td class="v">10</td></tr>
+  <tr><td>Терминов</td><td class="v">10</td></tr>
+</table>
+<p class="top"><a href="#s1">[ к началу ]</a></p>
+
+</div>
+</div>
+</div>
+</body>
+</html>
