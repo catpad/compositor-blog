@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вестник бесконечно малых: учебник анализа для начинающих</title>
+<meta name="description" content="Интерактивный учебник математического анализа для начинающих: предел, производная, интеграл и главная теорема, свёрстанные как первая полоса газеты.">
+<meta name="compositor:paper" content="#F3ECDD">
+<meta name="compositor:ink" content="#1B1A17">
+<meta name="compositor:accent" content="#C2361F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3ECDD;
+  --paper-deep:#E9DFCB;
+  --ink:#1B1A17;
+  --ink-soft:#5E584D;
+  --accent:#C2361F;
+  --rule:#1B1A17;
+  --display:"Playfair Display", "PT Serif", Georgia, serif;
+  --text:"PT Serif", Georgia, serif;
+  --mono:"PT Mono", ui-monospace, monospace;
+  --s-1:0.8125rem;
+  --s0:1.0625rem;
+  --s1:1.3125rem;
+  --s2:1.75rem;
+  --s3:2.5rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:var(--s0);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  hyphens:auto;
+}
+.sheet{max-width:1240px;margin:0 auto;padding:1.25rem 1.25rem 3rem}
+
+/* ---------- Masthead ---------- */
+.mast-top{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.75rem;
+  align-items:center;
+  border-bottom:1px solid var(--rule);
+  padding-bottom:.6rem;
+}
+.ear{
+  font-size:var(--s-1);
+  line-height:1.35;
+  border:1px solid var(--rule);
+  padding:.5rem .65rem;
+  max-width:16rem;
+}
+.ear b{display:block;font-family:var(--display);font-size:.95rem;letter-spacing:.02em;margin-bottom:.15rem}
+.ear.right{justify-self:end;text-align:right}
+.mast-name{
+  text-align:center;
+  font-family:var(--display);
+  font-weight:900;
+  font-size:clamp(2.1rem, 6.4vw, 5.4rem);
+  line-height:.95;
+  letter-spacing:-.01em;
+  margin:0;
+  text-shadow:3px 2px 0 rgba(194,54,31,.55);
+}
+.mast-sub{
+  text-align:center;
+  font-size:var(--s-1);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  margin:.45rem 0 0;
+}
+.folio{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:.25rem 1.5rem;
+  font-size:var(--s-1);
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border-bottom:3px double var(--rule);
+  padding:.4rem 0;
+}
+.folio span:nth-child(2){color:var(--accent)}
+@media (min-width:860px){
+  .mast-top{grid-template-columns:1fr auto 1fr}
+}
+@media (max-width:859px){
+  .ear{display:none}
+}
+
+/* ---------- Headline ---------- */
+.banner{padding:1.4rem 0 1.1rem;border-bottom:1px solid var(--rule);text-align:center}
+.kicker{
+  font-size:var(--s-1);letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin:0 0 .5rem;
+}
+.banner h1{
+  font-family:var(--display);
+  font-weight:900;
+  font-size:clamp(2rem, 4.8vw, 3.9rem);
+  line-height:1.03;
+  margin:0 auto;
+  max-width:22ch;
+  text-wrap:balance;
+}
+.deck{
+  font-style:italic;
+  font-size:var(--s1);
+  line-height:1.4;
+  max-width:44rem;
+  margin:.8rem auto 0;
+  color:var(--ink-soft);
+  text-wrap:pretty;
+}
+
+/* ---------- Grid of the front page ---------- */
+.front{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  border-bottom:1px solid var(--rule);
+}
+.front > *{padding:1.2rem 0}
+@media (min-width:920px){
+  .front{grid-template-columns:minmax(0,2.1fr) minmax(0,1fr)}
+  .front > * + *{border-left:1px solid var(--rule);padding-left:1.5rem}
+  .front > *:first-child{padding-right:1.5rem}
+}
+.pair{
+  display:grid;
+  grid-template-columns:1fr;
+  border-bottom:1px solid var(--rule);
+}
+.pair > *{padding:1.2rem 0}
+@media (min-width:920px){
+  .pair{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .pair > *:first-child{padding-right:1.5rem}
+  .pair > * + *{border-left:1px solid var(--rule);padding-left:1.5rem}
+}
+.wide{border-bottom:1px solid var(--rule);padding:1.2rem 0}
+
+/* ---------- Article typography ---------- */
+h2{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:var(--s2);
+  line-height:1.12;
+  margin:0 0 .6rem;
+  text-wrap:balance;
+}
+h3{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:var(--s1);
+  line-height:1.2;
+  margin:0 0 .45rem;
+  text-wrap:balance;
+}
+.label{
+  font-size:var(--s-1);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin:0 0 .35rem;
+  display:block;
+}
+p{margin:0 0 .8rem;text-wrap:pretty}
+.byline{font-size:var(--s-1);color:var(--ink-soft);font-style:italic;margin-bottom:.8rem}
+.dropcap::first-letter{
+  font-family:var(--display);
+  font-weight:900;
+  float:left;
+  font-size:3.6em;
+  line-height:.82;
+  padding:.06em .1em 0 0;
+  color:var(--accent);
+}
+.cols{column-gap:1.5rem;column-rule:1px solid var(--rule)}
+@media (min-width:700px){.cols{column-count:2}}
+.cols p{break-inside:avoid-column}
+.measure{max-width:38rem}
+i.v{font-style:italic}
+em{font-style:italic}
+
+/* formulas */
+.formula{
+  font-family:var(--text);
+  font-size:1.2rem;
+  text-align:center;
+  padding:.8rem .5rem;
+  margin:.4rem 0 1rem;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  overflow-x:auto;
+  white-space:nowrap;
+}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .2em}
+.frac > span:first-child{padding:0 .25em .1em;border-bottom:1.5px solid currentColor}
+.frac > span:last-child{padding:.1em .25em 0}
+.lim{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1;margin-right:.2em}
+.lim small{font-size:.62em;margin-top:.2em}
+.int{display:inline-flex;align-items:center;vertical-align:middle}
+.int .sign{font-size:1.9em;line-height:1;font-style:normal}
+.int .lims{display:inline-flex;flex-direction:column;justify-content:space-between;font-size:.62em;line-height:1.1;margin-left:.05em;height:2.6em}
+.hl{color:var(--accent)}
+
+/* ---------- Figures ---------- */
+figure{margin:0 0 1rem}
+figure svg{display:block;width:100%;height:auto}
+figcaption{
+  font-size:var(--s-1);
+  line-height:1.4;
+  color:var(--ink-soft);
+  border-top:1px solid var(--rule);
+  padding-top:.35rem;
+  margin-top:.35rem;
+}
+.ink-red{mix-blend-mode:multiply}
+
+/* ---------- Instruments ---------- */
+.instrument{
+  display:block;
+  width:100%;
+  min-height:380px;
+  margin:1rem 0 1.2rem;
+  border-top:2px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  background:var(--paper-deep);
+  position:relative;
+  overflow-x:auto;
+}
+.instrument[data-instrument="limit-band"]{min-height:340px}
+.instrument[data-instrument="derivative-trace"]{min-height:440px}
+.instrument[data-instrument="ftc-area"]{min-height:440px}
+
+/* ---------- Sidebars ---------- */
+.box{
+  border:1px solid var(--rule);
+  padding:.9rem 1rem 1rem;
+  margin:0 0 1.2rem;
+  background:var(--paper);
+}
+.box.inked{border-top:6px solid var(--ink)}
+.box h3{margin-top:0}
+.side-section + .side-section{border-top:1px solid var(--rule);padding-top:1.1rem;margin-top:.4rem}
+
+dl.gloss{margin:0;font-size:.98rem}
+dl.gloss dt{font-family:var(--display);font-weight:700;margin-top:.55rem}
+dl.gloss dt:first-child{margin-top:0}
+dl.gloss dd{margin:0;color:var(--ink)}
+
+table.rules{width:100%;border-collapse:collapse;font-size:1rem}
+table.rules td{padding:.38rem .2rem;border-bottom:1px solid rgba(27,26,23,.35);vertical-align:baseline}
+table.rules tr:last-child td{border-bottom:none}
+table.rules td:first-child{white-space:nowrap;padding-right:.8rem}
+table.rules td:last-child{text-align:right;white-space:nowrap}
+.rules-wrap{overflow-x:auto}
+
+/* ---------- Problems ---------- */
+.problems{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:700px){.problems{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1.5rem}}
+@media (min-width:1050px){.problems{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.problem{border-top:1px solid var(--rule);padding:.7rem 0 .9rem}
+.problem .n{font-family:var(--display);font-weight:900;color:var(--accent);font-size:1.4rem;line-height:1;margin-right:.35rem}
+.answers{
+  margin-top:1rem;
+  border-top:3px double var(--rule);
+  padding-top:.7rem;
+  transform:rotate(180deg);
+  font-size:var(--s-1);
+  color:var(--ink-soft);
+  text-align:center;
+}
+.answers b{color:var(--ink)}
+.end-mark{text-align:center;font-family:var(--display);font-size:1.3rem;color:var(--accent);margin-top:1.5rem;letter-spacing:.6em}
+
+@media (max-width:480px){
+  .sheet{padding:1rem .9rem 2.5rem}
+  .formula{font-size:1.05rem}
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="masthead">
+  <div class="mast-top">
+    <div class="ear">
+      <b>Погода в анализе</b>
+      Переменная. Приращения малы и продолжают уменьшаться; к полудню ожидается предел.
+    </div>
+    <div>
+      <p class="mast-name">Вестник бесконечно малых</p>
+      <p class="mast-sub">Интерактивный учебник математического анализа для начинающих</p>
+    </div>
+    <div class="ear right">
+      <b>В номере</b>
+      Предел · Производная · Правила дифференцирования · Интеграл · Главная теорема · Задачи
+    </div>
+  </div>
+  <div class="folio">
+    <span>Выпуск первый</span>
+    <span>Тема номера: изменение и накопление</span>
+    <span>Цена: немного внимания</span>
+  </div>
+</header>
+
+<section class="banner">
+  <p class="kicker">Сенсация в мире функций</p>
+  <h1>Мгновение поймано: скорость можно измерить в одной точке</h1>
+  <p class="deck">Как секущая превращается в касательную, почему площадь складывают из бесконечно тонких полосок и что связывает эти две идеи — в первом выпуске нашего учебника.</p>
+</section>
+
+<div class="front">
+  <article class="lead">
+    <span class="label">Главная статья · Производная</span>
+    <h2>Спидометр знает то, что нельзя вычислить делением: скорость «прямо сейчас»</h2>
+    <p class="byline">Учебный отдел «Вестника»</p>
+
+    <figure>
+      <svg viewBox="0 0 600 300" role="img" aria-label="Линогравюра: шар на склоне холма, к склону приложена красная касательная, над холмом красное солнце.">
+        <rect width="600" height="300" fill="#F3ECDD"/>
+        <g class="ink-red" fill="#C2361F" transform="translate(3 2)">
+          <circle cx="482" cy="78" r="44"/>
+          <polygon points="482,14 474,-4 490,-4" transform="rotate(0 482 78)"/>
+          <g>
+            <polygon points="476,22 482,2 488,22"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(30 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(60 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(90 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(120 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(150 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(180 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(210 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(240 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(270 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(300 482 78)"/>
+            <polygon points="476,22 482,2 488,22" transform="rotate(330 482 78)"/>
+          </g>
+          <path d="M66,222 L362,59 L367,68 L71,231 Z"/>
+          <path d="M40,268 C130,262 170,250 230,256 C300,262 340,246 420,250 C480,254 540,244 600,248 L600,300 L0,300 L0,270 Z" opacity=".9"/>
+        </g>
+        <g stroke="#F3ECDD" stroke-width="3" stroke-linecap="round" fill="none">
+          <path d="M455,70 q8,-12 22,-14"/>
+          <path d="M452,86 q10,-20 34,-22"/>
+          <path d="M462,100 q14,-16 36,-14"/>
+        </g>
+        <g fill="#1B1A17">
+          <path d="M0,300 L0,230 C120,230 200,120 300,110 C400,100 470,180 600,200 L600,300 Z"/>
+        </g>
+        <g stroke="#F3ECDD" stroke-width="3.2" stroke-linecap="round" fill="none">
+          <path d="M14,250 C110,250 190,150 300,138" stroke-dasharray="26 9 14 11"/>
+          <path d="M318,136 C400,130 470,200 590,220" stroke-dasharray="30 10 18 8"/>
+          <path d="M30,272 C140,268 220,176 300,168" stroke-dasharray="18 12 30 9"/>
+          <path d="M322,166 C410,162 480,226 590,244" stroke-dasharray="22 9 12 14"/>
+          <path d="M60,290 C160,286 240,206 310,198" stroke-dasharray="14 10 24 12"/>
+          <path d="M338,198 C420,196 490,256 584,270" stroke-dasharray="26 12 10 10"/>
+          <path d="M150,292 C220,262 270,232 330,228" stroke-dasharray="12 14 20 10"/>
+        </g>
+        <circle cx="207.3" cy="127.7" r="13" fill="#F3ECDD" stroke="#1B1A17" stroke-width="4.5"/>
+        <path d="M200,123 q4,-6 10,-5" stroke="#C2361F" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <g fill="none" stroke="#1B1A17" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M92,58 l10,8 l10,-8"/>
+          <path d="M128,40 l8,6 l8,-6"/>
+          <path d="M70,86 l7,5 l7,-5"/>
+        </g>
+      </svg>
+      <figcaption>Наклон холма под шаром — это и есть производная: насколько круто поднимается кривая именно в этой точке. Красная прямая, лишь касающаяся склона, — касательная.</figcaption>
+    </figure>
+
+    <div class="cols">
+      <p class="dropcap">Спидометр показывает скорость прямо сейчас. Но скорость — это путь, делённый на время, а за одно мгновение и путь, и время равны нулю. Ноль, делённый на ноль, ничего не сообщает. Математический анализ начинается с того, как обойти эту ловушку.</p>
+      <p>Возьмём промежуток не нулевой, а просто маленький: от <i class="v">x</i> до <i class="v">x</i> + <i class="v">h</i>. Средняя скорость изменения функции на нём — отношение приращений: насколько изменилось значение, делённое на то, насколько сдвинулся аргумент. На графике это наклон <em>секущей</em> — прямой, проведённой через две точки кривой.</p>
+      <p>Теперь уменьшаем <i class="v">h</i>. Вторая точка скользит к первой, секущая поворачивается и, если кривая гладкая, стремится к одному определённому положению — к <em>касательной</em>. Её наклон и называют производной функции в точке и обозначают <i class="v">f</i>′(<i class="v">x</i>).</p>
+      <p>Важно: мы ни разу не делим на ноль. Мы смотрим, к чему приближается честная дробь, когда знаменатель становится сколь угодно малым. Это приближение и есть предел — о нём рассказывает колонка справа.</p>
+    </div>
+
+    <div class="formula" aria-label="Определение производной">
+      <i class="v">f</i>′(<i class="v">x</i>) =
+      <span class="lim">lim<small><i class="v">h</i> → 0</small></span>
+      <span class="frac"><span><i class="v">f</i>(<i class="v">x</i> + <i class="v">h</i>) − <i class="v">f</i>(<i class="v">x</i>)</span><span><i class="v">h</i></span></span>
+    </div>
+
+    <div class="instrument" data-instrument="secant-tangent">
+  <div class="st-wrap">
+    <svg class="st-plot" viewBox="0 0 640 380" role="group" aria-label="График f(x) = x²: секущая через точки P и Q и касательная в точке P">
+      <defs><clipPath id="st-clip-secant-tangent"><rect x="40" y="12" width="586" height="338"></rect></clipPath></defs>
+      <g class="st-grid"></g>
+      <g clip-path="url(#st-clip-secant-tangent)">
+        <path class="st-tri"></path>
+        <path class="st-curve"></path>
+        <line class="st-secant"></line>
+        <line class="st-tangent"></line>
+      </g>
+      <text class="st-lab st-dx"></text>
+      <text class="st-lab st-dy"></text>
+      <text class="st-fname" x="56" y="34">f(x) = x²</text>
+      <g class="st-handle st-q" tabindex="0" role="slider" aria-label="Точка Q, абсцисса x + h" aria-valuemin="-1" aria-valuemax="4">
+        <circle class="st-hit" r="18"></circle>
+        <circle class="st-ring" r="12"></circle>
+        <circle class="st-dot" r="6"></circle>
+        <text class="st-name" y="-11">Q</text>
+      </g>
+      <g class="st-handle st-p" tabindex="0" role="slider" aria-label="Точка P, абсцисса x" aria-valuemin="-1" aria-valuemax="4">
+        <circle class="st-hit" r="16"></circle>
+        <circle class="st-ring" r="12"></circle>
+        <circle class="st-dot" r="6"></circle>
+        <text class="st-name" y="-11">P</text>
+      </g>
+    </svg>
+    <div class="st-board">
+      <div class="st-cell"><span class="st-k">x</span><span class="st-v" data-v="x"></span></div>
+      <div class="st-cell"><span class="st-k">h</span><span class="st-v" data-v="h"></span></div>
+      <div class="st-cell"><span class="st-k">наклон секущей</span><span class="st-v" data-v="m"></span></div>
+      <div class="st-cell"><span class="st-k">f′(x) = 2x</span><span class="st-v" data-v="d"></span></div>
+    </div>
+    <p class="st-status" aria-live="polite"></p>
+  </div>
+</div>
+<style>
+[data-instrument="secant-tangent"]{min-height:380px;padding:.75rem .9rem .9rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="secant-tangent"] .st-wrap{max-width:760px;margin:0 auto}
+[data-instrument="secant-tangent"] .st-plot{display:block;width:100%;height:auto;touch-action:pan-y pinch-zoom;user-select:none;-webkit-user-select:none}
+[data-instrument="secant-tangent"] .st-grid line{stroke:rgba(27,26,23,.12);stroke-width:1}
+[data-instrument="secant-tangent"] .st-grid line.st-axis{stroke:var(--ink);stroke-width:1}
+[data-instrument="secant-tangent"] .st-grid text{font-family:var(--mono);font-size:11px;fill:var(--ink-soft)}
+[data-instrument="secant-tangent"] .st-curve{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round}
+[data-instrument="secant-tangent"] .st-secant{stroke:var(--ink);stroke-width:1.8}
+[data-instrument="secant-tangent"] .st-tangent{stroke:var(--accent);stroke-width:2.2;stroke-dasharray:8 6}
+[data-instrument="secant-tangent"] .st-tri{fill:rgba(27,26,23,.07);stroke:var(--ink-soft);stroke-width:1.2}
+[data-instrument="secant-tangent"] .st-lab{font-family:var(--mono);font-size:12px;fill:var(--ink)}
+[data-instrument="secant-tangent"] .st-fname{font-family:var(--text);font-style:italic;font-size:16px;fill:var(--ink)}
+[data-instrument="secant-tangent"] .st-handle{outline:none;cursor:grab}
+[data-instrument="secant-tangent"] .st-handle.is-drag{cursor:grabbing}
+[data-instrument="secant-tangent"] .st-hit{fill:transparent;pointer-events:all;touch-action:none}
+[data-instrument="secant-tangent"] .st-q.merged .st-hit{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke}
+[data-instrument="secant-tangent"] .st-ring{fill:none;stroke:var(--accent);stroke-width:2;opacity:0;transition:opacity .15s}
+[data-instrument="secant-tangent"] .st-handle:focus .st-ring,[data-instrument="secant-tangent"] .st-handle.is-drag .st-ring{opacity:1}
+[data-instrument="secant-tangent"] .st-q.merged .st-ring{r:20px}
+[data-instrument="secant-tangent"] .st-p .st-dot{fill:var(--ink)}
+[data-instrument="secant-tangent"] .st-q .st-dot{fill:var(--paper);stroke:var(--ink);stroke-width:2}
+[data-instrument="secant-tangent"] .st-q.merged .st-dot,[data-instrument="secant-tangent"] .st-q.merged .st-name{display:none}
+[data-instrument="secant-tangent"] .st-name{font-family:var(--text);font-style:italic;font-weight:700;font-size:15px;fill:var(--ink);pointer-events:none}
+[data-instrument="secant-tangent"] .st-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:.4rem}
+[data-instrument="secant-tangent"] .st-cell{padding:.4rem .6rem .45rem;border-left:1px solid rgba(27,26,23,.35);min-width:0}
+[data-instrument="secant-tangent"] .st-cell:first-child{border-left:none}
+[data-instrument="secant-tangent"] .st-k{display:block;font-size:var(--s-1);color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="secant-tangent"] .st-v{display:block;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1.2rem;line-height:1.3;white-space:nowrap;min-width:7ch}
+[data-instrument="secant-tangent"] .st-v.match{color:var(--accent)}
+[data-instrument="secant-tangent"] .st-status{margin:.45rem 0 0;min-height:2.9em;font-size:var(--s-1);line-height:1.45;color:var(--ink-soft)}
+[data-instrument="secant-tangent"] .st-status.match{color:var(--accent)}
+@media (max-width:540px){
+  [data-instrument="secant-tangent"] .st-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-instrument="secant-tangent"] .st-cell:nth-child(3){border-left:none}
+  [data-instrument="secant-tangent"] .st-cell:nth-child(n+3){border-top:1px solid rgba(27,26,23,.35)}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="secant-tangent"] *{transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="secant-tangent"]');
+if(!root)return;
+const NS='http://www.w3.org/2000/svg';
+const svg=root.querySelector('svg');
+const W=640,H=380,L=40,R=14,T=12,B=30,X0=-1.25,X1=4.25,Y0=-1.5,Y1=17,XMIN=-1,XMAX=4;
+const PW=W-L-R,PH=H-T-B;
+const sx=x=>L+(x-X0)/(X1-X0)*PW;
+const sy=y=>T+(Y1-y)/(Y1-Y0)*PH;
+const f=x=>x*x;
+const r2=v=>Math.round(v*100)/100;
+const clamp=v=>Math.min(XMAX,Math.max(XMIN,v));
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function minus(s){return String(s).replace('-','−');}
+function fmt(v,d){const lim=0.5*Math.pow(10,-d);let s=Math.abs(v)<lim?(0).toFixed(d):v.toFixed(d);return s.replace('-','−').replace('.',',');}
+
+const grid=root.querySelector('.st-grid');
+for(let x=-1;x<=4;x++){
+  el('line',{x1:sx(x),x2:sx(x),y1:T,y2:T+PH,class:x===0?'st-axis':''},grid);
+  const t=el('text',{x:sx(x),y:sy(0)+16,'text-anchor':'middle'},grid);t.textContent=x===0?'0':minus(x);
+}
+for(let y=0;y<=16;y+=2){
+  el('line',{x1:L,x2:L+PW,y1:sy(y),y2:sy(y),class:y===0?'st-axis':''},grid);
+  if(y>0&&y%4===0){const t=el('text',{x:sx(0)-6,y:sy(y)+4,'text-anchor':'end'},grid);t.textContent=y;}
+}
+let d='';
+for(let i=0;i<=220;i++){const x=X0+i*(X1-X0)/220;d+=(i?'L':'M')+sx(x).toFixed(2)+','+sy(f(x)).toFixed(2);}
+root.querySelector('.st-curve').setAttribute('d',d);
+
+const secant=root.querySelector('.st-secant'),tangent=root.querySelector('.st-tangent'),tri=root.querySelector('.st-tri');
+const dxL=root.querySelector('.st-dx'),dyL=root.querySelector('.st-dy');
+const P=root.querySelector('.st-p'),Q=root.querySelector('.st-q');
+const Pn=P.querySelector('.st-name'),Qn=Q.querySelector('.st-name'),Qhit=Q.querySelector('.st-hit');
+const V={};root.querySelectorAll('.st-v').forEach(e=>V[e.dataset.v]=e);
+const status=root.querySelector('.st-status');
+
+const st={x:1,h:1.5,hWant:1.5};
+
+function setLine(line,x0,y0,m){
+  line.setAttribute('x1',sx(X0));line.setAttribute('y1',sy(y0+m*(X0-x0)));
+  line.setAttribute('x2',sx(X1));line.setAttribute('y2',sy(y0+m*(X1-x0)));
+}
+
+function render(){
+  const x=st.x,h=st.h,q=r2(x+h),fx=f(x),fq=f(q);
+  const merged=h===0;
+  const m=merged?2*x:(fq-fx)/h;
+  setLine(secant,x,fx,m);
+  setLine(tangent,x,fx,2*x);
+  if(merged){tri.setAttribute('d','');dxL.textContent='';dyL.textContent='';}
+  else{
+    tri.setAttribute('d','M'+sx(x)+','+sy(fx)+'H'+sx(q)+'V'+sy(fq)+'Z');
+    const pw=Math.abs(sx(q)-sx(x)),ph=Math.abs(sy(fq)-sy(fx));
+    dxL.textContent=pw>74?'Δx = '+fmt(h,2):pw>20?'Δx':'';
+    dxL.setAttribute('x',(sx(x)+sx(q))/2);
+    dxL.setAttribute('y',sy(fx)+(fq>=fx?16:-7));
+    dxL.setAttribute('text-anchor','middle');
+    const dy=fq-fx;
+    dyL.textContent=ph>22?'Δy = '+fmt(dy,2):ph>12?'Δy':'';
+    let right=h>0;
+    if(right&&sx(q)+84>W)right=false;
+    if(!right&&h<0&&sx(q)-84<L)right=true;
+    dyL.setAttribute('x',sx(q)+(right?7:-7));
+    dyL.setAttribute('text-anchor',right?'start':'end');
+    dyL.setAttribute('y',(sy(fx)+sy(fq))/2+4);
+  }
+  P.setAttribute('transform','translate('+sx(x)+','+sy(fx)+')');
+  Q.setAttribute('transform','translate('+sx(q)+','+sy(fq)+')');
+  const qRight=h>0;
+  Pn.setAttribute('text-anchor',qRight||merged?'end':'start');
+  Pn.setAttribute('x',qRight||merged?-10:10);
+  Pn.textContent=merged?'P = Q':'P';
+  Qn.setAttribute('text-anchor',qRight?'start':'end');
+  Qn.setAttribute('x',qRight?10:-10);
+  Q.classList.toggle('merged',merged);
+  Qhit.setAttribute('r',merged?22:18);
+
+  V.x.textContent=fmt(x,2);
+  V.h.textContent=fmt(h,2);
+  V.m.textContent=merged?'→ '+fmt(2*x,3):fmt(m,3);
+  V.d.textContent=fmt(2*x,3);
+  V.m.classList.toggle('match',merged);
+  V.d.classList.toggle('match',merged);
+  status.classList.toggle('match',merged);
+  if(merged){
+    status.textContent='h = 0: точка Q слилась с P, секущая легла на касательную — наклоны совпали: '+fmt(2*x,2)+'.';
+  }else{
+    status.textContent='(f(x + h) − f(x)) / h = '+fmt(fq-fx,4)+' / '+fmt(h,2)+' = '+fmt(m,3)+'; разница с 2x равна '+fmt(m-2*x,2)+', то есть ровно h.';
+  }
+  P.setAttribute('aria-valuenow',x);
+  P.setAttribute('aria-valuetext','x = '+fmt(x,2)+', f′(x) = '+fmt(2*x,2));
+  Q.setAttribute('aria-valuenow',q);
+  Q.setAttribute('aria-valuetext','x + h = '+fmt(q,2)+', h = '+fmt(h,2)+', наклон секущей '+(merged?'совпал с касательной':fmt(m,3)));
+}
+
+function setP(nx){
+  nx=clamp(r2(nx));
+  st.x=nx;
+  const q=clamp(r2(nx+st.hWant));
+  st.h=r2(q-nx);
+  render();
+}
+function setQ(nq,snap){
+  nq=clamp(r2(nq));
+  let h=r2(nq-st.x);
+  if(snap&&Math.abs(h)<0.03)h=0;
+  st.h=h;st.hWant=h;
+  render();
+}
+
+function toSvg(e){
+  const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+  const ctm=svg.getScreenCTM();if(!ctm)return null;
+  return pt.matrixTransform(ctm.inverse());
+}
+function nearestX(p){
+  let best=XMIN,bd=Infinity;
+  for(let i=0;i<=500;i++){
+    const x=XMIN+i*0.01,ddx=sx(x)-p.x,ddy=sy(f(x))-p.y,dd=ddx*ddx+ddy*ddy;
+    if(dd<bd){bd=dd;best=x;}
+  }
+  return r2(best);
+}
+
+function bindDrag(g,isP){
+  let id=null;
+  g.addEventListener('pointerdown',e=>{
+    if(e.button!==undefined&&e.button!==0)return;
+    e.preventDefault();
+    id=e.pointerId;
+    try{g.setPointerCapture(id);}catch(_){}
+    g.classList.add('is-drag');
+    try{g.focus({preventScroll:true});}catch(_){g.focus();}
+  });
+  g.addEventListener('pointermove',e=>{
+    if(id!==e.pointerId)return;
+    const p=toSvg(e);if(!p)return;
+    const x=nearestX(p);
+    if(isP)setP(x);else setQ(x,true);
+  });
+  const end=e=>{
+    if(id!==e.pointerId)return;
+    id=null;g.classList.remove('is-drag');
+    try{g.releasePointerCapture(e.pointerId);}catch(_){}
+  };
+  g.addEventListener('pointerup',end);
+  g.addEventListener('pointercancel',end);
+  g.addEventListener('keydown',e=>{
+    let dir=0;
+    if(e.key==='ArrowRight'||e.key==='ArrowUp')dir=1;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowDown')dir=-1;
+    if(!dir)return;
+    e.preventDefault();
+    if(isP){setP(st.x+dir*0.1);return;}
+    const h=st.h,a=Math.abs(h),away=h===0||Math.sign(h)===dir;
+    const step=(a>0.2+1e-9||(a>=0.2-1e-9&&away))?0.1:0.01;
+    setQ(st.x+h+dir*step,false);
+  });
+}
+bindDrag(P,true);
+bindDrag(Q,false);
+render();
+})();</script>
+
+    <div class="cols">
+      <p>Для <i class="v">f</i>(<i class="v">x</i>) = <i class="v">x</i>² это можно проверить вручную. Раскроем скобки: ((<i class="v">x</i> + <i class="v">h</i>)² − <i class="v">x</i>²) / <i class="v">h</i> = (2<i class="v">xh</i> + <i class="v">h</i>²) / <i class="v">h</i> = 2<i class="v">x</i> + <i class="v">h</i>. Когда <i class="v">h</i> стремится к нулю, остаётся 2<i class="v">x</i>.</p>
+      <p>Значит, в точке <i class="v">x</i> = 1 наклон касательной равен 2, а в точке <i class="v">x</i> = 3 — уже 6. Парабола становится круче по мере того, как поднимается, и производная сообщает это одним числом для каждой точки.</p>
+    </div>
+  </article>
+
+  <aside class="sidebar">
+    <section class="side-section">
+      <span class="label">Колонка · Предел</span>
+      <h3>Предел — это обещание подойти сколь угодно близко и больше не отходить</h3>
+      <p>Число <i class="v">L</i> называют пределом последовательности, если для любой, даже очень узкой полосы вокруг <i class="v">L</i> найдётся номер, начиная с которого все члены последовательности лежат внутри этой полосы. Полуширину полосы по традиции обозначают греческой буквой ε — «эпсилон».</p>
+      <p>Последовательность 1, ½, ⅓, ¼, … стремится к нулю: ни один её член не равен нулю, но для любого ε рано или поздно все члены оказываются ближе к нулю, чем на ε. А последовательность (1 + 1/<i class="v">n</i>)<sup><i class="v">n</i></sup> подбирается к числу <i class="v">e</i> ≈ 2,71828.</p>
+
+      <div class="instrument" data-instrument="limit-band">
+  <div class="lb">
+    <div class="lb-chips" role="group" aria-label="Последовательность">
+      <button type="button" class="lb-chip" data-seq="0" aria-pressed="true">1/<i>n</i> <span class="lb-l">L = 0</span></button>
+      <button type="button" class="lb-chip" data-seq="1" aria-pressed="false">(−1)<sup><i>n</i></sup>/<i>n</i> <span class="lb-l">L = 0</span></button>
+      <button type="button" class="lb-chip" data-seq="2" aria-pressed="false">(1 + 1/<i>n</i>)<sup><i>n</i></sup> <span class="lb-l">L = <i>e</i></span></button>
+    </div>
+    <div class="lb-plot">
+      <canvas aria-hidden="true"></canvas>
+      <div class="lb-edge" data-edge="1" role="slider" tabindex="0" aria-label="Верхний край полосы, ε"><span class="lb-grip"></span></div>
+      <div class="lb-edge" data-edge="-1" role="slider" tabindex="0" aria-label="Нижний край полосы, ε"><span class="lb-grip"></span></div>
+    </div>
+    <div class="lb-board" aria-live="polite">
+      <div class="lb-cell"><span class="lb-k">ε</span><span class="lb-v" data-out="eps">0,100</span></div>
+      <div class="lb-cell"><span class="lb-k">номер <i>N</i></span><span class="lb-v" data-out="n">11</span></div>
+      <div class="lb-cell"><span class="lb-k">вне полосы</span><span class="lb-v" data-out="out">10 из 60</span></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="limit-band"] .lb{padding:.7rem .75rem .75rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="limit-band"] .lb-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .55rem}
+[data-instrument="limit-band"] .lb-chip{font-family:var(--text);font-size:var(--s-1);line-height:1.3;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:999px;padding:.22rem .6rem;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
+[data-instrument="limit-band"] .lb-chip sup{font-size:.7em;line-height:0}
+[data-instrument="limit-band"] .lb-chip .lb-l{color:var(--ink-soft);margin-left:.2em}
+[data-instrument="limit-band"] .lb-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="limit-band"] .lb-chip[aria-pressed="true"] .lb-l{color:var(--paper-deep)}
+[data-instrument="limit-band"] .lb-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="limit-band"] .lb-plot{position:relative;height:210px;width:100%}
+[data-instrument="limit-band"] .lb-plot canvas{display:block;width:100%;height:100%;touch-action:pan-y}
+[data-instrument="limit-band"] .lb-edge{position:absolute;left:34px;right:0;height:24px;margin-top:-12px;top:0;touch-action:none;cursor:ns-resize;outline:none}
+[data-instrument="limit-band"] .lb-edge::before{content:"";position:absolute;left:0;right:22px;top:50%;height:2px;margin-top:-1px;background:var(--accent);opacity:0;transition:opacity .15s}
+[data-instrument="limit-band"] .lb-edge:hover::before,[data-instrument="limit-band"] .lb-edge.is-drag::before{opacity:.45}
+[data-instrument="limit-band"] .lb-edge:focus-visible::before{opacity:1}
+[data-instrument="limit-band"] .lb-grip{position:absolute;right:4px;top:50%;width:14px;height:18px;margin-top:-9px;background:var(--ink);border-radius:2px;box-shadow:inset 0 5px 0 -4px var(--paper),inset 0 -5px 0 -4px var(--paper)}
+[data-instrument="limit-band"] .lb-edge:focus-visible .lb-grip{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="limit-band"] .lb-edge.is-drag .lb-grip{background:var(--accent)}
+[data-instrument="limit-band"] .lb-edge.is-off{opacity:.35}
+[data-instrument="limit-band"] .lb-board{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin-top:.5rem}
+[data-instrument="limit-band"] .lb-cell{border-top:1px solid var(--ink);padding-top:.25rem;min-width:0}
+[data-instrument="limit-band"] .lb-k{display:block;font-size:var(--s-1);color:var(--ink-soft);line-height:1.3;white-space:nowrap}
+[data-instrument="limit-band"] .lb-v{display:block;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:1rem;line-height:1.4;height:1.4em;white-space:nowrap;overflow:hidden}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="limit-band"] .lb-chip,[data-instrument="limit-band"] .lb-edge::before{transition:none}
+}
+</style>
+<script>(function(){
+  const root = document.querySelector('[data-instrument="limit-band"]');
+  if(!root) return;
+  const plot = root.querySelector('.lb-plot');
+  const cv = plot.querySelector('canvas');
+  const ctx = cv.getContext('2d');
+  const edges = Array.from(root.querySelectorAll('.lb-edge'));
+  const chips = Array.from(root.querySelectorAll('.lb-chip'));
+  const outEps = root.querySelector('[data-out="eps"]');
+  const outN = root.querySelector('[data-out="n"]');
+  const outOut = root.querySelector('[data-out="out"]');
+
+  const SEQ = [
+    {a:n=>1/n, L:0, Lname:'0', y0:-0.22, y1:1.08, epsMax:1.05, eps0:0.1, ticks:[0,0.5,1]},
+    {a:n=>(n%2?-1:1)/n, L:0, Lname:'0', y0:-1.08, y1:0.62, epsMax:1.05, eps0:0.1, ticks:[-1,-0.5,0,0.5]},
+    {a:n=>Math.exp(n*Math.log1p(1/n)), L:Math.E, Lname:'e', y0:1.92, y1:2.84, epsMax:0.78, eps0:0.05, ticks:[2,2.25,2.5]}
+  ];
+  const EPS_MIN = 0.005;
+  const M = {l:34, r:24, t:12, b:20};
+  let seq = 0, eps = SEQ[0].eps0, W = 0, H = 0, dpr = 1;
+
+  const fmt = (x,d) => x.toFixed(d).replace('.',',').replace('-','−');
+  const dist = n => Math.abs(SEQ[seq].a(n) - SEQ[seq].L);
+  function findN(e){
+    if(dist(1) < e) return 1;
+    let hi = 2;
+    while(dist(hi) >= e && hi < 1e8) hi *= 2;
+    let lo = hi/2;
+    while(hi - lo > 1){ const m = Math.floor((lo+hi)/2); if(dist(m) < e) hi = m; else lo = m; }
+    return hi;
+  }
+  const pw = () => W - M.l - M.r;
+  const ph = () => H - M.t - M.b;
+  const px = n => M.l + (n-0.5)/60*pw();
+  const py = y => { const s = SEQ[seq]; return M.t + (s.y1 - y)/(s.y1 - s.y0)*ph(); };
+  const yFromPx = p => { const s = SEQ[seq]; return s.y1 - (p - M.t)/ph()*(s.y1 - s.y0); };
+
+  function css(name, fb){ return getComputedStyle(root).getPropertyValue(name).trim() || fb; }
+
+  function resize(){
+    const r = plot.getBoundingClientRect();
+    W = Math.max(200, r.width); H = Math.max(120, r.height);
+    dpr = window.devicePixelRatio || 1;
+    cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+    render();
+  }
+
+  function draw(N){
+    const s = SEQ[seq];
+    const ink = css('--ink','#1B1A17'), soft = css('--ink-soft','#5E584D'), acc = css('--accent','#C2361F'), paper = css('--paper','#F3ECDD');
+    const mono = css('--mono','monospace');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,W,H);
+    const x0 = M.l, x1 = W - M.r, yT = M.t, yB = H - M.b;
+
+    ctx.save();
+    ctx.beginPath(); ctx.rect(x0, yT, x1-x0, yB-yT); ctx.clip();
+    const bt = py(s.L + eps), bb = py(s.L - eps);
+    ctx.fillStyle = paper; ctx.fillRect(x0, bt, x1-x0, bb-bt);
+    ctx.strokeStyle = soft; ctx.globalAlpha = .25; ctx.lineWidth = 1;
+    s.ticks.forEach(t => { const y = Math.round(py(t))+.5; ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke(); });
+    ctx.globalAlpha = 1;
+    ctx.setLineDash([4,4]); ctx.strokeStyle = soft;
+    const yl = Math.round(py(s.L))+.5; ctx.beginPath(); ctx.moveTo(x0,yl); ctx.lineTo(x1,yl); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.strokeStyle = ink; ctx.lineWidth = 1.25;
+    [bt,bb].forEach(y => { ctx.beginPath(); ctx.moveTo(x0,y); ctx.lineTo(x1,y); ctx.stroke(); });
+    ctx.restore();
+
+    ctx.strokeStyle = ink; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(x0+.5, yT); ctx.lineTo(x0+.5, yB+.5); ctx.lineTo(x1, yB+.5); ctx.stroke();
+
+    ctx.font = '11px ' + mono; ctx.textBaseline = 'middle'; ctx.textAlign = 'right';
+    s.ticks.forEach(t => {
+      if(Math.abs(t - s.L) < 1e-9) return;
+      ctx.fillStyle = soft; ctx.fillText(fmt(t, t%1 ? (Math.abs(t*4%1)>1e-9?2:1) : 0), x0-5, py(t));
+    });
+    ctx.fillStyle = ink; ctx.font = (s.Lname==='e' ? 'italic ' : '') + 'bold 12px ' + (s.Lname==='e' ? css('--text','serif') : mono);
+    ctx.fillText(s.Lname, x0-5, py(s.L));
+
+    ctx.font = '11px ' + mono; ctx.textAlign = 'center'; ctx.textBaseline = 'top'; ctx.fillStyle = soft;
+    [1,10,20,30,40,50,60].forEach(n => {
+      const x = px(n); ctx.fillText(String(n), x, yB+4);
+      ctx.beginPath(); ctx.moveTo(x+.5, yB); ctx.lineTo(x+.5, yB+3); ctx.strokeStyle = soft; ctx.stroke();
+    });
+
+    ctx.font = 'italic 12px ' + css('--text','serif'); ctx.textBaseline = 'top';
+    if(N <= 60){
+      const x = Math.round(px(N))+.5;
+      ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, yT); ctx.lineTo(x, yB); ctx.stroke();
+      ctx.fillStyle = ink;
+      if(x > x1 - 46){ ctx.textAlign = 'right'; ctx.fillText('N', x-4, yT); }
+      else { ctx.textAlign = 'left'; ctx.fillText('N', x+4, yT); }
+    } else {
+      ctx.fillStyle = acc; ctx.textAlign = 'right';
+      ctx.fillText('N →', x1-2, yT);
+      ctx.strokeStyle = acc; ctx.lineWidth = 1.5; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(x1-.5, yT+16); ctx.lineTo(x1-.5, yB); ctx.stroke(); ctx.setLineDash([]);
+    }
+
+    for(let n=1; n<=60; n++){
+      const out = dist(n) >= eps;
+      ctx.fillStyle = out ? acc : ink;
+      ctx.beginPath(); ctx.arc(px(n), py(s.a(n)), out ? 2.7 : 2.2, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  function render(){
+    const s = SEQ[seq];
+    const N = findN(eps);
+    let out = 0; for(let n=1;n<=60;n++) if(dist(n) >= eps) out++;
+    outEps.textContent = fmt(eps,3);
+    outN.textContent = String(N);
+    outOut.textContent = out + ' из 60';
+    if(W) draw(N);
+    edges.forEach(el => {
+      const sign = +el.dataset.edge;
+      const y = py(s.L + sign*eps);
+      const yc = Math.min(H - M.b, Math.max(M.t, y));
+      el.style.top = yc + 'px';
+      el.classList.toggle('is-off', y < M.t - .5 || y > H - M.b + .5);
+      el.setAttribute('aria-valuemin', EPS_MIN);
+      el.setAttribute('aria-valuemax', s.epsMax);
+      el.setAttribute('aria-valuenow', eps.toFixed(3));
+      el.setAttribute('aria-valuetext', 'ε = ' + fmt(eps,3) + ', N = ' + N);
+    });
+  }
+
+  function setEps(v){
+    const s = SEQ[seq];
+    v = Math.min(s.epsMax, Math.max(EPS_MIN, v));
+    eps = Math.round(v*1000)/1000;
+    render();
+  }
+  function widen(f){ const t = Math.round(eps*f*1000)/1000; setEps(t > eps ? t : eps + 0.001); }
+  function narrow(f){ const t = Math.round(eps/f*1000)/1000; setEps(t < eps ? t : eps - 0.001); }
+
+  edges.forEach(el => {
+    const sign = +el.dataset.edge;
+    let drag = false;
+    const move = e => {
+      const r = plot.getBoundingClientRect();
+      setEps(Math.abs(yFromPx(e.clientY - r.top) - SEQ[seq].L));
+    };
+    el.addEventListener('pointerdown', e => {
+      drag = true; el.classList.add('is-drag');
+      try{ el.setPointerCapture(e.pointerId); }catch(_){}
+      el.focus({preventScroll:true});
+      move(e); e.preventDefault();
+    });
+    el.addEventListener('pointermove', e => { if(drag) move(e); });
+    const end = () => { drag = false; el.classList.remove('is-drag'); };
+    el.addEventListener('pointerup', end);
+    el.addEventListener('pointercancel', end);
+    el.addEventListener('keydown', e => {
+      const f = e.shiftKey ? 1.5 : 1.1;
+      let h = true;
+      switch(e.key){
+        case 'ArrowUp': sign > 0 ? widen(f) : narrow(f); break;
+        case 'ArrowDown': sign > 0 ? narrow(f) : widen(f); break;
+        case 'ArrowRight': widen(f); break;
+        case 'ArrowLeft': narrow(f); break;
+        case 'PageUp': widen(1.6); break;
+        case 'PageDown': narrow(1.6); break;
+        case 'Home': setEps(EPS_MIN); break;
+        case 'End': setEps(SEQ[seq].epsMax); break;
+        default: h = false;
+      }
+      if(h) e.preventDefault();
+    });
+  });
+
+  chips.forEach(c => c.addEventListener('click', () => {
+    seq = +c.dataset.seq;
+    chips.forEach(o => o.setAttribute('aria-pressed', o === c ? 'true' : 'false'));
+    eps = SEQ[seq].eps0;
+    render();
+  }));
+
+  if(window.ResizeObserver){ new ResizeObserver(resize).observe(plot); }
+  else { window.addEventListener('resize', resize); }
+  resize();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+})();</script>
+    </section>
+
+    <section class="side-section">
+      <span class="label">Из истории</span>
+      <h3>Двое изобрели одно исчисление — и спорили о первенстве до конца жизни</h3>
+      <figure>
+        <svg viewBox="0 0 300 220" role="img" aria-label="Линогравюра: два скрещённых гусиных пера, чёрное и красное, над чернильницей.">
+          <rect width="300" height="220" fill="#F3ECDD"/>
+          <g transform="translate(118 104) rotate(-28)">
+            <path d="M0,-100 C30,-80 34,-20 18,40 L4,62 L-4,62 L-18,40 C-34,-20 -30,-80 0,-100 Z" fill="#1B1A17"/>
+            <g stroke="#F3ECDD" stroke-width="3" stroke-linecap="round">
+              <line x1="3" y1="-74" x2="16" y2="-86"/><line x1="-3" y1="-74" x2="-16" y2="-86"/>
+              <line x1="3" y1="-58" x2="22" y2="-74"/><line x1="-3" y1="-58" x2="-22" y2="-74"/>
+              <line x1="3" y1="-42" x2="24" y2="-58"/><line x1="-3" y1="-42" x2="-24" y2="-58"/>
+              <line x1="3" y1="-26" x2="24" y2="-42"/><line x1="-3" y1="-26" x2="-24" y2="-42"/>
+              <line x1="3" y1="-10" x2="22" y2="-26"/><line x1="-3" y1="-10" x2="-22" y2="-26"/>
+              <line x1="3" y1="6" x2="20" y2="-8"/><line x1="-3" y1="6" x2="-20" y2="-8"/>
+              <line x1="3" y1="22" x2="16" y2="10"/><line x1="-3" y1="22" x2="-16" y2="10"/>
+              <line x1="0" y1="-92" x2="0" y2="58" stroke-width="2.2"/>
+            </g>
+            <path d="M-3,62 L3,62 L2,96 L0,104 L-2,96 Z" fill="#1B1A17"/>
+          </g>
+          <g class="ink-red" transform="translate(185 106) rotate(28)">
+            <path d="M0,-100 C30,-80 34,-20 18,40 L4,62 L-4,62 L-18,40 C-34,-20 -30,-80 0,-100 Z" fill="#C2361F"/>
+            <g stroke="#F3ECDD" stroke-width="3" stroke-linecap="round">
+              <line x1="3" y1="-74" x2="16" y2="-86"/><line x1="-3" y1="-74" x2="-16" y2="-86"/>
+              <line x1="3" y1="-58" x2="22" y2="-74"/><line x1="-3" y1="-58" x2="-22" y2="-74"/>
+              <line x1="3" y1="-42" x2="24" y2="-58"/><line x1="-3" y1="-42" x2="-24" y2="-58"/>
+              <line x1="3" y1="-26" x2="24" y2="-42"/><line x1="-3" y1="-26" x2="-24" y2="-42"/>
+              <line x1="3" y1="-10" x2="22" y2="-26"/><line x1="-3" y1="-10" x2="-22" y2="-26"/>
+              <line x1="3" y1="6" x2="20" y2="-8"/><line x1="-3" y1="6" x2="-20" y2="-8"/>
+              <line x1="3" y1="22" x2="16" y2="10"/><line x1="-3" y1="22" x2="-16" y2="10"/>
+              <line x1="0" y1="-92" x2="0" y2="58" stroke-width="2.2"/>
+            </g>
+            <path d="M-3,62 L3,62 L2,96 L0,104 L-2,96 Z" fill="#C2361F"/>
+          </g>
+          <g>
+            <path d="M112,214 L114,176 C114,168 124,164 132,164 L168,164 C176,164 186,168 186,176 L188,214 Z" fill="#1B1A17"/>
+            <rect x="130" y="152" width="40" height="14" fill="#1B1A17"/>
+            <rect x="124" y="148" width="52" height="7" fill="#1B1A17"/>
+            <g stroke="#F3ECDD" stroke-width="3" stroke-linecap="round">
+              <line x1="126" y1="182" x2="126" y2="204"/>
+              <line x1="136" y1="186" x2="136" y2="206"/>
+              <line x1="172" y1="182" x2="172" y2="200"/>
+            </g>
+          </g>
+        </svg>
+        <figcaption>Перо Ньютона и перо Лейбница: одна идея, две записи.</figcaption>
+      </figure>
+      <p>В конце XVII века Исаак Ньютон и Готфрид Вильгельм Лейбниц независимо друг от друга построили исчисление бесконечно малых. Ньютон говорил о «флюксиях» — скоростях изменения величин. Лейбниц придумал обозначения, которыми пользуются до сих пор: <i class="v">dy</i>/<i class="v">dx</i> и знак интеграла ∫ — вытянутую букву S от латинского <em>summa</em>.</p>
+      <p>Строгое определение предела через ε появилось позже, в XIX веке, в работах Коши и Вейерштрасса. До этого анализ полтора столетия успешно работал, опираясь на интуицию.</p>
+    </section>
+
+    <section class="side-section">
+      <div class="box inked">
+        <h3>Словарь номера</h3>
+        <dl class="gloss">
+          <dt>Функция</dt>
+          <dd>Правило, по которому каждому числу <i class="v">x</i> сопоставлено ровно одно число <i class="v">f</i>(<i class="v">x</i>).</dd>
+          <dt>Приращение</dt>
+          <dd>Разность двух значений: Δ<i class="v">x</i> для аргумента, Δ<i class="v">y</i> для функции.</dd>
+          <dt>Предел</dt>
+          <dd>Число, к которому значения подходят сколь угодно близко.</dd>
+          <dt>Производная</dt>
+          <dd>Мгновенная скорость изменения функции; наклон касательной.</dd>
+          <dt>Интеграл</dt>
+          <dd>Накопленная сумма; площадь под графиком с учётом знака.</dd>
+          <dt>Первообразная</dt>
+          <dd>Функция <i class="v">F</i>, производная которой равна <i class="v">f</i>.</dd>
+        </dl>
+      </div>
+    </section>
+  </aside>
+</div>
+
+<div class="pair">
+  <article>
+    <span class="label">Разворот · Производная как функция</span>
+    <h2>Наклон в каждой точке складывается в новую кривую — график производной</h2>
+    <p class="measure">Если вычислить наклон касательной в каждой точке графика, получится новая функция — <i class="v">f</i>′. Там, где исходная кривая поднимается, производная положительна; где опускается — отрицательна; на вершинах и во впадинах касательная горизонтальна, и производная обращается в ноль. Именно так ищут наибольшие и наименьшие значения: приравнивают производную к нулю.</p>
+
+    <div class="instrument" data-instrument="derivative-trace">
+  <div class="dt-wrap">
+    <div class="dt-head">
+      <div class="dt-chips" role="group" aria-label="Функция">
+        <button type="button" class="dt-chip" data-fn="sq" aria-pressed="false"><i>x</i>²</button>
+        <button type="button" class="dt-chip" data-fn="sin" aria-pressed="false">sin <i>x</i></button>
+        <button type="button" class="dt-chip" data-fn="cub" aria-pressed="true"><i>x</i>³ − 3<i>x</i></button>
+      </div>
+      <div class="dt-board" aria-live="polite">
+        <div class="dt-cell"><span class="dt-k"><i>x</i></span><span class="dt-v" data-out="x">0,000</span></div>
+        <div class="dt-cell"><span class="dt-k"><i>f</i>(<i>x</i>)</span><span class="dt-v" data-out="f">0,000</span></div>
+        <div class="dt-cell"><span class="dt-k"><i>f</i>′(<i>x</i>)</span><span class="dt-v dt-acc" data-out="d">0,000</span></div>
+        <div class="dt-cell dt-state"><span class="dt-k">кривая</span><span class="dt-s" data-out="s">f растёт</span></div>
+      </div>
+    </div>
+    <div class="dt-stage">
+      <canvas class="dt-canvas" tabindex="0" role="slider" aria-label="Точка на графике функции" aria-valuemin="-2.2" aria-valuemax="2.2" aria-valuenow="0"></canvas>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="derivative-trace"] .dt-wrap{padding:.8rem .9rem .9rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="derivative-trace"] .dt-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem 1rem;margin-bottom:.7rem}
+[data-instrument="derivative-trace"] .dt-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+[data-instrument="derivative-trace"] .dt-chip{font-family:var(--text);font-size:1rem;line-height:1.2;padding:.3rem .75rem;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:0;cursor:pointer}
+[data-instrument="derivative-trace"] .dt-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="derivative-trace"] .dt-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="derivative-trace"] .dt-board{display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--ink);background:var(--paper)}
+[data-instrument="derivative-trace"] .dt-cell{padding:.25rem .6rem .3rem;border-left:1px solid var(--ink)}
+[data-instrument="derivative-trace"] .dt-cell:first-child{border-left:none}
+[data-instrument="derivative-trace"] .dt-k{display:block;font-size:var(--s-1);color:var(--ink-soft);line-height:1.2}
+[data-instrument="derivative-trace"] .dt-v{display:block;width:7.2ch;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:1rem}
+[data-instrument="derivative-trace"] .dt-acc{color:var(--accent)}
+[data-instrument="derivative-trace"] .dt-s{display:block;width:10.5em;white-space:nowrap;font-style:italic;font-size:.95rem;line-height:1.55}
+[data-instrument="derivative-trace"] .dt-s.dt-hot{color:var(--accent);font-style:normal;font-weight:700}
+[data-instrument="derivative-trace"] .dt-stage{position:relative;width:100%}
+[data-instrument="derivative-trace"] .dt-canvas{display:block;width:100%;height:380px;touch-action:pan-y;cursor:grab;-webkit-tap-highlight-color:transparent}
+[data-instrument="derivative-trace"] .dt-canvas:active{cursor:grabbing}
+[data-instrument="derivative-trace"] .dt-canvas:focus{outline:none}
+[data-instrument="derivative-trace"] .dt-canvas:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:560px){
+  [data-instrument="derivative-trace"] .dt-board{grid-template-columns:repeat(3,1fr);width:100%}
+  [data-instrument="derivative-trace"] .dt-state{grid-column:1/-1;border-left:none;border-top:1px solid var(--ink)}
+  [data-instrument="derivative-trace"] .dt-v{width:auto;min-width:7.2ch}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="derivative-trace"]');
+if(!root)return;
+const cv=root.querySelector('.dt-canvas'),ctx=cv.getContext('2d'),stage=root.querySelector('.dt-stage');
+const out={};root.querySelectorAll('[data-out]').forEach(e=>out[e.dataset.out]=e);
+const chips=[].slice.call(root.querySelectorAll('.dt-chip'));
+const cs=getComputedStyle(root);
+const v=(n,d)=>(cs.getPropertyValue(n)||'').trim()||d;
+const C={paper:v('--paper','#F3ECDD'),ink:v('--ink','#1B1A17'),soft:v('--ink-soft','#5E584D'),accent:v('--accent','#C2361F')};
+const MONO=v('--mono','monospace'),TEXT=v('--text','serif');
+const P=Math.PI;
+const FN={
+  sq:{f:t=>t*t,d:t=>2*t,dd:()=>2,a:-2.5,b:2.5,start:-1.2,crit:[0],
+      ticks:[[-2,'−2'],[-1,'−1'],[0,'0'],[1,'1'],[2,'2']],fl:'f(x) = x²',dl:'f′(x) = 2x'},
+  sin:{f:Math.sin,d:Math.cos,dd:t=>-Math.sin(t),a:-6.6,b:6.6,start:-2.4,crit:[-1.5*P,-.5*P,.5*P,1.5*P],
+      ticks:[[-2*P,'−2π'],[-P,'−π'],[0,'0'],[P,'π'],[2*P,'2π']],fl:'f(x) = sin x',dl:'f′(x) = cos x'},
+  cub:{f:t=>t*t*t-3*t,d:t=>3*t*t-3,dd:t=>6*t,a:-2.2,b:2.2,start:-1.6,crit:[-1,1],
+      ticks:[[-2,'−2'],[-1,'−1'],[0,'0'],[1,'1'],[2,'2']],fl:'f(x) = x³ − 3x',dl:'f′(x) = 3x² − 3'}
+};
+function range(g,a,b){let lo=Infinity,hi=-Infinity;for(let i=0;i<=400;i++){const y=g(a+(b-a)*i/400);if(y<lo)lo=y;if(y>hi)hi=y;}lo=Math.min(lo,0);hi=Math.max(hi,0);const p=(hi-lo)*.12||1;return[lo-p,hi+p];}
+Object.keys(FN).forEach(k=>{const F=FN[k];F.r1=range(F.f,F.a,F.b);F.r2=range(F.d,F.a,F.b);});
+const M=320,vis=new Uint8Array(M);
+let fn,x=0,dragging=false,touched=false,played=false,anim=null,W=0,H=0,dpr=1;
+const G={};
+const reduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+const X=t=>G.l+(t-fn.a)/(fn.b-fn.a)*(W-G.l-G.r);
+const IX=p=>fn.a+(p-G.l)/(W-G.l-G.r)*(fn.b-fn.a);
+const Y1=y=>G.t+(fn.r1[1]-y)/(fn.r1[1]-fn.r1[0])*G.h1;
+const Y2=y=>G.y2+(fn.r2[1]-y)/(fn.r2[1]-fn.r2[0])*G.h2;
+const clamp=(t,a,b)=>Math.max(a,Math.min(b,t));
+function fmt(n){if(Math.abs(n)<.0005)n=0;return n.toFixed(3).replace('.',',').replace('-','−');}
+function tickLab(n){return String(n).replace('.',',').replace('-','−');}
+function niceTicks(lo,hi,n){const raw=(hi-lo)/n,m=Math.pow(10,Math.floor(Math.log10(raw))),q=raw/m,s=(q<1.5?1:q<3?2:q<7?5:10)*m,r=[];for(let t=Math.ceil(lo/s)*s;t<=hi+1e-9;t+=s)r.push(Math.abs(t)<1e-9?0:+t.toFixed(6));return r;}
+function isCrit(){return fn.crit.some(c=>Math.abs(x-c)<1e-9);}
+function bin(t){return clamp(Math.floor((t-fn.a)/(fn.b-fn.a)*M),0,M-1);}
+function markRange(p,q){if(p>q){const s=p;p=q;q=s;}for(let i=bin(p);i<=bin(q);i++)vis[i]=1;}
+function crossCrit(from,to){
+  if(to>from){for(const c of fn.crit)if(c>from+1e-9&&c<=to)return c;}
+  else if(to<from){for(let i=fn.crit.length-1;i>=0;i--){const c=fn.crit[i];if(c<from-1e-9&&c>=to)return c;}}
+  return to;
+}
+function layout(){G.l=46;G.r=12;G.t=6;G.xl=24;const gap=16,avail=H-G.t-gap-G.xl;G.h1=Math.round(avail*.56);G.y2=G.t+G.h1+gap;G.h2=H-G.xl-G.y2;}
+function resize(){W=stage.clientWidth;if(!W)return;H=W<520?330:380;cv.style.height=H+'px';dpr=window.devicePixelRatio||1;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);layout();draw();}
+function plot(g,Yf,from,to){const n=Math.max(2,Math.ceil((X(to)-X(from))/2));ctx.beginPath();for(let i=0;i<=n;i++){const t=from+(to-from)*i/n,px=X(t),py=Yf(g(t));i?ctx.lineTo(px,py):ctx.moveTo(px,py);}ctx.stroke();}
+function panel(pY,ph,r,Yf){
+  const pw=W-G.l-G.r;
+  ctx.fillStyle=C.paper;ctx.fillRect(G.l,pY,pw,ph);
+  ctx.save();ctx.beginPath();ctx.rect(G.l,pY,pw,ph);ctx.clip();
+  ctx.lineWidth=1;ctx.strokeStyle=C.ink;
+  const yt=niceTicks(r[0],r[1],ph<140?3:4);
+  ctx.globalAlpha=.09;
+  yt.forEach(t=>{const y=Math.round(Yf(t))+.5;ctx.beginPath();ctx.moveTo(G.l,y);ctx.lineTo(G.l+pw,y);ctx.stroke();});
+  fn.ticks.forEach(tk=>{const px=Math.round(X(tk[0]))+.5;ctx.beginPath();ctx.moveTo(px,pY);ctx.lineTo(px,pY+ph);ctx.stroke();});
+  ctx.globalAlpha=.5;
+  const y0=Math.round(Yf(0))+.5;ctx.beginPath();ctx.moveTo(G.l,y0);ctx.lineTo(G.l+pw,y0);ctx.stroke();
+  ctx.globalAlpha=.3;
+  const x0=Math.round(X(0))+.5;ctx.beginPath();ctx.moveTo(x0,pY);ctx.lineTo(x0,pY+ph);ctx.stroke();
+  ctx.restore();
+  ctx.globalAlpha=1;ctx.strokeStyle=C.ink;ctx.lineWidth=1;ctx.strokeRect(G.l+.5,pY+.5,pw-1,ph-1);
+  ctx.fillStyle=C.soft;ctx.font='11px '+MONO;ctx.textAlign='right';ctx.textBaseline='middle';
+  yt.forEach(t=>{const y=Yf(t);if(y>pY+6&&y<pY+ph-6)ctx.fillText(tickLab(t),G.l-6,y);});
+}
+function tag(text,g,Yf,pY,ph,color){
+  ctx.font='italic 15px '+TEXT;ctx.textAlign='left';ctx.textBaseline='alphabetic';
+  const w=ctx.measureText(text).width,pw=W-G.l-G.r;
+  const cands=[[G.l+10,pY+8],[G.l+pw-w-10,pY+8],[G.l+10,pY+ph-28],[G.l+pw-w-10,pY+ph-28]];
+  let best=cands[0],bd=-1;
+  cands.forEach(c=>{let md=Infinity;for(let k=0;k<=8;k++){const px=c[0]-4+(w+8)*k/8,d=Math.abs(Yf(g(IX(px)))-(c[1]+10));if(d<md)md=d;}if(md>bd){bd=md;best=c;}});
+  ctx.globalAlpha=.9;ctx.fillStyle=C.paper;ctx.fillRect(best[0]-4,best[1],w+8,20);ctx.globalAlpha=1;
+  ctx.fillStyle=color;ctx.fillText(text,best[0],best[1]+15);
+}
+function ring(px,py,r){ctx.beginPath();ctx.arc(px,py,r,0,2*P);ctx.strokeStyle=C.accent;ctx.lineWidth=2;ctx.stroke();}
+function dot(px,py,r,fill){ctx.beginPath();ctx.arc(px,py,r,0,2*P);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=C.paper;ctx.lineWidth=2;ctx.stroke();}
+function draw(){
+  if(!W||!fn)return;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  const pw=W-G.l-G.r,crit=isCrit(),fx=fn.f(x),dx=crit?0:fn.d(x),px=X(x),py1=Y1(fx),py2=Y2(dx);
+  panel(G.t,G.h1,fn.r1,Y1);panel(G.y2,G.h2,fn.r2,Y2);
+  ctx.fillStyle=C.soft;ctx.font='11px '+MONO;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  fn.ticks.forEach(tk=>ctx.fillText(tk[1],X(tk[0]),G.y2+G.h2+16));
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.save();ctx.beginPath();ctx.rect(G.l,G.t,pw,G.h1);ctx.clip();
+  ctx.strokeStyle=C.ink;ctx.lineWidth=2;plot(fn.f,Y1,fn.a,fn.b);
+  ctx.strokeStyle=C.accent;ctx.lineWidth=2;ctx.beginPath();
+  ctx.moveTo(X(fn.a),Y1(fx+dx*(fn.a-x)));ctx.lineTo(X(fn.b),Y1(fx+dx*(fn.b-x)));ctx.stroke();
+  ctx.restore();
+  ctx.save();ctx.beginPath();ctx.rect(G.l,G.y2,pw,G.h2);ctx.clip();
+  ctx.strokeStyle=C.ink;ctx.globalAlpha=.22;ctx.lineWidth=2;plot(fn.d,Y2,fn.a,fn.b);ctx.globalAlpha=1;
+  ctx.lineWidth=2.6;const w=(fn.b-fn.a)/M;
+  for(let i=0;i<M;){if(!vis[i]){i++;continue;}let j=i;while(j+1<M&&vis[j+1])j++;plot(fn.d,Y2,fn.a+i*w,Math.min(fn.b,fn.a+(j+1)*w));i=j+1;}
+  ctx.restore();
+  ctx.save();ctx.setLineDash([3,4]);ctx.strokeStyle=C.ink;ctx.globalAlpha=.4;ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(px,clamp(py1,G.t,G.t+G.h1));ctx.lineTo(px,clamp(py2,G.y2,G.y2+G.h2));ctx.stroke();ctx.restore();
+  tag(fn.fl,fn.f,Y1,G.t,G.h1,C.ink);tag(fn.dl,fn.d,Y2,G.y2,G.h2,C.ink);
+  if(crit){ring(px,py1,11);ring(px,py2,11);}
+  if(document.activeElement===cv){ctx.save();ctx.setLineDash([2,3]);ctx.beginPath();ctx.arc(px,py1,15,0,2*P);ctx.strokeStyle=C.soft;ctx.lineWidth=1;ctx.stroke();ctx.restore();}
+  dot(px,py1,6,C.ink);dot(px,py2,5,C.accent);
+}
+function refresh(){
+  const crit=isCrit(),fx=fn.f(x),dx=crit?0:fn.d(x);
+  out.x.textContent=fmt(x);out.f.textContent=fmt(fx);out.d.textContent=fmt(dx);
+  let s;
+  if(crit)s=(fn.dd(x)>0?'впадина':'вершина')+' · f′ = 0';
+  else s=dx>0?'f растёт':'f убывает';
+  out.s.textContent=s;out.s.classList.toggle('dt-hot',crit);
+  cv.setAttribute('aria-valuenow',x.toFixed(3));
+  cv.setAttribute('aria-valuetext','x = '+fmt(x)+', f(x) = '+fmt(fx)+', f′(x) = '+fmt(dx)+', '+s);
+  draw();
+}
+function setX(nx,snap){
+  nx=clamp(nx,fn.a,fn.b);
+  if(snap&&W)for(const c of fn.crit)if(Math.abs(X(nx)-X(c))<7){nx=c;break;}
+  markRange(x,nx);x=nx;refresh();
+}
+function touch(){touched=true;if(anim){cancelAnimationFrame(anim);anim=null;}}
+function selectFn(k){
+  fn=FN[k];chips.forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.fn===k)));
+  vis.fill(0);x=fn.start;markRange(fn.a,x);
+  cv.setAttribute('aria-valuemin',fn.a);cv.setAttribute('aria-valuemax',fn.b);
+  refresh();
+}
+chips.forEach(c=>c.addEventListener('click',()=>{touch();selectFn(c.dataset.fn);}));
+function fromEvent(e){const r=cv.getBoundingClientRect();setX(IX(e.clientX-r.left),true);}
+cv.addEventListener('pointerdown',e=>{touch();dragging=true;try{cv.setPointerCapture(e.pointerId);}catch(_){}cv.focus({preventScroll:true});fromEvent(e);});
+cv.addEventListener('pointermove',e=>{if(dragging)fromEvent(e);});
+const end=()=>{dragging=false;};
+cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+cv.addEventListener('keydown',e=>{
+  const st=(fn.b-fn.a)/120*(e.shiftKey?10:1);let nx=null;
+  switch(e.key){case'ArrowRight':case'ArrowUp':nx=x+st;break;case'ArrowLeft':case'ArrowDown':nx=x-st;break;case'Home':nx=fn.a;break;case'End':nx=fn.b;break;}
+  if(nx===null)return;e.preventDefault();touch();
+  if(e.key.indexOf('Arrow')===0)nx=crossCrit(x,clamp(nx,fn.a,fn.b));
+  setX(nx,false);
+});
+cv.addEventListener('focus',draw);cv.addEventListener('blur',draw);
+function play(){
+  played=true;vis.fill(0);x=fn.a;markRange(x,x);refresh();
+  let last=performance.now(),hold=0;const speed=(fn.b-fn.a)/5200;
+  function step(now){
+    const dt=Math.min(50,now-last);last=now;
+    if(now<hold){anim=requestAnimationFrame(step);return;}
+    let nx=Math.min(fn.b,x+speed*dt);const c=crossCrit(x,nx);
+    if(c!==nx){nx=c;hold=now+650;}
+    markRange(x,nx);x=nx;refresh();
+    anim=x<fn.b?requestAnimationFrame(step):null;
+  }
+  anim=requestAnimationFrame(step);
+}
+selectFn('cub');
+if(window.ResizeObserver)new ResizeObserver(resize).observe(stage);else window.addEventListener('resize',resize);
+resize();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(draw);
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting&&en.intersectionRatio>=.5){io.disconnect();if(!touched&&!played&&!reduce.matches)play();}});},{threshold:[.5]});
+  io.observe(root);
+}
+})();</script>
+
+    <p class="measure">Для синуса это особенно красиво: след производной оказывается косинусом — той же волной, сдвинутой на четверть периода. Для <i class="v">x</i>³ − 3<i class="v">x</i> производная 3<i class="v">x</i>² − 3 обращается в ноль при <i class="v">x</i> = −1 и <i class="v">x</i> = 1 — там, где у кривой горб и впадина.</p>
+  </article>
+
+  <aside>
+    <span class="label">Справочная · Правила</span>
+    <h3>Девять правил позволяют дифференцировать почти всё, что встретится в школе и на первом курсе</h3>
+    <p>Определение через предел нужно, чтобы понять смысл. Считать удобнее по готовым правилам, каждое из которых однажды выведено из того же определения.</p>
+    <div class="box">
+      <div class="rules-wrap">
+      <table class="rules">
+        <tr><td>(<i class="v">c</i>)′</td><td>0</td></tr>
+        <tr><td>(<i class="v">x</i><sup><i class="v">n</i></sup>)′</td><td><i class="v">n</i> <i class="v">x</i><sup><i class="v">n</i>−1</sup></td></tr>
+        <tr><td>(sin <i class="v">x</i>)′</td><td>cos <i class="v">x</i></td></tr>
+        <tr><td>(cos <i class="v">x</i>)′</td><td>−sin <i class="v">x</i></td></tr>
+        <tr><td>(<i class="v">e</i><sup><i class="v">x</i></sup>)′</td><td><i class="v">e</i><sup><i class="v">x</i></sup></td></tr>
+        <tr><td>(ln <i class="v">x</i>)′</td><td>1/<i class="v">x</i></td></tr>
+        <tr><td>(<i class="v">f</i> + <i class="v">g</i>)′</td><td><i class="v">f</i>′ + <i class="v">g</i>′</td></tr>
+        <tr><td>(<i class="v">f</i> · <i class="v">g</i>)′</td><td><i class="v">f</i>′<i class="v">g</i> + <i class="v">f</i><i class="v">g</i>′</td></tr>
+        <tr><td><i class="v">f</i>(<i class="v">g</i>(<i class="v">x</i>))′</td><td><i class="v">f</i>′(<i class="v">g</i>(<i class="v">x</i>)) · <i class="v">g</i>′(<i class="v">x</i>)</td></tr>
+      </table>
+      </div>
+    </div>
+    <p>Последнее правило называют цепным: производная «матрёшки» равна произведению производных её слоёв. Например, (sin 2<i class="v">x</i>)′ = cos 2<i class="v">x</i> · 2.</p>
+    <p>Заметьте особую строку: <i class="v">e</i><sup><i class="v">x</i></sup> — функция, равная собственной производной. Скорость её роста в каждой точке равна её значению, поэтому она описывает всё, что растёт пропорционально себе.</p>
+  </aside>
+</div>
+
+<div class="wide">
+  <span class="label">Второй сюжет · Интеграл</span>
+  <h2>Площадь под кривой складывают из полосок — и с каждой новой полоской ошибка тает</h2>
+
+  <figure>
+    <svg viewBox="0 0 600 250" role="img" aria-label="Линогравюра: ряд чёрных прямоугольных столбиков растущей высоты под красной кривой, похожей на ветвь параболы.">
+      <rect width="600" height="250" fill="#F3ECDD"/>
+      <g fill="#1B1A17">
+        <rect x="40" y="210" width="46" height="20"/>
+        <rect x="90" y="208.2" width="46" height="21.8"/>
+        <rect x="140" y="202.8" width="46" height="27.2"/>
+        <rect x="190" y="193.8" width="46" height="36.2"/>
+        <rect x="240" y="181.2" width="46" height="48.8"/>
+        <rect x="290" y="165" width="46" height="65"/>
+        <rect x="340" y="145.2" width="46" height="84.8"/>
+        <rect x="390" y="121.8" width="46" height="108.2"/>
+        <rect x="440" y="94.8" width="46" height="135.2"/>
+        <rect x="490" y="64.2" width="46" height="165.8"/>
+        <rect x="20" y="230" width="560" height="10"/>
+      </g>
+      <g stroke="#F3ECDD" stroke-width="3" stroke-linecap="round">
+        <line x1="252" y1="192" x2="252" y2="222"/><line x1="270" y1="198" x2="270" y2="216"/>
+        <line x1="302" y1="176" x2="302" y2="222"/><line x1="322" y1="184" x2="322" y2="210"/>
+        <line x1="352" y1="158" x2="352" y2="220"/><line x1="370" y1="168" x2="370" y2="200"/>
+        <line x1="402" y1="134" x2="402" y2="222"/><line x1="420" y1="146" x2="420" y2="186"/><line x1="420" y1="196" x2="420" y2="214"/>
+        <line x1="452" y1="108" x2="452" y2="220"/><line x1="470" y1="120" x2="470" y2="170"/><line x1="470" y1="182" x2="470" y2="214"/>
+        <line x1="502" y1="78" x2="502" y2="222"/><line x1="520" y1="92" x2="520" y2="150"/><line x1="520" y1="162" x2="520" y2="214"/>
+        <line x1="204" y1="204" x2="204" y2="220"/><line x1="156" y1="212" x2="156" y2="222"/>
+        <line x1="40" y1="235" x2="90" y2="235" stroke-dasharray="20 10"/>
+        <line x1="200" y1="235" x2="380" y2="235" stroke-dasharray="30 12 14 10"/>
+        <line x1="440" y1="235" x2="560" y2="235" stroke-dasharray="24 10"/>
+      </g>
+      <g class="ink-red" transform="translate(3 -2)">
+        <path d="M40,210 L90,208.2 L140,202.8 L190,193.8 L240,181.2 L290,165 L340,145.2 L390,121.8 L440,94.8 L490,64.2 L540,30" fill="none" stroke="#C2361F" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="560" cy="24" r="0" fill="#C2361F"/>
+      </g>
+    </svg>
+    <figcaption>Столбики — грубая оценка площади под красной кривой. Чем они уже, тем меньше светлых щелей между их верхушками и кривой.</figcaption>
+  </figure>
+
+  <div class="cols">
+    <p class="dropcap">Производная отвечает на вопрос «как быстро меняется?». Интеграл отвечает на обратный: «сколько всего накопилось?». Если известна скорость в каждый момент, сколько пройдено? Если известна высота кривой в каждой точке, какова площадь под ней?</p>
+    <p>Для прямоугольника ответ прост: ширина на высоту. Кривая же везде разной высоты. Поэтому разрежем отрезок на <i class="v">n</i> узких полосок, каждую заменим прямоугольником, высоту возьмём по значению функции в одной точке полоски — левой, правой или средней — и сложим площади. Получится <em>интегральная сумма</em>, или сумма Римана.</p>
+    <p>Пока полосок мало, оценка грубая: прямоугольники то не достают до кривой, то вылезают за неё. С ростом <i class="v">n</i> ошибка уменьшается, а сумма приближается к одному числу — <em>определённому интегралу</em>. Снова предел, только теперь не дроби, а суммы.</p>
+    <p>Для <i class="v">f</i>(<i class="v">x</i>) = <i class="v">x</i>² на отрезке от 0 до 2 этот предел равен 8/3 ≈ 2,6667. Левые прямоугольники всегда дают меньше, правые — больше, средние подходят быстрее всех.</p>
+  </div>
+
+  <div class="formula" aria-label="Определённый интеграл как предел суммы">
+    <span class="int"><span class="sign">∫</span><span class="lims"><span><i class="v">b</i></span><span><i class="v">a</i></span></span></span>
+    <i class="v">f</i>(<i class="v">x</i>) <i class="v">dx</i> =
+    <span class="lim">lim<small><i class="v">n</i> → ∞</small></span>
+    <span class="lim">Σ<small><i class="v">k</i>=1…<i class="v">n</i></small></span>
+    <i class="v">f</i>(<i class="v">x</i><sub><i class="v">k</i></sub>) · Δ<i class="v">x</i>
+  </div>
+
+  <div class="instrument" data-instrument="riemann-sum">
+  <div class="rs-plot">
+    <canvas tabindex="0" role="slider" aria-label="Число прямоугольников n" aria-valuemin="1" aria-valuemax="100" aria-valuenow="1"></canvas>
+  </div>
+  <div class="rs-controls">
+    <div class="rs-n">
+      <span class="rs-end">1</span>
+      <input type="range" min="1" max="100" step="1" value="1" aria-label="Число прямоугольников n">
+      <span class="rs-end">100</span>
+    </div>
+    <div class="rs-chips" role="radiogroup" aria-label="Точка высоты">
+      <button type="button" class="rs-chip" role="radio" data-mode="left" aria-checked="false">левая</button>
+      <button type="button" class="rs-chip" role="radio" data-mode="mid" aria-checked="false">середина</button>
+      <button type="button" class="rs-chip" role="radio" data-mode="right" aria-checked="true">правая</button>
+    </div>
+  </div>
+  <div class="rs-board">
+    <div class="rs-cell"><span class="rs-lab">n</span><span class="rs-val" data-out="n">1</span></div>
+    <div class="rs-cell"><span class="rs-lab">сумма прямоугольников</span><span class="rs-val" data-out="sum">8,0000</span></div>
+    <div class="rs-cell"><span class="rs-lab">точно, 8/3</span><span class="rs-val">2,6667</span></div>
+    <div class="rs-cell"><span class="rs-lab">ошибка</span><span class="rs-val" data-out="err">+5,3333</span></div>
+  </div>
+</div>
+<style>
+[data-instrument="riemann-sum"]{padding:1rem 1rem 1.1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="riemann-sum"] .rs-plot{position:relative;width:100%;min-width:260px}
+[data-instrument="riemann-sum"] canvas{display:block;width:100%;height:300px;touch-action:pan-y;cursor:ew-resize;outline:none;-webkit-tap-highlight-color:transparent}
+[data-instrument="riemann-sum"] canvas:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+[data-instrument="riemann-sum"] .rs-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.5rem;margin-top:.8rem;min-width:260px}
+[data-instrument="riemann-sum"] .rs-n{display:flex;align-items:center;gap:.6rem;flex:1 1 16rem}
+[data-instrument="riemann-sum"] .rs-end{font-family:var(--mono);font-size:var(--s-1);color:var(--ink-soft);font-variant-numeric:tabular-nums;min-width:3ch;text-align:center}
+[data-instrument="riemann-sum"] input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:8rem;height:30px;background:transparent;margin:0;cursor:pointer}
+[data-instrument="riemann-sum"] input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--ink)}
+[data-instrument="riemann-sum"] input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink);margin-top:-9px}
+[data-instrument="riemann-sum"] input[type=range]::-moz-range-track{height:2px;background:var(--ink)}
+[data-instrument="riemann-sum"] input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--ink);border:3px solid var(--paper);box-shadow:0 0 0 1px var(--ink)}
+[data-instrument="riemann-sum"] input[type=range]:focus{outline:none}
+[data-instrument="riemann-sum"] input[type=range]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="riemann-sum"] .rs-chips{display:flex;gap:0}
+[data-instrument="riemann-sum"] .rs-chip{font-family:var(--text);font-size:var(--s-1);letter-spacing:.06em;padding:.38rem .8rem;border:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;margin-left:-1px;border-radius:0}
+[data-instrument="riemann-sum"] .rs-chip:first-child{margin-left:0}
+[data-instrument="riemann-sum"] .rs-chip[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="riemann-sum"] .rs-chip:focus{outline:none}
+[data-instrument="riemann-sum"] .rs-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px;position:relative;z-index:1}
+[data-instrument="riemann-sum"] .rs-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);margin-top:.9rem;min-width:260px}
+[data-instrument="riemann-sum"] .rs-cell{padding:.5rem .7rem .2rem;border-left:1px solid rgba(27,26,23,.35);min-width:0}
+[data-instrument="riemann-sum"] .rs-cell:first-child{border-left:none;padding-left:0}
+[data-instrument="riemann-sum"] .rs-lab{display:block;font-size:var(--s-1);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="riemann-sum"] .rs-val{display:block;font-family:var(--mono);font-size:1.35rem;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap;min-width:7ch}
+@media (max-width:560px){
+  [data-instrument="riemann-sum"] .rs-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-instrument="riemann-sum"] .rs-cell:nth-child(3){border-left:none;padding-left:0}
+  [data-instrument="riemann-sum"] .rs-cell:nth-child(n+3){border-top:1px solid rgba(27,26,23,.35)}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="riemann-sum"]');if(!root)return;
+const cv=root.querySelector('canvas'),ctx=cv.getContext('2d'),wrap=root.querySelector('.rs-plot');
+const range=root.querySelector('input[type=range]');
+const chips=Array.prototype.slice.call(root.querySelectorAll('.rs-chip'));
+const oN=root.querySelector('[data-out="n"]'),oS=root.querySelector('[data-out="sum"]'),oE=root.querySelector('[data-out="err"]');
+const EXACT=8/3,YMAX=4.2,P={l:34,r:12,t:12,b:26};
+const rm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canAnim=!rm&&('IntersectionObserver' in window);
+let n=canAnim?1:12,mode='right',W=0,H=0,dragK=0,touched=false,raf=0;
+const cs=getComputedStyle(root);
+const v=(name,fb)=>(cs.getPropertyValue(name).trim()||fb);
+const C={ink:v('--ink','#1B1A17'),paper:v('--paper','#F3ECDD'),accent:v('--accent','#C2361F'),soft:v('--ink-soft','#5E584D'),mono:v('--mono','monospace')};
+const f=x=>x*x;
+const smp=(k,dx)=>mode==='left'?k*dx:mode==='right'?(k+1)*dx:(k+.5)*dx;
+function total(){const dx=2/n;let s=0;for(let k=0;k<n;k++){s+=f(smp(k,dx))*dx;}return s;}
+const fmt=x=>x.toFixed(4).replace('.',',');
+const fmtS=x=>(x>=0?'+':'\u2212')+fmt(Math.abs(x));
+const X=x=>P.l+x/2*(W-P.l-P.r);
+const Y=y=>H-P.b-y/YMAX*(H-P.t-P.b);
+const xOf=px=>(px-P.l)/(W-P.l-P.r)*2;
+function size(){
+  const w=wrap.clientWidth;if(!w)return;
+  const h=Math.round(Math.max(220,Math.min(380,w*0.46)));
+  const d=window.devicePixelRatio||1;
+  cv.style.height=h+'px';cv.width=Math.round(w*d);cv.height=Math.round(h*d);
+  W=w;H=h;ctx.setTransform(d,0,0,d,0,0);draw();
+}
+function rects(dx,pw,g){ctx.beginPath();for(let k=0;k<n;k++){const h=f(smp(k,dx));const x0=X(k*dx)+g/2;ctx.rect(x0,Y(h),Math.max(0.5,pw-g),Y(0)-Y(h));}}
+function draw(){
+  if(!W)return;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=C.paper;ctx.fillRect(X(0),Y(YMAX),X(2)-X(0),Y(0)-Y(YMAX));
+  ctx.strokeStyle=C.ink;ctx.globalAlpha=.13;ctx.lineWidth=1;ctx.beginPath();
+  for(let y=1;y<=4;y++){const yy=Math.round(Y(y))+.5;ctx.moveTo(X(0),yy);ctx.lineTo(X(2),yy);}
+  ctx.stroke();ctx.globalAlpha=1;
+  const dx=2/n,pw=(X(2)-X(0))/n,g=Math.min(1.5,pw*0.2);
+  ctx.fillStyle=C.ink;rects(dx,pw,g);ctx.fill();
+  ctx.save();ctx.beginPath();ctx.moveTo(X(0),0);
+  const N=200;for(let i=0;i<=N;i++){const x=2*i/N;ctx.lineTo(X(x),Y(f(x)));}
+  ctx.lineTo(X(2),0);ctx.closePath();ctx.clip();
+  ctx.fillStyle=C.accent;rects(dx,pw,g);ctx.fill();ctx.restore();
+  ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.lineJoin='round';ctx.beginPath();
+  for(let i=0;i<=N;i++){const x=2*i/N;i?ctx.lineTo(X(x),Y(f(x))):ctx.moveTo(X(x),Y(f(x)));}
+  ctx.stroke();
+  if(pw>16){ctx.lineWidth=1.5;for(let k=0;k<n;k++){const x=smp(k,dx);ctx.beginPath();ctx.arc(X(x),Y(f(x)),3,0,Math.PI*2);ctx.fillStyle=C.paper;ctx.fill();ctx.strokeStyle=C.ink;ctx.stroke();}}
+  ctx.strokeStyle=C.ink;ctx.lineWidth=1.5;ctx.beginPath();
+  ctx.moveTo(X(0)-4,Y(0));ctx.lineTo(X(2)+4,Y(0));ctx.moveTo(X(0),Y(0));ctx.lineTo(X(0),Y(YMAX));ctx.stroke();
+  ctx.fillStyle=C.soft;ctx.font='12px '+C.mono;ctx.textAlign='center';ctx.textBaseline='top';
+  ['0','0,5','1','1,5','2'].forEach((t,i)=>{const x=X(i*.5);ctx.fillText(t,x,Y(0)+7);ctx.fillRect(x-.5,Y(0),1,4);});
+  ctx.textAlign='right';ctx.textBaseline='middle';
+  for(let y=0;y<=4;y++){ctx.fillText(String(y),X(0)-8,Y(y));}
+  if(dragK){const bx=X(Math.min(2,dragK*dx));ctx.strokeStyle=C.accent;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(bx,Y(0)+5);ctx.lineTo(bx,P.t);ctx.stroke();}
+}
+function update(){
+  n=Math.max(1,Math.min(100,Math.round(n)));
+  range.value=n;
+  const s=total();
+  oN.textContent=String(n);oS.textContent=fmt(s);oE.textContent=fmtS(s-EXACT);
+  cv.setAttribute('aria-valuenow',n);
+  cv.setAttribute('aria-valuetext','n = '+n+', сумма '+fmt(s));
+  range.setAttribute('aria-valuetext','n = '+n);
+  draw();
+}
+function stopAnim(){touched=true;if(raf){cancelAnimationFrame(raf);raf=0;}}
+range.addEventListener('input',()=>{stopAnim();n=+range.value;update();});
+function setMode(m){mode=m;chips.forEach(c=>{const on=c.dataset.mode===m;c.setAttribute('aria-checked',on?'true':'false');c.tabIndex=on?0:-1;});update();}
+chips.forEach((c,i)=>{
+  c.addEventListener('click',()=>setMode(c.dataset.mode));
+  c.addEventListener('keydown',e=>{let j=-1;if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%chips.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i+chips.length-1)%chips.length;if(j>=0){e.preventDefault();chips[j].focus();setMode(chips[j].dataset.mode);}});
+});
+function localX(e){const r=cv.getBoundingClientRect();return e.clientX-r.left;}
+cv.addEventListener('pointerdown',e=>{
+  stopAnim();
+  const x=xOf(localX(e)),dx=2/n;
+  dragK=Math.max(1,Math.min(n,Math.round(x/dx)));
+  try{cv.setPointerCapture(e.pointerId);}catch(_){}
+  draw();
+});
+cv.addEventListener('pointermove',e=>{
+  if(!dragK)return;
+  const xd=Math.max(0.02,Math.min(2,xOf(localX(e))));
+  const m=Math.max(1,Math.min(100,Math.round(2*dragK/xd)));
+  if(m!==n){n=m;update();}
+});
+function endDrag(){if(dragK){dragK=0;draw();}}
+cv.addEventListener('pointerup',endDrag);
+cv.addEventListener('pointercancel',endDrag);
+cv.addEventListener('lostpointercapture',endDrag);
+cv.addEventListener('keydown',e=>{
+  let m=n;
+  switch(e.key){case 'ArrowRight':case 'ArrowUp':m++;break;case 'ArrowLeft':case 'ArrowDown':m--;break;case 'PageUp':m+=10;break;case 'PageDown':m-=10;break;case 'Home':m=1;break;case 'End':m=100;break;default:return;}
+  e.preventDefault();stopAnim();n=m;update();
+});
+let lastW=0;
+function onResize(){const w=wrap.clientWidth;if(w!==lastW){lastW=w;size();}}
+if('ResizeObserver' in window){new ResizeObserver(onResize).observe(wrap);}else{window.addEventListener('resize',onResize);}
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(draw);}
+if(canAnim){
+  const io=new IntersectionObserver(es=>{
+    if(!es.some(x=>x.isIntersecting))return;
+    io.disconnect();
+    if(touched)return;
+    const t0=performance.now(),D=1800;
+    const step=t=>{
+      if(touched)return;
+      const p=Math.min(1,(t-t0)/D),q=1-Math.pow(1-p,3);
+      const m=Math.round(1+39*q);
+      if(m!==n){n=m;update();}
+      raf=p<1?requestAnimationFrame(step):0;
+    };
+    raf=requestAnimationFrame(step);
+  },{threshold:0.4});
+  io.observe(root);
+}
+setMode(mode);
+onResize();
+})();</script>
+</div>
+
+<div class="pair">
+  <article>
+    <span class="label">Главная теорема номера</span>
+    <h2>Скорость, с которой растёт площадь, равна высоте кривой на её краю</h2>
+    <p class="measure">Представьте площадь под графиком <i class="v">f</i> от фиксированной точки до подвижного края <i class="v">x</i>. Назовём её <i class="v">A</i>(<i class="v">x</i>). Сдвинем край чуть вправо, на <i class="v">h</i>. Площадь прибавит узкую полоску шириной <i class="v">h</i> и высотой примерно <i class="v">f</i>(<i class="v">x</i>). Значит, прирост площади, делённый на <i class="v">h</i>, приближается к <i class="v">f</i>(<i class="v">x</i>), когда <i class="v">h</i> стремится к нулю.</p>
+    <p class="measure">Это и есть основная теорема анализа, которую в русских учебниках часто связывают с формулой Ньютона — Лейбница: производная накопленной площади равна самой функции. Дифференцирование и интегрирование оказываются взаимно обратными действиями.</p>
+
+    <div class="instrument" data-instrument="ftc-area">
+  <div class="ftc-chips" role="group" aria-label="Функция f(x)">
+    <span class="ftc-chips-lab"><i>f</i>(<i>x</i>) =</span>
+    <button type="button" class="ftc-chip" data-k="0" aria-pressed="true">1 + sin <i>x</i></button>
+    <button type="button" class="ftc-chip" data-k="1" aria-pressed="false">2 − <i>x</i></button>
+    <button type="button" class="ftc-chip" data-k="2" aria-pressed="false">(<i>x</i> − 1)(<i>x</i> − 3)</button>
+  </div>
+  <div class="ftc-stage">
+    <canvas class="ftc-top" aria-hidden="true"></canvas>
+    <canvas class="ftc-bot" aria-hidden="true"></canvas>
+    <div class="ftc-handle" role="slider" tabindex="0" aria-label="Край x" aria-valuemin="0" aria-valuemax="4" aria-valuenow="2.4"><span class="ftc-knob"></span></div>
+  </div>
+  <dl class="ftc-board">
+    <div class="ftc-cell"><dt><i>x</i></dt><dd data-o="x">0,00</dd></div>
+    <div class="ftc-cell"><dt><i>A</i>(<i>x</i>)</dt><dd data-o="a">0,000</dd></div>
+    <div class="ftc-cell ftc-acc"><dt><i>f</i>(<i>x</i>)</dt><dd data-o="f">0,000</dd></div>
+    <div class="ftc-cell ftc-acc"><dt>наклон <i>A</i> в точке</dt><dd data-o="s">0,000</dd></div>
+    <div class="ftc-cell"><dt>Δ<i>A</i> / <i>h</i>, <i>h</i> = 0,1</dt><dd data-o="d">0,000</dd></div>
+  </dl>
+  <p class="ftc-state" aria-live="polite"></p>
+</div>
+<style>
+[data-instrument="ftc-area"]{padding:.8rem 1rem 1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="ftc-area"] .ftc-chips{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin:0 0 .6rem}
+[data-instrument="ftc-area"] .ftc-chips-lab{font-size:var(--s-1);color:var(--ink-soft);margin-right:.2rem}
+[data-instrument="ftc-area"] .ftc-chip{font-family:var(--text);font-size:.95rem;line-height:1.2;padding:.3rem .7rem;border:1px solid var(--ink);background:var(--paper);color:var(--ink);border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+[data-instrument="ftc-area"] .ftc-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="ftc-area"] .ftc-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="ftc-area"] .ftc-stage{position:relative;min-width:280px;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize}
+[data-instrument="ftc-area"] .ftc-stage canvas{display:block}
+[data-instrument="ftc-area"] .ftc-handle{position:absolute;top:0;width:32px;margin-left:-16px;outline:none;touch-action:pan-y}
+[data-instrument="ftc-area"] .ftc-knob{position:absolute;left:50%;width:16px;height:22px;margin-left:-8px;background:var(--ink);border:2px solid var(--paper);border-radius:3px;box-shadow:0 0 0 1px var(--ink)}
+[data-instrument="ftc-area"] .ftc-knob::before,[data-instrument="ftc-area"] .ftc-knob::after{content:"";position:absolute;top:4px;bottom:4px;width:1.5px;background:var(--paper)}
+[data-instrument="ftc-area"] .ftc-knob::before{left:3.5px}
+[data-instrument="ftc-area"] .ftc-knob::after{right:3.5px}
+[data-instrument="ftc-area"] .ftc-handle:hover .ftc-knob{background:var(--accent)}
+[data-instrument="ftc-area"] .ftc-handle:focus-visible .ftc-knob{outline:2px solid var(--accent);outline-offset:3px}
+[data-instrument="ftc-area"] .ftc-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(7.6rem,1fr));gap:0 1rem;margin:.7rem 0 0}
+[data-instrument="ftc-area"] .ftc-cell{border-top:1px solid var(--ink);padding:.3rem 0 .2rem}
+[data-instrument="ftc-area"] .ftc-cell dt{font-size:var(--s-1);color:var(--ink-soft);line-height:1.25;white-space:nowrap}
+[data-instrument="ftc-area"] .ftc-cell dd{margin:0;font-family:var(--mono);font-size:1.15rem;font-variant-numeric:tabular-nums;min-width:7ch;white-space:nowrap}
+[data-instrument="ftc-area"] .ftc-acc dd{color:var(--accent)}
+[data-instrument="ftc-area"] .ftc-state{margin:.5rem 0 0;min-height:1.6em;font-size:var(--s-1);font-style:italic;color:var(--ink-soft)}
+@media (prefers-reduced-motion:reduce){[data-instrument="ftc-area"] .ftc-chip{transition:none}}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="ftc-area"]');
+if(!root)return;
+const stage=root.querySelector('.ftc-stage'),cT=root.querySelector('.ftc-top'),cB=root.querySelector('.ftc-bot'),
+handle=root.querySelector('.ftc-handle'),knob=root.querySelector('.ftc-knob'),chips=[...root.querySelectorAll('.ftc-chip')],
+state=root.querySelector('.ftc-state'),out={};
+root.querySelectorAll('[data-o]').forEach(e=>out[e.dataset.o]=e);
+const FN=[
+ {t:'1 + sin x',f:x=>1+Math.sin(x),A:x=>x+1-Math.cos(x)},
+ {t:'2 − x',f:x=>2-x,A:x=>2*x-x*x/2},
+ {t:'(x − 1)(x − 3)',f:x=>(x-1)*(x-3),A:x=>x*x*x/3-2*x*x+3*x}
+];
+const H=0.1;
+let k=0,X=2.4,W=0,Ht=210,Hb=180,L=46,plotW=100,dpr=1,rng=null,col={};
+function readCol(){const cs=getComputedStyle(root),g=(n,d)=>(cs.getPropertyValue(n).trim()||d);
+ col={ink:g('--ink','#1B1A17'),paper:g('--paper','#F3ECDD'),soft:g('--ink-soft','#5E584D'),acc:g('--accent','#C2361F'),mono:g('--mono','monospace'),text:g('--text','serif')};}
+function fmt(v,d){if(Math.abs(v)<0.5*Math.pow(10,-d))v=0;return v.toFixed(d).replace('.',',').replace('-','−');}
+function clamp(v){return Math.max(0,Math.min(4,v));}
+function ranges(){const F=FN[k];let fmn=0,fmx=0,amn=0,amx=0;
+ for(let i=0;i<=400;i++){const x=(4+H)*i/400,f=F.f(x);fmn=Math.min(fmn,f);fmx=Math.max(fmx,f);
+  if(x<=4){const a=F.A(x),run=x+1<=4?1:-1,t=a+run*f;amn=Math.min(amn,a,t);amx=Math.max(amx,a,t);}}
+ const pf=(fmx-fmn)*.1||1,pa=(amx-amn)*.1||1;
+ rng={fmn:fmn-pf,fmx:fmx+pf,amn:amn-pa,amx:amx+pa};}
+function ticks(a,b,n){const raw=(b-a)/n,p=Math.pow(10,Math.floor(Math.log10(raw))),m=raw/p,st=(m<1.5?1:m<3.5?2:m<7.5?5:10)*p,o=[];
+ for(let v=Math.ceil(a/st)*st;v<=b+1e-9;v+=st)o.push(+v.toFixed(10));return {o,st};}
+const sx=x=>L+x/4*plotW;
+function setup(c,h){c.width=Math.round(W*dpr);c.height=Math.round(h*dpr);c.style.width=W+'px';c.style.height=h+'px';
+ const g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);return g;}
+function resize(){W=stage.clientWidth;if(!W)return;dpr=window.devicePixelRatio||1;
+ Ht=W<480?180:210;Hb=W<480?160:180;
+ plotW=(W-L-12)/(1+H/4);
+ handle.style.height=(Ht+Hb)+'px';knob.style.top=(Ht-12)+'px';draw();}
+function frame(g,pt,ph,lo,hi){
+ g.fillStyle=col.paper;g.fillRect(L,pt,plotW,ph);
+ const ym=v=>pt+(hi-v)/(hi-lo)*ph;
+ g.strokeStyle=col.ink;g.globalAlpha=.12;g.lineWidth=1;
+ for(let i=1;i<4;i++){g.beginPath();g.moveTo(sx(i)+.5,pt);g.lineTo(sx(i)+.5,pt+ph);g.stroke();}
+ const T=ticks(lo,hi,4);g.globalAlpha=1;g.fillStyle=col.soft;g.font='11px '+col.mono;g.textAlign='right';g.textBaseline='middle';
+ T.o.forEach(v=>{const y=ym(v);g.globalAlpha=.12;g.beginPath();g.moveTo(L,Math.round(y)+.5);g.lineTo(L+plotW,Math.round(y)+.5);g.stroke();g.globalAlpha=1;g.fillText(fmt(v,T.st<1?1:0),L-6,y);});
+ g.strokeStyle=col.ink;g.lineWidth=1.2;const y0=ym(0);g.beginPath();g.moveTo(L,y0);g.lineTo(L+plotW,y0);g.stroke();
+ g.strokeRect(L+.5,pt+.5,plotW-1,ph-1);
+ return ym;}
+function hatch(g,x0,x1,y0,y1,c,gap,lw){const h=y1-y0;g.strokeStyle=c;g.lineWidth=lw;let i=0;
+ for(let s=x0-h*.6;s<x1;s+=gap,i++){g.setLineDash([12+(i*37)%23,3+(i*11)%6]);g.lineDashOffset=(i*17)%29;
+  g.beginPath();g.moveTo(s,y1);g.lineTo(s+h*.6,y0);g.stroke();}
+ g.setLineDash([]);}
+function guide(g,pt,ph){g.strokeStyle=col.soft;g.globalAlpha=.6;g.lineWidth=1;g.setLineDash([3,3]);
+ g.beginPath();g.moveTo(Math.round(sx(X))+.5,pt);g.lineTo(Math.round(sx(X))+.5,pt+ph);g.stroke();g.setLineDash([]);g.globalAlpha=1;}
+function draw(){if(!W)return;const F=FN[k],fx=F.f(X),ax=F.A(X);
+ /* top */
+ let g=setup(cT,Ht);const pt=14,ph=Ht-pt-16;g.clearRect(0,0,W,Ht);
+ const yf=frame(g,pt,ph,rng.fmn,rng.fmx),y0=yf(0);
+ g.fillStyle=col.ink;g.font='italic 13px '+col.text;g.textAlign='left';g.textBaseline='top';
+ g.fillText('f(x) = '+F.t,L+8,pt+6);
+ if(X>0){const N=Math.max(2,Math.ceil(X/4*plotW/2)),area=()=>{g.beginPath();g.moveTo(sx(0),y0);
+   for(let i=0;i<=N;i++){const t=X*i/N;g.lineTo(sx(t),yf(F.f(t)));}g.lineTo(sx(X),y0);g.closePath();};
+  g.save();area();g.clip();g.beginPath();g.rect(L,pt,plotW,y0-pt);g.clip();
+  g.fillStyle=col.ink;g.fillRect(L,pt,plotW,ph);hatch(g,L,sx(X),pt,pt+ph,col.paper,7,1.3);g.restore();
+  g.save();area();g.clip();g.beginPath();g.rect(L,y0,plotW,pt+ph-y0);g.clip();
+  hatch(g,L,sx(X),pt,pt+ph,col.ink,4,1.1);g.restore();}
+ guide(g,pt,ph);
+ g.strokeStyle=col.ink;g.lineWidth=2.2;g.beginPath();
+ for(let i=0;i<=200;i++){const t=4*i/200,px=sx(t),py=yf(F.f(t));i?g.lineTo(px,py):g.moveTo(px,py);}g.stroke();
+ const yv=yf(fx),top=Math.min(y0,yv),hh=Math.max(1,Math.abs(yv-y0));
+ g.globalAlpha=.85;g.fillStyle=col.acc;g.fillRect(sx(X),top,sx(X+H)-sx(X),hh);g.globalAlpha=1;
+ g.strokeStyle=col.acc;g.lineWidth=3;g.beginPath();g.moveTo(sx(X),y0);g.lineTo(sx(X),yv);g.stroke();
+ g.fillStyle=col.acc;g.strokeStyle=col.paper;g.lineWidth=2;g.beginPath();g.arc(sx(X),yv,5,0,7);g.fill();g.stroke();
+ /* bottom */
+ g=setup(cB,Hb);const pb=12,qh=Hb-pb-26;g.clearRect(0,0,W,Hb);
+ const ya=frame(g,pb,qh,rng.amn,rng.amx);
+ g.fillStyle=col.soft;g.font='11px '+col.mono;g.textAlign='center';g.textBaseline='top';
+ for(let i=0;i<=4;i++)g.fillText(String(i),sx(i),pb+qh+6);
+ g.fillStyle=col.ink;g.font='italic 13px '+col.text;g.textAlign='left';
+ g.fillText('A(x) = ∫₀ˣ f(t) dt',L+8,pb+6);
+ guide(g,pb,qh);
+ g.strokeStyle=col.ink;g.globalAlpha=.3;g.lineWidth=1.6;g.beginPath();
+ for(let i=0;i<=200;i++){const t=4*i/200;i?g.lineTo(sx(t),ya(F.A(t))):g.moveTo(sx(t),ya(F.A(t)));}g.stroke();g.globalAlpha=1;
+ g.lineWidth=2.8;g.beginPath();const M=Math.max(2,Math.ceil(X*50));
+ for(let i=0;i<=M;i++){const t=X*i/M;i?g.lineTo(sx(t),ya(F.A(t))):g.moveTo(sx(t),ya(F.A(t)));}g.stroke();
+ g.save();g.beginPath();g.rect(L,pb,plotW,qh);g.clip();
+ const run=X+1<=4?1:-1,Px=sx(X),Py=ya(ax),Qx=sx(X+run),Ty=ya(ax+run*fx);
+ g.strokeStyle=col.soft;g.lineWidth=1.2;g.setLineDash([4,3]);g.beginPath();g.moveTo(Px,Py);g.lineTo(Qx,Py);g.stroke();g.setLineDash([]);
+ g.strokeStyle=col.acc;g.lineWidth=3;g.beginPath();g.moveTo(Qx,Py);g.lineTo(Qx,Ty);g.stroke();
+ g.lineWidth=2;g.beginPath();g.moveTo(sx(X-1.2),ya(ax-1.2*fx));g.lineTo(sx(X+1.2),ya(ax+1.2*fx));g.stroke();
+ g.restore();
+ g.font='11px '+col.mono;g.textBaseline='middle';g.textAlign='center';g.fillStyle=col.soft;
+ g.fillText('1',(Px+Qx)/2,Py+(Ty<Py?10:-10));
+ g.fillStyle=col.acc;g.textAlign=run>0?'left':'right';g.fillText(fmt(fx,2),Qx+run*6,(Py+Ty)/2);
+ g.fillStyle=col.ink;g.strokeStyle=col.acc;g.lineWidth=2.5;g.beginPath();g.arc(Px,Py,4.5,0,7);g.fill();g.stroke();
+ /* handle + readouts */
+ handle.style.left=sx(X)+'px';
+ const slope=(F.A(X+1e-5)-F.A(X-1e-5))/2e-5,dA=(F.A(X+H)-ax)/H;
+ out.x.textContent=fmt(X,2);out.a.textContent=fmt(ax,3);out.f.textContent=fmt(fx,3);
+ out.s.textContent=fmt(slope,3);out.d.textContent=fmt(dA,3);
+ state.textContent=fx>0.005?'f(x) > 0 — площадь A(x) растёт':fx<-0.005?'f(x) < 0 — площадь A(x) убывает':'f(x) = 0 — касательная к A(x) горизонтальна';
+ handle.setAttribute('aria-valuenow',X.toFixed(2));
+ handle.setAttribute('aria-valuetext','x = '+fmt(X,2)+', A(x) = '+fmt(ax,3)+', f(x) = '+fmt(fx,3));}
+function setX(v){X=clamp(v);draw();}
+let drag=null;
+function fromEvt(e){const r=stage.getBoundingClientRect();return (e.clientX-r.left-L)/plotW*4;}
+stage.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;drag=e.pointerId;
+ try{stage.setPointerCapture(e.pointerId);}catch(_){}
+ handle.focus({preventScroll:true});setX(fromEvt(e));});
+stage.addEventListener('pointermove',e=>{if(drag===e.pointerId)setX(fromEvt(e));});
+['pointerup','pointercancel','lostpointercapture'].forEach(t=>stage.addEventListener(t,()=>{drag=null;}));
+handle.addEventListener('keydown',e=>{const s=e.shiftKey?0.25:0.05;let v=null;
+ switch(e.key){case'ArrowRight':case'ArrowUp':v=X+s;break;case'ArrowLeft':case'ArrowDown':v=X-s;break;
+  case'PageUp':v=X+0.5;break;case'PageDown':v=X-0.5;break;case'Home':v=0;break;case'End':v=4;break;}
+ if(v!==null){e.preventDefault();setX(Math.round(v*100)/100);}});
+chips.forEach(b=>b.addEventListener('click',()=>{k=+b.dataset.k;chips.forEach(c=>c.setAttribute('aria-pressed',c===b?'true':'false'));ranges();draw();}));
+readCol();ranges();resize();
+if('ResizeObserver' in window)new ResizeObserver(resize).observe(stage);else window.addEventListener('resize',resize);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{readCol();draw();});
+})();</script>
+  </article>
+
+  <aside>
+    <span class="label">Практика · Как этим пользоваться</span>
+    <h3>Чтобы найти площадь, достаточно угадать функцию, производная которой нам дана</h3>
+    <p>Из теоремы следует рабочий рецепт. Нужно найти первообразную <i class="v">F</i> — любую функцию, у которой <i class="v">F</i>′ = <i class="v">f</i>, — и вычесть её значения на концах отрезка:</p>
+    <div class="formula" aria-label="Формула Ньютона — Лейбница">
+      <span class="int"><span class="sign">∫</span><span class="lims"><span><i class="v">b</i></span><span><i class="v">a</i></span></span></span>
+      <i class="v">f</i>(<i class="v">x</i>) <i class="v">dx</i> = <i class="v">F</i>(<i class="v">b</i>) − <i class="v">F</i>(<i class="v">a</i>)
+    </div>
+    <p>Проверим на нашем примере. Для <i class="v">f</i>(<i class="v">x</i>) = <i class="v">x</i>² подходит <i class="v">F</i>(<i class="v">x</i>) = <i class="v">x</i>³/3: её производная равна <i class="v">x</i>². Тогда площадь от 0 до 2 равна 8/3 − 0 = <span class="hl">8/3</span> — то же число, к которому подбирались прямоугольники.</p>
+    <p>Сто полосок, тысяча, миллион — и одна строчка вычислений, которая сразу даёт предел. В этом сила теоремы: бесконечный процесс сложения заменён одним вычитанием.</p>
+    <div class="box">
+      <h3>Знак имеет значение</h3>
+      <p style="margin:0">Там, где график опускается ниже оси, интеграл считает площадь со знаком минус. Поэтому <i class="v">A</i>(<i class="v">x</i>) убывает, когда <i class="v">f</i>(<i class="v">x</i>) отрицательна, — в полном согласии с тем, что производная <i class="v">A</i> равна <i class="v">f</i>.</p>
+    </div>
+  </aside>
+</div>
+
+<section class="wide" style="border-bottom:none">
+  <span class="label">Задачи номера</span>
+  <h2>Пять задач проверяют, что идеи этого выпуска усвоены</h2>
+  <div class="problems">
+    <div class="problem"><span class="n">1</span>Найдите производную функции <i class="v">f</i>(<i class="v">x</i>) = 3<i class="v">x</i>² − 5<i class="v">x</i> + 1.</div>
+    <div class="problem"><span class="n">2</span>Чему равен наклон касательной к графику <i class="v">y</i> = <i class="v">x</i>³ в точке <i class="v">x</i> = 2?</div>
+    <div class="problem"><span class="n">3</span>Найдите предел последовательности (<i class="v">n</i> + 1)/<i class="v">n</i> при <i class="v">n</i> → ∞.</div>
+    <div class="problem"><span class="n">4</span>Вычислите интеграл от <i class="v">x</i> по отрезку от 0 до 1 и объясните ответ как площадь треугольника.</div>
+    <div class="problem"><span class="n">5</span>Пользуясь цепным правилом, найдите производную sin 2<i class="v">x</i>.</div>
+    <div class="problem"><span class="n">6</span>В каких точках касательная к графику <i class="v">y</i> = <i class="v">x</i>³ − 3<i class="v">x</i> горизонтальна?</div>
+  </div>
+  <p class="answers">Ответы: <b>1</b> — 6<i class="v">x</i> − 5; <b>2</b> — 12; <b>3</b> — 1; <b>4</b> — ½, треугольник с катетами 1 и 1; <b>5</b> — 2 cos 2<i class="v">x</i>; <b>6</b> — при <i class="v">x</i> = −1 и <i class="v">x</i> = 1.</p>
+  <p class="end-mark" aria-hidden="true">∫ · ∂ · ∞</p>
+</section>
+
+</div>
+</body>
+</html>
