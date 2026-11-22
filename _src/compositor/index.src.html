@@ -220,6 +220,12 @@ textarea:focus,input:focus{outline:none;border-color:var(--ink)}
 .chip:hover{border-color:var(--ink)}
 .chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .note{font-size:14.5px;color:var(--muted);min-height:1.5em}
+.kept{display:flex;align-items:center;gap:14px 18px;flex-wrap:wrap;margin:18px 0 6px;padding:14px 18px;border:1.5px solid var(--ink);border-radius:10px;background:#FFE14D;color:#15181D}
+.kept .what{flex:1 1 320px;min-width:0;display:grid;gap:3px}
+.kept .what b{font-family:var(--serif,inherit);font-size:17px;line-height:1.3;font-weight:700;overflow-wrap:anywhere}
+.kept .what span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;line-height:1.5;min-height:1.5em}
+.kept .btn{border-color:#15181D;color:#15181D}.kept .btn.solid{background:#15181D;color:#FFE14D}.kept .btn.solid:hover{background:#000;border-color:#000}
+.kept .acts{display:flex;gap:8px;flex-wrap:wrap}
 .note.bad{color:var(--alarm)}
 
 /* thread */
@@ -590,8 +596,11 @@ const htmlCache = new Map();
 
 function devClaude() {
   const docs = new Map(), subs = new Set(), blobs = new Map();
+  const persist = location.protocol !== 'file:';      // over http the stand-in survives a reload, so recovery can be tried
+  const saveDev = () => { if (!persist) return; try { localStorage.setItem('dev.docs', JSON.stringify([...docs])); localStorage.setItem('dev.text', JSON.stringify([...htmlCache])); } catch (e) {} };
+  if (persist) { try { for (const [k, v] of JSON.parse(localStorage.getItem('dev.docs') || '[]')) docs.set(k, v); for (const [k, v] of JSON.parse(localStorage.getItem('dev.text') || '[]')) { htmlCache.set(k, v); blobs.set(k, new Blob([v])); } } catch (e) {} }
   const snapDoc = p => ({id: p.split('/').pop(), exists: docs.has(p), data: () => docs.get(p), metadata: {fromCache: false, hasPendingWrites: false}});
-  const fire = () => subs.forEach(f => f());
+  const fire = () => { saveDev(); subs.forEach(f => f()); };
   const docRef = p => ({id: p.split('/').pop(), path: p,
     get: async () => snapDoc(p), set: async d => { docs.set(p, JSON.parse(JSON.stringify(d))); fire(); },
     update: async d => { docs.set(p, Object.assign({}, docs.get(p), JSON.parse(JSON.stringify(d)))); fire(); },
@@ -601,15 +610,19 @@ function devClaude() {
     return {path: p, doc: id => docRef(p + '/' + (id || rid(10))), get: async () => q(),
       onSnapshot: next => { const f = () => next(q()); subs.add(f); setTimeout(f, 30); return () => subs.delete(f); }}; };
   const db = {doc: docRef, collection: colRef};
-  const assets = {upload: async (blob, o) => { const id = rid(32); blobs.set(id, blob); if ((o && o.type || blob.type).startsWith('text/')) htmlCache.set(id, await blob.text());
-    return {id, url: URL.createObjectURL(blob), sizeBytes: blob.size, contentType: (o && o.type) || blob.type}; }};
+  const assets = {upload: async (blob, o) => { const id = rid(32); blobs.set(id, blob); if ((o && o.type || blob.type).startsWith('text/')) htmlCache.set(id, await blob.text()); saveDev();
+    return {id, url: URL.createObjectURL(blob), sizeBytes: blob.size, contentType: (o && o.type) || blob.type}; },
+    delete: async id => { blobs.delete(id); htmlCache.delete(id); saveDev(); }};
   const user = {id: async () => 'dev-author', isOwner: async () => true, canEdit: async () => true, can: async () => true, profiles: async ids => Object.fromEntries(ids.map(i => [i, {name: 'Dev Author'}]))};
   const sample = async (input, o) => {
-    const src = typeof input === 'string' ? input : input[0].content;
+    const src = typeof input === 'string' ? input : input[0].content, said = typeof input !== 'string' && input.length === 3 ? input[1].content : '';
+    if (said) (window.__seeded = window.__seeded || []).push(said.length);
     (window.__calls = window.__calls || []).push((o.model || o.modelTier) + '/' + (o.effort || '-'));
     if (window.__fail > 0) { window.__fail--; throw {code: 'empty_completion', message: 'Claude returned no text for this prompt'}; }
     await new Promise(r => setTimeout(r, 120));
-    const done = async text => { if (text.indexOf('<!DOCTYPE') === 0) for (let i = 1; i <= 8; i++) { await new Promise(r => setTimeout(r, window.__slow || 60)); o.onText && o.onText({text: text.slice(0, Math.ceil(text.length * i / 8)), delta: ''}); } else o.onText && o.onText({text, delta: text});
+    const done = async text => { if (said && text.indexOf(said) === 0) { const rest = text.slice(said.length); for (let i = 1; i <= 4; i++) { await new Promise(r => setTimeout(r, window.__slow || 60)); o.onText && o.onText({text: rest.slice(0, Math.ceil(rest.length * i / 4)), delta: ''}); } return {text: rest, truncated: false, modelTierApplied: 'complex', modelApplied: o.model}; }
+      if (window.__slowInst && text.indexOf('<div class="instrument"') === 0) await new Promise(r => setTimeout(r, window.__slowInst * (text.indexOf('data-instrument="two"') > 0 ? 1 : 0.15)));
+      if (text.indexOf('<!DOCTYPE') === 0) for (let i = 1; i <= 8; i++) { await new Promise(r => setTimeout(r, window.__slow || 60)); o.onText && o.onText({text: text.slice(0, Math.ceil(text.length * i / 8)), delta: ''}); } else o.onText && o.onText({text, delta: text});
       return {text, truncated: false, modelTierApplied: 'complex', modelApplied: o.model}; };
     if (src.indexOf('You are an illustrator') === 0) return done('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900"><rect width="1600" height="900" fill="#234"/><circle cx="800" cy="450" r="260" fill="#e9c46a"/></svg>');
     if (src.indexOf('You are building one interactive instrument') === 0) { const id = src.match(/id: ([a-z0-9-]+)/)[1];
@@ -637,6 +650,7 @@ async function boot() {
   }
   if (!db) { $('#app').replaceChildren(el('div', {class: 'wrap state', text: 'Sign in to Claude to read this publication.'})); return; }
   subscribe();
+  if (me.canEdit) Promise.all([findKept(), restoreForm()].map(p => p.catch(() => {}))).then(() => { if (!(job && job.active) && (kept || formState.restored) && view.name !== 'post') render(); });
   addEventListener('hashchange', route);
   addEventListener('message', onFrameMessage);
   route();
@@ -674,6 +688,91 @@ async function resolveNames(ids) {
   if (!need.length || !cap.user || !cap.user.profiles) return;
   try { const ps = await cap.user.profiles(need); for (const i of need) names[i] = (ps[i] && ps[i].name) || ''; } catch (e) { for (const i of need) names[i] = ''; }
 }
+
+/* ───────────── keeping unfinished work safe ─────────────
+   A page being set is saved piece by piece outside the tab: the request, the page text as it grows, the finished page,
+   each instrument. The record lives in the author's private data and, as a second copy, in this browser. */
+const LS = {get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }, del(k) { try { localStorage.removeItem(k); } catch (e) {} }};
+const mine = k => (cap.db && me.id) ? cap.db.collection('data/users/' + me.id).doc(k) : null;
+const storeText = async t => (await cap.assets.upload(new Blob([t], {type: 'text/plain'}), {type: 'text/plain'})).id;
+const dropAsset = id => { if (id && cap.assets && cap.assets.delete) { htmlCache.delete(id); Promise.resolve().then(() => cap.assets.delete(id)).catch(() => {}); } };
+let kept = null;                                                 // the record of a page that was not finished
+function keeper(st, j) {
+  const rec = st.rec || (st.rec = {jid: rid(8), at: Date.now(), title: '', stage: 'page', req: '', page: '', partial: '', done: {}, model: '', total: 0, notes: []});
+  let chain = Promise.resolve(), local = 0, remote = 0, busy = false;
+  const put = () => { rec.at = Date.now(); rec.notes = j.notes.slice(0, 8); kept = rec; LS.set('compositor.job', rec); const snap = JSON.parse(JSON.stringify(rec));
+    chain = chain.then(async () => { try { const d = mine('job'); if (d) await d.set(snap); } catch (e) {} }); return chain; };
+  return {
+    async request(ctx, meta) { if (rec.req) return; try { const c = Object.assign({}, ctx); delete c.images;
+      rec.title = meta.title || (ctx.brief || '').trim().split('\n')[0].slice(0, 90) || 'Untitled'; rec.req = await storeText(JSON.stringify({ctx: c, meta})); await put(); } catch (e) {} },
+    stream(t) { const now = Date.now();
+      if (now - local > 6000 && t.length > 300) { local = now; LS.set('compositor.job.text', {jid: rec.jid, text: t}); }
+      if (now - remote > 40000 && t.length > 3000 && !busy && rec.req) { remote = now; busy = true;
+        (async () => { try { const old = rec.partial; rec.partial = await storeText(t); await put(); dropAsset(old); } catch (e) {} busy = false; })(); } },
+    async page(text, model, total) { try { const old = rec.partial; rec.page = await storeText(text); rec.partial = ''; rec.model = model || ''; rec.stage = 'instruments'; rec.total = total || 0; await put(); dropAsset(old); LS.del('compositor.job.text'); } catch (e) {} },
+    async piece(id, html) { try { const a = await storeText(html); rec.done[id] = a; await put(); } catch (e) {} },
+    async clear() { await chain; forget(rec); }
+  };
+}
+function forget(rec) {
+  const ids = rec ? [rec.req, rec.page, rec.partial].concat(Object.values(rec.done || {})) : [];
+  LS.del('compositor.job'); LS.del('compositor.job.text'); if (kept && rec && kept.jid === rec.jid) kept = null;
+  Promise.resolve().then(async () => { try { const d = mine('job'); if (d) { const s = await d.get(); if (!s.exists || !rec || (s.data() || {}).jid === rec.jid) await d.delete(); } } catch (e) {} });
+  ids.forEach(dropAsset);
+}
+async function findKept() {
+  let r = null;
+  try { const d = mine('job'); if (d) { const s = await d.get(); if (s.exists) r = s.data(); } } catch (e) {}
+  const l = LS.get('compositor.job');
+  if (l && l.req && (!r || (l.at || 0) > (r.at || 0))) r = l;
+  kept = r && r.req && r.jid ? r : null;
+}
+function keptBar() {
+  if (!kept || !me.canEdit || (job && job.active)) return null;
+  const r = kept, built = Object.keys(r.done || {}).length;
+  const state = r.stage === 'instruments' ? 'The page is set' + (r.total ? ' · ' + built + ' of ' + r.total + ' instruments built' : '') : 'The page was being set';
+  let sure = false;
+  const no = el('button', {class: 'btn', type: 'button', text: 'Discard', onclick: () => { if (!sure) { sure = true; no.textContent = 'Discard for good'; return; } forget(r); kept = null; render(); }});
+  return el('div', {class: 'kept', role: 'status'},
+    el('div', {class: 'what'}, el('b', {text: 'An unfinished page is waiting: ' + (r.title || 'Untitled')}), el('span', {text: state + ' · saved ' + ago(new Date(r.at).toISOString())})),
+    el('div', {class: 'acts'}, el('button', {class: 'btn solid', type: 'button', text: 'Continue', onclick: () => resumeCompose(r)}), no));
+}
+
+/* The form of a new post is kept as it is typed, so a closed tab does not lose the writing. Files have to be attached again. */
+const FORM_KEYS = ['plain', 'kind', 'title', 'brief', 'look', 'links', 'style', 'inter', 'interNote', 'picStyle', 'selfDraw', 'seq'];
+const formState = {last: '', sent: 0, restored: false, ready: false};
+const formHas = () => !!((draft.brief || '').trim() || (draft.title || '').trim() || (draft.look || '').trim() || draft.links.length || draft.blocks.some(b => (b.text || '').trim() || (b.url || '').trim()));
+function saveForm() {
+  if (!formState.ready || draft.editing || (job && job.active)) return;
+  if (!formHas()) { if (formState.last || LS.get('compositor.form')) dropForm(); return; }
+  const o = {blocks: draft.blocks.filter(b => b.type !== 'file' && b.type !== 'page').map(b => ({id: b.id, type: b.type, text: b.text || '', url: b.url || ''}))};
+  FORM_KEYS.forEach(k => { o[k] = draft[k]; });
+  const sig = JSON.stringify(o); if (sig === formState.last) return;
+  formState.last = sig; o.at = Date.now(); LS.set('compositor.form', o);
+  if (Date.now() - formState.sent > 20000) { formState.sent = Date.now(); const d = mine('form'); if (d) Promise.resolve().then(() => d.set(o)).catch(() => {}); }
+}
+async function restoreForm() {
+  try { await restoreFormNow(); } finally { formState.ready = true; }
+}
+async function restoreFormNow() {
+  if (formHas()) return;
+  let r = LS.get('compositor.form');
+  try { const d = mine('form'); if (d) { const s = await d.get(); if (s.exists && (!r || (s.data().at || 0) > (r.at || 0))) r = s.data(); } } catch (e) {}
+  if (!r || !Array.isArray(r.blocks) || formHas()) return;
+  FORM_KEYS.forEach(k => { if (k in r) draft[k] = r[k]; });
+  if (!Array.isArray(draft.links)) draft.links = [];
+  draft.blocks = r.blocks.length ? r.blocks.map(b => ({id: b.id, type: b.type, text: b.text || '', url: b.url || ''})) : [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
+  draft.seq = Math.max(draft.seq || 1, ...draft.blocks.map(b => +String(b.id).replace(/\D/g, '') || 0));
+  formState.restored = formHas(); formState.last = '';
+}
+function clearForm() {
+  draft.plain = false; draft.kind = 'ai'; draft.brief = ''; draft.look = ''; draft.links = []; draft.files = []; draft.interNote = ''; draft.title = '';
+  draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}]; dropForm();
+}
+function dropForm() { formState.restored = false; formState.last = ''; LS.del('compositor.form'); const d = mine('form'); if (d) Promise.resolve().then(() => d.delete()).catch(() => {}); }
+setInterval(() => { if (view.name === 'new') saveForm(); }, 3000);
+addEventListener('pagehide', () => { if (view.name === 'new') { formState.sent = 0; saveForm(); } });
 
 /* ───────────── routing ───────────── */
 const view = {name: 'home', id: null};
@@ -817,7 +916,7 @@ function renderHome() {
   const list = all.length ? el('ol', {class: 'posts'}, all.map(item)) : (store.loaded ? el('p', {class: 'empty', text: 'Nothing has been published yet.'}) : null);
   const foot = el('p', {class: 'foot', text: 'Pages composed by Claude'});
   const keep = scrollY, tilesAt = app.querySelector('.tiles') ? app.querySelector('.tiles').scrollTop : 0;
-  const node = el('div', {class: 'home'}, el('div', {class: 'hw'}, sb, panel),
+  const node = el('div', {class: 'home'}, el('div', {class: 'hw'}, sb, panel, keptBar()),
     t[2] === 'sidebar' ? el('div', {class: 'hw body'}, el('div', {class: 'cols'}, mast, el('div', null, head, list, foot)))
                        : el('div', {class: 'hw body'}, el('div', {class: 'hw', style: 'padding:0'}, mast, head), list, foot));
   dressHome(node, t);
@@ -1076,7 +1175,9 @@ function renderCompose() {
     startCompose();
   }});
   $('#app').replaceChildren(bar(el('a', {class: 'btn quiet', href: draft.editing ? '#p-' + draft.editing : '#', text: 'Close', onclick: () => { if (draft.editing) { draft.editing = null; draft.plain = false; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}]; } }})), el('div', {class: 'wrap compose'},
-    el('div', null, el('h1', {text: draft.editing ? 'Edit the text' : 'New post'}), el('p', {class: 'lead', text: 'Give the subject, the materials and the look. The page is designed and built for you, then you revise it in plain words.'})),
+    el('div', null, el('h1', {text: draft.editing ? 'Edit the text' : 'New post'}), el('p', {class: 'lead', text: 'Give the subject, the materials and the look. The page is designed and built for you, then you revise it in plain words.'}),
+      draft.editing ? null : keptBar(),
+      formState.restored && !draft.editing ? el('p', {class: 'note'}, 'This is what you were writing when the page closed. Files have to be attached again. ', el('button', {class: 'link', type: 'button', text: 'Start afresh', onclick: () => { clearForm(); renderCompose(); }})) : null),
     el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'Kind of post'}), kindChips, kindDesc, own ? el('div', {class: 'chips'}, plainSw) : null),
     own || ready ? el('div', {class: 'field'}, el('label', {for: 'ptitle', text: ready ? 'Title (optional: the page\'s own title is used otherwise)' : 'Title'}), ptitle) : el('div', {class: 'field'}, el('label', {for: 'brief', text: 'Subject'}), brief),
     own ? el('div', {class: 'field'}, el('span', {class: 'lbl', text: 'The post, block by block'}), blockEditor()) : null,
@@ -1178,14 +1279,16 @@ const LADDER = [{model: MODEL, modelTier: 'complex', effort: 'medium'}, {model: 
 const wait = ms => new Promise(r => setTimeout(r, ms));
 function stopJob(j) { j.stopped = true; (j.ctls || []).forEach(c => c.abort()); }
 
-async function ask(prompt, images, j, cfg, show) {
+const CONT = 'You were cut off by the length limit. Continue from exactly the character where you stopped. Do not repeat anything already written and do not add any commentary.';
+async function ask(prompt, images, j, cfg, show, seed) {
   let turns = [{role: 'user', content: prompt}], whole = '', model = '';
+  if (seed) { whole = seed; if (show !== false) j.text = seed; turns = [{role: 'user', content: prompt}, {role: 'assistant', content: seed}, {role: 'user', content: CONT}]; }
   for (let round = 0; round < 4; round++) {
     if (j.stopped) throw {code: 'cancelled'};
     const ctl = new AbortController(); (j.ctls || (j.ctls = new Set())).add(ctl);
     const base = whole;
-    const opts = Object.assign({cache: false, signal: ctl.signal, onText: u => { if (show !== false) j.text = base + u.text; }}, cfg);
-    if (round === 0 && images && images.length) opts.images = images;
+    const opts = Object.assign({cache: false, signal: ctl.signal, onText: u => { if (show !== false) { j.text = base + u.text; j.onStream && j.onStream(j.text); } }}, cfg);
+    if (round === 0 && !seed && images && images.length) opts.images = images;
     let res;
     try { res = await cap.sample(turns, opts); }
     catch (e) { j.ctls.delete(ctl); if (e && typeof e.text === 'string') e.text = base + e.text; else if (e && base) e.text = base; throw e; }
@@ -1193,7 +1296,7 @@ async function ask(prompt, images, j, cfg, show) {
     whole = base + res.text; model = res.modelApplied || (res.modelTierApplied ? res.modelTierApplied + ' tier' : '');
     if (!res.truncated) break;
     if (bytes(prompt) + bytes(whole) > 240000) break;
-    turns = [{role: 'user', content: prompt}, {role: 'assistant', content: whole}, {role: 'user', content: 'You were cut off by the length limit. Continue from exactly the character where you stopped. Do not repeat anything already written and do not add any commentary.'}];
+    turns = [{role: 'user', content: prompt}, {role: 'assistant', content: whole}, {role: 'user', content: CONT}];
   }
   return {text: whole, model};
 }
@@ -1203,7 +1306,8 @@ async function askSafe(prompt, o) {
   for (let i = 0; i < LADDER.length; i++) {
     if (i) { o.j.phase = (o.label || 'Working') + ', another way'; o.j.paint && o.j.paint(); await wait(1200); }
     try {
-      const out = await ask(prompt, i < 2 ? images : null, o.j, LADDER[i], o.show);
+      const seed = i === 0 && o.seed && bytes(prompt) + bytes(o.seed) < 230000 ? o.seed : '';
+      const out = await ask(prompt, i < 2 ? images : null, o.j, LADDER[i], o.show, seed);
       const val = o.accept ? (o.accept(out.text) || (o.lenient ? o.lenient(out.text) : null)) : out.text;
       if (val != null) return {val, model: out.model, text: out.text};
       last = {code: 'incomplete'};
@@ -1365,6 +1469,7 @@ async function savePlain(note, btn) {
     else { id = rid(8);
       await cap.db.doc('posts/' + id).set({kind: 'plain', title, summary: meta.summary, theme: meta.theme, status: 'draft', createdAt: now, publishedAt: null, by: me.id, brief: '', instructions: '', links: [], files, source,
         current: 1, versions: [{n: 1, asset: up.id, at: now, note: 'Plain text', model: '', notes: []}]}); }
+    if (!draft.editing) dropForm();
     draft.editing = null; draft.plain = false; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
     if (location.hash === '#p-' + id) route(); else location.hash = 'p-' + id;
   } catch (e) { btn.disabled = false; note.textContent = 'This could not be stored. Try again.'; }
@@ -1383,22 +1488,42 @@ function pause(j, e) {
   j.paint && j.paint();
 }
 
-async function startCompose() {
+function startCompose() {
+  if (kept) forget(kept);
   const j = job = newJob('Setting the page');
-  const st = {uploaded: [], ctx: null, page: null, model: '', done: {}};
-  j.retry = () => { j.error = null; j.stopped = false; j.active = true; if (!st.page) j.text = ''; renderPress(); run(); };
+  composeRun(j, {uploaded: [], ctx: null, page: null, model: '', done: {}});
+}
+async function resumeCompose(rec) {
+  const j = job = newJob('Setting the page'); j.phase = 'Picking the page up';
+  renderPress(); scrollTo(0, 0);
+  try {
+    const req = JSON.parse(await loadHtml(rec.req));
+    const st = {uploaded: req.ctx.files || [], ctx: Object.assign(req.ctx, {images: []}), meta: req.meta, page: null, model: rec.model || '', done: {}, rec, seed: ''};
+    j.notes = (rec.notes || []).slice();
+    if (rec.page) st.page = await loadHtml(rec.page);
+    else { const l = LS.get('compositor.job.text'); let seed = l && l.jid === rec.jid ? l.text || '' : '';
+      if (rec.partial) { try { const t = await loadHtml(rec.partial); if (t.length > seed.length) seed = t; } catch (e) {} }
+      st.seed = seed; }
+    for (const id of Object.keys(rec.done || {})) { try { st.done[id] = await loadHtml(rec.done[id]); } catch (e) {} }
+    composeRun(j, st, true);
+  } catch (e) {
+    j.error = 'What was saved of this page could not be read. Discard it on the front page and set the page again.'; j.paint && j.paint();
+  }
+}
+function composeRun(j, st, picked) {
+  j.retry = () => { j.error = null; j.stopped = false; j.active = true; if (!st.page) { if (j.stream && j.text.length > 3000 && !extractPage(j.text)) st.seed = j.text; j.text = ''; } renderPress(); run(); };
   const run = async () => {
     try {
       /* 1. store the files */
-      const good = draft.files.filter(f => !f.bad);
+      const good = st.ctx ? [] : draft.files.filter(f => !f.bad);
       for (const f of good) {
         if (f.asset) continue;
         j.phase = 'Storing ' + f.file.name.slice(0, 28); j.paint && j.paint();
         try { const r = await cap.assets.upload(f.file, {type: TYPES[f.ext]}); f.asset = {id: r.id, name: f.file.name, type: AUDIO[f.ext] ? 'audio' : r.contentType, size: r.sizeBytes, audio: !!AUDIO[f.ext], desc: f.desc || ''}; }
         catch (e) { f.bad = 'Could not be stored'; j.notes.push('“' + f.file.name + '” could not be stored and was left out.'); }
       }
-      st.uploaded = good.filter(f => f.asset).map(f => f.asset);
-      const own = draft.kind === 'own';
+      if (!st.ctx) st.uploaded = good.filter(f => f.asset).map(f => f.asset);
+      const own = !st.ctx && draft.kind === 'own';
       if (own) {
         /* files that sit in blocks, then the pictures ordered in blocks */
         for (const b of draft.blocks) {
@@ -1478,18 +1603,22 @@ async function startCompose() {
         st.ctx = {core, images, brief: draft.brief.trim(), inter: draft.inter, interNote: draft.interNote.trim(), files: st.uploaded, links: draft.links.slice()};
       }
       const ctx = st.ctx;
+      if (!st.meta) st.meta = {look: draft.look.trim(), style: draft.style || '', inter: draft.inter, picStyle: draft.picStyle || '', title: draft.title.trim().slice(0, 140)};
+      const keep = st.keep || (st.keep = keeper(st, j));
+      await keep.request(ctx, st.meta);
       /* 2. the page itself, without instruments */
       if (!st.page) {
-        j.phase = 'Setting the page'; j.stream = true; j.paint && j.paint();
+        j.phase = st.seed ? 'Setting the page, from where it stopped' : 'Setting the page'; j.stream = true; j.onStream = t => keep.stream(t); j.paint && j.paint();
         try {
           const r = await askSafe(RULES + '\n\n────────\n' + ctx.core + (ctx.own ? ctx.step : ctx.inter === 'none' ? '' : step1(ctx.inter)) + '\n\nNow reply with the complete HTML document.',
-            {images: ctx.images, j, label: 'Setting the page', accept: t => extractPage(t), lenient: t => extractPage(t, true)});
+            {images: ctx.images, j, label: 'Setting the page', seed: st.seed, accept: t => extractPage(t), lenient: t => extractPage(t, true)});
           st.page = r.val; st.model = r.model;
         } catch (e) {
           if (e && HARD[e.code]) throw e;
           st.page = localPage(ctx); st.model = 'a plain setting';
           j.notes.push('Claude could not set this page, so it was set plainly from your own text. Use Revise to ask for the design again.');
         }
+        st.seed = ''; j.onStream = null; st.fresh = true;
       }
       j.stream = false; j.text = st.page; j.current = () => st.page.replace(MOUNT, (m, id) => id in st.done ? st.done[id] : m);
       j.show && j.show(j.current());
@@ -1498,12 +1627,13 @@ async function startCompose() {
       if (ctx.briefs) { for (const x of mounts) { if (ctx.briefs[x.id]) { x.brief = ctx.briefs[x.id].brief; x.kind = ctx.briefs[x.id].kind; } else st.done[x.id] = (ctx.embeds && ctx.embeds[x.id]) || ''; }
         j.show && j.show(j.current());
         for (const id of Object.keys(ctx.briefs)) if (!mounts.some(x => x.id === id)) j.notes.push('No place was left for one ordered block (' + ctx.briefs[id].brief.slice(0, 70) + '). Ask for it in Revise.'); }
+      if (st.fresh) { st.fresh = false; await keep.page(st.page, st.model, mounts.filter(x => !ctx.briefs || ctx.briefs[x.id]).length); }
       const todo = mounts.filter(x => !(x.id in st.done)).slice(0, 8);
       let halted = null, built = Object.keys(st.done).length;
       const work = async x => {
         if (halted) return;
         const sub = {text: '', phase: '', ctls: j.ctls, get stopped() { return j.stopped; }};
-        try { const r = await askSafe(instrPrompt(ctx, st.page, x.id, x.brief, x.kind), {j: sub, label: 'Building', accept: takeFragment(x.id)}); st.done[x.id] = r.val; j.extra = (j.extra || 0) + bytes(r.val); j.place && j.place(x.id, r.val); }
+        try { const r = await askSafe(instrPrompt(ctx, st.page, x.id, x.brief, x.kind), {j: sub, label: 'Building', accept: takeFragment(x.id)}); st.done[x.id] = r.val; j.extra = (j.extra || 0) + bytes(r.val); j.place && j.place(x.id, r.val); if (r.val) await keep.piece(x.id, r.val); }
         catch (e) { if (e && HARD[e.code]) halted = halted || e; else { st.done[x.id] = ''; j.place && j.place(x.id, ''); j.notes.push('One instrument was left out (' + (x.brief || x.id).slice(0, 90) + '). Ask for it in Revise.'); } }
         built++; j.phase = 'Building instruments, ' + built + ' of ' + mounts.length; j.paint && j.paint();
       };
@@ -1525,11 +1655,13 @@ async function startCompose() {
         for (const t of ctx.verify) for (const para of t.split(/\n\s*\n/)) { const f = flat(para.replace(/\]\([^)]*\)/g, ']')); if (f.length < 12) continue; all++; if (body.indexOf(f) < 0) miss++; }
         if (miss) j.notes.push(miss + ' of your ' + all + ' paragraphs ' + (miss === 1 ? 'does' : 'do') + ' not appear word for word. Read the page against your text.');
       }
-      await finish(j, {text: page, model: st.model}, null, 'First setting', Object.assign({kind: ctx.own ? 'own' : 'ai', brief: ctx.brief.slice(0, 60000), instructions: draft.look.trim(), style: draft.style || '', inter: draft.inter, picStyle: draft.picStyle || '', links: ctx.links, files: st.uploaded.slice()}, ctx.own ? Object.assign({source: ctx.source}, draft.title.trim() ? {title: draft.title.trim().slice(0, 140)} : {}) : {}));
-      draft.brief = ''; draft.look = ''; draft.links = []; draft.files = []; draft.interNote = ''; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}];
+      await finish(j, {text: page, model: st.model}, null, 'First setting', Object.assign({kind: ctx.own ? 'own' : 'ai', brief: ctx.brief.slice(0, 60000), instructions: st.meta.look, style: st.meta.style, inter: st.meta.inter, picStyle: st.meta.picStyle, links: ctx.links, files: st.uploaded.slice()}, ctx.own ? Object.assign({source: ctx.source}, st.meta.title ? {title: st.meta.title} : {}) : {}));
+      await keep.clear();
+      if (picked) { if (formState.restored) clearForm(); return; }
+      draft.brief = ''; draft.look = ''; draft.links = []; draft.files = []; draft.interNote = ''; draft.title = ''; draft.blocks = [{id: 'k' + (++draft.seq), type: 'text', text: ''}]; dropForm();
     } catch (e) { pause(j, e); }
   };
-  renderPress(); scrollTo(0, 0); run();
+  if (picked) run(); else { renderPress(); scrollTo(0, 0); run(); }
 }
 
 /* Revision by small exact edits; a whole new page only when the change is a restyle. */

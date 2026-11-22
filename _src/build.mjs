@@ -108,7 +108,7 @@ function homePage() {
     cut('const el = (tag, attrs, ...kids) => {', '\nconst rid'),
     cut('const dateOf = ', '\nconst ago'),
     cut('const MARK = () => {', '\nconst sayErr'),
-    'const me = {isOwner: false, canEdit: false}, cap = {}, visible = p => p && p.status === "published";',
+    'const me = {isOwner: false, canEdit: false}, cap = {}, visible = p => p && p.status === "published", keptBar = () => null;',
     'const store = ' + JSON.stringify({posts: list, site: {theme: site.theme}, loaded: true}).replace(/</g, '\\u003c') + ';',
     cut('const HOME_THEMES = [', '\nfunction wantFont(f) {'),
     render,
