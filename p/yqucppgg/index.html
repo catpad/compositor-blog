@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Токи Пона: учебник в картинках</title>
+<meta name="description" content="Комикс-учебник языка токи пона: звуки, слова, частицы li, e, pi и la, счёт и первые фразы.">
+<meta name="compositor:paper" content="#EFE6D2">
+<meta name="compositor:ink" content="#15120E">
+<meta name="compositor:accent" content="#C23A22">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EFE6D2;
+  --ink:#15120E;
+  --accent:#C23A22;
+  --night:#1D2430;
+  --ochre:#D9A441;
+  --muted:#5E5547;
+  --display:'Oswald','Arial Narrow',sans-serif;
+  --text:'Literata',Georgia,serif;
+  --rule:6px;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:18px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+svg{display:block}
+
+/* ---------- panels ---------- */
+.panel{
+  position:relative;
+  border-top:var(--rule) solid var(--ink);
+  border-bottom:var(--rule) solid var(--ink);
+  background:var(--night);
+  margin:0;
+}
+.panel svg{width:100%;height:auto}
+.panel.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.panel.scroll svg{min-width:640px}
+.cover svg{aspect-ratio:1200/720;height:auto}
+.cap{
+  position:absolute;
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1rem;
+  line-height:1.3;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  background:var(--ochre);
+  color:var(--ink);
+  border:3px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  padding:.45rem .7rem;
+  max-width:19rem;
+}
+.cap.tl{left:1.25rem;top:1.25rem}
+.cap.br{right:1.25rem;bottom:1.25rem}
+.cap.bl{left:1.25rem;bottom:1.25rem}
+
+/* ---------- cover ---------- */
+.cover .title-box{
+  position:absolute;
+  left:clamp(1rem,4vw,3rem);
+  bottom:clamp(1rem,4vw,3rem);
+  background:var(--paper);
+  border:4px solid var(--ink);
+  box-shadow:8px 8px 0 var(--ink);
+  padding:1rem 1.25rem 1.1rem;
+  max-width:26rem;
+}
+.kicker{
+  font-family:var(--display);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  font-size:.8rem;
+  color:var(--accent);
+  margin:0 0 .2rem;
+}
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.6rem,7vw,4.6rem);
+  line-height:.95;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+  margin:0 0 .5rem;
+}
+.cover .lede{margin:0;font-size:1rem;line-height:1.5}
+
+/* ---------- issues ---------- */
+.issue{margin:0 0 4.5rem}
+.issue-head{
+  max-width:40rem;
+  margin:3rem auto 1.5rem;
+  padding:0 1.25rem;
+}
+.issue-no{
+  display:inline-block;
+  font-family:var(--display);
+  font-weight:600;
+  font-size:.85rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  background:var(--ink);
+  color:var(--paper);
+  padding:.2rem .6rem;
+  margin-bottom:.8rem;
+}
+h2{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.85rem,4.4vw,2.8rem);
+  line-height:1.08;
+  letter-spacing:-.005em;
+  margin:0;
+}
+h3{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:1.3rem;
+  line-height:1.2;
+  margin:2.2rem 0 .6rem;
+}
+.prose{
+  max-width:40rem;
+  margin:2rem auto 0;
+  padding:0 1.25rem;
+}
+.prose p{margin:0 0 1.05rem}
+.tp{font-weight:600;white-space:nowrap}
+.pt{font-weight:600;color:var(--accent)}
+.gloss{color:var(--muted);font-style:italic}
+
+/* examples */
+.ex{
+  margin:1.4rem 0 1.6rem;
+  padding:0;
+  border-top:2px solid var(--ink);
+}
+.ex div{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1rem;
+  padding:.55rem 0;
+  border-bottom:1px solid rgba(21,18,14,.25);
+}
+.ex dt{font-weight:600;margin:0}
+.ex dd{margin:0;color:var(--muted)}
+
+/* rules box */
+.rule-box{
+  border:3px solid var(--ink);
+  background:var(--paper);
+  box-shadow:6px 6px 0 var(--ink);
+  padding:1rem 1.2rem;
+  margin:1.6rem 0;
+}
+.rule-box p{margin:0}
+.rule-box p + p{margin-top:.6rem}
+
+/* sound tables */
+.sounds{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(4.2rem,1fr));
+  border-left:3px solid var(--ink);
+  border-top:3px solid var(--ink);
+  margin:1.2rem 0 1.6rem;
+}
+.sounds span{
+  border-right:3px solid var(--ink);
+  border-bottom:3px solid var(--ink);
+  padding:.45rem .3rem .4rem;
+  text-align:center;
+  font-family:var(--display);
+  font-size:1.6rem;
+  line-height:1.1;
+}
+.sounds span small{
+  display:block;
+  font-family:var(--text);
+  font-size:.78rem;
+  color:var(--muted);
+}
+.sounds span.v{background:var(--ochre)}
+
+/* strip of two panels */
+.strip{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--rule);
+  background:var(--ink);
+  border-top:var(--rule) solid var(--ink);
+  border-bottom:var(--rule) solid var(--ink);
+}
+.strip figure{margin:0;background:var(--paper)}
+.strip svg{width:100%;height:auto}
+
+/* numerals panel */
+.numerals{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:var(--rule);
+  background:var(--ink);
+  border-top:var(--rule) solid var(--ink);
+  border-bottom:var(--rule) solid var(--ink);
+}
+.numerals div{
+  background:var(--night);
+  color:var(--paper);
+  padding:1.4rem .5rem 1.2rem;
+  text-align:center;
+}
+.numerals b{
+  display:block;
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.2rem,7vw,4.8rem);
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+  color:var(--ochre);
+}
+.numerals span{
+  display:block;
+  font-family:var(--display);
+  font-size:clamp(1rem,2.4vw,1.5rem);
+  margin-top:.4rem;
+  letter-spacing:.04em;
+}
+.numerals div:nth-child(5) b{color:var(--accent)}
+
+/* lexicon */
+.lexicon{
+  columns:3 13rem;
+  column-gap:2rem;
+  column-rule:2px solid var(--ink);
+  margin:1.4rem 0 1.8rem;
+  padding:1rem 0;
+  border-top:3px solid var(--ink);
+  border-bottom:3px solid var(--ink);
+  font-size:.95rem;
+  line-height:1.4;
+}
+.lexicon p{margin:0 0 .45rem;break-inside:avoid}
+.lexicon .tp{display:inline-block;min-width:4.6rem}
+
+.coda{
+  font-family:var(--display);
+  font-weight:600;
+  font-size:clamp(1.5rem,4vw,2.2rem);
+  line-height:1.2;
+  margin:2.4rem 0 0;
+}
+.coda .gloss{display:block;font-family:var(--text);font-weight:400;font-size:1rem;margin-top:.3rem}
+
+/* ---------- instruments ---------- */
+.instrument{
+  display:block;
+  max-width:56rem;
+  margin:2.6rem auto;
+  min-height:28rem;
+  background:var(--paper);
+  border:4px solid var(--ink);
+  box-shadow:8px 8px 0 var(--ink);
+}
+.instrument[data-instrument="sound-loom"]{min-height:26rem}
+.instrument[data-instrument="compound-forge"]{min-height:30rem}
+.instrument[data-instrument="sentence-panel"]{min-height:32rem}
+.instrument[data-instrument="la-scene"]{min-height:30rem}
+.instrument[data-instrument="number-hands"]{min-height:26rem}
+
+@media (max-width:960px){
+  .instrument{margin-left:1rem;margin-right:1rem}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .cover svg{aspect-ratio:1/1}
+  .cover .title-box{position:static;margin:-2.5rem 1rem 0;box-shadow:6px 6px 0 var(--ink)}
+  .cover{border-bottom:none;background:var(--paper)}
+  .cover > svg{border-bottom:var(--rule) solid var(--ink)}
+  .cap{position:static;display:block;max-width:none;margin:0;box-shadow:none;border-width:3px 0 0}
+  .strip{grid-template-columns:1fr}
+  .numerals{grid-template-columns:repeat(5,1fr)}
+  .numerals div{padding:1rem .2rem}
+  .ex div{grid-template-columns:1fr;gap:.1rem}
+  .instrument{box-shadow:5px 5px 0 var(--ink)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/yqucppgg/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Токи Пона: учебник в картинках"><meta property="og:description" content="Комикс-учебник языка токи пона: звуки, слова, частицы li, e, pi и la, счёт и первые фразы."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/yqucppgg/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#EFE6D2;border-bottom:1px solid #15120E26;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15120E;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15120E;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#15120E"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#EFE6D2" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#EFE6D2"/></svg><span>Compositor</span></a><time datetime="2026-11-22T12:33:58.712Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#15120E;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-22</time></compositor-bar>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="dot-ink" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="4.5" cy="4.5" r="1.9" fill="#15120E"/>
+    </pattern>
+    <pattern id="dot-ink-big" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="7" cy="7" r="3.4" fill="#15120E"/>
+    </pattern>
+    <pattern id="dot-red" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="5" cy="5" r="2.4" fill="#C23A22"/>
+    </pattern>
+    <pattern id="dot-paper" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="4.5" cy="4.5" r="1.5" fill="#EFE6D2"/>
+    </pattern>
+    <pattern id="dot-ochre" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <circle cx="5" cy="5" r="2.6" fill="#D9A441"/>
+    </pattern>
+    <filter id="brush" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ================= COVER ================= -->
+<section class="panel cover" aria-label="Обложка">
+  <svg viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Человек на вершине чёрного холма поднимает руку навстречу огромному красному солнцу и говорит: toki!">
+    <rect width="1200" height="720" fill="#D9A441"/>
+    <rect y="300" width="1200" height="420" fill="url(#dot-red)" opacity=".55"/>
+    <rect width="1200" height="170" fill="url(#dot-ink)" opacity=".35"/>
+    <g fill="#15120E" opacity=".88">
+      <polygon points="560,330 1438,135 1452,212"/>
+      <polygon points="560,330 1274,-218 1319,-153"/>
+      <polygon points="560,330 976,-468 1043,-429"/>
+      <polygon points="560,330 600,-569 678,-562"/>
+      <polygon points="560,330 215,-502 289,-529"/>
+      <polygon points="560,330 -103,-278 -48,-333"/>
+      <polygon points="560,330 -299,59 -272,-15"/>
+      <polygon points="560,330 -332,448 -339,370"/>
+    </g>
+    <circle cx="560" cy="330" r="150" fill="#C23A22" stroke="#15120E" stroke-width="9" filter="url(#brush)"/>
+    <path d="M470 260 A110 110 0 0 1 560 220" fill="none" stroke="#EFE6D2" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+    <path d="M0 720 L0 560 C200 520 420 545 600 522 C700 508 760 472 820 472 C900 472 1000 520 1200 540 L1200 720 Z" fill="#15120E" filter="url(#brush)"/>
+    <path d="M0 720 L0 640 C300 610 700 630 1200 600 L1200 720 Z" fill="url(#dot-paper)" opacity=".18"/>
+    <g fill="#15120E">
+      <circle cx="818" cy="378" r="16"/>
+      <path d="M806 395 Q818 390 830 395 L838 440 L830 443 L828 474 L820 474 L818 448 L814 474 L806 474 L806 443 L798 440 Z"/>
+      <path d="M828 398 L852 352 L860 357 L836 406 Z"/>
+    </g>
+    <polygon points="778,268 822,350 800,262" fill="#EFE6D2" stroke="#15120E" stroke-width="5" stroke-linejoin="round"/>
+    <ellipse cx="760" cy="225" rx="98" ry="56" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+    <ellipse cx="760" cy="225" rx="92" ry="50" fill="#EFE6D2"/>
+    <text x="760" y="244" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="54" fill="#15120E">toki!</text>
+  </svg>
+  <div class="title-box">
+    <p class="kicker">Учебник в восьми выпусках</p>
+    <h1>Токи Пона</h1>
+    <p class="lede">Язык примерно из ста двадцати слов, в котором трудно сказать сложно и легко сказать главное. Первое слово уже прозвучало: <span class="tp">toki</span> значит «язык», «говорить» и «привет».</p>
+  </div>
+</section>
+
+<!-- ================= ISSUE 1 ================= -->
+<section class="issue" aria-labelledby="i1">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 1</span>
+    <h2 id="i1">Этот язык придумали, чтобы думать проще</h2>
+  </header>
+
+  <figure class="panel">
+    <svg viewBox="0 0 1200 560" role="img" aria-label="В тёмной комнате уходит под потолок башня толстых книг; маленький человек смотрит на неё, а справа на полу светится одна карточка со словом pona.">
+      <rect width="1200" height="560" fill="#1D2430"/>
+      <rect width="1200" height="560" fill="url(#dot-paper)" opacity=".1"/>
+      <circle cx="935" cy="440" r="170" fill="url(#dot-ochre)" opacity=".75"/>
+      <circle cx="935" cy="440" r="90" fill="#D9A441" opacity=".35"/>
+      <path d="M0 470 L1200 432 L1200 560 L0 560 Z" fill="#15120E"/>
+      <g transform="rotate(-3 250 470)" stroke="#15120E" stroke-width="5" stroke-linejoin="round" filter="url(#brush)">
+        <rect x="90" y="420" width="320" height="50" fill="#C23A22"/>
+        <rect x="110" y="374" width="290" height="46" fill="#15120E" stroke="#EFE6D2" stroke-width="3"/>
+        <rect x="80" y="330" width="330" height="44" fill="#D9A441"/>
+        <rect x="120" y="282" width="280" height="48" fill="#15120E" stroke="#EFE6D2" stroke-width="3"/>
+        <rect x="100" y="238" width="300" height="44" fill="#C23A22"/>
+        <rect x="130" y="190" width="270" height="48" fill="#15120E" stroke="#EFE6D2" stroke-width="3"/>
+        <rect x="95" y="146" width="310" height="44" fill="#D9A441"/>
+        <rect x="125" y="98" width="280" height="48" fill="#15120E" stroke="#EFE6D2" stroke-width="3"/>
+        <rect x="105" y="52" width="300" height="46" fill="#C23A22"/>
+        <rect x="135" y="4" width="270" height="48" fill="#15120E" stroke="#EFE6D2" stroke-width="3"/>
+        <rect x="100" y="-44" width="300" height="48" fill="#D9A441"/>
+      </g>
+      <g transform="rotate(-3 250 470)" stroke-width="3">
+        <line x1="114" y1="428" x2="114" y2="462" stroke="#15120E"/><line x1="386" y1="428" x2="386" y2="462" stroke="#15120E"/>
+        <line x1="134" y1="382" x2="134" y2="412" stroke="#EFE6D2"/><line x1="376" y1="382" x2="376" y2="412" stroke="#EFE6D2"/>
+        <line x1="104" y1="338" x2="104" y2="366" stroke="#15120E"/><line x1="386" y1="338" x2="386" y2="366" stroke="#15120E"/>
+        <line x1="144" y1="290" x2="144" y2="322" stroke="#EFE6D2"/><line x1="376" y1="290" x2="376" y2="322" stroke="#EFE6D2"/>
+        <line x1="124" y1="246" x2="124" y2="274" stroke="#15120E"/><line x1="376" y1="246" x2="376" y2="274" stroke="#15120E"/>
+        <line x1="154" y1="198" x2="154" y2="230" stroke="#EFE6D2"/><line x1="376" y1="198" x2="376" y2="230" stroke="#EFE6D2"/>
+        <line x1="119" y1="154" x2="119" y2="182" stroke="#15120E"/><line x1="381" y1="154" x2="381" y2="182" stroke="#15120E"/>
+        <line x1="149" y1="106" x2="149" y2="138" stroke="#EFE6D2"/><line x1="381" y1="106" x2="381" y2="138" stroke="#EFE6D2"/>
+        <line x1="129" y1="60" x2="129" y2="90" stroke="#15120E"/><line x1="381" y1="60" x2="381" y2="90" stroke="#15120E"/>
+      </g>
+      <g fill="#EFE6D2" stroke="#15120E" stroke-width="3">
+        <circle cx="600" cy="392" r="11"/>
+        <path d="M591 404 Q600 400 609 404 L614 432 L608 434 L607 456 L601 456 L600 438 L598 456 L592 456 L591 434 L586 432 Z"/>
+      </g>
+      <g transform="rotate(-6 935 445)">
+        <rect x="868" y="408" width="150" height="86" fill="#15120E"/>
+        <rect x="858" y="398" width="150" height="86" fill="#EFE6D2" stroke="#15120E" stroke-width="5"/>
+        <text x="933" y="455" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="40" fill="#15120E">pona</text>
+      </g>
+    </svg>
+    <figcaption class="cap tl">Словари других языков — башни. Этот помещается на карточке.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Токи пону создала канадский лингвист Соня Ланг. Первые материалы о языке появились в интернете в 2001 году, а в 2014-м вышла книга «Toki Pona: The Language of Good». Говорящие называют её просто <span class="tp">pu</span>, и именно её словарь — около ста двадцати слов — считается основой языка.</p>
+    <p>Идея в том, чтобы складывать сложное из простых частей и всё время возвращаться к главному. Само название собрано из двух слов: <span class="tp">toki</span> — «язык, речь», <span class="tp">pona</span> — «хороший, простой, добрый». Получается «хороший язык», или «язык добра».</p>
+    <p>Слов мало, поэтому каждое работает за многих. Нет склонений и спряжений, нет времён, нет рода и числа. Порядок слов и несколько коротких частиц делают всю грамматическую работу. В этом учебнике частицы выделены красным: <b class="pt">li</b>, <b class="pt">e</b>, <b class="pt">pi</b>, <b class="pt">la</b>, <b class="pt">o</b>. Выучите их — и вы знаете половину грамматики.</p>
+  </div>
+</section>
+
+<!-- ================= ISSUE 2 ================= -->
+<section class="issue" aria-labelledby="i2">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 2</span>
+    <h2 id="i2">Четырнадцати звуков хватает на весь язык</h2>
+  </header>
+
+  <figure class="panel scroll">
+    <svg viewBox="0 0 1200 520" role="img" aria-label="Чёрный профиль человека с открытым ртом; из него вырывается взрывной пузырь с гласными a e i o u и согласными j k l m n p s t w.">
+      <rect width="1200" height="520" fill="#C23A22"/>
+      <rect width="1200" height="520" fill="url(#dot-ink)" opacity=".4"/>
+      <path d="M0 0 L250 0 C290 50 305 110 302 160 L350 236 L310 252 C316 266 324 274 318 284 L300 294 L322 312 C310 330 292 340 292 360 C292 400 250 430 230 520 L0 520 Z" fill="#15120E" filter="url(#brush)"/>
+      <path d="M250 0 C290 50 305 110 302 160 L350 236" fill="none" stroke="#D9A441" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+      <polygon points="1040,260 951,317 946,401 816,399 720,460 624,399 494,401 489,317 340,300 400,260 489,203 494,119 624,121 720,60 816,121 946,119 951,203" fill="#EFE6D2" stroke="#15120E" stroke-width="7" stroke-linejoin="round" filter="url(#brush)"/>
+      <text x="720" y="262" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="76" letter-spacing="6" fill="#15120E">a e i o u</text>
+      <text x="720" y="330" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="600" font-size="40" letter-spacing="8" fill="#C23A22">j k l m n p s t w</text>
+    </svg>
+  </figure>
+
+  <div class="prose">
+    <p>В токи поне пять гласных и девять согласных. Гласные звучат почти как русские: <span class="tp">a</span> — а, <span class="tp">e</span> — э, <span class="tp">i</span> — и, <span class="tp">o</span> — о, <span class="tp">u</span> — у.</p>
+    <div class="sounds" aria-label="Звуки токи поны">
+      <span class="v">a<small>а</small></span><span class="v">e<small>э</small></span><span class="v">i<small>и</small></span><span class="v">o<small>о</small></span><span class="v">u<small>у</small></span>
+      <span>j<small>й</small></span><span>k<small>к</small></span><span>l<small>л</small></span><span>m<small>м</small></span><span>n<small>н</small></span><span>p<small>п</small></span><span>s<small>с</small></span><span>t<small>т</small></span><span>w<small>как англ. w</small></span>
+    </div>
+    <p>Буква <span class="tp">j</span> читается как «й»: <span class="tp">jan</span> — «ян», человек. Ударение всегда падает на первый слог: <span class="tp">SO-we-li</span>, зверь.</p>
+    <div class="rule-box">
+      <p><strong>Слог устроен так:</strong> согласная (не всегда), гласная, и в конце может стоять <span class="tp">n</span>. Отсюда <span class="tp">mun</span>, <span class="tp">ken</span>, <span class="tp">sin-pin</span>.</p>
+      <p><strong>Запрещено:</strong> сочетания <span class="tp">ji</span>, <span class="tp">ti</span>, <span class="tp">wo</span>, <span class="tp">wu</span>, а также <span class="tp">n</span> перед <span class="tp">m</span> или <span class="tp">n</span>. Слог без согласной допустим только в начале слова: <span class="tp">ilo</span>, <span class="tp">olin</span>.</p>
+    </div>
+    <p>Эти ограничения делают слова удобными для говорящих на самых разных языках: в них нет звуков, о которые легко споткнуться.</p>
+  </div>
+
+  <div class="instrument" data-instrument="sound-loom">
+  <div class="sl-top">
+    <div class="sl-frame">
+      <span class="sl-count" aria-label="слогов"><span class="sl-cv">0</span> / 4</span>
+      <div class="sl-word" aria-live="polite"></div>
+      <div class="sl-line"><span class="sl-k">чтение</span><span class="sl-rv"></span></div>
+      <div class="sl-line"><span class="sl-k">ударение</span><span class="sl-sv"></span></div>
+    </div>
+    <div class="sl-mean">
+      <span class="sl-k">словарь pu</span>
+      <div class="sl-mw"></div>
+      <div class="sl-mv"></div>
+    </div>
+  </div>
+  <div class="sl-verdict" aria-live="polite"><span class="sl-mark" aria-hidden="true"></span><span class="sl-vt"></span></div>
+  <div class="sl-loom">
+    <div class="sl-row"><span class="sl-k">согласная</span><div class="sl-chips" role="radiogroup" aria-label="согласная" data-row="c"></div></div>
+    <div class="sl-row"><span class="sl-k">гласная</span><div class="sl-chips" role="radiogroup" aria-label="гласная" data-row="v"></div></div>
+    <div class="sl-row sl-act">
+      <span class="sl-k">конец</span>
+      <div class="sl-btns">
+        <button type="button" class="sl-n" role="switch" aria-checked="false"><span class="sl-tr" aria-hidden="true"></span>n</button>
+        <button type="button" class="sl-add"></button>
+        <button type="button" class="sl-del">− слог</button>
+        <button type="button" class="sl-clr">очистить</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="sound-loom"]{padding:1.25rem 1.25rem 1.4rem;font-family:var(--text);color:var(--ink);font-size:1rem;line-height:1.4}
+[data-instrument="sound-loom"] .sl-top{display:grid;grid-template-columns:minmax(0,1fr) 14rem;gap:1rem}
+[data-instrument="sound-loom"] .sl-frame{position:relative;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--paper);padding:.9rem 1rem .8rem;min-width:0}
+[data-instrument="sound-loom"] .sl-count{position:absolute;right:.6rem;top:.4rem;font-family:var(--display);font-size:.85rem;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
+[data-instrument="sound-loom"] .sl-word{font-family:var(--display);font-weight:700;font-size:clamp(2rem,7vw,3.5rem);line-height:1.15;height:1.3em;white-space:nowrap;overflow:hidden;margin:.2rem 0 .5rem}
+[data-instrument="sound-loom"] .sl-sy{display:inline-block;border-bottom:5px solid transparent}
+[data-instrument="sound-loom"] .sl-sy + .sl-sy::before{content:"·";color:var(--muted);font-weight:400;margin:0 .03em}
+[data-instrument="sound-loom"] .sl-sy.st{border-bottom-color:var(--ochre)}
+[data-instrument="sound-loom"] .sl-sy.bad{color:var(--accent);border-bottom:5px dashed var(--accent)}
+[data-instrument="sound-loom"] .sl-sy.gh{opacity:.32;border-bottom:5px dotted var(--ink)}
+[data-instrument="sound-loom"] .sl-sy.gh.bad{opacity:.55;border-bottom-color:var(--accent)}
+[data-instrument="sound-loom"] .sl-empty{color:var(--muted);font-weight:400}
+[data-instrument="sound-loom"] .sl-new{animation:sl-in .28s ease-out}
+@keyframes sl-in{from{opacity:0;transform:translateY(.25em)}to{opacity:1;transform:none}}
+[data-instrument="sound-loom"] .sl-line{display:flex;gap:.6rem;align-items:baseline;height:1.6rem;white-space:nowrap;overflow:hidden}
+[data-instrument="sound-loom"] .sl-k{font-family:var(--display);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);min-width:5.4rem}
+[data-instrument="sound-loom"] .sl-rv,[data-instrument="sound-loom"] .sl-sv{font-size:1.05rem}
+[data-instrument="sound-loom"] .sl-rv b,[data-instrument="sound-loom"] .sl-sv b{font-weight:600}
+[data-instrument="sound-loom"] .sl-mean{border:3px solid var(--ink);padding:.6rem .8rem;background:var(--paper);height:100%;min-height:8.5rem;display:flex;flex-direction:column;gap:.15rem;transition:background-color .25s,box-shadow .25s}
+[data-instrument="sound-loom"] .sl-mean.on{background:var(--ochre);box-shadow:4px 4px 0 var(--ink)}
+[data-instrument="sound-loom"] .sl-mean:not(.on){border-style:dashed}
+[data-instrument="sound-loom"] .sl-mw{font-family:var(--display);font-weight:700;font-size:1.5rem;line-height:1.1;height:1.7rem;overflow:hidden}
+[data-instrument="sound-loom"] .sl-mv{font-size:1.02rem;line-height:1.3;height:2.7rem;overflow:hidden}
+[data-instrument="sound-loom"] .sl-mean:not(.on) .sl-mv{color:var(--muted);font-style:italic}
+[data-instrument="sound-loom"] .sl-verdict{display:flex;align-items:center;gap:.7rem;height:3rem;margin:1rem 0 1.1rem;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);font-family:var(--display);font-size:1.12rem;letter-spacing:.02em;white-space:nowrap;overflow:hidden}
+[data-instrument="sound-loom"] .sl-vt{overflow:hidden;text-overflow:ellipsis}
+[data-instrument="sound-loom"] .sl-mark{flex:none;width:1.8rem;height:1.8rem;border:3px solid var(--ink);display:grid;place-items:center;font-weight:700;font-size:1rem;line-height:1}
+[data-instrument="sound-loom"] .sl-verdict.ok .sl-mark{background:var(--ink);color:var(--paper)}
+[data-instrument="sound-loom"] .sl-verdict.err{color:var(--accent)}
+[data-instrument="sound-loom"] .sl-verdict.err .sl-mark{background:var(--accent);color:var(--paper);border-color:var(--ink)}
+[data-instrument="sound-loom"] .sl-row{display:flex;align-items:center;gap:.6rem;margin:.55rem 0}
+[data-instrument="sound-loom"] .sl-chips,[data-instrument="sound-loom"] .sl-btns{display:flex;flex-wrap:wrap;gap:.4rem}
+[data-instrument="sound-loom"] button{font-family:var(--display);color:var(--ink);background:var(--paper);border:3px solid var(--ink);cursor:pointer;touch-action:manipulation;transition:background-color .15s,color .15s,border-color .15s}
+[data-instrument="sound-loom"] button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-instrument="sound-loom"] .sl-chip{min-width:2.65rem;height:2.65rem;font-size:1.3rem;font-weight:600;padding:0 .4rem}
+[data-instrument="sound-loom"] .sl-chip[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="sound-loom"] .sl-chip.bad{background:rgba(194,58,34,.13);color:var(--accent);border-color:var(--accent);border-style:dashed}
+[data-instrument="sound-loom"] .sl-chip.bad[aria-checked="true"]{background:var(--accent);color:var(--paper);border-color:var(--ink);border-style:solid}
+[data-instrument="sound-loom"] .sl-n,[data-instrument="sound-loom"] .sl-add,[data-instrument="sound-loom"] .sl-del,[data-instrument="sound-loom"] .sl-clr{height:2.65rem;font-size:1.05rem;padding:0 .8rem;display:inline-flex;align-items:center;gap:.45rem}
+[data-instrument="sound-loom"] .sl-n{font-size:1.3rem;font-weight:600}
+[data-instrument="sound-loom"] .sl-tr{width:1.9rem;height:1rem;border:2px solid var(--ink);position:relative;background:var(--paper)}
+[data-instrument="sound-loom"] .sl-tr::after{content:"";position:absolute;top:1px;left:1px;width:.7rem;height:.7rem;background:var(--ink);transition:left .15s}
+[data-instrument="sound-loom"] .sl-n[aria-checked="true"]{background:var(--ochre)}
+[data-instrument="sound-loom"] .sl-n[aria-checked="true"] .sl-tr::after{left:calc(100% - .7rem - 1px)}
+[data-instrument="sound-loom"] .sl-add{background:var(--ink);color:var(--paper);font-weight:600;min-width:5.6rem;justify-content:center;font-variant-numeric:tabular-nums}
+[data-instrument="sound-loom"] .sl-add.bad{background:var(--accent)}
+[data-instrument="sound-loom"] button:disabled{opacity:.35;cursor:default}
+@media (max-width:640px){
+  [data-instrument="sound-loom"]{padding:1rem}
+  [data-instrument="sound-loom"] .sl-top{grid-template-columns:1fr}
+  [data-instrument="sound-loom"] .sl-mean{min-height:0;height:auto}
+  [data-instrument="sound-loom"] .sl-row{flex-direction:column;align-items:flex-start;gap:.3rem}
+  [data-instrument="sound-loom"] .sl-k{min-width:0}
+  [data-instrument="sound-loom"] .sl-verdict{font-size:.98rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="sound-loom"] *{animation:none!important;transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="sound-loom"]');
+if(!root)return;
+const $=s=>root.querySelector(s);
+const C=['','j','k','l','m','n','p','s','t','w'];
+const V=['a','e','i','o','u'];
+const BAD={ji:1,ti:1,wo:1,wu:1};
+const DICT={toki:'язык, говорить, привет',pona:'хороший, простой, добрый',jan:'человек',moku:'еда, есть',telo:'вода, жидкость',suno:'солнце, свет',tomo:'дом, помещение',kili:'фрукт, овощ',pipi:'насекомое, жук',waso:'птица',soweli:'зверь',sina:'ты, вы',mi:'я, мы',ona:'он, она, оно',lili:'маленький',suli:'большой, важный',mun:'луна',ma:'земля, страна',nasa:'странный',ike:'плохой',ala:'нет, ничто',ale:'всё',lape:'спать, отдыхать',kala:'рыба',sona:'знать, знание',lukin:'видеть, смотреть',olin:'любить',seli:'огонь, тепло',sewi:'верх, небесный',nimi:'слово, имя',pali:'делать, работать',sitelen:'рисунок, письмо',kalama:'звук',kon:'воздух, дух',lipu:'лист, книга',ilo:'инструмент',wawa:'сильный, сила',tenpo:'время',pimeja:'тёмный, чёрный',kasi:'растение',kiwen:'камень, твёрдый',lete:'холодный',loje:'красный',jelo:'жёлтый',laso:'синий, зелёный',linja:'линия, нить'};
+const RC={'':'',j:'й',k:'к',l:'л',m:'м',n:'н',p:'п',s:'с',t:'т',w:'у'};
+const RV={a:'а',e:'э',i:'и',o:'о',u:'у'};
+const JV={a:'я',e:'е',i:'йи',o:'йо',u:'ю'};
+let word=[{c:'s',v:'o',n:false},{c:'w',v:'e',n:false},{c:'l',v:'i',n:false}];
+let cur={c:'p',v:'a',n:false};
+let fresh=-1;
+const str=s=>s.c+s.v+(s.n?'n':'');
+function rd(s,prev){
+  let r;
+  if(s.c==='j') r=(prev&&prev.n)?'й'+RV[s.v]:JV[s.v];
+  else r=RC[s.c]+RV[s.v];
+  return r+(s.n?'н':'');
+}
+function problems(list){
+  const out=[];
+  list.forEach((s,i)=>{
+    if(BAD[s.c+s.v]) out.push({i,msg:s.c+s.v+' — запрещённое сочетание'});
+    if(s.c===''&&i>0) out.push({i,msg:'слог без согласной не в начале — '+str(s)});
+    if(i>0&&list[i-1].n&&(s.c==='m'||s.c==='n')) out.push({i,msg:'n перед '+s.c+' — '+str(list[i-1])+'·'+str(s)});
+  });
+  return out;
+}
+function badAt(syl){
+  const pos=Math.min(word.length,4);
+  const list=word.slice(0,pos).concat([syl]);
+  return problems(list).some(p=>p.i===pos);
+}
+function mkRow(row,vals,key){
+  vals.forEach(val=>{
+    const b=document.createElement('button');
+    b.type='button';b.className='sl-chip';b.setAttribute('role','radio');
+    b.textContent=val===''?'∅':val;
+    b.setAttribute('aria-label',val===''?'без согласной':val);
+    b.addEventListener('click',()=>{cur[key]=val;render();});
+    row.appendChild(b);
+  });
+  row.addEventListener('keydown',e=>{
+    const n=vals.length;let i=vals.indexOf(cur[key]);
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')i=(i+1)%n;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')i=(i-1+n)%n;
+    else if(e.key==='Home')i=0;
+    else if(e.key==='End')i=n-1;
+    else return;
+    e.preventDefault();cur[key]=vals[i];render();row.children[i].focus();
+  });
+}
+const cRow=$('[data-row="c"]'),vRow=$('[data-row="v"]');
+mkRow(cRow,C,'c');mkRow(vRow,V,'v');
+const nBtn=$('.sl-n'),addBtn=$('.sl-add'),delBtn=$('.sl-del'),clrBtn=$('.sl-clr');
+nBtn.addEventListener('click',()=>{cur.n=!cur.n;render();});
+addBtn.addEventListener('click',()=>{if(word.length<4){word.push({c:cur.c,v:cur.v,n:cur.n});fresh=word.length-1;render();}});
+delBtn.addEventListener('click',()=>{if(word.length){word.pop();fresh=-1;render();}});
+clrBtn.addEventListener('click',()=>{word=[];fresh=-1;render();});
+function render(){
+  Array.from(cRow.children).forEach((b,i)=>{
+    const on=C[i]===cur.c;
+    b.setAttribute('aria-checked',on);b.tabIndex=on?0:-1;
+    b.classList.toggle('bad',badAt({c:C[i],v:cur.v,n:cur.n}));
+  });
+  Array.from(vRow.children).forEach((b,i)=>{
+    const on=V[i]===cur.v;
+    b.setAttribute('aria-checked',on);b.tabIndex=on?0:-1;
+    b.classList.toggle('bad',badAt({c:cur.c,v:V[i],n:cur.n}));
+  });
+  nBtn.setAttribute('aria-checked',cur.n);
+  const full=word.length>=4;
+  const curBad=badAt(cur);
+  addBtn.textContent='+ '+str(cur);
+  addBtn.setAttribute('aria-label','добавить слог '+str(cur));
+  addBtn.disabled=full;
+  addBtn.classList.toggle('bad',curBad&&!full);
+  delBtn.disabled=!word.length;clrBtn.disabled=!word.length;
+  const probs=problems(word);
+  const badIdx=new Set(probs.map(p=>p.i));
+  const w=$('.sl-word');w.textContent='';
+  if(!word.length&&full){}
+  word.forEach((s,i)=>{
+    const sp=document.createElement('span');
+    sp.className='sl-sy'+(i===0?' st':'')+(badIdx.has(i)?' bad':'')+(i===fresh?' sl-new':'');
+    sp.textContent=str(s);w.appendChild(sp);
+  });
+  if(!full){
+    const g=document.createElement('span');
+    g.className='sl-sy gh'+(curBad?' bad':'')+(word.length===0?' st':'');
+    g.textContent=str(cur);g.setAttribute('aria-hidden','true');w.appendChild(g);
+  }
+  fresh=-1;
+  $('.sl-cv').textContent=word.length;
+  const rv=$('.sl-rv'),sv=$('.sl-sv');
+  if(word.length){
+    const parts=word.map((s,i)=>rd(s,word[i-1]));
+    rv.innerHTML='[<b>'+parts[0].toUpperCase()+'</b>'+(parts.length>1?'-'+parts.slice(1).join('-'):'')+']';
+    sv.innerHTML='<b>'+str(word[0])+'</b> — первый слог';
+  }else{rv.textContent='—';sv.textContent='—';}
+  const ws=word.map(str).join('');
+  const valid=word.length&&!probs.length;
+  const m=$('.sl-mean');
+  const hit=valid&&DICT[ws];
+  m.classList.toggle('on',!!hit);
+  $('.sl-mw').textContent=hit?ws:(word.length?ws:'—');
+  $('.sl-mv').textContent=hit?DICT[ws]:(word.length?'нет в словаре pu':'слово пусто');
+  const vd=$('.sl-verdict'),mk=$('.sl-mark'),vt=$('.sl-vt');
+  vd.classList.remove('ok','err');
+  if(!word.length){mk.textContent='·';vt.textContent='слово пусто';}
+  else if(!probs.length){vd.classList.add('ok');mk.textContent='✓';vt.textContent='допустимо';}
+  else{vd.classList.add('err');mk.textContent='✕';vt.textContent='нарушение: '+probs[0].msg+(probs.length>1?' · ещё '+(probs.length-1):'');}
+}
+render();
+})();</script>
+</section>
+
+<!-- ================= ISSUE 3 ================= -->
+<section class="issue" aria-labelledby="i3">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 3</span>
+    <h2 id="i3">Слово означает не вещь, а целую область смысла</h2>
+  </header>
+
+  <figure class="panel scroll" style="background:var(--paper)">
+    <svg viewBox="0 0 1200 430" role="img" aria-label="Три кадра: дом, слово tomo; вода, слово telo; дом с каплей внутри — tomo telo, ванная.">
+      <rect width="1200" height="430" fill="#EFE6D2"/>
+      <rect width="1200" height="430" fill="url(#dot-ochre)" opacity=".35"/>
+      <g stroke="#15120E" stroke-width="6" stroke-linejoin="round">
+        <rect x="40" y="40" width="320" height="350" fill="#EFE6D2"/>
+        <rect x="440" y="40" width="320" height="350" fill="#EFE6D2"/>
+        <rect x="840" y="40" width="320" height="350" fill="#EFE6D2"/>
+      </g>
+      <g stroke="#15120E" stroke-width="7" stroke-linejoin="round" filter="url(#brush)">
+        <rect x="135" y="200" width="130" height="110" fill="#EFE6D2"/>
+        <rect x="135" y="200" width="130" height="110" fill="url(#dot-ink)" opacity=".35" stroke="none"/>
+        <path d="M110 205 L200 120 L290 205 Z" fill="#C23A22"/>
+        <rect x="185" y="250" width="30" height="60" fill="#15120E"/>
+      </g>
+      <g fill="none" stroke="#15120E" stroke-width="8" stroke-linecap="round" filter="url(#brush)">
+        <path d="M490 230 q30 -26 60 0 t60 0 t60 0 t60 0"/>
+        <path d="M490 270 q30 -26 60 0 t60 0 t60 0 t60 0"/>
+        <path d="M490 310 q30 -26 60 0 t60 0 t60 0 t60 0"/>
+      </g>
+      <path d="M600 80 C620 120 640 140 640 162 A40 40 0 0 1 560 162 C560 140 580 120 600 80 Z" fill="#1D2430" stroke="#15120E" stroke-width="6" filter="url(#brush)"/>
+      <path d="M582 158 A18 18 0 0 0 596 178" fill="none" stroke="#EFE6D2" stroke-width="5" stroke-linecap="round"/>
+      <g stroke="#15120E" stroke-width="7" stroke-linejoin="round" filter="url(#brush)">
+        <rect x="935" y="200" width="130" height="110" fill="#EFE6D2"/>
+        <path d="M910 205 L1000 120 L1090 205 Z" fill="#C23A22"/>
+        <path d="M1000 218 C1014 244 1028 260 1028 276 A28 28 0 0 1 972 276 C972 260 986 244 1000 218 Z" fill="#1D2430"/>
+      </g>
+      <g font-family="Oswald, sans-serif" text-anchor="middle">
+        <text x="200" y="350" font-size="36" font-weight="700" fill="#15120E">tomo</text>
+        <text x="200" y="378" font-size="20" fill="#5E5547">дом, помещение</text>
+        <text x="600" y="350" font-size="36" font-weight="700" fill="#15120E">telo</text>
+        <text x="600" y="378" font-size="20" fill="#5E5547">вода, жидкость</text>
+        <text x="1000" y="350" font-size="36" font-weight="700" fill="#15120E">tomo telo</text>
+        <text x="1000" y="378" font-size="20" fill="#5E5547">ванная</text>
+        <text x="400" y="240" font-size="72" font-weight="700" fill="#15120E">+</text>
+        <text x="800" y="240" font-size="72" font-weight="700" fill="#15120E">=</text>
+      </g>
+    </svg>
+  </figure>
+
+  <div class="prose">
+    <p>Каждое слово токи поны покрывает широкую область. <span class="tp">suno</span> — это солнце, свет и всё яркое. <span class="tp">moku</span> — еда и действие «есть». <span class="tp">telo</span> — вода, любая жидкость, а ещё «мыть» и «поливать». Одно и то же слово становится существительным, глаголом или признаком в зависимости от места во фразе.</p>
+    <h3>Главное слово стоит первым, уточнения идут за ним</h3>
+    <p>Когда не хватает отдельного слова, его собирают. Сначала называют основное, потом добавляют признаки — в порядке, обратном русскому «хороший человек».</p>
+    <dl class="ex">
+      <div><dt>jan pona</dt><dd>друг — «хороший человек»</dd></div>
+      <div><dt>jan lili</dt><dd>ребёнок — «маленький человек»</dd></div>
+      <div><dt>tomo telo</dt><dd>ванная — «водяное помещение»</dd></div>
+      <div><dt>tomo tawa</dt><dd>машина — «движущийся дом»</dd></div>
+      <div><dt>telo nasa</dt><dd>спиртное — «странная вода»</dd></div>
+      <div><dt>ma tomo</dt><dd>город — «земля домов»</dd></div>
+    </dl>
+    <p>Перестановка меняет смысл: <span class="tp">tomo telo</span> — помещение, связанное с водой, а <span class="tp">telo tomo</span> — вода, связанная с домом. Говорящий сам решает, что главное.</p>
+  </div>
+
+  <div class="instrument" data-instrument="compound-forge">
+  <div class="cf">
+    <div class="col heads" role="group" aria-label="Главные слова">
+      <p class="ch">голова</p>
+      <button type="button" class="tile" data-word="jan" data-role="head">jan<small>человек</small></button>
+      <button type="button" class="tile" data-word="tomo" data-role="head">tomo<small>дом</small></button>
+      <button type="button" class="tile" data-word="telo" data-role="head">telo<small>вода</small></button>
+      <button type="button" class="tile" data-word="ilo" data-role="head">ilo<small>инструмент</small></button>
+      <button type="button" class="tile" data-word="ma" data-role="head">ma<small>земля</small></button>
+    </div>
+    <div class="mid">
+      <div class="anvil" aria-label="Составное слово">
+        <div class="slot" data-slot="0"></div>
+        <div class="slot" data-slot="1"></div>
+        <div class="slot" data-slot="2"></div>
+        <span class="sl">голова</span><span class="sl">уточнение</span><span class="sl">уточнение</span>
+      </div>
+      <div class="bar"><button type="button" class="swap">⇄ поменять голову и уточнение</button></div>
+      <div class="frame"><svg class="pic" viewBox="0 0 400 240" role="img" aria-label=""></svg></div>
+      <div class="ro" aria-live="polite">
+        <div class="rp"><span class="tpw"></span><span class="tag"></span></div>
+        <div class="rl"></div>
+        <div class="rm"></div>
+        <div class="rr"></div>
+      </div>
+    </div>
+    <div class="col mods" role="group" aria-label="Уточнения">
+      <p class="ch">уточнения</p>
+      <button type="button" class="tile" data-word="pona" data-role="mod">pona<small>хороший</small></button>
+      <button type="button" class="tile" data-word="lili" data-role="mod">lili<small>маленький</small></button>
+      <button type="button" class="tile" data-word="suli" data-role="mod">suli<small>большой</small></button>
+      <button type="button" class="tile" data-word="tawa" data-role="mod">tawa<small>движение</small></button>
+      <button type="button" class="tile" data-word="telo" data-role="mod">telo<small>вода</small></button>
+      <button type="button" class="tile" data-word="nasa" data-role="mod">nasa<small>странный</small></button>
+      <button type="button" class="tile" data-word="moku" data-role="mod">moku<small>еда</small></button>
+      <button type="button" class="tile" data-word="toki" data-role="mod">toki<small>речь</small></button>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="compound-forge"]{position:relative;font-family:var(--text);color:var(--ink)}
+[data-instrument="compound-forge"] .cf{display:grid;grid-template-columns:7.2rem minmax(0,1fr) 7.2rem;gap:1.1rem;padding:1.2rem}
+[data-instrument="compound-forge"] .col{display:flex;flex-direction:column;gap:.45rem}
+[data-instrument="compound-forge"] .ch{margin:0 0 .2rem;font-family:var(--display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+[data-instrument="compound-forge"] .tile{font-family:var(--display);font-weight:700;font-size:1.15rem;line-height:1.1;text-align:left;color:var(--ink);background:var(--paper);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:.3rem .55rem .35rem;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;transition:background .15s,transform .15s}
+[data-instrument="compound-forge"] .tile small{display:block;font-family:var(--text);font-weight:400;font-size:.72rem;color:var(--muted)}
+[data-instrument="compound-forge"] .tile.on{background:var(--ochre)}
+[data-instrument="compound-forge"] .tile.off{opacity:.4}
+[data-instrument="compound-forge"] .tile:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+[data-instrument="compound-forge"] .tile:focus-visible,[data-instrument="compound-forge"] .chip:focus-visible,[data-instrument="compound-forge"] .swap:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="compound-forge"] .mid{display:flex;flex-direction:column;gap:.7rem;min-width:0}
+[data-instrument="compound-forge"] .anvil{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem .5rem;background:var(--ink);padding:.6rem .6rem .35rem;clip-path:polygon(0 0,100% 0,100% 72%,88% 100%,12% 100%,0 72%)}
+[data-instrument="compound-forge"] .slot{height:3.3rem;border:2px dashed rgba(239,230,210,.45);display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s}
+[data-instrument="compound-forge"] .slot.tgt{border-color:var(--ochre);background:rgba(217,164,65,.28)}
+[data-instrument="compound-forge"] .slot:not(.empty){border-style:solid;border-color:transparent}
+[data-instrument="compound-forge"] .sl{font-family:var(--display);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre);text-align:center;padding-bottom:.5rem}
+[data-instrument="compound-forge"] .chip{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-family:var(--display);font-weight:700;font-size:1.4rem;background:var(--paper);color:var(--ink);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+[data-instrument="compound-forge"] .chip.hd{background:var(--accent);color:var(--paper)}
+[data-instrument="compound-forge"] .chip.lift{opacity:.3}
+[data-instrument="compound-forge"] .bar{display:flex;justify-content:center}
+[data-instrument="compound-forge"] .swap{font-family:var(--display);font-weight:600;font-size:.95rem;letter-spacing:.03em;background:var(--paper);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:.3rem .8rem;cursor:pointer}
+[data-instrument="compound-forge"] .swap:disabled{opacity:.4;cursor:default}
+[data-instrument="compound-forge"] .frame{border:3px solid var(--ink);background:var(--paper);line-height:0}
+[data-instrument="compound-forge"] .pic{width:100%;height:auto}
+[data-instrument="compound-forge"] .pic path,[data-instrument="compound-forge"] .pic rect,[data-instrument="compound-forge"] .pic circle,[data-instrument="compound-forge"] .pic ellipse,[data-instrument="compound-forge"] .pic line{stroke:var(--ink);stroke-linejoin:round;stroke-linecap:round}
+[data-instrument="compound-forge"] .pic .h *{stroke-width:3.6}
+[data-instrument="compound-forge"] .pic .b *{stroke-width:8}
+[data-instrument="compound-forge"] .pic .fi{fill:var(--ink)}
+[data-instrument="compound-forge"] .pic .fp{fill:var(--paper)}
+[data-instrument="compound-forge"] .pic .fr{fill:var(--accent)}
+[data-instrument="compound-forge"] .pic .fo{fill:var(--ochre)}
+[data-instrument="compound-forge"] .pic .fn{fill:var(--night)}
+[data-instrument="compound-forge"] .pic .f0{fill:none}
+[data-instrument="compound-forge"] .pic .hl{stroke:var(--paper)}
+[data-instrument="compound-forge"] .pic .dt{fill:var(--ochre);stroke:none}
+[data-instrument="compound-forge"] .pic .bg{fill:var(--paper);stroke:none}
+[data-instrument="compound-forge"] .pic .sh{fill:var(--ink);stroke:none;opacity:.18}
+[data-instrument="compound-forge"] .pic .sp{stroke-width:4}
+[data-instrument="compound-forge"] .pic .cn{stroke-width:2.5;stroke-dasharray:5 5}
+[data-instrument="compound-forge"] .pic .bc{stroke-width:4}
+[data-instrument="compound-forge"] .pic .lb{font-family:var(--display);font-weight:700;font-size:20px;fill:var(--ink)}
+[data-instrument="compound-forge"] .pic .lb.s{font-size:15px;font-weight:600}
+[data-instrument="compound-forge"] .pic .in{animation:cf-in .3s ease-out}
+@keyframes cf-in{from{opacity:.15}to{opacity:1}}
+[data-instrument="compound-forge"] .ro{height:10.2rem;overflow:hidden;border:3px solid var(--ink);background:var(--paper);box-shadow:4px 4px 0 var(--ink);padding:.55rem .8rem;font-variant-numeric:tabular-nums}
+[data-instrument="compound-forge"] .rp{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;height:2.1rem}
+[data-instrument="compound-forge"] .tpw{font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="compound-forge"] .tag{flex:none;font-family:var(--display);font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.1rem .45rem;border:2px solid var(--ink)}
+[data-instrument="compound-forge"] .tag.est{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+[data-instrument="compound-forge"] .rl{height:3rem;font-size:1rem;line-height:1.5;overflow:hidden}
+[data-instrument="compound-forge"] .rm{height:1.6rem;font-size:1rem;line-height:1.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="compound-forge"] .rm b{color:var(--accent)}
+[data-instrument="compound-forge"] .rr{height:1.5rem;font-size:.88rem;line-height:1.6;color:var(--muted);font-style:italic;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="compound-forge"] .ghost{position:absolute;left:0;top:0;pointer-events:none;z-index:5;font-family:var(--display);font-weight:700;font-size:1.3rem;background:var(--ochre);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:.2rem .6rem;transform:translate(-50%,-70%) rotate(-3deg)}
+@media (max-width:640px){
+  [data-instrument="compound-forge"] .cf{grid-template-columns:1fr 1fr;grid-template-areas:"h m" "c c";padding:.9rem;gap:.8rem}
+  [data-instrument="compound-forge"] .heads{grid-area:h}
+  [data-instrument="compound-forge"] .mods{grid-area:m}
+  [data-instrument="compound-forge"] .mid{grid-area:c}
+  [data-instrument="compound-forge"] .col{flex-direction:row;flex-wrap:wrap;align-content:flex-start;gap:.35rem}
+  [data-instrument="compound-forge"] .ch{width:100%}
+  [data-instrument="compound-forge"] .tile{font-size:1rem;padding:.2rem .45rem}
+  [data-instrument="compound-forge"] .tile small{display:none}
+  [data-instrument="compound-forge"] .chip{font-size:1.15rem}
+  [data-instrument="compound-forge"] .ro{height:11.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="compound-forge"] *{animation:none!important;transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="compound-forge"]');
+if(!root)return;
+const P={
+jan:'<circle class="fi" cx="50" cy="22" r="13"/><path class="fi" d="M34 40 Q50 34 66 40 L72 72 L62 74 L60 96 L53 96 L50 78 L47 96 L40 96 L38 74 L28 72 Z"/>',
+tomo:'<rect class="fp" x="24" y="48" width="52" height="44"/><path class="fr" d="M14 52 L50 16 L86 52 Z"/><rect class="fi" x="43" y="66" width="14" height="26"/>',
+telo:'<path class="fn" d="M50 8 C62 30 72 42 72 58 A22 22 0 0 1 28 58 C28 42 38 30 50 8 Z"/><path class="f0 hl" d="M37 58 A13 13 0 0 0 46 70"/><path class="f0" d="M14 92 q9 -8 18 0 t18 0 t18 0 t18 0"/>',
+ilo:'<path class="fo" d="M44 38 L56 38 L59 94 L41 94 Z"/><path class="fi" d="M18 16 H74 L82 27 L74 38 H18 Z"/>',
+ma:'<path class="fo" d="M6 88 C24 52 42 44 54 58 C64 46 80 50 94 88 Z"/><circle class="fr" cx="74" cy="24" r="11"/><path class="f0" d="M4 90 H96"/>',
+pona:'<path class="fr" d="M50 86 C18 64 10 46 18 32 C26 18 44 20 50 34 C56 20 74 18 82 32 C90 46 82 64 50 86 Z"/>',
+lili:'<circle class="fi" cx="50" cy="50" r="9"/><path class="f0" d="M12 12 L32 32 M88 12 L68 32 M12 88 L32 68 M88 88 L68 68 M20 32 H32 V20 M80 32 H68 V20 M20 68 H32 V80 M80 68 H68 V80"/>',
+suli:'<circle class="fi" cx="50" cy="50" r="22"/><path class="f0" d="M30 30 L10 10 M70 30 L90 10 M30 70 L10 90 M70 70 L90 90 M10 22 V10 H22 M90 22 V10 H78 M10 78 V90 H22 M90 78 V90 H78"/>',
+tawa:'<path class="fr" d="M28 38 H60 V22 L90 50 L60 78 V62 H28 Z"/><path class="f0" d="M8 38 H18 M4 50 H18 M8 62 H18"/>',
+nasa:'<path class="f0" d="M50 50 m0 -4 a4 4 0 1 1 -4 4 a10 10 0 0 1 10 -10 a16 16 0 0 1 16 16 a22 22 0 0 1 -22 22 a28 28 0 0 1 -28 -28 a34 34 0 0 1 34 -34"/>',
+moku:'<path class="f0" d="M36 40 q-6 -8 0 -16 t0 -16 M52 40 q-6 -8 0 -16 t0 -16 M68 40 q-6 -8 0 -16 t0 -16"/><path class="fp" d="M12 50 H88 A38 38 0 0 1 12 50 Z"/>',
+toki:'<path class="fp" d="M12 18 H88 V64 H46 L26 86 L30 64 H12 Z"/><path class="f0" d="M26 34 H74 M26 48 H60"/>'
+};
+const W={
+jan:{n:'человек',g:0,a:['человеческий','человеческая','человеческое'],w:'человек, кто-то, люди'},
+tomo:{n:'дом',g:0,a:['домашний','домашняя','домашнее'],w:'дом, помещение, постройка'},
+telo:{n:'вода',g:1,a:['водяной','водяная','водяное'],w:'вода, любая жидкость'},
+ilo:{n:'инструмент',g:0,a:['инструментальный','инструментальная','инструментальное'],w:'инструмент, устройство'},
+ma:{n:'земля',g:1,a:['земной','земная','земное'],w:'земля, страна, место'},
+pona:{n:'добро',g:2,a:['хороший','хорошая','хорошее'],w:'добро, хорошее, простое'},
+lili:{n:'малость',g:1,a:['маленький','маленькая','маленькое'],w:'малость, всё маленькое'},
+suli:{n:'величина',g:1,a:['большой','большая','большое'],w:'величина, большое, важное'},
+tawa:{n:'движение',g:2,a:['движущийся','движущаяся','движущееся'],w:'движение, путь'},
+nasa:{n:'странность',g:1,a:['странный','странная','странное'],w:'странность, чудачество'},
+moku:{n:'еда',g:1,a:['пищевой','пищевая','пищевое'],w:'еда, пища'},
+toki:{n:'речь',g:1,a:['речевой','речевая','речевое'],w:'речь, язык, разговор'}
+};
+const D={'jan pona':'друг','jan lili':'ребёнок','jan suli':'взрослый, важный человек','tomo telo':'ванная','tomo tawa':'машина','telo nasa':'спиртное','ilo moku':'столовый прибор','ilo toki':'телефон','ma tomo':'город'};
+let seq=['tomo','tawa'];
+let focusSlot=null,suppress=false,drag=null;
+const slots=[...root.querySelectorAll('.slot')];
+const tiles=[...root.querySelectorAll('.tile')];
+const swapBtn=root.querySelector('.swap');
+const svg=root.querySelector('.pic');
+const el=s=>root.querySelector(s);
+
+function moveTo(i,k){
+  if(i===k)return;
+  if(k<seq.length){const t=seq[i];seq[i]=seq[k];seq[k]=t;}
+  else if(i>0){const w=seq.splice(i,1)[0];seq.push(w);}
+}
+function placeTile(w,k){
+  const i=seq.indexOf(w);
+  if(i>=0){moveTo(i,k);return;}
+  if(k<seq.length)seq[k]=w;else if(seq.length<3)seq.push(w);
+}
+function tapTile(w,role){
+  const i=seq.indexOf(w);
+  if(role==='head'){if(i>0)moveTo(i,0);else if(i<0)seq[0]=w;}
+  else{if(i>0)seq.splice(i,1);else if(i<0){if(seq.length<3)seq.push(w);else seq[2]=w;}}
+}
+
+function drawFrame(){
+  const head=seq[0],mods=seq.slice(1);
+  let s=1.45,rot=0;
+  if(mods.includes('lili'))s*=0.66;
+  if(mods.includes('suli'))s*=1.22;
+  if(mods.includes('nasa'))rot=-11;
+  const cx=160,cy=110;
+  let o='<defs><pattern id="cf-dots" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle class="dt" cx="5" cy="5" r="2.2"/></pattern>'+
+    '<filter id="cf-brush" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter></defs>';
+  o+='<rect class="bg" width="400" height="240"/><rect width="400" height="240" fill="url(#cf-dots)" opacity=".4" style="stroke:none"/>';
+  o+='<ellipse class="sh" cx="'+cx+'" cy="'+(cy+50*s+6).toFixed(1)+'" rx="'+(44*s).toFixed(1)+'" ry="'+(7*s).toFixed(1)+'"/>';
+  const B=[[322,64],[322,164]];
+  mods.forEach((m,i)=>{o+='<line class="cn" x1="'+(B[i][0]-32)+'" y1="'+B[i][1]+'" x2="'+(cx+40*s).toFixed(1)+'" y2="'+(cy-10+i*20)+'"/>';});
+  let g='';
+  if(mods.includes('tawa')){const x=cx-50*s-6;g+='<g>'+[-18,0,18].map((d,j)=>'<line class="sp" x1="'+(x-34+j*6).toFixed(1)+'" y1="'+(cy+d)+'" x2="'+x.toFixed(1)+'" y2="'+(cy+d)+'"/>').join('')+'</g>';}
+  g+='<g class="h" filter="url(#cf-brush)" transform="translate('+cx+' '+cy+') rotate('+rot+') scale('+s.toFixed(3)+') translate(-50 -50)">'+P[head]+'</g>';
+  g+='<text class="lb" x="'+cx+'" y="232" text-anchor="middle">'+head+'</text>';
+  mods.forEach((m,i)=>{const[bx,by]=B[i];
+    g+='<circle class="fp bc" cx="'+bx+'" cy="'+by+'" r="30"/><g class="b" transform="translate('+(bx-18)+' '+(by-18)+') scale(.36)">'+P[m]+'</g>';
+    g+='<text class="lb s" x="'+bx+'" y="'+(by+48)+'" text-anchor="middle">'+m+'</text>';});
+  o+='<g class="in">'+g+'</g>';
+  o+='<rect width="400" height="240" style="fill:none;stroke-width:0"/>';
+  svg.innerHTML=o;
+}
+
+function readout(){
+  const head=seq[0],mods=seq.slice(1),key=seq.join(' ');
+  el('.tpw').textContent=key;
+  let lit;
+  if(!mods.length)lit=W[head].n+' → <b>'+W[head].w+'</b>';
+  else lit=seq.map(w=>W[w].n).join(' + ')+' → <b>'+mods.slice().reverse().map(w=>W[w].a[W[head].g]).join(' ')+' '+W[head].n+'</b>';
+  el('.rl').innerHTML=lit;
+  let m,tag,est=D[key],r='';
+  if(est){m='обычно: <b>'+est+'</b>';tag='устоялось';}
+  else if(mods.length===2&&(D[head+' '+mods[0]]||D[head+' '+mods[1]])){
+    const j=D[head+' '+mods[0]]?0:1,inner=head+' '+mods[j];
+    m='в основе '+inner+' — <b>'+D[inner]+'</b>; '+mods[1-j]+' добавляет признак';tag='на основе';
+  }else if(!mods.length){m='одно слово — целая область смысла';tag='слово';}
+  else{m='устойчивого значения нет';tag='свободное';}
+  if(mods.length===1){const rv=mods[0]+' '+head;
+    r='наоборот: '+rv+' — '+(D[rv]?D[rv]+' (устоялось)':W[head].a[W[mods[0]].g]+' '+W[mods[0]].n);}
+  else if(mods.length===2){r='без '+mods[1]+': '+head+' '+mods[0]+(D[head+' '+mods[0]]?' — '+D[head+' '+mods[0]]:' — '+W[mods[0]].a[W[head].g]+' '+W[head].n);}
+  el('.rm').innerHTML=m;
+  el('.rr').textContent=r;
+  const t=el('.tag');t.textContent=tag;t.classList.toggle('est',!!est);
+  svg.setAttribute('aria-label','Кадр: '+W[head].n+(mods.length?' с признаками: '+mods.map(w=>W[w].n).join(', '):''));
+}
+
+function render(){
+  tiles.forEach(t=>{const w=t.dataset.word,r=t.dataset.role,i=seq.indexOf(w);
+    const on=r==='head'?i===0:i>0;
+    t.classList.toggle('on',on);t.setAttribute('aria-pressed',on?'true':'false');
+    t.classList.toggle('off',r==='mod'&&i===0);});
+  slots.forEach((s,k)=>{const w=seq[k];
+    s.innerHTML=w?'<span class="chip'+(k?'':' hd')+'" tabindex="0" role="button" data-slot="'+k+'" aria-label="'+w+', '+(k?'уточнение '+k:'голова')+': '+W[w].n+'">'+w+'</span>':'';
+    s.classList.toggle('empty',!w);});
+  swapBtn.disabled=seq.length<2;
+  drawFrame();readout();
+  if(focusSlot!=null){const c=root.querySelector('.chip[data-slot="'+focusSlot+'"]');if(c)c.focus();focusSlot=null;}
+}
+
+function hit(x,y){
+  const e=document.elementFromPoint(x,y);
+  if(!e||!root.contains(e))return{slot:null,anvil:false};
+  return{slot:e.closest('.slot'),anvil:!!e.closest('.anvil')};
+}
+function clearTgt(){slots.forEach(s=>s.classList.remove('tgt'));}
+function endDrag(){
+  if(!drag)return;
+  if(drag.ghost)drag.ghost.remove();
+  if(drag.el)drag.el.classList.remove('lift');
+  clearTgt();drag=null;
+}
+
+root.addEventListener('pointerdown',e=>{
+  if(e.button!==0)return;
+  const chip=e.target.closest('.chip'),tile=e.target.closest('.tile');
+  let src=null,node=null;
+  if(chip){src={kind:'chip',slot:+chip.dataset.slot,word:seq[+chip.dataset.slot]};node=chip;}
+  else if(tile){src={kind:'tile',word:tile.dataset.word,role:tile.dataset.role};node=tile;}
+  if(!src)return;
+  drag={src,el:node,x0:e.clientX,y0:e.clientY,moved:false,ghost:null,id:e.pointerId};
+  try{node.setPointerCapture(e.pointerId);}catch(_){}
+});
+root.addEventListener('pointermove',e=>{
+  if(!drag||drag.id!==e.pointerId)return;
+  if(!drag.moved){
+    if(Math.hypot(e.clientX-drag.x0,e.clientY-drag.y0)<6)return;
+    drag.moved=true;
+    const g=document.createElement('div');g.className='ghost';g.textContent=drag.src.word;root.appendChild(g);drag.ghost=g;
+    if(drag.src.kind==='chip')drag.el.classList.add('lift');
+  }
+  const r=root.getBoundingClientRect();
+  drag.ghost.style.left=(e.clientX-r.left)+'px';drag.ghost.style.top=(e.clientY-r.top)+'px';
+  const h=hit(e.clientX,e.clientY);clearTgt();if(h.slot)h.slot.classList.add('tgt');
+});
+root.addEventListener('pointerup',e=>{
+  if(!drag||drag.id!==e.pointerId)return;
+  const d=drag;
+  if(d.moved){
+    const h=hit(e.clientX,e.clientY);
+    endDrag();
+    suppress=true;setTimeout(()=>{suppress=false;},0);
+    if(d.src.kind==='tile'){if(h.slot)placeTile(d.src.word,+h.slot.dataset.slot);}
+    else{const i=d.src.slot;
+      if(h.slot)moveTo(i,+h.slot.dataset.slot);
+      else if(!h.anvil&&i>0)seq.splice(i,1);}
+    render();
+  }else endDrag();
+});
+root.addEventListener('pointercancel',endDrag);
+
+root.addEventListener('click',e=>{
+  if(suppress){suppress=false;return;}
+  const t=e.target.closest('.tile');
+  if(t){tapTile(t.dataset.word,t.dataset.role);render();return;}
+  if(e.target.closest('.swap')&&seq.length>1){const a=seq[0];seq[0]=seq[1];seq[1]=a;render();}
+});
+
+root.addEventListener('keydown',e=>{
+  const chip=e.target.closest('.chip');
+  if(chip){
+    const i=+chip.dataset.slot;let k=null;
+    if(e.key==='ArrowLeft')k=i-1;else if(e.key==='ArrowRight')k=i+1;
+    if(k!==null){e.preventDefault();if(k>=0&&k<seq.length){moveTo(i,k);focusSlot=k;render();}return;}
+    if((e.key==='Delete'||e.key==='Backspace')&&i>0){e.preventDefault();seq.splice(i,1);focusSlot=Math.min(i,seq.length-1);render();}
+    return;
+  }
+  const t=e.target.closest('.tile');
+  if(t&&(e.key==='ArrowDown'||e.key==='ArrowUp')){
+    const list=[...t.parentNode.querySelectorAll('.tile')],i=list.indexOf(t);
+    const n=list[(i+(e.key==='ArrowDown'?1:-1)+list.length)%list.length];
+    e.preventDefault();n.focus();
+  }
+});
+
+render();
+})();</script>
+</section>
+
+<!-- ================= ISSUE 4 ================= -->
+<section class="issue" aria-labelledby="i4">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 4</span>
+    <h2 id="i4">Частица li отделяет того, о ком речь, от того, что о нём сказано</h2>
+  </header>
+
+  <figure class="panel scroll">
+    <svg viewBox="0 0 1200 460" role="img" aria-label="Слева на ночном фоне светлый силуэт человека тянется рукой через красную стену с надписью li к огромному красному яблоку справа; звук: хрум!">
+      <rect width="600" height="460" fill="#1D2430"/>
+      <rect width="600" height="460" fill="url(#dot-paper)" opacity=".12"/>
+      <rect x="600" width="600" height="460" fill="#D9A441"/>
+      <rect x="600" width="600" height="460" fill="url(#dot-red)" opacity=".5"/>
+      <g fill="#EFE6D2" stroke="#15120E" stroke-width="5" stroke-linejoin="round">
+        <path d="M318 205 L470 248 L465 268 L312 232 Z"/>
+        <circle cx="280" cy="150" r="40"/>
+        <path d="M240 195 Q280 185 320 195 L345 320 L325 325 L320 440 L295 440 L285 340 L275 440 L250 440 L245 325 L220 320 Z"/>
+      </g>
+      <defs>
+        <clipPath id="apple-clip"><circle cx="880" cy="255" r="110"/></clipPath>
+      </defs>
+      <circle cx="880" cy="255" r="110" fill="#C23A22"/>
+      <g clip-path="url(#apple-clip)">
+        <circle cx="920" cy="290" r="110" fill="url(#dot-ink-big)" opacity=".55"/>
+      </g>
+      <circle cx="880" cy="255" r="110" fill="none" stroke="#15120E" stroke-width="8" filter="url(#brush)"/>
+      <path d="M820 205 A70 70 0 0 1 860 175" fill="none" stroke="#EFE6D2" stroke-width="10" stroke-linecap="round"/>
+      <path d="M880 148 Q888 118 905 98" fill="none" stroke="#15120E" stroke-width="9" stroke-linecap="round"/>
+      <path d="M892 124 Q930 92 962 112 Q926 138 892 124 Z" fill="#1D2430" stroke="#15120E" stroke-width="5"/>
+      <g stroke="#15120E" stroke-width="6" stroke-linecap="round">
+        <line x1="1010" y1="170" x2="1060" y2="140"/>
+        <line x1="1020" y1="210" x2="1080" y2="200"/>
+        <line x1="1012" y1="250" x2="1070" y2="262"/>
+      </g>
+      <text x="1035" y="380" text-anchor="middle" transform="rotate(-8 1035 380)" font-family="Oswald, sans-serif" font-weight="700" font-size="72" fill="#EFE6D2" stroke="#15120E" stroke-width="4" paint-order="stroke">ХРУМ!</text>
+      <rect x="560" y="0" width="80" height="460" fill="#C23A22" stroke="#15120E" stroke-width="7" filter="url(#brush)"/>
+      <rect x="560" y="0" width="80" height="460" fill="url(#dot-ink)" opacity=".3"/>
+      <circle cx="600" cy="230" r="58" fill="#EFE6D2" stroke="#15120E" stroke-width="7"/>
+      <text x="600" y="254" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="64" fill="#C23A22">li</text>
+      <g font-family="Oswald, sans-serif" font-weight="700" text-anchor="middle">
+        <text x="280" y="70" font-size="40" fill="#EFE6D2" letter-spacing="2">jan</text>
+        <text x="880" y="70" font-size="40" fill="#15120E" letter-spacing="2">moku</text>
+      </g>
+    </svg>
+    <figcaption class="cap bl">jan li moku. По одну сторону стены — кто. По другую — что он делает.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Простейшая фраза токи поны — это подлежащее, частица <b class="pt">li</b> и сказуемое. Связки «есть, является» нет: её роль и выполняет <b class="pt">li</b>.</p>
+    <dl class="ex">
+      <div><dt>jan <b class="pt">li</b> moku.</dt><dd>Человек ест.</dd></div>
+      <div><dt>suno <b class="pt">li</b> suli.</dt><dd>Солнце большое.</dd></div>
+      <div><dt>soweli <b class="pt">li</b> lape.</dt><dd>Зверь спит.</dd></div>
+      <div><dt>telo <b class="pt">li</b> lete.</dt><dd>Вода холодная.</dd></div>
+    </dl>
+    <div class="rule-box">
+      <p><strong>Исключение:</strong> если подлежащее — просто <span class="tp">mi</span> («я, мы») или <span class="tp">sina</span> («ты, вы»), частицу <b class="pt">li</b> опускают: <span class="tp">mi moku</span> — «я ем», <span class="tp">sina pona</span> — «ты хороший». С <span class="tp">ona</span> («он, она, оно») <b class="pt">li</b> остаётся: <span class="tp">ona <b class="pt">li</b> lape</span>.</p>
+    </div>
+    <h3>Частица e указывает, на что направлено действие</h3>
+    <p>Прямое дополнение вводится частицей <b class="pt">e</b>. Что стоит после неё, то и едят, видят, любят.</p>
+    <dl class="ex">
+      <div><dt>mi moku <b class="pt">e</b> kili.</dt><dd>Я ем фрукт.</dd></div>
+      <div><dt>jan <b class="pt">li</b> lukin <b class="pt">e</b> mun.</dt><dd>Человек смотрит на луну.</dd></div>
+      <div><dt>sina olin <b class="pt">e</b> mi.</dt><dd>Ты любишь меня.</dd></div>
+      <div><dt>mi telo <b class="pt">e</b> kasi.</dt><dd>Я поливаю растение.</dd></div>
+    </dl>
+    <p>Здесь видно, как слово меняет роль: <span class="tp">telo</span> после подлежащего становится глаголом — «поливать водой». Отрицание ставится сразу за словом, которое отрицают: <span class="tp">mi moku ala</span> — «я не ем».</p>
+  </div>
+
+  <div class="instrument" data-instrument="sentence-panel">
+  <div class="sp-frame"><svg class="sp-svg" viewBox="0 0 600 260" role="img" aria-label=""></svg></div>
+  <div class="sp-line">
+    <span class="sp-slot" data-role="subj"><button type="button" class="sp-chip sp-in" data-role="subj"></button></span>
+    <span class="sp-part sp-pt" data-p="li">li</span>
+    <span class="sp-slot" data-role="pred"><button type="button" class="sp-chip sp-in" data-role="pred"></button></span>
+    <span class="sp-part" data-p="ala">ala</span>
+    <span class="sp-part sp-pt" data-p="e">e</span>
+    <span class="sp-slot" data-role="obj"><button type="button" class="sp-chip sp-in" data-role="obj"></button></span>
+    <span class="sp-stop">.</span>
+  </div>
+  <div class="sp-trays">
+    <div class="sp-tray"><span class="sp-cap">подлежащее</span><div class="sp-chips" data-role="subj"></div></div>
+    <div class="sp-tray"><span class="sp-cap">сказуемое</span><div class="sp-chips" data-role="pred"></div></div>
+    <div class="sp-tray"><span class="sp-cap">после e</span><div class="sp-chips" data-role="obj"></div></div>
+  </div>
+  <div class="sp-out">
+    <button type="button" class="sp-switch" role="switch" aria-checked="false"><span class="sp-track"><span class="sp-knob"></span></span><span class="sp-sw-l">ala</span></button>
+    <div class="sp-tr" aria-live="polite"></div>
+    <div class="sp-note"></div>
+  </div>
+</div>
+<style>
+[data-instrument="sentence-panel"]{position:relative;padding:1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="sentence-panel"] .sp-frame{border:3px solid var(--ink);background:var(--paper);line-height:0}
+[data-instrument="sentence-panel"] .sp-svg{display:block;width:100%;height:auto;aspect-ratio:600/260}
+[data-instrument="sentence-panel"] .sp-line{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;min-height:3.6rem;margin:.9rem 0 .5rem;padding:.35rem;border:2px solid transparent;transition:background .2s,border-color .2s}
+[data-instrument="sentence-panel"] .sp-line.sp-hot{background:rgba(217,164,65,.28);border-color:var(--ink)}
+[data-instrument="sentence-panel"] .sp-slot{display:inline-flex;align-items:center;justify-content:center;min-width:5.6rem;height:2.7rem;margin:.2rem .2rem;border:2px dashed transparent}
+[data-instrument="sentence-panel"] .sp-slot.sp-empty{border-color:var(--muted)}
+[data-instrument="sentence-panel"] .sp-slot.sp-target{border-color:var(--accent);border-style:solid}
+[data-instrument="sentence-panel"] .sp-part{display:inline-block;overflow:hidden;white-space:nowrap;max-width:3.2rem;margin:0 .3rem;font-family:var(--display);font-weight:700;font-size:1.55rem;line-height:1;opacity:1;transform:none;transition:max-width .4s ease,margin .4s ease,opacity .3s ease,transform .4s ease}
+[data-instrument="sentence-panel"] .sp-pt{color:var(--accent)}
+[data-instrument="sentence-panel"] .sp-part.sp-off{max-width:0;margin:0;opacity:0;transform:translateY(-.9em) scale(.6)}
+[data-instrument="sentence-panel"] .sp-stop{font-family:var(--display);font-weight:700;font-size:1.55rem;margin-left:.1rem}
+[data-instrument="sentence-panel"] .sp-chip{font-family:var(--display);font-weight:600;font-size:1.15rem;line-height:1.2;padding:.28rem .7rem;background:var(--paper);color:var(--ink);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);border-radius:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+[data-instrument="sentence-panel"] .sp-chip:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="sentence-panel"] .sp-in{background:var(--ochre);font-size:1.3rem}
+[data-instrument="sentence-panel"] .sp-in[hidden]{display:none}
+[data-instrument="sentence-panel"] .sp-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="sentence-panel"] .sp-chip.sp-lift{opacity:.35}
+[data-instrument="sentence-panel"] .sp-ghost{position:absolute;left:0;top:0;margin:0;z-index:5;pointer-events:none;background:var(--ochre);box-shadow:6px 6px 0 var(--ink);cursor:grabbing}
+[data-instrument="sentence-panel"] .sp-trays{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.8rem 1.2rem;padding:.8rem 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+[data-instrument="sentence-panel"] .sp-cap{display:block;font-family:var(--display);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+[data-instrument="sentence-panel"] .sp-chips{display:flex;flex-wrap:wrap;gap:.45rem}
+[data-instrument="sentence-panel"] .sp-out{display:grid;grid-template-columns:auto 1fr;gap:.7rem 1rem;align-items:center;margin-top:.9rem}
+[data-instrument="sentence-panel"] .sp-switch{display:inline-flex;align-items:center;gap:.5rem;background:none;border:0;padding:.3rem;color:var(--ink);cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.3rem}
+[data-instrument="sentence-panel"] .sp-switch:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-instrument="sentence-panel"] .sp-track{position:relative;display:inline-block;width:2.8rem;height:1.5rem;border:2px solid var(--ink);background:var(--paper);transition:background .2s}
+[data-instrument="sentence-panel"] .sp-knob{position:absolute;top:2px;left:2px;width:1rem;height:1rem;background:var(--ink);transition:transform .2s}
+[data-instrument="sentence-panel"] .sp-switch[aria-checked="true"] .sp-track{background:var(--accent)}
+[data-instrument="sentence-panel"] .sp-switch[aria-checked="true"] .sp-knob{transform:translateX(1.3rem);background:var(--paper)}
+[data-instrument="sentence-panel"] .sp-tr{height:4.2rem;display:flex;align-items:center;padding:0 1rem;border:3px solid var(--ink);background:var(--paper);box-shadow:4px 4px 0 var(--ink);font-size:clamp(1.05rem,2.6vw,1.45rem);line-height:1.25;font-variant-numeric:tabular-nums;overflow:hidden}
+[data-instrument="sentence-panel"] .sp-note{grid-column:1/-1;height:2.9em;overflow:hidden;font-size:.92rem;line-height:1.45;color:var(--muted)}
+[data-instrument="sentence-panel"] .sp-note b{color:var(--ink);font-weight:600}
+[data-instrument="sentence-panel"] .sp-note .sp-warn{color:var(--accent);font-weight:600}
+@media (max-width:640px){
+  [data-instrument="sentence-panel"]{padding:.7rem}
+  [data-instrument="sentence-panel"] .sp-note{height:4.35em}
+  [data-instrument="sentence-panel"] .sp-slot{min-width:4.6rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="sentence-panel"] *{transition:none!important;animation:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="sentence-panel"]');if(!root)return;
+const cs=getComputedStyle(root),V=(k,f)=>(cs.getPropertyValue(k)||'').trim()||f;
+const INK=V('--ink','#15120E'),PAPER=V('--paper','#EFE6D2'),ACC=V('--accent','#C23A22'),OCH=V('--ochre','#D9A441'),NIGHT=V('--night','#1D2430');
+const LISTS={subj:['mi','sina','jan','soweli','waso','ona'],pred:['moku','lukin','olin','lape','pona','suli'],obj:['kili','telo','mun','kala','sina','mi']};
+const INTR={lape:'усыплять',pona:'улучшать, чинить',suli:'увеличивать'};
+const S={subj:'jan',pred:'moku',obj:'kili',neg:false};
+const svg=root.querySelector('.sp-svg'),line=root.querySelector('.sp-line'),tr=root.querySelector('.sp-tr'),note=root.querySelector('.sp-note'),sw=root.querySelector('.sp-switch');
+const slot=r=>root.querySelector('.sp-slot[data-role="'+r+'"]'),inChip=r=>slot(r).querySelector('.sp-chip');
+const part=p=>root.querySelector('.sp-part[data-p="'+p+'"]');
+const ROLE={subj:'подлежащее',pred:'сказуемое',obj:'дополнение'};
+Object.keys(LISTS).forEach(r=>{const box=root.querySelector('.sp-chips[data-role="'+r+'"]');LISTS[r].forEach(w=>{const b=document.createElement('button');b.type='button';b.className='sp-chip';b.dataset.role=r;b.dataset.word=w;b.textContent=w;b.setAttribute('aria-pressed','false');box.appendChild(b);});});
+const trayChips=r=>[...root.querySelectorAll('.sp-chips[data-role="'+r+'"] .sp-chip')];
+
+/* ---- translation ---- */
+const SB={mi:['Я',0,'m'],sina:['Ты',1,'m'],jan:['Человек',2,'m'],soweli:['Зверь',2,'m'],waso:['Птица',2,'f'],ona:['Он',2,'m']};
+const ACCV={kili:'фрукт',telo:'воду',mun:'луну',kala:'рыбу',sina:'тебя',mi:'меня'};
+const VB={moku:['ем','ешь','ест'],drink:['пью','пьёшь','пьёт'],lukin:['смотрю','смотришь','смотрит'],olin:['люблю','любишь','любит'],lape:['сплю','спишь','спит'],lapeC:['усыпляю','усыпляешь','усыпляет'],ponaC:['улучшаю','улучшаешь','улучшает'],suliC:['увеличиваю','увеличиваешь','увеличивает']};
+const ADJ={pona:{m:'хороший',f:'хорошая'},suli:{m:'большой',f:'большая'}};
+function translate(){
+  const sb=SB[S.subj],n=sb[0],p=sb[1],g=sb[2],o=S.obj,pr=S.pred;
+  const acc=o?(o===S.subj?'себя':ACCV[o]):'';let core;
+  if(!o)core=ADJ[pr]?ADJ[pr][g]:VB[pr][p];
+  else if(INTR[pr])core=VB[pr+'C'][p]+' '+acc;
+  else if(pr==='moku')core=(o==='telo'?VB.drink:VB.moku)[p]+' '+acc;
+  else if(pr==='lukin')core=VB.lukin[p]+' на '+acc;
+  else core=VB[pr][p]+' '+acc;
+  return n+' '+(S.neg?'не ':'')+core+'.';
+}
+function noteHTML(){
+  const li=(S.subj==='mi'||S.subj==='sina')?'<b>li</b> опущена после одиночного <b>'+S.subj+'</b>':'<b>li</b> отделяет <b>'+S.subj+'</b> от сказуемого';
+  let e;
+  if(!S.obj)e='дополнения нет — нет и <b>e</b>';
+  else if(INTR[S.pred])e='<span class="sp-warn">необычный смысл: '+S.pred+' + e — «'+INTR[S.pred]+'»</span>';
+  else e='<b>e</b> вводит дополнение <b>'+S.obj+'</b>';
+  return li+' · '+e+(S.neg?' · <b>ala</b> отрицает <b>'+S.pred+'</b>':'');
+}
+
+/* ---- drawing ---- */
+const SX=150,OX=450,G=220,OH={kili:88,telo:92,mun:100,kala:58,mi:137,sina:137};
+const st='stroke="'+INK+'" stroke-width="4" stroke-linejoin="round"';
+const eye=(x,y,c,col)=>c?'<path d="M'+(x-5)+' '+y+' q5 4 10 0" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linecap="round"/>':'<circle cx="'+x+'" cy="'+y+'" r="2.8" fill="'+col+'"/>';
+function human(f,arm,c){let s='';
+  if(arm)s+='<path d="M12 -94 L50 -76 L46 -67 L9 -83 Z" fill="'+f+'" '+st+'/>';
+  s+='<path d="M-17 -98 Q0 -104 17 -98 L26 -40 L16 -38 L14 0 L4 0 L0 -32 L-4 0 L-14 0 L-16 -38 L-26 -40 Z" fill="'+f+'" '+st+'/>';
+  s+='<circle cx="0" cy="-120" r="17" fill="'+f+'" '+st+'/>'+eye(7,-123,c,f===INK?PAPER:INK);return s;}
+function beast(c){return '<path d="M-52 -54 Q-80 -66 -70 -96" fill="none" stroke="'+INK+'" stroke-width="7" stroke-linecap="round"/>'+
+  [-40,-24,16,30].map(x=>'<rect x="'+x+'" y="-36" width="9" height="36" fill="'+OCH+'" '+st+'/>').join('')+
+  '<ellipse cx="-5" cy="-50" rx="50" ry="22" fill="'+OCH+'" '+st+'/><path d="M28 -78 L32 -100 L44 -84 Z" fill="'+OCH+'" '+st+'/><path d="M46 -84 L56 -101 L60 -78 Z" fill="'+OCH+'" '+st+'/><circle cx="44" cy="-68" r="20" fill="'+OCH+'" '+st+'/>'+eye(52,-71,c,INK);}
+function bird(c){return '<path d="M-6 -36 L-9 0 M6 -36 L9 0" stroke="'+INK+'" stroke-width="4"/><path d="M-28 -58 L-52 -72 L-48 -48 Z" fill="'+NIGHT+'" '+st+'/><ellipse cx="0" cy="-56" rx="32" ry="24" fill="'+PAPER+'" '+st+'/><path d="M-20 -60 Q2 -36 22 -56 Q2 -48 -20 -60 Z" fill="'+NIGHT+'" '+st+'/><polygon points="40,-86 58,-80 40,-75" fill="'+OCH+'" '+st+'/><circle cx="28" cy="-82" r="14" fill="'+PAPER+'" '+st+'/>'+eye(32,-85,c,INK);}
+function subFig(w,arm,c){return w==='soweli'?beast(c):w==='waso'?bird(c):human(w==='mi'?OCH:w==='ona'?INK:PAPER,arm,c);}
+function objFig(o,c){switch(o){
+  case'kili':return '<path d="M0 -64 Q4 -78 12 -88" fill="none" stroke="'+INK+'" stroke-width="6" stroke-linecap="round"/><path d="M6 -76 Q26 -92 40 -80 Q22 -68 6 -76 Z" fill="'+NIGHT+'" '+st+'/><circle cx="0" cy="-34" r="32" fill="'+ACC+'" '+st+'/><path d="M-20 -44 A22 22 0 0 1 -6 -58" fill="none" stroke="'+PAPER+'" stroke-width="5" stroke-linecap="round"/>';
+  case'telo':return '<path d="M0 -92 C16 -64 32 -50 32 -32 A32 32 0 0 1 -32 -32 C-32 -50 -16 -64 0 -92 Z" fill="'+NIGHT+'" '+st+'/><path d="M-16 -34 A16 16 0 0 0 -4 -16" fill="none" stroke="'+PAPER+'" stroke-width="5" stroke-linecap="round"/>';
+  case'mun':return '<path d="M8 -100 A40 40 0 0 0 8 -20 A50 50 0 0 1 8 -100 Z" fill="'+OCH+'" '+st+'/>';
+  case'kala':return '<polygon points="-30,-30 -56,-48 -56,-12" fill="'+NIGHT+'" '+st+'/><path d="M-34 -30 Q0 -58 38 -30 Q0 -2 -34 -30 Z" fill="'+NIGHT+'" '+st+'/><circle cx="22" cy="-34" r="3.5" fill="'+PAPER+'"/>';
+  default:return human(o==='mi'?OCH:PAPER,false,c);}}
+function burst(cx,cy,R,r,n){const p=[];for(let i=0;i<n*2;i++){const a=Math.PI*i/n-Math.PI/2,d=i%2?r:R;p.push((cx+Math.cos(a)*d*1.35).toFixed(1)+','+(cy+Math.sin(a)*d).toFixed(1));}return p.join(' ');}
+const star=(x,y,k)=>'<path transform="translate('+x+','+y+') scale('+k+')" d="M0 -14 L4 -4 L14 0 L4 4 L0 14 L-4 4 L-14 0 L-4 -4 Z" fill="'+OCH+'" stroke="'+INK+'" stroke-width="2.5" stroke-linejoin="round"/>';
+const txt=(x,y,s,t,f)=>'<text x="'+x+'" y="'+y+'" text-anchor="middle" style="font-family:var(--display)" font-weight="700" font-size="'+s+'" fill="'+(f||INK)+'">'+t+'</text>';
+function draw(){
+  const w=S.subj,p=S.pred,o=S.obj,neg=S.neg,has=!!o,caus=has&&!!INTR[p],oHum=o==='mi'||o==='sina',hS=!(w==='soweli'||w==='waso');
+  let sk=1,ok=oHum?.85:1;
+  if(p==='suli'&&!neg){if(caus)ok*=1.3;else if(!has)sk=1.3;}
+  const sTop=G-(w==='soweli'?102:w==='waso'?96:137)*sk,oTop=has?G-OH[o]*ok:0;
+  const sleepS=p==='lape'&&!neg&&!has,sleepO=p==='lape'&&!neg&&caus;
+  let s='<defs><pattern id="sp-dots" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="5" cy="5" r="2.6" fill="'+OCH+'"/></pattern>'+
+    '<filter id="sp-brush" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3" xChannelSelector="R" yChannelSelector="G"/></filter>'+
+    '<marker id="sp-ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="'+INK+'"/></marker></defs>';
+  s+='<rect width="600" height="260" fill="'+PAPER+'"/><ellipse cx="300" cy="220" rx="290" ry="70" fill="url(#sp-dots)" opacity=".6"/><rect y="220" width="600" height="40" fill="'+INK+'"/>';
+  if(has)s+='<path d="M196 241 L388 241" stroke="'+PAPER+'" stroke-width="5" stroke-linecap="round"/><polygon points="386,232 404,241 386,250" fill="'+PAPER+'"/><circle cx="292" cy="241" r="13" fill="'+ACC+'" stroke="'+PAPER+'" stroke-width="3"/>'+txt(292,247,18,'e',PAPER);
+  s+='<g transform="translate('+SX+','+G+') scale('+sk+')" filter="url(#sp-brush)">'+subFig(w,hS&&has,sleepS)+'</g>';
+  if(w==='mi')s+='<polygon points="'+(SX-11)+','+(sTop-26)+' '+(SX+11)+','+(sTop-26)+' '+SX+','+(sTop-9)+'" fill="'+ACC+'" stroke="'+INK+'" stroke-width="3" stroke-linejoin="round"/>';
+  if(w==='sina')s+='<line x1="22" y1="22" x2="'+(SX-36)+'" y2="'+(sTop+4)+'" stroke="'+INK+'" stroke-width="7" stroke-linecap="round" marker-end="url(#sp-ah)"/>';
+  if(has)s+='<g transform="translate('+OX+','+G+') scale('+(oHum?-ok:ok)+','+ok+')" filter="url(#sp-brush)">'+objFig(o,sleepO)+'</g>';
+  const tx=caus?OX:SX,tt=caus?oTop:sTop,k=caus?ok:sk;let a='',cx,cy;
+  if(p==='moku'){cx=has?300:268;cy=88;a='<polygon points="'+burst(cx,cy,40,26,11)+'" fill="'+PAPER+'" stroke="'+INK+'" stroke-width="4" stroke-linejoin="round"/>'+txt(cx,cy+8,22,o==='telo'?'БУЛЬ!':'ХРУМ!');}
+  else if(p==='lukin'){cx=has?300:268;cy=has?66:78;
+    const ex=SX+(hS?10:w==='soweli'?52:32)*sk,ey=G-(hS?123:w==='soweli'?71:85)*sk;
+    if(has){const oy=G-OH[o]*ok*.55;a+='<path d="M'+ex+' '+ey+' L'+(OX-30)+' '+oy+' M'+ex+' '+(ey+6)+' L'+(OX-30)+' '+(oy+14)+'" stroke="'+INK+'" stroke-width="3" stroke-dasharray="8 7" fill="none"/>';}
+    else a+='<path d="M'+(ex+14)+' '+(ey-8)+' l40 -14 M'+(ex+16)+' '+ey+' l44 0 M'+(ex+14)+' '+(ey+8)+' l40 14" stroke="'+INK+'" stroke-width="3" stroke-dasharray="8 6"/>';
+    a+='<path d="M'+(cx-36)+' '+cy+' Q'+cx+' '+(cy-28)+' '+(cx+36)+' '+cy+' Q'+cx+' '+(cy+28)+' '+(cx-36)+' '+cy+' Z" fill="'+PAPER+'" stroke="'+INK+'" stroke-width="4"/><circle cx="'+cx+'" cy="'+cy+'" r="11" fill="'+INK+'"/><circle cx="'+(cx+4)+'" cy="'+(cy-4)+'" r="3" fill="'+PAPER+'"/>';}
+  else if(p==='olin'){cx=has?300:262;cy=86;a='<path transform="translate('+cx+','+cy+') scale(1.45)" d="M0 18 C-40 -10 -26 -40 0 -22 C26 -40 40 -10 0 18 Z" fill="'+ACC+'" stroke="'+INK+'" stroke-width="3" stroke-linejoin="round"/>';}
+  else if(p==='lape'){cx=tx+54;cy=tt-20;a=txt(tx+34,tt+6,30,'Z')+txt(tx+54,tt-14,24,'z')+txt(tx+70,tt-32,18,'z');}
+  else if(p==='pona'){cx=tx;cy=tt-4;a=star(tx-42,tt+14,1.1)+star(tx+44,tt,1.3)+star(tx+4,tt-22,.9);}
+  else{const d=Math.round(62*k);cx=tx+d;cy=(tt+G)/2;const y1=tt+6,y2=G-6;a='<path d="M'+cx+' '+(y1+4)+' L'+cx+' '+(y2-4)+'" stroke="'+INK+'" stroke-width="5"/><polygon points="'+(cx-10)+','+(y1+14)+' '+cx+','+y1+' '+(cx+10)+','+(y1+14)+'" fill="'+INK+'"/><polygon points="'+(cx-10)+','+(y2-14)+' '+cx+','+y2+' '+(cx+10)+','+(y2-14)+'" fill="'+INK+'"/>';}
+  s+='<g>'+a+'</g>';
+  if(neg){const r=32,L='<line x1="'+(cx-r)+'" y1="'+(cy-r)+'" x2="'+(cx+r)+'" y2="'+(cy+r)+'"/><line x1="'+(cx+r)+'" y1="'+(cy-r)+'" x2="'+(cx-r)+'" y2="'+(cy+r)+'"/>';
+    s+='<g stroke="'+PAPER+'" stroke-width="16" stroke-linecap="round">'+L+'</g><g stroke="'+ACC+'" stroke-width="9" stroke-linecap="round" filter="url(#sp-brush)">'+L+'</g>';}
+  svg.innerHTML=s;
+}
+
+/* ---- state ---- */
+function render(){
+  ['subj','pred','obj'].forEach(r=>{const v=S[r],c=inChip(r),sl=slot(r);
+    if(v){c.hidden=false;c.textContent=v;c.dataset.word=v;c.setAttribute('aria-label',ROLE[r]+': '+v);sl.classList.remove('sp-empty');}
+    else{c.hidden=true;c.removeAttribute('aria-label');sl.classList.add('sp-empty');}
+    trayChips(r).forEach(b=>b.setAttribute('aria-pressed',b.dataset.word===v?'true':'false'));
+  });
+  const noLi=S.subj==='mi'||S.subj==='sina';
+  part('li').classList.toggle('sp-off',noLi);
+  part('e').classList.toggle('sp-off',!S.obj);
+  part('ala').classList.toggle('sp-off',!S.neg);
+  sw.setAttribute('aria-checked',S.neg?'true':'false');
+  const t=translate();
+  tr.textContent=t;
+  note.innerHTML=noteHTML();
+  const sent=S.subj+(noLi?'':' li')+' '+S.pred+(S.neg?' ala':'')+(S.obj?' e '+S.obj:'')+'.';
+  svg.setAttribute('aria-label',sent+' — '+t);
+  draw();
+}
+function focusTray(r){const b=trayChips(r)[0];if(b)b.focus();}
+
+/* ---- dragging ---- */
+let drag=null,suppress=false;
+root.addEventListener('pointerdown',e=>{
+  const c=e.target.closest('.sp-chip');
+  if(!c||!root.contains(c)||c.classList.contains('sp-ghost')||(e.button!==undefined&&e.button>0))return;
+  drag={c,id:e.pointerId,x0:e.clientX,y0:e.clientY,on:false,over:false,role:c.dataset.role,word:c.dataset.word,fromSlot:c.classList.contains('sp-in')};
+  try{c.setPointerCapture(e.pointerId);}catch(_){}
+});
+root.addEventListener('pointermove',e=>{
+  if(!drag||e.pointerId!==drag.id)return;
+  if(!drag.on){
+    if(Math.hypot(e.clientX-drag.x0,e.clientY-drag.y0)<5)return;
+    const r=drag.c.getBoundingClientRect();
+    drag.ox=e.clientX-r.left;drag.oy=e.clientY-r.top;
+    const g=drag.c.cloneNode(true);
+    g.className='sp-chip sp-ghost'+(drag.fromSlot?' sp-in':'');
+    g.tabIndex=-1;g.setAttribute('aria-hidden','true');g.removeAttribute('aria-pressed');
+    root.appendChild(g);drag.g=g;drag.on=true;
+    drag.c.classList.add('sp-lift');
+  }
+  e.preventDefault();
+  const rr=root.getBoundingClientRect();
+  drag.g.style.transform='translate('+(e.clientX-rr.left-drag.ox)+'px,'+(e.clientY-rr.top-drag.oy)+'px)';
+  const lr=line.getBoundingClientRect(),pad=24;
+  drag.over=e.clientX>lr.left-pad&&e.clientX<lr.right+pad&&e.clientY>lr.top-pad&&e.clientY<lr.bottom+pad;
+  line.classList.toggle('sp-hot',drag.over);
+  slot(drag.role).classList.toggle('sp-target',drag.over);
+});
+function endDrag(e,cancel){
+  if(!drag||(e&&e.pointerId!==undefined&&e.pointerId!==drag.id))return;
+  const d=drag;drag=null;
+  if(!d.on)return;
+  suppress=true;setTimeout(()=>{suppress=false;},0);
+  if(!cancel){
+    if(d.over&&!d.fromSlot)S[d.role]=d.word;
+    else if(!d.over&&d.fromSlot&&d.role==='obj')S.obj=null;
+  }
+  if(d.g)d.g.remove();
+  d.c.classList.remove('sp-lift');
+  line.classList.remove('sp-hot');
+  slot(d.role).classList.remove('sp-target');
+  render();
+  if(d.fromSlot&&d.role==='obj'&&!S.obj&&document.activeElement===d.c)focusTray('obj');
+}
+root.addEventListener('pointerup',e=>endDrag(e,false));
+root.addEventListener('pointercancel',e=>endDrag(e,true));
+
+/* ---- clicks ---- */
+root.addEventListener('click',e=>{
+  if(suppress){e.preventDefault();return;}
+  if(e.target.closest('.sp-switch')){S.neg=!S.neg;render();return;}
+  const c=e.target.closest('.sp-chip');
+  if(!c||c.classList.contains('sp-ghost'))return;
+  const r=c.dataset.role;
+  if(c.classList.contains('sp-in')){
+    if(r==='obj'){S.obj=null;render();focusTray('obj');}
+    return;
+  }
+  if(r==='obj'&&S.obj===c.dataset.word)S.obj=null;
+  else S[r]=c.dataset.word;
+  render();
+});
+
+/* ---- keyboard ---- */
+root.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&drag){endDrag(null,true);return;}
+  const c=e.target.closest('.sp-chip');
+  if(!c||c.classList.contains('sp-ghost'))return;
+  const r=c.dataset.role,k=e.key;
+  if(c.classList.contains('sp-in')){
+    const L=LISTS[r];
+    if(k==='ArrowRight'||k==='ArrowLeft'){
+      e.preventDefault();
+      const i=L.indexOf(S[r]);
+      S[r]=L[(i+(k==='ArrowRight'?1:L.length-1))%L.length];
+      render();
+    }else if(r==='obj'&&(k==='ArrowDown'||k==='Delete'||k==='Backspace')){
+      e.preventDefault();S.obj=null;render();focusTray('obj');
+    }
+  }else{
+    const sib=trayChips(r),i=sib.indexOf(c);
+    if(k==='ArrowRight'||k==='ArrowLeft'){
+      e.preventDefault();
+      sib[(i+(k==='ArrowRight'?1:sib.length-1))%sib.length].focus();
+    }else if(k==='ArrowUp'){
+      e.preventDefault();S[r]=c.dataset.word;render();inChip(r).focus();
+    }else if(k==='ArrowDown'&&r==='obj'&&S.obj===c.dataset.word){
+      e.preventDefault();S.obj=null;render();
+    }
+  }
+});
+
+render();
+})();</script>
+</section>
+
+<!-- ================= ISSUE 5 ================= -->
+<section class="issue" aria-labelledby="i5">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 5</span>
+    <h2 id="i5">Частица pi собирает уточнения в группу</h2>
+  </header>
+
+  <div class="strip">
+    <figure>
+      <svg viewBox="0 0 600 420" role="img" aria-label="Кадр первый: человек с огромным пузырём речи, в котором пусто, и ярлык jan toki pona — хороший говорящий человек.">
+        <rect width="600" height="420" fill="#EFE6D2"/>
+        <rect width="600" height="420" fill="url(#dot-ochre)" opacity=".4"/>
+        <g fill="#15120E">
+          <circle cx="170" cy="200" r="34"/>
+          <path d="M136 240 Q170 230 204 240 L222 340 L205 344 L200 420 L180 420 L172 352 L164 420 L144 420 L140 344 L120 340 Z"/>
+        </g>
+        <ellipse cx="380" cy="130" rx="160" ry="80" fill="#EFE6D2" stroke="#15120E" stroke-width="6" filter="url(#brush)"/>
+        <polygon points="250,180 210,215 280,195" fill="#EFE6D2" stroke="#15120E" stroke-width="5" stroke-linejoin="round"/>
+        <text x="380" y="148" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="52" fill="#C23A22">!!!</text>
+        <rect x="300" y="290" width="270" height="96" fill="#15120E"/>
+        <text x="435" y="332" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="32" fill="#EFE6D2">jan toki pona</text>
+        <text x="435" y="368" text-anchor="middle" font-family="Oswald, sans-serif" font-size="20" fill="#D9A441">хорошо говорящий человек</text>
+      </svg>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 600 420" role="img" aria-label="Кадр второй: тот же человек держит карточку toki pona; ярлык jan pi toki pona — человек токи поны, говорящий на ней.">
+        <rect width="600" height="420" fill="#1D2430"/>
+        <rect width="600" height="420" fill="url(#dot-paper)" opacity=".12"/>
+        <g fill="#EFE6D2" stroke="#15120E" stroke-width="4">
+          <circle cx="170" cy="200" r="34"/>
+          <path d="M136 240 Q170 230 204 240 L222 340 L205 344 L200 420 L180 420 L172 352 L164 420 L144 420 L140 344 L120 340 Z"/>
+          <path d="M204 250 L290 196 L298 208 L214 266 Z"/>
+        </g>
+        <g transform="rotate(-8 360 160)">
+          <rect x="290" y="110" width="190" height="96" fill="#C23A22" stroke="#15120E" stroke-width="6"/>
+          <text x="385" y="172" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="40" fill="#EFE6D2">toki pona</text>
+        </g>
+        <rect x="300" y="290" width="270" height="96" fill="#D9A441" stroke="#15120E" stroke-width="5"/>
+        <text x="435" y="332" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="30" fill="#15120E">jan <tspan fill="#C23A22">pi</tspan> toki pona</text>
+        <text x="435" y="368" text-anchor="middle" font-family="Oswald, sans-serif" font-size="20" fill="#15120E">человек токи поны</text>
+      </svg>
+    </figure>
+  </div>
+
+  <div class="prose">
+    <p>Каждое уточнение относится к главному слову. В <span class="tp">jan toki pona</span> человек и «говорящий», и «хороший» — хорошо говорящий человек. А если нужно сказать «человек, связанный с токи поной»? Тогда уточнения склеивают частицей <b class="pt">pi</b>: всё, что идёт после неё, работает как одно целое.</p>
+    <dl class="ex">
+      <div><dt>jan <b class="pt">pi</b> toki pona</dt><dd>человек токи поны, тот, кто на ней говорит</dd></div>
+      <div><dt>tomo <b class="pt">pi</b> telo nasa</dt><dd>бар — «помещение странной воды»</dd></div>
+      <div><dt>nimi <b class="pt">pi</b> jan pona mi</dt><dd>имя моего друга</dd></div>
+      <div><dt>tomo <b class="pt">pi</b> jan mute</dt><dd>дом многих людей</dd></div>
+    </dl>
+    <p>Правило простое: после <b class="pt">pi</b> всегда стоят минимум два слова. Одно слово можно прицепить и без неё.</p>
+  </div>
+</section>
+
+<!-- ================= ISSUE 6 ================= -->
+<section class="issue" aria-labelledby="i6">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 6</span>
+    <h2 id="i6">Всё, что стоит перед la, задаёт обстановку сцены</h2>
+  </header>
+
+  <figure class="panel scroll">
+    <svg viewBox="0 0 1200 500" role="img" aria-label="Широкий ночной кадр: над крышами города висит луна, в одном окне горит свет, внутри силуэт склонился над столом; табличка tenpo pimeja la.">
+      <rect width="1200" height="500" fill="#1D2430"/>
+      <rect width="1200" height="260" fill="url(#dot-paper)" opacity=".08"/>
+      <circle cx="930" cy="120" r="70" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+      <circle cx="958" cy="104" r="62" fill="#1D2430"/>
+      <g fill="#15120E" filter="url(#brush)">
+        <path d="M0 500 L0 300 L90 300 L90 250 L170 250 L170 320 L260 320 L260 210 L300 180 L340 210 L340 330 L430 330 L430 270 L560 270 L560 230 L610 230 L610 300 L700 300 L700 190 L800 190 L800 310 L900 310 L900 260 L1010 260 L1010 330 L1100 330 L1100 240 L1200 240 L1200 500 Z"/>
+      </g>
+      <rect x="720" y="220" width="56" height="62" fill="#D9A441"/>
+      <rect x="720" y="220" width="56" height="62" fill="url(#dot-red)" opacity=".5"/>
+      <g fill="#15120E">
+        <circle cx="742" cy="246" r="9"/>
+        <path d="M730 258 Q742 252 754 258 L760 282 L726 282 Z"/>
+        <rect x="752" y="270" width="24" height="5"/>
+      </g>
+      <g fill="#EFE6D2" opacity=".85">
+        <rect x="112" y="268" width="14" height="16"/><rect x="294" y="236" width="12" height="18"/>
+        <rect x="460" y="290" width="12" height="16"/><rect x="1130" y="262" width="12" height="16"/>
+      </g>
+      <rect x="0" y="420" width="1200" height="80" fill="url(#dot-paper)" opacity=".1"/>
+      <g transform="rotate(-3 210 110)">
+        <rect x="70" y="60" width="300" height="96" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+        <text x="220" y="124" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="46" fill="#15120E">tenpo pimeja <tspan fill="#C23A22">la</tspan></text>
+      </g>
+    </svg>
+    <figcaption class="cap br">tenpo pimeja la, jan li pali. Ночью человек работает.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <p>Частица <b class="pt">la</b> делит предложение на две части. Слева — контекст: время, место, условие. Справа — сама фраза. Как подпись над кадром комикса: сначала «ночью», потом действие.</p>
+    <dl class="ex">
+      <div><dt>tenpo pini <b class="pt">la</b> mi lape.</dt><dd>Раньше (в прошлом) я спал.</dd></div>
+      <div><dt>tenpo kama <b class="pt">la</b> mi tawa.</dt><dd>Потом (в будущем) я уйду.</dd></div>
+      <div><dt>sina lape <b class="pt">la</b> mi pali.</dt><dd>Когда ты спишь, я работаю.</dd></div>
+      <div><dt>telo <b class="pt">li</b> lete <b class="pt">la</b> mi seli <b class="pt">e</b> ona.</dt><dd>Если вода холодная, я её грею.</dd></div>
+    </dl>
+    <p>Времён в глаголе нет — именно <b class="pt">la</b> с <span class="tp">tenpo</span> («время») переносит фразу в прошлое или будущее. А целое предложение перед <b class="pt">la</b> становится условием: «если» и «когда» здесь одно и то же.</p>
+  </div>
+
+  <div class="instrument" data-instrument="la-scene">
+  <figure class="ls-fig">
+    <svg class="ls-svg" viewBox="0 0 1200 460" role="img" aria-label="Кадр">
+      <defs>
+        <clipPath id="ls-win"><rect x="660" y="50" width="460" height="250"/></clipPath>
+        <mask id="ls-cres"><circle cx="960" cy="110" r="36" fill="#fff"/><circle cx="978" cy="98" r="31" fill="#000"/></mask>
+        <pattern id="ls-dot" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="4.5" cy="4.5" r="1.6" fill="#15120E"/></pattern>
+        <pattern id="ls-pdot" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="4.5" cy="4.5" r="1.5" fill="#EFE6D2"/></pattern>
+      </defs>
+      <rect class="ls-wall" width="1200" height="460"/>
+      <rect class="ls-wdots" width="1200" height="380" fill="url(#ls-dot)" opacity=".1"/>
+      <g clip-path="url(#ls-win)">
+        <rect class="ls-sky" x="660" y="50" width="460" height="250"/>
+        <rect x="660" y="50" width="460" height="250" fill="url(#ls-pdot)" opacity=".12"/>
+        <g class="ls-stars" fill="#EFE6D2">
+          <circle cx="700" cy="80" r="3"/><circle cx="760" cy="135" r="2"/><circle cx="820" cy="72" r="3"/><circle cx="870" cy="160" r="2"/>
+          <circle cx="1040" cy="170" r="3"/><circle cx="1090" cy="82" r="2"/><circle cx="740" cy="205" r="2"/><circle cx="1010" cy="215" r="2"/><circle cx="1100" cy="190" r="3"/>
+        </g>
+        <g class="ls-sun">
+          <g class="ls-rays" stroke="#15120E" stroke-width="5" stroke-linecap="round">
+            <line class="k" x1="1014" y1="120" x2="1032" y2="120"/><line class="k" x1="998" y1="158" x2="1011" y2="171"/>
+            <line class="k" x1="960" y1="174" x2="960" y2="192"/><line class="k" x1="922" y1="158" x2="909" y2="171"/>
+            <line class="k" x1="906" y1="120" x2="888" y2="120"/><line class="k" x1="922" y1="82" x2="909" y2="69"/>
+            <line class="k" x1="960" y1="66" x2="960" y2="48"/><line class="k" x1="998" y1="82" x2="1011" y2="69"/>
+          </g>
+          <circle class="k" cx="960" cy="120" r="42" fill="#C23A22" stroke="#15120E" stroke-width="6"/>
+        </g>
+        <g class="ls-moon"><circle cx="960" cy="110" r="36" fill="#EFE6D2" mask="url(#ls-cres)"/></g>
+        <path class="k" fill="#15120E" stroke="#15120E" stroke-width="3" d="M660 300 L660 240 L720 240 L720 260 L780 260 L780 220 L810 200 L840 220 L840 250 L920 250 L920 230 L990 230 L990 265 L1050 265 L1050 215 L1120 215 L1120 300 Z"/>
+        <g class="ls-lit" fill="#D9A441"><rect x="736" y="270" width="10" height="12"/><rect x="802" y="230" width="10" height="12"/><rect x="950" y="242" width="10" height="12"/><rect x="1072" y="228" width="10" height="12"/></g>
+        <g class="ls-clouds" fill="#5E5547" stroke="#15120E" stroke-width="5">
+          <ellipse class="k" cx="760" cy="88" rx="90" ry="34"/><ellipse class="k" cx="1080" cy="72" rx="74" ry="32"/>
+          <ellipse class="k" cx="980" cy="96" rx="110" ry="40"/><ellipse class="k" cx="860" cy="70" rx="82" ry="38"/>
+        </g>
+        <g class="ls-rain" stroke="#EFE6D2" stroke-width="3" stroke-linecap="round">
+          <line x1="700" y1="40" x2="650" y2="300"/><line x1="740" y1="60" x2="690" y2="320"/><line x1="780" y1="40" x2="730" y2="300"/>
+          <line x1="820" y1="70" x2="770" y2="330"/><line x1="860" y1="40" x2="810" y2="300"/><line x1="900" y1="60" x2="850" y2="320"/>
+          <line x1="940" y1="40" x2="890" y2="300"/><line x1="980" y1="70" x2="930" y2="330"/><line x1="1020" y1="40" x2="970" y2="300"/>
+          <line x1="1060" y1="60" x2="1010" y2="320"/><line x1="1100" y1="40" x2="1050" y2="300"/><line x1="1140" y1="70" x2="1090" y2="330"/><line x1="1180" y1="40" x2="1130" y2="300"/>
+        </g>
+      </g>
+      <rect class="k" x="660" y="50" width="460" height="250" fill="none" stroke="#15120E" stroke-width="10"/>
+      <line class="k" x1="890" y1="50" x2="890" y2="300" stroke="#15120E" stroke-width="7"/>
+      <line class="k" x1="660" y1="175" x2="1120" y2="175" stroke="#15120E" stroke-width="7"/>
+      <rect class="k" x="640" y="296" width="500" height="16" fill="#15120E" stroke="#15120E" stroke-width="3"/>
+      <g>
+        <circle class="k" cx="540" cy="110" r="40" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+        <g stroke="#15120E" stroke-width="4"><line x1="540" y1="74" x2="540" y2="82"/><line x1="576" y1="110" x2="568" y2="110"/><line x1="540" y1="146" x2="540" y2="138"/><line x1="504" y1="110" x2="512" y2="110"/></g>
+        <line class="ls-hh" x1="540" y1="110" x2="540" y2="88" stroke="#15120E" stroke-width="6" stroke-linecap="round"/>
+        <line class="ls-mh" x1="540" y1="110" x2="540" y2="79" stroke="#C23A22" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="540" cy="110" r="4" fill="#15120E"/>
+      </g>
+      <polygon class="ls-glow" points="382,96 418,96 610,380 190,380" fill="#D9A441"/>
+      <line class="k" x1="400" y1="0" x2="400" y2="72" stroke="#15120E" stroke-width="4"/>
+      <path class="k" d="M372 98 L428 98 L414 70 L386 70 Z" fill="#15120E" stroke="#15120E" stroke-width="4" stroke-linejoin="round"/>
+      <circle class="k" cx="400" cy="103" r="7" fill="#D9A441" stroke="#15120E" stroke-width="3"/>
+      <rect class="k" x="0" y="380" width="1200" height="80" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+      <rect x="0" y="380" width="1200" height="80" fill="url(#ls-pdot)" opacity=".12"/>
+      <polygon class="ls-beam" points="700,382 1120,382 1060,460 580,460" fill="#D9A441"/>
+      <ellipse class="k" cx="470" cy="410" rx="150" ry="26" fill="#C23A22" stroke="#15120E" stroke-width="5"/>
+      <g>
+        <rect class="k" x="30" y="262" width="14" height="118" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="236" y="318" width="12" height="62" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="40" y="320" width="200" height="30" fill="#EFE6D2" stroke="#15120E" stroke-width="5"/>
+        <ellipse class="k" cx="78" cy="312" rx="30" ry="12" fill="#EFE6D2" stroke="#15120E" stroke-width="4"/>
+        <g class="ls-sleeper">
+          <circle class="k" cx="84" cy="300" r="17" fill="#EFE6D2" stroke="#15120E" stroke-width="4"/>
+          <path d="M76 300 q6 5 12 0" stroke="#15120E" stroke-width="3" fill="none"/>
+          <path class="k" d="M98 308 Q170 288 238 302 L238 326 L98 326 Z" fill="#1D2430" stroke="#15120E" stroke-width="4"/>
+          <text class="ls-z" x="118" y="266" font-family="Oswald, sans-serif" font-weight="700" font-size="28" fill="#C23A22">z<tspan dy="-12" font-size="38">Z</tspan></text>
+        </g>
+      </g>
+      <g>
+        <rect class="k" x="646" y="236" width="10" height="94" fill="#C23A22" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="588" y="320" width="66" height="10" fill="#C23A22" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="592" y="330" width="8" height="50" fill="#C23A22" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="644" y="330" width="8" height="50" fill="#C23A22" stroke="#15120E" stroke-width="4"/>
+      </g>
+      <g class="ls-person">
+        <path class="k" d="M562 300 L630 300 L630 324 L584 324 L584 380 L562 380 Z" fill="#EFE6D2" stroke="#15120E" stroke-width="4" stroke-linejoin="round"/>
+        <path class="k" d="M590 236 Q612 228 634 236 L642 322 L590 322 Z" fill="#EFE6D2" stroke="#15120E" stroke-width="4" stroke-linejoin="round"/>
+        <circle class="k" cx="610" cy="206" r="24" fill="#EFE6D2" stroke="#15120E" stroke-width="4"/>
+        <circle cx="596" cy="203" r="3" fill="#15120E"/>
+        <path class="k" d="M600 244 L590 282" fill="none" stroke="#15120E" stroke-width="16" stroke-linecap="round"/>
+        <path d="M600 244 L590 282" fill="none" stroke="#EFE6D2" stroke-width="8" stroke-linecap="round"/>
+      </g>
+      <g class="ls-act ls-pali">
+        <path class="k" d="M430 290 L520 290 L512 282 L438 282 Z" fill="#EFE6D2" stroke="#15120E" stroke-width="3"/>
+        <g class="ls-fw">
+          <path class="k" d="M590 282 L532 284" fill="none" stroke="#15120E" stroke-width="16" stroke-linecap="round"/>
+          <path d="M590 282 L532 284" fill="none" stroke="#EFE6D2" stroke-width="8" stroke-linecap="round"/>
+          <line x1="530" y1="284" x2="512" y2="266" stroke="#C23A22" stroke-width="5" stroke-linecap="round"/>
+        </g>
+      </g>
+      <g class="ls-act ls-moku">
+        <path class="k" d="M458 270 A36 20 0 0 0 530 270 Z" fill="#C23A22" stroke="#15120E" stroke-width="4"/>
+        <g class="ls-fw">
+          <path class="k" d="M590 282 L548 276" fill="none" stroke="#15120E" stroke-width="16" stroke-linecap="round"/>
+          <path d="M590 282 L548 276" fill="none" stroke="#EFE6D2" stroke-width="8" stroke-linecap="round"/>
+          <line x1="546" y1="276" x2="528" y2="273" stroke="#15120E" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="524" cy="273" rx="7" ry="4" fill="#15120E"/>
+        </g>
+      </g>
+      <g>
+        <rect class="k" x="300" y="290" width="270" height="14" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="314" y="304" width="12" height="76" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+        <rect class="k" x="544" y="304" width="12" height="76" fill="#15120E" stroke="#15120E" stroke-width="4"/>
+      </g>
+      <g class="ls-act ls-lape">
+        <g class="ls-breath">
+          <path class="k" d="M540 384 Q596 376 574 350" fill="none" stroke="#15120E" stroke-width="10" stroke-linecap="round"/>
+          <ellipse class="k" cx="480" cy="372" rx="66" ry="28" fill="#D9A441" stroke="#15120E" stroke-width="5"/>
+          <path class="k" d="M406 362 L402 338 L420 354 Z M426 354 L440 336 L440 362 Z" fill="#D9A441" stroke="#15120E" stroke-width="4" stroke-linejoin="round"/>
+          <circle class="k" cx="420" cy="376" r="22" fill="#D9A441" stroke="#15120E" stroke-width="5"/>
+          <path d="M406 377 q6 5 12 0" stroke="#15120E" stroke-width="3" fill="none"/>
+          <circle cx="400" cy="384" r="3" fill="#15120E"/>
+        </g>
+        <text class="ls-z" x="372" y="332" font-family="Oswald, sans-serif" font-weight="700" font-size="28" fill="#C23A22">z<tspan dy="-10" font-size="36">Z</tspan></text>
+      </g>
+    </svg>
+    <div class="ls-cap" aria-hidden="true"></div>
+  </figure>
+
+  <div class="ls-ctl">
+    <div class="ls-rail">
+      <span class="ls-line"></span>
+      <div class="ls-thumb" role="slider" tabindex="0" aria-label="Контекст перед la" aria-valuemin="0" aria-valuemax="6"></div>
+    </div>
+    <div class="ls-chips"></div>
+  </div>
+
+  <div class="ls-out">
+    <p class="ls-phrase"><span class="ls-pc"></span> <b class="ls-la">la</b> <span class="ls-pa"></span>.</p>
+    <p class="ls-gloss"></p>
+    <div class="ls-row">
+      <div class="ls-tr" aria-live="polite"></div>
+      <div class="ls-acts" role="radiogroup" aria-label="Фраза справа от la"></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="la-scene"]{overflow:hidden;color:var(--ink);font-family:var(--text)}
+[data-instrument="la-scene"] .ls-fig{position:relative;margin:0;line-height:0;border-bottom:4px solid var(--ink);background:var(--paper)}
+[data-instrument="la-scene"] .ls-svg{display:block;width:100%;height:auto;filter:sepia(0) saturate(1) contrast(1) brightness(1);transition:filter .6s ease}
+[data-instrument="la-scene"][data-ctx="pini"] .ls-svg{filter:sepia(.85) saturate(.6) contrast(.86) brightness(1.05)}
+[data-instrument="la-scene"] .ls-cap{position:absolute;left:.8rem;top:.8rem;line-height:1.2;font-family:var(--display);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:clamp(.72rem,1.8vw,1rem);background:var(--ochre);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:.3rem .6rem}
+[data-instrument="la-scene"] .ls-sky{fill:#A9C6C2;transition:fill .6s ease}
+[data-instrument="la-scene"] .ls-wall{fill:#EFE6D2;transition:fill .6s ease}
+[data-instrument="la-scene"] .ls-sun,[data-instrument="la-scene"] .ls-moon,[data-instrument="la-scene"] .ls-clouds{transition:transform .7s cubic-bezier(.4,0,.2,1),opacity .6s}
+[data-instrument="la-scene"] .ls-stars,[data-instrument="la-scene"] .ls-rain,[data-instrument="la-scene"] .ls-glow,[data-instrument="la-scene"] .ls-beam,[data-instrument="la-scene"] .ls-lit,[data-instrument="la-scene"] .ls-sleeper,[data-instrument="la-scene"] .ls-act,[data-instrument="la-scene"] .ls-person,[data-instrument="la-scene"] .ls-rays{transition:opacity .5s}
+[data-instrument="la-scene"] .k{transition:fill-opacity .5s}
+[data-instrument="la-scene"] .ls-moon{transform:translate(0,240px);opacity:0}
+[data-instrument="la-scene"] .ls-stars,[data-instrument="la-scene"] .ls-rain,[data-instrument="la-scene"] .ls-glow,[data-instrument="la-scene"] .ls-lit,[data-instrument="la-scene"] .ls-sleeper,[data-instrument="la-scene"] .ls-rays{opacity:0}
+[data-instrument="la-scene"] .ls-clouds{opacity:0;transform:translate(0,-90px)}
+[data-instrument="la-scene"] .ls-beam{opacity:.4}
+[data-instrument="la-scene"][data-ctx="pini"] .ls-sky{fill:#D9A441}
+[data-instrument="la-scene"][data-ctx="pini"] .ls-sun{transform:translate(110px,62px)}
+[data-instrument="la-scene"][data-ctx="pini"] .ls-beam{opacity:.35}
+[data-instrument="la-scene"][data-ctx="ni"] .ls-sun{transform:translate(-110px,28px)}
+[data-instrument="la-scene"][data-ctx="ni"] .ls-rays{opacity:.6}
+[data-instrument="la-scene"][data-ctx="kama"] .ls-sky{fill:#EFE6D2}
+[data-instrument="la-scene"][data-ctx="kama"] .ls-sun{transform:translate(-40px,20px)}
+[data-instrument="la-scene"][data-ctx="kama"] .ls-beam{opacity:.12}
+[data-instrument="la-scene"][data-ctx="kama"] .ls-wdots{opacity:0}
+[data-instrument="la-scene"][data-ctx="kama"] .k{fill-opacity:.12;stroke-dasharray:9 7}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-sky,[data-instrument="la-scene"][data-ctx="sina"] .ls-sky{fill:#1D2430}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-wall,[data-instrument="la-scene"][data-ctx="sina"] .ls-wall{fill:#3D4049}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-sun,[data-instrument="la-scene"][data-ctx="sina"] .ls-sun{transform:translate(0,240px);opacity:0}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-moon{transform:translate(0,0);opacity:1}
+[data-instrument="la-scene"][data-ctx="sina"] .ls-moon{transform:translate(-160px,22px);opacity:1}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-stars,[data-instrument="la-scene"][data-ctx="sina"] .ls-stars,[data-instrument="la-scene"][data-ctx="pimeja"] .ls-lit{opacity:1}
+[data-instrument="la-scene"][data-ctx="sina"] .ls-lit{opacity:.5}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-glow{opacity:.5}
+[data-instrument="la-scene"][data-ctx="sina"] .ls-glow{opacity:.42}
+[data-instrument="la-scene"][data-ctx="pimeja"] .ls-beam,[data-instrument="la-scene"][data-ctx="sina"] .ls-beam{opacity:0}
+[data-instrument="la-scene"][data-ctx="sina"] .ls-sleeper{opacity:1}
+[data-instrument="la-scene"][data-ctx="suno"] .ls-sky{fill:#E9B44C}
+[data-instrument="la-scene"][data-ctx="suno"] .ls-sun{transform:translate(0,-6px)}
+[data-instrument="la-scene"][data-ctx="suno"] .ls-rays{opacity:1}
+[data-instrument="la-scene"][data-ctx="suno"] .ls-beam{opacity:.6}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-sky{fill:#8C8F8C}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-wall{fill:#D6CDB8}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-sun{transform:translate(90px,40px);opacity:.5}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-clouds{opacity:1;transform:translate(0,0)}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-rain{opacity:1}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-beam{opacity:.08}
+[data-instrument="la-scene"][data-ctx="telo"] .ls-glow{opacity:.25}
+[data-instrument="la-scene"] .ls-act,[data-instrument="la-scene"] .ls-person{opacity:0}
+[data-instrument="la-scene"][data-act="pali"] .ls-pali,[data-instrument="la-scene"][data-act="moku"] .ls-moku,[data-instrument="la-scene"][data-act="lape"] .ls-lape,[data-instrument="la-scene"][data-act="pali"] .ls-person,[data-instrument="la-scene"][data-act="moku"] .ls-person{opacity:1}
+[data-instrument="la-scene"] .ls-rain line{stroke-dasharray:16 24;animation:ls-rain .6s linear infinite}
+[data-instrument="la-scene"] .ls-fw,[data-instrument="la-scene"] .ls-hh,[data-instrument="la-scene"] .ls-mh,[data-instrument="la-scene"] .ls-breath{transform-box:view-box}
+[data-instrument="la-scene"] .ls-fw{transform-origin:590px 282px}
+[data-instrument="la-scene"] .ls-hh,[data-instrument="la-scene"] .ls-mh{transform-origin:540px 110px;transition:transform .7s ease}
+[data-instrument="la-scene"] .ls-pali .ls-fw{animation:ls-write 1.1s ease-in-out infinite}
+[data-instrument="la-scene"] .ls-moku .ls-fw{animation:ls-eat 2.6s ease-in-out infinite}
+[data-instrument="la-scene"] .ls-breath{transform-origin:480px 390px;animation:ls-breathe 3.2s ease-in-out infinite}
+[data-instrument="la-scene"] .ls-z{animation:ls-zz 2.4s ease-in-out infinite}
+@keyframes ls-write{0%,100%{transform:rotate(0)}50%{transform:translate(-10px,0) rotate(-5deg)}}
+@keyframes ls-eat{0%,55%,100%{transform:rotate(0)}28%{transform:rotate(38deg)}}
+@keyframes ls-breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.03,1.07)}}
+@keyframes ls-zz{0%{opacity:0;transform:translate(0,8px)}45%{opacity:1}100%{opacity:0;transform:translate(10px,-16px)}}
+@keyframes ls-rain{to{stroke-dashoffset:-40}}
+[data-instrument="la-scene"] .ls-ctl{padding:1rem 1.2rem .4rem}
+[data-instrument="la-scene"] .ls-rail{position:relative;height:3rem;touch-action:pan-y;cursor:pointer;user-select:none;-webkit-user-select:none}
+[data-instrument="la-scene"] .ls-line{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;background:var(--ink)}
+[data-instrument="la-scene"] .ls-tick{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--paper);border:3px solid var(--ink)}
+[data-instrument="la-scene"] .ls-tick.on{background:var(--ochre)}
+[data-instrument="la-scene"] .ls-thumb{position:absolute;top:50%;width:2.3rem;height:2.3rem;transform:translate(-50%,-50%);background:var(--accent);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);border-radius:50%;cursor:grab;touch-action:none;transition:left .22s ease;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:.85rem;color:var(--paper);line-height:1}
+[data-instrument="la-scene"] .ls-thumb.drag{transition:none;cursor:grabbing}
+[data-instrument="la-scene"] .ls-thumb:focus{outline:none}
+[data-instrument="la-scene"] .ls-thumb:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;box-shadow:0 0 0 6px var(--ink)}
+[data-instrument="la-scene"] .ls-chips{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.35rem;margin-top:.3rem}
+[data-instrument="la-scene"] .ls-chip{font:inherit;cursor:pointer;background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:.3rem .2rem .35rem;text-align:center;line-height:1.15}
+[data-instrument="la-scene"] .ls-chip b{display:block;font-family:var(--display);font-weight:600;font-size:.92rem}
+[data-instrument="la-scene"] .ls-chip small{display:block;font-size:.72rem;color:var(--muted);font-style:italic}
+[data-instrument="la-scene"] .ls-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="la-scene"] .ls-chip[aria-pressed="true"] small{color:var(--ochre)}
+[data-instrument="la-scene"] .ls-chip:focus-visible,[data-instrument="la-scene"] .ls-act-b:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-instrument="la-scene"] .ls-out{padding:.6rem 1.2rem 1.2rem}
+[data-instrument="la-scene"] .ls-phrase{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(1.15rem,3.6vw,1.75rem);line-height:1.5;min-height:1.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="la-scene"] .ls-phrase .li{color:var(--accent)}
+[data-instrument="la-scene"] .ls-la{color:var(--paper);background:var(--accent);border:2px solid var(--ink);padding:0 .3em;box-shadow:2px 2px 0 var(--ink)}
+[data-instrument="la-scene"] .ls-gloss{margin:.1rem 0 .7rem;color:var(--muted);font-style:italic;font-size:.92rem;line-height:1.4;min-height:2.8em}
+[data-instrument="la-scene"] .ls-row{display:flex;flex-wrap:wrap;gap:.8rem;align-items:stretch}
+[data-instrument="la-scene"] .ls-tr{flex:1 1 18rem;height:4.4rem;display:flex;align-items:center;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);background:var(--paper);padding:.4rem .9rem;font-size:1.05rem;line-height:1.3;overflow:hidden}
+[data-instrument="la-scene"] .ls-acts{display:flex;flex:0 1 auto;border:3px solid var(--ink)}
+[data-instrument="la-scene"] .ls-act-b{font-family:var(--display);font-weight:600;font-size:.95rem;cursor:pointer;background:var(--paper);color:var(--ink);border:0;border-left:2px solid var(--ink);padding:.3rem .7rem;white-space:nowrap}
+[data-instrument="la-scene"] .ls-act-b:first-child{border-left:0}
+[data-instrument="la-scene"] .ls-act-b[aria-checked="true"]{background:var(--ochre)}
+@media (max-width:640px){
+[data-instrument="la-scene"] .ls-chips{grid-template-columns:repeat(4,minmax(0,1fr))}
+[data-instrument="la-scene"] .ls-acts{width:100%}
+[data-instrument="la-scene"] .ls-act-b{flex:1;padding:.4rem .3rem;font-size:.85rem}
+}
+@media (prefers-reduced-motion:reduce){
+[data-instrument="la-scene"] *{transition:none!important;animation:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="la-scene"]');
+if(!root)return;
+const C=[
+{id:'pini',tp:'tenpo pini',ru:'в прошлом',lit:'«время прошедшее»',t:'past',lead:'В прошлом ',h:19,m:0,d:'выцветший сепийный кадр, низкое вечернее солнце'},
+{id:'ni',tp:'tenpo ni',ru:'сейчас',lit:'«это время»',t:'now',lead:'Сейчас ',h:10,m:10,d:'ясное утро, солнце в окне'},
+{id:'kama',tp:'tenpo kama',ru:'в будущем',lit:'«приходящее время»',t:'fut',lead:'В будущем ',h:16,m:0,d:'кадр только намечен пунктирным контуром'},
+{id:'pimeja',tp:'tenpo pimeja',ru:'ночью',lit:'«тёмное время»',t:'now',lead:'Ночью ',h:23,m:0,d:'ночь, луна и звёзды, горит лампа'},
+{id:'suno',tp:'tenpo suno',ru:'днём',lit:'«солнечное время»',t:'now',lead:'Днём ',h:13,m:0,d:'полдень, солнце высоко, комната залита светом'},
+{id:'sina',tp:'sina lape',ru:'когда ты спишь',lit:'«ты спишь»',t:'now',lead:'Когда ты спишь, ',h:2,m:0,d:'глубокая ночь, на кровати спит второй человек'},
+{id:'telo',tp:'telo li kama',ru:'если пойдёт дождь',lit:'«вода приходит»',t:'fut',lead:'Если пойдёт дождь, ',h:17,m:30,d:'тучи и дождь за окном'}
+];
+const A={
+pali:{tp:'mi pali',html:'mi pali',lit:'«я работать»',now:'я работаю',past:'я работал',fut:'я буду работать',d:'человек пишет за столом'},
+lape:{tp:'soweli li lape',html:'soweli <span class="li">li</span> lape',lit:'«зверь спать»',now:'зверь спит',past:'зверь спал',fut:'зверь будет спать',d:'зверь спит у стола'},
+moku:{tp:'jan li moku',html:'jan <span class="li">li</span> moku',lit:'«человек есть»',now:'человек ест',past:'человек ел',fut:'человек будет есть',d:'человек ест за столом'}
+};
+const N=C.length;
+const $=s=>root.querySelector(s);
+const svg=$('.ls-svg'),cap=$('.ls-cap'),rail=$('.ls-rail'),thumb=$('.ls-thumb'),chipsBox=$('.ls-chips'),
+pc=$('.ls-pc'),pa=$('.ls-pa'),gloss=$('.ls-gloss'),tr=$('.ls-tr'),actsBox=$('.ls-acts'),hh=$('.ls-hh'),mh=$('.ls-mh');
+let idx=3,act='pali',dragging=false;
+const center=i=>(i+0.5)/N*100;
+const ticks=C.map((c,i)=>{const t=document.createElement('span');t.className='ls-tick';t.style.left=center(i)+'%';rail.insertBefore(t,thumb);return t;});
+const chips=C.map((c,i)=>{const b=document.createElement('button');b.type='button';b.className='ls-chip';
+b.innerHTML='<b>'+c.tp+'</b><small>'+c.ru+'</small>';b.addEventListener('click',()=>setIdx(i,true));chipsBox.appendChild(b);return b;});
+const actBtns=Object.keys(A).map(k=>{const b=document.createElement('button');b.type='button';b.className='ls-act-b';b.setAttribute('role','radio');
+b.textContent=A[k].tp;b.dataset.k=k;b.addEventListener('click',()=>{act=k;render();});
+b.addEventListener('keydown',e=>{const ks=Object.keys(A);let j=ks.indexOf(act);
+if(e.key==='ArrowRight'||e.key==='ArrowDown'){j=(j+1)%ks.length}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){j=(j+ks.length-1)%ks.length}else return;
+e.preventDefault();act=ks[j];render();actBtns[j].focus();});
+actsBox.appendChild(b);return b;});
+function sentence(c,a){const s=c.lead+a[c.t];return s.charAt(0).toUpperCase()+s.slice(1)+'.';}
+function render(){
+const c=C[idx],a=A[act];
+root.dataset.ctx=c.id;root.dataset.act=act;
+cap.textContent=c.tp+' la';
+pc.innerHTML=c.tp.replace(' li ',' <span class="li">li</span> ');
+pa.innerHTML=a.html;
+gloss.textContent=c.tp+' — '+c.lit+' · '+a.tp+' — '+a.lit;
+tr.textContent=sentence(c,a);
+const hDeg=(c.h%12)*30+c.m*0.5,mDeg=c.m*6;
+hh.style.transform='rotate('+hDeg+'deg)';mh.style.transform='rotate('+mDeg+'deg)';
+svg.setAttribute('aria-label','Кадр: '+c.d+'; '+a.d+'.');
+chips.forEach((b,i)=>b.setAttribute('aria-pressed',i===idx?'true':'false'));
+ticks.forEach((t,i)=>t.classList.toggle('on',i===idx));
+actBtns.forEach(b=>{const on=b.dataset.k===act;b.setAttribute('aria-checked',on?'true':'false');b.tabIndex=on?0:-1;});
+thumb.setAttribute('aria-valuenow',idx);
+thumb.setAttribute('aria-valuetext',c.tp+' la — '+c.ru);
+thumb.textContent='la';
+if(!dragging)thumb.style.left=center(idx)+'%';
+}
+function setIdx(i){i=Math.max(0,Math.min(N-1,i));if(i!==idx){idx=i;}render();}
+function fromX(x){const r=rail.getBoundingClientRect();let p=(x-r.left)/r.width;p=Math.max(0.5/N,Math.min((N-0.5)/N,p));return p;}
+function onMove(e){if(!dragging)return;const p=fromX(e.clientX);thumb.style.left=(p*100)+'%';const i=Math.round(p*N-0.5);if(i!==idx){idx=i;render();}}
+rail.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;dragging=true;thumb.classList.add('drag');
+try{rail.setPointerCapture(e.pointerId)}catch(_){}onMove(e);thumb.focus({preventScroll:true});e.preventDefault();});
+rail.addEventListener('pointermove',onMove);
+function end(){if(!dragging)return;dragging=false;thumb.classList.remove('drag');thumb.style.left=center(idx)+'%';}
+rail.addEventListener('pointerup',end);rail.addEventListener('pointercancel',end);rail.addEventListener('lostpointercapture',end);
+thumb.addEventListener('keydown',e=>{let i=idx;
+if(e.key==='ArrowRight'||e.key==='ArrowUp')i++;else if(e.key==='ArrowLeft'||e.key==='ArrowDown')i--;
+else if(e.key==='Home')i=0;else if(e.key==='End')i=N-1;else return;e.preventDefault();setIdx(i);});
+render();
+})();</script>
+</section>
+
+<!-- ================= ISSUE 7 ================= -->
+<section class="issue" aria-labelledby="i7">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 7</span>
+    <h2 id="i7">Счёт собирают из пяти слов, складывая их подряд</h2>
+  </header>
+
+  <div class="numerals" aria-label="Числительные токи поны">
+    <div><b>1</b><span>wan</span></div>
+    <div><b>2</b><span>tu</span></div>
+    <div><b>5</b><span>luka</span></div>
+    <div><b>20</b><span>mute</span></div>
+    <div><b>100</b><span>ale</span></div>
+  </div>
+
+  <div class="prose">
+    <p>В самом простом счёте токи поны есть <span class="tp">wan</span> — один, <span class="tp">tu</span> — два и <span class="tp">mute</span> — много. Чаще всего больше и не нужно: <span class="tp">soweli tu</span> — два зверя, <span class="tp">jan mute</span> — много людей.</p>
+    <p>Для точных чисел книга Сони Ланг предлагает дополнительную систему: <span class="tp">luka</span> («рука») — пять, <span class="tp">mute</span> — двадцать, <span class="tp">ale</span> — сто. Числа складываются, и крупные идут первыми.</p>
+    <dl class="ex">
+      <div><dt>tu wan</dt><dd>3 = 2 + 1</dd></div>
+      <div><dt>luka tu</dt><dd>7 = 5 + 2</dd></div>
+      <div><dt>luka luka</dt><dd>10 = 5 + 5</dd></div>
+      <div><dt>mute luka tu wan</dt><dd>28 = 20 + 5 + 2 + 1</dd></div>
+    </dl>
+    <p>Числительное стоит после слова, как любое уточнение: <span class="tp">kili luka</span> — пять фруктов. Ноль и «ничего» — это <span class="tp">ala</span>.</p>
+  </div>
+
+  <div class="instrument" data-instrument="number-hands">
+  <div class="nh">
+    <div class="nh-scale">
+      <div class="nh-track">
+        <div class="nh-fill"></div>
+        <div class="nh-thumb" role="slider" tabindex="0" aria-label="Число" aria-valuemin="0" aria-valuemax="100" aria-valuenow="28"><span>28</span></div>
+      </div>
+    </div>
+    <div class="nh-main">
+      <div class="nh-say" aria-live="polite">
+        <div class="nh-words"></div>
+        <div class="nh-alt"></div>
+      </div>
+      <div class="nh-sum"></div>
+      <div class="nh-row" aria-hidden="true"></div>
+      <div class="nh-coins"></div>
+      <button type="button" class="nh-switch" role="switch" aria-checked="false"><span class="nh-sw"><i></i></span><span>простой счёт</span></button>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="number-hands"]{font-family:var(--text);color:var(--ink)}
+[data-instrument="number-hands"] .nh{display:grid;grid-template-columns:5.6rem minmax(0,1fr);gap:1.4rem;padding:1.4rem 1.4rem 1.5rem}
+[data-instrument="number-hands"] .nh-scale{position:relative;min-height:20rem;touch-action:none;cursor:ns-resize;user-select:none;-webkit-user-select:none}
+[data-instrument="number-hands"] .nh-track{position:absolute;left:0;right:0;top:1.5rem;bottom:1.5rem}
+[data-instrument="number-hands"] .nh-track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--ink)}
+[data-instrument="number-hands"] .nh-fill{position:absolute;left:50%;bottom:0;width:8px;margin-left:-4px;background:var(--accent)}
+[data-instrument="number-hands"] .nh-tick{position:absolute;left:50%;width:.8rem;height:2px;margin:-1px 0 0 -.4rem;background:var(--ink)}
+[data-instrument="number-hands"] .nh-tick.nh-major{width:1.6rem;margin-left:-.8rem;height:3px}
+[data-instrument="number-hands"] .nh-tl{position:absolute;right:calc(50% + 1rem);transform:translateY(-50%);font-family:var(--display);font-weight:400;font-size:.8rem;line-height:1;color:var(--muted);font-variant-numeric:tabular-nums}
+[data-instrument="number-hands"] .nh-thumb{position:absolute;left:50%;top:72%;transform:translate(-50%,-50%);width:4.2rem;height:2.9rem;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--accent);font-family:var(--display);font-weight:700;font-size:1.75rem;line-height:1;font-variant-numeric:tabular-nums;cursor:grab;transition:top .08s linear;outline:none}
+[data-instrument="number-hands"] .nh-thumb:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="number-hands"] .nh-scale.nh-drag .nh-thumb{cursor:grabbing;transition:none}
+[data-instrument="number-hands"] .nh-main{display:flex;flex-direction:column;gap:.9rem;min-width:0}
+[data-instrument="number-hands"] .nh-say{height:8.6rem;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);background:var(--paper);display:flex;flex-direction:column;padding:.5rem 1rem .45rem;overflow:hidden}
+[data-instrument="number-hands"] .nh-words{flex:1;display:flex;align-items:center;flex-wrap:wrap;column-gap:.32em;font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:.01em}
+[data-instrument="number-hands"] .nh-words.s1{font-size:3.3rem}
+[data-instrument="number-hands"] .nh-words.s2{font-size:2.5rem}
+[data-instrument="number-hands"] .nh-words.s3{font-size:1.95rem}
+[data-instrument="number-hands"] .nh-words.s4{font-size:1.55rem}
+[data-instrument="number-hands"] .nh-words .w-ale{color:var(--accent)}
+[data-instrument="number-hands"] .nh-words .w-ala{color:var(--muted)}
+[data-instrument="number-hands"] .nh-alt{height:1.5rem;font-size:.92rem;font-style:italic;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="number-hands"] .nh-alt b{font-style:normal;font-weight:600;color:var(--ink)}
+[data-instrument="number-hands"] .nh-sum{height:2.4rem;display:flex;align-items:center;font-family:var(--display);font-size:1.3rem;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;color:var(--muted)}
+[data-instrument="number-hands"] .nh-sum b{color:var(--ink);font-weight:600}
+[data-instrument="number-hands"] .nh-sum em{font-style:normal;color:var(--accent);font-weight:700;margin-left:.3em}
+[data-instrument="number-hands"] .nh-row{height:5.4rem;display:flex;align-items:flex-end;gap:.3em;border-bottom:3px solid var(--ink);padding-bottom:.25rem;overflow:hidden;color:var(--ink)}
+[data-instrument="number-hands"] .nh-ic{display:block;flex:none;height:auto;transform-origin:50% 100%}
+[data-instrument="number-hands"] .nh-ic-ale{width:4em}
+[data-instrument="number-hands"] .nh-ic-mute{width:3.6em}
+[data-instrument="number-hands"] .nh-ic-luka{width:3em}
+[data-instrument="number-hands"] .nh-ic-tu,[data-instrument="number-hands"] .nh-ic-wan{width:2.5em}
+[data-instrument="number-hands"] .nh-ic-ala{width:3em}
+[data-instrument="number-hands"] .nh-sun{fill:var(--accent);stroke:var(--ink);stroke-width:4}
+[data-instrument="number-hands"] .nh-ray{stroke:var(--ink);stroke-width:4;stroke-linecap:round}
+[data-instrument="number-hands"] .nh-sep{stroke:var(--paper);stroke-width:2.5}
+[data-instrument="number-hands"] .nh-fing{stroke:currentColor;stroke-width:7;stroke-linecap:round;fill:none}
+[data-instrument="number-hands"] .nh-void{fill:none;stroke:var(--muted);stroke-width:3;stroke-dasharray:6 5}
+[data-instrument="number-hands"] .nh-new{animation:nh-pop .22s ease-out}
+@keyframes nh-pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+[data-instrument="number-hands"] .nh-coins{display:flex;flex-wrap:wrap;gap:.6rem}
+[data-instrument="number-hands"] .nh-coin{position:relative;display:flex;flex-direction:column;align-items:stretch;width:4.2rem}
+[data-instrument="number-hands"] .nh-coin button{font:inherit;color:var(--ink);background:var(--paper);border:3px solid var(--ink);cursor:pointer;padding:0;touch-action:manipulation}
+[data-instrument="number-hands"] .nh-add{height:3.3rem;border-radius:50% 50% 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+[data-instrument="number-hands"] .nh-add b{font-family:var(--display);font-weight:600;font-size:1.05rem}
+[data-instrument="number-hands"] .nh-add span{font-family:var(--display);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;margin-top:.15rem}
+[data-instrument="number-hands"] .nh-sub{height:1.6rem;border-top:0!important;font-family:var(--display)!important;font-size:1.1rem!important;line-height:1}
+[data-instrument="number-hands"] .nh-coin[data-k="ale"] .nh-add{background:var(--accent);color:var(--paper)}
+[data-instrument="number-hands"] .nh-coin[data-k="ale"] .nh-add span{color:var(--paper)}
+[data-instrument="number-hands"] .nh-coin button:hover:not(:disabled){background:var(--ochre);color:var(--ink)}
+[data-instrument="number-hands"] .nh-coin button:focus-visible{outline:3px solid var(--accent);outline-offset:2px;position:relative;z-index:1}
+[data-instrument="number-hands"] .nh-coin button:disabled{opacity:.35;cursor:default}
+[data-instrument="number-hands"] .nh-badge{position:absolute;top:-.45rem;right:-.45rem;min-width:1.6rem;height:1.4rem;padding:0 .25rem;background:var(--ink);color:var(--paper);font-family:var(--display);font-size:.8rem;line-height:1.4rem;text-align:center;font-variant-numeric:tabular-nums;pointer-events:none}
+[data-instrument="number-hands"] .nh-badge.nh-off{visibility:hidden}
+[data-instrument="number-hands"] .nh-switch{align-self:flex-start;display:inline-flex;align-items:center;gap:.6rem;font-family:var(--display);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;background:none;border:0;padding:.2rem 0;color:var(--ink);cursor:pointer}
+[data-instrument="number-hands"] .nh-switch:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="number-hands"] .nh-sw{position:relative;width:2.9rem;height:1.5rem;border:3px solid var(--ink);background:var(--paper);border-radius:1rem;flex:none}
+[data-instrument="number-hands"] .nh-sw i{position:absolute;top:.12rem;left:.15rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--ink);transition:left .15s}
+[data-instrument="number-hands"] .nh-switch[aria-checked="true"] .nh-sw{background:var(--accent)}
+[data-instrument="number-hands"] .nh-switch[aria-checked="true"] .nh-sw i{left:1.5rem;background:var(--paper)}
+@media (max-width:640px){
+  [data-instrument="number-hands"] .nh{grid-template-columns:4.6rem minmax(0,1fr);gap:1rem;padding:1rem}
+  [data-instrument="number-hands"] .nh-thumb{width:3.6rem;height:2.5rem;font-size:1.45rem}
+  [data-instrument="number-hands"] .nh-tl{font-size:.7rem;right:calc(50% + .9rem)}
+  [data-instrument="number-hands"] .nh-say{height:9rem;padding:.4rem .7rem}
+  [data-instrument="number-hands"] .nh-words.s1{font-size:2.5rem}
+  [data-instrument="number-hands"] .nh-words.s2{font-size:1.95rem}
+  [data-instrument="number-hands"] .nh-words.s3{font-size:1.5rem}
+  [data-instrument="number-hands"] .nh-words.s4{font-size:1.25rem}
+  [data-instrument="number-hands"] .nh-sum{font-size:1rem}
+  [data-instrument="number-hands"] .nh-coin{width:3.6rem}
+  [data-instrument="number-hands"] .nh-add b{font-size:.95rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="number-hands"] .nh-thumb,[data-instrument="number-hands"] .nh-sw i{transition:none}
+  [data-instrument="number-hands"] .nh-new{animation:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="number-hands"]');
+if(!root)return;
+const VAL={ale:100,mute:20,luka:5,tu:2,wan:1};
+const ORDER=['ale','mute','luka','tu','wan'];
+const EM={ale:4,mute:3.6,luka:3,tu:2.5,wan:2.5,ala:3};
+const scale=root.querySelector('.nh-scale'),track=root.querySelector('.nh-track'),fill=root.querySelector('.nh-fill'),thumb=root.querySelector('.nh-thumb'),thumbNum=thumb.querySelector('span');
+const wordsEl=root.querySelector('.nh-words'),altEl=root.querySelector('.nh-alt'),sumEl=root.querySelector('.nh-sum'),row=root.querySelector('.nh-row'),coinsEl=root.querySelector('.nh-coins'),sw=root.querySelector('.nh-switch');
+let n=28,simple=false,prevKeys=[],curKeys=[];
+
+for(let v=0;v<=100;v+=5){
+  const t=document.createElement('i');t.className='nh-tick'+(v%20===0?' nh-major':'');t.style.top=(100-v)+'%';track.insertBefore(t,fill);
+  if(v%20===0){const l=document.createElement('b');l.className='nh-tl';l.textContent=v;l.style.top=(100-v)+'%';track.insertBefore(l,fill);}
+}
+ORDER.forEach(function(k){
+  const d=document.createElement('div');d.className='nh-coin';d.dataset.k=k;
+  d.innerHTML='<button type="button" class="nh-add" aria-label="+ '+k+' ('+VAL[k]+')"><b>'+k+'</b><span>'+VAL[k]+'</span></button><button type="button" class="nh-sub" aria-label="− '+k+' ('+VAL[k]+')">−</button><span class="nh-badge nh-off"></span>';
+  coinsEl.appendChild(d);
+});
+
+function exact(x){
+  const w=[];let r=x;
+  ['ale','mute','luka'].forEach(function(k){while(r>=VAL[k]){w.push(k);r-=VAL[k];}});
+  if(r===4){w.push('tu','tu');}else{if(r>=2){w.push('tu');r-=2;}if(r===1)w.push('wan');}
+  return w;
+}
+function plain(x){return x===0?[]:x===1?['wan']:x===2?['tu']:['mute'];}
+function say(w){return w.length?w.join(' '):'ala';}
+
+function person(cx,top,s){
+  return '<circle cx="'+cx+'" cy="'+(top+6*s)+'" r="'+(5.5*s)+'"/><path d="M'+(cx-8*s)+' '+(top+27*s)+' Q'+(cx-8*s)+' '+(top+13*s)+' '+cx+' '+(top+13*s)+' Q'+(cx+8*s)+' '+(top+13*s)+' '+(cx+8*s)+' '+(top+27*s)+' Z"/>';
+}
+function icon(k,isNew){
+  let s='';
+  if(k==='ale'){
+    for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),si=Math.sin(a);s+='<line class="nh-ray" x1="'+(32+20*c).toFixed(1)+'" y1="'+(32+20*si).toFixed(1)+'" x2="'+(32+29*c).toFixed(1)+'" y2="'+(32+29*si).toFixed(1)+'"/>';}
+    s+='<circle class="nh-sun" cx="32" cy="32" r="15"/>';
+  }else if(k==='mute'){
+    s='<g fill="currentColor" class="nh-sep">'+person(22,16,1.05)+person(42,16,1.05)+person(11,31,1.2)+person(32,31,1.2)+person(53,31,1.2)+'</g>';
+  }else if(k==='luka'){
+    s='<path class="nh-fing" d="M21 33 L19 15 M28 31 L28 9 M35 31 L36 10 M42 33 L45 16 M20 45 L9 33"/><rect x="16" y="29" width="31" height="28" rx="10" fill="currentColor"/>';
+  }else if(k==='tu'){
+    s='<path class="nh-fing" d="M27 33 L22 10 M36 33 L41 10"/><rect x="19" y="30" width="26" height="27" rx="8" fill="currentColor"/>';
+  }else if(k==='wan'){
+    s='<path class="nh-fing" d="M29 33 L29 8"/><rect x="19" y="30" width="26" height="27" rx="8" fill="currentColor"/>';
+  }else{
+    s='<circle class="nh-void" cx="32" cy="34" r="21"/>';
+  }
+  return '<svg class="nh-ic nh-ic-'+k+(isNew?' nh-new':'')+'" viewBox="0 0 64 64" focusable="false">'+s+'</svg>';
+}
+
+function fit(){
+  const w=row.clientWidth;if(!w)return;
+  let need=0;curKeys.forEach(function(k){need+=EM[k];});
+  need+=0.3*Math.max(0,curKeys.length-1);
+  const k=Math.min(1.2,w/(need*16));
+  row.style.fontSize=(16*k).toFixed(2)+'px';
+}
+
+function render(){
+  const ex=exact(n),pl=plain(n),w=simple?pl:ex,txt=say(w);
+  thumb.style.top=(100-n)+'%';
+  fill.style.height=n+'%';
+  thumbNum.textContent=n;
+  thumb.setAttribute('aria-valuenow',n);
+  thumb.setAttribute('aria-valuetext',n+' — '+txt);
+  const len=txt.length;
+  wordsEl.className='nh-words '+(len<=12?'s1':len<=22?'s2':len<=31?'s3':'s4');
+  wordsEl.innerHTML=(w.length?w:['ala']).map(function(x){return '<span class="w-'+x+'">'+x+'</span>';}).join('');
+  altEl.innerHTML=simple?'точно: <b>'+say(ex)+'</b>':'просто: <b>'+say(pl)+'</b>';
+  if(simple){
+    sumEl.innerHTML=n<=2?'<b>'+n+'</b>':'<b>'+n+'</b><em>≈ много</em>';
+  }else if(n===0){
+    sumEl.innerHTML='<b>0</b>';
+  }else{
+    sumEl.innerHTML='<b>'+ex.map(function(x){return VAL[x];}).join('</b> + <b>')+'</b>'+(ex.length>1?'<em>= '+n+'</em>':'');
+  }
+  curKeys=w.length?w.slice():['ala'];
+  let p=0;while(p<prevKeys.length&&p<curKeys.length&&prevKeys[p]===curKeys[p])p++;
+  row.innerHTML=curKeys.map(function(k,i){return icon(k,i>=p);}).join('');
+  prevKeys=curKeys;
+  fit();
+  coinsEl.querySelectorAll('.nh-coin').forEach(function(c){
+    const k=c.dataset.k,v=VAL[k];
+    c.querySelector('.nh-add').disabled=n+v>100;
+    c.querySelector('.nh-sub').disabled=n<v;
+    let cnt=0;ex.forEach(function(x){if(x===k)cnt++;});
+    const b=c.querySelector('.nh-badge');b.textContent='×'+cnt;b.classList.toggle('nh-off',cnt===0);
+  });
+}
+function set(v){v=Math.max(0,Math.min(100,Math.round(v)));if(v===n)return;n=v;render();}
+
+let drag=false;
+function fromY(e){const r=track.getBoundingClientRect();set((1-(e.clientY-r.top)/r.height)*100);}
+scale.addEventListener('pointerdown',function(e){
+  if(e.button!==undefined&&e.button!==0)return;
+  drag=true;scale.classList.add('nh-drag');
+  try{scale.setPointerCapture(e.pointerId);}catch(_){}
+  fromY(e);thumb.focus({preventScroll:true});e.preventDefault();
+});
+scale.addEventListener('pointermove',function(e){if(drag)fromY(e);});
+function end(){drag=false;scale.classList.remove('nh-drag');}
+scale.addEventListener('pointerup',end);
+scale.addEventListener('pointercancel',end);
+scale.addEventListener('lostpointercapture',end);
+
+thumb.addEventListener('keydown',function(e){
+  const step=e.shiftKey?5:1;let v=null;
+  switch(e.key){
+    case 'ArrowUp':case 'ArrowRight':v=n+step;break;
+    case 'ArrowDown':case 'ArrowLeft':v=n-step;break;
+    case 'PageUp':v=n+10;break;
+    case 'PageDown':v=n-10;break;
+    case 'Home':v=0;break;
+    case 'End':v=100;break;
+  }
+  if(v!==null){e.preventDefault();set(v);}
+});
+
+coinsEl.addEventListener('click',function(e){
+  const b=e.target.closest('button');if(!b||b.disabled)return;
+  const v=VAL[b.closest('.nh-coin').dataset.k];
+  set(b.classList.contains('nh-add')?n+v:n-v);
+});
+
+sw.addEventListener('click',function(){
+  simple=!simple;sw.setAttribute('aria-checked',simple?'true':'false');render();
+});
+
+if(typeof ResizeObserver!=='undefined'){new ResizeObserver(fit).observe(row);}
+else{window.addEventListener('resize',fit);}
+render();
+})();</script>
+</section>
+
+<!-- ================= ISSUE 8 ================= -->
+<section class="issue" aria-labelledby="i8">
+  <header class="issue-head">
+    <span class="issue-no">Выпуск 8</span>
+    <h2 id="i8">Первые фразы уже можно сказать вслух</h2>
+  </header>
+
+  <figure class="panel scroll">
+    <svg viewBox="0 0 1200 480" role="img" aria-label="Двое у костра под звёздами смотрят друг на друга; над ними пузыри речи: toki! и toki! sina pona anu seme?">
+      <rect width="1200" height="480" fill="#1D2430"/>
+      <rect width="1200" height="480" fill="url(#dot-paper)" opacity=".08"/>
+      <g fill="#EFE6D2">
+        <circle cx="120" cy="60" r="3"/><circle cx="260" cy="110" r="2"/><circle cx="430" cy="40" r="3"/>
+        <circle cx="760" cy="70" r="2"/><circle cx="980" cy="40" r="3"/><circle cx="1110" cy="120" r="2"/>
+      </g>
+      <ellipse cx="600" cy="430" rx="260" ry="70" fill="url(#dot-ochre)" opacity=".55"/>
+      <path d="M0 480 L0 420 C300 400 900 400 1200 420 L1200 480 Z" fill="#15120E"/>
+      <g filter="url(#brush)">
+        <path d="M600 300 C640 340 650 380 630 420 L570 420 C550 380 560 340 600 300 Z" fill="#C23A22" stroke="#15120E" stroke-width="6"/>
+        <path d="M600 350 C618 372 620 395 610 420 L590 420 C580 395 582 372 600 350 Z" fill="#D9A441"/>
+        <path d="M540 425 L660 410 M545 410 L655 428" stroke="#15120E" stroke-width="10" stroke-linecap="round"/>
+      </g>
+      <g fill="#15120E">
+        <circle cx="360" cy="296" r="28"/>
+        <path d="M330 330 Q360 320 390 330 L405 420 L315 420 Z"/>
+        <circle cx="850" cy="300" r="26"/>
+        <path d="M822 332 Q850 322 878 332 L892 420 L808 420 Z"/>
+      </g>
+      <path d="M385 290 A28 28 0 0 1 386 306 M824 296 A26 26 0 0 0 824 310" stroke="#C23A22" stroke-width="5" fill="none"/>
+      <ellipse cx="300" cy="170" rx="110" ry="60" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+      <polygon points="320,222 352,268 344,222" fill="#EFE6D2" stroke="#15120E" stroke-width="5" stroke-linejoin="round"/>
+      <text x="300" y="188" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="50" fill="#15120E">toki!</text>
+      <ellipse cx="880" cy="160" rx="230" ry="80" fill="#EFE6D2" stroke="#15120E" stroke-width="6"/>
+      <polygon points="850,236 845,272 880,238" fill="#EFE6D2" stroke="#15120E" stroke-width="5" stroke-linejoin="round"/>
+      <text x="880" y="148" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="40" fill="#15120E">toki!</text>
+      <text x="880" y="196" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="600" font-size="34" fill="#C23A22">sina pona anu seme?</text>
+    </svg>
+    <figcaption class="cap tl">У огня. Два слова — и разговор начался.</figcaption>
+  </figure>
+
+  <div class="prose">
+    <h3>Частица o обращается и просит</h3>
+    <p>Последняя частица этого учебника, <b class="pt">o</b>, делает две вещи. После имени она зовёт: <span class="tp">jan Sonja <b class="pt">o</b>!</span> — «Соня!». Перед сказуемым она просит или приказывает: <span class="tp"><b class="pt">o</b> moku!</span> — «ешь!», <span class="tp"><b class="pt">o</b> lape pona</span> — «спи сладко».</p>
+    <h3>Вопрос задают, повторяя слово или ставя seme</h3>
+    <p>Чтобы спросить «да или нет», повторяют сказуемое с <span class="tp">ala</span> между ними или добавляют <span class="tp">anu seme</span> («или что?») в конце. Ответ — само слово или его отрицание.</p>
+    <dl class="ex">
+      <div><dt>sina pona ala pona?</dt><dd>У тебя всё хорошо?</dd></div>
+      <div><dt>sina pona anu seme?</dt><dd>Ты в порядке, или как?</dd></div>
+      <div><dt>pona. / pona ala.</dt><dd>Да, хорошо. / Нет, не очень.</dd></div>
+      <div><dt>sina moku e seme?</dt><dd>Что ты ешь?</dd></div>
+    </dl>
+    <h3>Этого хватит на первый разговор</h3>
+    <dl class="ex">
+      <div><dt>toki!</dt><dd>Привет!</dd></div>
+      <div><dt>nimi mi li …</dt><dd>Меня зовут …</dd></div>
+      <div><dt>mi kama sona e toki pona.</dt><dd>Я учу токи пону — «прихожу к знанию».</dd></div>
+      <div><dt>mi tawa.</dt><dd>Я пошёл (прощание уходящего).</dd></div>
+      <div><dt>tawa pona!</dt><dd>Счастливого пути!</dd></div>
+    </dl>
+
+    <h3>Сорок слов, с которых всё начинается</h3>
+    <div class="lexicon">
+      <p><span class="tp">ala</span> нет, ничто</p>
+      <p><span class="tp">ale</span> всё</p>
+      <p><span class="tp">ike</span> плохой</p>
+      <p><span class="tp">ilo</span> инструмент</p>
+      <p><span class="tp">jan</span> человек</p>
+      <p><span class="tp">kala</span> рыба</p>
+      <p><span class="tp">kalama</span> звук</p>
+      <p><span class="tp">kama</span> приходить, становиться</p>
+      <p><span class="tp">kasi</span> растение</p>
+      <p><span class="tp">kili</span> фрукт, овощ</p>
+      <p><span class="tp">kon</span> воздух, дух</p>
+      <p><span class="tp">lape</span> спать</p>
+      <p><span class="tp">lete</span> холодный</p>
+      <p><span class="tp">lili</span> маленький</p>
+      <p><span class="tp">lipu</span> лист, книга</p>
+      <p><span class="tp">lukin</span> видеть</p>
+      <p><span class="tp">ma</span> земля, страна</p>
+      <p><span class="tp">mi</span> я, мы</p>
+      <p><span class="tp">moku</span> еда, есть</p>
+      <p><span class="tp">mun</span> луна</p>
+      <p><span class="tp">mute</span> много</p>
+      <p><span class="tp">nasa</span> странный</p>
+      <p><span class="tp">nimi</span> слово, имя</p>
+      <p><span class="tp">olin</span> любить</p>
+      <p><span class="tp">ona</span> он, она, оно</p>
+      <p><span class="tp">pali</span> делать, работать</p>
+      <p><span class="tp">pimeja</span> тёмный</p>
+      <p><span class="tp">pona</span> хороший, простой</p>
+      <p><span class="tp">seli</span> огонь, тепло</p>
+      <p><span class="tp">seme</span> что, какой</p>
+      <p><span class="tp">sewi</span> верх, небесный</p>
+      <p><span class="tp">sina</span> ты, вы</p>
+      <p><span class="tp">sitelen</span> рисунок, письмо</p>
+      <p><span class="tp">sona</span> знать</p>
+      <p><span class="tp">soweli</span> зверь</p>
+      <p><span class="tp">suli</span> большой</p>
+      <p><span class="tp">suno</span> солнце, свет</p>
+      <p><span class="tp">tawa</span> идти, к</p>
+      <p><span class="tp">telo</span> вода</p>
+      <p><span class="tp">tenpo</span> время</p>
+      <p><span class="tp">toki</span> язык, говорить</p>
+      <p><span class="tp">tomo</span> дом</p>
+      <p><span class="tp">waso</span> птица</p>
+      <p><span class="tp">wawa</span> сильный</p>
+    </div>
+
+    <p class="coda">mi pona. sina pona. toki pona li pona.
+      <span class="gloss">Мне хорошо. Тебе хорошо. Хороший язык — хорош.</span>
+    </p>
+  </div>
+</section>
+
+</body>
+</html>
