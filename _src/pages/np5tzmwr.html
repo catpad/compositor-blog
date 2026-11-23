@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сюжет, которого ещё не было</title>
+<meta name="description" content="Рецепт оригинального научно-фантастического сюжета в семь шагов: от описи чужих клише до недели, когда идея отлёживается.">
+<meta name="compositor:paper" content="#FBFAF6">
+<meta name="compositor:ink" content="#2A2620">
+<meta name="compositor:accent" content="#A8402F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBFAF6;
+  --ink:#2A2620;
+  --muted:#6E665A;
+  --rule:#DDD5C5;
+  --accent:#A8402F;
+  --sage:#6F8E5E;
+  --display:"Playfair Display", Georgia, serif;
+  --text:"PT Serif", Georgia, serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:1.0625rem;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1080px;margin:0 auto;padding:3rem 1.5rem 4rem}
+.kicker{
+  font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 .75rem;
+}
+h1{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.05;
+  margin:0 0 1rem;letter-spacing:-.01em;
+}
+h1 em{font-style:italic;color:var(--accent)}
+.lede{
+  font-size:1.2rem;line-height:1.55;max-width:36rem;margin:0 0 2rem;color:var(--ink);
+}
+.facts{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  margin:0 0 2.5rem;padding:0;list-style:none;
+}
+.facts li{padding:.8rem .9rem;border-left:1px solid var(--rule)}
+.facts li:first-child{border-left:0;padding-left:0}
+.facts b{
+  display:block;font-weight:400;font-size:.72rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.15rem;
+}
+.facts span{font-size:1.02rem;font-variant-numeric:tabular-nums}
+
+figure.hero{margin:0 0 3rem;background:#fff;border:1px solid var(--rule);padding:1rem 1rem .75rem}
+figure.hero svg{display:block;width:100%;height:auto}
+figure.hero figcaption{
+  font-size:.92rem;color:var(--muted);font-style:italic;
+  border-top:1px solid var(--rule);padding-top:.6rem;margin-top:.5rem;
+}
+figure.hero figcaption b{font-style:normal;font-weight:400;letter-spacing:.12em;text-transform:uppercase;font-size:.74rem;color:var(--accent);margin-right:.5rem}
+
+.recipe{display:grid;grid-template-columns:300px minmax(0,1fr);gap:3.5rem;align-items:start}
+h2{
+  font-family:var(--display);font-weight:500;font-size:1.55rem;line-height:1.2;
+  margin:0 0 1rem;
+}
+h2 small{display:block;font-family:var(--text);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem;font-weight:400}
+
+.ingredients{border-top:1px solid var(--ink);padding-top:1.2rem}
+.ingredients ul{list-style:none;margin:0 0 1.5rem;padding:0}
+.ingredients li{
+  display:grid;grid-template-columns:4.2rem 1fr;gap:.6rem;
+  padding:.55rem 0;border-bottom:1px dotted var(--rule);font-size:.98rem;line-height:1.45;
+}
+.ingredients .q{font-variant-numeric:tabular-nums;color:var(--accent);font-size:.92rem}
+.ingredients h3{
+  font-family:var(--text);font-weight:400;font-size:.74rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);margin:1.4rem 0 .5rem;
+}
+.ingredients p{font-size:.96rem;margin:0 0 .8rem;line-height:1.5}
+.no{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:1px}
+
+.method{border-top:1px solid var(--ink);padding-top:1.2rem;max-width:40rem}
+.method ol{list-style:none;margin:0;padding:0;counter-reset:step}
+.step{
+  counter-increment:step;position:relative;
+  padding:0 0 2.2rem 3.4rem;
+}
+.step::before{
+  content:counter(step);
+  position:absolute;left:0;top:-.15rem;
+  font-family:var(--display);font-size:2.2rem;line-height:1;color:var(--accent);
+  font-variant-numeric:lining-nums;
+}
+.step h3{
+  font-family:var(--display);font-weight:500;font-size:1.25rem;line-height:1.3;margin:0 0 .3rem;
+}
+.time{
+  display:inline-block;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);font-variant-numeric:tabular-nums;margin-bottom:.6rem;
+  border:1px solid var(--rule);padding:.05rem .5rem;
+}
+.step p{margin:0 0 .8rem}
+
+.instrument{
+  display:block;width:100%;min-height:400px;
+  margin:1.5rem 0 1.5rem;
+  background:#fff;border:1px solid var(--rule);border-top:2px solid var(--ink);
+}
+.instrument[data-instrument="time-sprout"]{min-height:440px}
+
+.note{
+  margin:3.5rem 0 0;padding:1.6rem 1.8rem;background:#fff;
+  border-left:3px solid var(--accent);max-width:44rem;
+}
+.note h2{font-size:1.35rem}
+.note p{margin:0 0 .9rem}
+.note .sign{font-style:italic;color:var(--muted);margin:0}
+
+.after{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.5rem;margin-top:3.5rem;border-top:1px solid var(--ink);padding-top:1.5rem}
+.after h2{font-size:1.2rem}
+.after p,.after li{font-size:.97rem;line-height:1.55}
+.after ul{margin:0;padding:0;list-style:none}
+.after li{padding:.45rem 0;border-bottom:1px dotted var(--rule)}
+.after li i{color:var(--accent);font-style:normal}
+
+.dishes{margin:4rem 0 0;border-top:1px solid var(--ink);padding-top:1.5rem}
+.dishes-head{max-width:44rem;margin:0 0 1.5rem}
+.dishes-head h2{font-size:1.75rem}
+.dishes-head p{margin:0 0 .8rem}
+.dish{display:grid;grid-template-columns:300px minmax(0,1fr);gap:3.5rem;padding:2rem 0 1.6rem;border-top:1px solid var(--rule)}
+.dish-num{display:block;font-family:var(--display);font-size:2.4rem;line-height:1;color:var(--accent);margin:0 0 .6rem;font-variant-numeric:lining-nums}
+.dish h3{font-family:var(--display);font-weight:500;font-size:1.32rem;line-height:1.28;margin:0 0 .7rem}
+.dish .pitch{font-style:italic;color:var(--muted);font-size:.98rem;line-height:1.5;margin:0}
+.dish dl{margin:0;max-width:40rem;display:grid;grid-template-columns:9.5rem minmax(0,1fr)}
+.dish dt{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:.72rem 1rem .6rem 0;border-bottom:1px dotted var(--rule)}
+.dish dd{margin:0;padding:.5rem 0;border-bottom:1px dotted var(--rule);line-height:1.55}
+.dish dd ul{margin:0;padding:0;list-style:none}
+.dish dd li{padding:0 0 .35rem 1.1rem;position:relative}
+.dish dd li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.dish dd.ask{font-style:italic;border-left:2px solid var(--accent);padding-left:.7rem;border-bottom:0;margin-top:.4rem}
+.dish dt.ask-t{border-bottom:0}
+
+@media (max-width:860px){
+  .dish{grid-template-columns:1fr;gap:1.2rem}
+}
+@media (max-width:560px){
+  .dish dl{grid-template-columns:1fr}
+  .dish dt{border-bottom:0;padding:.7rem 0 .1rem}
+  .dish dd{padding-top:.1rem}
+}
+@media (max-width:860px){
+  .recipe{grid-template-columns:1fr;gap:2.5rem}
+  .after{grid-template-columns:1fr;gap:1.5rem}
+}
+@media (max-width:560px){
+  .page{padding:2rem 1.1rem 3rem}
+  .facts{grid-template-columns:1fr 1fr}
+  .facts li:nth-child(3){border-left:0;padding-left:0}
+  .facts li:nth-child(n+3){border-top:1px solid var(--rule)}
+  .step{padding-left:2.6rem}
+  .step::before{font-size:1.8rem}
+  figure.hero{padding:.6rem .6rem .5rem}
+  .note{padding:1.2rem 1.1rem}
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+<p class="kicker">Рецепт № 1 · Научная фантастика</p>
+<h1>Сюжет, которого <em>ещё не было</em></h1>
+<p class="lede">Оригинальность не падает с неба и не покупается готовой. Её выращивают из общих продуктов: из одного допущения, нескольких честных следствий и человека, которому от всего этого хуже всех.</p>
+
+<ul class="facts">
+  <li><b>Выход</b><span>одна книга</span></li>
+  <li><b>Подготовка</b><span>около 3 часов</span></li>
+  <li><b>Отлёживание</b><span>7 дней</span></li>
+  <li><b>Сложность</b><span>нужно терпение</span></li>
+</ul>
+
+<figure class="hero">
+<svg viewBox="0 0 720 560" role="img" aria-labelledby="heroTitle heroDesc">
+  <title id="heroTitle">Fabula nova — ботаническая таблица</title>
+  <desc id="heroDesc">Акварельный рисунок вымышленного растения: тонкий зелёный стебель с тремя листьями, раскрытый цветок цвета краплака, в сердцевине которого лежат маленькие планеты, одна с кольцом. Справа бутон и семя в разрезе со спиральной галактикой внутри. Внизу корни.</desc>
+  <defs>
+    <filter id="wash" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.5"/>
+    </filter>
+    <filter id="bloom" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1.1"/>
+    </filter>
+    <radialGradient id="petal" cx="50%" cy="95%" r="95%">
+      <stop offset="0" stop-color="#8E2E2A"/>
+      <stop offset=".45" stop-color="#C2564A"/>
+      <stop offset="1" stop-color="#EBB3A3"/>
+    </radialGradient>
+    <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9DB57F"/>
+      <stop offset=".6" stop-color="#6F8E5E"/>
+      <stop offset="1" stop-color="#4E6E4A"/>
+    </linearGradient>
+    <linearGradient id="budG" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#6F8E5E"/>
+      <stop offset=".7" stop-color="#9DB57F"/>
+      <stop offset="1" stop-color="#C2564A"/>
+    </linearGradient>
+    <radialGradient id="seedCore" cx="45%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#7C93B2"/>
+      <stop offset="1" stop-color="#2F4462"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="720" height="560" fill="#fff"/>
+
+  <!-- roots -->
+  <g fill="none" stroke="#8A6A45" stroke-linecap="round" opacity=".75">
+    <path d="M318 505 C 312 520, 300 532, 284 546" stroke-width="2"/>
+    <path d="M318 505 C 322 522, 336 534, 356 544" stroke-width="1.8"/>
+    <path d="M318 506 C 318 524, 316 538, 318 552" stroke-width="1.6"/>
+    <path d="M300 528 C 290 532, 280 531, 270 536" stroke-width=".9"/>
+    <path d="M334 530 C 344 529, 352 524, 364 526" stroke-width=".9"/>
+    <path d="M317 540 C 309 544, 304 549, 298 553" stroke-width=".7"/>
+    <path d="M290 538 C 286 543, 280 545, 274 549" stroke-width=".6"/>
+  </g>
+  <ellipse cx="318" cy="506" rx="46" ry="4" fill="#C9B79A" opacity=".25" filter="url(#bloom)"/>
+
+  <!-- stem wash + line -->
+  <path d="M318 505 C 312 440, 330 375, 318 300 C 310 250, 322 215, 330 180" fill="none" stroke="#86A26E" stroke-width="7" opacity=".45" stroke-linecap="round" filter="url(#wash)"/>
+  <path d="M318 505 C 312 440, 330 375, 318 300 C 310 250, 322 215, 330 180" fill="none" stroke="#4E6E4A" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- leaf lower left -->
+  <g>
+    <path d="M318 420 C 282 382, 222 356, 170 364 C 206 398, 266 424, 318 420 Z" fill="url(#leafG)" opacity=".55" filter="url(#wash)"/>
+    <path d="M318 420 C 290 395, 240 376, 196 372 C 230 394, 274 414, 318 420 Z" fill="#4E6E4A" opacity=".18" filter="url(#bloom)"/>
+    <path d="M318 420 C 282 382, 222 356, 170 364 C 206 398, 266 424, 318 420 Z" fill="none" stroke="#3F5D3C" stroke-width=".9"/>
+    <path d="M318 420 C 270 396, 220 374, 172 365" fill="none" stroke="#3F5D3C" stroke-width=".8"/>
+    <g fill="none" stroke="#3F5D3C" stroke-width=".5" opacity=".8">
+      <path d="M290 404 C 284 392, 280 386, 272 380"/>
+      <path d="M262 391 C 256 381, 250 375, 242 370"/>
+      <path d="M234 380 C 228 372, 222 368, 214 364"/>
+      <path d="M288 405 C 280 410, 272 412, 262 412"/>
+      <path d="M258 391 C 250 398, 240 400, 230 400"/>
+      <path d="M228 379 C 220 384, 212 386, 202 385"/>
+    </g>
+  </g>
+
+  <!-- leaf right -->
+  <g>
+    <path d="M321 340 C 362 302, 420 286, 470 296 C 432 330, 374 348, 321 340 Z" fill="url(#leafG)" opacity=".5" filter="url(#wash)"/>
+    <path d="M321 340 C 360 316, 410 302, 452 300 C 420 322, 372 338, 321 340 Z" fill="#B7C78F" opacity=".35" filter="url(#bloom)"/>
+    <path d="M321 340 C 362 302, 420 286, 470 296 C 432 330, 374 348, 321 340 Z" fill="none" stroke="#3F5D3C" stroke-width=".9"/>
+    <path d="M321 340 C 372 318, 420 304, 468 297" fill="none" stroke="#3F5D3C" stroke-width=".8"/>
+    <g fill="none" stroke="#3F5D3C" stroke-width=".5" opacity=".8">
+      <path d="M350 328 C 356 316, 362 310, 372 304"/>
+      <path d="M382 316 C 388 306, 396 300, 406 296"/>
+      <path d="M414 308 C 420 300, 428 296, 438 294"/>
+      <path d="M352 327 C 362 332, 372 334, 384 333"/>
+      <path d="M386 315 C 396 320, 408 320, 420 318"/>
+      <path d="M418 307 C 428 310, 438 310, 448 307"/>
+    </g>
+  </g>
+
+  <!-- small leaf upper left -->
+  <g>
+    <path d="M316 262 C 292 236, 258 224, 228 230 C 250 254, 286 268, 316 262 Z" fill="url(#leafG)" opacity=".5" filter="url(#wash)"/>
+    <path d="M316 262 C 292 236, 258 224, 228 230 C 250 254, 286 268, 316 262 Z" fill="none" stroke="#3F5D3C" stroke-width=".8"/>
+    <path d="M316 262 C 286 248, 258 236, 230 231" fill="none" stroke="#3F5D3C" stroke-width=".6"/>
+    <g fill="none" stroke="#3F5D3C" stroke-width=".45" opacity=".8">
+      <path d="M296 252 C 292 244, 286 240, 280 236"/>
+      <path d="M272 242 C 268 236, 262 233, 256 231"/>
+      <path d="M294 253 C 286 258, 278 259, 270 258"/>
+    </g>
+  </g>
+
+  <!-- sepals -->
+  <g opacity=".7">
+    <path d="M330 182 C 316 186, 300 196, 290 212 C 308 206, 322 196, 330 182Z" fill="#6F8E5E" filter="url(#wash)"/>
+    <path d="M330 182 C 344 186, 360 194, 372 208 C 354 204, 340 196, 330 182Z" fill="#6F8E5E" filter="url(#wash)"/>
+  </g>
+
+  <!-- flower -->
+  <g transform="translate(330,160)">
+    <g filter="url(#wash)">
+      <path transform="rotate(-80)" d="M0 0 C -24 -30, -22 -78, 0 -98 C 22 -78, 24 -30, 0 0Z" fill="url(#petal)" opacity=".5"/>
+      <path transform="rotate(-25)" d="M0 0 C -24 -30, -22 -82, 0 -104 C 22 -82, 24 -30, 0 0Z" fill="url(#petal)" opacity=".55"/>
+      <path transform="rotate(30)" d="M0 0 C -24 -30, -22 -78, 0 -100 C 22 -78, 24 -30, 0 0Z" fill="url(#petal)" opacity=".5"/>
+      <path transform="rotate(85)" d="M0 0 C -24 -30, -22 -74, 0 -92 C 22 -74, 24 -30, 0 0Z" fill="url(#petal)" opacity=".48"/>
+      <path transform="rotate(140)" d="M0 0 C -20 -26, -20 -60, 0 -76 C 20 -60, 20 -26, 0 0Z" fill="url(#petal)" opacity=".42"/>
+      <path transform="rotate(-135)" d="M0 0 C -20 -26, -20 -62, 0 -78 C 20 -62, 20 -26, 0 0Z" fill="url(#petal)" opacity=".42"/>
+    </g>
+    <g fill="#8E2E2A" opacity=".18" filter="url(#bloom)">
+      <ellipse cx="0" cy="-30" rx="10" ry="22" transform="rotate(-25)"/>
+      <ellipse cx="0" cy="-30" rx="10" ry="22" transform="rotate(30)"/>
+      <ellipse cx="0" cy="-28" rx="9" ry="20" transform="rotate(-80)"/>
+    </g>
+    <g fill="none" stroke="#8E2E2A" stroke-width=".8" opacity=".75">
+      <path transform="rotate(-80)" d="M0 0 C -24 -30, -22 -78, 0 -98 C 22 -78, 24 -30, 0 0Z"/>
+      <path transform="rotate(-25)" d="M0 0 C -24 -30, -22 -82, 0 -104 C 22 -82, 24 -30, 0 0Z"/>
+      <path transform="rotate(30)" d="M0 0 C -24 -30, -22 -78, 0 -100 C 22 -78, 24 -30, 0 0Z"/>
+      <path transform="rotate(85)" d="M0 0 C -24 -30, -22 -74, 0 -92 C 22 -74, 24 -30, 0 0Z"/>
+      <path transform="rotate(140)" d="M0 0 C -20 -26, -20 -60, 0 -76 C 20 -60, 20 -26, 0 0Z"/>
+      <path transform="rotate(-135)" d="M0 0 C -20 -26, -20 -62, 0 -78 C 20 -62, 20 -26, 0 0Z"/>
+    </g>
+    <g fill="none" stroke="#8E2E2A" stroke-width=".4" opacity=".55">
+      <path transform="rotate(-25)" d="M0 -12 L0 -92 M0 -30 C -6 -46, -8 -60, -6 -74 M0 -30 C 6 -46, 8 -60, 6 -74"/>
+      <path transform="rotate(30)" d="M0 -12 L0 -88 M0 -30 C -6 -46, -8 -60, -6 -72 M0 -30 C 6 -46, 8 -60, 6 -72"/>
+      <path transform="rotate(-80)" d="M0 -12 L0 -86"/>
+      <path transform="rotate(85)" d="M0 -12 L0 -80"/>
+    </g>
+    <!-- seed-worlds in the heart -->
+    <circle r="25" fill="#D9A85C" opacity=".45" filter="url(#wash)"/>
+    <circle r="25" fill="none" stroke="#9A6E32" stroke-width=".7"/>
+    <circle cx="-10" cy="-8" r="6.5" fill="#5D7FA3" opacity=".7" filter="url(#wash)"/>
+    <circle cx="-10" cy="-8" r="6.5" fill="none" stroke="#3E5677" stroke-width=".5"/>
+    <circle cx="9" cy="-11" r="4.5" fill="#B5543F" opacity=".7"/>
+    <circle cx="9" cy="-11" r="4.5" fill="none" stroke="#7C2F23" stroke-width=".5"/>
+    <circle cx="5" cy="8" r="7" fill="#C99A5B" opacity=".85"/>
+    <ellipse cx="5" cy="8" rx="13" ry="3.4" fill="none" stroke="#6E4E2A" stroke-width=".8" transform="rotate(-18 5 8)"/>
+    <circle cx="-11" cy="10" r="3.5" fill="#7E9C6B" opacity=".85"/>
+    <circle cx="16" cy="2" r="2.2" fill="#3E5677" opacity=".8"/>
+    <circle cx="-2" cy="-18" r="2" fill="#6E4E2A" opacity=".7"/>
+    <circle cx="-19" cy="0" r="1.6" fill="#6E4E2A" opacity=".7"/>
+  </g>
+
+  <!-- fig 3: bud -->
+  <g>
+    <path d="M600 214 C 596 196, 600 178, 604 168" fill="none" stroke="#4E6E4A" stroke-width="1"/>
+    <path d="M604 170 C 582 150, 584 112, 606 92 C 626 114, 626 150, 604 170Z" fill="url(#budG)" opacity=".6" filter="url(#wash)"/>
+    <path d="M604 170 C 582 150, 584 112, 606 92 C 626 114, 626 150, 604 170Z" fill="none" stroke="#3F5D3C" stroke-width=".8"/>
+    <path d="M604 168 C 600 140, 602 116, 606 94" fill="none" stroke="#8E2E2A" stroke-width=".5" opacity=".7"/>
+    <path d="M604 170 C 594 166, 586 160, 580 150 C 592 154, 600 160, 604 170Z" fill="#6F8E5E" opacity=".6"/>
+    <path d="M604 170 C 614 166, 622 160, 628 150 C 616 154, 608 160, 604 170Z" fill="#6F8E5E" opacity=".6"/>
+  </g>
+
+  <!-- fig 2: seed in section -->
+  <g transform="translate(596,420)">
+    <ellipse rx="58" ry="52" fill="#C99A5B" opacity=".45" filter="url(#wash)"/>
+    <ellipse rx="58" ry="52" fill="none" stroke="#6E4E2A" stroke-width=".9"/>
+    <ellipse rx="48" ry="43" fill="#F0E0BE" opacity=".8"/>
+    <ellipse rx="48" ry="43" fill="none" stroke="#9A6E32" stroke-width=".5"/>
+    <circle r="33" fill="url(#seedCore)" opacity=".55" filter="url(#wash)"/>
+    <circle r="33" fill="none" stroke="#2F4462" stroke-width=".6"/>
+    <g fill="none" stroke="#F4EEDC" stroke-linecap="round" opacity=".85">
+      <path d="M0 0 C 6 -4, 12 2, 9 9 C 5 18, -10 17, -15 7 C -21 -6, -10 -21, 6 -21 C 20 -20, 28 -6, 24 8" stroke-width="1.6"/>
+      <path d="M0 0 C -6 4, -12 -2, -9 -9 C -5 -18, 10 -17, 15 -7 C 21 6, 10 21, -6 21 C -20 20, -28 6, -24 -8" stroke-width="1.6"/>
+    </g>
+    <g fill="#F4EEDC">
+      <circle cx="-22" cy="-18" r=".9"/><circle cx="18" cy="-24" r=".7"/>
+      <circle cx="25" cy="16" r=".9"/><circle cx="-14" cy="24" r=".7"/>
+      <circle cx="4" cy="-28" r=".6"/><circle cx="-27" cy="4" r=".6"/>
+      <circle cx="0" cy="0" r="1.8"/>
+    </g>
+    <path d="M-58 0 C -66 -2, -72 -6, -78 -12" fill="none" stroke="#6E4E2A" stroke-width=".8"/>
+  </g>
+
+  <!-- labels -->
+  <g font-family="'PT Serif', Georgia, serif" font-style="italic" font-size="13" fill="#6E665A">
+    <text x="40" y="60" font-style="normal" font-size="11" letter-spacing="2.5" fill="#A8402F">TAB. I</text>
+    <text x="40" y="84" font-size="20" fill="#2A2620">Fabula nova</text>
+    <text x="40" y="104">сюжет обыкновенный, редкий</text>
+
+    <path d="M232 142 L 300 130" stroke="#9A9184" stroke-width=".5" fill="none"/>
+    <text x="40" y="140">fig. 1 — цветок:</text>
+    <text x="40" y="157">одно допущение,</text>
+    <text x="40" y="174">раскрытое во все стороны</text>
+
+    <path d="M168 380 L 120 420" stroke="#9A9184" stroke-width=".5" fill="none"/>
+    <text x="40" y="438">лист: следствие</text>
+    <text x="40" y="455">второго порядка</text>
+
+    <path d="M270 538 L 210 512" stroke="#9A9184" stroke-width=".5" fill="none"/>
+    <text x="96" y="506">корень: обыденность</text>
+
+    <text x="642" y="120">fig. 3 —</text>
+    <text x="642" y="137">бутон:</text>
+    <text x="642" y="154">допущение</text>
+    <text x="642" y="171">до первого</text>
+    <text x="642" y="188">следствия</text>
+
+    <text x="520" y="300">fig. 2 — семя в разрезе:</text>
+    <text x="520" y="317">вселенная, ещё не написанная</text>
+  </g>
+  <g stroke="#2A2620" stroke-width=".7">
+    <line x1="520" y1="530" x2="620" y2="530"/>
+    <line x1="520" y1="526" x2="520" y2="534"/>
+    <line x1="570" y1="527" x2="570" y2="533"/>
+    <line x1="620" y1="526" x2="620" y2="534"/>
+  </g>
+  <text x="520" y="548" font-family="'PT Serif', Georgia, serif" font-size="11" fill="#6E665A">0</text>
+  <text x="590" y="548" font-family="'PT Serif', Georgia, serif" font-size="11" fill="#6E665A">1 глава</text>
+</svg>
+<figcaption><b>Табл. I</b>Растение, из семян которого вырастают миры. Цветок — допущение, листья — его следствия, корни уходят в обыденность.</figcaption>
+</figure>
+
+<div class="recipe">
+
+<aside class="ingredients">
+  <h2><small>Ингредиенты</small>Одно допущение и всё, что из него следует</h2>
+  <ul>
+    <li><span class="q">1</span><span>допущение «что, если…». Одно: два — уже суп из всего подряд</span></li>
+    <li><span class="q">1</span><span>закон, который оно нарушает: физический, биологический или общественный</span></li>
+    <li><span class="q">3</span><span>следствия, не ближе второго порядка</span></li>
+    <li><span class="q">1</span><span>человек, которому от перемены хуже всех</span></li>
+    <li><span class="q">1</span><span>цена — то, чем герой платит за развязку</span></li>
+    <li><span class="q">2 ст. л.</span><span>обыденности: очереди, счета, семейные обеды</span></li>
+    <li><span class="q">1</span><span>вопрос, на который книга не отвечает до конца</span></li>
+    <li><span class="q">щепотка</span><span>юмора, по вкусу</span></li>
+  </ul>
+
+  <h3>Не класть</h3>
+  <p><span class="no">Избранного</span>, <span class="no">древнее пророчество</span>, <span class="no">«всё оказалось сном»</span>, <span class="no">злодея, который хочет власти просто так</span>.</p>
+
+  <h3>Понадобится</h3>
+  <p>Лист бумаги, таймер, неделя терпения и один честный первый читатель.</p>
+</aside>
+
+<section class="method">
+  <h2><small>Приготовление</small>Семь шагов от клише к собственной идее</h2>
+  <ol>
+    <li class="step">
+      <h3>Опишите кладовую: что уже сварено до вас</h3>
+      <span class="time">40 минут</span>
+      <p>Выпишите всё, что приходит в голову при словах «научная фантастика»: корабль поколений, вторжение пришельцев, восстание машин, путешествие во времени, перенос сознания в компьютер, последний человек на Земле, общество, где граждан оценивают баллами. Не стесняйтесь банальности — в этом и цель.</p>
+      <p>Всё, что попало на лист за первые минуты, — общая кладовая, из неё готовят все. Ваш сюжет не должен отсюда начинаться. Он может сюда прийти, но позже и с неожиданной стороны.</p>
+    </li>
+
+    <li class="step">
+      <h3>Скрестите науку с тем, что к науке не относится</h3>
+      <span class="time">30 минут</span>
+      <p>Новое редко рождается внутри одного поля. Возьмите научную идею и соедините её с чем-то сугубо человеческим и будничным: похоронным обрядом, налоговой проверкой, сватовством, школьным экзаменом. Потом добавьте ограничение — оно делает смесь густой.</p>
+      <div class="instrument" data-instrument="premise-cross">
+  <div class="pc-rows">
+    <div class="pc-row">
+      <div class="pc-label" id="pc-l-s">Научная идея</div>
+      <div class="pc-chips" role="radiogroup" aria-labelledby="pc-l-s" data-row="s"></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-label" id="pc-l-d">Человеческая область</div>
+      <div class="pc-chips" role="radiogroup" aria-labelledby="pc-l-d" data-row="d"></div>
+    </div>
+    <div class="pc-row">
+      <div class="pc-label" id="pc-l-c">Ограничение</div>
+      <div class="pc-chips" role="radiogroup" aria-labelledby="pc-l-c" data-row="c"></div>
+    </div>
+  </div>
+  <div class="pc-frame" aria-live="polite">
+    <div class="pc-head">
+      <span class="pc-tag">Допущение</span>
+      <span class="pc-count"><span class="pc-num">1</span> из <span class="pc-total">175</span></span>
+    </div>
+    <p class="pc-premise"></p>
+    <div class="pc-qtag">Первый вопрос сюжета</div>
+    <p class="pc-question"></p>
+  </div>
+  <div class="pc-foot">
+    <button type="button" class="pc-shuffle">Перемешать всё</button>
+  </div>
+</div>
+<style>
+[data-instrument="premise-cross"]{
+  container-type:inline-size;
+  padding:1.25rem 1.25rem 1.1rem;
+  font-family:var(--text);
+  color:var(--ink);
+}
+[data-instrument="premise-cross"] .pc-rows{display:grid;gap:.85rem;margin:0 0 1.1rem}
+[data-instrument="premise-cross"] .pc-label{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 .35rem;
+}
+[data-instrument="premise-cross"] .pc-chips{display:flex;flex-wrap:wrap;gap:.35rem}
+[data-instrument="premise-cross"] .pc-chip{
+  font-family:var(--text);font-size:.9rem;line-height:1.3;
+  color:var(--ink);background:var(--paper);
+  border:1px solid var(--rule);border-radius:999px;
+  padding:.28rem .75rem;cursor:pointer;
+  touch-action:manipulation;
+  transition:background-color .15s, border-color .15s, color .15s;
+}
+[data-instrument="premise-cross"] .pc-chip:hover{border-color:var(--muted)}
+[data-instrument="premise-cross"] .pc-chip[aria-checked="true"]{
+  background:var(--accent);border-color:var(--accent);color:#fff;
+}
+[data-instrument="premise-cross"] .pc-chip:focus-visible,
+[data-instrument="premise-cross"] .pc-shuffle:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+[data-instrument="premise-cross"] .pc-frame{
+  height:15.5rem;overflow:hidden;
+  background:var(--paper);
+  border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);
+  padding:.8rem 1rem;
+  display:flex;flex-direction:column;
+}
+[data-instrument="premise-cross"] .pc-head{
+  display:flex;justify-content:space-between;align-items:baseline;margin:0 0 .4rem;
+}
+[data-instrument="premise-cross"] .pc-tag,
+[data-instrument="premise-cross"] .pc-qtag{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);
+}
+[data-instrument="premise-cross"] .pc-count{
+  font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;
+  min-width:6.5em;text-align:right;
+}
+[data-instrument="premise-cross"] .pc-num{display:inline-block;min-width:2.2em;text-align:right}
+[data-instrument="premise-cross"] .pc-premise{
+  font-family:var(--display);font-weight:500;
+  font-size:1.22rem;line-height:1.32;margin:0 0 .7rem;
+  flex:0 0 auto;
+}
+[data-instrument="premise-cross"] .pc-question{
+  font-style:italic;font-size:1rem;line-height:1.45;margin:.2rem 0 0;
+  border-left:2px solid var(--accent);padding-left:.7rem;
+}
+[data-instrument="premise-cross"] .pc-premise,
+[data-instrument="premise-cross"] .pc-question{transition:opacity .22s ease}
+[data-instrument="premise-cross"] .pc-fade .pc-premise,
+[data-instrument="premise-cross"] .pc-fade .pc-question{opacity:.15;transition:none}
+[data-instrument="premise-cross"] .pc-foot{display:flex;justify-content:flex-end;margin-top:.85rem}
+[data-instrument="premise-cross"] .pc-shuffle{
+  font-family:var(--text);font-size:.85rem;letter-spacing:.06em;
+  color:var(--ink);background:#fff;
+  border:1px solid var(--ink);padding:.35rem .9rem;cursor:pointer;
+  touch-action:manipulation;
+}
+[data-instrument="premise-cross"] .pc-shuffle:hover{background:var(--ink);color:var(--paper)}
+@container (max-width:520px){
+  [data-instrument="premise-cross"] .pc-frame{height:20.5rem}
+  [data-instrument="premise-cross"] .pc-premise{font-size:1.08rem}
+  [data-instrument="premise-cross"] .pc-question{font-size:.95rem}
+}
+@container (max-width:360px){
+  [data-instrument="premise-cross"] .pc-frame{height:24rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="premise-cross"] .pc-chip,
+  [data-instrument="premise-cross"] .pc-premise,
+  [data-instrument="premise-cross"] .pc-question{transition:none}
+  [data-instrument="premise-cross"] .pc-fade .pc-premise,
+  [data-instrument="premise-cross"] .pc-fade .pc-question{opacity:1}
+}
+</style>
+<script>(function(){
+  const root = document.querySelector('[data-instrument="premise-cross"]');
+  if(!root) return;
+
+  const S = [
+    {label:'память можно пересадить', clause:'память можно пересадить от человека к человеку',
+     nom:'чужие воспоминания', acc:'чужие воспоминания', gen:'чужих воспоминаний', ins:'чужими воспоминаниями', pre:'чужих воспоминаниях'},
+    {label:'время течёт по-разному в разных комнатах', clause:'время течёт по-разному в разных комнатах одного дома',
+     nom:'лишние часы из медленных комнат', acc:'лишние часы из медленных комнат', gen:'лишних часов из медленных комнат', ins:'лишними часами из медленных комнат', pre:'лишних часах из медленных комнат'},
+    {label:'растения научились говорить', clause:'растения научились говорить',
+     nom:'шёпот растений', acc:'шёпот растений', gen:'шёпота растений', ins:'шёпотом растений', pre:'шёпоте растений'},
+    {label:'гравитация слабеет по ночам', clause:'гравитация слабеет по ночам',
+     nom:'ночная лёгкость', acc:'ночную лёгкость', gen:'ночной лёгкости', ins:'ночной лёгкостью', pre:'ночной лёгкости'},
+    {label:'мёртвые оставляют голосовой след', clause:'мёртвые оставляют голосовой след',
+     nom:'голос умершего', acc:'голос умершего', gen:'голоса умершего', ins:'голосом умершего', pre:'голосе умершего'}
+  ];
+  const D = [
+    {label:'похороны', who:'вдова', t:s=>'и на похоронах главное теперь — '+s.nom},
+    {label:'налоги', who:'налоговый инспектор', t:s=>'и государство берёт налог с '+s.gen},
+    {label:'сватовство', who:'сваха', t:s=>'и без '+s.gen+' не обходится ни одно сватовство'},
+    {label:'школьный экзамен', who:'учительница', t:s=>'и на выпускном экзамене главный билет — про '+s.acc},
+    {label:'суд', who:'судья', t:s=>'и суд принимает '+s.acc+' как доказательство'},
+    {label:'рынок', who:'перекупщик', t:s=>'и на рынке бойко торгуют '+s.ins},
+    {label:'колыбельная', who:'ночная няня', t:s=>'и детям поют колыбельные о '+s.pre}
+  ];
+  const C = [
+    {label:'только раз в жизни', t:'но каждому это доступно лишь раз в жизни',
+     q:(s,d)=>'Кому '+d.who+' отдаст своё единственное право на '+s.acc+' — себе или тому, кому нужнее?'},
+    {label:'только по закону', t:'но только по закону, с печатью и подписью',
+     q:(s,d)=>'На что пойдёт '+d.who+', чтобы получить '+s.acc+' в обход закона?'},
+    {label:'только в одном городе', t:'но всё это возможно лишь в одном городе на свете',
+     q:(s,d)=>'Зачем '+d.who+' едет в этот город за '+s.ins+' — и почему не может уехать обратно?'},
+    {label:'никто не помнит, как это началось', t:'и никто уже не помнит, как это началось',
+     q:(s,d)=>'Что узнает '+d.who+', докопавшись до истоков '+s.gen+', — и кому выгодно, чтобы их забыли?'},
+    {label:'стоит дорого', t:'и обходится это так дорого, что большинству не по карману',
+     q:(s,d)=>'Что '+d.who+' продаст, чтобы заплатить за '+s.acc+', — и кто это купит?'}
+  ];
+
+  const data = {s:S, d:D, c:C};
+  const state = {s:0, d:1, c:0};
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const premiseEl = root.querySelector('.pc-premise');
+  const questionEl = root.querySelector('.pc-question');
+  const numEl = root.querySelector('.pc-num');
+  const frame = root.querySelector('.pc-frame');
+  root.querySelector('.pc-total').textContent = S.length * D.length * C.length;
+
+  const groups = {};
+  root.querySelectorAll('.pc-chips').forEach(g=>{
+    const key = g.dataset.row;
+    groups[key] = g;
+    data[key].forEach((item,i)=>{
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pc-chip';
+      b.setAttribute('role','radio');
+      b.textContent = item.label;
+      b.dataset.i = i;
+      b.addEventListener('pointerup', e=>{ if(e.button===0||e.pointerType!=='mouse'){ set(key,i,false); } });
+      b.addEventListener('click', e=>{ if(e.detail===0) set(key,i,false); });
+      b.addEventListener('keydown', e=>{
+        const n = data[key].length;
+        let j = null;
+        if(e.key==='ArrowRight'||e.key==='ArrowDown') j=(state[key]+1)%n;
+        else if(e.key==='ArrowLeft'||e.key==='ArrowUp') j=(state[key]-1+n)%n;
+        else if(e.key==='Home') j=0;
+        else if(e.key==='End') j=n-1;
+        if(j!==null){ e.preventDefault(); set(key,j,true); }
+      });
+      g.appendChild(b);
+    });
+  });
+
+  function cap(t){ return t.charAt(0).toUpperCase()+t.slice(1); }
+
+  function render(animate){
+    const s=S[state.s], d=D[state.d], c=C[state.c];
+    Object.keys(groups).forEach(k=>{
+      groups[k].querySelectorAll('.pc-chip').forEach(b=>{
+        const on = +b.dataset.i===state[k];
+        b.setAttribute('aria-checked', on?'true':'false');
+        b.tabIndex = on?0:-1;
+      });
+    });
+    premiseEl.textContent = 'Что, если '+s.clause+', '+d.t(s)+', '+c.t+'?';
+    questionEl.textContent = cap(c.q(s,d));
+    numEl.textContent = state.s*D.length*C.length + state.d*C.length + state.c + 1;
+    if(animate && !reduce){
+      frame.classList.add('pc-fade');
+      void frame.offsetWidth;
+      frame.classList.remove('pc-fade');
+    }
+  }
+
+  function set(key,i,focus){
+    const changed = state[key]!==i;
+    state[key]=i;
+    render(changed);
+    if(focus){
+      const b = groups[key].querySelector('[data-i="'+i+'"]');
+      if(b) b.focus();
+    }
+  }
+
+  root.querySelector('.pc-shuffle').addEventListener('click', ()=>{
+    const prev = state.s+'-'+state.d+'-'+state.c;
+    let next;
+    do{
+      state.s = Math.floor(Math.random()*S.length);
+      state.d = Math.floor(Math.random()*D.length);
+      state.c = Math.floor(Math.random()*C.length);
+      next = state.s+'-'+state.d+'-'+state.c;
+    }while(next===prev);
+    render(true);
+  });
+
+  render(false);
+})();</script>
+      <p>Половина таких сочетаний окажется нелепой. Это нормально: нелепое отбраковывается за секунду, а одно из десятка заставит вас замереть. Запомните это ощущение — это и есть вкус.</p>
+    </li>
+
+    <li class="step">
+      <h3>Дайте допущению прорасти во времени</h3>
+      <span class="time">1 час</span>
+      <p>Первое следствие любой идеи очевидно всем, и потому его уже написали. «Люди научились читать мысли — значит, лгать стало невозможно». Интересное начинается на втором и третьем шаге: что станет с дипломатией, с покером, с первым свиданием, с языком, в котором за века отомрёт слово «ложь»?</p>
+      <p>Проследите идею от первого дня до тысячного года и смотрите, как меняется не техника, а люди.</p>
+      <div class="instrument" data-instrument="time-sprout">
+  <div class="ts-chips" role="radiogroup" aria-label="Допущение">
+    <button type="button" class="ts-chip" role="radio" data-k="mind">люди научились слышать мысли друг друга</button>
+    <button type="button" class="ts-chip" role="radio" data-k="age">никто больше не умирает от старости</button>
+    <button type="button" class="ts-chip" role="radio" data-k="past">каждый помнит свои прошлые жизни</button>
+  </div>
+  <div class="ts-stage"><canvas class="ts-canvas" aria-hidden="true"></canvas></div>
+  <div class="ts-track">
+    <div class="ts-rail"></div>
+    <div class="ts-ticks"></div>
+    <div class="ts-handle" tabindex="0" role="slider" aria-label="Время с начала перемены" aria-valuemin="0" aria-valuemax="1000"></div>
+  </div>
+  <div class="ts-read">
+    <div class="ts-count">
+      <div><b>Прошло</b><span class="ts-time">1 день</span></div>
+      <div><b>Порядок</b><span class="ts-order">первый</span></div>
+      <div><b>Листьев</b><span class="ts-leaves">1 из 7</span></div>
+    </div>
+    <p class="ts-cap" aria-live="polite"></p>
+  </div>
+</div>
+<style>
+[data-instrument="time-sprout"]{padding:1rem 1rem 1.1rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="time-sprout"] .ts-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.6rem}
+[data-instrument="time-sprout"] .ts-chip{font:inherit;font-size:.86rem;line-height:1.3;padding:.3rem .7rem;border:1px solid var(--rule);background:var(--paper);color:var(--muted);border-radius:999px;cursor:pointer}
+[data-instrument="time-sprout"] .ts-chip[aria-checked="true"]{border-color:var(--accent);color:var(--accent);background:#fff}
+[data-instrument="time-sprout"] .ts-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="time-sprout"] .ts-stage{position:relative;height:190px}
+[data-instrument="time-sprout"] .ts-canvas{display:block;width:100%;height:100%}
+[data-instrument="time-sprout"] .ts-track{position:relative;height:46px;margin:0 14px;touch-action:pan-y;cursor:pointer}
+[data-instrument="time-sprout"] .ts-rail{position:absolute;left:0;right:0;top:12px;height:1px;background:var(--ink)}
+[data-instrument="time-sprout"] .ts-ticks span{position:absolute;top:8px;transform:translateX(-50%);font-size:.72rem;color:var(--muted);white-space:nowrap;padding-top:12px}
+[data-instrument="time-sprout"] .ts-ticks span::before{content:"";position:absolute;left:50%;top:0;width:1px;height:9px;background:var(--ink)}
+[data-instrument="time-sprout"] .ts-handle{position:absolute;top:3px;width:18px;height:18px;margin-left:-9px;border-radius:50%;background:var(--accent);border:3px solid #fff;box-shadow:0 0 0 1px var(--accent);touch-action:none;cursor:grab}
+[data-instrument="time-sprout"] .ts-handle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+[data-instrument="time-sprout"] .ts-read{display:grid;grid-template-columns:11rem 1fr;gap:1rem;border-top:1px solid var(--rule);padding-top:.7rem;margin-top:.3rem}
+[data-instrument="time-sprout"] .ts-count div{display:flex;justify-content:space-between;font-size:.9rem;font-variant-numeric:tabular-nums;border-bottom:1px dotted var(--rule);padding:.15rem 0}
+[data-instrument="time-sprout"] .ts-count b{font-weight:400;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);align-self:center}
+[data-instrument="time-sprout"] .ts-cap{margin:0;height:4.8em;overflow:hidden;font-size:1rem;line-height:1.6}
+[data-instrument="time-sprout"] .ts-cap i{color:var(--accent);font-style:normal}
+@media (max-width:560px){[data-instrument="time-sprout"] .ts-read{grid-template-columns:1fr}[data-instrument="time-sprout"] .ts-cap{height:6.4em}[data-instrument="time-sprout"] .ts-ticks span{font-size:.6rem}}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="time-sprout"]');if(!root)return;
+const STOPS=[[1,'день'],[30,'месяц'],[365,'год'],[3650,'10 лет'],[9125,'поколение'],[36500,'век'],[365000,'тысячелетие']];
+const ORD=[1,1,2,2,3,3,3],MAXL=Math.log10(365000);
+const D={
+mind:["Ложь перестаёт работать: любое «всё хорошо» слышно насквозь.","Допросы и суды присяжных закрываются за ненадобностью; адвокаты ищут новое ремесло.","Рождается этикет неслышания: в гостях прилично думать о погоде.","Исчезают покер, дипломатия и сюрпризы; рынок торгует без торга.","Дети, выросшие в общем шуме, учатся думать шёпотом: внутренний голос становится навыком, как письмо.","Тишина становится роскошью: богатые платят за дома вдали от чужих мыслей.","Из языка отмирает слово «ложь»; старые романы читают как сказки о людях-загадках."],
+age:["Пенсионные фонды и страховщики в панике пересчитывают обязательства.","Дома престарелых переименовывают в дома долгожителей; геронтологи переучиваются.","Наследство больше не приходит: молодые восстают против вечных владельцев.","Клятву «пока смерть не разлучит» заменяют брачным контрактом на пятьдесят лет.","Право родить ребёнка разыгрывают в лотерею: Земля тесна.","Смерть остаётся только случайной, и люди перестают рисковать: умирают спорт, горы и море.","Память не вмещает тысячу лет: каждый нанимает биографа, чтобы знать, кем был."],
+past:["Миллионы узнают, кем были раньше, и где стоят их прежние дома.","Суды завалены исками о праве на имущество из прошлой жизни.","Жертвы узнают своих убийц прошлых веков в соседях по лестнице.","Детей расспрашивают с первых слов: резюме начинается до рождения.","Историки уходят из профессии: свидетели живы и спорят друг с другом.","Люди копят «для себя следующего»; щедрость становится вкладом в собственное будущее.","Национальность теряет смысл: каждый успел побыть сотней народов."]};
+const ORDN=['','первый','второй','третий'];
+const cv=root.querySelector('.ts-canvas'),ctx=cv.getContext('2d'),track=root.querySelector('.ts-track'),h=root.querySelector('.ts-handle');
+const tEl=root.querySelector('.ts-time'),oEl=root.querySelector('.ts-order'),lEl=root.querySelector('.ts-leaves'),cap=root.querySelector('.ts-cap');
+const chips=[...root.querySelectorAll('.ts-chip')];
+const RM=matchMedia('(prefers-reduced-motion: reduce)');
+let key='mind',target=0.42,shown=0.42,raf=0,W=0,H=0;
+root.querySelector('.ts-ticks').innerHTML=STOPS.map(s=>'<span style="left:'+(Math.log10(s[0])/MAXL*100)+'%">'+s[1]+'</span>').join('');
+function pl(n,a,b,c){const m=n%10,k=n%100;return m==1&&k!=11?a:(m>=2&&m<=4&&(k<12||k>14)?b:c)}
+function fmt(d){if(d<30){const n=Math.max(1,Math.floor(d));return n+' '+pl(n,'день','дня','дней')}
+if(d<365){const n=Math.max(1,Math.floor(d/30.44));return n+' '+pl(n,'месяц','месяца','месяцев')}
+const n=Math.floor(d/365.25+1e-9)||1;return n.toLocaleString('ru-RU')+' '+pl(n,'год','года','лет')}
+function days(p){return Math.pow(10,p*MAXL)}
+function stemY(x){return H*0.58+Math.sin(x/W*Math.PI*2.2)*8}
+function resize(){const r=cv.getBoundingClientRect(),dp=devicePixelRatio||1;W=r.width;H=r.height;cv.width=W*dp;cv.height=H*dp;ctx.setTransform(dp,0,0,dp,0,0);draw()}
+function leaf(x,y,len,ang,o,cur,seed){
+const col=o==1?[120,22,72]:o==2?[100,26,48]:[96,34,34];
+ctx.save();ctx.translate(x,y);ctx.rotate(ang);
+for(let i=0;i<3;i++){const j=Math.sin(seed*7+i*3)*len*0.06;
+ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(len*0.3,-len*0.32+j,len*0.75,-len*0.22,len+j,0);ctx.bezierCurveTo(len*0.75,len*0.2,len*0.3,len*0.26-j,0,0);
+ctx.fillStyle='hsla('+col[0]+','+col[1]+'%,'+col[2]+'%,'+(o==1?0.22:o==2?0.3:0.38)+')';ctx.fill()}
+ctx.beginPath();ctx.moveTo(0,0);ctx.bezierCurveTo(len*0.3,-len*0.32,len*0.75,-len*0.22,len,0);ctx.bezierCurveTo(len*0.75,len*0.2,len*0.3,len*0.26,0,0);
+ctx.strokeStyle=cur?'#A8402F':'hsla('+col[0]+',30%,'+(col[2]-18)+'%,.7)';ctx.lineWidth=cur?1.4:0.8;ctx.stroke();
+ctx.beginPath();ctx.moveTo(0,0);ctx.quadraticCurveTo(len*0.5,-len*0.04,len*0.95,0);ctx.lineWidth=0.6;ctx.stroke();ctx.restore()}
+function state(p){const d=days(p);let n=0;STOPS.forEach((s,i)=>{if(d>=s[0]*0.999)n=i+1});return{d,n:Math.max(1,n)}}
+function draw(){if(!W)return;ctx.clearRect(0,0,W,H);const pad=14,iw=W-pad*2,mx=pad+shown*iw,{n}=state(shown);
+ctx.lineCap='round';
+for(let k=0;k<2;k++){ctx.beginPath();for(let x=pad;x<=mx;x+=4){const y=stemY(x)+(k?0:Math.sin(x*.07)*1.2);x==pad?ctx.moveTo(x,y):ctx.lineTo(x,y)}
+ctx.strokeStyle=k?'#4E6E4A':'rgba(134,162,110,.45)';ctx.lineWidth=k?1.2:7;ctx.stroke()}
+ctx.beginPath();ctx.arc(mx,stemY(mx),3.5,0,7);ctx.fillStyle='rgba(111,142,94,.6)';ctx.fill();
+const lg=Math.log10(days(shown));
+STOPS.forEach((s,i)=>{const sp=Math.log10(s[0])/MAXL,x=pad+sp*iw,g=Math.min(1,Math.max(0,(lg-Math.log10(s[0]))/0.35+0.15));
+if(lg<Math.log10(s[0])-0.002)return;const o=ORD[i],len=(26+o*12)*Math.min(1,H/190)*(0.25+0.75*g),up=i%2==0;
+leaf(x,stemY(x),len,up?-0.9-o*0.08:0.9+o*0.08,o,i==n-1,i+1)});}
+function update(){const{d,n}=state(shown),o=ORD[n-1];tEl.textContent=fmt(d);oEl.textContent=ORDN[o];lEl.textContent=n+' из 7';
+cap.innerHTML='<i>'+STOPS[n-1][1]+' · '+ORDN[o]+' порядок.</i> '+D[key][n-1];
+h.style.left=(target*100)+'%';h.setAttribute('aria-valuenow',Math.round(days(target)/365.25));h.setAttribute('aria-valuetext',fmt(days(target))+'. '+D[key][state(target).n-1]);draw()}
+function tick(){shown+= (target-shown)*0.22;if(Math.abs(target-shown)<0.001)shown=target;update();raf=shown!==target?requestAnimationFrame(tick):0}
+function set(p){target=Math.min(1,Math.max(0,p));if(RM.matches){shown=target;update()}else if(!raf)raf=requestAnimationFrame(tick)}
+function fromEv(e){const r=track.getBoundingClientRect();return(e.clientX-r.left)/r.width}
+let drag=false;
+track.addEventListener('pointerdown',e=>{drag=true;track.setPointerCapture(e.pointerId);h.focus();set(fromEv(e))});
+track.addEventListener('pointermove',e=>{if(drag)set(fromEv(e))});
+['pointerup','pointercancel'].forEach(t=>track.addEventListener(t,()=>drag=false));
+h.addEventListener('keydown',e=>{const st=STOPS.map(s=>Math.log10(s[0])/MAXL);let p=target;
+if(e.key=='ArrowRight'||e.key=='ArrowUp')p+=0.02;else if(e.key=='ArrowLeft'||e.key=='ArrowDown')p-=0.02;
+else if(e.key=='PageUp')p=st.find(v=>v>target+1e-4)??1;else if(e.key=='PageDown')p=[...st].reverse().find(v=>v<target-1e-4)??0;
+else if(e.key=='Home')p=0;else if(e.key=='End')p=1;else return;e.preventDefault();set(p)});
+chips.forEach(c=>c.addEventListener('click',()=>{key=c.dataset.k;chips.forEach(x=>x.setAttribute('aria-checked',x===c));update()}));
+chips[0].setAttribute('aria-checked','true');chips.slice(1).forEach(x=>x.setAttribute('aria-checked','false'));
+new ResizeObserver(resize).observe(cv);resize();update();
+})();</script>
+      <p>Ищите следствие, о котором не подумал бы первый встречный. Именно там начинается ваша книга.</p>
+    </li>
+
+    <li class="step">
+      <h3>Найдите человека, которому хуже всех</h3>
+      <span class="time">20 минут</span>
+      <p>Мир с новым законом — ещё не сюжет. Сюжет появляется, когда в этом мире есть человек, для которого перемена — личная беда или единственный шанс. Не изобретатель и не спаситель: чаще тот, кто стоит сбоку.</p>
+      <p>В мире, где мысли слышны, это может быть актриса, чья профессия перестала существовать. Или мать, которая всю жизнь скрывала, кто отец её ребёнка.</p>
+    </li>
+
+    <li class="step">
+      <h3>Выбросьте первые две версии каждого поворота</h3>
+      <span class="time">15 минут</span>
+      <p>Для каждого важного поворота придумайте три продолжения. Первое — то, что придумал бы любой. Второе — то, что придумал бы любой, кто старается быть оригинальным. Третье обычно неудобно, требует переделывать остальное, — и поэтому его стоит взять.</p>
+    </li>
+
+    <li class="step">
+      <h3>Перескажите сюжет без жанровых слов</h3>
+      <span class="time">10 минут</span>
+      <p>Опишите историю одной фразой, не используя слов «будущее», «космос», «технология», «робот», «апокалипсис». Если без них фраза разваливается, она держалась на декорациях, а не на идее. Если устояла — проверьте, хочется ли дослушать её до конца.</p>
+    </li>
+
+    <li class="step">
+      <h3>Дайте замыслу отлежаться неделю</h3>
+      <span class="time">7 дней</span>
+      <p>Уберите записи. Вернувшись, перечитайте их холодной головой: всё, что блестело от усталости и азарта, потускнеет, а настоящее останется. Тогда можно садиться писать.</p>
+    </li>
+  </ol>
+</section>
+
+</div>
+
+<section class="dishes">
+  <div class="dishes-head">
+    <h2><small>Пять блюд</small>Пять миров, приготовленных по этому рецепту</h2>
+    <p>Каждый замысел ниже собран по тем же шагам: одно допущение, закон, который оно нарушает, следствия не ближе второго порядка, человек, которому хуже всех, цена и вопрос, на который книга не отвечает до конца.</p>
+    <p>Насколько нам известно, таких книг нет. Но, как сказано в заметке ниже, обещать этого не может никто: прежде чем садиться писать, проверьте, не опередил ли вас кто-нибудь.</p>
+  </div>
+
+  <article class="dish">
+    <header>
+      <span class="dish-num">I</span>
+      <h3>Мир, где человека держит на земле только чужая память</h3>
+      <p class="pitch">Сирота, которую знают одиннадцать человек, решает прославиться любой ценой, чтобы её не унесло ветром.</p>
+    </header>
+    <dl>
+      <dt>Допущение</dt>
+      <dd>Тело весит ровно столько, сколько людей помнят имя его владельца.</dd>
+      <dt>Нарушено</dt>
+      <dd>Закон тяготения: масса больше не принадлежит самому телу.</dd>
+      <dt>Следствия</dt>
+      <dd><ul>
+        <li>Слава становится увечьем: знаменитостям укрепляют полы, а самые известные не могут подняться с кровати.</li>
+        <li>Соцработники обходят одиноких стариков по графику, чтобы «вспоминать» их вслух, пока те не оторвались от пола.</li>
+        <li>Переезд в чужой город опасен; новичков ведут по соседям знакомиться, как раньше водили на крестины.</li>
+      </ul></dd>
+      <dt>Кому хуже всех</dt>
+      <dd>Девушке, выросшей в приюте. Её помнят одиннадцать человек, она ходит в свинцовых башмаках, и двое из одиннадцати уже очень стары.</dd>
+      <dt>Цена</dt>
+      <dd>Чтобы удержаться на земле, ей нужна известность, а самый быстрый путь к ней — скандал.</dd>
+      <dt class="ask-t">Вопрос</dt>
+      <dd class="ask">Держит ли на земле ненависть так же крепко, как любовь?</dd>
+    </dl>
+  </article>
+
+  <article class="dish">
+    <header>
+      <span class="dish-num">II</span>
+      <h3>Язык, в котором у каждого слова кончается запас</h3>
+      <p class="pitch">Мать решает, кому достанется одно из последних «мама» в стране: её сыну или чужому ребёнку.</p>
+    </header>
+    <dl>
+      <dt>Допущение</dt>
+      <dd>Каждое слово можно произнести лишь ограниченное число раз за всю историю народа. Остаток виден на табло в министерстве словесности.</dd>
+      <dt>Нарушено</dt>
+      <dd>Закон языка: слова перестают быть общими и бесконечными.</dd>
+      <dt>Следствия</dt>
+      <dd><ul>
+        <li>Частые слова дорожают; богатые выкупают остаток «прости» и «люблю», бедные говорят длинными описаниями.</li>
+        <li>Поэты становятся самыми нужными людьми: они придумывают новые слова взамен истраченных.</li>
+        <li>Молчание считается бережливостью и хорошим тоном, а детей учат синонимам, как учат копить.</li>
+      </ul></dd>
+      <dt>Кому хуже всех</dt>
+      <dd>Беременной женщине, работающей в министерстве учётчицей: она знает, что слову «мама» осталось около двух тысяч произнесений.</dd>
+      <dt>Цена</dt>
+      <dd>Сберечь слово для сына можно, только отдав взамен своё собственное имя.</dd>
+      <dt class="ask-t">Вопрос</dt>
+      <dd class="ask">Остаётся ли чувство, когда для него закончилось слово?</dd>
+    </dl>
+  </article>
+
+  <article class="dish">
+    <header>
+      <span class="dish-num">III</span>
+      <h3>Посёлок, в который река приносит вещи из будущего</h3>
+      <p class="pitch">Почтальонша находит на берегу собственное тело и пять лет пытается понять, кто её столкнёт.</p>
+    </header>
+    <dl>
+      <dt>Допущение</dt>
+      <dd>Река течёт против времени: всё, что в неё бросят когда-нибудь потом, выносит на отмель сегодня.</dd>
+      <dt>Нарушено</dt>
+      <dd>Закон причинности: следствие приходит раньше причины.</dd>
+      <dt>Следствия</dt>
+      <dd><ul>
+        <li>Мусор читают как прогноз: по этикеткам неизвестных марок и обрывкам газет угадывают, что будет.</li>
+        <li>Жители боятся бросать что-нибудь в воду: раз вещь уже приплыла, её всё равно придётся бросить.</li>
+        <li>В посёлок съезжаются скупщики; отмель делят на участки, как золотоносный ручей.</li>
+      </ul></dd>
+      <dt>Кому хуже всех</dt>
+      <dd>Почтальонше, к которой выносит её собственное тело в её же пальто, на вид лет на пять старше.</dd>
+      <dt>Цена</dt>
+      <dd>Чтобы уберечься, ей придётся подозревать каждого, кого она любит.</dd>
+      <dt class="ask-t">Вопрос</dt>
+      <dd class="ask">Если смерть уже доставлена, можно ли её не отправить?</dd>
+    </dl>
+  </article>
+
+  <article class="dish">
+    <header>
+      <span class="dish-num">IV</span>
+      <h3>Город, где горе передаётся воздушно-капельным путём</h3>
+      <p class="pitch">Врач, создавшая лекарство от жалости, решает нарочно заразить жалостью весь город.</p>
+    </header>
+    <dl>
+      <dt>Допущение</dt>
+      <dd>Чувства заразны, как болезни: у них есть инкубационный период, эпидемии и иммунитет.</dd>
+      <dt>Нарушено</dt>
+      <dd>Биологический закон: то, что считалось внутренним, становится инфекцией.</dd>
+      <dt>Следствия</dt>
+      <dd><ul>
+        <li>После похорон объявляют карантин; на поминки ходят в масках.</li>
+        <li>Весной вспыхивает влюблённость, и на неё выписывают больничные.</li>
+        <li>Кто однажды переболел надеждой, больше никогда её не испытает, поэтому надеждой стараются не болеть до старости.</li>
+      </ul></dd>
+      <dt>Кому хуже всех</dt>
+      <dd>Эпидемиологу, которая перед войной руководит прививочной кампанией против сострадания, и её сыну, которому прививка противопоказана.</dd>
+      <dt>Цена</dt>
+      <dd>Остановить войну можно, только став источником заразы и навсегда потеряв к ней иммунитет.</dd>
+      <dt class="ask-t">Вопрос</dt>
+      <dd class="ask">Если чувство можно подхватить, как простуду, кому оно принадлежит?</dd>
+    </dl>
+  </article>
+
+  <article class="dish">
+    <header>
+      <span class="dish-num">V</span>
+      <h3>Народ, который раз в семь лет сбрасывает кожу вместе с памятью</h3>
+      <p class="pitch">За месяц до того, как жена его забудет, муж решает, давать ли ей прочесть их общие семь лет.</p>
+    </header>
+    <dl>
+      <dt>Допущение</dt>
+      <dd>Люди линяют каждые семь лет. Старая кожа уносит память о прожитом цикле, и прочесть её может любой, кто к ней прикоснётся.</dd>
+      <dt>Нарушено</dt>
+      <dd>Биологический закон: память перестаёт быть частью самого человека.</dd>
+      <dt>Следствия</dt>
+      <dd><ul>
+        <li>Браки заключают на один цикл; продлить их — значит заново влюбиться в незнакомца.</li>
+        <li>Суды спорят, виновен ли перелинявший преступник, если преступление помнит только его кожа.</li>
+        <li>Воры крадут чужие кожи, чтобы прожить чужие годы, а семейные шкафы с кожами охраняют лучше сейфов.</li>
+      </ul></dd>
+      <dt>Кому хуже всех</dt>
+      <dd>Мужу, жена которого линяет через месяц: все семь лет их брака останутся в коже, которую он будет хранить.</dd>
+      <dt>Цена</dt>
+      <dd>Если он даст ей прочесть кожу, она вспомнит и то, что он хотел бы скрыть.</dd>
+      <dt class="ask-t">Вопрос</dt>
+      <dd class="ask">Можно ли полюбить человека второй раз, зная о первом только понаслышке?</dd>
+    </dl>
+  </article>
+</section>
+
+<section class="note">
+  <h2>Заметка повара: «такого ещё не было» не обещает ни один рецепт</h2>
+  <p>Книг написано слишком много, и почти любое допущение кто-нибудь уже трогал. Но это не повод опускать руки. Станислав Лем в «Солярисе» взял старую тему встречи с иным разумом и построил книгу на том, что понять друг друга не удаётся, — это и запомнилось. Урсула Ле Гуин в «Левой руке тьмы» отправила героя на планету, где у жителей нет постоянного пола, и написала из этого роман о доверии и одиночестве.</p>
+  <p>Ингредиенты у всех общие. Оригинальность живёт в пропорциях, в следствиях, до которых вы додумались, и в том, насколько точно вы видите своего героя. Самое новое в книге — это вы, если не прячетесь за декорациями.</p>
+  <p class="sign">— из кухни Compositor</p>
+</section>
+
+<div class="after">
+  <section>
+    <h2>Замены подходят почти к любому шагу</h2>
+    <ul>
+      <li><i>Нет научной идеи?</i> Замените закон природы законом экономики или языка: мир, где деньги портятся, как хлеб.</li>
+      <li><i>Для рассказа</i> хватит шагов 1, 2 и 6 и одного точного следствия.</li>
+      <li><i>Для цикла</i> на шаге 3 дойдите до тысячелетия и возьмите каждую эпоху отдельной книгой.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Если не поднялось, причина обычно одна из трёх</h2>
+    <ul>
+      <li><i>Мир интересен, а читать скучно</i> — вернитесь к шагу 4: в мире нет человека.</li>
+      <li><i>Всё похоже на известный фильм</i> — идея застряла на первом следствии, повторите шаг 3.</li>
+      <li><i>Всё держится на тайне в финале</i> — тайна приправа, не основа блюда.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Отбракованные идеи хранятся годами</h2>
+    <p>Не выбрасывайте листы с неудачными сочетаниями. То, что не подошло сегодня, через год может оказаться тем самым недостающим ингредиентом. Храните в сухом месте, перечитывайте перед новым замыслом.</p>
+  </section>
+</div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Full Throttle: Three Moments That Decided Formula One Titles</title>
+<meta name="description" content="Suzuka 1989, Interlagos 2008 and Abu Dhabi 2021, each told through its circuit, its people and the sound of its engines.">
+<meta name="compositor:paper" content="#101114">
+<meta name="compositor:ink" content="#ECEDEF">
+<meta name="compositor:accent" content="#FF3B1F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800;900&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#101114;
+  --ink:#ECEDEF;
+  --steel:#8C97A3;
+  --accent:#FF3B1F;
+  --blue:#0F3B78;
+  --line:#F4F7FB;
+  --display:"Big Shoulders Display", "Arial Narrow", sans-serif;
+  --text:"IBM Plex Sans", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.62 var(--text);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.measure{max-width:65ch}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:72px 0 96px;border-bottom:1px solid #2a2d33}
+.hero .lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.kicker{font:500 12px/1.4 var(--mono);letter-spacing:.22em;text-transform:uppercase;color:var(--steel);position:relative}
+.kicker b{color:var(--accent);font-weight:500}
+h1{position:relative;margin:28px 0 0;font-family:var(--display);font-weight:900;text-transform:uppercase;line-height:.82;letter-spacing:-.01em;font-size:clamp(76px,17vw,232px);transform:skewX(-12deg);transform-origin:left bottom}
+h1 .row{display:block;white-space:nowrap}
+h1 .row + .row{margin-left:.55em}
+h1 span span{display:inline-block}
+.m{background:linear-gradient(176deg,#ffffff 0%,#c9ced4 38%,#5f6872 52%,#e9ecef 66%,#9aa3ad 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.r{color:var(--accent)}
+.deck{position:relative;margin:40px 0 0 auto;max-width:34em;font-size:clamp(19px,2.1vw,23px);line-height:1.5;color:#d5d8dc}
+.deck em{font-style:normal;color:var(--ink);border-bottom:2px solid var(--accent)}
+
+.index{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;position:relative;border-top:1px solid #33373e}
+.index div{padding:14px 18px 0 0;font:500 12px/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+.index b{display:block;font:800 40px/1 var(--display);color:var(--ink);letter-spacing:0;transform:skewX(-12deg);transform-origin:left;margin-bottom:6px}
+.index b i{font-style:normal;color:var(--accent)}
+
+/* EPISODES */
+.ep{position:relative;padding:96px 0 40px}
+.ep::before{content:"";position:absolute;left:-10%;right:-10%;top:28px;height:10px;background:var(--accent);transform:rotate(-2.4deg);transform-origin:left}
+.ep:nth-of-type(odd)::before{transform:rotate(2deg)}
+.ep-head{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;align-items:start}
+.num{font:900 clamp(120px,18vw,210px)/.78 var(--display);transform:skewX(-14deg);transform-origin:left bottom;margin:0;letter-spacing:-.03em}
+h2{margin:0 0 28px;font:800 clamp(32px,4.6vw,58px)/.98 var(--display);text-transform:uppercase;letter-spacing:.005em;transform:skewX(-8deg);transform-origin:left}
+h2 .r{display:inline}
+dl.meta{margin:28px 0 0;display:grid;grid-template-columns:88px 1fr;gap:10px 14px;font:400 13px/1.45 var(--mono);border-top:1px solid #33373e;padding-top:16px}
+dl.meta dt{color:var(--steel);text-transform:uppercase;letter-spacing:.14em;font-size:11px;padding-top:2px}
+dl.meta dd{margin:0;color:var(--ink)}
+dl.meta dd.hot{color:var(--accent)}
+.body p{margin:0 0 1em}
+.body p:first-child::first-line{font-weight:500}
+
+figure{margin:48px 0 0}
+figcaption{font:400 12.5px/1.55 var(--mono);color:var(--steel);margin-top:12px;max-width:80ch}
+figcaption b{color:var(--ink);font-weight:500}
+.plate{background:var(--blue);overflow-x:auto;border:1px solid #2f5d9b;clip-path:polygon(0 0,100% 0,100% calc(100% - 26px),calc(100% - 26px) 100%,0 100%)}
+.plate svg{display:block;width:100%;min-width:620px;height:auto}
+.sound{background:#07080a;border:1px solid #262a30;padding:0}
+.sound canvas{display:block;width:100%}
+canvas.wave{height:64px;border-bottom:1px solid #1e2126}
+canvas.spec{height:clamp(210px,28vw,320px)}
+
+.pair{display:grid;grid-template-columns:1fr;gap:0}
+
+/* KEY SECTION */
+.key{padding:96px 0 110px;position:relative}
+.key::before{content:"";position:absolute;left:-10%;right:-10%;top:28px;height:2px;background:var(--steel);transform:rotate(-1.4deg)}
+.formula{font:500 clamp(18px,2.4vw,26px)/1.3 var(--mono);color:var(--ink);margin:28px 0;letter-spacing:.02em}
+.formula span{color:var(--accent)}
+
+/* SVG typography */
+.bp text{font-family:var(--mono);fill:var(--line);font-size:11px;letter-spacing:.08em}
+.bp .t-big{font-size:13px;font-weight:500;letter-spacing:.14em}
+.bp .t-small{font-size:9px;opacity:.85}
+.bp .hot{fill:#FF6A4D}
+
+@media (max-width:820px){
+  .ep-head{grid-template-columns:1fr;gap:12px}
+  .num{font-size:130px}
+  .index{grid-template-columns:1fr}
+  .index div{padding:14px 0;border-bottom:1px solid #2a2d33}
+  body{font-size:17px}
+  .wrap{padding:0 18px}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/978o5u5c/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Full Throttle: Three Moments That Decided Formula One Titles"><meta property="og:description" content="Suzuka 1989, Interlagos 2008 and Abu Dhabi 2021, each told through its circuit, its people and the sound of its engines."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/978o5u5c/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#101114;border-bottom:1px solid #ECEDEF26;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#ECEDEF;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#ECEDEF;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#ECEDEF"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#101114" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#101114"/></svg><span>Compositor</span></a><time datetime="2026-11-23T01:09:52.063Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#ECEDEF;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+
+<!-- shared blueprint definitions -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="gridMinor" width="16" height="16" patternUnits="userSpaceOnUse">
+      <path d="M16 0H0V16" fill="none" stroke="#F4F7FB" stroke-opacity=".08" stroke-width=".6"/>
+    </pattern>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <rect width="80" height="80" fill="url(#gridMinor)"/>
+      <path d="M80 0H0V80" fill="none" stroke="#F4F7FB" stroke-opacity=".18" stroke-width=".8"/>
+    </pattern>
+    <pattern id="rain" width="22" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <path d="M4 2V12M15 9V19" stroke="#F4F7FB" stroke-opacity=".22" stroke-width=".8"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1L9 5L0 9" fill="none" stroke="#F4F7FB" stroke-width="1.2"/>
+    </marker>
+    <g id="car">
+      <rect x="15" y="-7.5" width="3.2" height="15" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+      <rect x="6" y="-8.5" width="6.5" height="3.4" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+      <rect x="6" y="5.1" width="6.5" height="3.4" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+      <rect x="-14" y="-9" width="7.5" height="3.8" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+      <rect x="-14" y="5.2" width="7.5" height="3.8" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+      <path d="M16 0L8 -1.8L3 -3.2L-3 -4.6L-12 -3.6L-12 3.6L-3 4.6L3 3.2L8 1.8Z" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1.1"/>
+      <ellipse cx="-1" cy="0" rx="2.6" ry="1.6" fill="none" stroke="#F4F7FB" stroke-width=".8"/>
+      <rect x="-19.5" y="-6.5" width="3.4" height="13" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+    </g>
+  </defs>
+</svg>
+
+<section class="hero">
+  <svg class="lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+    <g stroke="#ECEDEF" stroke-linecap="round" transform="rotate(-12 600 350)">
+      <line x1="-100" y1="120" x2="520" y2="120" stroke-opacity=".10" stroke-width="2"/>
+      <line x1="140" y1="168" x2="1300" y2="168" stroke-opacity=".06" stroke-width="1"/>
+      <line x1="-80" y1="236" x2="300" y2="236" stroke-opacity=".14" stroke-width="3"/>
+      <line x1="620" y1="270" x2="1320" y2="270" stroke-opacity=".08" stroke-width="1.5"/>
+      <line x1="-60" y1="330" x2="880" y2="330" stroke-opacity=".05" stroke-width="1"/>
+      <line x1="760" y1="398" x2="1300" y2="398" stroke-opacity=".12" stroke-width="2"/>
+      <line x1="-90" y1="470" x2="420" y2="470" stroke-opacity=".07" stroke-width="1"/>
+      <line x1="300" y1="540" x2="1260" y2="540" stroke-opacity=".09" stroke-width="2.5"/>
+      <line x1="-40" y1="610" x2="640" y2="610" stroke-opacity=".05" stroke-width="1"/>
+      <line x1="880" y1="660" x2="1320" y2="660" stroke="#FF3B1F" stroke-opacity=".7" stroke-width="3"/>
+      <line x1="-120" y1="300" x2="160" y2="300" stroke="#FF3B1F" stroke-opacity=".55" stroke-width="2"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="kicker"><b>Formula One</b> · three moments · told in sound</div>
+    <h1 aria-label="Full Throttle">
+      <span class="row" aria-hidden="true"><span class="m" style="transform:translate(-.04em,.06em) rotate(-4deg)">F</span><span style="transform:translateY(-.05em)">U</span><span class="m" style="transform:translate(.02em,.03em) rotate(3deg)">L</span><span class="r" style="transform:translate(.07em,-.10em) rotate(-7deg)">L</span></span>
+      <span class="row" aria-hidden="true"><span style="transform:translateY(.04em)">T</span><span class="m" style="transform:translate(-.01em,-.06em) rotate(-3deg)">H</span><span>R</span><span class="m" style="transform:translate(.02em,.05em) rotate(4deg)">O</span><span style="transform:translateY(-.03em)">T</span><span class="r" style="transform:translate(.04em,-.11em) rotate(-6deg)">T</span><span class="m" style="transform:translate(.09em,.04em) rotate(8deg)">L</span><span style="transform:translate(.18em,-.16em) rotate(-13deg)">E</span></span>
+    </h1>
+    <p class="deck">Three championships were settled in a few seconds each: at a chicane in Japan, at the last corner in Brazil, at a hairpin in Abu Dhabi. Here is where each happened, who was there, and <em>how each era's engine sounded</em> as it unfolded.</p>
+    <div class="index">
+      <div><b><i>01</i> 1989</b>Suzuka · Japan · Senna, Prost</div>
+      <div><b><i>02</i> 2008</b>Interlagos · Brazil · Hamilton, Massa, Glock</div>
+      <div><b><i>03</i> 2021</b>Yas Marina · Abu Dhabi · Verstappen, Hamilton</div>
+    </div>
+  </div>
+</section>
+
+<!-- EPISODE 1 -->
+<section class="ep">
+  <div class="wrap">
+    <div class="ep-head">
+      <div>
+        <p class="num m" aria-hidden="true">01</p>
+        <dl class="meta">
+          <dt>Who</dt><dd>Ayrton Senna and Alain Prost, team-mates at McLaren-Honda</dd>
+          <dt>When</dt><dd class="hot">22 October 1989 · lap 47 of 53</dd>
+          <dt>Where</dt><dd>Suzuka Circuit, Mie Prefecture, Japan<br>34.84° N 136.54° E</dd>
+          <dt>Engine</dt><dd>Honda 3.5-litre V10</dd>
+        </dl>
+      </div>
+      <div class="body">
+        <h2>At Suzuka's chicane, two team-mates settled a title by <span class="r">refusing to yield</span></h2>
+        <div class="measure">
+          <p>Senna came to the Japanese Grand Prix needing to win to keep his title hopes alive. Prost, his team-mate and rival, led from the start and stayed ahead for most of the afternoon.</p>
+          <p>On lap 47 Senna dived down the inside at the chicane before the pit straight. Prost turned in. The two McLarens locked wheels and slid to a stop together on the escape road. Prost climbed out. Senna, pushed by marshals, rejoined through the escape road, pitted for a new nose, caught and passed Alessandro Nannini's Benetton, and crossed the line first.</p>
+          <p>The stewards disqualified him for rejoining by cutting the chicane. Nannini was awarded the win, and Prost became world champion. A year later, at the same circuit, the roles were reversed: Senna drove into Prost at the first corner and the 1990 title was his.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure>
+      <div class="plate">
+        <svg class="bp" viewBox="0 0 640 400" role="img" aria-label="Blueprint schematic of the Suzuka chicane: the two McLarens locked together at the turn-in, with the escape road continuing straight ahead.">
+          <rect width="640" height="400" fill="url(#grid)"/>
+          <!-- escape road -->
+          <path d="M300 140 L468 140 C512 140 520 218 548 256" fill="none" stroke="#F4F7FB" stroke-width="36" stroke-dasharray="7 5"/>
+          <path d="M300 140 L468 140 C512 140 520 218 548 256" fill="none" stroke="#0F3B78" stroke-width="33"/>
+          <!-- main road -->
+          <path d="M-10 140 L290 140 C330 140 340 196 375 206 C410 216 420 262 460 262 L650 262" fill="none" stroke="#F4F7FB" stroke-width="46" stroke-linejoin="round"/>
+          <path d="M-10 140 L290 140 C330 140 340 196 375 206 C410 216 420 262 460 262 L650 262" fill="none" stroke="#0F3B78" stroke-width="43" stroke-linejoin="round"/>
+          <path d="M-10 140 L290 140 C330 140 340 196 375 206 C410 216 420 262 460 262 L650 262" fill="none" stroke="#F4F7FB" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="10 6"/>
+          <!-- kerbs -->
+          <path d="M318 160 C336 175 346 196 370 202" fill="none" stroke="#F4F7FB" stroke-width="4" stroke-dasharray="4 4" stroke-opacity=".7"/>
+          <path d="M398 232 C412 245 422 256 444 260" fill="none" stroke="#F4F7FB" stroke-width="4" stroke-dasharray="4 4" stroke-opacity=".7"/>
+          <!-- direction -->
+          <line x1="60" y1="140" x2="120" y2="140" stroke="#F4F7FB" stroke-width="1.2" marker-end="url(#arr)"/>
+          <!-- cars -->
+          <use href="#car" transform="translate(320 150) rotate(30)"/>
+          <use href="#car" transform="translate(312 170) rotate(22)"/>
+          <!-- contact -->
+          <circle cx="326" cy="162" r="22" fill="none" stroke="#FF6A4D" stroke-width="1.6"/>
+          <path d="M326 134V146M326 178V190M298 162H310M342 162H354" stroke="#FF6A4D" stroke-width="1.6"/>
+          <text x="356" y="118" class="t-big hot">CONTACT · LAP 47</text>
+          <line x1="352" y1="122" x2="340" y2="144" stroke="#FF6A4D" stroke-width="1"/>
+          <!-- leaders -->
+          <line x1="222" y1="92" x2="316" y2="146" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="96" y="88">PROST · McLAREN Nº 2</text>
+          <line x1="232" y1="214" x2="306" y2="174" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="100" y="226">SENNA · McLAREN Nº 1</text>
+          <text x="24" y="124" class="t-small">FROM 130R</text>
+          <text x="400" y="133" class="t-small">ESCAPE ROAD</text>
+          <text x="500" y="294" class="t-small">TO PIT STRAIGHT</text>
+          <line x1="500" y1="302" x2="590" y2="302" stroke="#F4F7FB" stroke-width="1" marker-end="url(#arr)"/>
+          <!-- dimension: track edges -->
+          <line x1="40" y1="117" x2="40" y2="163" stroke="#F4F7FB" stroke-width=".8" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <line x1="32" y1="117" x2="48" y2="117" stroke="#F4F7FB" stroke-width=".6"/>
+          <line x1="32" y1="163" x2="48" y2="163" stroke="#F4F7FB" stroke-width=".6"/>
+          <!-- section mark -->
+          <line x1="372" y1="160" x2="372" y2="250" stroke="#F4F7FB" stroke-width=".8" stroke-dasharray="14 4 2 4"/>
+          <circle cx="372" cy="150" r="9" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/><text x="368" y="154" class="t-small">A</text>
+          <circle cx="372" cy="260" r="9" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/><text x="368" y="264" class="t-small">A</text>
+          <!-- title block -->
+          <g transform="translate(408 322)">
+            <rect width="220" height="66" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+            <line x1="0" y1="22" x2="220" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="0" y1="44" x2="220" y2="44" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="62" y1="0" x2="62" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <text x="8" y="15" class="t-small">PLATE 01</text>
+            <text x="70" y="15" class="t-small">SUZUKA · 1989</text>
+            <text x="8" y="37" class="t-small">CHICANE · BEFORE PIT STRAIGHT</text>
+            <text x="8" y="59" class="t-small">SCHEMATIC · NOT TO SCALE</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Plate 01.</b> The chicane on lap 47: Senna on the inside, Prost turning in, the two cars meeting at the apex. The escape road runs straight on; Senna used it to rejoin.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="sound">
+        <canvas class="wave" data-spec="suzuka" data-kind="wave" role="img" aria-label="Loudness envelope following the modelled rev trace"></canvas>
+        <canvas class="spec" data-spec="suzuka" data-kind="spec" role="img" aria-label="Schematic spectrogram of a V10 engine through the chicane, contact and restart"></canvas>
+      </div>
+      <figcaption><b>Sound 01 · V10, 0–5 kHz.</b> A schematic spectrogram, not a recording from the day. The bright lines are the firing frequency of a ten-cylinder engine and its harmonics, following a modelled rev trace: upshifts, braking for the chicane, the cars stopped, the car rejoining. The rules of 1989 set no rev limit; the trace peaks at an illustrative 13,000 rpm.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- EPISODE 2 -->
+<section class="ep">
+  <div class="wrap">
+    <div class="ep-head">
+      <div>
+        <p class="num m" aria-hidden="true">02</p>
+        <dl class="meta">
+          <dt>Who</dt><dd>Lewis Hamilton (McLaren-Mercedes), Felipe Massa (Ferrari), Timo Glock (Toyota)</dd>
+          <dt>When</dt><dd class="hot">2 November 2008 · lap 71 of 71</dd>
+          <dt>Where</dt><dd>Autódromo José Carlos Pace, Interlagos, São Paulo, Brazil<br>23.70° S 46.70° W</dd>
+          <dt>Engine</dt><dd>Mercedes 2.4-litre V8, 19,000 rpm limit</dd>
+        </dl>
+      </div>
+      <div class="body">
+        <h2>At Interlagos, the title changed hands <span class="r">twice in the final corners</span></h2>
+        <div class="measure">
+          <p>If Massa won his home race, Hamilton needed fifth place to be champion. Massa did his part and led from the front. In the closing laps rain began to fall, and most of the field pitted for intermediate tyres. Glock's Toyota stayed out on dry tyres.</p>
+          <p>With two laps left, Sebastian Vettel passed Hamilton and pushed him down to sixth. When Massa crossed the line as the winner, the Ferrari garage celebrated a championship. But Glock was losing grip in the wet, and on the final lap Hamilton passed him on the climb out of Junção, the last corner before the finish.</p>
+          <p>He finished fifth and won the title by one point, 98 to 97. At 23 he was, at the time, the youngest champion in the sport's history. Massa took the podium as runner-up, with a composure that is still remembered.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure>
+      <div class="plate">
+        <svg class="bp" viewBox="0 0 640 400" role="img" aria-label="Blueprint schematic of the Junção corner at Interlagos in the rain: Hamilton passing Glock on the climb toward the finish line.">
+          <rect width="640" height="400" fill="url(#grid)"/>
+          <rect width="640" height="400" fill="url(#rain)"/>
+          <path d="M-10 330 L290 330 C390 330 425 300 455 245 L590 20" fill="none" stroke="#F4F7FB" stroke-width="46" stroke-linejoin="round"/>
+          <path d="M-10 330 L290 330 C390 330 425 300 455 245 L590 20" fill="none" stroke="#0F3B78" stroke-width="43" stroke-linejoin="round"/>
+          <path d="M-10 330 L290 330 C390 330 425 300 455 245 L590 20" fill="none" stroke="#F4F7FB" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="10 6"/>
+          <path d="M330 312 C380 310 404 296 424 270" fill="none" stroke="#F4F7FB" stroke-width="4" stroke-dasharray="4 4" stroke-opacity=".7"/>
+          <!-- finish line -->
+          <line x1="538" y1="57" x2="582" y2="84" stroke="#F4F7FB" stroke-width="5" stroke-dasharray="4 4"/>
+          <line x1="534" y1="63" x2="578" y2="90" stroke="#F4F7FB" stroke-width="5" stroke-dasharray="4 4" stroke-dashoffset="4"/>
+          <text x="590" y="94" class="t-small">LINE</text>
+          <!-- direction -->
+          <line x1="60" y1="330" x2="130" y2="330" stroke="#F4F7FB" stroke-width="1.2" marker-end="url(#arr)"/>
+          <!-- cars -->
+          <use href="#car" transform="translate(432 286) rotate(-50)"/>
+          <use href="#car" transform="translate(434 310) rotate(-40)"/>
+          <!-- pass mark -->
+          <circle cx="440" cy="292" r="26" fill="none" stroke="#FF6A4D" stroke-width="1.6"/>
+          <text x="478" y="340" class="t-big hot">PASS · LAP 71</text>
+          <line x1="476" y1="334" x2="458" y2="312" stroke="#FF6A4D" stroke-width="1"/>
+          <line x1="296" y1="232" x2="422" y2="282" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="96" y="228">HAMILTON · McLAREN · INTERS</text>
+          <line x1="300" y1="380" x2="426" y2="320" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="118" y="386">GLOCK · TOYOTA · DRY TYRES</text>
+          <text x="330" y="282" class="t-small">JUNÇÃO</text>
+          <text transform="translate(500 196) rotate(-59)" class="t-small">SUBIDA DOS BOXES</text>
+          <line x1="540" y1="200" x2="584" y2="126" stroke="#F4F7FB" stroke-width=".8" marker-end="url(#arr)"/>
+          <text x="560" y="214" class="t-small">UPHILL</text>
+          <!-- dimension -->
+          <line x1="140" y1="307" x2="140" y2="353" stroke="#F4F7FB" stroke-width=".8" marker-start="url(#arr)" marker-end="url(#arr)"/>
+          <line x1="132" y1="307" x2="148" y2="307" stroke="#F4F7FB" stroke-width=".6"/>
+          <line x1="132" y1="353" x2="148" y2="353" stroke="#F4F7FB" stroke-width=".6"/>
+          <!-- title block -->
+          <g transform="translate(12 12)">
+            <rect width="220" height="66" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+            <line x1="0" y1="22" x2="220" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="0" y1="44" x2="220" y2="44" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="62" y1="0" x2="62" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <text x="8" y="15" class="t-small">PLATE 02</text>
+            <text x="70" y="15" class="t-small">INTERLAGOS · 2008</text>
+            <text x="8" y="37" class="t-small">JUNÇÃO · WET · FINAL LAP</text>
+            <text x="8" y="59" class="t-small">SCHEMATIC · NOT TO SCALE</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Plate 02.</b> Junção on the last lap, in the rain. The circuit runs anticlockwise; out of this left-hander the cars climb the pit straight to the finish. Hamilton, on intermediates, comes past Glock, on dry tyres.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="sound">
+        <canvas class="wave" data-spec="interlagos" data-kind="wave" role="img" aria-label="Loudness envelope following the modelled rev trace"></canvas>
+        <canvas class="spec" data-spec="interlagos" data-kind="spec" role="img" aria-label="Schematic spectrogram of a V8 engine through Junção and up to the finish line"></canvas>
+      </div>
+      <figcaption><b>Sound 02 · V8, 0–5 kHz.</b> A schematic spectrogram, not a recording. An eight-cylinder engine at the 19,000 rpm limit of the 2008 rules fires about 1,267 times a second. That is the highest line of the three eras, and the reason the V8s were remembered as a scream.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- EPISODE 3 -->
+<section class="ep">
+  <div class="wrap">
+    <div class="ep-head">
+      <div>
+        <p class="num m" aria-hidden="true">03</p>
+        <dl class="meta">
+          <dt>Who</dt><dd>Max Verstappen (Red Bull-Honda) and Lewis Hamilton (Mercedes)</dd>
+          <dt>When</dt><dd class="hot">12 December 2021 · lap 58 of 58</dd>
+          <dt>Where</dt><dd>Yas Marina Circuit, Abu Dhabi, United Arab Emirates<br>24.47° N 54.60° E</dd>
+          <dt>Engine</dt><dd>1.6-litre V6 turbo hybrid, 15,000 rpm limit</dd>
+        </dl>
+      </div>
+      <div class="body">
+        <h2>At Yas Marina, a season that arrived level was decided <span class="r">on a single lap</span></h2>
+        <div class="measure">
+          <p>Verstappen and Hamilton came to the final race of 2021 level on points. Hamilton took the lead at the start and built a comfortable margin over the afternoon.</p>
+          <p>On lap 53 Nicholas Latifi crashed, and the safety car came out. Verstappen pitted for fresh soft tyres; Hamilton stayed out on old ones. Race director Michael Masi allowed only the lapped cars running between the two leaders to unlap themselves, and the race restarted for the final lap.</p>
+          <p>Verstappen dived inside at Turn 5, held off Hamilton's counter-attack on the long straight that follows, and won his first world championship. Mercedes' protests were rejected. The FIA later reviewed the race, and Masi was removed from his role.</p>
+        </div>
+      </div>
+    </div>
+
+    <figure>
+      <div class="plate">
+        <svg class="bp" viewBox="0 0 640 400" role="img" aria-label="Blueprint schematic of the Turn 5 hairpin at Yas Marina: Verstappen on the inside line passing Hamilton, with the back straight beyond.">
+          <rect width="640" height="400" fill="url(#grid)"/>
+          <path d="M-10 290 L460 290 A85 85 0 0 0 460 120 L-10 120" fill="none" stroke="#F4F7FB" stroke-width="46"/>
+          <path d="M-10 290 L460 290 A85 85 0 0 0 460 120 L-10 120" fill="none" stroke="#0F3B78" stroke-width="43"/>
+          <path d="M-10 290 L460 290 A85 85 0 0 0 460 120 L-10 120" fill="none" stroke="#F4F7FB" stroke-opacity=".45" stroke-width=".8" stroke-dasharray="10 6"/>
+          <!-- apex kerb -->
+          <path d="M470 269 A64 64 0 0 0 470 141" fill="none" stroke="#F4F7FB" stroke-width="4" stroke-dasharray="4 4" stroke-opacity=".7"/>
+          <!-- Verstappen's line -->
+          <path d="M260 300 Q400 282 466 278 A72 72 0 0 0 466 134 L300 116" fill="none" stroke="#FF6A4D" stroke-width="1.2" stroke-dasharray="3 4"/>
+          <!-- centre mark & radius -->
+          <circle cx="460" cy="205" r="2" fill="#F4F7FB"/>
+          <line x1="460" y1="205" x2="520" y2="145" stroke="#F4F7FB" stroke-width=".7" stroke-dasharray="6 3"/>
+          <text x="470" y="200" class="t-small">R</text>
+          <!-- cars -->
+          <use href="#car" transform="translate(432 278)"/>
+          <use href="#car" transform="translate(404 302)"/>
+          <circle cx="436" cy="290" r="28" fill="none" stroke="#FF6A4D" stroke-width="1.6"/>
+          <text x="348" y="362" class="t-big hot">PASS · LAP 58</text>
+          <line x1="410" y1="352" x2="428" y2="318" stroke="#FF6A4D" stroke-width="1"/>
+          <line x1="262" y1="236" x2="420" y2="274" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="96" y="232">VERSTAPPEN · RED BULL Nº 33</text>
+          <line x1="250" y1="340" x2="392" y2="306" stroke="#F4F7FB" stroke-width=".8"/>
+          <text x="60" y="346">HAMILTON · MERCEDES Nº 44</text>
+          <text x="560" y="210" class="t-small">TURN 5</text>
+          <text x="140" y="92" class="t-small">BACK STRAIGHT · COUNTER-ATTACK</text>
+          <line x1="320" y1="98" x2="160" y2="98" stroke="#F4F7FB" stroke-width="1" marker-end="url(#arr)"/>
+          <line x1="40" y1="290" x2="110" y2="290" stroke="#F4F7FB" stroke-width="1.2" marker-end="url(#arr)"/>
+          <!-- section mark -->
+          <line x1="300" y1="146" x2="300" y2="264" stroke="#F4F7FB" stroke-width=".8" stroke-dasharray="14 4 2 4"/>
+          <circle cx="300" cy="140" r="9" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/><text x="296" y="144" class="t-small">B</text>
+          <circle cx="300" cy="270" r="9" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/><text x="296" y="274" class="t-small">B</text>
+          <!-- title block -->
+          <g transform="translate(12 12)">
+            <rect width="220" height="66" fill="#0F3B78" stroke="#F4F7FB" stroke-width="1"/>
+            <line x1="0" y1="22" x2="220" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="0" y1="44" x2="220" y2="44" stroke="#F4F7FB" stroke-width=".6"/>
+            <line x1="62" y1="0" x2="62" y2="22" stroke="#F4F7FB" stroke-width=".6"/>
+            <text x="8" y="15" class="t-small">PLATE 03</text>
+            <text x="70" y="15" class="t-small">YAS MARINA · 2021</text>
+            <text x="8" y="37" class="t-small">TURN 5 HAIRPIN · FINAL LAP</text>
+            <text x="8" y="59" class="t-small">SCHEMATIC · NOT TO SCALE</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Plate 03.</b> Turn 5 on the final lap. Verstappen takes the inside on fresh tyres; Hamilton comes back at him along the straight that follows, and the move holds.</figcaption>
+    </figure>
+
+    <figure>
+      <div class="sound">
+        <canvas class="wave" data-spec="yas" data-kind="wave" role="img" aria-label="Loudness envelope following the modelled rev trace"></canvas>
+        <canvas class="spec" data-spec="yas" data-kind="spec" role="img" aria-label="Schematic spectrogram of a V6 turbo hybrid engine from the safety-car restart through Turn 5"></canvas>
+      </div>
+      <figcaption><b>Sound 03 · V6 turbo hybrid, 0–5 kHz.</b> A schematic spectrogram, not a recording. Six cylinders at lower revs put the firing line far lower than in the earlier eras, which is why the hybrid cars sound deeper and quieter. The trace starts behind the safety car and peaks near 12,000 rpm.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- KEY -->
+<section class="key">
+  <div class="wrap">
+    <h2>Each era's engine sings in its own key, set by cylinders and revs</h2>
+    <div class="measure body">
+      <p>The brightest line in each spectrogram is the firing frequency: how many times per second a cylinder fires. In a four-stroke engine each cylinder fires once every two turns of the crankshaft, so the pitch follows directly from the revs and the number of cylinders.</p>
+    </div>
+    <p class="formula">f = rpm ÷ 60 × <span>cylinders</span> ÷ 2</p>
+    <figure style="margin-top:20px">
+      <div class="plate">
+        <svg class="bp" viewBox="0 0 900 300" role="img" aria-label="Blueprint top views of V10, V8 and V6 cylinder layouts, each with its firing frequency at the stated revs.">
+          <rect width="900" height="300" fill="url(#grid)"/>
+          <!-- V10 -->
+          <g transform="translate(150 120)">
+            <line x1="-120" y1="0" x2="120" y2="0" stroke="#F4F7FB" stroke-width=".8" stroke-dasharray="14 4 2 4"/>
+            <rect x="-110" y="-62" width="220" height="124" rx="6" fill="none" stroke="#F4F7FB" stroke-width="1.2"/>
+            <g fill="#0F3B78" stroke="#F4F7FB" stroke-width="1.2">
+              <circle cx="-80" cy="-32" r="15"/><circle cx="-40" cy="-32" r="15"/><circle cx="0" cy="-32" r="15"/><circle cx="40" cy="-32" r="15"/><circle cx="80" cy="-32" r="15"/>
+              <circle cx="-66" cy="32" r="15"/><circle cx="-26" cy="32" r="15"/><circle cx="14" cy="32" r="15"/><circle cx="54" cy="32" r="15"/><circle cx="94" cy="32" r="15"/>
+            </g>
+            <g stroke="#F4F7FB" stroke-width=".6" opacity=".7"><circle cx="-80" cy="-32" r="5" fill="none"/><circle cx="-66" cy="32" r="5" fill="none"/></g>
+            <line x1="-110" y1="-80" x2="110" y2="-80" stroke="#F4F7FB" stroke-width=".8" marker-start="url(#arr)" marker-end="url(#arr)"/>
+            <text x="-24" y="-86" class="t-small">10 CYL</text>
+            <text x="-110" y="92" class="t-big">V10 · 3.5 L · 1989</text>
+            <text x="-110" y="112" class="t-small">13,000 ÷ 60 × 5 ≈ 1,083 Hz</text>
+            <text x="-110" y="128" class="t-small">REVS ILLUSTRATIVE · NO LIMIT IN RULES</text>
+          </g>
+          <!-- V8 -->
+          <g transform="translate(450 120)">
+            <line x1="-120" y1="0" x2="120" y2="0" stroke="#F4F7FB" stroke-width=".8" stroke-dasharray="14 4 2 4"/>
+            <rect x="-90" y="-62" width="180" height="124" rx="6" fill="none" stroke="#F4F7FB" stroke-width="1.2"/>
+            <g fill="#0F3B78" stroke="#F4F7FB" stroke-width="1.2">
+              <circle cx="-60" cy="-32" r="15"/><circle cx="-20" cy="-32" r="15"/><circle cx="20" cy="-32" r="15"/><circle cx="60" cy="-32" r="15"/>
+              <circle cx="-46" cy="32" r="15"/><circle cx="-6" cy="32" r="15"/><circle cx="34" cy="32" r="15"/><circle cx="74" cy="32" r="15"/>
+            </g>
+            <line x1="-90" y1="-80" x2="90" y2="-80" stroke="#F4F7FB" stroke-width=".8" marker-start="url(#arr)" marker-end="url(#arr)"/>
+            <text x="-22" y="-86" class="t-small">8 CYL</text>
+            <text x="-90" y="92" class="t-big hot">V8 · 2.4 L · 2008</text>
+            <text x="-90" y="112" class="t-small">19,000 ÷ 60 × 4 ≈ 1,267 Hz</text>
+            <text x="-90" y="128" class="t-small">AT THE REGULATION LIMIT</text>
+          </g>
+          <!-- V6 -->
+          <g transform="translate(750 120)">
+            <line x1="-120" y1="0" x2="120" y2="0" stroke="#F4F7FB" stroke-width=".8" stroke-dasharray="14 4 2 4"/>
+            <rect x="-70" y="-62" width="140" height="124" rx="6" fill="none" stroke="#F4F7FB" stroke-width="1.2"/>
+            <g fill="#0F3B78" stroke="#F4F7FB" stroke-width="1.2">
+              <circle cx="-40" cy="-32" r="15"/><circle cx="0" cy="-32" r="15"/><circle cx="40" cy="-32" r="15"/>
+              <circle cx="-26" cy="32" r="15"/><circle cx="14" cy="32" r="15"/><circle cx="54" cy="32" r="15"/>
+            </g>
+            <circle cx="96" cy="0" r="16" fill="none" stroke="#F4F7FB" stroke-width="1"/>
+            <path d="M96 -16V16M80 0H112M85 -11L107 11M107 -11L85 11" stroke="#F4F7FB" stroke-width=".5" opacity=".7"/>
+            <text x="82" y="34" class="t-small">TURBO</text>
+            <line x1="-70" y1="-80" x2="70" y2="-80" stroke="#F4F7FB" stroke-width=".8" marker-start="url(#arr)" marker-end="url(#arr)"/>
+            <text x="-22" y="-86" class="t-small">6 CYL</text>
+            <text x="-70" y="92" class="t-big">V6 · 1.6 L · 2021</text>
+            <text x="-70" y="112" class="t-small">12,000 ÷ 60 × 3 = 600 Hz</text>
+            <text x="-70" y="128" class="t-small">LIMIT 15,000 RPM</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption><b>Plate 04.</b> Cylinder banks seen from above, drawn to the same scale as one another but not to life. Each figure gives the firing frequency at the revs stated beneath it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+(function(){
+  var DATA = {
+    suzuka:{cyl:10,max:13000,
+      pts:[[0,9000],[.06,12800],[.065,10600],[.13,13000],[.135,11000],[.2,13000],[.24,12600],[.27,7500],[.29,9000],[.30,6500],[.32,8000],[.34,5200],[.37,6000],[.40,4200],[.44,2600],[.62,2600],[.66,9000],[.70,11500],[.705,9200],[.76,12500],[.765,10200],[.84,13000],[.845,10800],[.92,13000],[1,12800]],
+      ev:[[.27,"BRAKE"],[.40,"CONTACT"],[.63,"REJOIN"]]},
+    interlagos:{cyl:8,max:19000,
+      pts:[[0,17500],[.08,19000],[.12,18600],[.16,13000],[.18,15000],[.2,11500],[.22,13000],[.25,9500],[.32,10500],[.35,12500],[.42,18500],[.425,15600],[.5,19000],[.505,16000],[.6,19000],[.605,16200],[.72,19000],[.725,16500],[.86,19000],[.9,19000],[.93,15000],[1,12000]],
+      ev:[[.16,"BRAKE · JUNÇÃO"],[.37,"PASS"],[.9,"LINE"]]},
+    yas:{cyl:6,max:12000,
+      pts:[[0,7000],[.04,9500],[.08,6500],[.12,9800],[.16,7000],[.2,8000],[.22,8000],[.27,11800],[.275,9800],[.33,12000],[.335,10000],[.40,12000],[.405,10200],[.46,11800],[.49,6500],[.51,8000],[.53,5200],[.56,6200],[.58,4800],[.64,9500],[.68,11800],[.685,9800],[.74,12000],[.745,10000],[.82,12000],[.825,10200],[.92,12000],[1,11800]],
+      ev:[[.21,"RESTART"],[.47,"BRAKE · T5"],[.58,"PASS"]]}
+  };
+  var FMAX = 5000;
+  var ORD = [.5,1,1.5,2,3,4,5,6];
+  var AMP = [.32,1,.28,.6,.42,.28,.18,.12];
+  var STOPS = [[0,[7,8,10]],[.33,[20,39,63]],[.58,[95,113,134]],[.8,[201,206,212]],[1,[255,255,255]]];
+
+  function rpmAt(p,t){
+    for(var i=1;i<p.length;i++){
+      if(t<=p[i][0]){var a=p[i-1],b=p[i],u=(t-a[0])/(b[0]-a[0]||1);return a[1]+(b[1]-a[1])*u;}
+    }
+    return p[p.length-1][1];
+  }
+  function cmap(v){
+    v=Math.max(0,Math.min(1,v));
+    for(var i=1;i<STOPS.length;i++){
+      if(v<=STOPS[i][0]){var a=STOPS[i-1],b=STOPS[i],u=(v-a[0])/(b[0]-a[0]);
+        return [a[1][0]+(b[1][0]-a[1][0])*u,a[1][1]+(b[1][1]-a[1][1])*u,a[1][2]+(b[1][2]-a[1][2])*u];}
+    }
+    return STOPS[STOPS.length-1][1];
+  }
+  function rng(seed){var s=seed>>>0;return function(){s=(s*1664525+1013904223)>>>0;return s/4294967296;};}
+
+  function size(c){
+    var dpr=window.devicePixelRatio||1, r=c.getBoundingClientRect();
+    var w=Math.max(1,Math.round(r.width*dpr)), h=Math.max(1,Math.round(r.height*dpr));
+    if(c.width!==w||c.height!==h){c.width=w;c.height=h;}
+    return {w:w,h:h,dpr:dpr};
+  }
+  function markers(ctx,d,w,h,dpr,labels){
+    ctx.save();
+    ctx.strokeStyle="#FF3B1F";ctx.lineWidth=1.2*dpr;ctx.setLineDash([4*dpr,4*dpr]);
+    ctx.fillStyle="#FF3B1F";ctx.font="500 "+(10*dpr)+"px 'IBM Plex Mono', monospace";
+    d.ev.forEach(function(e){
+      var x=Math.round(e[0]*w)+.5;
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
+      if(labels){
+        var tw=ctx.measureText(e[1]).width, tx=x+6*dpr;
+        if(tx+tw>w-4*dpr) tx=x-6*dpr-tw;
+        ctx.fillText(e[1],tx,16*dpr);
+      }
+    });
+    ctx.restore();
+  }
+
+  function drawSpec(c,d){
+    var s=size(c),w=s.w,h=s.h,dpr=s.dpr,ctx=c.getContext("2d");
+    var img=ctx.createImageData(w,h),px=img.data,rnd=rng(w*7+h*13+d.cyl);
+    var col=new Float32Array(h);
+    for(var x=0;x<w;x++){
+      var t=x/(w-1),rpm=rpmAt(d.pts,t),f=rpm/60*d.cyl/2,loud=Math.pow(rpm/d.max,1.4);
+      var jit=1+(rnd()-.5)*.004;
+      for(var y=0;y<h;y++){
+        var fr=(1-y/(h-1))*FMAX, v=0;
+        for(var k=0;k<ORD.length;k++){
+          var c0=f*ORD[k]*jit, sg=10+ORD[k]*7, dd=(fr-c0)/sg;
+          if(dd>-5&&dd<5) v+=AMP[k]*Math.exp(-.5*dd*dd);
+        }
+        var floor=.05*Math.exp(-fr/1800)*(.4+loud)+.012;
+        v=v*(.25+.75*loud)+floor*(.6+.8*rnd());
+        col[y]=v;
+      }
+      for(var y2=0;y2<h;y2++){
+        var lv=Math.log(1+col[y2]*40)/Math.log(41),cc=cmap(lv),i=(y2*w+x)*4;
+        px[i]=cc[0];px[i+1]=cc[1];px[i+2]=cc[2];px[i+3]=255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    ctx.save();
+    ctx.font="400 "+(10*dpr)+"px 'IBM Plex Mono', monospace";
+    ctx.fillStyle="rgba(236,237,239,.72)";ctx.strokeStyle="rgba(236,237,239,.14)";ctx.lineWidth=1;
+    for(var kz=1;kz<5;kz++){
+      var yy=Math.round(h*(1-kz*1000/FMAX))+.5;
+      ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(w,yy);ctx.stroke();
+      ctx.fillText(kz+" kHz",8*dpr,yy-5*dpr);
+    }
+    ctx.restore();
+    markers(ctx,d,w,h,dpr,true);
+  }
+
+  function drawWave(c,d){
+    var s=size(c),w=s.w,h=s.h,dpr=s.dpr,ctx=c.getContext("2d"),rnd=rng(w*3+d.cyl*11);
+    ctx.clearRect(0,0,w,h);
+    var mid=h/2,step=Math.max(1,Math.round(1.5*dpr));
+    ctx.strokeStyle="#8C97A3";ctx.lineWidth=Math.max(1,dpr*.8);
+    ctx.beginPath();
+    for(var x=0;x<w;x+=step){
+      var t=x/(w-1),rpm=rpmAt(d.pts,t),loud=Math.pow(rpm/d.max,1.6);
+      var a=(mid-6*dpr)*(.08+.92*loud)*(.55+.45*rnd());
+      ctx.moveTo(x+.5,mid-a);ctx.lineTo(x+.5,mid+a);
+    }
+    ctx.stroke();
+    ctx.strokeStyle="#ECEDEF";ctx.lineWidth=1.2*dpr;ctx.beginPath();
+    for(var x2=0;x2<w;x2+=step){
+      var t2=x2/(w-1),l2=Math.pow(rpmAt(d.pts,t2)/d.max,1.6),a2=(mid-6*dpr)*(.08+.92*l2);
+      if(x2===0)ctx.moveTo(x2,mid-a2);else ctx.lineTo(x2,mid-a2);
+    }
+    ctx.stroke();
+    markers(ctx,d,w,h,dpr,false);
+  }
+
+  var canvases=[].slice.call(document.querySelectorAll("canvas[data-spec]"));
+  function draw(c){
+    var d=DATA[c.getAttribute("data-spec")];
+    if(!d)return;
+    if(c.getAttribute("data-kind")==="spec")drawSpec(c,d);else drawWave(c,d);
+  }
+  function drawAll(){canvases.forEach(draw);}
+  drawAll();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(drawAll);
+  if("ResizeObserver" in window){
+    var lastW=new WeakMap();
+    var ro=new ResizeObserver(function(entries){
+      entries.forEach(function(en){
+        var wNow=Math.round(en.contentRect.width);
+        if(lastW.get(en.target)!==wNow){lastW.set(en.target,wNow);draw(en.target);}
+      });
+    });
+    canvases.forEach(function(c){ro.observe(c);});
+  }else{
+    window.addEventListener("resize",drawAll);
+  }
+})();
+</script>
+</body>
+</html>
