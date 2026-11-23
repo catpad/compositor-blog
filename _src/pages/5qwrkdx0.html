@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ирлэ: карманный словарь языка поэтических объектов</title>
+<meta name="description" content="Вымышленный язык, в котором поэма — одно слово: учебник, словарь корней, хрестоматия и размышления по следам «поэтических объектов» Борхеса.">
+<meta name="compositor:paper" content="#F2EBDC">
+<meta name="compositor:ink" content="#1D1A17">
+<meta name="compositor:accent" content="#B3301E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@400;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EBDC;
+  --paper-2:#E8DDC7;
+  --ink:#1D1A17;
+  --accent:#B3301E;
+  --ochre:#C8952E;
+  --muted:#6B6257;
+  --display:"Alegreya SC", "Literata", Georgia, serif;
+  --text:"Literata", Georgia, "Times New Roman", serif;
+  --s-1:.8rem;
+  --s0:1.03rem;
+  --s1:1.25rem;
+  --s2:1.6rem;
+  --s3:2.3rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:var(--s0);
+  line-height:1.58;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+.page{
+  position:relative;
+  max-width:47rem;
+  margin:0 auto;
+  padding:2.5rem 4.5rem 4rem 2rem;
+}
+.page::before{
+  content:"";
+  position:absolute;
+  top:0; bottom:0; right:3.1rem;
+  border-right:1px solid var(--ink);
+  opacity:.25;
+}
+p{margin:0 0 1em; max-width:36em; hyphens:auto}
+a{color:var(--accent); text-underline-offset:.15em}
+em,i{font-style:italic}
+b,strong{font-weight:700}
+
+/* ——— thumb index ——— */
+.thumbs{
+  display:flex; gap:.35rem; flex-wrap:wrap;
+  margin:0 0 2.2rem;
+  font-family:var(--display);
+  font-size:var(--s-1);
+  letter-spacing:.06em;
+}
+.thumbs a{
+  display:inline-block;
+  padding:.3rem .65rem .35rem;
+  background:var(--ink); color:var(--paper);
+  text-decoration:none;
+  border-radius:0 0 .5rem .5rem;
+}
+.thumbs a:hover,.thumbs a:focus-visible{background:var(--accent); outline:none}
+.sec{position:relative; padding-top:1.2rem; margin-top:3.2rem}
+.tab{
+  position:absolute;
+  right:-4.5rem;
+  top:calc(1.2rem + var(--i) * 3.4rem);
+  width:1.9rem; height:3.6rem;
+  background:var(--ink); color:var(--paper);
+  font-family:var(--display);
+  font-size:.82rem;
+  letter-spacing:.08em;
+  display:flex; align-items:center; justify-content:center;
+  writing-mode:vertical-rl;
+  border-radius:.45rem 0 0 .45rem;
+}
+.runhead{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1.5px solid var(--ink);
+  padding-bottom:.25rem; margin-bottom:1.6rem;
+  font-family:var(--display);
+  font-size:var(--s-1);
+  letter-spacing:.08em;
+}
+.runhead span:last-child{color:var(--accent)}
+
+/* ——— headings ——— */
+h1,h2,h3,h4{font-weight:700; line-height:1.2; margin:0}
+h2{
+  font-family:var(--display);
+  font-size:var(--s2);
+  font-weight:700;
+  letter-spacing:.01em;
+  margin:0 0 1rem;
+  max-width:24em;
+}
+h3{
+  font-family:var(--text);
+  font-size:var(--s1);
+  margin:2.4rem 0 .8rem;
+  max-width:28em;
+}
+h3 .num{
+  font-family:var(--display);
+  color:var(--accent);
+  font-weight:400;
+  margin-right:.35em;
+}
+h4{
+  font-family:var(--display);
+  font-size:var(--s0);
+  letter-spacing:.05em;
+  margin:2rem 0 .8rem;
+  display:flex; align-items:center; gap:.5rem;
+}
+h4 svg{width:1.4rem; height:1.4rem; flex:none}
+
+/* ——— title block ——— */
+.cover{padding-top:.5rem}
+.eyebrow{
+  font-family:var(--display);
+  font-size:var(--s-1);
+  letter-spacing:.12em;
+  color:var(--muted);
+  margin-bottom:.6rem;
+}
+.cover h1{
+  font-family:var(--text);
+  font-size:clamp(2.6rem, 9vw, 4.2rem);
+  font-weight:700;
+  letter-spacing:-.01em;
+  line-height:1;
+  color:var(--accent);
+}
+.cover h1 .pron{font-size:.36em; color:var(--ink); font-weight:400; letter-spacing:0; margin-left:.3em; vertical-align:.5em}
+.subtitle{
+  font-family:var(--display);
+  font-size:var(--s1);
+  margin:.5rem 0 1.4rem;
+  max-width:26em;
+}
+.lead{font-size:1.1rem; max-width:34em}
+
+/* ——— dictionary typographic pieces ——— */
+.hw{font-weight:700; color:var(--accent)}
+.lat{font-style:italic; color:var(--muted)}
+.pron{font-family:var(--text); font-weight:400; color:var(--ink); white-space:nowrap}
+.lab{font-style:italic; font-size:.84em; color:var(--muted)}
+.sn{font-weight:700; margin-right:.15em}
+.sc{font-family:var(--display); font-size:.86em; letter-spacing:.05em}
+.entry{margin:0 0 .9rem; break-inside:avoid; max-width:none}
+.entry.big{font-size:1.08rem; border-top:1.5px solid var(--ink); border-bottom:1.5px solid var(--ink); padding:.9rem 0; margin:1.2rem 0 1.6rem; max-width:36em}
+.entry .see{display:block; font-size:.9em; margin-top:.15rem}
+.dict{column-count:2; column-gap:2.4rem; column-rule:1px solid rgba(29,26,23,.25); margin-top:.4rem}
+.dict h4{break-after:avoid; margin-top:1.2rem}
+.dict h4:first-child{margin-top:0}
+
+.abbr{
+  border:1.5px solid var(--ink);
+  padding:.8rem 1rem;
+  font-size:.92rem;
+  margin:1.2rem 0 1.6rem;
+  max-width:36em;
+  columns:2; column-gap:1.6rem;
+}
+.abbr div{break-inside:avoid}
+.abbr .t{font-family:var(--display); letter-spacing:.06em; column-span:all; margin-bottom:.4rem; display:block}
+
+/* ——— tables ——— */
+.alpha{
+  border-collapse:collapse;
+  margin:1rem 0 1.4rem;
+  font-size:.95rem;
+  width:100%;
+  max-width:34em;
+}
+.alpha th,.alpha td{
+  text-align:left; padding:.35rem .6rem .35rem 0;
+  border-bottom:1px solid rgba(29,26,23,.25);
+  vertical-align:top;
+}
+.alpha th{font-family:var(--display); font-weight:400; letter-spacing:.06em; font-size:var(--s-1); border-bottom:1.5px solid var(--ink)}
+.alpha td:first-child{font-weight:700; color:var(--accent); width:4.5rem}
+
+/* ——— interlinear gloss ——— */
+.ig{display:flex; flex-wrap:wrap; gap:.2rem .1rem; margin:.5rem 0 .8rem; font-size:.95rem}
+.ig span{display:inline-flex; flex-direction:column; padding:0 .3rem .1rem 0; border-right:1px dotted rgba(29,26,23,.35)}
+.ig span:last-child{border-right:0}
+.ig b{font-weight:700}
+.ig .k b{color:var(--accent)}
+.ig i{font-family:var(--display); font-style:normal; font-size:.74rem; letter-spacing:.05em; color:var(--muted)}
+
+.ex{margin:.4rem 0 1rem; padding-left:1.1rem; border-left:3px solid var(--ochre); max-width:35em}
+.ex .w{font-weight:700; color:var(--accent)}
+
+/* ——— exercises ——— */
+.drill{margin:1.6rem 0; padding:1rem 1.1rem; background:var(--paper-2); max-width:36em}
+.drill .t{font-family:var(--display); letter-spacing:.06em; display:block; margin-bottom:.5rem}
+.drill ol{margin:0; padding-left:1.3rem}
+.drill li{margin-bottom:.45rem}
+.key{font-size:.86rem; font-style:italic; color:var(--muted); margin-top:.7rem; border-top:1px solid rgba(29,26,23,.25); padding-top:.5rem}
+.key b{font-style:normal; color:var(--ink)}
+
+.steps{counter-reset:s; list-style:none; padding:0; margin:1rem 0; max-width:36em}
+.steps li{counter-increment:s; position:relative; padding-left:2.2rem; margin-bottom:.7rem}
+.steps li::before{
+  content:counter(s);
+  position:absolute; left:0; top:.05rem;
+  width:1.5rem; height:1.5rem;
+  background:var(--ink); color:var(--paper);
+  font-family:var(--display); font-size:.85rem;
+  display:flex; align-items:center; justify-content:center;
+}
+
+/* ——— poems ——— */
+.poem{border-top:1.5px solid var(--ink); padding:1.3rem 0 .6rem; margin-top:1.4rem}
+.poem .no{font-family:var(--display); color:var(--accent); letter-spacing:.08em; font-size:var(--s-1)}
+.poem .word{
+  font-family:var(--text);
+  font-weight:700;
+  font-size:clamp(1.55rem, 5.6vw, 2.5rem);
+  line-height:1.1;
+  letter-spacing:.01em;
+  margin:.2rem 0 .3rem;
+  overflow-wrap:anywhere;
+}
+.poem .meta{font-size:.92rem; color:var(--muted); margin-bottom:.4rem}
+.poem .tr{font-style:italic; font-size:1.06rem; max-width:32em}
+.poem .note{font-size:.93rem}
+.poem.long .word{font-size:clamp(1.15rem, 4.4vw, 2rem)}
+
+/* ——— figures ——— */
+figure{margin:2rem 0}
+figure svg{display:block; width:100%; height:auto}
+figcaption{font-size:.86rem; color:var(--muted); margin-top:.5rem; font-style:italic; max-width:36em}
+figcaption b{font-style:normal; color:var(--accent)}
+.k{fill:var(--ink)}
+.r{fill:var(--accent)}
+.o{fill:var(--ochre)}
+.pp{fill:var(--paper)}
+.g{fill:none; stroke:var(--paper); stroke-linecap:round; stroke-linejoin:round}
+.sk{fill:none; stroke:var(--ink); stroke-linecap:round; stroke-linejoin:round}
+.sr{fill:none; stroke:var(--accent); stroke-linecap:round; stroke-linejoin:round}
+
+blockquote{
+  margin:1.2rem 0; padding:0 0 0 1.1rem;
+  border-left:3px solid var(--accent);
+  font-style:italic; max-width:34em;
+}
+blockquote p{margin:0}
+.aside{font-size:.9rem; color:var(--muted); max-width:36em}
+.pull{
+  font-family:var(--display);
+  font-size:var(--s1);
+  line-height:1.35;
+  margin:1.8rem 0;
+  max-width:26em;
+  color:var(--accent);
+}
+.colophon{
+  margin-top:3rem; padding-top:.8rem;
+  border-top:1.5px solid var(--ink);
+  font-size:.86rem; color:var(--muted); max-width:36em;
+}
+
+/* ——— instruments ——— */
+.instrument{
+  display:block;
+  position:relative;
+  width:100%;
+  margin:2.2rem 0 2.4rem;
+  min-height:340px;
+  background:var(--paper-2);
+  border-top:2px solid var(--ink);
+  border-bottom:2px solid var(--ink);
+}
+.instrument[data-instrument="vowel-stretch"]{min-height:360px}
+.instrument[data-instrument="word-forge"]{min-height:540px}
+.instrument[data-instrument="word-reader"]{min-height:380px}
+.instrument[data-instrument="translation-press"]{min-height:420px}
+.instrument[data-instrument="fading-word"]{min-height:320px}
+
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+@media (max-width:640px){
+  .page{padding:1.6rem 2.6rem 3rem 1.1rem}
+  .page::before{right:1.9rem}
+  .tab{right:-2.6rem; width:1.45rem; height:3rem; font-size:.72rem; top:calc(1.2rem + var(--i) * 2.6rem)}
+  .dict{column-count:1}
+  .abbr{columns:1}
+  .instrument[data-instrument="word-forge"]{min-height:620px}
+  .instrument[data-instrument="translation-press"]{min-height:480px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="cut" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="i-eye" viewBox="0 0 24 24"><circle class="r" cx="13" cy="13" r="5"/><path class="k" d="M1.5 12 Q12 1.5 22.5 12 Q12 22.5 1.5 12 Z M6 12 Q12 17 18 12 Q12 7 6 12 Z"/><circle class="k" cx="12" cy="12" r="2.6"/></symbol>
+    <symbol id="i-ear" viewBox="0 0 24 24"><circle class="r" cx="4.5" cy="13" r="3"/><path class="sk" stroke-width="2.8" d="M8 8 q4 4 0 8 M12 5 q7 7 0 14 M16 2 q10 10 0 20"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><circle class="r" cx="13" cy="16" r="6"/><path class="k" d="M6 13 Q6 22 12 22 Q18 22 18 13 L18 9 Q16.5 8 15.5 9 L15.5 4 Q14 3 13 4 L13 3 Q11.5 2 10.5 3 L10.5 4.5 Q9 3.5 8 4.8 L8 11 Q6.5 10 6 13 Z"/></symbol>
+    <symbol id="i-nose" viewBox="0 0 24 24"><path class="r" d="M12 14 Q16 19 12 22 Q8 19 12 14 Z"/><path class="sk" stroke-width="2.6" d="M6 15 c-3 -3 3 -5 0 -9 M12 12 c-3 -3 3 -5 0 -9 M18 15 c-3 -3 3 -5 0 -9"/></symbol>
+    <symbol id="i-wave" viewBox="0 0 24 24"><path class="sr" stroke-width="2.6" d="M2 19 q5 -5 10 0 t10 0"/><path class="sk" stroke-width="3" d="M2 12 q5 -7 10 0 t10 0"/><path class="k" d="M17 4 L23 6 L18.5 10 Z"/></symbol>
+    <symbol id="i-glass" viewBox="0 0 24 24"><path class="k" d="M5 2 H19 V4 L13.4 12 L19 20 V22 H5 V20 L10.6 12 L5 4 Z M8 4 L12 10 L16 4 Z M8 20 H16 L12 15 Z"/><path class="r" d="M9 20 H15 L12 16.5 Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+  <header class="cover">
+    <div class="eyebrow">Карманный словарь · учебник · хрестоматия</div>
+    <h1>ирлэ<span class="pron">[ˈir.lɛ]</span></h1>
+    <div class="subtitle">Язык поэтических объектов, в котором поэма может быть одним словом</div>
+
+    <p class="entry big"><span class="hw">ирлэ</span> <span class="lab">нескл., м.</span>
+      <span class="sn">1.</span> Вымышленный язык, в котором нет существительных, а слово складывается из ощущений, как вещь из света, звука и тепла.
+      <span class="sn">2.</span> Само такое слово: <span class="lab">поэтический объект</span>, существующий только в момент произнесения.
+      <span class="sn">3.</span> <span class="lab">перен.</span> Миг, когда несколько чувств сходятся в одно и у этого одного ещё нет имени.
+    </p>
+
+    <p class="lead">В рассказе Борхеса «Тлён, Укбар, Orbis Tertius» (1940) описана выдуманная планета, языки которой обходятся без существительных. В северном полушарии Тлёна вещь называют, нагромождая прилагательные; там же сочиняют «поэтические объекты» — сочетания ощущений, у которых в нашем языке нет имени, — и там знамениты поэмы, состоящие из одного огромного слова. Борхес только упоминает их, как упоминают далёкую страну. Этот словарь делает следующий шаг: даёт такому языку звуки, корни, правила, учебник и первые стихи.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 400" role="img" aria-labelledby="f1t">
+        <title id="f1t">Линогравюра: красное солнце восходит над чёрными холмами, справа вверху летит чёрная птица, от её клюва расходятся красные дуги крика.</title>
+        <g filter="url(#cut)">
+          <g transform="translate(4,3)">
+            <path class="o" d="M24 52 L120 44 L240 50 L360 40 L480 48 L616 42 L620 262 L20 262 Z"/>
+            <path class="g" stroke-width="3.5" d="M44 74 H150 M190 70 H226 M420 66 H560 M58 104 H118 M470 120 H520 M40 140 H96 M560 150 H604 M48 196 H130 M520 214 H600"/>
+          </g>
+          <g transform="translate(-3,2)">
+            <path class="r" d="M182 262 A118 118 0 0 1 418 262 Z"/>
+            <path class="g" stroke-width="3.2" stroke-dasharray="18 10" d="M210 262 A90 90 0 0 1 390 262"/>
+            <path class="g" stroke-width="3.2" stroke-dasharray="10 9" d="M242 262 A58 58 0 0 1 358 262"/>
+            <path class="sr" stroke-width="7" d="M572 72 q12 13 0 26 M586 63 q20 21 0 43 M601 55 q26 29 0 58"/>
+          </g>
+          <g>
+            <path class="sk" stroke-width="10" d="M169.6 227 L92.3 206.3 M189.4 184.5 L115.7 132.9 M222.5 151.4 L179.5 90 M265 131.6 L241.7 46 M311.8 127.5 L317.8 57.8 M357.1 139.7 L393.1 62.7 M395.4 166.6 L430.8 131.2 M422.3 204.9 L494.8 171.1"/>
+            <path class="k" d="M20 262 L80 255 L150 265 L230 253 L300 262 L380 251 L460 260 L540 249 L620 258 L620 384 L20 384 Z"/>
+            <path class="g" stroke-width="4" d="M40 292 q30 -8 60 0 M128 300 q40 -10 80 0 M236 286 q30 -7 60 0 M330 296 q44 -11 88 0 M452 284 q28 -7 56 0 M540 298 q30 -8 60 0 M60 326 q46 -10 92 0 M190 334 q28 -6 56 0 M282 322 q50 -12 100 0 M420 330 q36 -9 72 0 M520 324 q40 -9 80 0 M36 358 q30 -6 60 0 M130 362 q52 -10 104 0 M300 356 q34 -7 68 0 M402 364 q48 -10 96 0 M540 356 q30 -6 60 0"/>
+            <path class="k" d="M470 96 L448 86 L452 100 L446 110 L472 102 Z"/>
+            <path class="k" d="M504 86 L500 44 L513 48 L522 84 Z"/>
+            <path class="k" d="M468 98 C480 86 505 80 522 82 C530 76 540 76 546 82 L562 78 L550 88 L563 94 L547 94 C540 102 520 106 500 104 C488 104 476 102 468 98 Z"/>
+            <path class="k" d="M490 90 L466 52 L482 53 L514 88 Z"/>
+            <path class="g" stroke-width="2.4" d="M478 96 L498 94 M486 100 L508 99"/>
+            <circle class="pp" cx="539" cy="85" r="2.3"/>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Рис. 1. <b>лумакахнт</b> — цвет восхода и далёкий крик птицы. Первый поэтический объект, приведённый у Борхеса, записанный средствами ирлэ.</figcaption>
+    </figure>
+  </header>
+
+  <div class="thumbs" aria-label="Разделы словаря">
+    <a href="#pr">Пр · предисловие</a>
+    <a href="#uch">Уч · учебник</a>
+    <a href="#sl">Сл · словарь</a>
+    <a href="#hr">Хр · хрестоматия</a>
+    <a href="#rz">Рз · размышления</a>
+  </div>
+
+  <!-- ——————————————— ПРЕДИСЛОВИЕ ——————————————— -->
+  <section class="sec" id="pr" style="--i:0">
+    <span class="tab" aria-hidden="true">Пр</span>
+    <div class="runhead"><span>предисловие</span><span>Тлён — ирлэ</span></div>
+    <h2>Борхес оставил этот язык описанным, но не записанным</h2>
+
+    <p>Тлён, по словам рассказчика, населён врождёнными идеалистами: мир для них — не собрание предметов в пространстве, а разнородный ряд отдельных актов восприятия. Поэтому и языки Тлёна устроены иначе, чем наши.</p>
+
+    <p>В языке южного полушария нет существительных, зато есть безличные глаголы с наречными приставками. Слова «луна» там нет, есть глагол — что-то вроде «лунить». Борхес приводит фразу <i>hlör u fang axaxaxas mlö</i>, смысл которой в пересказе таков: <i>вверх — за длящимся течением — залунело</i>. Луна здесь не вещь, а то, что случилось.</p>
+
+    <p>В северном полушарии основная клетка языка — прилагательное. Вместо «луны» скажут, например, «воздушно-светлое над тёмно-круглым» или «бледно-оранжевое неба». Существительное здесь — не имя, а скопление признаков. И отсюда возникает главное:</p>
+
+    <blockquote><p>Есть объекты из двух членов — зрительного и слухового: цвет восхода и далёкий крик птицы. Есть из многих: солнце и вода у груди пловца; смутное розовое дрожание, которое видишь с закрытыми глазами, и чувство того, кого уносит река и сон. Такие объекты второй степени соединяются с другими, и процесс почти бесконечен. Есть знаменитые поэмы из одного огромного слова.</p></blockquote>
+    <p class="aside">Пересказ места из «Тлён, Укбар, Orbis Tertius», не перевод.</p>
+
+    <p>Борхес не даёт ни одного такого слова. Он описывает язык снаружи, как карту страны, в которую не пускают. <span class="hw">Ирлэ</span> не реконструкция Тлёна — реконструировать нечего, — а один из возможных его родственников: язык, где корни называют не вещи, а ощущения, где пять гласных между корнями говорят, как ощущения соединены, и где слово, однажды составленное, принадлежит только своему мгновению.</p>
+
+    <p class="aside">Все корни, правила, поэмы и упражнения ниже сочинены для этой страницы. Слова Борхеса, Хлебникова, Кэрролла и других авторов приводятся в пересказе или в общеизвестной форме.</p>
+  </section>
+
+  <!-- ——————————————— УЧЕБНИК ——————————————— -->
+  <section class="sec" id="uch" style="--i:1">
+    <span class="tab" aria-hidden="true">Уч</span>
+    <div class="runhead"><span>учебник</span><span>урок 1 — урок 7</span></div>
+    <h2>Учебник в семи уроках: от одного слога до первой поэмы</h2>
+
+    <h3><span class="num">Урок 1.</span>Пять гласных и пятнадцать согласных: ирлэ читается так, как пишется</h3>
+
+    <p>Ирлэ записывается кириллицей. Каждая буква читается всегда одинаково, без редукции: безударное <i>о</i> остаётся <i>о</i>. Согласный перед <i>э</i> твёрдый, перед <i>и</i> мягкий; мягкий знак встречается только в метке <i>-ль</i>.</p>
+
+    <table class="alpha">
+      <thead><tr><th>Буквы</th><th>Звук</th><th>Где встречается</th></tr></thead>
+      <tbody>
+        <tr><td>а э и о у</td><td>[a ɛ i o u]</td><td>в корнях и в стыках между корнями</td></tr>
+        <tr><td>б в г д з</td><td>[b v g d z]</td><td>в начале и в середине корня</td></tr>
+        <tr><td>к л м н п</td><td>[k l m n p]</td><td>везде</td></tr>
+        <tr><td>р с т х ш</td><td>[r s t x ʃ]</td><td>везде; <i>с</i>, <i>ш</i>, <i>рр</i> также метки</td></tr>
+        <tr><td>ль</td><td>[lʲ]</td><td>только метка «угасая»</td></tr>
+      </tbody>
+    </table>
+
+    <p>Корень всегда устроен как <b>согласный — гласный — согласный</b>, причём в начале может стоять пара согласных: <span class="hw">лум</span>, <span class="hw">ках</span>, <span class="hw">тлин</span>, <span class="hw">ступ</span>. Отсюда главное правило чтения: гласные в слове чередуются — гласная корня, гласная стыка, гласная корня. Поэтому даже слово в шестьдесят букв читается без запинки: глаз сам находит, где кончается одно ощущение и начинается другое.</p>
+
+    <p>Ударение падает на корень того ощущения, которое в объекте главное. По умолчанию это первый корень: <i>лу́макахнт</i> — прежде всего свет, а крик при нём. Переставьте ударение — <i>лума́кахнт</i> — и на переднем плане окажется крик, а свет станет его фоном. Долгий стык произносится протяжно, как вдох; об этом урок 5.</p>
+
+    <div class="drill">
+      <span class="t">Упражнение 1</span>
+      <ol>
+        <li>Разделите на корни и стыки: <i>лумакахнт</i>, <i>тэмомол</i>, <i>шэлэвэл</i>.</li>
+        <li>Где ударение в слове <i>свару́тэм</i> и что в нём главное?</li>
+      </ol>
+      <div class="key"><b>Ключ.</b> 1. лум·а·ках(нт); тэм·о·мол; шэл·э·вэл. 2. На втором корне: главное — темнота, блеск лишь предшествует ей.</div>
+    </div>
+
+    <h3><span class="num">Урок 2.</span>Корень называет ощущение, а не вещь</h3>
+
+    <p>В ирлэ нет ни одного существительного. Нет слова «луна», «вода», «птица». Есть корни, каждый из которых называет одно ощущение, и ощущение это ничьё: в языке нет местоимений, нет «я вижу», есть только «видится». Корни разделены на шесть семей, по числу путей, которыми мир приходит к телу:</p>
+
+    <ul class="steps" style="counter-reset:none">
+      <li style="list-style:none"><b>Зрение.</b> Свет, цвет, темнота: <span class="hw">лум</span> — свет восхода, <span class="hw">тэм</span> — темнота, в которой ещё что-то есть.</li>
+      <li style="list-style:none"><b>Слух.</b> <span class="hw">ках</span> — крик птицы, <span class="hw">мол</span> — тишина, которую слышно.</li>
+      <li style="list-style:none"><b>Осязание.</b> <span class="hw">сол</span> — тепло солнца на коже, <span class="hw">вэл</span> — вода у тела.</li>
+      <li style="list-style:none"><b>Запах и вкус.</b> <span class="hw">нам</span> — запах хлеба, <span class="hw">зир</span> — запах первого дождя на пыли.</li>
+      <li style="list-style:none"><b>Движение тела.</b> <span class="hw">рэк</span> — то, что тебя уносит, <span class="hw">сон</span> — погружение в сон.</li>
+      <li style="list-style:none"><b>Время.</b> Четыре корня-рамки, которые стоят только в начале слова: <span class="hw">ир-</span>, <span class="hw">ав-</span>, <span class="hw">эж-</span>, <span class="hw">ок-</span>. Им посвящён урок 6.</li>
+    </ul>
+
+    <p>Вещь в ирлэ — не предмет, а повторяющаяся встреча ощущений. Говорящий на ирлэ не скажет «луна»; он скажет <i>тэмосвар</i> — «блеск внутри темноты», и это будет не название луны, а то, что произошло с ним сегодня ночью. Завтра, в тумане, та же луна будет другим словом.</p>
+
+    <h3><span class="num">Урок 3.</span>Пять стыков: гласная между корнями говорит, как ощущения связаны</h3>
+
+    <p>Между двумя корнями всегда стоит гласная. Это не соединительная буква, как <i>о</i> в слове «пароход», а самая смысловая часть слова: она сообщает, в каком отношении находятся два ощущения.</p>
+
+    <table class="alpha">
+      <thead><tr><th>Стык</th><th>Отношение</th><th>Пример и перевод</th></tr></thead>
+      <tbody>
+        <tr><td>-а-</td><td>одновременно, рядом</td><td><i>лумаках</i> — свет восхода, и при нём крик</td></tr>
+        <tr><td>-о-</td><td>внутри, охватывая</td><td><i>тэмомол</i> — темнота, внутри которой тишина</td></tr>
+        <tr><td>-у-</td><td>вслед, из</td><td><i>сварутэм</i> — блеск, а за ним темнота</td></tr>
+        <tr><td>-и-</td><td>сквозь, вопреки</td><td><i>сэримэд</i> — горечь, сквозь которую сладость</td></tr>
+        <tr><td>-э-</td><td>подобно, эхом</td><td><i>шэлэвэл</i> — шелест листвы, похожий на воду</td></tr>
+      </tbody>
+    </table>
+
+    <p>Стык <i>-а-</i> — самый простой и самый древний: им составлены почти все объекты, которые Борхес перечисляет как примеры. Стык <i>-э-</i> — самый поэтический: это метафора, встроенная в грамматику. Стык <i>-и-</i> — самый драматический: в нём одно ощущение сопротивляется другому.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 340" role="img" aria-labelledby="f2t">
+        <title id="f2t">Линогравюра: голова и рука пловца над чёрной водой, позади красное солнце, вокруг груди пловца расходятся светлые круги.</title>
+        <g filter="url(#cut)">
+          <g transform="translate(4,-3)">
+            <path class="o" d="M20 30 L620 24 L622 206 L18 210 Z"/>
+            <path class="g" stroke-width="3.5" d="M40 52 H180 M220 48 H300 M60 84 H120 M200 72 H244 M520 58 H600 M40 122 H92 M560 150 H604 M110 160 H170"/>
+          </g>
+          <g transform="translate(-3,2)">
+            <circle class="r" cx="470" cy="128" r="66"/>
+            <path class="g" stroke-width="3.2" stroke-dasharray="16 9" d="M424 128 A46 46 0 0 1 516 128"/>
+            <path class="g" stroke-width="3.2" stroke-dasharray="9 8" d="M446 128 A24 24 0 0 1 494 128"/>
+          </g>
+          <g>
+            <path class="k" d="M18 206 Q58 196 98 206 T178 206 T258 206 T338 206 T418 206 T498 206 T578 206 L622 204 L622 328 L18 328 Z"/>
+            <path class="g" stroke-width="3.6" d="M40 250 q24 -7 48 0 M110 286 q30 -8 60 0 M44 306 q22 -5 44 0 M320 262 q26 -7 52 0 M300 300 q34 -8 68 0 M560 248 q22 -6 44 0 M548 292 q28 -7 56 0"/>
+            <path class="g" stroke-width="4" stroke-dasharray="26 12" d="M172 222 A62 10 0 0 0 296 222"/>
+            <path class="g" stroke-width="4" stroke-dasharray="20 14" d="M138 230 A96 16 0 0 0 330 230"/>
+            <path class="g" stroke-width="3.4" stroke-dasharray="14 16" d="M102 242 A132 22 0 0 0 366 242"/>
+            <circle class="k" cx="232" cy="182" r="31"/>
+            <path class="k" d="M258 178 Q272 182 268 194 L254 196 Z"/>
+            <path class="g" stroke-width="3.2" d="M206 170 Q228 148 254 164"/>
+            <path class="g" stroke-width="2.6" d="M244 186 q6 4 12 0"/>
+            <path class="sk" stroke-width="20" d="M254 204 C282 118 360 102 396 168"/>
+            <path class="k" d="M384 160 Q404 158 414 178 Q410 194 396 190 Q384 182 384 160 Z"/>
+            <path class="g" stroke-width="2.6" d="M300 136 q20 -8 40 2"/>
+            <path class="sr" stroke-width="7" d="M404 236 H536 M424 262 H516 M442 288 H498 M458 312 H482"/>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Рис. 2. <b>солавэлс</b> — тепло солнца на коже, и одновременно вода у самой груди. Объект из двух членов по образцу «солнца и воды у груди пловца».</figcaption>
+    </figure>
+
+    <div class="drill">
+      <span class="t">Упражнение 2</span>
+      <ol>
+        <li>Переведите: <i>зирабор</i>, <i>сонувит</i>, <i>крэнисол</i>.</li>
+        <li>Как сказать: «запах хлеба внутри тепла»; «звон, похожий на свет восхода»?</li>
+      </ol>
+      <div class="key"><b>Ключ.</b> 1. Запах дождя на пыли, и при нём гул; погружение в сон, а затем кружение; холод, сквозь который тепло. 2. <i>намосол</i>; <i>тинэлум</i>.</div>
+    </div>
+
+    <h3><span class="num">Урок 4.</span>Метки уточняют расстояние и течение ощущения</h3>
+
+    <p>Сразу после корня может стоять метка — одна или две согласных без гласной. Метка не меняет ощущения, она говорит, где оно и как длится.</p>
+
+    <table class="alpha">
+      <thead><tr><th>Метка</th><th>Значение</th><th>Пример</th></tr></thead>
+      <tbody>
+        <tr><td>-нт</td><td>далеко</td><td><i>кахнт</i> — крик птицы вдали</td></tr>
+        <tr><td>-с</td><td>вплотную, у самой кожи</td><td><i>вэлс</i> — вода у груди</td></tr>
+        <tr><td>-рр</td><td>нарастая</td><td><i>солрр</i> — тепло, которое прибывает</td></tr>
+        <tr><td>-ль</td><td>угасая</td><td><i>шэлль</i> — шелест, который стихает</td></tr>
+        <tr><td>-ш</td><td>мерцая, повторяясь</td><td><i>тинш</i> — звон сверчка, то есть, то нет</td></tr>
+      </tbody>
+    </table>
+
+    <p>Метки можно ставить только по одной на корень. Это ограничение делает язык стройным: у каждого ощущения есть ровно одно уточнение, и поэт должен выбрать, что в нём важнее — расстояние или течение во времени.</p>
+
+    <h3><span class="num">Урок 5.</span>Долгота стыка показывает глубину: так объекты складываются в объекты</h3>
+
+    <p>Борхес пишет, что объекты Тлёна соединяются в объекты второй степени, а те — с другими, и этот процесс почти бесконечен. В ирлэ глубина соединения слышна: чем выше степень, тем дольше тянется гласная стыка.</p>
+
+    <ul class="steps">
+      <li><b>Краткий стык</b> (<i>а</i>) связывает корни в объект первой степени: <i>рэкасон</i> — уносит, и одновременно сон.</li>
+      <li><b>Долгий стык</b> (<i>аа</i>) связывает объекты между собой: <i>тлин‖аа‖рэкасон</i>.</li>
+      <li><b>Трёхдолгий стык</b> (<i>ааа</i>) связывает объекты второй степени; дальше язык не запрещает, но дыхания редко хватает.</li>
+    </ul>
+
+    <p>Вот третий пример Борхеса — «смутное розовое дрожание, которое видишь с закрытыми глазами, и чувство того, кого уносит река и сон»:</p>
+
+    <div class="ig" aria-label="Подстрочник слова тлинаарэкасон">
+      <span class="k"><b>тлин</b><i>розовое под веками</i></span>
+      <span><b>аа</b><i>и одновременно ‖</i></span>
+      <span class="k"><b>рэк</b><i>уносит</i></span>
+      <span><b>а</b><i>и одновременно</i></span>
+      <span class="k"><b>сон</b><i>сон</i></span>
+    </div>
+
+    <p>Если укоротить первый стык — <i>тлинарэкасон</i>, — три ощущения встанут в ряд как равные. Долгий стык отделяет дрожание под веками от двойного чувства реки и сна: это два объекта, а не три корня. В устной речи долгий стык — пауза дыхания, поэтому длинную поэму-слово слышно как строфы, хотя на письме она не прерывается ни разу.</p>
+
+    <figure>
+      <svg viewBox="0 0 640 380" role="img" aria-labelledby="f3t">
+        <title id="f3t">Линогравюра: чёрный профиль спящего, лежащего лицом вверх; над закрытым глазом красные дрожащие дуги; голова покоится на чёрной реке с длинными светлыми струями, по реке плывёт лист.</title>
+        <g filter="url(#cut)">
+          <g transform="translate(4,3)">
+            <path class="o" d="M20 20 L620 26 L618 252 L22 248 Z"/>
+            <path class="g" stroke-width="3.5" d="M44 44 H140 M470 46 H600 M500 80 H580 M40 76 H86 M540 120 H604 M44 110 H70"/>
+          </g>
+          <g>
+            <path class="k" d="M40 252 C44 176 104 134 180 130 C214 128 244 132 262 140 Q270 144 272 152 Q282 148 292 152 L300 114 Q304 108 308 114 L318 152 Q326 150 332 152 Q338 158 344 152 Q352 150 362 154 Q378 156 384 170 Q404 188 430 206 Q452 224 468 252 Z"/>
+            <path class="g" stroke-width="3.4" d="M70 222 q30 -60 100 -76 M60 240 q40 -70 120 -88 M96 244 q30 -50 90 -66"/>
+            <path class="g" stroke-width="3.4" d="M186 194 q14 -12 22 4 q4 14 -10 18"/>
+            <path class="g" stroke-width="3.6" d="M268 168 Q281 177 294 168"/>
+            <path class="g" stroke-width="2.4" d="M272 172 l-3 7 M281 175 l0 8 M290 172 l3 7"/>
+            <path class="k" d="M20 246 Q120 236 220 250 T420 246 T622 250 L622 364 L20 364 Z"/>
+            <path class="g" stroke-width="4" d="M40 282 C140 266 220 298 330 282 S520 270 600 286 M60 316 C170 300 260 330 380 314 S540 304 604 320 M36 344 C130 334 210 356 300 344 M420 346 C480 336 540 352 600 342"/>
+            <path class="pp" d="M488 300 Q520 284 558 296 Q526 314 488 300 Z"/>
+            <path class="sk" stroke-width="2.4" d="M496 299 Q522 296 550 296"/>
+          </g>
+          <g transform="translate(-3,-2)">
+            <path class="sr" stroke-width="7" stroke-dasharray="16 9" d="M240 130 A52 52 0 0 1 340 116"/>
+            <path class="sr" stroke-width="7" stroke-dasharray="22 10" d="M222 104 A82 82 0 0 1 364 86"/>
+            <path class="sr" stroke-width="7" stroke-dasharray="12 12" d="M208 76 A112 112 0 0 1 392 58"/>
+          </g>
+        </g>
+      </svg>
+      <figcaption>Рис. 3. <b>тлинаарэкасон</b> — розовое дрожание под закрытыми веками ‖ и чувство того, кого уносит река и сон.</figcaption>
+    </figure>
+
+    <div class="instrument" data-instrument="vowel-stretch">
+  <div class="vs-in">
+    <div class="vs-chips" role="group" aria-label="Слово"></div>
+    <div class="vs-stage">
+      <svg class="vs-tree" aria-hidden="true"></svg>
+      <div class="vs-word" lang="ru"></div>
+    </div>
+    <div class="vs-row">
+      <div class="vs-deg"><span class="vs-k">степень</span><span class="vs-n">0</span></div>
+      <div class="vs-meta">
+        <div class="vs-group"></div>
+        <div class="vs-count"></div>
+      </div>
+    </div>
+    <div class="vs-ig"></div>
+    <p class="vs-tr" aria-live="polite"></p>
+  </div>
+</div>
+<style>
+[data-instrument="vowel-stretch"] .vs-in{padding:1.1rem 1.2rem 1.2rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="vowel-stretch"] .vs-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .9rem}
+[data-instrument="vowel-stretch"] .vs-chip{font-family:var(--text);font-weight:700;font-size:.8rem;letter-spacing:.01em;line-height:1.25;padding:.3rem .6rem .35rem;background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:0 0 .45rem .45rem;cursor:pointer;overflow-wrap:anywhere;text-align:left;max-width:100%}
+[data-instrument="vowel-stretch"] .vs-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="vowel-stretch"] .vs-chip:hover{border-color:var(--accent)}
+[data-instrument="vowel-stretch"] .vs-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="vowel-stretch"] .vs-stage{position:relative;width:100%;overflow:hidden;padding-top:90px}
+[data-instrument="vowel-stretch"] .vs-tree{position:absolute;left:0;top:0;display:block;overflow:visible}
+[data-instrument="vowel-stretch"] .vs-tree .l1{stroke:var(--ochre)}
+[data-instrument="vowel-stretch"] .vs-tree .l2{stroke:var(--accent)}
+[data-instrument="vowel-stretch"] .vs-tree .l3{stroke:var(--ink)}
+[data-instrument="vowel-stretch"] .vs-tree .f1{fill:var(--ochre)}
+[data-instrument="vowel-stretch"] .vs-tree .f2{fill:var(--accent)}
+[data-instrument="vowel-stretch"] .vs-tree .f3{fill:var(--ink)}
+[data-instrument="vowel-stretch"] .vs-tree .fk{fill:var(--ink)}
+[data-instrument="vowel-stretch"] .vs-tree .fp{fill:var(--paper)}
+[data-instrument="vowel-stretch"] .vs-tree .hl{stroke:var(--paper);fill:none;stroke-linecap:round}
+[data-instrument="vowel-stretch"] .vs-word{display:inline-block;white-space:nowrap;font-weight:700;font-size:46px;line-height:1.15;letter-spacing:.005em;user-select:none;-webkit-user-select:none;padding:0 .1em .12em 0}
+[data-instrument="vowel-stretch"] .vs-leaf{display:inline}
+[data-instrument="vowel-stretch"] .vs-m{color:var(--muted)}
+[data-instrument="vowel-stretch"] .vs-lock{color:var(--muted);font-weight:400}
+[data-instrument="vowel-stretch"] .vs-j{position:relative;display:inline-block;color:var(--accent);cursor:ew-resize;touch-action:pan-y;border-bottom:.1em solid var(--ochre);padding:0 .02em;outline:none;transition:background-color .15s}
+[data-instrument="vowel-stretch"] .vs-j::after{content:"";position:absolute;left:-.12em;right:-.12em;top:-.2em;bottom:-.3em}
+[data-instrument="vowel-stretch"] .vs-j[data-len="2"]{border-bottom-color:var(--accent);border-bottom-width:.13em}
+[data-instrument="vowel-stretch"] .vs-j[data-len="3"]{border-bottom-color:var(--ink);border-bottom-width:.16em}
+[data-instrument="vowel-stretch"] .vs-j:hover,[data-instrument="vowel-stretch"] .vs-j.is-drag{background:rgba(179,48,30,.1)}
+[data-instrument="vowel-stretch"] .vs-j:focus-visible{outline:2px solid var(--accent);outline-offset:3px;background:rgba(179,48,30,.1)}
+[data-instrument="vowel-stretch"] .vs-row{display:flex;gap:1rem;align-items:stretch;margin:.9rem 0 .6rem;border-top:1.5px solid var(--ink);padding-top:.6rem}
+[data-instrument="vowel-stretch"] .vs-deg{flex:none;width:5rem;display:flex;flex-direction:column;justify-content:center}
+[data-instrument="vowel-stretch"] .vs-k{font-family:var(--display);font-size:var(--s-1);letter-spacing:.08em;color:var(--muted)}
+[data-instrument="vowel-stretch"] .vs-n{font-family:var(--text);font-weight:700;font-size:2.3rem;line-height:1;font-variant-numeric:tabular-nums lining-nums;color:var(--accent)}
+[data-instrument="vowel-stretch"] .vs-meta{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.25rem}
+[data-instrument="vowel-stretch"] .vs-group{white-space:nowrap;overflow-x:auto;height:1.8em;line-height:1.7em;font-size:.95rem;font-weight:600}
+[data-instrument="vowel-stretch"] .vs-count{font-family:var(--display);font-size:var(--s-1);letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums lining-nums;height:1.5em;white-space:nowrap;overflow:hidden}
+[data-instrument="vowel-stretch"] .vs-ig{display:flex;flex-wrap:nowrap;overflow-x:auto;height:3.4em;align-items:flex-start;font-size:.92rem;margin:0 0 .5rem}
+[data-instrument="vowel-stretch"] .vs-ig span{display:inline-flex;flex-direction:column;flex:none;padding:0 .35rem .1rem 0;margin-right:.1rem;border-right:1px dotted rgba(29,26,23,.35);line-height:1.35}
+[data-instrument="vowel-stretch"] .vs-ig span:last-child{border-right:0}
+[data-instrument="vowel-stretch"] .vs-ig b{font-weight:700}
+[data-instrument="vowel-stretch"] .vs-ig .r b{color:var(--accent)}
+[data-instrument="vowel-stretch"] .vs-ig i{font-family:var(--display);font-style:normal;font-size:.74rem;letter-spacing:.05em;color:var(--muted);white-space:nowrap}
+[data-instrument="vowel-stretch"] .vs-tr{margin:0;max-width:none;height:7.4em;overflow-y:auto;font-style:italic;font-size:1rem;line-height:1.48;border-left:3px solid var(--ochre);padding:.1rem 0 0 .9rem}
+@media (max-width:540px){
+  [data-instrument="vowel-stretch"] .vs-in{padding:.9rem .8rem 1rem}
+  [data-instrument="vowel-stretch"] .vs-tr{height:11.5em;font-size:.95rem}
+  [data-instrument="vowel-stretch"] .vs-deg{width:4.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="vowel-stretch"] .vs-j{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="vowel-stretch"]');
+if(!root)return;
+const $=s=>root.querySelector(s);
+const chipsEl=$('.vs-chips'),stage=$('.vs-stage'),svg=$('.vs-tree'),wordEl=$('.vs-word'),
+nEl=$('.vs-n'),groupEl=$('.vs-group'),countEl=$('.vs-count'),igEl=$('.vs-ig'),trEl=$('.vs-tr');
+
+const DICT={
+ 'лум':['свет восхода','свет восхода'],'тлин':['розовое под веками','розовое дрожание под веками'],
+ 'свар':['блеск','блеск на воде'],'гал':['синева','далёкая синева'],'рус':['ржавое','ржавый цвет'],
+ 'тэм':['темнота','темнота'],'бор':['гул','гул'],'ках':['крик птицы','крик птицы'],
+ 'мол':['тишина','тишина, которую слышно'],'плэс':['всплеск','всплеск'],'тин':['звон','тонкий звон'],
+ 'шэл':['шелест','шелест листвы'],'вэл':['вода у тела','вода у тела'],'грум':['тяжесть','тяжесть в ладони'],
+ 'крэн':['холод','обжигающий холод'],'пух':['мягкое','мягкость'],'сол':['тепло солнца','тепло солнца на коже'],
+ 'зир':['запах дождя','запах первого дождя на пыли'],'мэд':['сладость','сладость'],'нам':['запах хлеба','запах хлеба'],
+ 'сэр':['горечь','горечь'],'хос':['дым','дым костра'],'вит':['кружение','кружение'],
+ 'рэк':['уносит','уносящее течение'],'сон':['сон','погружение в сон'],'ступ':['шаг','шаг']
+};
+const ROOTS=Object.keys(DICT).sort((a,b)=>b.length-a.length);
+const MARKS=['нт','рр','ль','с','ш'];
+const MG={'нт':'вдали','с':'вплотную','рр':'нарастая','ль':'угасая','ш':'мерцая'};
+const VOW='аоуиэ';
+const JG={'а':'рядом','о':'внутри','у':'вслед','и':'сквозь','э':'подобно'};
+const C={
+ 1:{'а':', и одновременно ','о':', а внутри — ','у':', а вслед — ','и':', и всё же ','э':' — словно '},
+ 2:{'а':'; и при этом — ','о':'; а внутри всего — ','у':'; а из этого — ','и':'; и сквозь всё — ','э':'; и всё это словно '},
+ 3:{'а':'. И при всём этом — ','о':'. А внутри всего этого — ','у':'. А из всего этого — ','и':'. И сквозь всё это — ','э':'. И всё это словно '}
+};
+const LEN=['','краткий','долгий','трёхдолгий'],ORD=['','первая','вторая','третья'];
+const WORDS=['тлинаарэкасон','солавэлсаасварэтинааарэкусоншлэ','лумакахнтаатлинусоншлэ'];
+
+function parse(t){
+ let p=0;const roots=[],j=[];let lock=false;
+ while(p<t.length){
+  const r=ROOTS.find(k=>t.startsWith(k,p));if(!r)break;p+=r.length;
+  let mark='';
+  if(t.slice(p)==='лэ'){roots.push([r,mark]);lock=true;break;}
+  const mk=MARKS.find(m=>t.startsWith(m,p));
+  if(mk){mark=mk;p+=mk.length;}
+  roots.push([r,mark]);
+  if(t.slice(p)==='лэ'){lock=true;break;}
+  const v=t[p];if(!v||VOW.indexOf(v)<0)break;
+  let n=0;while(t[p]===v){n++;p++;}
+  j.push([v,Math.min(3,n)]);
+ }
+ return {roots,j,lock};
+}
+const STATE=WORDS.map(parse);
+let cur=0,S=STATE[0],fs=46,svgH=100,handles=[],leaves=[],tree=null,drag=null,lastW=0;
+
+function build(lo,hi){
+ if(lo===hi)return {leaf:true,k:lo};
+ let m=0;for(let k=lo;k<hi;k++)m=Math.max(m,S.j[k][1]);
+ const children=[],vowels=[];let s=lo;
+ for(let k=lo;k<hi;k++)if(S.j[k][1]===m){children.push(build(s,k));vowels.push(S.j[k][0]);s=k+1;}
+ children.push(build(s,hi));
+ return {leaf:false,level:m,children,vowels};
+}
+function leafPhrase(k){
+ const [r,m]=S.roots[k];let t=DICT[r][1];
+ if(m)t+=(m==='нт'||m==='с')?' '+MG[m]:', '+MG[m];
+ return t;
+}
+function tr(n){
+ if(n.leaf)return leafPhrase(n.k);
+ let s=tr(n.children[0]);
+ for(let i=1;i<n.children.length;i++)s+=C[n.level][n.vowels[i-1]]+tr(n.children[i]);
+ return s;
+}
+function grp(n,top){
+ if(n.leaf){const [r,m]=S.roots[n.k];return r+(m?'-'+m:'');}
+ let s=grp(n.children[0],false);
+ for(let i=1;i<n.children.length;i++){
+  const v=n.vowels[i-1],L=n.level;
+  const sep=L===1?' · '+v+' · ':L===2?' ‖ '+v+v+' ‖ ':' ‖‖ '+v+v+v+' ‖‖ ';
+  s+=sep+grp(n.children[i],false);
+ }
+ return top?s:'['+s+']';
+}
+function countNodes(n){return n.leaf?0:1+n.children.reduce((a,c)=>a+countNodes(c),0);}
+
+function buildChips(){
+ chipsEl.innerHTML='';
+ WORDS.forEach((w,i)=>{
+  const b=document.createElement('button');b.type='button';b.className='vs-chip';
+  b.textContent=w;b.setAttribute('aria-pressed',i===cur?'true':'false');
+  b.addEventListener('click',()=>{if(cur===i)return;cur=i;S=STATE[i];
+   chipsEl.querySelectorAll('.vs-chip').forEach((c,ci)=>c.setAttribute('aria-pressed',ci===i?'true':'false'));
+   buildWord();layout();});
+  chipsEl.appendChild(b);
+ });
+}
+function setHandle(k){
+ const h=handles[k],[v,n]=S.j[k];
+ h.textContent=v.repeat(n);h.dataset.len=n;
+ h.setAttribute('aria-valuenow',n);
+ h.setAttribute('aria-valuetext',v.repeat(n)+': '+LEN[n]+' стык, '+JG[v]+', '+ORD[n]+' степень');
+}
+function setLen(k,n){
+ n=Math.max(1,Math.min(3,n));if(S.j[k][1]===n)return;
+ S.j[k][1]=n;setHandle(k);render();draw();
+}
+function buildWord(){
+ wordEl.innerHTML='';handles=[];leaves=[];
+ S.roots.forEach(([r,m],k)=>{
+  const lf=document.createElement('span');lf.className='vs-leaf';lf.textContent=r;
+  if(m){const ms=document.createElement('span');ms.className='vs-m';ms.textContent=m;lf.appendChild(ms);}
+  wordEl.appendChild(lf);leaves.push(lf);
+  if(k<S.j.length){
+   const h=document.createElement('span');h.className='vs-j';h.tabIndex=0;
+   h.setAttribute('role','slider');h.setAttribute('aria-valuemin','1');h.setAttribute('aria-valuemax','3');
+   h.setAttribute('aria-label','стык '+r+' — '+S.roots[k+1][0]);
+   h.addEventListener('pointerdown',e=>{
+    if(e.button>0)return;e.preventDefault();
+    drag={k,x:e.clientX,len:S.j[k][1],id:e.pointerId};
+    try{h.setPointerCapture(e.pointerId);}catch(_){}
+    h.focus({preventScroll:true});h.classList.add('is-drag');
+   });
+   h.addEventListener('pointermove',e=>{
+    if(!drag||drag.id!==e.pointerId)return;
+    const step=fs*.58;
+    setLen(drag.k,Math.round(drag.len+(e.clientX-drag.x)/step));
+   });
+   const end=e=>{if(drag&&drag.id===e.pointerId){drag=null;h.classList.remove('is-drag');}};
+   h.addEventListener('pointerup',end);h.addEventListener('pointercancel',end);
+   h.addEventListener('keydown',e=>{
+    let n=S.j[k][1];
+    if(e.key==='ArrowRight'||e.key==='ArrowUp')n++;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowDown')n--;
+    else if(e.key==='Home')n=1;else if(e.key==='End')n=3;else return;
+    e.preventDefault();setLen(k,n);
+   });
+   wordEl.appendChild(h);handles.push(h);setHandle(k);
+  }
+ });
+ if(S.lock){const l=document.createElement('span');l.className='vs-lock';l.textContent='лэ';wordEl.appendChild(l);}
+ render();
+}
+function render(){
+ tree=build(0,S.roots.length-1);
+ const deg=tree.leaf?0:tree.level;
+ nEl.textContent=deg;
+ nEl.style.color=deg===1?'var(--ochre)':deg===3?'var(--ink)':'var(--accent)';
+ groupEl.textContent=grp(tree,true)+(S.lock?' · -лэ':'');
+ countEl.textContent='корней '+S.roots.length+' · объектов '+countNodes(tree)+' · знаков '+wordEl.textContent.length;
+ let ig='';
+ S.roots.forEach(([r,m],k)=>{
+  ig+='<span class="r"><b>'+r+(m?'-'+m:'')+'</b><i>'+DICT[r][0]+(m?', '+MG[m]:'')+'</i></span>';
+  if(k<S.j.length){const [v,n]=S.j[k];ig+='<span><b>'+v.repeat(n)+'</b><i>'+JG[v]+(n>1?' '+'‖'.repeat(n-1):'')+'</i></span>';}
+ });
+ if(S.lock)ig+='<span><b>лэ</b><i>сказано</i></span>';
+ igEl.innerHTML=ig;
+ let t=tr(tree);t=t.charAt(0).toUpperCase()+t.slice(1)+'.';
+ if(S.lock)t+=' Сказано.';
+ trEl.textContent=t;
+}
+function fit(){
+ const BASE=46;wordEl.style.fontSize=BASE+'px';
+ const saved=handles.map(h=>h.textContent);
+ handles.forEach((h,k)=>h.textContent=S.j[k][0].repeat(3));
+ const w=wordEl.getBoundingClientRect().width;
+ handles.forEach((h,k)=>h.textContent=saved[k]);
+ const avail=stage.clientWidth-2;
+ fs=Math.max(12,Math.min(BASE,BASE*avail/Math.max(1,w)));
+ wordEl.style.fontSize=fs.toFixed(2)+'px';
+}
+function layout(){
+ if(!stage.clientWidth)return;
+ fit();svgH=Math.round(fs*2.3);
+ stage.style.paddingTop=svgH+'px';draw();
+}
+function draw(){
+ const W=stage.clientWidth;if(!W||!tree)return;
+ const sr=stage.getBoundingClientRect();
+ const cx=leaves.map(l=>{const r=l.getBoundingClientRect();return r.left-sr.left+r.width/2;});
+ const base=svgH-3,stepY=(svgH-3-fs*.28)/3,sw=Math.max(3,fs*.12),items=[],stems=[],dots=[];
+ function bez(a,b,c,d,t){const u=1-t;return u*u*u*a+3*u*u*t*b+3*u*t*t*c+t*t*t*d;}
+ function place(n){
+  if(n.leaf)return {x:cx[n.k],y:base};
+  const pts=n.children.map(place);
+  const p0=pts[0],pn=pts[pts.length-1],yN=base-n.level*stepY;
+  const yc=(yN-(p0.y+pn.y)/8)*4/3;
+  items.push({L:n.level,d:'M'+p0.x.toFixed(1)+' '+p0.y.toFixed(1)+' C'+p0.x.toFixed(1)+' '+yc.toFixed(1)+' '+pn.x.toFixed(1)+' '+yc.toFixed(1)+' '+pn.x.toFixed(1)+' '+pn.y.toFixed(1)});
+  for(let i=1;i<pts.length-1;i++){
+   let lo=0,hi=1;
+   for(let it=0;it<30;it++){const m=(lo+hi)/2;if(bez(p0.x,p0.x,pn.x,pn.x,m)<pts[i].x)lo=m;else hi=m;}
+   const t=(lo+hi)/2,y=bez(p0.y,yc,yc,pn.y,t);
+   stems.push({L:n.level,d:'M'+pts[i].x.toFixed(1)+' '+pts[i].y.toFixed(1)+' L'+pts[i].x.toFixed(1)+' '+y.toFixed(1)});
+  }
+  const x=(p0.x+pn.x)/2;dots.push({L:n.level,x,y:yN});
+  return {x,y:yN};
+ }
+ place(tree);
+ items.sort((a,b)=>b.L-a.L);stems.sort((a,b)=>b.L-a.L);dots.sort((a,b)=>b.L-a.L);
+ let g='';
+ stems.concat(items).forEach(it=>{
+  g+='<path d="'+it.d+'" class="l'+it.L+'" fill="none" stroke-width="'+sw.toFixed(1)+'" stroke-linecap="round"/>';
+  g+='<path d="'+it.d+'" class="hl" stroke-width="'+(sw*.26).toFixed(1)+'" stroke-dasharray="'+(sw*2.4).toFixed(1)+' '+(sw*1.8).toFixed(1)+'"/>';
+ });
+ cx.forEach(x=>{g+='<rect class="fk" x="'+(x-fs*.07).toFixed(1)+'" y="'+(base-fs*.07).toFixed(1)+'" width="'+(fs*.14).toFixed(1)+'" height="'+(fs*.14).toFixed(1)+'" transform="rotate(45 '+x.toFixed(1)+' '+base.toFixed(1)+')"/>';});
+ dots.forEach(d=>{
+  g+='<circle class="f'+d.L+'" cx="'+d.x.toFixed(1)+'" cy="'+d.y.toFixed(1)+'" r="'+(fs*.13).toFixed(1)+'"/>';
+  g+='<circle class="fp" cx="'+d.x.toFixed(1)+'" cy="'+d.y.toFixed(1)+'" r="'+(fs*.04).toFixed(1)+'"/>';
+ });
+ svg.setAttribute('width',W);svg.setAttribute('height',svgH);svg.setAttribute('viewBox','0 0 '+W+' '+svgH);
+ svg.innerHTML='<defs><filter id="vs-cut" filterUnits="userSpaceOnUse" x="-20" y="-20" width="'+(W+40)+'" height="'+(svgH+40)+'"><feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="11" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="'+Math.max(1.5,fs*.06).toFixed(1)+'" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#vs-cut)">'+g+'</g>';
+}
+
+buildChips();buildWord();layout();
+if(window.ResizeObserver){
+ new ResizeObserver(()=>{const w=stage.clientWidth;if(w!==lastW){lastW=w;layout();}}).observe(stage);
+}else{window.addEventListener('resize',layout);}
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+})();</script>
+
+    <h3><span class="num">Урок 6.</span>Рамка времени открывает слово, замок -лэ его закрывает</h3>
+
+    <p>В ирлэ нет глагольных времён. Вместо них перед первым корнем может стоять рамка — один из четырёх корней времени. Это единственные корни, которые начинаются с гласной, и единственные, которые не соединяются стыком:</p>
+
+    <p class="entry"><span class="hw">ир-</span> — сейчас, в этот миг. <span class="hw">ав-</span> — когда-то, в памяти. <span class="hw">эж-</span> — ещё не, в ожидании. <span class="hw">ок-</span> — в последний раз.</p>
+
+    <p>В конце слова может стоять замок <span class="hw">-лэ</span>: «сказано». Слово без замка открыто, к нему ещё можно приставить объект; слово с замком закончено и становится поэмой. Название языка — это рамка и замок без единого ощущения между ними: <i>ир-лэ</i>, «сейчас — сказано». Пустая поэма, миг, в котором ещё ничего не почувствовано, но уже произнесено.</p>
+
+    <p>Отсюда главный обычай ирлэ: <b>слово произносится один раз</b>. Объект принадлежит мгновению, и второе мгновение не бывает тем же. Повторить чужое или своё слово можно только как цитату — с рамкой <i>ав-</i>: <i>авлумакахнт</i>, «то, что когда-то было светом восхода с далёким криком». Грамматика здесь совпадает с этикой: язык не позволяет притворяться, что пережитое можно пережить снова.</p>
+
+    <h3><span class="num">Урок 7.</span>Поэма-слово сочиняется по шагам, как гравюра режется по слоям</h3>
+
+    <ol class="steps">
+      <li>Выберите мгновение. Не тему — мгновение: одно утро, один глоток, одну переправу.</li>
+      <li>Выпишите ощущения этого мгновения корнями, по одному на каждое.</li>
+      <li>Свяжите соседние корни краткими стыками, решая для каждой пары: рядом, внутри, вслед, вопреки, подобно.</li>
+      <li>Поставьте метки там, где важны расстояние или течение.</li>
+      <li>Соберите объекты в большие объекты долгими стыками; это строфы поэмы.</li>
+      <li>Поставьте рамку времени, если мгновение не «сейчас», и закройте слово замком <i>-лэ</i>.</li>
+      <li>Произнесите его вслух. Один раз.</li>
+    </ol>
+
+    <div class="instrument" data-instrument="word-forge">
+<div class="wf-grid">
+<div class="wf-left">
+<div class="wf-fams"></div>
+<div class="wf-line" aria-label="Корни слова"></div>
+<div class="wf-ctl">
+<div class="wf-row"><span class="wf-lab wf-jl">стык</span><span class="wf-jv"></span><span class="wf-jn"></span></div>
+<div class="wf-row"><span class="wf-lab wf-ml">метка</span><span class="wf-mk"></span></div>
+<div class="wf-row"><span class="wf-lab">рамка</span><span class="wf-fr"></span><button class="wf-b wf-lock" aria-pressed="true">-лэ</button></div>
+</div>
+</div>
+<div class="wf-right">
+<div class="wf-word" aria-live="polite"></div>
+<div class="wf-ipa"></div>
+<div class="wf-gl"></div>
+<div class="wf-tr"></div>
+<canvas class="wf-cv" role="img" aria-label="Линогравюрная композиция объекта"></canvas>
+</div>
+</div>
+</div>
+<style>
+[data-instrument="word-forge"]{padding:1rem .9rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="word-forge"] .wf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:640px){[data-instrument="word-forge"] .wf-grid{grid-template-columns:1fr}}
+[data-instrument="word-forge"] .wf-fam{display:flex;flex-wrap:wrap;gap:.25rem;align-items:center;margin-bottom:.3rem}
+[data-instrument="word-forge"] .wf-lab{font-family:var(--display);font-size:.72rem;letter-spacing:.06em;color:var(--muted);width:3.6rem;flex:none}
+[data-instrument="word-forge"] .wf-b{font:inherit;font-size:.86rem;padding:.12rem .45rem;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;border-radius:2px;min-width:1.9rem}
+[data-instrument="word-forge"] .wf-b[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="word-forge"] .wf-b:disabled{opacity:.35;cursor:default}
+[data-instrument="word-forge"] .wf-b:focus-visible,[data-instrument="word-forge"] .wf-r:focus-visible,[data-instrument="word-forge"] .wf-j:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="word-forge"] .wf-line{display:flex;flex-wrap:wrap;align-items:center;gap:.2rem;min-height:3.6rem;padding:.5rem 0;margin:.4rem 0;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+[data-instrument="word-forge"] .wf-r{position:relative;touch-action:pan-y;user-select:none;padding:.3rem .55rem;background:var(--paper);border:1.5px solid var(--ink);font-weight:700;cursor:grab;border-radius:2px}
+[data-instrument="word-forge"] .wf-r.st{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+[data-instrument="word-forge"] .wf-r.dr{opacity:.6;cursor:grabbing}
+[data-instrument="word-forge"] .wf-r small{font-weight:400;font-size:.75em}
+[data-instrument="word-forge"] .wf-x{border:0;background:none;color:inherit;font:inherit;font-size:.8em;padding:0 0 0 .3rem;cursor:pointer;opacity:.7}
+[data-instrument="word-forge"] .wf-j{border:0;background:none;font:inherit;font-weight:700;color:var(--muted);padding:.2rem .15rem;cursor:pointer;border-bottom:2px solid transparent}
+[data-instrument="word-forge"] .wf-j.on{color:var(--accent);border-bottom-color:var(--accent)}
+[data-instrument="word-forge"] .wf-row{display:flex;flex-wrap:wrap;gap:.25rem;align-items:center;margin-bottom:.35rem}
+[data-instrument="word-forge"] .wf-row>span:not(.wf-lab){display:flex;gap:.25rem;flex-wrap:wrap}
+[data-instrument="word-forge"] .wf-word{height:3.4rem;display:flex;align-items:center;font-weight:700;color:var(--accent);overflow-wrap:anywhere;line-height:1.05;overflow:hidden}
+[data-instrument="word-forge"] .wf-ipa{height:1.6rem;font-size:.9rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+[data-instrument="word-forge"] .wf-gl{height:4.4rem;overflow:hidden;display:flex;flex-wrap:wrap;gap:.1rem .3rem;align-content:flex-start;font-size:.8rem;border-top:1px solid rgba(29,26,23,.25);padding-top:.3rem}
+[data-instrument="word-forge"] .wf-gl span{display:inline-flex;flex-direction:column}
+[data-instrument="word-forge"] .wf-gl i{font-family:var(--display);font-style:normal;font-size:.68rem;color:var(--muted)}
+[data-instrument="word-forge"] .wf-tr{height:5.6rem;overflow:auto;font-style:italic;font-size:.92rem;border-top:1px solid rgba(29,26,23,.25);padding-top:.3rem}
+[data-instrument="word-forge"] .wf-cv{display:block;width:100%;height:170px;background:var(--paper);margin-top:.4rem}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="word-forge"]');if(!root)return;
+const FAM=[["зрение",["лум","тлин","свар","гал","тэм","рус"]],["слух",["ках","шэл","тин","бор","мол","плэс"]],["осязание",["сол","вэл","крэн","пух","грум"]],["запах",["нам","зир","сэр","мэд","хос"]],["движение",["рэк","сон","вит","ступ"]]];
+const G={лум:"свет восхода",тлин:"розовое под веками",свар:"блеск",гал:"далёкая синева",тэм:"темнота",рус:"ржавое",ках:"крик птицы",шэл:"шелест",тин:"тонкий звон",бор:"гул",мол:"тишина",плэс:"всплеск",сол:"тепло солнца",вэл:"вода у тела",крэн:"холод",пух:"мягкость",грум:"тяжесть в руке",нам:"запах хлеба",зир:"запах дождя на пыли",сэр:"горечь",мэд:"сладость",хос:"дым",рэк:"уносит",сон:"погружение в сон",вит:"кружение",ступ:"шаг"};
+const FI={};FAM.forEach((f,i)=>f[1].forEach(r=>FI[r]=i));
+const MK={"нт":"вдали","с":"у самой кожи","рр":"нарастая","ль":"угасая","ш":"мерцая"};
+const JV={"а":["рядом",", и при этом — "],"о":["внутри",", а внутри — "],"у":["вслед",", а вслед за тем — "],"и":["сквозь",", и всё же сквозь это — "],"э":["подобно",", и словно эхом — "]};
+const FR={"ир":["сейчас","Сейчас: "],"ав":["в памяти","Когда-то: "],"эж":["ещё не","Ещё не: "],"ок":["в последний раз","В последний раз: "]};
+const S={roots:[{r:"лум",m:""},{r:"ках",m:"нт"}],joints:[{v:"а",n:1}],stress:0,sj:0,frame:"ир",lock:true};
+const $=s=>root.querySelector(s);
+const mkB=(t,f)=>{const b=document.createElement("button");b.type="button";b.className="wf-b";b.textContent=t;b.onclick=f;return b};
+const fams=$(".wf-fams");
+FAM.forEach(f=>{const d=document.createElement("div");d.className="wf-fam";d.innerHTML='<span class="wf-lab">'+f[0]+'</span>';f[1].forEach(r=>{const b=mkB(r,()=>{if(S.roots.length>=7)return;if(S.roots.length)S.joints.push({v:"а",n:1});S.roots.push({r,m:""});S.stress=S.roots.length-1;S.sj=Math.max(0,S.joints.length-1);render()});b.dataset.add=1;d.appendChild(b)});fams.appendChild(d)});
+const jv=$(".wf-jv"),jn=$(".wf-jn"),mk=$(".wf-mk"),fr=$(".wf-fr"),lock=$(".wf-lock");
+Object.keys(JV).forEach(v=>jv.appendChild(mkB(v,()=>{if(S.joints[S.sj]){S.joints[S.sj].v=v;render()}})));
+[1,2,3].forEach(n=>jn.appendChild(mkB("×"+n,()=>{if(S.joints[S.sj]){S.joints[S.sj].n=n;render()}})));
+mk.appendChild(mkB("—",()=>{if(S.roots[S.stress]){S.roots[S.stress].m="";render()}}));
+Object.keys(MK).forEach(m=>mk.appendChild(mkB(m,()=>{const o=S.roots[S.stress];if(o){o.m=o.m===m?"":m;render()}})));
+fr.appendChild(mkB("—",()=>{S.frame="";render()}));
+Object.keys(FR).forEach(f=>fr.appendChild(mkB(f,()=>{S.frame=S.frame===f?"":f;render()})));
+lock.onclick=()=>{S.lock=!S.lock;render()};
+function moveRoot(i,j){if(j<0||j>=S.roots.length||i===j)return;const st=S.roots[S.stress];const [x]=S.roots.splice(i,1);S.roots.splice(j,0,x);S.stress=S.roots.indexOf(st)}
+const line=$(".wf-line");
+function buildLine(){line.innerHTML="";S.roots.forEach((o,i)=>{const c=document.createElement("span");c.className="wf-r"+(i===S.stress?" st":"");c.tabIndex=0;c.dataset.i=i;c.setAttribute("aria-label",o.r+(o.m?"-"+o.m:"")+(i===S.stress?", ударный":""));c.innerHTML=o.r+(o.m?"<small>"+o.m+"</small>":"");const x=document.createElement("button");x.type="button";x.className="wf-x";x.textContent="×";x.setAttribute("aria-label","убрать "+o.r);x.onclick=e=>{e.stopPropagation();rem(i)};x.onpointerdown=e=>e.stopPropagation();c.appendChild(x);
+c.onkeydown=e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();const j=i+(e.key==="ArrowLeft"?-1:1);moveRoot(i,j);render();focusR(Math.max(0,Math.min(S.roots.length-1,j)))}else if(e.key==="Enter"||e.key===" "){e.preventDefault();S.stress=i;render();focusR(i)}else if(e.key==="Delete"||e.key==="Backspace"){e.preventDefault();rem(i)}};
+c.onpointerdown=e=>{if(e.button)return;let sx=e.clientX,drag=false,cur=i;c.setPointerCapture(e.pointerId);
+c.onpointermove=ev=>{if(!drag&&Math.abs(ev.clientX-sx)>6){drag=true;c.classList.add("dr")}if(!drag)return;const rs=[...line.querySelectorAll(".wf-r")];let t=cur;rs.forEach((r,k)=>{const b=r.getBoundingClientRect();if(ev.clientX>b.left&&ev.clientX<b.right&&ev.clientY>b.top-10&&ev.clientY<b.bottom+10)t=k});if(t!==cur){moveRoot(cur,t);cur=t;render();const n=line.querySelectorAll(".wf-r")[cur];n.classList.add("dr");n.focus()}};
+const up=()=>{line.querySelectorAll(".wf-r").forEach(r=>r.onpointermove=null);c.onpointermove=null;if(!drag){S.stress=i;render();focusR(i)}else render()};c.onpointerup=up;c.onpointercancel=()=>{c.onpointermove=null;render()}};
+line.appendChild(c);
+if(i<S.joints.length){const j=S.joints[i];const b=document.createElement("button");b.type="button";b.className="wf-j"+(i===S.sj?" on":"");b.textContent=j.v.repeat(j.n);b.setAttribute("aria-label","стык "+j.v.repeat(j.n));b.onclick=()=>{S.sj=i;render()};line.appendChild(b)}})}
+function focusR(i){const n=line.querySelectorAll(".wf-r")[i];if(n)n.focus()}
+function rem(i){S.roots.splice(i,1);if(S.joints.length)S.joints.splice(Math.min(i,S.joints.length-1),1);if(S.stress>=S.roots.length||S.stress===i)S.stress=Math.min(i,S.roots.length-1);else if(S.stress>i)S.stress--;S.stress=Math.max(0,S.stress);S.sj=Math.max(0,Math.min(S.sj,S.joints.length-1));render()}
+function tree(a,b){if(a===b)return{leaf:a};let L=0;for(let k=a;k<b;k++)L=Math.max(L,S.joints[k].n);const parts=[],js=[];let s=a;for(let k=a;k<b;k++)if(S.joints[k].n===L){parts.push(tree(s,k));js.push(S.joints[k].v);s=k+1}parts.push(tree(s,b));return{parts,js,L}}
+function trans(t){if("leaf" in t){const o=S.roots[t.leaf];return G[o.r]+(o.m?" "+MK[o.m]:"")}let s=trans(t.parts[0]);t.js.forEach((v,k)=>{let c=JV[v][1];if(t.L>1)c=c.replace(/^,/,t.L>2?".":";");s+=c+trans(t.parts[k+1])});return s}
+const IPA={а:"a",э:"ɛ",и:"i",о:"o",у:"u",б:"b",в:"v",г:"g",д:"d",з:"z",к:"k",л:"l",м:"m",н:"n",п:"p",р:"r",с:"s",т:"t",х:"x",ш:"ʃ",ь:"ʲ"};
+function ipa(str){let o="";for(let k=0;k<str.length;k++){const ch=str[k];if(ch==="ˈ"){o+=ch;continue}o+=IPA[ch]||"";const nx=str[k+1]==="ˈ"?str[k+2]:str[k+1];if(nx==="и"&&"бвгдзклмнпрстх".includes(ch))o+="ʲ"}return o.replace(/([aɛiou])\1\1/g,"$1ːː").replace(/([aɛiou])\1/g,"$1ː")}
+function render(){
+buildLine();
+const full=S.roots.length>=7;fams.querySelectorAll("[data-add]").forEach(b=>b.disabled=full);
+const hasJ=S.joints.length>0,cj=S.joints[S.sj];
+[...jv.children].forEach(b=>{b.disabled=!hasJ;b.setAttribute("aria-pressed",hasJ&&cj.v===b.textContent)});
+[...jn.children].forEach((b,k)=>{b.disabled=!hasJ;b.setAttribute("aria-pressed",hasJ&&cj.n===k+1)});
+$(".wf-jl").textContent=hasJ?"стык "+(S.sj+1):"стык —";
+const sr=S.roots[S.stress];$(".wf-ml").textContent=sr?"метка · "+sr.r:"метка";
+[...mk.children].forEach((b,k)=>{b.disabled=!sr;b.setAttribute("aria-pressed",!!sr&&(k===0?!sr.m:sr.m===b.textContent))});
+[...fr.children].forEach((b,k)=>b.setAttribute("aria-pressed",k===0?!S.frame:S.frame===b.textContent));
+lock.setAttribute("aria-pressed",S.lock);
+let w=S.frame,wi=S.frame,gl=[];if(S.frame)gl.push([S.frame,FR[S.frame][0]]);
+S.roots.forEach((o,i)=>{const r=o.r;if(i===S.stress){const p=r.search(/[аэиоу]/);w+=r.slice(0,p+1)+"\u0301"+r.slice(p+1);wi+="ˈ"+r}else{w+=r;wi+=r}w+=o.m;wi+=o.m;gl.push([r+(o.m?"-"+o.m:""),G[r]+(o.m?", "+MK[o.m]:""),1]);if(i<S.joints.length){const j=S.joints[i],v=j.v.repeat(j.n);w+=v;wi+=v;gl.push([v,JV[j.v][0]+(j.n>1?" "+"‖".repeat(j.n-1):"")])}});
+if(S.lock){w+="лэ";wi+="лэ";gl.push(["лэ","сказано"])}
+const W=$(".wf-word");W.textContent=w||"—";const len=w.length;W.style.fontSize=(len<12?2.2:len<20?1.7:len<30?1.3:1.05)+"rem";
+$(".wf-ipa").textContent=w?"["+ipa(wi)+"]":"";
+$(".wf-gl").innerHTML=gl.map(g=>'<span><b'+(g[2]?' style="color:var(--accent)"':'')+'>'+g[0]+'</b><i>'+g[1]+'</i></span>').join("");
+let tr="";if(S.roots.length){tr=trans(tree(0,S.roots.length-1));tr=tr[0].toUpperCase()+tr.slice(1);if(S.frame)tr=FR[S.frame][1]+tr[0].toLowerCase()+tr.slice(1);tr+=".";if(S.lock)tr+=" Сказано."}else tr=S.frame||S.lock?(S.frame?FR[S.frame][1]:"")+(S.lock?"Сказано.":""):"";
+if(S.roots.length&&S.stress>0)tr+=" (на первом плане — "+G[S.roots[S.stress].r]+")";
+$(".wf-tr").textContent=tr;draw()}
+const cv=$(".wf-cv"),cx=cv.getContext("2d");
+function col(){const s=getComputedStyle(root);return{o:s.getPropertyValue("--ochre").trim()||"#C8952E",r:s.getPropertyValue("--accent").trim()||"#B3301E",k:s.getPropertyValue("--ink").trim()||"#1D1A17",p:s.getPropertyValue("--paper").trim()||"#F2EBDC"}}
+const FC=["o","r","k","o","r"];
+function shape(o,x,y,w,h,C,i){const f=FI[o.r];let sc=o.m==="нт"?.6:o.m==="с"?1:.82;const cxp=x+w/2,cyp=y+h/2,R=Math.min(w,h)/2*sc;const c=C[FC[f]],dx=f%2?-2:2,dy=f>2?2:-1;cx.save();cx.translate(dx,dy);cx.fillStyle=c;cx.strokeStyle=c;cx.globalAlpha=o.m==="ль"?.55:1;cx.beginPath();
+if(f===0){cx.arc(cxp,cyp,R,0,7);cx.fill()}
+else if(f===1){cx.lineWidth=Math.max(2,R*.22);cx.setLineDash(o.m==="ш"?[R*.3,R*.2]:[]);for(let k=1;k<=3;k++){cx.beginPath();cx.arc(cxp-R*.6,cyp,R*k/3,-1,1);cx.stroke()}}
+else if(f===2){cx.rect(cxp-R,cyp-R*.8,R*2,R*1.6);cx.fill()}
+else if(f===3){cx.moveTo(cxp,cyp-R);cx.quadraticCurveTo(cxp+R,cyp+R*.2,cxp,cyp+R);cx.quadraticCurveTo(cxp-R,cyp+R*.2,cxp,cyp-R);cx.fill()}
+else{cx.moveTo(cxp-R,cyp);cx.quadraticCurveTo(cxp-R/2,cyp-R,cxp,cyp);cx.quadraticCurveTo(cxp+R/2,cyp+R,cxp+R,cyp);cx.lineTo(cxp+R,cyp+R*.5);cx.quadraticCurveTo(cxp+R/2,cyp+R*1.4,cxp,cyp+R*.5);cx.quadraticCurveTo(cxp-R/2,cyp-R*.5,cxp-R,cyp+R*.5);cx.fill()}
+if(f!==1){cx.setLineDash(o.m==="ш"?[4,4]:[]);cx.strokeStyle=C.p;cx.lineWidth=1.6;cx.globalAlpha=1;for(let k=0;k<3;k++){cx.beginPath();const yy=cyp-R*.4+k*R*.35;cx.moveTo(cxp-R*.5,yy);cx.lineTo(cxp+R*(.1+k*.15),yy);cx.stroke()}}
+if(o.m==="рр"){cx.setLineDash([]);cx.strokeStyle=c;cx.lineWidth=2;cx.beginPath();cx.arc(cxp,cyp,R*1.15,0,7);cx.stroke()}
+if(i===S.stress){cx.setLineDash([]);cx.strokeStyle=C.k;cx.lineWidth=2.5;cx.beginPath();cx.moveTo(cxp-R,y+h-3);cx.lineTo(cxp+R,y+h-3);cx.stroke()}
+cx.restore()}
+function lay(t,x,y,w,h,C){if("leaf" in t){shape(S.roots[t.leaf],x,y,w,h,C,t.leaf);return}
+const n=t.parts.length;let slots=[],cur=null;t.parts.forEach((p,k)=>{const v=k?t.js[k-1]:null;if(v==="о"&&cur){cur.inner.push(p)}else{cur={p,v,inner:[]};slots.push(cur)}});
+const sw=w/slots.length;slots.forEach((s,k)=>{let bx=x+k*sw,by=y,bw=sw,bh=h;if(s.v==="у"){by+=h*.18;bh*=.82}if(s.v==="э"){bx+=bw*.15;by+=bh*.15;bw*=.7;bh*=.7}if(s.v==="и"){bx-=sw*.25;bw*=1.1}lay(s.p,bx,by,bw,bh,C);let ix=bx,iy=by,iw=bw,ih=bh;s.inner.forEach(q=>{ix+=iw*.22;iy+=ih*.22;iw*=.56;ih*=.56;lay(q,ix,iy,iw,ih,C)})})}
+function draw(){const r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;if(!r.width)return;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);cx.setTransform(d,0,0,d,0,0);const C=col();cx.fillStyle=C.p;cx.fillRect(0,0,r.width,r.height);if(!S.roots.length)return;lay(tree(0,S.roots.length-1),8,8,r.width-16,r.height-16,C);cx.strokeStyle=C.k;cx.lineWidth=1.5;cx.strokeRect(3,3,r.width-6,r.height-6)}
+if(window.ResizeObserver)new ResizeObserver(draw).observe(cv);
+render();
+})();</script>
+
+    <div class="drill">
+      <span class="t">Упражнение 3</span>
+      <ol>
+        <li>Переведите на ирлэ: «запах дождя на пыли, и при нём далёкий гул».</li>
+        <li>«В ожидании: холод у самой кожи, и всё же прибывающее тепло. Сказано».</li>
+        <li>Составьте поэму о мгновении, которое вы помните, не больше чем из пяти корней. Произносить её второй раз нельзя.</li>
+      </ol>
+      <div class="key"><b>Ключ.</b> 1. <i>зираборнт</i>. 2. <i>эжкрэнсисолррлэ</i>. 3. Ключа нет: правильных ответов столько же, сколько мгновений.</div>
+    </div>
+  </section>
+
+  <!-- ——————————————— СЛОВАРЬ ——————————————— -->
+  <section class="sec" id="sl" style="--i:2">
+    <span class="tab" aria-hidden="true">Сл</span>
+    <div class="runhead"><span>словарь</span><span>лум — ок-</span></div>
+    <h2>Словарь корней: тридцать ощущений, из которых складывается любое мгновение</h2>
+
+    <div class="abbr">
+      <span class="t">Условные сокращения</span>
+      <div><span class="lab">зрит.</span> — зрительное</div>
+      <div><span class="lab">слух.</span> — слуховое</div>
+      <div><span class="lab">осяз.</span> — осязательное</div>
+      <div><span class="lab">обон.</span> — запах и вкус</div>
+      <div><span class="lab">двиг.</span> — движение тела</div>
+      <div><span class="lab">врем.</span> — рамка времени</div>
+      <div><span class="lab">поэт.</span> — в поэмах</div>
+      <div><span class="lab">перен.</span> — переносное</div>
+      <div>◊ — пример</div>
+      <div>‖ — граница объекта</div>
+    </div>
+
+    <div class="dict">
+      <h4><svg aria-hidden="true"><use href="#i-eye"/></svg>Зрение</h4>
+      <p class="entry"><span class="hw">гал</span> <span class="pron">[gal]</span> <span class="lab">зрит.</span> <span class="sn">1.</span> Далёкая синева: горы, вечерний лес. <span class="sn">2.</span> <span class="lab">перен.</span> То, что видно, но недостижимо. <span class="see">◊ <i>борагалнт</i> — гул и далёкая синева; так говорят о море.</span></p>
+      <p class="entry"><span class="hw">лум</span> <span class="pron">[lum]</span> <span class="lab">зрит.</span> <span class="sn">1.</span> Розово-золотой свет восхода. <span class="sn">2.</span> Цвет начала чего угодно: первого листа, первой строки. <span class="see">◊ <i>лумакахнт</i>, см. рис. 1.</span></p>
+      <p class="entry"><span class="hw">рус</span> <span class="pron">[rus]</span> <span class="lab">зрит.</span> Ржавое, красное; цвет листьев в октябре и старого железа.</p>
+      <p class="entry"><span class="hw">свар</span> <span class="pron">[svar]</span> <span class="lab">зрит.</span> <span class="sn">1.</span> Блеск, солнечные чешуйки на воде. <span class="sn">2.</span> Внезапная ясность. <span class="see">◊ <i>тэмосвар</i> — блеск внутри темноты; ближе всего к нашей «луне».</span></p>
+      <p class="entry"><span class="hw">тлин</span> <span class="pron">[tlʲin]</span> <span class="lab">зрит.</span> Смутное розовое дрожание, которое видно с закрытыми глазами. <span class="see">◊ <i>тлинаарэкасон</i>, см. рис. 3.</span></p>
+      <p class="entry"><span class="hw">тэм</span> <span class="pron">[tɛm]</span> <span class="lab">зрит.</span> <span class="sn">1.</span> Темнота, в которой ещё что-то есть. <span class="sn">2.</span> <span class="lab">поэт.</span> Закрытые глаза бодрствующего.</p>
+
+      <h4><svg aria-hidden="true"><use href="#i-ear"/></svg>Слух</h4>
+      <p class="entry"><span class="hw">бор</span> <span class="pron">[bor]</span> <span class="lab">слух.</span> Гул: море, далёкий поезд, кровь в ушах.</p>
+      <p class="entry"><span class="hw">ках</span> <span class="pron">[kax]</span> <span class="lab">слух.</span> <span class="sn">1.</span> Крик птицы. <span class="sn">2.</span> Любой одинокий звук, обращённый ни к кому.</p>
+      <p class="entry"><span class="hw">мол</span> <span class="pron">[mol]</span> <span class="lab">слух.</span> Тишина, которую слышно; не отсутствие звука, а звук его отсутствия.</p>
+      <p class="entry"><span class="hw">плэс</span> <span class="pron">[plɛs]</span> <span class="lab">слух.</span> Всплеск, короткий удар воды.</p>
+      <p class="entry"><span class="hw">тин</span> <span class="pron">[tʲin]</span> <span class="lab">слух.</span> Тонкий звон: стекло, сверчок, комар. <span class="see">◊ <i>тинш</i> — звон, который то есть, то нет.</span></p>
+      <p class="entry"><span class="hw">шэл</span> <span class="pron">[ʃɛl]</span> <span class="lab">слух.</span> <span class="sn">1.</span> Шелест листвы. <span class="sn">2.</span> Шелест страниц. <span class="see">◊ <i>шэлотэм</i> — шелест внутри темноты; так говорят о книге.</span></p>
+
+      <h4><svg aria-hidden="true"><use href="#i-hand"/></svg>Осязание</h4>
+      <p class="entry"><span class="hw">вэл</span> <span class="pron">[vɛl]</span> <span class="lab">осяз.</span> Вода у тела. <span class="see">◊ <i>солавэлс</i>, см. рис. 2.</span></p>
+      <p class="entry"><span class="hw">грум</span> <span class="pron">[grum]</span> <span class="lab">осяз.</span> Тяжесть в ладони: камень, ведро, чужая рука.</p>
+      <p class="entry"><span class="hw">крэн</span> <span class="pron">[krɛn]</span> <span class="lab">осяз.</span> Холод, обжигающий кожу.</p>
+      <p class="entry"><span class="hw">пух</span> <span class="pron">[pux]</span> <span class="lab">осяз.</span> Мягкое: перо, мех, волосы ребёнка.</p>
+      <p class="entry"><span class="hw">сол</span> <span class="pron">[sol]</span> <span class="lab">осяз.</span> <span class="sn">1.</span> Тепло солнца на коже. <span class="sn">2.</span> Любое тепло, пришедшее снаружи.</p>
+
+      <h4><svg aria-hidden="true"><use href="#i-nose"/></svg>Запах и вкус</h4>
+      <p class="entry"><span class="hw">зир</span> <span class="pron">[zʲir]</span> <span class="lab">обон.</span> Запах первого дождя на пыли.</p>
+      <p class="entry"><span class="hw">мэд</span> <span class="pron">[mɛt]</span> <span class="lab">обон.</span> Сладость. <span class="see">◊ <i>сэримэд</i> — горечь, сквозь которую сладость.</span></p>
+      <p class="entry"><span class="hw">нам</span> <span class="pron">[nam]</span> <span class="lab">обон.</span> Запах хлеба. <span class="see">◊ <i>намосолаапух</i> — хлеб в тепле ‖ мягкость; так говорят о доме.</span></p>
+      <p class="entry"><span class="hw">сэр</span> <span class="pron">[sɛr]</span> <span class="lab">обон.</span> Горечь, полынь.</p>
+      <p class="entry"><span class="hw">хос</span> <span class="pron">[xos]</span> <span class="lab">обон.</span> Дым, запах костра.</p>
+
+      <h4><svg aria-hidden="true"><use href="#i-wave"/></svg>Движение тела</h4>
+      <p class="entry"><span class="hw">вит</span> <span class="pron">[vʲit]</span> <span class="lab">двиг.</span> Кружение, головокружение.</p>
+      <p class="entry"><span class="hw">рэк</span> <span class="pron">[rɛk]</span> <span class="lab">двиг.</span> <span class="sn">1.</span> То, что тебя уносит: течение, толпа. <span class="sn">2.</span> <span class="lab">перен.</span> Годы.</p>
+      <p class="entry"><span class="hw">сон</span> <span class="pron">[son]</span> <span class="lab">двиг.</span> Погружение в сон; само засыпание, а не сон как состояние.</p>
+      <p class="entry"><span class="hw">ступ</span> <span class="pron">[stup]</span> <span class="lab">двиг.</span> Шаг, опора под ногой. <span class="see">◊ <i>окступль</i> — в последний раз шаг, угасая; так прощаются.</span></p>
+
+      <h4><svg aria-hidden="true"><use href="#i-glass"/></svg>Время, стыки, метки</h4>
+      <p class="entry"><span class="hw">ир-, ав-, эж-, ок-</span> <span class="lab">врем.</span> Рамки: сейчас; в памяти; ещё не; в последний раз. См. урок 6.</p>
+      <p class="entry"><span class="hw">-а- -о- -у- -и- -э-</span> Стыки: рядом; внутри; вслед; вопреки; подобно. Долгота — степень объекта.</p>
+      <p class="entry"><span class="hw">-нт -с -рр -ль -ш</span> Метки: далеко; вплотную; нарастая; угасая; мерцая.</p>
+      <p class="entry"><span class="hw">-лэ</span> Замок: «сказано». Превращает объект в поэму.</p>
+    </div>
+
+    <h3>Чего нет в словаре: русские слова и что говорят вместо них</h3>
+    <p class="entry"><span class="hw">луна</span> <span class="lab">нет.</span> Говорят по случаю: <i>тэмосвар</i>, <i>гализмол</i>… <span class="lab">каждый раз иначе.</span></p>
+    <p class="entry"><span class="hw">море</span> <span class="lab">нет.</span> Чаще всего <i>борагалнт</i>: гул и далёкая синева.</p>
+    <p class="entry"><span class="hw">дом</span> <span class="lab">нет.</span> <i>намосолаапух</i>: хлеб в тепле ‖ мягкость.</p>
+    <p class="entry"><span class="hw">книга</span> <span class="lab">нет.</span> <i>шэлотэм</i>: шелест внутри темноты.</p>
+    <p class="entry"><span class="hw">прощай</span> <span class="lab">нет.</span> <i>окступль</i>: последний шаг, угасая.</p>
+    <p class="entry"><span class="hw">я</span> <span class="lab">нет и не может быть.</span> Ощущение ничьё; ближе всего к «я» пустая рамка <i>ир-</i>.</p>
+    <p class="entry"><span class="hw">время</span> <span class="lab">нет.</span> Время в ирлэ не предмет разговора, а рамка, в которую поставлен разговор.</p>
+  </section>
+
+  <!-- ——————————————— ХРЕСТОМАТИЯ ——————————————— -->
+  <section class="sec" id="hr" style="--i:3">
+    <span class="tab" aria-hidden="true">Хр</span>
+    <div class="runhead"><span>хрестоматия</span><span>поэмы I — VI</span></div>
+    <h2>Шесть поэм, каждая из которых — одно слово</h2>
+
+    <div class="poem">
+      <div class="no">I · Утро</div>
+      <div class="word">ирлумакахнтлэ</div>
+      <div class="meta">ир- · лум · а · ках-нт · -лэ</div>
+      <div class="tr">Сейчас: свет восхода, и при нём далёкий крик. Сказано.</div>
+      <p class="note">Учебная поэма, которой открывают все хрестоматии: первый объект Борхеса, поставленный в рамку и закрытый замком. Пять морфем, одно дыхание.</p>
+    </div>
+
+    <div class="poem">
+      <div class="no">II · Бессонница</div>
+      <div class="word">эжтэмомолиитиншлэ</div>
+      <div class="ig">
+        <span><b>эж</b><i>ещё не</i></span>
+        <span class="k"><b>тэм</b><i>темнота</i></span>
+        <span><b>о</b><i>внутри</i></span>
+        <span class="k"><b>мол</b><i>тишина</i></span>
+        <span><b>ии</b><i>сквозь ‖</i></span>
+        <span class="k"><b>тин-ш</b><i>звон, мерцая</i></span>
+        <span><b>лэ</b><i>сказано</i></span>
+      </div>
+      <div class="tr">Ещё не сон. Темнота, в ней тишина, и сквозь всё — сверчок.</div>
+      <p class="note">Рамка <i>эж-</i> делает всю поэму ожиданием: сон не наступил и, может быть, не наступит. Долгий стык <i>ии</i> противопоставляет звон не тишине, а всему объекту «тьма с тишиной внутри».</p>
+    </div>
+
+    <div class="poem">
+      <div class="no">III · Старый пруд</div>
+      <div class="word">ирмоловэлааступуплэслэ</div>
+      <div class="ig">
+        <span><b>ир</b><i>сейчас</i></span>
+        <span class="k"><b>мол</b><i>тишина</i></span>
+        <span><b>о</b><i>внутри</i></span>
+        <span class="k"><b>вэл</b><i>вода</i></span>
+        <span><b>аа</b><i>и ‖</i></span>
+        <span class="k"><b>ступ</b><i>толчок</i></span>
+        <span><b>у</b><i>вслед</i></span>
+        <span class="k"><b>плэс</b><i>всплеск</i></span>
+        <span><b>лэ</b><i>сказано</i></span>
+      </div>
+      <div class="tr">Тишина, заключённая в воду, — и толчок, а за ним всплеск.</div>
+      <p class="note">Переложение хайку Басё о старом пруде и прыгнувшей лягушке. Лягушки в ирлэ нет: есть только толчок и звук, который он оставил.</p>
+    </div>
+
+    <div class="poem">
+      <div class="no">IV · Последний октябрь</div>
+      <div class="word">окрусашэльуухосэгалнтлэ</div>
+      <div class="meta">ок- · рус · а · шэл-ль ‖ уу ‖ хос · э · гал-нт · -лэ</div>
+      <div class="tr">В последний раз: ржавый лист и гаснущий шелест; а потом дым, похожий на далёкую синеву.</div>
+      <p class="note">Стык <i>-э-</i> делает дым синевой гор, и это не сравнение, приставленное сбоку, а грамматическая связь: для языка дым и синева в этот миг — одно ощущение в двух обличьях.</p>
+    </div>
+
+    <div class="poem">
+      <div class="no">V · Переправа</div>
+      <div class="word">солавэлсаасварэтинааарэкусоншлэ</div>
+      <div class="meta">[[сол · а · вэл-с] ‖ аа ‖ [свар · э · тин]] ‖‖ ааа ‖‖ [рэк · у · сон-ш] · -лэ</div>
+      <div class="tr">Солнце на коже и вода у груди; блеск на воде, похожий на звон, — и из всего этого течение, а за ним сон, то наплывающий, то нет.</div>
+      <p class="note">Объект третьей степени. Трёхдолгий стык делит поэму на две половины: всё, что было телом пловца, и то, что его уносит.</p>
+    </div>
+
+    <div class="poem long">
+      <div class="no">VI · Возвращение</div>
+      <div class="word">авнамосолааступагрумаавэлсикрэнааалумакахнтаатлинусоншлэ</div>
+      <div class="tr">Когда-то: запах хлеба внутри тепла; шаг и тяжесть в руке; вода у кожи — и всё же холод. И из всего этого — рассвет с далёким криком, а в нём розовое дрожание под веками, уходящее в сон.</div>
+      <p class="note">Пятьдесят семь букв, девять корней, пять объектов, две половины. По обычаю, её читают на одном дыхании, задерживая воздух на долгих стыках, — тогда паузы слышны как строфы.</p>
+    </div>
+
+    <div class="instrument" data-instrument="word-reader">
+  <div class="wr">
+    <div class="wr-word">
+      <div class="wr-line"></div>
+      <div class="wr-cur" tabindex="0" role="slider" aria-label="Курсор чтения поэмы VI" aria-valuemin="0" aria-valuemax="56" aria-valuenow="0"></div>
+    </div>
+    <div class="wr-body">
+      <div class="wr-art"><canvas aria-hidden="true"></canvas></div>
+      <div class="wr-card">
+        <div class="wr-fam"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-glass"></use></svg><span></span></div>
+        <div class="wr-root"></div>
+        <div class="wr-mean"></div>
+        <div class="wr-mark"></div>
+        <div class="wr-state"></div>
+        <div class="wr-count"><span class="c1"></span><span class="c2"></span><span class="c3"></span></div>
+      </div>
+    </div>
+    <div class="wr-foot">
+      <button type="button" class="wr-play" aria-pressed="false">читать</button>
+      <p class="wr-tr"></p>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="word-reader"] .wr{padding:1.1rem 1rem 1.2rem;color:var(--ink);font-family:var(--text)}
+[data-instrument="word-reader"] .wr-word{position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:ew-resize;margin-bottom:.8rem}
+[data-instrument="word-reader"] .wr-line{display:flex;flex-wrap:wrap;font-weight:700;font-size:clamp(1.1rem,3.6vw,1.5rem);line-height:1.15;letter-spacing:.01em}
+[data-instrument="word-reader"] .wr-g{position:relative;padding:1rem 0 1.3rem;white-space:nowrap}
+[data-instrument="word-reader"] .wr-t{color:rgba(29,26,23,.38)}
+[data-instrument="word-reader"] .t-J{letter-spacing:.09em}
+[data-instrument="word-reader"] .wr-t.past{color:var(--muted)}
+[data-instrument="word-reader"] .t-r.past,[data-instrument="word-reader"] .t-f.past,[data-instrument="word-reader"] .t-l.past{color:var(--ink)}
+[data-instrument="word-reader"] .wr-t.now{color:var(--ink);background:rgba(200,149,46,.32)}
+[data-instrument="word-reader"] .t-r.now{color:var(--accent);background:none}
+[data-instrument="word-reader"] .wr-b{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c) calc(var(--f,0)*100%),rgba(29,26,23,.13) 0)}
+[data-instrument="word-reader"] .wr-b1{bottom:.9rem;left:2px;right:2px;--c:var(--ink)}
+[data-instrument="word-reader"] .wr-b2{bottom:.55rem;--c:var(--accent)}
+[data-instrument="word-reader"] .wr-b3{bottom:.2rem;--c:var(--ochre)}
+[data-instrument="word-reader"] .wr-b.lt::before,[data-instrument="word-reader"] .wr-b.rt::after{content:"";position:absolute;bottom:0;width:2px;height:6px;background:rgba(29,26,23,.2)}
+[data-instrument="word-reader"] .wr-b.lt::before{left:0}
+[data-instrument="word-reader"] .wr-b.rt::after{right:0}
+[data-instrument="word-reader"] .wr-b.on.lt::before,[data-instrument="word-reader"] .wr-b.closed.rt::after{background:var(--c)}
+[data-instrument="word-reader"] .wr-cur{position:absolute;left:0;top:0;width:2px;margin-left:-1px;background:var(--accent);pointer-events:none;outline:none}
+[data-instrument="word-reader"] .wr-cur::before{content:"";position:absolute;left:50%;top:-2px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--accent)}
+[data-instrument="word-reader"] .wr-cur:focus-visible::before{box-shadow:0 0 0 3px var(--paper-2),0 0 0 5px var(--ink)}
+[data-instrument="word-reader"] .wr-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1rem;align-items:start}
+[data-instrument="word-reader"] .wr-art{aspect-ratio:4/3;background:var(--paper);border:1.5px solid var(--ink)}
+[data-instrument="word-reader"] .wr-art canvas{display:block;width:100%;height:100%}
+[data-instrument="word-reader"] .wr-card{height:13.2rem;overflow:hidden;background:var(--paper);border:1.5px solid var(--ink);padding:.7rem .85rem;display:flex;flex-direction:column;gap:.2rem}
+[data-instrument="word-reader"] .wr-fam{display:flex;align-items:center;gap:.45rem;height:1.6rem;font-family:var(--display);font-size:var(--s-1);letter-spacing:.06em}
+[data-instrument="word-reader"] .wr-fam svg{width:1.5rem;height:1.5rem;flex:none}
+[data-instrument="word-reader"] .wr-root{height:2.3rem;font-weight:700;font-size:1.9rem;line-height:1.15;color:var(--accent)}
+[data-instrument="word-reader"] .wr-mean{height:2.8em;font-style:italic;font-size:.95rem;line-height:1.4;overflow:hidden}
+[data-instrument="word-reader"] .wr-mark,[data-instrument="word-reader"] .wr-state{height:1.45em;font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="word-reader"] .wr-state{color:var(--muted)}
+[data-instrument="word-reader"] .wr-count{margin-top:auto;display:flex;justify-content:space-between;gap:.5rem;font-size:.82rem;font-variant-numeric:tabular-nums lining-nums;border-top:1px solid rgba(29,26,23,.25);padding-top:.35rem;white-space:nowrap}
+[data-instrument="word-reader"] .wr-foot{display:flex;gap:1rem;align-items:flex-start;margin-top:1rem}
+[data-instrument="word-reader"] .wr-play{flex:none;min-width:6.5rem;font-family:var(--display);font-size:var(--s0);letter-spacing:.06em;background:var(--ink);color:var(--paper);border:0;padding:.45rem 1rem .5rem;cursor:pointer}
+[data-instrument="word-reader"] .wr-play[aria-pressed="true"]{background:var(--accent)}
+[data-instrument="word-reader"] .wr-play[hidden]{display:none}
+[data-instrument="word-reader"] .wr-play:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="word-reader"] .wr-tr{margin:0;max-width:none;font-style:italic;font-size:.98rem;line-height:1.5}
+[data-instrument="word-reader"] .wr-tr span{color:rgba(29,26,23,.3);transition:color .3s}
+[data-instrument="word-reader"] .wr-tr span.on{color:var(--ink)}
+[data-instrument="word-reader"] .wr-tr span.now{color:var(--accent)}
+@media (max-width:560px){
+  [data-instrument="word-reader"] .wr-body{grid-template-columns:1fr}
+  [data-instrument="word-reader"] .wr-foot{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="word-reader"] .wr-tr span{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="word-reader"]');
+if(!root)return;
+const lineEl=root.querySelector('.wr-line'),wordEl=root.querySelector('.wr-word'),cur=root.querySelector('.wr-cur'),
+cv=root.querySelector('canvas'),c=cv.getContext('2d'),btn=root.querySelector('.wr-play'),trEl=root.querySelector('.wr-tr'),
+famUse=root.querySelector('.wr-fam use'),famTx=root.querySelector('.wr-fam span'),rootTx=root.querySelector('.wr-root'),
+meanTx=root.querySelector('.wr-mean'),markTx=root.querySelector('.wr-mark'),stateTx=root.querySelector('.wr-state'),
+c1=root.querySelector('.c1'),c2=root.querySelector('.c2'),c3=root.querySelector('.c3');
+
+const FAM={eye:'зрение',ear:'слух',hand:'осязание',nose:'запах и вкус',wave:'движение тела',glass:'время'};
+const R={'нам':['nose','запах хлеба'],'сол':['hand','тепло солнца на коже'],'ступ':['wave','шаг, опора под ногой'],
+'грум':['hand','тяжесть в ладони'],'вэл':['hand','вода у тела'],'крэн':['hand','холод, обжигающий кожу'],
+'лум':['eye','розово-золотой свет восхода'],'ках':['ear','крик птицы'],
+'тлин':['eye','смутное розовое дрожание, которое видно с закрытыми глазами'],'сон':['wave','погружение в сон, само засыпание']};
+const MK={'с':'вплотную, у самой кожи','нт':'далеко','ш':'мерцая, повторяясь'};
+const JN={'а':'рядом, одновременно','о':'внутри, охватывая','у':'вслед, из','и':'сквозь, вопреки','э':'подобно, эхом'};
+
+const G=[
+{type:'frame',toks:[['f','ав']],tr:'Когда-то:'},
+{type:'obj',half:0,toks:[['r','нам'],['j','о'],['r','сол']],tr:'запах хлеба внутри тепла;'},
+{type:'J',half:0,toks:[['J','аа']]},
+{type:'obj',half:0,toks:[['r','ступ'],['j','а'],['r','грум']],tr:'шаг и тяжесть в руке;'},
+{type:'J',half:0,toks:[['J','аа']]},
+{type:'obj',half:0,toks:[['r','вэл'],['m','с'],['j','и'],['r','крэн']],tr:'вода у кожи — и всё же холод.'},
+{type:'J',half:null,toks:[['J','ааа']],tr:'И из всего этого —'},
+{type:'obj',half:1,toks:[['r','лум'],['j','а'],['r','ках'],['m','нт']],tr:'рассвет с далёким криком,'},
+{type:'J',half:1,toks:[['J','аа']]},
+{type:'obj',half:1,toks:[['r','тлин'],['j','у'],['r','сон'],['m','ш']],tr:'а в нём розовое дрожание под веками, уходящее в сон.'},
+{type:'lock',toks:[['l','лэ']],tr:'Сказано.'}
+];
+
+let N=0;const toks=[],letters=[];
+const halves=[[],[]];
+G.forEach((g,gi)=>{if(g.half!=null)halves[g.half].push(gi);});
+let objNo=0;
+G.forEach((g,gi)=>{
+  g.el=document.createElement('div');g.el.className='wr-g';g.start=N;
+  if(g.type==='obj')g.no=++objNo;
+  g.toks.forEach(([k,s])=>{
+    const t={k,s,g:gi,start:N,el:document.createElement('span')};
+    t.el.className='wr-t t-'+k;
+    for(const ch of s){const L=document.createElement('span');L.textContent=ch;t.el.appendChild(L);letters.push(L);letterTok.push(t);N++;}
+    t.end=N;t.i=toks.length;toks.push(t);g.el.appendChild(t.el);
+  });
+  g.end=N;
+  lineEl.appendChild(g.el);
+  if(g.tr){g.trEl=document.createElement('span');g.trEl.textContent=g.tr+' ';trEl.appendChild(g.trEl);}
+});
+var letterTok;
+function cl(v){return v<0?0:v>1?1:v;}
+const objs=G.filter(g=>g.type==='obj'),roots=toks.filter(t=>t.k==='r'),rootTok={};
+roots.forEach(t=>{rootTok[t.s]=t;});
+const bars=[];
+function bar(g,cls,s,e,lt,rt){const b=document.createElement('span');b.className='wr-b '+cls+(lt?' lt':'')+(rt?' rt':'');b.setAttribute('aria-hidden','true');g.el.appendChild(b);bars.push({el:b,s,e});}
+const A=objs[0],Z=objs[objs.length-1];
+G.forEach((g,gi)=>{
+  if(g.type==='obj')bar(g,'wr-b1',g.start,g.end,1,1);
+  if(g.half!=null){const h=halves[g.half];bar(g,'wr-b2',G[h[0]].start,G[h[h.length-1]].end,gi===h[0],gi===h[h.length-1]);}
+  if(g.start>=A.start&&g.end<=Z.end)bar(g,'wr-b3',A.start,Z.end,g===A,g===Z);
+});
+cur.setAttribute('aria-valuemax',N);
+const TEMPO={r:115,m:150,j:210,f:230,l:260,J:520};
+const objWord=g=>g.toks.map(t=>t[1]).join('');
+const pad=(n,w)=>String(n).padStart(w,'\u2007');
+let p=32;
+
+function card(ct){
+  const g=G[ct.g];let ic='glass',fam='',rt='',mn='',mk='',st='';
+  const half=g.half===0?'половина I':g.half===1?'половина II':'';
+  if(ct.k==='r'||ct.k==='m'){
+    const r=ct.k==='r'?ct:toks[ct.i-1],nx=toks[r.i+1],d=R[r.s],hasM=nx&&nx.k==='m';
+    ic=d[0];fam=FAM[ic];rt=r.s+(hasM?'-'+nx.s:'');mn=d[1];
+    mk=hasM?'метка -'+nx.s+': '+MK[nx.s]:'без метки';
+    st='объект '+g.no+' из '+objs.length+' · '+half;
+  }else if(ct.k==='j'){
+    let a=ct.i-1;while(toks[a].k!=='r')a--;
+    fam='краткий стык';rt='-'+ct.s+'-';mn=JN[ct.s]+': '+toks[a].s+' — '+toks[ct.i+1].s;
+    mk='объект первой степени: '+objWord(g);st='объект '+g.no+' из '+objs.length+' · '+half;
+  }else if(ct.k==='J'){
+    const n=ct.s.length,pv=G[ct.g-1];
+    fam=n===3?'трёхдолгий стык':'долгий стык';rt='‖ '+ct.s+' ‖';
+    if(n===3){const k=halves[0].filter(i=>G[i].type==='obj').length;mn='закрывается половина I: '+k+' объекта становятся одним';st='объекты второй степени → третья';}
+    else{mn='закрывается объект '+pv.no+': '+objWord(pv);st='объекты первой степени → вторая';}
+    mk='пауза дыхания '+(n*TEMPO.J/1000).toFixed(2).replace('.',',')+' с';
+  }else if(ct.k==='f'){
+    fam='рамка времени';rt='ав-';mn='когда-то, в памяти: всё слово — воспоминание';mk='без стыка: рамка стоит вне объектов';st='начало слова';
+  }else{
+    fam='замок';rt='-лэ';mn='сказано: слово закрыто и становится поэмой';mk='закрываются половина II и вся поэма';st='объект третьей степени';
+  }
+  famUse.setAttribute('href','#i-'+ic);famTx.textContent=fam;rootTx.textContent=rt;meanTx.textContent=mn;markTx.textContent=mk;stateTx.textContent=st;
+  cur.setAttribute('aria-valuetext',rt+', '+mn);
+}
+
+function update(){
+  const pi=Math.min(Math.floor(p),N-1),ct=p>=N?toks[toks.length-1]:letterTok[pi];
+  toks.forEach(t=>{const now=t===ct&&p<N;t.el.classList.toggle('now',now);t.el.classList.toggle('past',!now&&p>=t.end);});
+  G.forEach(g=>{
+    g.el.style.setProperty('--f',cl((p-g.start)/(g.end-g.start)));
+    if(g.trEl){g.trEl.classList.toggle('on',p>g.start);g.trEl.classList.toggle('now',G[ct.g]===g&&p<N);}
+  });
+  bars.forEach(b=>{b.el.classList.toggle('on',p>b.s);b.el.classList.toggle('closed',p>=b.e);});
+  card(ct);
+  c1.textContent='буква '+pad(Math.floor(p),2)+'/'+N;
+  c2.textContent='корень '+pad(roots.filter(t=>p>t.start).length,2)+'/'+roots.length;
+  c3.textContent='закрыто '+objs.filter(g=>p>=g.end).length+'/'+objs.length;
+  cur.setAttribute('aria-valuenow',Math.round(p));
+}
+
+function place(){
+  const wr=wordEl.getBoundingClientRect(),i=Math.min(Math.floor(p),N-1),fr=Math.min(p-i,1),r=letters[i].getBoundingClientRect();
+  cur.style.left=(r.left+r.width*fr-wr.left)+'px';
+  cur.style.top=(r.top-wr.top-8)+'px';
+  cur.style.height=(r.height+14)+'px';
+}
+
+const ln=(x,W,H,a)=>a.forEach(s=>{x.beginPath();x.moveTo(s[0]*W,s[1]*H);x.lineTo(s[2]*W,s[3]*H);x.stroke();});
+const poly=(x,W,H,a)=>{x.beginPath();a.forEach((q,i)=>i?x.lineTo(q[0]*W,q[1]*H):x.moveTo(q[0]*W,q[1]*H));x.closePath();x.fill();};
+const SH=[
+{root:'сол',L:'o',x0:.03,x1:.97,
+ f(x,W,H){x.beginPath();x.moveTo(.04*W,.06*H);x.lineTo(.96*W,.05*H);x.lineTo(.97*W,.5*H);x.quadraticCurveTo(.75*W,.47*H,.5*W,.51*H);x.quadraticCurveTo(.25*W,.54*H,.03*W,.5*H);x.closePath();x.fill();},
+ c(x,W,H){x.lineWidth=2.6;ln(x,W,H,[[.08,.12,.3,.12],[.58,.1,.78,.1],[.1,.21,.19,.21],[.72,.3,.9,.3],[.06,.4,.16,.4],[.84,.4,.93,.4],[.42,.16,.5,.16]]);}},
+{root:'нам',L:'o',x0:.05,x1:.35,
+ f(x,W,H){x.beginPath();x.moveTo(.06*W,.77*H);x.bezierCurveTo(.05*W,.57*H,.35*W,.56*H,.34*W,.77*H);x.closePath();x.fill();},
+ c(x,W,H){x.lineWidth=2.6;ln(x,W,H,[[.12,.67,.15,.62],[.18,.67,.21,.61],[.24,.67,.27,.62]]);}},
+{root:'лум',L:'r',x0:.3,x1:.74,
+ f(x,W,H){x.beginPath();x.arc(.52*W,.5*H,.22*H,Math.PI,0);x.closePath();x.fill();},
+ c(x,W,H){x.lineWidth=3;[[.68,[14,8]],[.38,[8,8]]].forEach(a=>{x.setLineDash(a[1]);x.beginPath();x.arc(.52*W,.5*H,.22*H*a[0],Math.PI,0);x.stroke();});x.setLineDash([]);}},
+{root:'крэн',L:'r',x0:.53,x1:.93,
+ f(x,W,H){[[.56,.1],[.63,.15],[.7,.08],[.77,.13],[.84,.09],[.9,.12]].forEach(s=>poly(x,W,H,[[s[0]-.025,.83],[s[0],.83-s[1]],[s[0]+.025,.83]]));}},
+{root:'тлин',L:'r',x0:.04,x1:.36,
+ f(x,W,H){x.strokeStyle=x.fillStyle;x.lineWidth=4;x.lineCap='round';x.setLineDash([10,7]);[.06,.095,.13].forEach(r=>{x.beginPath();x.arc(.2*W,.3*H,r*W,1.12*Math.PI,1.88*Math.PI);x.stroke();});x.setLineDash([]);}},
+{root:'ступ',L:'k',x0:.66,x1:.96,
+ f(x,W,H){poly(x,W,H,[[.66,.64],[.66,.6],[.73,.6],[.73,.56],[.8,.56],[.8,.52],[.87,.52],[.87,.48],[.96,.48],[.96,.64]]);},
+ c(x,W,H){x.lineWidth=2;ln(x,W,H,[[.67,.61,.72,.61],[.74,.57,.79,.57],[.81,.53,.86,.53],[.88,.49,.95,.49]]);}},
+{root:'грум',L:'k',x0:.33,x1:.51,
+ f(x,W,H){x.beginPath();x.ellipse(.42*W,.715*H,.08*W,.065*H,0,0,Math.PI*2);x.fill();},
+ c(x,W,H){x.lineWidth=2.4;ln(x,W,H,[[.38,.68,.41,.71],[.41,.71,.4,.75],[.45,.68,.47,.7]]);}},
+{root:'вэл',L:'k',x0:.03,x1:.97,
+ f(x,W,H){const n=6,w=.94/n;x.beginPath();x.moveTo(.03*W,.8*H);for(let i=0;i<n;i++)x.quadraticCurveTo((.03+w*(i+.5))*W,(i%2?.84:.76)*H,(.03+w*(i+1))*W,.8*H);x.lineTo(.97*W,.97*H);x.lineTo(.03*W,.97*H);x.closePath();x.fill();},
+ c(x,W,H){x.lineWidth=2.6;[[.08,.88,.12],[.3,.91,.16],[.6,.87,.12],[.78,.92,.14],[.15,.94,.1],[.48,.95,.1]].forEach(s=>{x.beginPath();x.moveTo(s[0]*W,s[1]*H);x.quadraticCurveTo((s[0]+s[2]/2)*W,(s[1]-.025)*H,(s[0]+s[2])*W,s[1]*H);x.stroke();});}},
+{root:'ках',L:'k',x0:.73,x1:.87,
+ f(x,W,H){x.beginPath();x.moveTo(.74*W,.17*H);x.quadraticCurveTo(.77*W,.11*H,.8*W,.16*H);x.quadraticCurveTo(.83*W,.11*H,.86*W,.15*H);x.quadraticCurveTo(.83*W,.14*H,.8*W,.19*H);x.quadraticCurveTo(.77*W,.14*H,.74*W,.17*H);x.fill();}},
+{root:'сон',L:'k',x0:.1,x1:.3,
+ f(x,W,H){x.beginPath();x.moveTo(.11*W,.29*H);x.quadraticCurveTo(.2*W,.38*H,.29*W,.29*H);x.quadraticCurveTo(.2*W,.33*H,.11*W,.29*H);x.fill();x.strokeStyle=x.fillStyle;x.lineWidth=2.4;x.lineCap='round';ln(x,W,H,[[.14,.32,.13,.36],[.2,.335,.2,.375],[.26,.32,.27,.36]]);}}
+];
+const LAY={o:document.createElement('canvas'),r:document.createElement('canvas'),k:document.createElement('canvas')};
+const OFF={o:[2.5,1.8],r:[-1.8,1.2],k:[0,0]};
+function colors(){const s=getComputedStyle(root),g=(n,f)=>(s.getPropertyValue(n)||'').trim()||f;
+  return {paper:g('--paper','#F2EBDC'),o:g('--ochre','#C8952E'),r:g('--accent','#B3301E'),k:g('--ink','#1D1A17')};}
+function prog(n){const t=rootTok[n];return cl((p-t.start)/(t.end-t.start));}
+function art(){
+  const W=cv.clientWidth,H=cv.clientHeight;if(!W||!H)return;
+  const d=window.devicePixelRatio||1,pw=Math.round(W*d),ph=Math.round(H*d),col=colors();
+  if(cv.width!==pw||cv.height!==ph){cv.width=pw;cv.height=ph;}
+  c.setTransform(d,0,0,d,0,0);c.globalCompositeOperation='source-over';c.fillStyle=col.paper;c.fillRect(0,0,W,H);
+  ['o','r','k'].forEach(L=>{
+    const lc=LAY[L];if(lc.width!==pw||lc.height!==ph){lc.width=pw;lc.height=ph;}
+    const x=lc.getContext('2d');x.setTransform(1,0,0,1,0,0);x.globalCompositeOperation='source-over';x.clearRect(0,0,pw,ph);x.setTransform(d,0,0,d,0,0);
+    SH.forEach(s=>{
+      if(s.L!==L)return;const f=prog(s.root);if(f<=0)return;
+      x.save();x.beginPath();x.rect(s.x0*W-4,0,((s.x1-s.x0)*W+8)*f,H);x.clip();
+      x.globalCompositeOperation='source-over';x.fillStyle=col[L];s.f(x,W,H);
+      if(s.c){x.globalCompositeOperation='destination-out';x.strokeStyle='#000';x.lineCap='round';s.c(x,W,H);}
+      x.restore();
+    });
+    c.globalCompositeOperation='multiply';c.drawImage(lc,OFF[L][0],OFF[L][1],W,H);
+  });
+  c.globalCompositeOperation='source-over';
+}
+
+function render(){update();place();art();}
+function setP(v){p=v<0?0:v>N?N:v;render();}
+
+let playing=false,raf=0,last=0;
+function step(ts){
+  if(!playing)return;
+  let rem=last?Math.min(ts-last,100):0;last=ts;
+  while(rem>0&&p<N){const i=Math.floor(p),ms=TEMPO[letterTok[i].k],need=(i+1-p)*ms;if(rem>=need){p=i+1;rem-=need;}else{p+=rem/ms;rem=0;}}
+  render();
+  if(p>=N){stop();return;}
+  raf=requestAnimationFrame(step);
+}
+function start(){if(p>=N)p=0;playing=true;last=0;btn.setAttribute('aria-pressed','true');raf=requestAnimationFrame(step);}
+function stop(){playing=false;cancelAnimationFrame(raf);btn.setAttribute('aria-pressed','false');}
+btn.addEventListener('click',()=>{playing?stop():start();});
+const mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+function rm(){const r=!!(mq&&mq.matches);btn.hidden=r;if(r)stop();}
+if(mq){mq.addEventListener?mq.addEventListener('change',rm):mq.addListener&&mq.addListener(rm);}
+rm();
+
+function fromPt(x,y){
+  const rs=letters.map(l=>l.getBoundingClientRect()),dist=r=>y<r.top?r.top-y:y>r.bottom?y-r.bottom:0;
+  let bd=1e9;rs.forEach(r=>{const d=dist(r);if(d<bd)bd=d;});
+  const row=[];rs.forEach((r,i)=>{if(dist(r)<=bd+.5)row.push(i);});
+  const a=row[0],b=row[row.length-1];
+  if(x<=rs[a].left)return a;if(x>=rs[b].right)return b+1;
+  for(const i of row){const r=rs[i];if(x<r.right)return i+Math.max(0,(x-r.left)/r.width);}
+  return b+1;
+}
+let drag=false;
+wordEl.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;stop();drag=true;
+  try{wordEl.setPointerCapture(e.pointerId);}catch(_){}
+  setP(fromPt(e.clientX,e.clientY));cur.focus({preventScroll:true});e.preventDefault();
+});
+wordEl.addEventListener('pointermove',e=>{if(drag)setP(fromPt(e.clientX,e.clientY));});
+const end=()=>{drag=false;};
+wordEl.addEventListener('pointerup',end);wordEl.addEventListener('pointercancel',end);wordEl.addEventListener('lostpointercapture',end);
+cur.addEventListener('keydown',e=>{
+  let v=null;
+  if(e.key==='ArrowRight'||e.key==='ArrowUp')v=Math.floor(p)+1;
+  else if(e.key==='ArrowLeft'||e.key==='ArrowDown')v=Math.ceil(p)-1;
+  else if(e.key==='Home')v=0;else if(e.key==='End')v=N;
+  if(v===null)return;e.preventDefault();stop();setP(v);
+});
+
+if(window.ResizeObserver){const ro=new ResizeObserver(()=>{place();art();});ro.observe(wordEl);ro.observe(cv);}
+else window.addEventListener('resize',()=>{place();art();});
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{place();art();});
+render();
+})();</script>
+  </section>
+
+  <!-- ——————————————— РАЗМЫШЛЕНИЯ ——————————————— -->
+  <section class="sec" id="rz" style="--i:4">
+    <span class="tab" aria-hidden="true">Рз</span>
+    <div class="runhead"><span>размышления
+</body></html>

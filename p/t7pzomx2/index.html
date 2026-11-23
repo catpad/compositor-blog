@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Десять развязок, которых ещё не было</title>
+<meta name="description" content="Десять новых детективных развязок без фантастики и мистики, оформленных как патентные заявки и сверенных с ближайшими прототипами у Кристи, Конан Дойла и других классиков.">
+<meta name="compositor:paper" content="#FAF9F5">
+<meta name="compositor:ink" content="#141414">
+<meta name="compositor:accent" content="#A3221B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF9F5;
+  --ink:#141414;
+  --grey:#5E5E5A;
+  --rule:#C9C6BC;
+  --accent:#A3221B;
+  --panel:#F1EFE8;
+  --display:"Old Standard TT", "Times New Roman", serif;
+  --text:"PT Serif", Georgia, serif;
+  --mono:"PT Mono", "Courier New", monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink)}
+body{font-family:var(--text);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+.doc{max-width:44rem;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+
+/* Title block */
+.titleblock{border:2px solid var(--ink);padding:1.25rem 1.25rem 1.5rem;margin-bottom:3rem}
+.titleblock .row{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:.5rem;margin-bottom:1.25rem}
+h1{font-family:var(--display);font-weight:400;font-size:2.6rem;line-height:1.08;margin:0 0 1rem;letter-spacing:-.01em}
+.titleblock .sub{font-size:1.05rem;color:var(--grey);margin:0;max-width:36rem}
+.titleblock .codes{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;margin-top:1.25rem;font-family:var(--mono);font-size:.78rem;color:var(--grey)}
+.titleblock .codes b{font-weight:400;color:var(--ink)}
+
+/* Sheets */
+.sheet{margin:0 0 3.5rem}
+.sheet-head{display:flex;justify-content:space-between;align-items:baseline;border-top:2px solid var(--ink);padding-top:.45rem;margin-bottom:1.1rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase}
+.sheet-head .no{color:var(--ink)}
+.sheet-head .fig-no{color:var(--grey)}
+h2{font-family:var(--display);font-weight:400;font-size:1.65rem;line-height:1.2;margin:0 0 1rem}
+h3{font-family:var(--mono);font-weight:400;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;margin:1.6rem 0 .5rem;color:var(--grey)}
+p{margin:0 0 1rem;hyphens:auto;-webkit-hyphens:auto}
+.ref{font-family:var(--mono);font-size:.88em;white-space:nowrap}
+ol.criteria{margin:0 0 1rem;padding-left:1.4rem}
+ol.criteria li{margin-bottom:.45rem;padding-left:.2rem}
+
+/* Figures */
+.plate{margin:1.5rem 0 1.25rem;border:1px solid var(--ink);background:var(--paper);padding:1rem .75rem .5rem}
+.plate figcaption{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;border-top:1px solid var(--rule);margin-top:.5rem;padding-top:.45rem;color:var(--grey)}
+.fig svg{display:block;width:100%;height:auto;stroke:var(--ink);stroke-width:1.25;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fig .thin{stroke-width:.8}
+.fig .lead{stroke-width:.7}
+.fig .dash{stroke-dasharray:6 4}
+.fig .dot{stroke-dasharray:1.5 3.5}
+.fig .smudge{stroke-dasharray:9 3 2 4}
+.fig .solid{fill:var(--ink);stroke:none}
+.fig .blank{fill:var(--paper)}
+.fig text{fill:var(--ink);stroke:none;font-family:var(--mono);font-size:13px}
+.fig text.small{font-size:9.5px;letter-spacing:.08em}
+.fig text.serif{font-family:var(--text);font-size:17px}
+.legend{list-style:none;margin:.25rem 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:.1rem 1.25rem;font-size:.85rem;color:var(--grey)}
+.legend li{display:flex;gap:.5rem}
+.legend .n{font-family:var(--mono);color:var(--ink);min-width:2rem}
+
+/* Claims */
+.claim{margin:1.4rem 0 0;padding:.9rem 0 .2rem 1.1rem;border-left:2px solid var(--ink);font-size:.98rem}
+.claim .label{display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-bottom:.35rem}
+.claim p{margin:0 0 .6rem}
+.mark{color:var(--accent)}
+
+/* Instruments */
+.instrument{display:block;width:100%;margin:2rem 0 1rem;border:1px solid var(--ink);background:var(--paper)}
+.instrument[data-instrument="survivorship"]{min-height:300px}
+.instrument[data-instrument="prior-art"]{min-height:460px}
+.inst-label{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--grey);margin:2rem 0 -1.5rem;display:flex;justify-content:space-between}
+
+.note{font-size:.9rem;color:var(--grey);border-top:1px solid var(--rule);padding-top:.75rem;margin-top:1.5rem}
+
+@media (max-width:520px){
+  body{font-size:1rem}
+  h1{font-size:2rem}
+  h2{font-size:1.35rem}
+  .plate{padding:.6rem .4rem .4rem}
+  .titleblock{padding:1rem}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/t7pzomx2/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Десять развязок, которых ещё не было"><meta property="og:description" content="Десять новых детективных развязок без фантастики и мистики, оформленных как патентные заявки и сверенных с ближайшими прототипами у Кристи, Конан Дойла и других классиков."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/t7pzomx2/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#FAF9F5;border-bottom:1px solid #14141426;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#141414;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#141414;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#141414"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#FAF9F5" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#FAF9F5"/></svg><span>Compositor</span></a><time datetime="2026-11-23T02:26:12.504Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#141414;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#141414" stroke-width="0.8"/>
+    </pattern>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 1 L9 5 L0 9" fill="none" stroke="#141414" stroke-width="1.2"/>
+    </marker>
+  </defs>
+</svg>
+
+<main class="doc">
+
+<header class="titleblock">
+  <div class="row"><span>Заявка на сюжетное устройство</span><span>Лист 1 из 12</span></div>
+  <h1>Десять развязок, которых ещё не было</h1>
+  <p class="sub">Описание десяти способов закончить детектив так, чтобы читатель перелистнул книгу назад и увидел её заново. Без призраков, ясновидцев, неизвестных науке ядов и машин времени.</p>
+  <div class="codes">
+    <span>Класс</span><b>Детектив / развязка / без сверхъестественного</b>
+    <span>Пунктов</span><b>10</b>
+    <span>Прототипы</span><b>Кристи, Конан Дойл, Сэйерс, Честертон, Беркли, Куин, Хайсмит</b>
+  </div>
+</header>
+
+<section class="sheet" id="abstract">
+  <div class="sheet-head"><span class="no">Реферат</span><span class="fig-no">Лист 1</span></div>
+  <h2>Каждая развязка описана как изобретение: устройство, отличительный признак, формула</h2>
+  <p>Классический детектив держится на одном обещании: ответ всё время был на виду. Развязки ниже следуют этому правилу. В них нет ядов, неизвестных науке, тайных близнецов и потайных ходов. Только люди, вещи, документы и время.</p>
+  <p>Каждый пункт оформлен как патентная заявка. Сначала описано устройство: как совершается преступление и как его скрывают. Затем указано, по какой улике внимательный читатель может прийти к ответу раньше сыщика. В конце дана формула, где <span class="mark">отличительный признак</span> выделен цветом. Только этот признак и заявлен как новый.</p>
+  <p>Поручиться, что за сто восемьдесят лет жанра никто не написал ничего подобного, не может никто. Поэтому заявка утверждает меньшее: ближайшие известные прототипы устроены иначе. Кнопка «Проверить новизну» под каждым пунктом открывает поисковую карточку на листе 12. Там названы предшественники у Кристи, Конан Дойла и других и сказано, чем от них отличается новое устройство.</p>
+</section>
+
+<style>
+.fig text{font-size:15px}
+.fig text.small{font-size:11px}
+.check{display:inline-flex;align-items:center;gap:.55rem;margin-top:1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);text-decoration:none;border:1px solid var(--ink);padding:.45rem .75rem;background:var(--paper)}
+.check::before{content:"§";color:var(--accent);font-size:1rem;line-height:1}
+.check:hover,.check:focus-visible{background:var(--ink);color:var(--paper);outline:none}
+.check:focus-visible{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink)}
+.clue{font-style:italic}
+</style>
+
+<!-- 1 -->
+<section class="sheet" id="twist-1">
+  <div class="sheet-head"><span class="no">Пункт 1</span><span class="fig-no">Лист 2 · Фиг. 1</span></div>
+  <h2>Тело находят дважды, и второй нашедший и есть убийца</h2>
+  <h3>Устройство</h3>
+  <p>Убийство совершено в 21:40. На теле остались следы убийцы: волокна его пальто, его кровь из порезанной ладони на манжете жертвы. Через двадцать пять минут тело случайно находит подросток, который не должен был находиться в этом доме. Он в ужасе убегает и звонит в полицию из автомата, не назвав себя. Убийца понимает, что тело обнаружено. Тогда он возвращается и при свидетелях «находит» его во второй раз: бросается к нему, пытается сделать искусственное дыхание, прижимает к себе. Теперь каждый его след на теле объяснён, и объяснён на глазах у публики.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Время анонимного звонка записано в журнале дежурного и упомянуто в третьей главе как курьёз. В звонке сказано, что тело <span class="clue">лежит лицом вниз у камина</span>. Официальный нашедший описывает его лежащим на спине. Значит, кто-то перевернул тело между двумя обнаружениями. Сделать это незаметно мог только тот, кто первым подошёл к телу при людях.</p>
+
+  <figure class="plate fig">
+    <svg viewBox="0 0 640 210" role="img" aria-label="Фигура 1. Временная ось вечера: убийство, первое тайное обнаружение, анонимный звонок, второе обнаружение убийцей и зона, где следы получают законное объяснение.">
+      <path d="M100 70 L100 58 L520 58 L520 70" class="dash"/>
+      <line x1="40" y1="120" x2="610" y2="120" marker-end="url(#arr)"/>
+      <line x1="100" y1="112" x2="100" y2="128"/>
+      <line x1="225" y1="112" x2="225" y2="128"/>
+      <line x1="290" y1="112" x2="290" y2="128"/>
+      <line x1="520" y1="112" x2="520" y2="128"/>
+      <circle cx="100" cy="100" r="7" class="solid"/>
+      <circle cx="225" cy="100" r="7" class="blank"/>
+      <rect x="283" y="93" width="14" height="14" class="blank"/>
+      <path d="M520 92 L528 106 L512 106 Z" class="blank"/>
+      <rect x="520" y="132" width="78" height="14" fill="url(#hatch)"/>
+      <text x="100" y="152" text-anchor="middle" class="small">21:40</text>
+      <text x="225" y="152" text-anchor="middle" class="small">22:05</text>
+      <text x="290" y="152" text-anchor="middle" class="small">22:07</text>
+      <text x="520" y="168" text-anchor="middle" class="small">22:45</text>
+      <line x1="100" y1="93" x2="70" y2="40" class="lead"/><text x="54" y="36">10</text>
+      <line x1="225" y1="93" x2="205" y2="40" class="lead"/><text x="190" y="36">12</text>
+      <line x1="290" y1="93" x2="310" y2="40" class="lead"/><text x="306" y="36">14</text>
+      <line x1="520" y1="92" x2="545" y2="40" class="lead"/><text x="541" y="36">16</text>
+      <line x1="580" y1="146" x2="600" y2="190" class="lead"/><text x="596" y="204">18</text>
+      <text x="310" y="78" text-anchor="middle" class="small">ИНТЕРВАЛ, О КОТОРОМ МОЛЧАТ</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">10</span>Убийство</li>
+      <li><span class="n">12</span>Первое обнаружение, тайное</li>
+      <li><span class="n">14</span>Анонимный звонок с описанием позы</li>
+      <li><span class="n">16</span>Второе обнаружение, публичное</li>
+      <li><span class="n">18</span>Следы, получившие законное объяснение</li>
+    </ul>
+    <figcaption><span>Фиг. 1</span><span>Хронология двух обнаружений</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>1. Способ развязки, при котором тело жертвы обнаруживают дважды, <span class="mark">отличающийся тем, что второе, публичное обнаружение совершает сам убийца, чтобы его следы на теле получили объяснение при свидетелях, а ключом служит описание позы тела, оставленное первым, молчащим нашедшим.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="1">Проверить новизну</a>
+</section>
+
+<!-- 2 -->
+<section class="sheet" id="twist-2">
+  <div class="sheet-head"><span class="no">Пункт 2</span><span class="fig-no">Лист 3</span></div>
+  <h2>Алиби убийце предоставляет безупречное рассуждение сыщика</h2>
+  <h3>Устройство</h3>
+  <p>Убийца сам ни на какое алиби не ссылается. Вместо этого он устраивает у себя дома мнимую кражу со взломом и оставляет следы, рассчитанные на знаменитого сыщика: золу трубки, которая гаснет за известное время, остановленные часы, влажный след на подоконнике, высыхающий по известному закону. Сыщик приходит к верному выводу о краже: вор влез в 23:10, пока хозяин спал наверху. Именно в 23:10 хозяин совершал убийство на другом конце города. Вывод сыщика публикуется в газетах. В суде никто не решится его оспорить, и меньше всех сам сыщик.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Все улики кражи поддаются точной датировке, и все указывают на одну и ту же минуту. Настоящие кражи так не выглядят. Улики подобраны под метод конкретного человека: на полке у хозяина стоит сборник очерков о делах этого сыщика с загнутыми страницами.</p>
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>2. Способ развязки, при котором преступник управляет выводами сыщика, <span class="mark">отличающийся тем, что вывод сыщика о второстепенном преступлении остаётся верным, а его точное время служит убийце алиби для главного преступления, которое расследуют отдельно.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="2">Проверить новизну</a>
+</section>
+
+<!-- 3 -->
+<section class="sheet" id="twist-3">
+  <div class="sheet-head"><span class="no">Пункт 3</span><span class="fig-no">Лист 4 · Инструмент</span></div>
+  <h2>Связь ищут среди умерших, а она есть только среди выживших</h2>
+  <h3>Устройство</h3>
+  <p>В загородном пансионе ужинают двадцать четыре постояльца. Ночью у всех начинается отравление. Сестра милосердия всю ночь ходит из комнаты в комнату и спасает пятнадцать человек. Девять умирают. Следствие неделями ищет, что объединяет девятерых: возраст, этаж, место за столом, город, профессия. Ничего общего не находится, и смерти списывают на испорченные продукты.</p>
+  <p>Яд был у всех. Противоядие под видом успокоительного получили только те, к кому сестра зашла вовремя, и выбирала их она сама. Ей нужны были пятнадцать человек, обязанных ей жизнью и готовых в суде поклясться, что она святая. Среди девяти умерших спрятан один, которому она нарочно пришла «слишком поздно».</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Нужно задать вопрос о выживших. Их объединяет только одно: первую помощь каждому оказала она.</p>
+
+  <div class="inst-label"><span>Прибор к пункту 3</span><span>24 постояльца</span></div>
+  <div class="instrument" data-instrument="survivorship">
+  <div class="sv-controls">
+    <div class="sv-switch" role="radiogroup" aria-label="Группа">
+      <button type="button" role="radio" data-g="d">Умершие</button>
+      <button type="button" role="radio" data-g="s">Выжившие</button>
+    </div>
+    <div class="sv-chips" role="radiogroup" aria-label="Признак">
+      <button type="button" role="radio" data-f="floor">Этаж</button>
+      <button type="button" role="radio" data-f="table">Стол</button>
+      <button type="button" role="radio" data-f="city">Город</button>
+      <button type="button" role="radio" data-f="age">Возраст</button>
+      <button type="button" role="radio" data-f="prof">Профессия</button>
+      <button type="button" role="radio" data-f="aid">Первая помощь</button>
+    </div>
+  </div>
+  <svg class="sv-plate" viewBox="0 0 660 350" role="img" aria-label=""></svg>
+  <div class="sv-bottom">
+    <div class="sv-read" aria-live="polite">
+      <div class="sv-frac">0 из 0</div>
+      <div class="sv-val">—</div>
+    </div>
+    <div class="sv-dist"></div>
+  </div>
+</div>
+<style>
+[data-instrument="survivorship"]{padding:.9rem .9rem .8rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="survivorship"] .sv-controls{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;border-bottom:1px solid var(--rule);padding-bottom:.75rem;margin-bottom:.5rem}
+[data-instrument="survivorship"] .sv-switch{display:inline-flex;border:1px solid var(--ink)}
+[data-instrument="survivorship"] .sv-switch button,[data-instrument="survivorship"] .sv-chips button{font-family:var(--mono);font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;background:var(--paper);color:var(--ink);cursor:pointer;margin:0;line-height:1.2}
+[data-instrument="survivorship"] .sv-switch button{border:0;padding:.42rem .75rem}
+[data-instrument="survivorship"] .sv-switch button+button{border-left:1px solid var(--ink)}
+[data-instrument="survivorship"] .sv-switch button[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="survivorship"] .sv-chips{display:flex;flex-wrap:wrap;gap:.35rem}
+[data-instrument="survivorship"] .sv-chips button{border:1px solid var(--rule);padding:.32rem .55rem;color:var(--grey)}
+[data-instrument="survivorship"] .sv-chips button[aria-checked="true"]{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+[data-instrument="survivorship"] button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="survivorship"] .sv-plate{display:block;width:100%;height:auto;stroke:var(--ink);stroke-width:1.2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+[data-instrument="survivorship"] .sv-plate text{font-family:var(--mono);font-size:13px;fill:var(--ink);stroke:none}
+[data-instrument="survivorship"] .sv-plate text.sv-idx{font-size:11px;fill:var(--grey)}
+[data-instrument="survivorship"] .sv-plate text.sv-head{font-size:11px;letter-spacing:.08em;fill:var(--grey)}
+[data-instrument="survivorship"] .sv-plate text.sv-head.sv-on{fill:var(--ink)}
+[data-instrument="survivorship"] .sv-plate .sv-div{stroke:var(--rule);stroke-dasharray:4 4}
+[data-instrument="survivorship"] .sv-plate pattern line{stroke:var(--ink);stroke-width:.8}
+[data-instrument="survivorship"] .sv-s .sv-fill{fill:var(--paper)}
+[data-instrument="survivorship"] .sv-d .sv-fill{fill:url(#sv-hatch)}
+[data-instrument="survivorship"] .sv-person{transition:opacity .2s}
+[data-instrument="survivorship"] .sv-off{opacity:.25}
+[data-instrument="survivorship"] .sv-ring{stroke:var(--accent);stroke-width:1.6;opacity:0;transition:opacity .2s}
+[data-instrument="survivorship"] .sv-lead{stroke-width:.8;opacity:0;transition:opacity .2s}
+[data-instrument="survivorship"] .sv-num{opacity:0;transition:opacity .2s}
+[data-instrument="survivorship"] .sv-hit .sv-ring,[data-instrument="survivorship"] .sv-hit .sv-lead,[data-instrument="survivorship"] .sv-hit .sv-num{opacity:1}
+[data-instrument="survivorship"] .sv-bottom{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:stretch;border-top:1px solid var(--rule);padding-top:.75rem;margin-top:.25rem}
+[data-instrument="survivorship"] .sv-read{flex:0 0 12rem;width:12rem;border:1px solid var(--ink);padding:.45rem .7rem;font-family:var(--mono);font-variant-numeric:tabular-nums}
+[data-instrument="survivorship"] .sv-frac{font-size:1.65rem;line-height:1.15;white-space:nowrap}
+[data-instrument="survivorship"] .sv-val{font-size:.78rem;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="survivorship"] .sv-dist{flex:1 1 14rem;font-family:var(--mono);font-size:.74rem;line-height:1.55;color:var(--grey);font-variant-numeric:tabular-nums;height:4.7em;overflow:hidden}
+[data-instrument="survivorship"] .sv-dist .sv-top{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="survivorship"] .sv-person,[data-instrument="survivorship"] .sv-ring,[data-instrument="survivorship"] .sv-lead,[data-instrument="survivorship"] .sv-num{transition:none}
+}
+@media (max-width:520px){
+  [data-instrument="survivorship"]{padding:.6rem .5rem}
+  [data-instrument="survivorship"] .sv-read{flex-basis:100%;width:100%}
+}
+</style>
+<script>(function(){
+  const root = document.querySelector('[data-instrument="survivorship"]');
+  if(!root) return;
+  const raw = [
+    ['d',1,1,'Москва',34,'учитель','никто'],
+    ['d',1,2,'Петербург',67,'купец','доктор Р.'],
+    ['d',1,3,'Киев',52,'инженер','сестра Л.'],
+    ['d',2,4,'Москва',41,'рантье','никто'],
+    ['d',2,5,'Казань',73,'офицер','управляющий'],
+    ['d',2,6,'Одесса',28,'студент','никто'],
+    ['d',3,1,'Рига',59,'юрист','доктор Р.'],
+    ['d',3,2,'Петербург',46,'учитель','горничная'],
+    ['d',3,3,'Москва',63,'чиновник','управляющий'],
+    ['s',1,1,'Москва',24,'учитель','сестра Л.'],
+    ['s',1,4,'Петербург',37,'инженер','сестра Л.'],
+    ['s',1,5,'Киев',45,'купец','сестра Л.'],
+    ['s',1,6,'Москва',58,'рантье','сестра Л.'],
+    ['s',1,2,'Казань',62,'офицер','сестра Л.'],
+    ['s',2,3,'Одесса',71,'рантье','сестра Л.'],
+    ['s',2,4,'Рига',29,'студент','сестра Л.'],
+    ['s',2,5,'Москва',33,'инженер','сестра Л.'],
+    ['s',2,6,'Петербург',48,'учитель','сестра Л.'],
+    ['s',2,1,'Казань',55,'купец','сестра Л.'],
+    ['s',3,2,'Киев',66,'чиновник','сестра Л.'],
+    ['s',3,4,'Москва',78,'офицер','сестра Л.'],
+    ['s',3,5,'Одесса',39,'художник','сестра Л.'],
+    ['s',3,6,'Рига',42,'инженер','сестра Л.'],
+    ['s',3,3,'Петербург',51,'юрист','сестра Л.']
+  ];
+  const P = raw.map(a=>({g:a[0],floor:a[1],table:a[2],city:a[3],age:a[4],prof:a[5],aid:a[6]}));
+  const FEAT = {
+    floor:{name:'этаж',num:110,get:p=>p.floor,fmt:v=>'этаж '+v,numeric:true},
+    table:{name:'стол',num:112,get:p=>p.table,fmt:v=>'стол '+v,numeric:true},
+    city:{name:'город',num:114,get:p=>p.city,fmt:v=>v},
+    age:{name:'возраст',num:116,get:p=>{const d=Math.floor(p.age/10)*10;return d;},fmt:v=>v+'–'+(v+9)+' лет',numeric:true},
+    prof:{name:'профессия',num:118,get:p=>p.prof,fmt:v=>v},
+    aid:{name:'первая помощь',num:120,get:p=>p.aid,fmt:v=>v}
+  };
+  const state = {g:'d', f:'city'};
+
+  // layout: rows = floors; per row 3 dead then 5 survivors
+  const svg = root.querySelector('.sv-plate');
+  let s = '<defs><pattern id="sv-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5"/></pattern></defs>';
+  s += '<text class="sv-head" data-h="d" x="120" y="16" text-anchor="middle">УМЕРШИЕ · 9</text>';
+  s += '<text class="sv-head" data-h="s" x="448" y="16" text-anchor="middle">ВЫЖИВШИЕ · 15</text>';
+  s += '<line class="sv-div" x1="264" y1="26" x2="264" y2="340"/>';
+  let idx = 0;
+  const order = [];
+  for(let r=0;r<3;r++){
+    const top = 50 + r*108;
+    const dead = P.filter(p=>p.g==='d'&&p.floor===r+1);
+    const surv = P.filter(p=>p.g==='s'&&p.floor===r+1);
+    dead.forEach((p,i)=>{p.cx=48+i*72;p.top=top;order.push(p);});
+    surv.forEach((p,j)=>{p.cx=304+j*72;p.top=top;order.push(p);});
+  }
+  order.forEach(p=>{
+    idx++; p.n = idx;
+    const cx=p.cx, t=p.top;
+    s += '<g class="sv-person sv-'+p.g+'" data-n="'+idx+'">'+
+      '<rect class="sv-ring" x="'+(cx-26)+'" y="'+(t-2)+'" width="52" height="64"/>'+
+      '<path class="sv-fill" d="M'+(cx-16)+' '+(t+58)+' L'+(cx-16)+' '+(t+42)+' Q'+(cx-16)+' '+(t+26)+' '+cx+' '+(t+26)+' Q'+(cx+16)+' '+(t+26)+' '+(cx+16)+' '+(t+42)+' L'+(cx+16)+' '+(t+58)+' Z"/>'+
+      '<circle class="sv-fill" cx="'+cx+'" cy="'+(t+13)+'" r="8.5"/>'+
+      '<line class="sv-lead" x1="'+(cx+22)+'" y1="'+(t-2)+'" x2="'+(cx+30)+'" y2="'+(t-11)+'"/>'+
+      '<text class="sv-num" x="'+(cx+32)+'" y="'+(t-13)+'"></text>'+
+      '<text class="sv-idx" x="'+cx+'" y="'+(t+77)+'" text-anchor="middle">'+String(idx).padStart(2,'0')+'</text>'+
+      '</g>';
+  });
+  svg.innerHTML = s;
+  order.forEach(p=>{p.el = svg.querySelector('[data-n="'+p.n+'"]'); p.numEl = p.el.querySelector('.sv-num');});
+  const heads = svg.querySelectorAll('.sv-head');
+  const frac = root.querySelector('.sv-frac');
+  const val = root.querySelector('.sv-val');
+  const dist = root.querySelector('.sv-dist');
+
+  function render(){
+    const f = FEAT[state.f];
+    const mem = P.filter(p=>p.g===state.g);
+    const all = Array.from(new Set(P.map(f.get)));
+    all.sort((a,b)=>f.numeric?a-b:String(a).localeCompare(String(b),'ru'));
+    const cnt = new Map();
+    mem.forEach(p=>{const v=f.get(p);cnt.set(v,(cnt.get(v)||0)+1);});
+    const vals = all.filter(v=>cnt.has(v));
+    vals.sort((a,b)=>(cnt.get(b)-cnt.get(a)) || (all.indexOf(a)-all.indexOf(b)));
+    const top = vals[0], n = cnt.get(top), N = mem.length;
+    order.forEach(p=>{
+      const inG = p.g===state.g;
+      p.el.classList.toggle('sv-off', !inG);
+      p.el.classList.toggle('sv-hit', inG && f.get(p)===top);
+      p.numEl.textContent = f.num;
+    });
+    heads.forEach(h=>h.classList.toggle('sv-on', h.getAttribute('data-h')===state.g));
+    frac.textContent = n+' из '+N;
+    val.textContent = f.num+' — '+f.fmt(top);
+    dist.innerHTML = vals.map(v=>'<span'+(cnt.get(v)===n?' class="sv-top"':'')+'>'+f.fmt(v)+'&nbsp;'+cnt.get(v)+'</span>').join(' · ');
+    svg.setAttribute('aria-label', (state.g==='d'?'Умершие':'Выжившие')+', признак «'+f.name+'»: '+f.fmt(top)+', '+n+' из '+N);
+  }
+
+  function radio(group, attr, key){
+    const btns = Array.from(group.querySelectorAll('button'));
+    function sync(){
+      btns.forEach(b=>{
+        const on = b.getAttribute(attr)===state[key];
+        b.setAttribute('aria-checked', on?'true':'false');
+        b.tabIndex = on?0:-1;
+      });
+    }
+    function pick(b, focus){
+      state[key] = b.getAttribute(attr);
+      sync(); render();
+      if(focus) b.focus();
+    }
+    btns.forEach((b,i)=>{
+      b.addEventListener('click',()=>pick(b,false));
+      b.addEventListener('keydown',e=>{
+        let j=null;
+        if(e.key==='ArrowRight'||e.key==='ArrowDown') j=(i+1)%btns.length;
+        else if(e.key==='ArrowLeft'||e.key==='ArrowUp') j=(i-1+btns.length)%btns.length;
+        else if(e.key==='Home') j=0;
+        else if(e.key==='End') j=btns.length-1;
+        if(j!==null){e.preventDefault();pick(btns[j],true);}
+      });
+    });
+    sync();
+  }
+  radio(root.querySelector('.sv-switch'),'data-g','g');
+  radio(root.querySelector('.sv-chips'),'data-f','f');
+  render();
+})();</script>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>3. Способ развязки массового отравления, <span class="mark">отличающийся тем, что убийца определяет не жертв, а выживших, и связь, которую следствие напрасно ищет среди умерших, обнаруживается только среди спасённых, а спаситель оказывается отравителем.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="3">Проверить новизну</a>
+</section>
+
+<!-- 4 -->
+<section class="sheet" id="twist-4">
+  <div class="sheet-head"><span class="no">Пункт 4</span><span class="fig-no">Лист 5</span></div>
+  <h2>Обвиняемый признаётся, чтобы признание развалилось в суде</h2>
+  <h3>Устройство</h3>
+  <p>Подозреваемый сам приходит в полицию и даёт подробное признание. В нём три детали, которые может знать только убийца, и две невозможные: он называет не то оружие и не тот час. Защита доказывает, что признание ложное. Три «тайные» детали за неделю до этого появились в газете со ссылкой на анонимный источник. Две невозможные прямо опровергнуты экспертизой. Суд видит человека, который пересказал газету и ошибся в остальном, и оправдывает его. Повторно судить за то же преступление нельзя.</p>
+  <p>Анонимным источником газеты был он сам. Тайные детали он сделал общеизвестными заранее, чтобы в суде они перестали быть уликами.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Заметка в газете вышла раньше, чем полиция обнаружила одну из трёх деталей. Даты указаны во второй и в седьмой главах.</p>
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>4. Способ развязки, при котором виновный добивается оправдания, <span class="mark">отличающийся тем, что он сам заранее и анонимно предаёт огласке детали, известные только убийце, а затем включает их в собственное признание, нарочно опровержимое в остальном.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="4">Проверить новизну</a>
+</section>
+
+<!-- 5 -->
+<section class="sheet" id="twist-5">
+  <div class="sheet-head"><span class="no">Пункт 5</span><span class="fig-no">Лист 6 · Фиг. 2</span></div>
+  <h2>Орудием второго убийства становится следственный эксперимент</h2>
+  <h3>Устройство</h3>
+  <p>Единственная свидетельница утверждает, что видела убийцу из окна, стоя на наружном карнизе: она пряталась там от мужа. Следователь хочет проверить, можно ли оттуда что-то разглядеть, и назначает следственный эксперимент. Идею ему подсказали так, что он считает её своей: один из подозреваемых насмешливо заметил, будто с карниза ничего не видно. Ночью перед экспериментом этот подозреваемый подпиливает кронштейн. Свидетельница при полиции встаёт на указанное место и падает. Протокол фиксирует несчастный случай во время следственного действия.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Свидетельница описывала, что стояла <span class="clue">левее водосточной трубы</span>. Эксперимент проводят правее, на месте, которое в протоколе указал «помогавший восстановить картину» подозреваемый.</p>
+
+  <figure class="plate fig">
+    <svg viewBox="0 0 640 370" role="img" aria-label="Фигура 2. Разрез стены с окном, наружный карниз на треугольном кронштейне с пропилом и траектория падения во время эксперимента.">
+      <rect x="80" y="20" width="60" height="100" fill="url(#hatch)"/>
+      <rect x="80" y="232" width="60" height="108" fill="url(#hatch)"/>
+      <line x1="80" y1="20" x2="80" y2="120"/><line x1="140" y1="20" x2="140" y2="120"/><line x1="80" y1="120" x2="140" y2="120"/>
+      <line x1="80" y1="232" x2="80" y2="340"/><line x1="140" y1="232" x2="140" y2="340"/><line x1="80" y1="232" x2="140" y2="232"/>
+      <rect x="98" y="120" width="24" height="112" class="thin"/>
+      <line x1="110" y1="120" x2="110" y2="232" class="thin"/>
+      <rect x="140" y="222" width="118" height="12" fill="url(#hatch)"/>
+      <rect x="140" y="222" width="118" height="12"/>
+      <path d="M140 234 L140 300 L236 234"/>
+      <path d="M146 240 L146 286 L214 240" class="thin"/>
+      <line x1="178" y1="257" x2="194" y2="281"/>
+      <line x1="183" y1="254" x2="199" y2="278"/>
+      <path d="M228 216 l8 8 m0 -8 l-8 8"/>
+      <path d="M232 214 C 300 220, 330 270, 338 334" class="dash" marker-end="url(#arr)"/>
+      <rect x="140" y="340" width="480" height="14" fill="url(#hatch)"/>
+      <line x1="20" y1="340" x2="620" y2="340"/>
+      <line x1="560" y1="234" x2="560" y2="338" marker-start="url(#arr)" marker-end="url(#arr)" class="thin"/>
+      <line x1="262" y1="228" x2="572" y2="228" class="dot"/>
+      <text x="572" y="292" class="small">H</text>
+      <line x1="60" y1="70" x2="86" y2="70" class="lead"/><text x="28" y="75">30</text>
+      <line x1="250" y1="222" x2="290" y2="180" class="lead"/><text x="294" y="178">32</text>
+      <line x1="150" y1="290" x2="120" y2="320" class="lead"/><text x="100" y="334" fill="#141414">34</text>
+      <line x1="196" y1="270" x2="240" y2="300" class="lead"/><text x="244" y="308">36</text>
+      <line x1="320" y1="250" x2="390" y2="250" class="lead"/><text x="396" y="255">38</text>
+      <line x1="232" y1="214" x2="232" y2="170" class="lead"/><text x="222" y="162">40</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">30</span>Стена в разрезе</li>
+      <li><span class="n">32</span>Наружный карниз</li>
+      <li><span class="n">34</span>Кронштейн</li>
+      <li><span class="n">36</span>Пропил, сделанный накануне</li>
+      <li><span class="n">38</span>Траектория падения при эксперименте</li>
+      <li><span class="n">40</span>Место, указанное подозреваемым</li>
+    </ul>
+    <figcaption><span>Фиг. 2</span><span>Разрез по оси окна</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>5. Способ развязки, при котором убийство повторяет обстоятельства первого, <span class="mark">отличающийся тем, что убийство совершается руками самой полиции во время следственного эксперимента, назначенного по незаметной подсказке убийцы, и оформляется в протоколе как несчастный случай.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="5">Проверить новизну</a>
+</section>
+
+<!-- 6 -->
+<section class="sheet" id="twist-6">
+  <div class="sheet-head"><span class="no">Пункт 6</span><span class="fig-no">Лист 7 · Фиг. 3</span></div>
+  <h2>У жертвы было одно имя на троих</h2>
+  <h3>Устройство</h3>
+  <p>Трое приезжих много лет живут по одному паспорту. Днём один работает счетоводом на складе, второй вечером стоит за прилавком в лавке, третий ночью сторожит стройку. Живут они в разных концах города, и каждый квартал знает «своего» Ивана Петровича. В канале находят тело с этим паспортом, и соседи в каждом квартале опознают пропавшего. Следствие ищет убийцу человека, которого никогда не было. Один из троих убил другого и теперь получает за двоих.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Сыщик сводит показания всех свидетелей о распорядке «Ивана Петровича» на одном листе. Получается, что в его сутках больше двадцати четырёх часов: дважды в день он находится в двух местах одновременно.</p>
+
+  <figure class="plate fig">
+    <svg viewBox="0 0 640 330" role="img" aria-label="Фигура 3. Раскрытый паспорт с тремя наложенными силуэтами в одной фотографии и сводный распорядок дня, где часы перекрываются.">
+      <rect x="40" y="30" width="270" height="270" rx="6"/>
+      <rect x="330" y="30" width="270" height="270" rx="6"/>
+      <path d="M310 36 Q320 30 330 36" class="thin"/>
+      <rect x="70" y="70" width="112" height="142"/>
+      <ellipse cx="126" cy="120" rx="24" ry="30"/>
+      <path d="M80 212 Q86 166 126 160 Q166 166 172 212"/>
+      <ellipse cx="132" cy="116" rx="22" ry="29" class="dash thin"/>
+      <path d="M88 212 Q94 164 132 156 Q170 164 176 212" class="dash thin"/>
+      <ellipse cx="120" cy="124" rx="26" ry="31" class="dot"/>
+      <path d="M74 212 Q80 170 120 165 Q160 170 166 212" class="dot"/>
+      <line x1="198" y1="84" x2="290" y2="84" class="thin"/>
+      <line x1="198" y1="104" x2="276" y2="104" class="thin"/>
+      <line x1="198" y1="124" x2="290" y2="124" class="thin"/>
+      <line x1="198" y1="144" x2="260" y2="144" class="thin"/>
+      <line x1="70" y1="236" x2="182" y2="236" class="thin"/>
+      <line x1="70" y1="254" x2="160" y2="254" class="thin"/>
+      <circle cx="248" cy="246" r="30" class="thin"/>
+      <circle cx="248" cy="246" r="23" class="thin"/>
+      <line x1="232" y1="246" x2="264" y2="246" class="thin"/>
+      <rect x="350" y="80" width="70" height="20"/>
+      <rect x="411.25" y="125" width="78.75" height="20"/>
+      <rect x="481.25" y="170" width="78.75" height="20"/>
+      <rect x="411.25" y="222" width="8.75" height="14" fill="url(#hatch)"/>
+      <rect x="481.25" y="222" width="8.75" height="14" fill="url(#hatch)"/>
+      <line x1="350" y1="236" x2="560" y2="236"/>
+      <line x1="350" y1="230" x2="350" y2="242"/><line x1="560" y1="230" x2="560" y2="242"/>
+      <line x1="411.25" y1="70" x2="411.25" y2="236" class="dot"/>
+      <line x1="490" y1="70" x2="490" y2="236" class="dot"/>
+      <text x="350" y="262" text-anchor="middle" class="small">0</text>
+      <text x="560" y="262" text-anchor="middle" class="small">24</text>
+      <line x1="60" y1="50" x2="40" y2="20" class="lead"/><text x="20" y="18">50</text>
+      <line x1="170" y1="190" x2="196" y2="196" class="lead"/><text x="200" y="202">52</text>
+      <line x1="560" y1="180" x2="585" y2="180" class="lead"/><text x="588" y="185">54</text>
+      <line x1="486" y1="236" x2="500" y2="280" class="lead"/><text x="496" y="295">56</text>
+      <line x1="270" y1="268" x2="290" y2="290" class="lead"/><text x="286" y="316" fill="#141414">58</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">50</span>Один паспорт</li>
+      <li><span class="n">52</span>Три силуэта, совмещённые в одном фото</li>
+      <li><span class="n">54</span>Распорядок по показаниям каждого квартала</li>
+      <li><span class="n">56</span>Часы, в которые человек находится в двух местах</li>
+      <li><span class="n">58</span>Печать</li>
+    </ul>
+    <figcaption><span>Фиг. 3</span><span>Документ и сводный распорядок</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>6. Способ развязки, при котором личность жертвы двойственна, <span class="mark">отличающийся тем, что одной личностью пользуются несколько человек, а убийцу выдаёт сводный распорядок дня, в котором сутки оказываются длиннее двадцати четырёх часов.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="6">Проверить новизну</a>
+</section>
+
+<!-- 7 -->
+<section class="sheet" id="twist-7">
+  <div class="sheet-head"><span class="no">Пункт 7</span><span class="fig-no">Лист 8 · Фиг. 4</span></div>
+  <h2>Два компаньона отравили друг друга за одним ужином</h2>
+  <h3>Устройство</h3>
+  <p>Компаньоны обедают вдвоём, и оба умирают той же ночью. Подозрение падает на кухарку, единственного третьего человека в доме. Следы двух разных ядов ведут к двум людям, и оба мертвы, поэтому сыщик поначалу их отбрасывает. На деле каждый из компаньонов решил избавиться от другого и в этот вечер исполнил задуманное. Ни один не знал о замысле второго. Кухарка невиновна. Виноваты обе жертвы, и судить некого.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Каждый яд найден в аптечке не того, кто от него умер, а его сотрапезника. Кроме того, оба покойника накануне написали письма, где уверенно говорят о планах на следующую неделю, но только на свою, без компаньона.</p>
+
+  <figure class="plate fig">
+    <defs>
+      <pattern id="hatch2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+        <line x1="0" y1="0" x2="0" y2="6" stroke="#141414" stroke-width="0.8"/>
+      </pattern>
+    </defs>
+    <svg viewBox="0 0 640 320" role="img" aria-label="Фигура 4. Два бокала с разным ядом и два аптечных флакона; пути ядов перекрещиваются: каждый флакон ведёт к бокалу другого.">
+      <defs>
+        <pattern id="hatch-r" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#141414" stroke-width="0.8"/>
+        </pattern>
+      </defs>
+      <rect x="40" y="270" width="560" height="14" fill="url(#hatch)"/>
+      <line x1="40" y1="270" x2="600" y2="270"/><line x1="40" y1="284" x2="600" y2="284"/>
+      <path d="M174 120 L246 120 Q244 168 210 178 Q176 168 174 120 Z" fill="url(#hatch)" stroke="none"/>
+      <path d="M170 90 L250 90 Q248 172 210 184 Q172 172 170 90 Z"/>
+      <line x1="174" y1="120" x2="246" y2="120" class="thin"/>
+      <line x1="210" y1="184" x2="210" y2="262"/>
+      <path d="M172 268 Q210 254 248 268"/>
+      <path d="M394 120 L466 120 Q464 168 430 178 Q396 168 394 120 Z" fill="url(#hatch-r)" stroke="none"/>
+      <path d="M390 90 L470 90 Q468 172 430 184 Q392 172 390 90 Z"/>
+      <line x1="394" y1="120" x2="466" y2="120" class="thin"/>
+      <line x1="430" y1="184" x2="430" y2="262"/>
+      <path d="M392 268 Q430 254 468 268"/>
+      <rect x="85" y="200" width="30" height="70" rx="3"/>
+      <rect x="93" y="186" width="14" height="14"/>
+      <rect x="90" y="178" width="20" height="8" class="solid"/>
+      <line x1="85" y1="220" x2="115" y2="220" class="thin"/><line x1="85" y1="246" x2="115" y2="246" class="thin"/>
+      <rect x="525" y="200" width="30" height="70" rx="3"/>
+      <rect x="533" y="186" width="14" height="14"/>
+      <rect x="530" y="178" width="20" height="8" class="solid"/>
+      <line x1="525" y1="220" x2="555" y2="220" class="thin"/><line x1="525" y1="246" x2="555" y2="246" class="thin"/>
+      <path d="M100 172 Q300 10 420 84" class="dash" marker-end="url(#arr)"/>
+      <path d="M540 172 Q340 10 220 84" class="dash" marker-end="url(#arr)"/>
+      <line x1="190" y1="150" x2="140" y2="130" class="lead"/><text x="116" y="128">60</text>
+      <line x1="450" y1="150" x2="500" y2="130" class="lead"/><text x="504" y="128">62</text>
+      <line x1="100" y1="236" x2="60" y2="236" class="lead"/><text x="30" y="241">64</text>
+      <line x1="540" y1="236" x2="580" y2="236" class="lead"/><text x="584" y="241">66</text>
+      <line x1="320" y1="52" x2="320" y2="26" class="lead"/><text x="310" y="20">68</text>
+      <line x1="320" y1="277" x2="320" y2="300" class="lead"/><text x="310" y="316">70</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">60</span>Бокал первого компаньона</li>
+      <li><span class="n">62</span>Бокал второго компаньона</li>
+      <li><span class="n">64</span>Флакон из аптечки первого</li>
+      <li><span class="n">66</span>Флакон из аптечки второго</li>
+      <li><span class="n">68</span>Перекрёстные пути ядов</li>
+      <li><span class="n">70</span>Стол в разрезе</li>
+    </ul>
+    <figcaption><span>Фиг. 4</span><span>Схема перекрёстного отравления</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>7. Способ развязки, при котором подозрение падает на третье лицо, <span class="mark">отличающийся тем, что две жертвы независимо друг от друга и в один вечер убивают одна другую, так что каждая из них одновременно жертва и убийца, а третьего виновного нет.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="7">Проверить новизну</a>
+</section>
+
+<!-- 8 -->
+<section class="sheet" id="twist-8">
+  <div class="sheet-head"><span class="no">Пункт 8</span><span class="fig-no">Лист 9 · Фиг. 5</span></div>
+  <h2>Убийца в трёхстах километрах, а орудие лежит в каждом почтовом ящике</h2>
+  <h3>Устройство</h3>
+  <p>Жертва — человек строгих привычек. Каждую субботу он переходит на остров по дамбе, которую открывает отлив, и сверяется с таблицей приливов в местном еженедельнике. Убийца работает наборщиком в типографии, где печатают этот еженедельник. В номере за пятницу он меняет одну литеру в таблице: малая вода стоит на час позже настоящей. Жертва выходит в назначенное время и попадает в прилив. Убийца в это время за триста километров, у всех на виду, и подозрений против него нет.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Утонувший держал газету в кармане. Одна цифра в таблице оттиснута чуть бледнее соседних, и у неё сбит угол. Такую же сбитую восьмёрку читатель видел в шестой главе, в объявлении, которое набирал тот же человек.</p>
+
+  <figure class="plate fig">
+    <svg viewBox="0 0 640 300" role="img" aria-label="Фигура 5. Поперечный разрез пролива: материк, дамба, остров, уровни полной и малой воды и врезка с таблицей приливов, где одна цифра подменена.">
+      <path d="M20 140 L130 140 Q170 145 190 200 L450 200 Q480 150 520 130 L620 130 L620 290 L20 290 Z" fill="url(#hatch)" stroke="none"/>
+      <path d="M20 140 L130 140 Q170 145 190 200 L450 200 Q480 150 520 130 L620 130"/>
+      <rect x="190" y="188" width="260" height="12" class="blank"/>
+      <line x1="150" y1="160" x2="492" y2="160" class="dash"/>
+      <line x1="180" y1="196" x2="460" y2="196" class="dot"/>
+      <path d="M200 160 q6 -5 12 0 t12 0 M260 160 q6 -5 12 0 t12 0 M330 160 q6 -5 12 0 t12 0 M400 160 q6 -5 12 0 t12 0" class="thin"/>
+      <text x="498" y="164" class="small">ПВ</text>
+      <text x="466" y="200" class="small">МВ</text>
+      <rect x="420" y="18" width="200" height="92" class="blank"/>
+      <line x1="420" y1="42" x2="620" y2="42" class="thin"/>
+      <line x1="420" y1="64" x2="620" y2="64" class="thin"/>
+      <line x1="420" y1="86" x2="620" y2="86" class="thin"/>
+      <line x1="470" y1="18" x2="470" y2="110" class="thin"/>
+      <text x="434" y="35" class="small">СБ</text>
+      <text x="434" y="58" class="small">МВ</text><text x="490" y="58" class="small">05:40</text>
+      <text x="434" y="80" class="small">ПВ</text><text x="490" y="80" class="small">11:52</text>
+      <text x="434" y="102" class="small">МВ</text><text x="490" y="102" class="small">18:05</text>
+      <circle cx="529" cy="98" r="9" class="thin"/>
+      <line x1="60" y1="140" x2="40" y2="100" class="lead"/><text x="28" y="94">80</text>
+      <line x1="580" y1="130" x2="600" y2="124" class="lead"/><text x="602" y="146" fill="#141414">82</text>
+      <line x1="320" y1="200" x2="320" y2="240" class="lead"/><text x="310" y="256" fill="#141414">84</text>
+      <line x1="170" y1="160" x2="130" y2="110" class="lead"/><text x="110" y="104">86</text>
+      <line x1="230" y1="196" x2="250" y2="240" class="lead"/><text x="246" y="256" fill="#141414">88</text>
+      <line x1="420" y1="40" x2="380" y2="30" class="lead"/><text x="356" y="34">90</text>
+      <line x1="538" y1="100" x2="590" y2="124" class="lead"/><text x="594" y="122" fill="#141414"> </text>
+      <text x="560" y="128" class="small">92</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">80</span>Материк</li>
+      <li><span class="n">82</span>Остров</li>
+      <li><span class="n">84</span>Дамба, открытая в отлив</li>
+      <li><span class="n">86</span>Уровень полной воды</li>
+      <li><span class="n">88</span>Уровень малой воды</li>
+      <li><span class="n">90</span>Таблица приливов в еженедельнике</li>
+      <li><span class="n">92</span>Подменённая литера</li>
+    </ul>
+    <figcaption><span>Фиг. 5</span><span>Разрез пролива и таблица</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>8. Способ развязки, при котором время играет решающую роль, <span class="mark">отличающийся тем, что орудием убийства служит общедоступный печатный документ, в котором убийца, не находясь рядом с жертвой, изменил одну цифру, а уликой служит дефект литеры, который повторяется в другой работе того же наборщика.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="8">Проверить новизну</a>
+</section>
+
+<!-- 9 -->
+<section class="sheet" id="twist-9">
+  <div class="sheet-head"><span class="no">Пункт 9</span><span class="fig-no">Лист 10 · Фиг. 6</span></div>
+  <h2>Убийце нужна была не смерть, а её очерёдность</h2>
+  <h3>Устройство</h3>
+  <p>Старый фабрикант умирает в больнице. Врачи дают ему не больше суток. По завещанию всё достаётся сыну, а если сын умрёт раньше отца, то племяннику. Пока сын жив, племянник не получит ничего. Умри сын хоть через час после отца, наследство перешло бы к нему, а от него к его вдове. Ночью сын погибает: его машина на мокрой дороге уходит в реку. Отец умирает под утро. Всё выглядит как двойное несчастье в одной семье.</p>
+  <p>Для племянника смерть сына ничего не значила бы сама по себе. Ему нужно было одно: чтобы сын умер раньше отца. Поэтому он действовал не раньше и не позже той ночи, когда отцу оставались часы.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>Мотив виден только тому, кто знает и условие завещания, и прогноз врачей. Прогноз врач сообщил по телефону единственному родственнику, который в тот вечер позвонил в больницу. Запись в книге дежурной сестры приведена в пятой главе.</p>
+
+  <figure class="plate fig">
+    <svg viewBox="0 0 640 260" role="img" aria-label="Фигура 6. Две параллельные оси жизни, отца и сына, с моментами смерти; при обратном порядке наследство уходит по другой ветви.">
+      <line x1="40" y1="70" x2="610" y2="70" marker-end="url(#arr)"/>
+      <line x1="40" y1="150" x2="610" y2="150" marker-end="url(#arr)"/>
+      <line x1="40" y1="64" x2="40" y2="76"/><line x1="40" y1="144" x2="40" y2="156"/>
+      <path d="M470 60 l10 10 l-10 10 l-10 -10 Z" class="solid"/>
+      <path d="M300 140 l10 10 l-10 10 l-10 -10 Z" class="solid"/>
+      <rect x="300" y="60" width="170" height="20" fill="url(#hatch)" stroke="none"/>
+      <line x1="300" y1="80" x2="300" y2="140" class="dot"/>
+      <line x1="470" y1="80" x2="470" y2="200" class="dot"/>
+      <path d="M470 210 C 500 210, 520 220, 540 232" class="dash" marker-end="url(#arr)"/>
+      <path d="M470 210 C 440 210, 420 220, 400 232" class="thin" marker-end="url(#arr)"/>
+      <line x1="388" y1="226" x2="412" y2="244" class="thin"/>
+      <line x1="412" y1="226" x2="388" y2="244" class="thin"/>
+      <text x="30" y="50" class="small">ОТЕЦ</text>
+      <text x="30" y="130" class="small">СЫН</text>
+      <line x1="470" y1="60" x2="500" y2="26" class="lead"/><text x="502" y="24">100</text>
+      <line x1="300" y1="140" x2="250" y2="110" class="lead"/><text x="222" y="108">102</text>
+      <line x1="385" y1="62" x2="370" y2="30" class="lead"/><text x="356" y="24">104</text>
+      <line x1="540" y1="232" x2="580" y2="232" class="lead"/><text x="584" y="237">106</text>
+      <line x1="388" y1="236" x2="350" y2="236" class="lead"/><text x="316" y="241">108</text>
+    </svg>
+    <ul class="legend">
+      <li><span class="n">100</span>Смерть отца, естественная</li>
+      <li><span class="n">102</span>Смерть сына, подстроенная</li>
+      <li><span class="n">104</span>Часы, отделяющие одну смерть от другой</li>
+      <li><span class="n">106</span>Наследство племяннику</li>
+      <li><span class="n">108</span>Ветвь вдовы сына, закрытая</li>
+    </ul>
+    <figcaption><span>Фиг. 6</span><span>Порядок смертей и ветви наследования</span></figcaption>
+  </figure>
+
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>9. Способ развязки, при котором мотивом служит наследственное право, <span class="mark">отличающийся тем, что убийце выгодна не смерть жертвы, а её место в очерёдности по отношению к другой, естественной и предсказанной смерти, так что время убийства выбирается по медицинскому прогнозу.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="9">Проверить новизну</a>
+</section>
+
+<!-- 10 -->
+<section class="sheet" id="twist-10">
+  <div class="sheet-head"><span class="no">Пункт 10</span><span class="fig-no">Лист 11</span></div>
+  <h2>Раскрыть дело сыщик может, только сознавшись в своём старом проступке</h2>
+  <h3>Устройство</h3>
+  <p>Убийство совершено так, что все улики указывают на невиновного. Есть одна деталь, которая его оправдывает. Двадцать лет назад сыщик, тогда молодой, в этом самом доме подменил улику в деле, которое считается его первым триумфом. Знать о подмене может только он. Чтобы объяснить, почему нынешняя улика ничего не доказывает, ему придётся рассказать, как она туда попала, а значит, признаться и погубить своё имя.</p>
+  <p>Убийце покойный был безразличен. Целью был сыщик: тот, по чьей давней подмене пострадал близкий убийце человек. Любой выбор сыщика наказывает его самого: либо невиновный идёт под суд, либо он сам теряет всё.</p>
+  <h3>Как узнаёт читатель</h3>
+  <p>В первой главе сыщик на миг медлит у двери, хотя, по его словам, в доме прежде не бывал. Старая газетная вырезка о его первом деле, упомянутая мимоходом, называет тот же адрес.</p>
+  <div class="claim">
+    <span class="label">Формула</span>
+    <p>10. Способ развязки, при котором преступление направлено против сыщика, <span class="mark">отличающийся тем, что убийство устроено так, что единственное верное решение требует от сыщика публично признаться в собственном давнем подлоге, а настоящая жертва замысла не убитый, а тот, кто расследует.</span></p>
+  </div>
+  <a class="check" href="#prior-art-sheet" data-twist="10">Проверить новизну</a>
+</section>
+
+<!-- Prior art -->
+<section class="sheet" id="prior-art-sheet">
+  <div class="sheet-head"><span class="no">Поиск по прототипам</span><span class="fig-no">Лист 12</span></div>
+  <h2>У каждой развязки есть ближайший предшественник, и у каждой есть отличие от него</h2>
+  <p>Новизну детективного приёма доказать нельзя, её можно только проверить по известным образцам. В карточках ниже собраны ближайшие прототипы из классического канона и сформулирован признак, которого у них нет. Если читатель знает более близкий образец, это возражение против заявки, и оно будет принято.</p>
+
+  <div class="inst-label"><span>Карточка поиска</span><span>Пункты 1–10</span></div>
+  <div class="instrument" data-instrument="prior-art">
+  <div class="pa-head">
+    <span class="pa-no">Пункт <span class="pa-num">1</span></span>
+    <span class="pa-count">Прототипов: <span class="pa-cnt">2</span></span>
+  </div>
+  <div class="pa-chips" role="tablist" aria-label="Пункт заявки"></div>
+  <div class="pa-stack"></div>
+</div>
+<style>
+[data-instrument="prior-art"]{padding:0;font-family:var(--text);color:var(--ink)}
+[data-instrument="prior-art"] .pa-head{display:flex;justify-content:space-between;gap:1rem;font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding:.6rem .9rem .5rem}
+[data-instrument="prior-art"] .pa-num,[data-instrument="prior-art"] .pa-cnt{display:inline-block;min-width:1.6em;text-align:left;font-variant-numeric:tabular-nums}
+[data-instrument="prior-art"] .pa-count{color:var(--grey)}
+[data-instrument="prior-art"] .pa-chips{display:grid;grid-template-columns:repeat(10,1fr);gap:.3rem;padding:.75rem .9rem;border-bottom:1px solid var(--rule)}
+[data-instrument="prior-art"] .pa-chip{font-family:var(--mono);font-size:.85rem;font-variant-numeric:tabular-nums;line-height:1;padding:.5rem 0;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;touch-action:manipulation;min-width:0}
+[data-instrument="prior-art"] .pa-chip:hover{background:var(--panel)}
+[data-instrument="prior-art"] .pa-chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+[data-instrument="prior-art"] .pa-chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+[data-instrument="prior-art"] .pa-stack{display:grid;padding:.9rem .9rem 1rem}
+[data-instrument="prior-art"] .pa-card{grid-area:1/1;visibility:hidden;opacity:0;transition:opacity .18s ease}
+[data-instrument="prior-art"] .pa-card.on{visibility:visible;opacity:1}
+[data-instrument="prior-art"] .pa-title{font-family:var(--display);font-size:1.35rem;line-height:1.2;margin:0 0 .9rem}
+[data-instrument="prior-art"] .pa-h{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin:0 0 .4rem}
+[data-instrument="prior-art"] .pa-list{list-style:none;margin:0 0 1rem;padding:0;border-top:1px solid var(--rule)}
+[data-instrument="prior-art"] .pa-item{display:grid;grid-template-columns:2.2rem 1fr auto;gap:.1rem .6rem;padding:.5rem 0;border-bottom:1px solid var(--rule);font-size:.93rem;line-height:1.45}
+[data-instrument="prior-art"] .pa-idx{font-family:var(--mono);font-size:.75rem;color:var(--grey);padding-top:.15rem}
+[data-instrument="prior-art"] .pa-work b{font-weight:700}
+[data-instrument="prior-art"] .pa-year{font-family:var(--mono);font-size:.78rem;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;padding-top:.12rem;text-align:right}
+[data-instrument="prior-art"] .pa-what{grid-column:2/4;color:var(--grey)}
+[data-instrument="prior-art"] .pa-diff{border-left:2px solid var(--ink);padding:.2rem 0 .2rem 1rem;font-size:.97rem;line-height:1.5;margin:0}
+[data-instrument="prior-art"] .pa-diff .mark{color:var(--accent)}
+@media (max-width:520px){
+  [data-instrument="prior-art"] .pa-chips{gap:.2rem;padding:.6rem}
+  [data-instrument="prior-art"] .pa-chip{font-size:.78rem;padding:.45rem 0}
+  [data-instrument="prior-art"] .pa-stack{padding:.75rem .6rem .9rem}
+  [data-instrument="prior-art"] .pa-item{grid-template-columns:1.8rem 1fr auto}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="prior-art"] .pa-card{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="prior-art"]');
+if(!root)return;
+const D=[
+{t:"Тело находят дважды",p:[["Честертон","Сломанная шпага","1911","Тело прячут среди множества тел, следы — среди законных следов."],["Кристи","Убийство Роджера Экройда","1926","Убийца оказывается на месте обнаружения, чтобы убрать улику."]],d:["Убийца ","устраивает повторное публичное обнаружение уже найденного тела",", чтобы его собственные следы получили объяснение при свидетелях; ключ — поза тела в анонимном звонке."]},
+{t:"Алиби из верного вывода сыщика",p:[["Эллери Куин","Чудо десяти дней","1948","Убийца ведёт сыщика к ложному выводу."],["Кристи","Убийство Роджера Экройда","1926","Алиби создаётся подстроенным временем."]],d:["Вывод сыщика ","верен: он касается другого, второстепенного преступления, и именно его точность даёт алиби","."]},
+{t:"Связь среди выживших",p:[["Кристи","Убийства по алфавиту","1936","Одна нужная жертва спрятана в серии."],["Кристи","Печальный кипарис","1940","Отравительница — сиделка."]],d:["Убийца ","выбирает не жертв, а выживших","; связь есть только среди спасённых."]},
+{t:"Признание, рассчитанное на опровержение",p:[["Кристи","Свидетель обвинения","1925 / 1953","Свидетельница нарочно даёт показания, которые будут опровергнуты, чтобы обвиняемого оправдали."]],d:["","Сам виновный заранее и анонимно предаёт огласке детали, известные лишь убийце",", обесценивая их как улики, и строит на них опровержимое признание."]},
+{t:"Следственный эксперимент как орудие",p:[["Кристи","Мышеловка","1952","Убийца, выдающий себя за полицейского, устраивает реконструкцию событий, чтобы остаться наедине с жертвой."],["Конан Дойл","Загадка Торского моста","1922","Холмс воспроизводит обстоятельства смерти опытом."]],d:["Эксперимент ","проводит настоящая полиция по незаметной подсказке убийцы",", а убивает подготовленное заранее приспособление."]},
+{t:"Одно имя на троих",p:[["Конан Дойл","Установление личности","1891","Один человек под двумя личностями."],["Конан Дойл","Человек с рассечённой губой","1891","Один человек под двумя личностями."]],d:["Обратное: ","несколько человек под одной личностью","; разоблачение по сводному распорядку, в котором сутки длиннее двадцати четырёх часов."]},
+{t:"Взаимное отравление",p:[["Конан Дойл","Дьяволова нога","1910","Отравитель сам становится жертвой мстителя."],["Кристи","Убийство в Восточном экспрессе","1934","Много убийц у одной жертвы."]],d:["","Две жертвы независимо и одновременно убивают друг друга",", третьего виновного нет."]},
+{t:"Подменённая литера в таблице приливов",p:[["Сэйерс","Пять красных селёдок","1931","Расписания поездов в построении алиби."],["Сэйерс","Где будет труп","1932","Таблицы приливов в построении алиби."],["Ф. У. Крофтс","Бочка","1920","Алиби по расписаниям."]],d:["Таблица не опора алиби, а ","орудие убийства — изменённый печатный документ","; уликой служит дефект литеры."]},
+{t:"Очерёдность смертей",p:[["Сэйерс","Неестественная смерть","1927","Мотив связан со сроком смерти и изменением наследственного права."]],d:["Убийце нужна не смерть, а ","очерёдность одной смерти относительно другой",", естественной и предсказанной врачами."]},
+{t:"Признание сыщика",p:[["Конан Дойл","Последнее дело Холмса","1893","Преступник направлен против самого сыщика."],["Кристи","Пять поросят","1942","Старое дело пересматривается через годы."],["Кристи","Занавес","1975","Сыщик сам переступает закон."]],d:["","Верное решение нового дела требует от сыщика признаться в собственном давнем подлоге","; настоящая цель убийцы — сыщик."]}
+];
+const chipsBox=root.querySelector('.pa-chips'),stack=root.querySelector('.pa-stack');
+const numEl=root.querySelector('.pa-num'),cntEl=root.querySelector('.pa-cnt');
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;};
+const chips=[],cards=[];
+D.forEach((item,i)=>{
+  const n=i+1;
+  const c=el('button','pa-chip',String(n));
+  c.type='button';c.setAttribute('role','tab');c.id='pa-tab-'+n;c.setAttribute('aria-controls','pa-card-'+n);
+  c.addEventListener('click',()=>select(n,true));
+  chipsBox.appendChild(c);chips.push(c);
+  const card=el('div','pa-card');card.id='pa-card-'+n;card.setAttribute('role','tabpanel');card.setAttribute('aria-labelledby','pa-tab-'+n);
+  card.appendChild(el('h4','pa-title',item.t));
+  card.appendChild(el('p','pa-h','Ближайшие прототипы'));
+  const ul=el('ul','pa-list');
+  item.p.forEach((p,k)=>{
+    const li=el('li','pa-item');
+    li.appendChild(el('span','pa-idx','П'+(k+1)));
+    const w=el('span','pa-work');w.appendChild(el('b',null,p[0]));w.appendChild(document.createTextNode(', «'+p[1]+'»'));
+    li.appendChild(w);li.appendChild(el('span','pa-year',p[2]));li.appendChild(el('span','pa-what',p[3]));
+    ul.appendChild(li);
+  });
+  card.appendChild(ul);
+  card.appendChild(el('p','pa-h','Отличие'));
+  const d=el('p','pa-diff');
+  d.appendChild(document.createTextNode(item.d[0]));d.appendChild(el('span','mark',item.d[1]));d.appendChild(document.createTextNode(item.d[2]));
+  card.appendChild(d);
+  stack.appendChild(card);cards.push(card);
+});
+let cur=1;
+function select(n,focus){
+  cur=n;
+  chips.forEach((c,i)=>{const on=i+1===n;c.setAttribute('aria-selected',on?'true':'false');c.tabIndex=on?0:-1;});
+  cards.forEach((c,i)=>{const on=i+1===n;c.classList.toggle('on',on);c.setAttribute('aria-hidden',on?'false':'true');});
+  numEl.textContent=String(n);
+  cntEl.textContent=String(D[n-1].p.length);
+  if(focus)chips[n-1].focus({preventScroll:true});
+}
+chipsBox.addEventListener('keydown',e=>{
+  let n=cur;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')n=cur%10+1;
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(cur+8)%10+1;
+  else if(e.key==='Home')n=1;
+  else if(e.key==='End')n=10;
+  else return;
+  e.preventDefault();select(n,true);
+});
+const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('.check[data-twist]').forEach(b=>{
+  b.addEventListener('click',e=>{
+    const n=parseInt(b.getAttribute('data-twist'),10);
+    if(!(n>=1&&n<=10))return;
+    e.preventDefault();
+    select(n,false);
+    const target=document.getElementById('prior-art-sheet')||root;
+    target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+    chips[n-1].focus({preventScroll:true});
+  });
+});
+select(1,false);
+})();</script>
+
+  <p class="note">Все сюжеты на этой странице описаны впервые здесь и свободны для использования. Годы публикаций прототипов указаны по первым изданиям; русские названия даны в распространённых переводах.</p>
+</section>
+
+</main>
+</body>
+</html>
