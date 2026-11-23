@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Пять патентов на эффект бабочки</title>
+<meta name="description" content="Пять вымышленных сюжетов, в которых ничтожная мелочь шаг за шагом меняет весь мир. Каждый оформлен как описание изобретения с чертежом, цепью звеньев и формулой.">
+<meta name="compositor:paper" content="#FAFAF7">
+<meta name="compositor:ink" content="#141414">
+<meta name="compositor:accent" content="#B0291C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAFAF7;
+  --ink:#141414;
+  --muted:#5A5A55;
+  --faint:#D8D7D0;
+  --accent:#B0291C;
+  --display:'Old Standard TT', 'Times New Roman', serif;
+  --text:'PT Serif', Georgia, serif;
+  --mono:'PT Mono', ui-monospace, 'Courier New', monospace;
+  --s-1:.8125rem;
+  --s0:1.0625rem;
+  --s1:1.3rem;
+  --s2:1.75rem;
+  --s3:2.5rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:var(--s0);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.page{
+  max-width:820px;
+  margin:0 auto;
+  padding:2.5rem 1.25rem 3rem;
+}
+.sheet{
+  border:1.5px solid var(--ink);
+  padding:1.25rem 1.25rem 1.75rem;
+  margin:0 0 2.5rem;
+  position:relative;
+  background:var(--paper);
+}
+@media (min-width:700px){
+  .sheet{padding:1.75rem 2.75rem 2.5rem}
+}
+.sheet-head{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:var(--s-1);
+  letter-spacing:.04em;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:.5rem;
+  margin-bottom:1.5rem;
+  font-variant-numeric:tabular-nums;
+}
+.prose{max-width:65ch}
+p{margin:0 0 1rem}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.2;margin:0}
+h1{font-size:var(--s3);letter-spacing:-.005em;margin:.25rem 0 1.25rem}
+h2{font-size:var(--s2);margin:0 0 1rem;max-width:30ch}
+h3{
+  font-family:var(--mono);
+  font-size:var(--s-1);
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  margin:2rem 0 .9rem;
+}
+.inid{
+  display:grid;
+  grid-template-columns:3.2rem 1fr;
+  gap:.35rem .75rem;
+  font-size:var(--s-1);
+  margin:0 0 1.75rem;
+  max-width:65ch;
+}
+.inid dt{font-family:var(--mono);color:var(--muted)}
+.inid dd{margin:0}
+.inid dd.big{font-family:var(--display);font-size:var(--s1);line-height:1.3}
+.rule{border:0;border-top:1px solid var(--ink);margin:1.75rem 0}
+.patno{font-family:var(--mono);font-size:var(--s-1);color:var(--muted);letter-spacing:.05em;margin:0 0 .4rem}
+
+figure{margin:1.5rem 0 1.75rem}
+.fig-box{
+  border-top:1px solid var(--faint);
+  border-bottom:1px solid var(--faint);
+  padding:.75rem 0;
+  overflow-x:auto;
+}
+svg.fig{display:block;width:100%;min-width:520px;height:auto}
+svg.fig .ln{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linejoin:round;stroke-linecap:round}
+svg.fig .th{fill:none;stroke:var(--ink);stroke-width:.7;stroke-linecap:round}
+svg.fig .dash{fill:none;stroke:var(--ink);stroke-width:.9;stroke-dasharray:5 4}
+svg.fig .dashdot{fill:none;stroke:var(--ink);stroke-width:.9;stroke-dasharray:14 4 2 4}
+svg.fig .lead{fill:none;stroke:var(--ink);stroke-width:.8}
+svg.fig .hatch{fill:url(#hatch);stroke:var(--ink);stroke-width:1.3}
+svg.fig .paperfill{fill:var(--paper);stroke:none}
+svg.fig text{font-family:var(--mono);fill:var(--ink)}
+svg.fig .cn{font-size:15px}
+svg.fig .lbl{font-size:11px;letter-spacing:.04em}
+svg.fig .code{font-size:22px}
+figcaption{
+  font-size:var(--s-1);
+  color:var(--muted);
+  margin-top:.6rem;
+  max-width:65ch;
+}
+figcaption b{font-family:var(--mono);font-weight:400;color:var(--ink);letter-spacing:.04em}
+
+ol.chain{
+  list-style:none;
+  counter-reset:step;
+  margin:0;
+  padding:0;
+  max-width:65ch;
+}
+ol.chain li{
+  counter-increment:step;
+  position:relative;
+  padding:0 0 1rem 3rem;
+  margin:0;
+}
+ol.chain li::before{
+  content:counter(step);
+  position:absolute;
+  left:0;
+  top:.15rem;
+  width:2rem;
+  height:1.6rem;
+  border:1px solid var(--ink);
+  font-family:var(--mono);
+  font-size:var(--s-1);
+  text-align:center;
+  line-height:1.5rem;
+  font-variant-numeric:tabular-nums;
+}
+ol.chain li::after{
+  content:"";
+  position:absolute;
+  left:1rem;
+  top:1.85rem;
+  bottom:.15rem;
+  border-left:1px solid var(--ink);
+}
+ol.chain li:last-child::after{display:none}
+ol.chain li b{font-weight:700}
+.kind{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid currentColor;
+  padding:0 .35rem;
+  margin-right:.4rem;
+  line-height:1.35;
+  vertical-align:.12em;
+}
+.kind.threshold{color:var(--accent)}
+.kind.amp{color:var(--ink)}
+.ref{font-family:var(--mono);font-size:.9em}
+
+ol.claims{
+  margin:0;
+  padding:0 0 0 1.75rem;
+  max-width:65ch;
+  font-size:.98rem;
+}
+ol.claims li{margin:0 0 .75rem;padding-left:.25rem}
+ol.claims li::marker{font-family:var(--mono)}
+
+.legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem 1.5rem;
+  font-size:var(--s-1);
+  margin:0 0 1.5rem;
+  max-width:65ch;
+}
+
+.instrument{
+  display:block;
+  width:100%;
+  margin:1.5rem 0 .6rem;
+  border:1px solid var(--ink);
+  background:var(--paper);
+}
+.instrument[data-instrument="divergence"]{min-height:360px}
+.instrument[data-instrument="chain-stepper"]{min-height:460px}
+
+.small{font-size:var(--s-1);color:var(--muted)}
+em{font-style:italic}
+a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:2px}
+
+@media (max-width:480px){
+  h1{font-size:2rem}
+  h2{font-size:1.45rem}
+  .inid{grid-template-columns:2.6rem 1fr}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#141414" stroke-width=".8"/>
+    </pattern>
+    <pattern id="perf" x="40" y="145" width="20" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="5" r="3" fill="none" stroke="#141414" stroke-width=".9"/>
+    </pattern>
+    <clipPath id="capsule">
+      <rect x="70" y="70" width="80" height="130" rx="40"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<main class="page">
+
+<!-- ЛИСТ 1 -->
+<section class="sheet">
+  <div class="sheet-head"><span>RU 1952 C1</span><span>Лист 1 из 7</span></div>
+
+  <dl class="inid">
+    <dt>(12)</dt><dd>Описание изобретения к патенту, пять вариантов осуществления</dd>
+    <dt>(54)</dt><dd class="big">Способ получения всемирных последствий из ничтожных причин</dd>
+    <dt>(72)</dt><dd>Изобретатель: случай</dd>
+    <dt>(57)</dt><dd>Реферат. Описаны пять цепей, в каждой из которых мелкое бытовое событие через десять звеньев приводит к изменению, затрагивающему весь мир. Для каждой цепи приведены чертёж исходной мелочи, пошаговое описание и формула. Все сюжеты вымышлены.</dd>
+  </dl>
+
+  <h1>Пять патентов на эффект бабочки</h1>
+
+  <div class="prose">
+    <p>В рассказе Рэя Брэдбери «И грянул гром» (1952) охотник Экельс во время сафари в далёкое прошлое сходит с проложенной тропы и раздавливает бабочку. Вернувшись в своё время, путешественники находят другой мир: иначе пишутся слова на вывеске конторы, на выборах победил другой кандидат. Брэдбери показывает первое звено и последнее, а середину оставляет читателю.</p>
+    <p>Здесь описана именно середина. Каждый из пяти сюжетов изложен как изобретение: чертёж мелочи, с которой всё началось, цепь из десяти пронумерованных звеньев и формула, где сказано, в чём новизна способа.</p>
+  </div>
+
+  <h3>Почему малое вырастает только в особых местах</h3>
+  <div class="prose">
+    <p>Большинство мелочей гаснет. Оторванная пуговица обычно стоит человеку двадцати минут, и больше ничего. Чтобы мелочь дошла до мира, в цепи должны встретиться звенья двух видов.</p>
+    <p><span class="kind amp">усилитель</span>Звено, где одно событие размножается: строка кода копируется в тысячи систем, напев становится звуком в миллионах роликов.</p>
+    <p><span class="kind threshold">порог</span>Звено, где система стоит на краю и малый толчок решает, в какую сторону она упадёт: успеют ли оцепить очаг, хватит ли банку денег до вечера. Цвет здесь отмечает место, где цепь могла оборваться и не оборвалась.</p>
+    <p>Остальные звенья просто передают сигнал дальше. Метеоролог Эдвард Лоренц, давший явлению имя, показал похожее на уравнениях погоды: в некоторых системах сколь угодно малая разница в начале со временем становится разницей во всём. Простейшая такая система — отображение x → r·x·(1 − x). Две его траектории, стартующие почти из одной точки, какое-то время идут вместе, а потом расходятся; уменьшение начальной разницы в десять раз отодвигает расхождение лишь на несколько шагов.</p>
+  </div>
+
+  <div class="instrument" data-instrument="divergence">
+  <div class="dv-fig">
+    <svg class="dv-svg" viewBox="0 0 640 300" role="group" aria-label="Две траектории отображения x → 3,9·x·(1 − x) за 60 шагов и модуль их разницы на логарифмической шкале">
+      <defs>
+        <pattern id="dv-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" class="dv-hl"/>
+        </pattern>
+      </defs>
+      <g class="dv-static"></g>
+      <rect class="dv-zone"/>
+      <polyline class="dv-a dv-ta"/>
+      <polyline class="dv-b dv-tb"/>
+      <polyline class="dv-d"/>
+      <polyline class="dv-dhi"/>
+      <circle class="dv-m0" r="3.2"/>
+      <line class="dv-div"/>
+      <text class="dv-divlbl" text-anchor="middle"></text>
+      <g class="dv-cos"></g>
+    </svg>
+  </div>
+
+  <div class="dv-scale">
+    <span class="dv-sl dv-sl-n">n</span>
+    <div class="dv-row dv-ns"></div>
+    <span class="dv-sl"></span>
+    <div class="dv-row dv-track">
+      <div class="dv-rail"></div>
+      <div class="dv-ticks"></div>
+      <div class="dv-handle" role="slider" tabindex="0" aria-label="Начальная разница Δ₀, порядок" aria-valuemin="1" aria-valuemax="12" aria-valuenow="6"></div>
+    </div>
+    <span class="dv-sl dv-sl-d">Δ₀</span>
+    <div class="dv-row dv-dec"></div>
+  </div>
+
+  <div class="dv-read">
+    <div class="dv-c dv-c1">
+      <span class="dv-k">Δ₀</span>
+      <span class="dv-v dv-vd">1,00·10⁻⁶</span>
+    </div>
+    <div class="dv-c dv-c2">
+      <span class="dv-k">|Δ| &gt; 0,1 на шаге</span>
+      <span class="dv-v dv-vn">—</span>
+    </div>
+    <div class="dv-c dv-c3">
+      <div class="dv-nav">
+        <button type="button" class="dv-btn dv-prev" aria-label="Предыдущее звено">←</button>
+        <span class="dv-k dv-kk">звено 1 из 4</span>
+        <button type="button" class="dv-btn dv-next" aria-label="Следующее звено">→</button>
+      </div>
+      <p class="dv-txt" aria-live="polite"></p>
+    </div>
+  </div>
+</div>
+
+<style>
+[data-instrument="divergence"]{
+  font-family:var(--mono);
+  color:var(--ink);
+  padding:.75rem .9rem 1rem;
+  font-variant-numeric:tabular-nums;
+}
+[data-instrument="divergence"] .dv-fig{overflow-x:auto}
+[data-instrument="divergence"] svg.dv-svg{display:block;width:100%;min-width:460px;height:auto}
+[data-instrument="divergence"] svg text{font-family:var(--mono);fill:var(--ink);font-size:10.5px;font-variant-numeric:tabular-nums}
+[data-instrument="divergence"] .dv-an{font-size:12px}
+[data-instrument="divergence"] .dv-ax{fill:none;stroke:var(--ink);stroke-width:.8}
+[data-instrument="divergence"] .dv-tk{stroke:var(--ink);stroke-width:.6}
+[data-instrument="divergence"] .dv-grid{stroke:var(--faint);stroke-width:.7;stroke-dasharray:1 3}
+[data-instrument="divergence"] .dv-a{fill:none;stroke:var(--ink);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}
+[data-instrument="divergence"] .dv-b{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:4 3;stroke-linejoin:round}
+[data-instrument="divergence"] .dv-d{fill:none;stroke:var(--ink);stroke-width:.85;stroke-linejoin:round}
+[data-instrument="divergence"] .dv-dhi{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round;opacity:0}
+[data-instrument="divergence"] .dv-thr{stroke:var(--ink);stroke-width:.7;stroke-dasharray:5 4}
+[data-instrument="divergence"] .dv-div{stroke:var(--accent);stroke-width:1.1;stroke-dasharray:14 4 2 4}
+[data-instrument="divergence"] .dv-divlbl{fill:var(--accent)}
+[data-instrument="divergence"] .dv-m0{fill:var(--paper);stroke:var(--ink);stroke-width:1}
+[data-instrument="divergence"] .dv-zone{fill:url(#dv-hatch);opacity:0}
+[data-instrument="divergence"] .dv-hl{stroke:var(--muted);stroke-width:.6}
+[data-instrument="divergence"] svg[data-link="1"] .dv-m0{fill:var(--ink)}
+[data-instrument="divergence"] svg[data-link="2"] .dv-dhi{opacity:1}
+[data-instrument="divergence"] svg[data-link="3"] .dv-div{stroke-width:2.2}
+[data-instrument="divergence"] svg[data-link="4"] .dv-zone{opacity:.55}
+
+[data-instrument="divergence"] .dv-co{cursor:pointer;outline:none}
+[data-instrument="divergence"] .dv-lead{fill:none;stroke:var(--ink);stroke-width:.8}
+[data-instrument="divergence"] .dv-cn{font-size:14px}
+[data-instrument="divergence"] .dv-cb{fill:var(--paper);stroke:transparent;stroke-width:1}
+[data-instrument="divergence"] .dv-cf{fill:none;stroke:transparent;stroke-width:1.5}
+[data-instrument="divergence"] .dv-co[aria-pressed="true"] .dv-cb{stroke:var(--ink)}
+[data-instrument="divergence"] .dv-co:focus-visible .dv-cf{stroke:var(--accent)}
+[data-instrument="divergence"] .dv-co:hover .dv-cb{stroke:var(--muted)}
+[data-instrument="divergence"] .dv-co[aria-pressed="true"]:hover .dv-cb{stroke:var(--ink)}
+
+[data-instrument="divergence"] .dv-scale{
+  display:grid;
+  grid-template-columns:2.2rem 1fr;
+  grid-template-rows:16px 36px 16px;
+  margin-top:.5rem;
+  font-size:.72rem;
+}
+[data-instrument="divergence"] .dv-sl{color:var(--muted);align-self:center}
+[data-instrument="divergence"] .dv-row{position:relative;margin:0 12px}
+[data-instrument="divergence"] .dv-row span.dv-lab{
+  position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;line-height:16px;
+}
+[data-instrument="divergence"] .dv-ns span.dv-lab{color:var(--muted)}
+[data-instrument="divergence"] .dv-track{touch-action:pan-y;cursor:pointer;-webkit-user-select:none;user-select:none}
+[data-instrument="divergence"] .dv-rail{position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--ink)}
+[data-instrument="divergence"] .dv-ticks i{position:absolute;top:calc(50% - 5px);height:10px;border-left:1px solid var(--ink)}
+[data-instrument="divergence"] .dv-handle{
+  position:absolute;top:50%;width:16px;height:26px;margin:-13px 0 0 -8px;
+  border:1px solid var(--ink);background:var(--paper);
+  touch-action:pan-y;cursor:ew-resize;
+}
+[data-instrument="divergence"] .dv-handle::after{
+  content:"";position:absolute;left:7px;top:4px;bottom:4px;border-left:1px solid var(--ink);
+}
+[data-instrument="divergence"] .dv-handle:focus{outline:none}
+[data-instrument="divergence"] .dv-handle:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+[data-instrument="divergence"] .dv-read{
+  display:grid;
+  grid-template-columns:11ch 9ch 1fr;
+  gap:.4rem 1.25rem;
+  border-top:1px solid var(--ink);
+  margin-top:.7rem;
+  padding-top:.55rem;
+}
+[data-instrument="divergence"] .dv-c{display:flex;flex-direction:column;min-width:0}
+[data-instrument="divergence"] .dv-k{font-size:.72rem;color:var(--muted);letter-spacing:.03em;white-space:nowrap}
+[data-instrument="divergence"] .dv-v{font-size:1.05rem;line-height:1.5;white-space:nowrap}
+[data-instrument="divergence"] .dv-nav{display:flex;align-items:center;gap:.5rem}
+[data-instrument="divergence"] .dv-kk{width:12ch;text-align:center}
+[data-instrument="divergence"] .dv-btn{
+  font-family:var(--mono);font-size:.8rem;line-height:1;
+  width:1.9rem;height:1.45rem;padding:0;
+  border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;
+}
+[data-instrument="divergence"] .dv-btn:disabled{color:var(--faint);border-color:var(--faint);cursor:default}
+[data-instrument="divergence"] .dv-btn:focus{outline:none}
+[data-instrument="divergence"] .dv-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="divergence"] .dv-txt{
+  margin:.3rem 0 0;font-family:var(--text);font-size:var(--s-1);line-height:1.45;
+  height:4.35em;overflow:hidden;font-variant-numeric:tabular-nums;
+}
+@media (max-width:560px){
+  [data-instrument="divergence"] .dv-row span.dv-ev{display:none}
+  [data-instrument="divergence"] .dv-read{grid-template-columns:1fr 1fr}
+  [data-instrument="divergence"] .dv-c3{grid-column:1 / -1}
+  [data-instrument="divergence"] .dv-txt{height:5.8em}
+}
+@media (prefers-reduced-motion:no-preference){
+  [data-instrument="divergence"] .dv-cb,
+  [data-instrument="divergence"] .dv-zone,
+  [data-instrument="divergence"] .dv-dhi{transition:opacity .15s, stroke .15s}
+}
+</style>
+
+<script>(function(){
+  const root = document.querySelector('[data-instrument="divergence"]');
+  if(!root) return;
+  const $ = s => root.querySelector(s);
+  const NS = 'http://www.w3.org/2000/svg';
+
+  const RR = 3.9, X0 = 0.4, STEPS = 60;
+  const L = 70, R = 616, T = 34, B = 160, T2 = 194, B2 = 262, LMIN = -14;
+  const X = n => L + n * (R - L) / STEPS;
+  const Y = v => B - v * (B - T);
+  const Yl = l => T2 + Math.min(-LMIN, Math.max(0, -l)) / (-LMIN) * (B2 - T2);
+
+  const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+  const sup = n => String(n).split('').map(c => SUP[c] || c).join('');
+  const comma = s => s.replace('.', ',');
+  function fmtD(d){
+    let k = Math.floor(Math.log10(d) + 1e-9);
+    let m = d / Math.pow(10, k);
+    if (m >= 9.995){ m /= 10; k++; }
+    return comma(m.toFixed(2)) + '·10' + sup(k);
+  }
+
+  function run(d){
+    let x = X0, y = X0 + d;
+    const xs = [x], ys = [y], ds = [Math.abs(y - x)];
+    let N = ds[0] > 0.1 ? 0 : -1, DN = ds[0];
+    for (let n = 1; n <= 600; n++){
+      x = RR * x * (1 - x);
+      y = RR * y * (1 - y);
+      const dd = Math.abs(x - y);
+      if (n <= STEPS){ xs.push(x); ys.push(y); ds.push(dd); }
+      if (N < 0 && dd > 0.1){ N = n; DN = dd; }
+      if (N >= 0 && n >= STEPS) break;
+    }
+    return {xs, ys, ds, N, DN};
+  }
+
+  /* static drawing */
+  let s = '';
+  s += `<line class="dv-grid" x1="${L}" y1="${Y(.5)}" x2="${R}" y2="${Y(.5)}"/>`;
+  [[0,'0'],[.5,'0,5'],[1,'1']].forEach(([v,t]) => {
+    s += `<line class="dv-tk" x1="${L-4}" y1="${Y(v)}" x2="${L}" y2="${Y(v)}"/><text x="${L-7}" y="${Y(v)+3.5}" text-anchor="end">${t}</text>`;
+  });
+  [0,-4,-8,-12].forEach(l => {
+    s += `<line class="dv-tk" x1="${L-4}" y1="${Yl(l)}" x2="${L}" y2="${Yl(l)}"/><text x="${L-7}" y="${Yl(l)+3.5}" text-anchor="end">10${sup(l)}</text>`;
+  });
+  for (let n = 0; n <= STEPS; n += 10){
+    s += `<line class="dv-tk" x1="${X(n)}" y1="${B}" x2="${X(n)}" y2="${B+4}"/>`;
+    s += `<line class="dv-tk" x1="${X(n)}" y1="${B2}" x2="${X(n)}" y2="${B2+4}"/>`;
+    s += `<text x="${X(n)}" y="${B2+15}" text-anchor="middle">${n}</text>`;
+  }
+  s += `<path class="dv-ax" d="M${L},${T-4}V${B}H${R}M${L},${T2-4}V${B2}H${R}"/>`;
+  s += `<line class="dv-thr" x1="${L}" y1="${Yl(-1)}" x2="${R}" y2="${Yl(-1)}"/><text x="${R+4}" y="${Yl(-1)+3.5}">0,1</text>`;
+  s += `<text class="dv-an" x="8" y="${(T+B)/2+4}">x</text>`;
+  s += `<text class="dv-an" x="8" y="${(T2+B2)/2+4}">|Δ|</text>`;
+  s += `<text class="dv-an" x="${R+8}" y="${B2+4}">n</text>`;
+  s += `<line class="dv-a" x1="410" y1="178" x2="436" y2="178"/><text x="442" y="181.5">x₀ = 0,4</text>`;
+  s += `<line class="dv-b" x1="518" y1="178" x2="544" y2="178"/><text x="550" y="181.5">x₀ + Δ₀</text>`;
+  $('.dv-static').innerHTML = s;
+
+  /* callouts */
+  const NAMES = ['толчок', 'скрытый рост', 'порог', 'последствие'];
+  const cosG = $('.dv-cos');
+  const cos = [];
+  for (let k = 1; k <= 4; k++){
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'dv-co');
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', 'Звено ' + k + ': ' + NAMES[k-1]);
+    g.innerHTML = `<path class="dv-lead"/><rect class="dv-cf" width="26" height="26"/><rect class="dv-cb" width="20" height="20"/><text class="dv-cn" text-anchor="middle">${k}</text>`;
+    g.dataset.k = k;
+    cosG.appendChild(g);
+    cos.push(g);
+  }
+  function placeCo(g, tx, ty, lx, ly){
+    const ey = ty > ly ? ly + 10 : ly - 10;
+    g.querySelector('.dv-lead').setAttribute('d', `M${tx.toFixed(1)},${ty.toFixed(1)}Q${((tx+lx)/2).toFixed(1)},${ty.toFixed(1)} ${lx.toFixed(1)},${ey.toFixed(1)}`);
+    g.querySelector('.dv-cb').setAttribute('x', lx - 10); g.querySelector('.dv-cb').setAttribute('y', ly - 10);
+    g.querySelector('.dv-cf').setAttribute('x', lx - 13); g.querySelector('.dv-cf').setAttribute('y', ly - 13);
+    const t = g.querySelector('text'); t.setAttribute('x', lx); t.setAttribute('y', ly + 5);
+  }
+
+  /* scale */
+  const ns = $('.dv-ns'), dec = $('.dv-dec'), ticks = $('.dv-ticks'), track = $('.dv-track'), handle = $('.dv-handle');
+  for (let k = 1; k <= 12; k++){
+    const p = (k - 1) / 11 * 100;
+    const ev = k % 2 === 0 ? ' dv-ev' : '';
+    const a = document.createElement('span'); a.className = 'dv-lab' + ev; a.style.left = p + '%';
+    a.textContent = run(Math.pow(10, -k)).N; ns.appendChild(a);
+    const b = document.createElement('span'); b.className = 'dv-lab' + ev; b.style.left = p + '%';
+    b.textContent = '10' + sup(-k); dec.appendChild(b);
+    const i = document.createElement('i'); i.style.left = p + '%'; ticks.appendChild(i);
+  }
+
+  const svg = $('.dv-svg');
+  const el = {
+    a: $('.dv-ta'), b: $('.dv-tb'), d: $('.dv-d'), dhi: $('.dv-dhi'), m0: $('.dv-m0'),
+    div: $('.dv-div'), divl: $('.dv-divlbl'), zone: $('.dv-zone'),
+    vd: $('.dv-vd'), vn: $('.dv-vn'), kk: $('.dv-kk'), txt: $('.dv-txt'),
+    prev: $('.dv-prev'), next: $('.dv-next')
+  };
+
+  let ex = -6, link = 1, cur = null;
+
+  function pts(arr, f, n0, n1){
+    const o = [];
+    for (let n = n0; n <= n1; n++) o.push(X(n).toFixed(1) + ',' + f(arr[n]).toFixed(1));
+    return o.join(' ');
+  }
+  const lg = v => Math.log10(Math.max(v, 1e-16));
+
+  function linkText(){
+    const c = cur, N = c.N, d = c.d;
+    if (link === 1) return 'Толчок: вторая траектория стартует из 0,4 + Δ₀, где Δ₀ = ' + fmtD(d) + '. На верхнем чертеже две кривые сначала неотличимы.';
+    if (link === 2){
+      const g = Math.pow(c.DN / d, 1 / Math.max(N, 1));
+      return 'Скрытый рост: за один шаг разница умножается в среднем в ' + comma(g.toFixed(2)) + ' раза. До шага ' + N + ' она остаётся меньше 0,1.';
+    }
+    if (link === 3) return 'Порог: на шаге ' + N + ' разница впервые больше 0,1, и траектории расходятся.' + (N > STEPS ? ' Это за правым краем чертежа.' : '');
+    return 'Последствие: дальше траектории не помнят общего начала. При Δ₀ в десять раз меньше порог наступил бы на шаге ' + c.N10 + ', а не ' + N + '.';
+  }
+
+  function render(){
+    const d = Math.pow(10, ex);
+    const r = run(d);
+    r.d = d; r.N10 = run(d / 10).N;
+    cur = r;
+    const N = r.N, Nd = Math.min(N, STEPS);
+
+    el.a.setAttribute('points', pts(r.xs, Y, 0, STEPS));
+    el.b.setAttribute('points', pts(r.ys, Y, 0, STEPS));
+    el.d.setAttribute('points', pts(r.ds, v => Yl(lg(v)), 0, STEPS));
+    el.dhi.setAttribute('points', pts(r.ds, v => Yl(lg(v)), 0, Math.max(Nd, 1)));
+    const y0 = Yl(lg(d));
+    el.m0.setAttribute('cx', X(0)); el.m0.setAttribute('cy', y0.toFixed(1));
+
+    if (N <= STEPS){
+      el.div.style.display = '';
+      el.div.setAttribute('x1', X(N)); el.div.setAttribute('x2', X(N));
+      el.div.setAttribute('y1', T - 2); el.div.setAttribute('y2', B2 + 20);
+      el.divl.setAttribute('x', Math.min(Math.max(X(N), L + 20), R - 10));
+      el.divl.setAttribute('text-anchor', 'middle');
+      el.divl.textContent = 'n = ' + N;
+    } else {
+      el.div.style.display = 'none';
+      el.divl.setAttribute('x', R); el.divl.setAttribute('text-anchor', 'end');
+      el.divl.textContent = 'n = ' + N + ' →';
+    }
+    el.divl.setAttribute('y', B2 + 33);
+    el.zone.setAttribute('x', X(Nd)); el.zone.setAttribute('y', T);
+    el.zone.setAttribute('width', Math.max(0, R - X(Nd))); el.zone.setAttribute('height', B - T);
+
+    /* callouts */
+    let lx1 = X(0) + 30, ly1 = y0 - 26 >= T2 + 12 ? y0 - 26 : y0 + 26;
+    placeCo(cos[0], X(0), y0, lx1, ly1);
+    const n2 = Math.max(1, Math.round(Nd / 2));
+    const ty2 = Yl(lg(r.ds[n2]));
+    const ly2 = ty2 + 26 <= B2 - 10 ? ty2 + 26 : ty2 - 26;
+    const lx2 = Math.min(Math.max(X(n2) + 14, lx1 + 30), R);
+    placeCo(cos[1], X(n2), ty2, lx2, ly2);
+    const lx3 = Math.max(X(Nd) - 22, L + 12);
+    placeCo(cos[2], X(Nd), T, lx3, 16);
+    const m = N >= STEPS - 2 ? STEPS : Math.round((N + STEPS) / 2);
+    const lx4 = Math.min(Math.max(X(m) + 18, lx3 + 30), 628);
+    placeCo(cos[3], X(m), Y(r.xs[m]), lx4, 16);
+
+    /* readout */
+    el.vd.textContent = fmtD(d);
+    el.vn.textContent = String(N);
+    el.txt.textContent = linkText();
+
+    const p = (-1 - ex) / 11;
+    handle.style.left = (p * 100) + '%';
+    const v = Math.round(-ex * 100) / 100;
+    handle.setAttribute('aria-valuenow', v);
+    handle.setAttribute('aria-valuetext', 'Δ₀ = ' + fmtD(d) + ', расхождение на шаге ' + N);
+  }
+
+  function setLink(k){
+    link = Math.min(4, Math.max(1, k));
+    svg.setAttribute('data-link', link);
+    cos.forEach(g => g.setAttribute('aria-pressed', String(+g.dataset.k === link)));
+    el.kk.textContent = 'звено ' + link + ' из 4';
+    el.prev.disabled = link === 1;
+    el.next.disabled = link === 4;
+    if (cur) el.txt.textContent = linkText();
+  }
+
+  cos.forEach(g => {
+    g.addEventListener('click', () => setLink(+g.dataset.k));
+    g.addEventListener('keydown', e => {
+      const k = +g.dataset.k;
+      if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setLink(k); }
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); const n = Math.min(4, k + 1); setLink(n); cos[n-1].focus(); }
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); const n = Math.max(1, k - 1); setLink(n); cos[n-1].focus(); }
+    });
+  });
+  el.prev.addEventListener('click', () => setLink(link - 1));
+  el.next.addEventListener('click', () => setLink(link + 1));
+
+  function setEx(v){
+    ex = Math.min(-1, Math.max(-12, v));
+    render();
+  }
+  function fromX(clientX){
+    const rc = track.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (clientX - rc.left) / rc.width));
+    setEx(-1 - 11 * p);
+  }
+  let drag = null;
+  track.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    drag = e.pointerId;
+    try { track.setPointerCapture(e.pointerId); } catch(_){}
+    fromX(e.clientX);
+    handle.focus({preventScroll:true});
+  });
+  track.addEventListener('pointermove', e => { if (drag === e.pointerId) fromX(e.clientX); });
+  const end = e => { if (drag === e.pointerId){ drag = null; try { track.releasePointerCapture(e.pointerId); } catch(_){} } };
+  track.addEventListener('pointerup', end);
+  track.addEventListener('pointercancel', end);
+
+  handle.addEventListener('keydown', e => {
+    let v = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowUp') v = ex - 0.1;
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') v = ex + 0.1;
+    else if (e.key === 'PageUp') v = ex - 1;
+    else if (e.key === 'PageDown') v = ex + 1;
+    else if (e.key === 'Home') v = -1;
+    else if (e.key === 'End') v = -12;
+    if (v !== null){ e.preventDefault(); setEx(Math.round(v * 10) / 10); }
+  });
+
+  render();
+  setLink(1);
+})();</script>
+  <p class="small">Фиг. 0. Две траектории отображения при r = 3,9; начальная разница задаётся на логарифмической шкале.</p>
+</section>
+
+<!-- ЛИСТ 2 -->
+<section class="sheet" id="patent-1">
+  <div class="sheet-head"><span>RU 1952 C1 · вариант 1</span><span>Лист 2 из 7</span></div>
+  <p class="patno">(54) Пуговица и банан</p>
+  <h2>Оторванная пуговица отучает мир от монокультуры</h2>
+  <div class="prose">
+    <p>Фитопатолог Инес Карреро опаздывает на служебный автобус и идёт на работу пешком через оптовый рынок, где не бывала годами. Там она видит то, что увидела бы через два года на сотнях плантаций сразу. Два года форы оказываются достаточными, чтобы поменять правила, по которым мир сажает еду.</p>
+  </div>
+
+  <figure>
+    <div class="fig-box">
+      <svg class="fig" viewBox="0 0 640 380" role="img" aria-label="Патентный чертёж: пуговица с четырьмя отверстиями, одна нить цела, другая перетёрта, свободный конец свисает; справа сечение пуговицы по линии A–A.">
+        <!-- section line A-A -->
+        <line class="dashdot" x1="86" y1="160" x2="374" y2="160"/>
+        <path class="ln" d="M86,160 L86,146 M80,152 L86,146 L92,152"/>
+        <path class="ln" d="M374,160 L374,146 M368,152 L374,146 L380,152"/>
+        <text class="lbl" x="80" y="138">A</text>
+        <text class="lbl" x="370" y="138">A</text>
+        <!-- button -->
+        <circle class="ln" cx="230" cy="190" r="120"/>
+        <circle class="ln" cx="230" cy="190" r="104"/>
+        <circle class="th" cx="230" cy="190" r="98"/>
+        <!-- shading arcs -->
+        <path class="th" d="M338.3,209.1 A110,110 0 0 1 267.6,293.4"/>
+        <path class="th" d="M342.3,209.8 A114,114 0 0 1 269,297.1"/>
+        <path class="th" d="M343,220.3 A117,117 0 0 1 288.5,291.3"/>
+        <path class="th" d="M316,230 A96,96 0 0 1 262,280"/>
+        <!-- holes -->
+        <circle class="paperfill" cx="200" cy="160" r="13"/>
+        <circle class="ln" cx="200" cy="160" r="13"/><circle class="th" cx="200" cy="160" r="9"/>
+        <circle class="ln" cx="260" cy="160" r="13"/><circle class="th" cx="260" cy="160" r="9"/>
+        <circle class="ln" cx="200" cy="220" r="13"/><circle class="th" cx="200" cy="220" r="9"/>
+        <circle class="ln" cx="260" cy="220" r="13"/><circle class="th" cx="260" cy="220" r="9"/>
+        <!-- intact thread -->
+        <line x1="200" y1="160" x2="260" y2="220" stroke="#141414" stroke-width="7" stroke-linecap="round"/>
+        <line x1="200" y1="160" x2="260" y2="220" stroke="#FAFAF7" stroke-width="4.4" stroke-linecap="round"/>
+        <line class="th" x1="210" y1="166" x2="214" y2="174"/>
+        <line class="th" x1="222" y1="178" x2="226" y2="186"/>
+        <line class="th" x1="234" y1="190" x2="238" y2="198"/>
+        <line class="th" x1="246" y1="202" x2="250" y2="210"/>
+        <!-- broken thread, upper part -->
+        <line x1="260" y1="160" x2="238" y2="182" stroke="#141414" stroke-width="7" stroke-linecap="butt"/>
+        <line x1="260" y1="160" x2="238" y2="182" stroke="#FAFAF7" stroke-width="4.4" stroke-linecap="butt"/>
+        <path class="th" d="M239,181 L232,185 M239,181 L234,189 M239,181 L237,190 M239,181 L230,181"/>
+        <!-- broken thread, lower part -->
+        <line x1="200" y1="220" x2="218" y2="202" stroke="#141414" stroke-width="7" stroke-linecap="butt"/>
+        <line x1="200" y1="220" x2="218" y2="202" stroke="#FAFAF7" stroke-width="4.4" stroke-linecap="butt"/>
+        <path class="th" d="M217,203 L224,199 M217,203 L222,195 M217,203 L219,194 M217,203 L226,203"/>
+        <!-- loose hanging thread -->
+        <path d="M196,226 C180,280 140,282 118,338" fill="none" stroke="#141414" stroke-width="7" stroke-linecap="butt"/>
+        <path d="M196,226 C180,280 140,282 118,338" fill="none" stroke="#FAFAF7" stroke-width="4.4" stroke-linecap="butt"/>
+        <path class="th" d="M118,338 L110,348 M118,338 L114,350 M118,338 L120,350 M118,338 L106,342"/>
+        <!-- section A-A -->
+        <path class="hatch" d="M440,200 L440,186 Q442,178 452,178 L470,178 Q476,178 478,184 L482,192 L578,192 L582,184 Q584,178 590,178 L608,178 Q618,178 620,186 L620,200 Q620,206 612,206 L448,206 Q440,206 440,200 Z"/>
+        <rect class="paperfill" x="498" y="190" width="19" height="18"/>
+        <rect class="paperfill" x="543" y="190" width="19" height="18"/>
+        <line class="ln" x1="498" y1="192" x2="498" y2="206"/>
+        <line class="ln" x1="517" y1="192" x2="517" y2="206"/>
+        <line class="ln" x1="543" y1="192" x2="543" y2="206"/>
+        <line class="ln" x1="562" y1="192" x2="562" y2="206"/>
+        <line class="ln" x1="482" y1="192" x2="498" y2="192"/>
+        <line class="ln" x1="517" y1="192" x2="543" y2="192"/>
+        <line class="ln" x1="562" y1="192" x2="578" y2="192"/>
+        <path d="M507.5,192 C507.5,160 552.5,160 552.5,192" fill="none" stroke="#141414" stroke-width="7"/>
+        <path d="M507.5,192 C507.5,160 552.5,160 552.5,192" fill="none" stroke="#FAFAF7" stroke-width="4.4"/>
+        <text class="lbl" x="512" y="240">A–A</text>
+        <!-- callouts -->
+        <path class="lead" d="M145,105 Q118,82 100,64"/><text class="cn" x="82" y="60">10</text>
+        <path class="lead" d="M265,150 Q282,92 300,46"/><text class="cn" x="296" y="40">12</text>
+        <path class="lead" d="M146,296 Q110,300 84,302"/><text class="cn" x="62" y="307">14</text>
+        <path class="lead" d="M228,192 Q300,262 378,318"/><text class="cn" x="382" y="326">16</text>
+        <path class="lead" d="M604,200 Q612,228 610,256"/><text class="cn" x="600" y="274">18</text>
+      </svg>
+    </div>
+    <figcaption><b>Фиг. 1.</b> Пуговица (10) пальто с четырьмя отверстиями (12). Одна нить (14) цела, вторая перетёрта о край отверстия (16). Справа — сечение по линии A–A (18).</figcaption>
+  </figure>
+
+  <h3>Описание цепи</h3>
+  <ol class="chain" data-chain="1">
+    <li data-step="1"><b>Нить истёрлась.</b> За зиму нить на пуговице пальто перетёрлась о край отверстия <span class="ref">(16)</span>. Утром, застёгиваясь, Инес отрывает пуговицу <span class="ref">(10)</span>.</li>
+    <li data-step="2"><b>Швея за углом.</b> Ходить расстёгнутой в холод она не хочет и заходит к швее у дома. Двадцать минут, и служебный автобус до института уходит без неё.</li>
+    <li data-step="3"><b>Пешком через рынок.</b> Следующий автобус через час. Кратчайший пеший путь лежит через оптовый фруктовый рынок, куда Инес не заходила много лет.</li>
+    <li data-step="4"><b>Бурые прожилки.</b> У одной торговки бананы с бурыми прожилками в черешках. Этот признак фузариозного увядания Инес до сих пор видела только на снимках. Торговка говорит, что партия с новой плантации на севере.</li>
+    <li data-step="5"><b>Образец.</b> Инес покупает гроздь и в институте отдаёт черешок на посев. Через десять дней ясно: это штамм грибка, о котором в стране ещё никто не сообщал.</li>
+    <li data-step="6"><span class="kind threshold">порог</span><b>На два года раньше.</b> Без пуговицы штамм нашли бы, когда больны были бы сотни плантаций. Сейчас заражены три, и сигнал в службу карантина приходит, пока очаг ещё можно оцепить.</li>
+    <li data-step="7"><span class="kind amp">усилитель</span><b>Тревога у соседей.</b> Страна закрывает северные плантации. Соседние экспортёры, опасаясь того же, проверяют свои поля и находят ещё два очага. Новость обходит все отраслевые издания.</li>
+    <li data-step="8"><b>Риск получает цену.</b> Страховщики отказываются страховать урожай одного сорта на тысячах гектаров подряд. Без страховки банки перестают кредитовать новые посадки монокультуры.</li>
+    <li data-step="9"><b>Пёстрые плантации.</b> Чтобы получить кредит, фермеры высаживают смеси сортов и полосы других культур. Селекционные программы и банки семян диких родичей получают деньги, о которых раньше просили напрасно.</li>
+    <li data-step="10"><span class="kind threshold">порог</span><b>Мир без монокультур.</b> Правило страховщиков переходит на пшеницу, кофе, картофель: генетическое однообразие поля теперь оценивается как риск. Через поколение эпидемии растений перестают оборачиваться голодом, потому что ни одна болезнь больше не встречает поля, где все растения одинаковы.</li>
+  </ol>
+
+  <h3>Формула изобретения</h3>
+  <ol class="claims">
+    <li>Способ изменения мирового сельского хозяйства, включающий отрыв пуговицы (10) и последующее опоздание наблюдателя, <em>отличающийся тем, что</em> опоздание направляет специалиста мимо места, где ранний признак болезни уже виден, но ещё никем не замечен.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> выигранное время обращается в правило через механизм страхования (звено 8), который и разносит изменение по всему миру.</li>
+  </ol>
+</section>
+
+<!-- ЛИСТ 3 -->
+<section class="sheet" id="patent-2">
+  <div class="sheet-head"><span>RU 1952 C1 · вариант 2</span><span>Лист 3 из 7</span></div>
+  <p class="patno">(54) Знак, которого не хватило</p>
+  <h2>Один пропущенный знак «=» укорачивает цепочки поставок всего мира</h2>
+  <div class="prose">
+    <p>Программист Глеб плохо спит одну ночь и наутро пишет в небольшой открытой библиотеке «меньше» вместо «меньше или равно». Три года эта строка ничего не делает. Потом наступает 29 февраля.</p>
+  </div>
+
+  <figure>
+    <div class="fig-box">
+      <svg class="fig" viewBox="0 0 640 380" role="img" aria-label="Патентный чертёж: перфорированная лента с текстом программы, знак «меньше» обведён и показан в увеличении через лупу, под ним пунктиром отсутствующая черта знака равенства; внизу листок календаря с числом 29.">
+        <!-- tape -->
+        <path class="ln" d="M40,140 L600,140 C606,160 594,190 600,220 L40,220 C46,190 34,160 40,140 Z"/>
+        <rect x="42" y="145" width="556" height="10" fill="url(#perf)"/>
+        <rect x="42" y="205" width="556" height="10" fill="url(#perf)"/>
+        <text class="code" x="62" y="189">if (leap &amp;&amp; day</text>
+        <text class="code" x="290" y="189" text-anchor="middle">&lt;</text>
+        <text class="code" x="310" y="189">29) accept(doc);</text>
+        <circle class="ln" cx="290" cy="181" r="17"/>
+        <!-- projection lines -->
+        <line class="dash" x1="282" y1="166" x2="400" y2="58"/>
+        <line class="dash" x1="306" y1="178" x2="388" y2="120"/>
+        <!-- magnifier -->
+        <circle class="paperfill" cx="440" cy="92" r="55"/>
+        <circle class="ln" cx="440" cy="92" r="55"/>
+        <circle class="ln" cx="440" cy="92" r="50"/>
+        <path class="th" d="M406,72 A40,40 0 0 1 424,56"/>
+        <path class="th" d="M410,80 A36,36 0 0 1 418,68"/>
+        <text x="436" y="116" text-anchor="middle" style="font-size:72px">&lt;</text>
+        <line class="dash" x1="412" y1="130" x2="460" y2="130"/>
+        <rect class="ln" x="495" y="80" width="16" height="24" fill="#FAFAF7"/>
+        <rect class="hatch" x="511" y="84" width="96" height="16"/>
+        <!-- calendar leaf -->
+        <rect class="ln" x="60" y="262" width="140" height="104"/>
+        <line class="ln" x1="60" y1="286" x2="200" y2="286"/>
+        <rect class="hatch" x="60" y="262" width="140" height="24"/>
+        <circle class="ln" cx="88" cy="262" r="6" fill="#FAFAF7"/>
+        <circle class="ln" cx="130" cy="262" r="6" fill="#FAFAF7"/>
+        <circle class="ln" cx="172" cy="262" r="6" fill="#FAFAF7"/>
+        <text x="130" y="338" text-anchor="middle" style="font-size:40px">29</text>
+        <text class="lbl" x="130" y="358" text-anchor="middle">ФЕВРАЛЬ</text>
+        <!-- callouts -->
+        <path class="lead" d="M120,140 Q106,118 94,102"/><text class="cn" x="78" y="96">20</text>
+        <path class="lead" d="M292,198 Q298,226 300,248"/><text class="cn" x="292" y="266">22</text>
+        <path class="lead" d="M418,130 Q380,80 356,40"/><text class="cn" x="340" y="34">24</text>
+        <path class="lead" d="M200,316 Q224,318 244,322"/><text class="cn" x="248" y="327">26</text>
+        <path class="lead" d="M482,60 Q520,42 552,36"/><text class="cn" x="556" y="40">28</text>
+      </svg>
+    </div>
+    <figcaption><b>Фиг. 2.</b> Строка проверки даты (20) со знаком «меньше» (22); в лупе (28) пунктиром показана черта, которой не хватило до «меньше или равно» (24). Лист календаря (26) — дата, на которой строка срабатывает.</figcaption>
+  </figure>
+
+  <h3>Описание цепи</h3>
+  <ol class="chain" data-chain="2">
+    <li data-step="1"><b>Дрель за стеной.</b> Сосед Глеба полночи вешает полки. Глеб спит четыре часа.</li>
+    <li data-step="2"><b>Знак.</b> Утром, исправляя проверку дат в небольшой открытой библиотеке, он пишет «day &lt; 29» <span class="ref">(22)</span> вместо «day &lt;= 29» <span class="ref">(24)</span> для февраля високосного года. Тесты проверяют только обычные годы и проходят.</li>
+    <li data-step="3"><b>Никто не смотрит.</b> Второй сопровождающий библиотеки в отпуске. Правка короткая, проверки зелёные, и её принимают автоматически.</li>
+    <li data-step="4"><span class="kind amp">усилитель</span><b>Расползание.</b> Библиотека — зависимость зависимостей. Её подтягивают пакеты, на которых построены системы таможенного декларирования, планирования портовых кранов, бронирования контейнеров. За три года она оказывается в тысячах систем, и почти никто из их владельцев не знает о её существовании.</li>
+    <li data-step="5"><span class="kind threshold">порог</span><b>29 февраля.</b> В первый високосный день все документы с датой 29.02 признаются недействительными. Таможенные системы отклоняют декларации, планировщики кранов не принимают окна выгрузки.</li>
+    <li data-step="6"><b>Портовая тишина.</b> Крупные порты останавливают выгрузку. На поиск причины уходит сорок часов: ошибка сидит в коде, которого никто из пострадавших не писал и не читал.</li>
+    <li data-step="7"><b>Очередь на рейде.</b> Суда встают в очередь, расписания, рассчитанные по часам, сбиваются на недели. Заводы, работающие без складов, останавливаются без деталей, фармацевтические фабрики — без субстанций.</li>
+    <li data-step="8"><b>Цена недели.</b> Убытки подсчитывают по отраслям, и выясняется, что лекарства, электроника и удобрения для половины мира шли через одни и те же несколько звеньев.</li>
+    <li data-step="9"><b>Закон о запасе.</b> Правительства обязывают держать запасы критически важных товаров и производить часть их у себя или у ближайших соседей. Открытые библиотеки, на которых стоит инфраструктура, получают государственное финансирование и обязательную двойную проверку изменений.</li>
+    <li data-step="10"><span class="kind threshold">порог</span><b>Короткие цепочки.</b> За десятилетие мировая торговля перестраивается: вместо одной длинной нити через полпланеты возникает сеть коротких региональных петель. Товары немного дорожают, зато следующий сбой останавливает одну петлю, а не весь мир. Многие страны впервые за полвека сами делают простые лекарства.</li>
+  </ol>
+
+  <h3>Формула изобретения</h3>
+  <ol class="claims">
+    <li>Способ перестройки мировой торговли, включающий недосып исполнителя и замену знака «меньше или равно» знаком «меньше» (22) в общедоступном коде, <em>отличающийся тем, что</em> ошибка спит до календарной даты (26), наступающей раз в четыре года, и успевает распространиться задолго до срабатывания.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> усиление обеспечивается цепочкой зависимостей (звено 4), а необратимость — законом о запасах (звено 9).</li>
+  </ol>
+</section>
+
+<!-- ЛИСТ 4 -->
+<section class="sheet" id="patent-3">
+  <div class="sheet-head"><span>RU 1952 C1 · вариант 3</span><span>Лист 4 из 7</span></div>
+  <p class="patno">(54) Остывший чай</p>
+  <h2>Опрокинутая кружка чая удешевляет водород и закрывает нефтяной век</h2>
+  <div class="prose">
+    <p>Аспирантка Лейла Насирова нарушает лабораторное правило, которое нарушают все: ставит кружку с чаем над рабочим столом. Хлопает дверь, и чай попадает туда, где ему быть не положено. Всё, что дальше, зависит от того, что Лейла не вылила испорченный раствор.</p>
+  </div>
+
+  <figure>
+    <div class="fig-box">
+      <svg class="fig" viewBox="0 0 640 380" role="img" aria-label="Патентный чертёж: кружка в разрезе опрокидывается с края полки, струя чая падает в лабораторный стакан с железным электродом в сечении и пузырьками газа; справа выносной элемент Б с плёнкой на поверхности электрода.">
+        <!-- shelf -->
+        <rect class="hatch" x="60" y="200" width="140" height="14"/>
+        <path class="ln" d="M84,214 L84,252 L124,214"/>
+        <!-- mug, tipping about its bottom-right corner -->
+        <g transform="translate(200,200) rotate(40) translate(-100,-120)">
+          <rect class="hatch" x="0" y="0" width="10" height="120"/>
+          <rect class="hatch" x="90" y="0" width="10" height="120"/>
+          <rect class="hatch" x="10" y="110" width="80" height="10"/>
+          <path class="hatch" d="M0,25 C-36,25 -36,85 0,85 L0,72 C-20,72 -20,38 0,38 Z"/>
+          <line class="th" x1="10" y1="104" x2="90" y2="104"/>
+        </g>
+        <!-- stream -->
+        <path class="ln" d="M276,104 C302,104 324,150 332,236"/>
+        <path class="ln" d="M279,113 C298,118 318,160 324,236"/>
+        <ellipse class="ln" cx="342" cy="214" rx="2.4" ry="3.6"/>
+        <ellipse class="ln" cx="314" cy="206" rx="2" ry="3"/>
+        <!-- beaker -->
+        <path class="ln" d="M294,176 L300,180 L300,334 Q300,340 306,340 L414,340 Q420,340 420,334 L420,180 L426,176"/>
+        <path class="th" d="M304,182 L304,332 Q304,336 308,336 L412,336 Q416,336 416,332 L416,182"/>
+        <line class="dash" x1="304" y1="236" x2="416" y2="236"/>
+        <path class="th" d="M314,236 Q328,230 342,236 M308,242 Q328,236 348,242"/>
+        <line class="th" x1="304" y1="260" x2="316" y2="260"/>
+        <line class="th" x1="304" y1="280" x2="312" y2="280"/>
+        <line class="th" x1="304" y1="300" x2="316" y2="300"/>
+        <line class="th" x1="304" y1="320" x2="312" y2="320"/>
+        <!-- electrode -->
+        <rect class="ln" x="350" y="140" width="32" height="12"/>
+        <rect class="hatch" x="360" y="152" width="12" height="160"/>
+        <path class="ln" d="M366,140 C366,100 420,90 470,92"/>
+        <circle class="ln" cx="474" cy="92" r="4"/>
+        <circle class="th" cx="380" cy="292" r="2.5"/>
+        <circle class="th" cx="382" cy="272" r="3"/>
+        <circle class="th" cx="378" cy="254" r="2"/>
+        <circle class="th" cx="386" cy="244" r="2.5"/>
+        <circle class="th" cx="355" cy="282" r="2.5"/>
+        <circle class="th" cx="352" cy="262" r="2"/>
+        <circle class="th" cx="354" cy="246" r="3"/>
+        <!-- bench -->
+        <line class="ln" x1="260" y1="340" x2="460" y2="340"/>
+        <rect class="hatch" x="260" y="340" width="200" height="10"/>
+        <!-- detail Б -->
+        <circle class="dash" cx="366" cy="290" r="16"/>
+        <text class="lbl" x="340" y="318">Б</text>
+        <line class="dash" x1="381" y1="284" x2="482" y2="238"/>
+        <path class="hatch" d="M540,188 L540,312 A62,62 0 0 1 540,188 Z"/>
+        <path class="ln" d="M540,190 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12 q9,6 0,12"/>
+        <circle class="th" cx="566" cy="214" r="3"/>
+        <circle class="th" cx="574" cy="248" r="4"/>
+        <circle class="th" cx="562" cy="282" r="2.5"/>
+        <circle class="ln" cx="540" cy="250" r="62"/>
+        <text class="lbl" x="512" y="332">Б (5:1)</text>
+        <!-- callouts -->
+        <path class="lead" d="M163,92 Q132,80 118,64"/><text class="cn" x="100" y="58">30</text>
+        <path class="lead" d="M316,150 Q302,104 292,72"/><text class="cn" x="282" y="64">32</text>
+        <path class="lead" d="M418,320 Q446,326 468,330"/><text class="cn" x="472" y="336">34</text>
+        <path class="lead" d="M372,180 Q408,166 438,154"/><text class="cn" x="442" y="158">36</text>
+        <path class="lead" d="M548,218 Q576,192 598,172"/><text class="cn" x="602" y="168">38</text>
+      </svg>
+    </div>
+    <figcaption><b>Фиг. 3.</b> Кружка (30) в разрезе опрокидывается с края полки; струя чая (32) попадает в стакан (34) с железным электродом (36). Выносной элемент Б: тёмная плёнка (38) на поверхности электрода.</figcaption>
+  </figure>
+
+  <h3>Описание цепи</h3>
+  <ol class="chain" data-chain="3">
+    <li data-step="1"><b>Кружка на полке.</b> Лаборатория тесная, и Лейла ставит недопитый чёрный чай на полку над электрохимическим стендом, хотя правила это запрещают.</li>
+    <li data-step="2"><b>Сквозняк.</b> В конце дня кто-то распахивает окно, хлопает дверь, кружка <span class="ref">(30)</span> на краю полки опрокидывается, и чай льётся в стакан с раствором, где железный электрод <span class="ref">(36)</span> ждёт замера.</li>
+    <li data-step="3"><b>Не вылила.</b> По правилам раствор следовало вылить и начать заново. Но до отчёта по гранту три дня, а свежий раствор готовится сутки. Лейла запускает замер, чтобы не терять вечер.</li>
+    <li data-step="4"><b>Аномалия.</b> Электрод выделяет водород при заметно меньшем напряжении, чем должен. Под микроскопом на нём видна тонкая тёмная плёнка <span class="ref">(38)</span>: дубильные вещества чая связались с железом.</li>
+    <li data-step="5"><span class="kind threshold">порог</span><b>Повтор.</b> Лейла нарочно повторяет опыт с заваркой из буфета, потом с чистыми танинами. Эффект воспроизводится. Не воспроизведись он, история закончилась бы записью «загрязнение» в лабораторном журнале.</li>
+    <li data-step="6"><span class="kind amp">усилитель</span><b>Открытая статья.</b> Условия гранта требуют открытой публикации. Рецепт прост: железо, заварка, комнатная температура. За месяц его повторяют сотни лабораторий, и каждая что-нибудь улучшает.</li>
+    <li data-step="7"><b>Дешёвый водород.</b> Электролизёрам больше не нужны платина и иридий. Они дешевеют в разы и встают рядом с солнечными и ветровыми станциями, превращая излишки электричества в газ, который можно хранить.</li>
+    <li data-step="8"><b>Сталь и удобрения.</b> Металлурги восстанавливают руду водородом вместо кокса, химические заводы синтезируют аммиак без природного газа. Две отрасли, на которых держится мир, меняют сырьё.</li>
+    <li data-step="9"><span class="kind threshold">порог</span><b>Спрос падает.</b> Спрос на нефть и газ падает быстрее любого прогноза. Страны, живущие экспортом, за десятилетие перестраивают бюджеты: одни спокойно, другие через потрясения.</li>
+    <li data-step="10"><b>Конец нефтяного века.</b> Карта богатства перекраивается. Энергия теперь там, где много солнца и воды, и главными её поставщиками становятся солнечные пустынные страны у моря, которые ещё недавно считались бедными.</li>
+  </ol>
+
+  <h3>Формула изобретения</h3>
+  <ol class="claims">
+    <li>Способ смены мировой энергетики, включающий опрокидывание кружки (30) с чаем в электрохимическую ячейку, <em>отличающийся тем, что</em> загрязнённый раствор не выливают, а измеряют, поскольку на приготовление нового нет времени.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> распространение обеспечивается требованием открытой публикации (звено 6), а простота рецепта позволяет повторить его в любой лаборатории мира.</li>
+  </ol>
+</section>
+
+<!-- ЛИСТ 5 -->
+<section class="sheet" id="patent-4">
+  <div class="sheet-head"><span>RU 1952 C1 · вариант 4</span><span>Лист 5 из 7</span></div>
+  <p class="patno">(54) Ключ в кармане</p>
+  <h2>Ключ, нажавший кнопку в кармане, спасает тысячи языков от исчезновения</h2>
+  <div class="prose">
+    <p>Тимур носит телефон в одном кармане с ключами. Однажды ключ включает запись, и телефон сорок минут слушает бабушкину кухню. Среди звона посуды на записи остаются четыре минуты колыбельной на языке, на котором дома говорят уже только старики.</p>
+  </div>
+
+  <figure>
+    <div class="fig-box">
+      <svg class="fig" viewBox="0 0 640 380" role="img" aria-label="Патентный чертёж: телефон в кармане, бородка ключа упирается в боковую кнопку; на экране отметка записи; справа деталь В — разрез кнопки со сжатой пружиной.">
+        <!-- pocket -->
+        <path class="ln" d="M160,50 L160,328 Q285,368 420,328 L420,50"/>
+        <path class="dash" d="M170,60 L170,320 Q285,356 410,320 L410,60"/>
+        <line class="ln" x1="160" y1="50" x2="420" y2="50"/>
+        <line class="dash" x1="160" y1="62" x2="420" y2="62"/>
+        <!-- phone -->
+        <rect class="ln" x="220" y="100" width="110" height="200" rx="14"/>
+        <rect class="ln" x="230" y="118" width="90" height="150" rx="3"/>
+        <line class="th" x1="236" y1="160" x2="276" y2="122"/>
+        <line class="th" x1="236" y1="172" x2="288" y2="122"/>
+        <line class="th" x1="280" y1="264" x2="314" y2="232"/>
+        <line class="th" x1="292" y1="264" x2="314" y2="244"/>
+        <circle class="ln" cx="250" cy="201" r="5"/>
+        <text class="lbl" x="262" y="205">41:07</text>
+        <rect class="ln" x="262" y="106" width="26" height="4" rx="2"/>
+        <circle class="th" cx="263" cy="286" r="1.6"/>
+        <circle class="th" cx="271" cy="286" r="1.6"/>
+        <circle class="th" cx="279" cy="286" r="1.6"/>
+        <circle class="th" cx="287" cy="286" r="1.6"/>
+        <rect class="ln" x="214" y="140" width="6" height="24"/>
+        <rect class="ln" x="330" y="150" width="8" height="34"/>
+        <text class="lbl" x="336" y="142">В</text>
+        <!-- key -->
+        <g transform="translate(360,167) rotate(80)">
+          <circle class="ln" cx="0" cy="0" r="22"/>
+          <circle class="ln" cx="-8" cy="0" r="6"/>
+          <path class="ln" d="M22,-5 L80,-5 L86,0 L80,5 L72,5 L68,12 L63,5 L58,12 L53,5 L48,12 L43,5 L22,5 Z"/>
+          <line class="th" x1="28" y1="-1" x2="78" y2="-1"/>
+        </g>
+        <!-- detail В -->
+        <rect class="hatch" x="460" y="100" width="12" height="100"/>
+        <rect class="hatch" x="472" y="125" width="6" height="50"/>
+        <polyline class="ln" points="478,150 481,140 485,160 489,140 493,160 497,140 501,160 505,140 509,160 513,140 517,160 520,150"/>
+        <rect class="ln" x="520" y="136" width="64" height="28"/>
+        <rect class="hatch" x="560" y="96" width="22" height="38"/>
+        <rect class="hatch" x="560" y="166" width="22" height="38"/>
+        <path class="ln" d="M624.9,132 A24,24 0 0 0 624.9,168"/>
+        <text class="lbl" x="530" y="232">В (2:1)</text>
+        <!-- callouts -->
+        <path class="lead" d="M226,250 Q186,252 140,254"/><text class="cn" x="118" y="259">40</text>
+        <path class="lead" d="M372,222 Q410,240 440,252"/><text class="cn" x="444" y="258">42</text>
+        <path class="lead" d="M548,140 Q544,100 540,72"/><text class="cn" x="530" y="66">44</text>
+        <path class="lead" d="M170,110 Q140,98 120,92"/><text class="cn" x="98" y="96">46</text>
+        <path class="lead" d="M500,160 Q492,200 488,238"/><text class="cn" x="478" y="256">48</text>
+      </svg>
+    </div>
+    <figcaption><b>Фиг. 4.</b> Телефон (40) в кармане (46); бородка ключа (42) упирается в боковую кнопку. Деталь В: кнопка (44) в разрезе, пружина (48) сжата до упора.</figcaption>
+  </figure>
+
+  <h3>Описание цепи</h3>
+  <ol class="chain" data-chain="4">
+    <li data-step="1"><b>Ключ и кнопка.</b> Тимур сидит у бабушки на кухне. Бородка ключа <span class="ref">(42)</span> в кармане упирается в боковую кнопку телефона <span class="ref">(44)</span>, и долгое нажатие включает голосовую запись.</li>
+    <li data-step="2"><b>Сорок одна минута.</b> Телефон пишет всё: чайник, разговоры о соседях и четыре минуты, пока бабушка укачивает правнучку и поёт колыбельную на родном горном языке.</li>
+    <li data-step="3"><b>Находка.</b> Через неделю Тимур монтирует ролик о поездке, ищет звук и натыкается на запись. Колыбельная ложится на кадры гор лучше любой музыки.</li>
+    <li data-step="4"><span class="kind amp">усилитель</span><b>Звук уходит.</b> Сам ролик смотрят немногие, но звук попадает в общую библиотеку платформы. Его подкладывают под видео о сне, детях и доме, и за полгода он звучит в миллионах роликов.</li>
+    <li data-step="5"><b>Вопрос в комментариях.</b> Тысячи людей спрашивают одно и то же: что это за язык и о чём поётся. Тимур записывает с бабушкой перевод, потом ещё десяток песен.</li>
+    <li data-step="6"><span class="kind threshold">порог</span><b>Курс за неделю.</b> Приложение для изучения языков, которому нужен громкий повод, за неделю собирает по этим записям короткий курс. Без курса любопытство угасло бы через месяц, а теперь у него есть куда деться.</li>
+    <li data-step="7"><b>Записать стариков.</b> Люди по всему миру начинают записывать песни и сказки своих бабушек на языках, которыми сами уже не владеют. Появляется общий открытый архив таких записей.</li>
+    <li data-step="8"><span class="kind amp">усилитель</span><b>Корпус для машин.</b> За два года архив вырастает до сотен тысяч часов речи на тысячах малых языков. На нём учат системы распознавания и перевода, и малые языки впервые получают клавиатуры, субтитры и голосовых помощников.</li>
+    <li data-step="9"><b>Школы.</b> На языке теперь можно переписываться и смотреть мультфильмы, и родители перестают считать его бесполезным для детей. Местные школы возвращают его в расписание.</li>
+    <li data-step="10"><span class="kind threshold">порог</span><b>Языки перестают уходить.</b> Малые языки больше не исчезают один за другим вместе с последними носителями. Дети в тысячах деревень растут двуязычными, и мир остаётся многоязычным.</li>
+  </ol>
+
+  <h3>Формула изобретения</h3>
+  <ol class="claims">
+    <li>Способ сохранения языкового многообразия, включающий непреднамеренное нажатие кнопки (44) ключом (42) в кармане, <em>отличающийся тем, что</em> случайная запись захватывает речь, которую никто не стал бы записывать нарочно.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> мода на звук (звено 4) обращается в долговременную ценность через открытый архив, пригодный для обучения машин (звено 8).</li>
+  </ol>
+</section>
+
+<!-- ЛИСТ 6 -->
+<section class="sheet" id="patent-5">
+  <div class="sheet-head"><span>RU 1952 C1 · вариант 5</span><span>Лист 6 из 7</span></div>
+  <p class="patno">(54) Шарик на анемометре</p>
+  <h2>Улетевший детский шарик находит забытые скважины и замедляет потепление</h2>
+  <div class="prose">
+    <p>На дне рождения у пятилетней Ады выскальзывает из рук воздушный шарик. Он улетает за холм и останавливает прибор, которому положено молча мерить ветер. Ремонтник едет на холм кружным путём и находит то, чего не было ни на одной карте.</p>
+  </div>
+
+  <figure>
+    <div class="fig-box">
+      <svg class="fig" viewBox="0 0 640 380" role="img" aria-label="Патентный чертёж: чашечный анемометр на мачте, лента сдувшегося воздушного шарика намотана на ступицу; справа вверху график скорости ветра, оборванный в ровную линию.">
+        <!-- ground -->
+        <line class="ln" x1="220" y1="360" x2="420" y2="360"/>
+        <rect class="hatch" x="220" y="360" width="200" height="12"/>
+        <!-- mast -->
+        <line class="dashdot" x1="320" y1="112" x2="320" y2="372"/>
+        <rect class="ln" x="312" y="172" width="16" height="188"/>
+        <rect class="ln" x="296" y="348" width="48" height="12"/>
+        <rect class="ln" x="300" y="162" width="40" height="12"/>
+        <!-- back cup -->
+        <path class="ln" d="M284,128 A23,23 0 0 0 284,174 Z"/>
+        <!-- front cup -->
+        <path class="ln" d="M236,128 A23,23 0 0 1 236,174 Z"/>
+        <path class="th" d="M242,136 A16,16 0 0 1 242,166"/>
+        <!-- left arm (front), over back cup -->
+        <rect class="paperfill" x="259" y="148" width="45" height="6"/>
+        <line class="ln" x1="259" y1="148" x2="304" y2="148"/>
+        <line class="ln" x1="259" y1="154" x2="304" y2="154"/>
+        <!-- right arm and cup -->
+        <line class="ln" x1="336" y1="148" x2="416" y2="148"/>
+        <line class="ln" x1="336" y1="154" x2="416" y2="154"/>
+        <circle class="ln" cx="440" cy="151" r="24"/>
+        <circle class="ln" cx="440" cy="151" r="19"/>
+        <path class="th" d="M452,138 A16,16 0 0 1 452,164"/>
+        <path class="th" d="M447,134 A20,20 0 0 1 456,160"/>
+        <!-- hub -->
+        <rect class="ln" x="304" y="140" width="32" height="22" rx="3"/>
+        <path class="ln" d="M308,140 Q320,128 332,140"/>
+        <!-- rotation arrow -->
+        <path class="th" d="M292,118 A34,10 0 0 1 348,118"/>
+        <path class="th" d="M340,113 L348,118 L340,122"/>
+        <!-- ribbon wound on hub -->
+        <path class="ln" d="M306,144 L334,150 M306,150 L334,156 M306,156 L334,161"/>
+        <path class="ln" d="M334,158 C350,175 340,200 360,220 C378,238 370,250 392,260"/>
+        <!-- deflated balloon -->
+        <path class="ln" d="M387,256 L397,256 L392,266 Z"/>
+        <path class="ln" d="M392,266 C410,268 420,292 412,316 C406,334 386,338 378,322 C368,302 374,272 392,266 Z"/>
+        <path class="th" d="M384,290 Q394,296 404,288"/>
+        <path class="th" d="M386,310 Q396,304 406,312"/>
+        <path class="th" d="M392,274 Q388,282 396,286"/>
+        <!-- record chart -->
+        <rect class="ln" x="480" y="40" width="140" height="104"/>
+        <line class="th" x1="480" y1="66" x2="620" y2="66"/>
+        <line class="th" x1="480" y1="92" x2="620" y2="92"/>
+        <line class="th" x1="480" y1="118" x2="620" y2="118"/>
+        <polyline class="ln" points="486,110 494,96 502,104 510,84 518,92 526,74 534,88 542,68 550,80 558,132 612,132"/>
+        <line class="dashdot" x1="556" y1="44" x2="556" y2="140"/>
+        <text class="lbl" x="482" y="34">м/с</text>
+        <text class="lbl" x="612" y="158">t</text>
+        <!-- callouts -->
+        <path class="lead" d="M452,172 Q468,194 480,208"/><text class="cn" x="484" y="220">50</text>
+        <path class="lead" d="M310,142 Q290,108 278,90"/><text class="cn" x="262" y="84">52</text>
+        <path class="lead" d="M350,198 Q300,222 270,236"/><text class="cn" x="246" y="244">54</text>
+        <path class="lead" d="M414,300 Q440,302 460,302"/><text class="cn" x="464" y="307">56</text>
+        <path class="lead" d="M590,132 Q598,156 600,174"/><text class="cn" x="592" y="192">58</text>
+      </svg>
+    </div>
+    <figcaption><b>Фиг. 5.</b> Чашечный анемометр: чашки (50), ступица (52), на которую намоталась лента (54) сдувшегося шарика (56). Справа запись скорости ветра (58): после остановки чашек — ровная линия.</figcaption>
+  </figure>
+
+  <h3>Описание цепи</h3>
+  <ol class="chain" data-chain="5">
+    <li data-step="1"><b>Шарик улетел.</b> На дне рождения шарик выскальзывает из рук Ады и уходит с ветром за холм.</li>
+    <li data-step="2"><b>Чашки встали.</b> На вершине стоит автоматическая метеостанция. Лента шарика <span class="ref">(54)</span> обматывается вокруг ступицы анемометра <span class="ref">(52)</span>, и чашки <span class="ref">(50)</span> останавливаются. Станция передаёт полное безветрие при штормовом предупреждении <span class="ref">(58)</span>.</li>
+    <li data-step="3"><b>Объезд.</b> Удалённо неисправность не устранить, и техник Арвид едет на холм. Короткую дорогу размыло, он едет кругом, через заросшее поле.</li>
+    <li data-step="4"><b>Запах.</b> В поле пахнет газом. Арвид находит в бурьяне ржавый оголовок скважины, брошенной десятилетия назад. В машине у него переносной газоанализатор, и стрелка уходит до упора.</li>
+    <li data-step="5"><b>Заметка.</b> Вечером Арвид пишет в местный блог: одна забытая скважина и его прикидка, сколько метана она выпускает за год. Заметку читает климатолог, который изучает метан.</li>
+    <li data-step="6"><span class="kind threshold">порог</span><b>Масштаб.</b> Климатолог сверяет старые буровые реестры: брошенных скважин в стране огромное число, и многие нигде не учтены. Метан на коротком отрезке греет атмосферу намного сильнее углекислого газа. Подсчёт успевает попасть в доклад к большой конференции.</li>
+    <li data-step="7"><span class="kind amp">усилитель</span><b>Дроны.</b> Небольшая компания ставит дешёвые датчики метана на сельскохозяйственные дроны. Фермеры за плату облетают свои поля, и общая карта утечек прирастает каждый день.</li>
+    <li data-step="8"><b>Цементная пробка.</b> Заглушить скважину можно за несколько дней, и это оказывается одной из самых дешёвых климатических мер. Тем же способом начинают искать утечки на свалках, газопроводах и угольных шахтах.</li>
+    <li data-step="9"><b>Договор о метане.</b> Страны подписывают соглашение с обязательной открытой картой утечек. Компании, чьи старые скважины нашлись на карте, оплачивают их глушение.</li>
+    <li data-step="10"><span class="kind threshold">порог</span><b>Выигранное время.</b> Метан держится в атмосфере около десятка лет, поэтому сокращение выбросов сказывается быстро. Уже через десятилетие потепление идёт медленнее, и у мира появляется время на всё остальное.</li>
+  </ol>
+
+  <h3>Формула изобретения</h3>
+  <ol class="claims">
+    <li>Способ замедления потепления, включающий потерю воздушного шарика и остановку анемометра лентой (54), <em>отличающийся тем, что</em> ложное показание прибора посылает человека с газоанализатором туда, где никто не искал.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> единичная находка переводится в мировой масштаб сверкой с архивными реестрами (звено 6) и дешёвой массовой съёмкой (звено 7).</li>
+  </ol>
+</section>
+
+<!-- ЛИСТ 7 -->
+<section class="sheet" id="summary">
+  <div class="sheet-head"><span>RU 1952 C1 · сводный лист</span><span>Лист 7 из 7</span></div>
+  <h2>У всех пяти цепей одно устройство: мелочь, порог, усилитель и правило</h2>
+  <div class="prose">
+    <p>Если положить пять чертежей рядом, видно, что мелочь сама по себе ничего не решает. Пуговица, знак, кружка, ключ и шарик только сдвигают чью-то траекторию на несколько минут или метров. Дальше цепь проходит через порог, где она могла оборваться: очаг ещё можно оцепить, опыт мог не повториться, интерес мог угаснуть. Потом через усилитель, который размножает событие. И в конце почти всегда возникает правило — страховое условие, закон о запасах, требование открытой публикации, общий архив, международный договор. Правило и делает перемену необратимой.</p>
+    <p>У Брэдбери мир меняется мгновенно: путешественники возвращаются и сразу видят другую вывеску. В этих пяти сюжетах на то же уходят годы и десятилетия, и каждое звено можно назвать по имени.</p>
+  </div>
+
+  <div class="legend">
+    <span><span class="kind amp">усилитель</span>событие размножается</span>
+    <span><span class="kind threshold">порог</span>цепь могла оборваться здесь</span>
+  </div>
+
+  <div class="instrument" data-instrument="chain-stepper">
+    <div class="cs-chips" role="group" aria-label="Вариант">
+      <button type="button" class="cs-chip" data-v="1" aria-pressed="true">Вариант 1</button>
+      <button type="button" class="cs-chip" data-v="2" aria-pressed="false">Вариант 2</button>
+      <button type="button" class="cs-chip" data-v="3" aria-pressed="false">Вариант 3</button>
+      <button type="button" class="cs-chip" data-v="4" aria-pressed="false">Вариант 4</button>
+      <button type="button" class="cs-chip" data-v="5" aria-pressed="false">Вариант 5</button>
+    </div>
+    <div class="cs-fig">
+      <svg class="cs-svg" viewBox="0 0 640 262" role="group" aria-label="Цепь из десяти звеньев выбранного варианта"></svg>
+    </div>
+    <div class="cs-read">
+      <div class="cs-nav">
+        <button type="button" class="cs-btn cs-prev" aria-label="Предыдущее звено">←</button>
+        <span class="cs-pos">вариант 1 · звено  1 из 10</span>
+        <button type="button" class="cs-btn cs-next" aria-label="Следующее звено">→</button>
+        <span class="cs-name"></span>
+      </div>
+      <p class="cs-title" aria-live="polite"></p>
+      <p class="cs-kind"></p>
+    </div>
+  </div>
+
+<style>
+[data-instrument="chain-stepper"]{
+  font-family:var(--mono);
+  color:var(--ink);
+  padding:.85rem .9rem 1rem;
+  font-variant-numeric:tabular-nums;
+}
+[data-instrument="chain-stepper"] .cs-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 .75rem}
+[data-instrument="chain-stepper"] .cs-chip{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.03em;
+  padding:.25rem .6rem;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;
+}
+[data-instrument="chain-stepper"] .cs-chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="chain-stepper"] .cs-chip:focus{outline:none}
+[data-instrument="chain-stepper"] .cs-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="chain-stepper"] .cs-fig{overflow-x:auto;border-top:1px solid var(--faint);border-bottom:1px solid var(--faint)}
+[data-instrument="chain-stepper"] svg.cs-svg{display:block;width:100%;min-width:540px;height:auto}
+[data-instrument="chain-stepper"] svg text{font-family:var(--mono);fill:var(--ink)}
+[data-instrument="chain-stepper"] .cs-lbl{font-size:10px;fill:var(--muted);letter-spacing:.04em}
+[data-instrument="chain-stepper"] .cs-box{cursor:pointer;outline:none}
+[data-instrument="chain-stepper"] .cs-frame{fill:var(--paper);stroke:var(--ink);stroke-width:.8}
+[data-instrument="chain-stepper"] .cs-box.k-threshold .cs-frame{stroke:var(--accent)}
+[data-instrument="chain-stepper"] .cs-box.is-past .cs-frame,
+[data-instrument="chain-stepper"] .cs-box.is-cur .cs-frame{stroke-width:2}
+[data-instrument="chain-stepper"] .cs-sep{stroke:var(--ink);stroke-width:.6}
+[data-instrument="chain-stepper"] .cs-box.k-threshold .cs-sep{stroke:var(--accent)}
+[data-instrument="chain-stepper"] .cs-head{fill:url(#cs-hatch);stroke:none;opacity:0}
+[data-instrument="chain-stepper"] .cs-box.is-cur .cs-head{opacity:1}
+[data-instrument="chain-stepper"] .cs-pb{fill:var(--paper)}
+[data-instrument="chain-stepper"] .cs-num{font-size:12px}
+[data-instrument="chain-stepper"] .cs-kt{font-size:9px;letter-spacing:.04em}
+[data-instrument="chain-stepper"] .cs-box.k-threshold .cs-kt{fill:var(--accent)}
+[data-instrument="chain-stepper"] .cs-t{font-size:10.5px;fill:var(--muted)}
+[data-instrument="chain-stepper"] .cs-box.is-past .cs-t,
+[data-instrument="chain-stepper"] .cs-box.is-cur .cs-t{fill:var(--ink)}
+[data-instrument="chain-stepper"] .cs-fan{fill:none;stroke:var(--ink);stroke-width:.8;stroke-linecap:round}
+[data-instrument="chain-stepper"] .cs-box.is-past .cs-fan,
+[data-instrument="chain-stepper"] .cs-box.is-cur .cs-fan{stroke-width:1.5}
+[data-instrument="chain-stepper"] .cs-ring{fill:none;stroke:transparent;stroke-width:1.5}
+[data-instrument="chain-stepper"] .cs-box:hover .cs-ring{stroke:var(--faint)}
+[data-instrument="chain-stepper"] .cs-box:focus-visible .cs-ring{stroke:var(--accent)}
+[data-instrument="chain-stepper"] .cs-cn{fill:none;stroke:var(--ink);stroke-width:.8;stroke-linejoin:round;stroke-linecap:round}
+[data-instrument="chain-stepper"] .cs-cn.is-past{stroke-width:1.8}
+[data-instrument="chain-stepper"] .cs-read{
+  border-top:1px solid var(--ink);margin-top:.75rem;padding-top:.55rem;
+}
+[data-instrument="chain-stepper"] .cs-nav{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;min-height:1.6rem}
+[data-instrument="chain-stepper"] .cs-pos{font-size:.78rem;width:26ch;text-align:center;white-space:pre}
+[data-instrument="chain-stepper"] .cs-name{font-size:.78rem;color:var(--muted);margin-left:.5rem;white-space:nowrap}
+[data-instrument="chain-stepper"] .cs-btn{
+  font-family:var(--mono);font-size:.8rem;line-height:1;
+  width:1.9rem;height:1.45rem;padding:0;
+  border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;
+}
+[data-instrument="chain-stepper"] .cs-btn:disabled{color:var(--faint);border-color:var(--faint);cursor:default}
+[data-instrument="chain-stepper"] .cs-btn:focus{outline:none}
+[data-instrument="chain-stepper"] .cs-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="chain-stepper"] .cs-title{
+  margin:.45rem 0 .1rem;font-family:var(--display);font-size:var(--s1);line-height:1.3;
+  height:1.3em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+[data-instrument="chain-stepper"] .cs-kind{
+  margin:0;font-family:var(--text);font-size:var(--s-1);color:var(--muted);height:1.5em;line-height:1.5;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+[data-instrument="chain-stepper"] .cs-kind .kind{margin-right:.5rem}
+ol.chain li.is-lit::before{background:var(--ink);color:var(--paper)}
+ol.chain li.is-lit > b{box-shadow:inset 0 -.12em 0 var(--accent)}
+@media (max-width:560px){
+  [data-instrument="chain-stepper"] .cs-name{margin-left:0;width:100%}
+  [data-instrument="chain-stepper"] .cs-title{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  [data-instrument="chain-stepper"] .cs-head{transition:opacity .15s}
+  [data-instrument="chain-stepper"] .cs-frame,
+  [data-instrument="chain-stepper"] .cs-cn{transition:stroke-width .15s}
+}
+</style>
+
+<script>(function(){
+  const root = document.querySelector('[data-instrument="chain-stepper"]');
+  if (!root) return;
+  const svg = root.querySelector('.cs-svg');
+  const chips = Array.from(root.querySelectorAll('.cs-chip'));
+  const el = {
+    pos: root.querySelector('.cs-pos'), name: root.querySelector('.cs-name'),
+    title: root.querySelector('.cs-title'), kind: root.querySelector('.cs-kind'),
+    prev: root.querySelector('.cs-prev'), next: root.querySelector('.cs-next')
+  };
+
+  const BW = 104, BH = 70, HH = 20, R0 = 34, R1 = 164;
+  const P = i => { const row = i < 5 ? 0 : 1; const col = i < 5 ? i : 9 - i; return {x: 16 + col * 126, y: row ? R1 : R0, row}; };
+  const KIND = {
+    threshold: ['порог', 'цепь могла оборваться здесь'],
+    amp: ['усилитель', 'событие размножается'],
+    pass: ['передача', 'звено передаёт сигнал дальше']
+  };
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+  function readChain(v){
+    const ol = document.querySelector('ol.chain[data-chain="' + v + '"]');
+    if (!ol) return null;
+    const sheet = ol.closest('.sheet');
+    const pn = sheet ? sheet.querySelector('.patno') : null;
+    const name = pn ? pn.textContent.replace(/^\(54\)\s*/, '').trim() : '';
+    const items = Array.from(ol.children).filter(n => n.tagName === 'LI').map(li => {
+      const b = li.querySelector('b');
+      const kind = li.querySelector('.kind.threshold') ? 'threshold' : (li.querySelector('.kind.amp') ? 'amp' : 'pass');
+      return {li, title: b ? b.textContent.trim().replace(/[.:]$/, '') : '', kind};
+    });
+    return {name, items};
+  }
+  function wrap(s, max){
+    const w = s.split(/\s+/), lines = [];
+    let c = '';
+    w.forEach(x => { if (!c) c = x; else if ((c + ' ' + x).length <= max) c += ' ' + x; else { lines.push(c); c = x; } });
+    if (c) lines.push(c);
+    return lines.slice(0, 3);
+  }
+
+  let v = 1, cur = 0, data = null, boxes = [], conns = [];
+
+  function build(){
+    data = readChain(v);
+    if (!data) return;
+    const n = Math.min(10, data.items.length);
+    let s = '<defs><pattern id="cs-hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#141414" stroke-width=".9"/></pattern></defs>';
+    s += '<text class="cs-lbl" x="16" y="24">исходная мелочь</text>';
+    const pl = P(n - 1);
+    s += '<text class="cs-lbl" x="' + pl.x + '" y="' + (pl.y + BH + 18) + '">всемирное последствие</text>';
+    const my = HH + (BH - HH) / 2;
+    for (let i = 0; i < n - 1; i++){
+      const p = P(i), q = P(i + 1);
+      let d;
+      if (p.row === q.row && p.row === 0){
+        const y = p.y + my, x1 = p.x + BW, x2 = q.x;
+        d = 'M' + x1 + ',' + y + 'H' + x2 + 'M' + (x2 - 6) + ',' + (y - 4) + 'L' + x2 + ',' + y + 'L' + (x2 - 6) + ',' + (y + 4);
+      } else if (p.row === q.row){
+        const y = p.y + my, x1 = p.x, x2 = q.x + BW;
+        d = 'M' + x1 + ',' + y + 'H' + x2 + 'M' + (x2 + 6) + ',' + (y - 4) + 'L' + x2 + ',' + y + 'L' + (x2 + 6) + ',' + (y + 4);
+      } else {
+        const x = p.x + BW / 2, y1 = p.y + BH, y2 = q.y;
+        d = 'M' + x + ',' + y1 + 'V' + y2 + 'M' + (x - 4) + ',' + (y2 - 6) + 'L' + x + ',' + y2 + 'L' + (x + 4) + ',' + (y2 - 6);
+      }
+      s += '<path class="cs-cn" data-i="' + i + '" d="' + d + '"/>';
+    }
+    for (let i = 0; i < n; i++){
+      const it = data.items[i], p = P(i), x = p.x, y = p.y;
+      const kw = KIND[it.kind][0];
+      s += '<g class="cs-box k-' + it.kind + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Звено ' + (i + 1) + ': ' + esc(it.title) + ', ' + kw + '">';
+      s += '<rect class="cs-ring" x="' + (x - 4) + '" y="' + (y - 4) + '" width="' + (BW + 8) + '" height="' + (BH + 8) + '"/>';
+      s += '<rect class="cs-frame" x="' + x + '" y="' + y + '" width="' + BW + '" height="' + BH + '"/>';
+      s += '<rect class="cs-head" x="' + x + '" y="' + y + '" width="' + BW + '" height="' + HH + '"/>';
+      s += '<line class="cs-sep" x1="' + x + '" y1="' + (y + HH) + '" x2="' + (x + BW) + '" y2="' + (y + HH) + '"/>';
+      s += '<rect class="cs-pb" x="' + (x + 4) + '" y="' + (y + 3) + '" width="22" height="14"/>';
+      s += '<text class="cs-num" x="' + (x + 15) + '" y="' + (y + 14.5) + '" text-anchor="middle">' + (i + 1) + '</text>';
+      if (it.kind !== 'pass'){
+        const w = kw.length * 5.5 + 6;
+        s += '<rect class="cs-pb" x="' + (x + BW - 4 - w) + '" y="' + (y + 4) + '" width="' + w + '" height="12"/>';
+        s += '<text class="cs-kt" x="' + (x + BW - 7) + '" y="' + (y + 13.5) + '" text-anchor="end">' + kw + '</text>';
+      }
+      wrap(it.title, 14).forEach((ln, j) => {
+        s += '<text class="cs-t" x="' + (x + 8) + '" y="' + (y + HH + 15 + j * 13) + '">' + esc(ln) + '</text>';
+      });
+      if (it.kind === 'amp'){
+        const ox = x + BW - 16, oy = y - 2;
+        s += '<path class="cs-fan" d="M' + ox + ',' + oy + 'L' + (ox - 9) + ',' + (oy - 10) + 'M' + ox + ',' + oy + 'L' + ox + ',' + (oy - 13) + 'M' + ox + ',' + oy + 'L' + (ox + 9) + ',' + (oy - 10) + '"/>';
+      }
+      s += '</g>';
+    }
+    svg.innerHTML = s;
+    boxes = Array.from(svg.querySelectorAll('.cs-box'));
+    conns = Array.from(svg.querySelectorAll('.cs-cn'));
+    boxes.forEach(g => {
+      g.addEventListener('click', () => setCur(+g.dataset.i));
+      g.addEventListener('keydown', e => {
+        const i = +g.dataset.i;
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); setCur(i); }
+        else if (e.key === 'ArrowRight' || e.key === 'ArrowDown'){ e.preventDefault(); setCur(i + 1); boxes[cur].focus(); }
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp'){ e.preventDefault(); setCur(i - 1); boxes[cur].focus(); }
+      });
+    });
+  }
+
+  function setCur(i){
+    if (!data) return;
+    const n = boxes.length;
+    cur = Math.min(n - 1, Math.max(0, i));
+    boxes.forEach((g, j) => { g.classList.toggle('is-past', j < cur); g.classList.toggle('is-cur', j === cur); g.setAttribute('aria-pressed', String(j === cur)); });
+    conns.forEach(c => c.classList.toggle('is-past', +c.dataset.i < cur));
+    document.querySelectorAll('ol.chain li.is-lit').forEach(li => li.classList.remove('is-lit'));
+    const it = data.items[cur];
+    it.li.classList.add('is-lit');
+    el.pos.textContent = 'вариант ' + v + ' · звено ' + String(cur + 1).padStart(2, '\u2007') + ' из ' + n;
+    el.name.textContent = data.name;
+    el.title.textContent = it.title;
+    const k = KIND[it.kind];
+    el.kind.innerHTML = (it.kind === 'pass' ? '' : '<span class="kind ' + it.kind + '">' + k[0] + '</span>') + (it.kind === 'pass' ? k[0] + ': ' : '') + k[1];
+    el.prev.disabled = cur === 0;
+    el.next.disabled = cur === n - 1;
+  }
+
+  function setVariant(nv){
+    v = nv;
+    chips.forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.v === v)));
+    build();
+    setCur(0);
+  }
+
+  chips.forEach(c => c.addEventListener('click', () => setVariant(+c.dataset.v)));
+  el.prev.addEventListener('click', () => setCur(cur - 1));
+  el.next.addEventListener('click', () => setCur(cur + 1));
+  root.addEventListener('keydown', e => {
+    if (e.target.closest('.cs-box')) return;
+    if (e.key === 'ArrowRight'){ e.preventDefault(); setCur(cur + 1); }
+    else if (e.key === 'ArrowLeft'){ e.preventDefault(); setCur(cur - 1); }
+  });
+
+  setVariant(1);
+})();</script>
+  <p class="small">Фиг. 6. Цепь выбранного варианта от исходной мелочи до всемирного последствия.</p>
+
+  <h3>Общая формула</h3>
+  <ol class="claims">
+    <li>Способ получения всемирного последствия из ничтожной причины, включающий малое отклонение в поведении одного человека, <em>отличающийся тем, что</em> отклонение выводит его к системе, находящейся на пороге, а затем через звено-усилитель и закрепляющее правило передаётся всему миру.</li>
+    <li>Способ по п. 1, <em>отличающийся тем, что</em> при отсутствии хотя бы одного порога, усилителя или правила последствие гаснет и остаётся частным случаем, как гаснет большинство оторванных пуговиц.</li>
+  </ol>
+</section>
+
+</main>
+</body>
+</html>

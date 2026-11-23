@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Партия в четырнадцать строк</title>
+<meta name="description" content="Перуанская бессмертная, Каналь против любителя, 1934: четырнадцать ходов, разложенные по строкам сонета, с вольтой на девятом и матом в последнем двустишии.">
+<meta name="compositor:paper" content="#F1EADB">
+<meta name="compositor:ink" content="#1E1A17">
+<meta name="compositor:accent" content="#B0301C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1EADB;
+  --ink:#1E1A17;
+  --accent:#B0301C;
+  --faded:#6B6156;
+  --rule:#2A2420;
+  --impress:rgba(30,26,23,.18);
+  --display:"Playfair Display SC", Georgia, serif;
+  --text:"Old Standard TT", Georgia, serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--paper);color:var(--ink)}
+body{font-family:var(--text);font-size:19px;line-height:1.55;padding:48px 18px 72px}
+.sheet{max-width:760px;margin:0 auto;text-align:center;border:3px double var(--rule);padding:44px 28px 56px;
+  box-shadow:inset 0 0 0 8px var(--paper), inset 0 0 0 9px var(--rule)}
+.press{text-shadow:0 0 1px var(--impress),.4px .6px 0 var(--impress)}
+.kicker{font-family:var(--display);letter-spacing:.32em;font-size:.82rem;margin:0 0 14px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(2.3rem,8vw,4.4rem);line-height:.98;margin:8px 0 6px;letter-spacing:.01em}
+h1 .small{display:block;font-size:.42em;font-weight:400;letter-spacing:.22em;margin-top:10px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,3.6vw,1.7rem);line-height:1.2;margin:0 auto 18px;max-width:30ch}
+.sub{font-style:italic;color:var(--faded);margin:10px auto 0;max-width:36ch}
+.orn{display:block;margin:30px auto;color:var(--ink)}
+.prose{max-width:62ch;margin:0 auto;text-align:left;hyphens:auto}
+.prose p{margin:0 0 1em}
+.prose p:first-child::first-letter{font-family:var(--display);font-weight:900;float:left;font-size:3.6em;line-height:.82;padding:6px 8px 0 0;color:var(--accent)}
+.red{color:var(--accent)}
+.moves{font-family:var(--text);font-variant-numeric:tabular-nums}
+.poem{margin:0 auto;max-width:620px}
+.stanza{margin:0 0 22px}
+.stanza-tag{font-family:var(--display);font-size:.75rem;letter-spacing:.3em;color:var(--faded);margin-bottom:6px}
+.line{display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;padding:3px 0}
+.line .verse{font-size:1.12rem}
+.line .mv{font-size:.78rem;color:var(--faded);letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.line.volta .verse::before{content:"❧ ";color:var(--accent)}
+.line.volta .mv{color:var(--accent)}
+.couplet .verse{font-weight:700}
+.map{border-collapse:collapse;margin:0 auto;font-variant-numeric:tabular-nums;font-size:.95rem}
+.map td{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:8px 12px;text-align:left;vertical-align:top}
+.map td:first-child{font-family:var(--display);font-weight:700;white-space:nowrap}
+.instrument{width:100%;max-width:680px;min-height:620px;margin:10px auto 0;border-top:2px solid var(--rule);border-bottom:2px solid var(--rule);padding:18px 0}
+.colophon{font-family:var(--display);letter-spacing:.24em;font-size:.78rem;color:var(--faded);margin-top:8px}
+@media (max-width:520px){
+  body{font-size:17.5px;padding:20px 8px 40px}
+  .sheet{padding:30px 14px 40px}
+  .instrument{min-height:700px}
+  .map td{padding:7px 6px}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/x8bk1o4v/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Партия в четырнадцать строк"><meta property="og:description" content="Перуанская бессмертная, Каналь против любителя, 1934: четырнадцать ходов, разложенные по строкам сонета, с вольтой на девятом и матом в последнем двустишии."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/x8bk1o4v/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F1EADB;border-bottom:1px solid #1E1A1726;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1A17;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1A17;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1E1A17"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F1EADB" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F1EADB"/></svg><span>Compositor</span></a><time datetime="2026-11-23T04:45:22.447Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1A17;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+<main class="sheet">
+
+<p class="kicker press">Будапешт · 1934 · сеанс</p>
+<h1 class="press">Партия<br>в четырнадцать<br>строк<span class="small">сонет на ходы Каналя</span></h1>
+<p class="sub">Белые: Эстебан Каналь. Чёрные: любитель, чьё имя не сохранилось. Мат на четырнадцатом ходу.</p>
+
+<svg class="orn" width="300" height="34" viewBox="0 0 300 34" aria-hidden="true">
+  <g fill="currentColor">
+    <rect x="0" y="16" width="112" height="2"/><rect x="0" y="21" width="96" height="1"/>
+    <rect x="188" y="16" width="112" height="2"/><rect x="204" y="21" width="96" height="1"/>
+    <path d="M150 4c6 6 14 6 18 13-4 7-12 7-18 13-6-6-14-6-18-13 4-7 12-7 18-13z"/>
+    <circle cx="122" cy="17" r="3.4"/><circle cx="178" cy="17" r="3.4"/>
+    <path d="M150 11c2 3 5 4 5 6s-3 3-5 6c-2-3-5-4-5-6s3-3 5-6z" fill="var(--paper)"/>
+  </g>
+</svg>
+
+<h2 class="press">Сонету нужна партия, которая сама просит этой формы</h2>
+<div class="prose">
+<p>Сонет: четырнадцать строк, поворот мысли на девятой и развязка в последнем двустишии. Если партию нужно растягивать или сокращать, чтобы она вошла в эту форму, затея не удалась. Здесь подходит партия, известная как «Перуанская бессмертная». Каналь дал её в сеансе одновременной игры в Будапеште в 1934 году. Ровно четырнадцать ходов белых, и последний из них ставит мат.</p>
+<p>Первые восемь ходов похожи на обычный дебют: центральный размен, ферзь чёрных уходит на край, слоны выходят, связывают фигуры и разменивают. На девятом ходу чёрные ставят коня на d7. Этот спокойный ход освобождает b8 для длинной рокировки и одновременно перекрывает королю будущее поле отступления. Отсюда, а не с жертвы ладьи, и начинается <span class="red">вольта</span>. Дальше белые отдают обе ладьи, затем ферзя, и в двустишии слон с a6 матует короля на c8, которому некуда уйти: поле d7 занимает тот самый конь.</p>
+</div>
+
+<svg class="orn" width="120" height="30" viewBox="0 0 120 30" aria-hidden="true"><g fill="currentColor"><path d="M60 3c5 7 12 9 12 12s-7 5-12 12c-5-7-12-9-12-12s7-5 12-12z"/><circle cx="34" cy="15" r="3"/><circle cx="86" cy="15" r="3"/><circle cx="20" cy="15" r="1.8"/><circle cx="100" cy="15" r="1.8"/></g></svg>
+
+<h2 class="press">Строки сонета повторяют ходы партии</h2>
+<div class="poem moves">
+  <div class="stanza">
+    <div class="stanza-tag">Первый катрен</div>
+    <div class="line"><span class="verse">Две пешки в центре сходятся вначале,</span><span class="mv">1. e4 d5</span></div>
+    <div class="line"><span class="verse">Размен — и чёрный ферзь уже в бою.</span><span class="mv">2. exd5 Qxd5</span></div>
+    <div class="line"><span class="verse">Его конём на край доски прогнали,</span><span class="mv">3. Nc3 Qa5</span></div>
+    <div class="line"><span class="verse">И пешки встали обе, как в строю.</span><span class="mv">4. d4 c6</span></div>
+  </div>
+  <div class="stanza">
+    <div class="stanza-tag">Второй катрен</div>
+    <div class="line"><span class="verse">Второй конь скачет — слон его пленяет;</span><span class="mv">5. Nf3 Bg4</span></div>
+    <div class="line"><span class="verse">Слон белых целит в королевский дом;</span><span class="mv">6. Bf4 e6</span></div>
+    <div class="line"><span class="verse">Шагнула пешка — тот коня меняет;</span><span class="mv">7. h3 Bxf3</span></div>
+    <div class="line"><span class="verse">Ферзь взял — и связан конь другим слоном.</span><span class="mv">8. Qxf3 Bb4</span></div>
+  </div>
+  <div class="stanza">
+    <div class="stanza-tag">Третий катрен</div>
+    <div class="line volta"><span class="verse">Но тихий ход конём грозит пожаром:</span><span class="mv">9. Be2 Nd7 · вольта</span></div>
+    <div class="line"><span class="verse">Монарх налево скрылся впопыхах;</span><span class="mv">10. a3 O-O-O</span></div>
+    <div class="line"><span class="verse">Взят слон — ладья ферзю досталась даром;</span><span class="mv">11. axb4 Qxa1+</span></div>
+    <div class="line"><span class="verse">Король шагнул — ладья вторая — прах.</span><span class="mv">12. Kd2 Qxh1</span></div>
+  </div>
+  <div class="stanza couplet">
+    <div class="stanza-tag">Двустишие</div>
+    <div class="line"><span class="verse">Ферзь белых сам ложится под удар —</span><span class="mv">13. Qxc6+ bxc6</span></div>
+    <div class="line"><span class="verse">И мат слоном: свой конь — последний дар.</span><span class="mv">14. Ba6#</span></div>
+  </div>
+</div>
+
+<svg class="orn" width="300" height="20" viewBox="0 0 300 20" aria-hidden="true"><g fill="currentColor"><rect x="0" y="8" width="300" height="3"/><rect x="0" y="14" width="300" height="1"/><rect x="0" y="4" width="300" height="1"/></g></svg>
+
+<h2 class="press">Ход за ходом: доска на каждой строке</h2>
+<div class="instrument" data-instrument="sonnet-board">
+  <div class="sb-wrap">
+    <figure class="sb-fig">
+      <svg class="sb-board" viewBox="0 0 340 342" role="img" aria-label="Шахматная диаграмма"></svg>
+      <div class="sb-read">
+        <div class="sb-cell"><span class="sb-k">Ход</span><span class="sb-v sb-no">0 / 14</span></div>
+        <div class="sb-cell"><span class="sb-k">Нотация</span><span class="sb-v sb-not" aria-live="polite">—</span></div>
+        <div class="sb-cell"><span class="sb-k">Материал</span><span class="sb-v sb-mat">39 : 39</span></div>
+        <div class="sb-cell sb-full"><span class="sb-v sb-st">исходное положение</span></div>
+      </div>
+    </figure>
+    <ol class="sb-sonnet"></ol>
+  </div>
+  <div class="sb-ctrl">
+    <button type="button" class="sb-btn" data-d="-1" aria-label="Предыдущий ход">‹</button>
+    <div class="sb-tape">
+      <div class="sb-track">
+        <div class="sb-rule"></div>
+        <div class="sb-ticks"></div>
+        <div class="sb-knob" role="slider" tabindex="0" aria-label="Ход партии" aria-valuemin="0" aria-valuemax="14" aria-valuenow="0"></div>
+      </div>
+    </div>
+    <button type="button" class="sb-btn" data-d="1" aria-label="Следующий ход">›</button>
+  </div>
+</div>
+<style>
+[data-instrument="sonnet-board"]{font-family:var(--text);color:var(--ink);text-align:left}
+[data-instrument="sonnet-board"] .sb-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+@media (min-width:600px){[data-instrument="sonnet-board"] .sb-wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:start}}
+[data-instrument="sonnet-board"] .sb-fig{margin:0}
+[data-instrument="sonnet-board"] .sb-board{display:block;width:100%;max-width:360px;height:auto;margin:0 auto}
+[data-instrument="sonnet-board"] .sb-lt{fill:var(--paper)}
+[data-instrument="sonnet-board"] .sb-dk{fill:url(#sb-hatch)}
+[data-instrument="sonnet-board"] .sb-hl{fill:var(--ink);opacity:.55}
+[data-instrument="sonnet-board"] .sb-frame{fill:none;stroke:var(--ink);stroke-width:2}
+[data-instrument="sonnet-board"] .sb-frame2{fill:none;stroke:var(--ink);stroke-width:.8}
+[data-instrument="sonnet-board"] .sb-co{fill:var(--faded);font-family:var(--text);font-size:10px;text-anchor:middle}
+[data-instrument="sonnet-board"] .sb-last{fill:none;stroke:var(--ink);stroke-width:2.2}
+[data-instrument="sonnet-board"] .sb-lastb{stroke-dasharray:4 3}
+[data-instrument="sonnet-board"] .sb-accf{fill:none;stroke:var(--accent);stroke-width:3}
+[data-instrument="sonnet-board"] .sb-accl{stroke:var(--accent);stroke-width:2.6;stroke-linecap:round;fill:none}
+[data-instrument="sonnet-board"] .sb-accd{stroke-dasharray:6 4}
+[data-instrument="sonnet-board"] .sb-x{stroke:var(--accent);stroke-width:3;stroke-linecap:round}
+[data-instrument="sonnet-board"] .sb-p{font-family:"Segoe UI Symbol","DejaVu Sans","Noto Sans Symbols 2","Apple Symbols",serif;font-size:33px;text-anchor:middle;dominant-baseline:central}
+[data-instrument="sonnet-board"] .sb-pwb{fill:var(--paper);stroke:var(--paper);stroke-width:2;paint-order:stroke}
+[data-instrument="sonnet-board"] .sb-pw{fill:var(--ink)}
+[data-instrument="sonnet-board"] .sb-pb{fill:var(--ink);stroke:var(--paper);stroke-width:2.4;paint-order:stroke}
+[data-instrument="sonnet-board"] .sb-pb.sb-acc{fill:var(--accent)}
+[data-instrument="sonnet-board"] .sb-read{display:grid;grid-template-columns:1fr 1.8fr 1.2fr;gap:0;margin:12px auto 0;max-width:360px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-variant-numeric:tabular-nums lining-nums}
+[data-instrument="sonnet-board"] .sb-cell{display:flex;flex-direction:column;align-items:center;justify-content:center;height:52px;padding:4px 2px;overflow:hidden}
+[data-instrument="sonnet-board"] .sb-cell+.sb-cell{border-left:1px solid var(--impress)}
+[data-instrument="sonnet-board"] .sb-full{grid-column:1/-1;height:30px;border-left:0 !important;border-top:1px solid var(--impress)}
+[data-instrument="sonnet-board"] .sb-k{font-family:var(--display);font-size:.62rem;letter-spacing:.2em;color:var(--faded);line-height:1.2}
+[data-instrument="sonnet-board"] .sb-v{font-size:1rem;white-space:nowrap;line-height:1.3}
+[data-instrument="sonnet-board"] .sb-st{font-style:italic;font-size:.9rem}
+[data-instrument="sonnet-board"] .sb-st.sb-red,[data-instrument="sonnet-board"] .sb-not.sb-red{color:var(--accent)}
+[data-instrument="sonnet-board"] .sb-sonnet{list-style:none;margin:0;padding:0;font-size:.84rem;line-height:1.35}
+[data-instrument="sonnet-board"] .sb-sonnet li{display:grid;grid-template-columns:1.9em minmax(0,1fr);padding:3px 6px 3px 2px;color:var(--faded);cursor:pointer;border-left:3px solid transparent;transition:color .2s,background-color .2s,border-color .2s}
+[data-instrument="sonnet-board"] .sb-sonnet li.sb-gap{margin-top:10px}
+[data-instrument="sonnet-board"] .sb-sonnet li.sb-c .sb-vs{font-weight:700}
+[data-instrument="sonnet-board"] .sb-sonnet li.on{color:var(--ink);border-left-color:var(--ink);background:rgba(30,26,23,.06)}
+[data-instrument="sonnet-board"] .sb-sonnet li.sb-volta .sb-vs::before{content:"❧ ";color:var(--accent)}
+[data-instrument="sonnet-board"] .sb-sonnet li.sb-volta.on{border-left-color:var(--accent);color:var(--accent)}
+[data-instrument="sonnet-board"] .sb-n{font-variant-numeric:tabular-nums;text-align:right;padding-right:.55em;font-size:.82em;padding-top:.12em}
+[data-instrument="sonnet-board"] .sb-ctrl{display:grid;grid-template-columns:40px minmax(0,1fr) 40px;align-items:center;gap:10px;margin-top:20px}
+[data-instrument="sonnet-board"] .sb-btn{width:40px;height:40px;border:1.5px solid var(--rule);background:var(--paper);color:var(--ink);font-family:var(--display);font-size:1.4rem;line-height:1;cursor:pointer;padding:0}
+[data-instrument="sonnet-board"] .sb-btn:disabled{opacity:.35;cursor:default}
+[data-instrument="sonnet-board"] .sb-btn:focus-visible,[data-instrument="sonnet-board"] .sb-knob:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+[data-instrument="sonnet-board"] .sb-tape{touch-action:pan-y;cursor:pointer;padding:6px 12px 0;user-select:none;-webkit-user-select:none}
+[data-instrument="sonnet-board"] .sb-track{position:relative;height:48px}
+[data-instrument="sonnet-board"] .sb-rule{position:absolute;left:0;right:0;top:16px;height:2px;background:var(--rule)}
+[data-instrument="sonnet-board"] .sb-tick{position:absolute;top:9px;width:0;height:16px;border-left:1px solid var(--faded)}
+[data-instrument="sonnet-board"] .sb-tick.sb-tall{top:5px;height:24px}
+[data-instrument="sonnet-board"] .sb-tick.done{border-left:2px solid var(--ink)}
+[data-instrument="sonnet-board"] .sb-tick.sb-nine{border-left-color:var(--accent);border-left-width:2px}
+[data-instrument="sonnet-board"] .sb-tl{position:absolute;top:31px;transform:translateX(-50%);font-size:.72rem;color:var(--faded);font-variant-numeric:tabular-nums}
+[data-instrument="sonnet-board"] .sb-tl.sb-nine{color:var(--accent)}
+[data-instrument="sonnet-board"] .sb-knob{position:absolute;top:2px;width:14px;height:28px;margin-left:-7px;background:var(--ink);box-shadow:0 0 0 2px var(--paper);cursor:grab;touch-action:none;transition:left .18s ease}
+[data-instrument="sonnet-board"] .sb-knob.sb-k9{background:var(--accent)}
+[data-instrument="sonnet-board"] .sb-tape.drag .sb-knob{cursor:grabbing;transition:none}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="sonnet-board"] .sb-knob,[data-instrument="sonnet-board"] .sb-sonnet li{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="sonnet-board"]');
+if(!root)return;
+const svg=root.querySelector('.sb-board'),list=root.querySelector('.sb-sonnet'),ticks=root.querySelector('.sb-ticks'),
+knob=root.querySelector('.sb-knob'),track=root.querySelector('.sb-track'),tape=root.querySelector('.sb-tape'),
+outNo=root.querySelector('.sb-no'),outNot=root.querySelector('.sb-not'),outMat=root.querySelector('.sb-mat'),outSt=root.querySelector('.sb-st'),
+btns=root.querySelectorAll('.sb-btn');
+const VERSES=["Две пешки в центре сходятся вначале,","Размен — и чёрный ферзь уже в бою.","Его конём на край доски прогнали,","И пешки встали обе, как в строю.","Второй конь скачет — слон его пленяет;","Слон белых целит в королевский дом;","Шагнула пешка — тот коня меняет;","Ферзь взял — и связан конь другим слоном.","Но тихий ход конём грозит пожаром:","Монарх налево скрылся впопыхах;","Взят слон — ладья ферзю досталась даром;","Король шагнул — ладья вторая — прах.","Ферзь белых сам ложится под удар —","И мат слоном: свой конь — последний дар."];
+const SAN=["1. e4 d5","2. exd5 Qxd5","3. Nc3 Qa5","4. d4 c6","5. Nf3 Bg4","6. Bf4 e6","7. h3 Bxf3","8. Qxf3 Bb4","9. Be2 Nd7","10. a3 O-O-O","11. axb4 Qxa1+","12. Kd2 Qxh1","13. Qxc6+ bxc6","14. Ba6#"];
+const NOTE=["исходное положение","центр","размен в центре","ферзь на краю","пешки встали","связка коня","слон f4 держит b8 и c7","размен на f3","вольта: конь на d7","длинная рокировка","шах · ладья a1 отдана","ладья h1 отдана","шах · жертва ферзя","мат: d7 занято своим конём"];
+const H=[["e2","e4"],["d7","d5"],["e4","d5"],["d8","d5"],["b1","c3"],["d5","a5"],["d2","d4"],["c7","c6"],["g1","f3"],["c8","g4"],["c1","f4"],["e7","e6"],["h2","h3"],["g4","f3"],["d1","f3"],["f8","b4"],["f1","e2"],["b8","d7"],["a2","a3"],["e8","c8","a8","d8"],["a3","b4"],["a5","a1"],["e1","d2"],["a1","h1"],["f3","c6"],["b7","c6"],["e2","a6"]];
+const VAL={p:1,n:3,b:3,r:5,q:9,k:0};
+const GLY={k:"\u265A",q:"\u265B",r:"\u265C",b:"\u265D",n:"\u265E",p:"\u265F",K:"\u2654",Q:"\u2655",R:"\u2656",B:"\u2657",N:"\u2658",P:"\u2659"};
+const FILES="abcdefgh";
+function init(){const b={},back="rnbqkbnr";for(let i=0;i<8;i++){const f=FILES[i];b[f+"1"]=back[i].toUpperCase();b[f+"2"]="P";b[f+"7"]="p";b[f+"8"]=back[i];}return b;}
+const states=[{b:init(),last:[]}];
+for(let n=1;n<=14;n++){
+  const b=Object.assign({},states[n-1].b),last=[];
+  [2*n-2,2*n-1].forEach((h,k)=>{const m=H[h];if(!m)return;
+    for(let j=0;j<m.length;j+=2){b[m[j+1]]=b[m[j]];delete b[m[j]];}
+    last.push({from:m[0],to:m[1],side:k?"b":"w"});});
+  states.push({b:b,last:last});
+}
+function material(b){let w=0,k=0;for(const s in b){const p=b[s],v=VAL[p.toLowerCase()];if(p===p.toUpperCase())w+=v;else k+=v;}return [w,k];}
+const S=40,OX=18,OY=2;
+function xy(sq){return [OX+(sq.charCodeAt(0)-97)*S,OY+(8-(+sq[1]))*S];}
+function ctr(sq){const p=xy(sq);return [p[0]+20,p[1]+20];}
+const DEFS='<defs><pattern id="sb-hatch" width="4.2" height="4.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4.2" height="4.2" class="sb-lt"/><rect width="1.3" height="4.2" class="sb-hl"/></pattern></defs>';
+function frame(sq,cls,inset){const p=xy(sq),i=inset||2.5;return '<rect x="'+(p[0]+i)+'" y="'+(p[1]+i)+'" width="'+(S-2*i)+'" height="'+(S-2*i)+'" class="'+cls+'"/>';}
+function line(a,b,cls){const p=ctr(a),q=ctr(b);return '<line x1="'+p[0]+'" y1="'+p[1]+'" x2="'+q[0]+'" y2="'+q[1]+'" class="'+cls+'"/>';}
+function cross(sq){const c=ctr(sq),d=7;return '<path d="M'+(c[0]-d)+' '+(c[1]-d)+'L'+(c[0]+d)+' '+(c[1]+d)+'M'+(c[0]+d)+' '+(c[1]-d)+'L'+(c[0]-d)+' '+(c[1]+d)+'" class="sb-x"/>';}
+function draw(n){
+  const st=states[n];let s=DEFS;
+  for(let r=8;r>=1;r--)for(let f=0;f<8;f++){const x=OX+f*S,y=OY+(8-r)*S,dark=(f+r)%2===1;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+S+'" height="'+S+'" class="'+(dark?"sb-dk":"sb-lt")+'"/>';}
+  st.last.forEach(m=>{const c="sb-last"+(m.side==="b"?" sb-lastb":"");s+=frame(m.from,c)+frame(m.to,c);});
+  const acc={};
+  if(n===9){s+=frame("d7","sb-accf",1.5);acc.d7=1;}
+  if(n===14){s+=frame("d7","sb-accf",1.5)+frame("c8","sb-accf",1.5);s+=line("a6","c8","sb-accl")+line("f4","b8","sb-accl sb-accd");acc.d7=1;acc.c8=1;}
+  for(const sq in st.b){const p=st.b[sq],c=ctr(sq),white=p===p.toUpperCase(),t='x="'+c[0]+'" y="'+(c[1]+1)+'"';
+    if(white){s+='<text '+t+' class="sb-p sb-pwb">'+GLY[p.toLowerCase()]+'\uFE0E</text><text '+t+' class="sb-p sb-pw">'+GLY[p]+'\uFE0E</text>';}
+    else{s+='<text '+t+' class="sb-p sb-pb'+(acc[sq]?" sb-acc":"")+'">'+GLY[p]+'\uFE0E</text>';}}
+  if(n===14){s+=cross("b8")+cross("c7");}
+  s+='<rect x="'+OX+'" y="'+OY+'" width="320" height="320" class="sb-frame"/>';
+  for(let i=0;i<8;i++){s+='<text x="'+(OX+i*S+20)+'" y="'+(OY+333)+'" class="sb-co">'+FILES[i]+'</text>';
+    s+='<text x="8" y="'+(OY+i*S+24)+'" class="sb-co">'+(8-i)+'</text>';}
+  svg.innerHTML=s;
+  svg.setAttribute("aria-label",n?"Позиция после хода "+SAN[n-1]:"Исходное положение");
+}
+VERSES.forEach((v,i)=>{const li=document.createElement("li");
+  li.className=(i===4||i===8||i===12?"sb-gap ":"")+(i===8?"sb-volta ":"")+(i>=12?"sb-c":"");
+  li.innerHTML='<span class="sb-n">'+(i+1)+'</span><span class="sb-vs"></span>';
+  li.querySelector(".sb-vs").textContent=v;
+  li.addEventListener("click",()=>set(i+1));list.appendChild(li);});
+const lis=list.querySelectorAll("li");
+const tickEls=[];
+for(let i=0;i<=14;i++){const pc=(i/14*100)+"%",t=document.createElement("span");
+  t.className="sb-tick"+(i%4===0||i===14?" sb-tall":"")+(i===9?" sb-nine":"");t.style.left=pc;ticks.appendChild(t);tickEls.push(t);
+  const l=document.createElement("span");l.className="sb-tl"+(i===9?" sb-nine":"");l.style.left=pc;l.textContent=i;ticks.appendChild(l);}
+let cur=-1;
+function set(n){n=Math.max(0,Math.min(14,n|0));if(n===cur)return;cur=n;
+  draw(n);
+  lis.forEach((li,i)=>li.classList.toggle("on",i===n-1));
+  tickEls.forEach((t,i)=>t.classList.toggle("done",i>0&&i<=n));
+  knob.style.left=(n/14*100)+"%";knob.classList.toggle("sb-k9",n===9);
+  const nt=n?SAN[n-1]:"—";
+  knob.setAttribute("aria-valuenow",n);knob.setAttribute("aria-valuetext",n?nt:"исходное положение");
+  outNo.textContent=n+" / 14";outNot.textContent=nt;
+  const m=material(states[n].b);outMat.textContent=m[0]+" : "+m[1];
+  outSt.textContent=NOTE[n];
+  const red=n===9||n===14;outSt.classList.toggle("sb-red",red);outNot.classList.toggle("sb-red",red);
+  btns[0].disabled=n===0;btns[1].disabled=n===14;
+}
+btns.forEach(b=>b.addEventListener("click",()=>set(cur+(+b.dataset.d))));
+root.addEventListener("keydown",e=>{let d=null;
+  if(e.key==="ArrowRight"||e.key==="ArrowUp")d=cur+1;else if(e.key==="ArrowLeft"||e.key==="ArrowDown")d=cur-1;
+  else if(e.key==="Home")d=0;else if(e.key==="End")d=14;
+  if(d!==null){e.preventDefault();set(d);}});
+let drag=false;
+function fromX(x){const r=track.getBoundingClientRect();if(r.width>0)set(Math.round((x-r.left)/r.width*14));}
+tape.addEventListener("pointerdown",e=>{if(e.button!==undefined&&e.button!==0)return;drag=true;tape.classList.add("drag");
+  try{tape.setPointerCapture(e.pointerId);}catch(_){}
+  fromX(e.clientX);knob.focus({preventScroll:true});});
+tape.addEventListener("pointermove",e=>{if(drag)fromX(e.clientX);});
+function end(){drag=false;tape.classList.remove("drag");}
+tape.addEventListener("pointerup",end);tape.addEventListener("pointercancel",end);tape.addEventListener("lostpointercapture",end);
+set(9);
+})();</script>
+
+<svg class="orn" width="300" height="34" viewBox="0 0 300 34" aria-hidden="true">
+  <g fill="currentColor">
+    <rect x="0" y="16" width="120" height="2"/><rect x="180" y="16" width="120" height="2"/>
+    <path d="M150 5l5 8h9l-7 6 3 9-10-6-10 6 3-9-7-6h9z"/>
+  </g>
+</svg>
+
+<h2 class="press">Белые ставят мат двумя слонами, а клетку для короля строят сами чёрные</h2>
+<table class="map moves">
+  <tr><td>Катрены</td><td>ходы 1–8: дебют, размены, связки; слон встаёт на f4 и уже держит b8 и c7</td></tr>
+  <tr><td class="red">Вольта</td><td>ход 9: …Nd7 открывает путь к длинной рокировке и закрывает d7</td></tr>
+  <tr><td>Третий катрен</td><td>ходы 10–12: белые отдают слону ладью a1 и ладью h1</td></tr>
+  <tr><td>Двустишие</td><td>ходы 13–14: жертва ферзя на c6 открывает линию a6–c8; мат</td></tr>
+</table>
+
+<p class="colophon">Набрано в одну краску · четырнадцать строк</p>
+</main>
+</body>
+</html>

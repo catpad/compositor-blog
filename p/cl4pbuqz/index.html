@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Наставление к Игре в бисер</title>
+<meta name="description" content="Учебник Игры в бисер по Гессе: правила, доска, три вида связи, этюды из разных областей знания и полный разбор партии «Китайский дом».">
+<meta name="compositor:paper" content="#F3EBD8">
+<meta name="compositor:ink" content="#1F1A14">
+<meta name="compositor:accent" content="#9A2A1C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+SC:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3EBD8;
+  --ink:#1F1A14;
+  --rubric:#9A2A1C;
+  --faded:#6B5E4B;
+  --rule:#BFAE8E;
+  --wash:#EAE0C8;
+  --display:"Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --caps:"Cormorant SC", "Cormorant Garamond", Georgia, serif;
+  --text:"EB Garamond", Georgia, "Times New Roman", serif;
+  --measure:35rem;
+  --margin-col:15rem;
+  --gutter:2rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper);color:var(--ink);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:1.1875rem;line-height:1.62;font-feature-settings:"kern","liga","onum";-webkit-font-smoothing:antialiased;hyphens:auto;-webkit-hyphens:auto}
+.book{max-width:calc(var(--measure) + var(--gutter) + var(--margin-col) + 4rem);margin:0 auto;padding:3rem 2rem 4rem}
+p{margin:0}
+p + p{text-indent:1.6em}
+a{color:var(--rubric)}
+em,i{font-style:italic}
+b,strong{font-weight:500}
+.svg-defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* title page */
+.title-page{border:1px solid var(--ink);outline:1px solid var(--ink);outline-offset:5px;padding:3rem 2rem 2.5rem;text-align:center;margin:0.5rem 0 4.5rem}
+.title-page .pre{font-family:var(--caps);letter-spacing:.32em;font-size:.95rem;color:var(--faded);margin-bottom:1.6rem}
+.title-page h1{font-family:var(--display);font-weight:500;font-size:clamp(2.3rem,6vw,3.9rem);line-height:1.04;margin:0 0 1.1rem;letter-spacing:.01em}
+.title-page h1 span{display:block;font-size:.52em;font-style:italic;font-weight:400;margin-top:.45rem;letter-spacing:0}
+.title-page .sub{font-family:var(--display);font-style:italic;font-size:1.3rem;line-height:1.4;max-width:30rem;margin:0 auto 2rem}
+.title-page .device{width:12.5rem;max-width:60%;height:auto;display:block;margin:0 auto 1.8rem}
+.title-page .imprint{font-family:var(--caps);letter-spacing:.24em;font-size:.95rem;line-height:1.7}
+.title-page .imprint .rub{color:var(--rubric)}
+.rule-orn{display:block;margin:1.4rem auto;width:9rem;height:auto}
+
+/* chapters */
+.chapter{margin:0 0 4.5rem}
+.chapter::after{content:"";display:block;clear:both}
+.chapter > *:not(.wide):not(.note){max-width:var(--measure)}
+.chapter-no{font-family:var(--caps);letter-spacing:.3em;font-size:1rem;color:var(--rubric);text-align:center;margin:0 0 .5rem}
+.chapter h2{font-family:var(--display);font-weight:500;font-size:2.05rem;line-height:1.14;text-align:center;margin:0 0 2rem;letter-spacing:.005em}
+.chapter h3{font-family:var(--display);font-weight:600;font-size:1.4rem;line-height:1.25;margin:2.4rem 0 .8rem}
+.lead::first-letter{float:left;font-family:var(--display);font-weight:500;font-size:4.4em;line-height:.78;padding:.08em .1em 0 0;color:var(--rubric)}
+.sig{font-family:var(--caps);font-weight:600;letter-spacing:.06em;color:var(--rubric);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+.lk{font-family:var(--display);font-weight:600;padding:0 .18em;color:var(--ink)}
+.latin{font-family:var(--caps);letter-spacing:.12em}
+
+/* marginal notes */
+.note{float:right;clear:right;width:var(--margin-col);margin:.3rem 0 1.2rem;font-size:.95rem;line-height:1.48;color:var(--faded)}
+.note .nh{display:block;font-family:var(--caps);letter-spacing:.18em;color:var(--rubric);font-size:.85rem;margin-bottom:.2rem}
+.note p + p{text-indent:0;margin-top:.5rem}
+
+/* plates and figures */
+.plate{margin:2.6rem 0 2.8rem}
+.wide{clear:both;max-width:none}
+.plate svg{display:block;width:100%;height:auto}
+.plate-frame{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:1.2rem 0}
+.plate figcaption{font-size:.98rem;line-height:1.45;color:var(--faded);margin-top:.9rem;max-width:var(--measure)}
+.plate figcaption .tab{font-family:var(--caps);letter-spacing:.18em;color:var(--ink);margin-right:.4rem}
+.scroll-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.scroll-box > svg{min-width:40rem}
+
+/* instruments */
+.instrument{display:block;width:100%;margin:0;background:var(--wash);border:1px solid var(--rule);box-shadow:inset 0 0 0 4px var(--paper),inset 0 0 0 5px var(--rule)}
+.instrument[data-instrument="monochord"]{min-height:23rem}
+.instrument[data-instrument="modulation"]{min-height:25rem}
+.instrument[data-instrument="board"]{min-height:40rem}
+.instrument[data-instrument="replay"]{min-height:38rem}
+
+/* lists, tables */
+.rules{list-style:none;counter-reset:rule;padding:0;margin:1.4rem 0}
+.rules li{counter-increment:rule;position:relative;padding-left:2.6rem;margin:0 0 .9rem}
+.rules li::before{content:counter(rule,upper-roman) ".";position:absolute;left:0;top:0;font-family:var(--caps);color:var(--rubric);letter-spacing:.06em;width:2.2rem}
+.rules b{font-family:var(--display);font-weight:600;font-size:1.08em}
+.lines-table{width:100%;border-collapse:collapse;margin:1.4rem 0;font-size:1rem;line-height:1.4}
+.lines-table th,.lines-table td{text-align:left;vertical-align:top;padding:.55rem .6rem .55rem 0;border-bottom:1px solid var(--rule)}
+.lines-table thead th{font-family:var(--caps);font-weight:600;letter-spacing:.14em;font-size:.88rem;color:var(--faded);border-bottom:1px solid var(--ink)}
+.lines-table td:first-child{white-space:nowrap}
+.lines-table .num{font-variant-numeric:lining-nums tabular-nums;text-align:right;white-space:nowrap}
+.table-box{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-box table{min-width:30rem}
+
+.etudes{list-style:none;padding:0;margin:1.8rem 0 0;border-top:1px solid var(--ink)}
+.etudes > li{padding:1.1rem 0 1.2rem;border-bottom:1px solid var(--rule)}
+.etude-head{font-family:var(--display);font-weight:600;font-size:1.28rem;line-height:1.25;margin-bottom:.35rem}
+.etude-head .en{font-family:var(--caps);color:var(--rubric);letter-spacing:.1em;margin-right:.55rem;font-weight:600}
+.etude-line{font-size:1.02rem;margin:.1rem 0 .45rem;line-height:1.5}
+.etudes p + p{text-indent:0}
+.score{font-family:var(--caps);letter-spacing:.08em;font-size:.92rem;color:var(--faded);margin-top:.45rem;font-variant-numeric:lining-nums tabular-nums}
+.score b{color:var(--ink);font-weight:600}
+
+.moves{list-style:none;padding:0;margin:1.8rem 0 0;border-top:1px solid var(--ink)}
+.moves > li{display:grid;grid-template-columns:3rem 1fr;column-gap:.6rem;padding:1rem 0 1.05rem;border-bottom:1px solid var(--rule)}
+.moves .mn{font-family:var(--display);font-weight:500;font-size:1.7rem;line-height:1;color:var(--rubric);font-variant-numeric:lining-nums}
+.moves .who{font-family:var(--caps);letter-spacing:.14em;font-size:.88rem;color:var(--faded)}
+.moves .bead-line{font-size:1.05rem;line-height:1.45;margin:.15rem 0 .4rem}
+.moves p + p{text-indent:0}
+.moves .score{margin-top:.35rem}
+
+.checklist{margin:1.2rem 0;padding:0;list-style:none}
+.checklist li{padding:.35rem 0 .35rem 1.6rem;position:relative;border-bottom:1px dotted var(--rule)}
+.checklist li::before{content:"";position:absolute;left:.25rem;top:.95rem;width:.5rem;height:.5rem;border-radius:50%;background:var(--ink)}
+
+.verdict{margin:1.6rem 0;padding:1rem 1.2rem;border-left:2px solid var(--rubric);font-family:var(--display);font-style:italic;font-size:1.25rem;line-height:1.42}
+
+.colophon{text-align:center;margin:5rem auto 1rem;max-width:26rem}
+.colophon svg{width:7.5rem;height:auto;display:block;margin:0 auto 1.2rem}
+.colophon p{font-family:var(--display);font-style:italic;font-size:1.12rem;line-height:1.5;text-indent:0}
+.colophon .finis{font-family:var(--caps);font-style:normal;letter-spacing:.4em;color:var(--rubric);margin-top:1rem;font-size:1rem}
+
+@media (max-width:900px){
+  .book{padding:2rem 1.25rem 3rem}
+  .note{float:none;width:auto;max-width:var(--measure);margin:1.2rem 0;padding-left:1rem;border-left:1px solid var(--rule)}
+  .chapter h2{font-size:1.75rem}
+  .title-page{padding:2.2rem 1.1rem 2rem}
+}
+@media (max-width:480px){
+  body{font-size:1.09rem}
+  .moves > li{grid-template-columns:2.2rem 1fr}
+  .moves .mn{font-size:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/cl4pbuqz/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Наставление к Игре в бисер"><meta property="og:description" content="Учебник Игры в бисер по Гессе: правила, доска, три вида связи, этюды из разных областей знания и полный разбор партии «Китайский дом»."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/cl4pbuqz/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F3EBD8;border-bottom:1px solid #1F1A1426;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F1A14;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F1A14;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1F1A14"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F3EBD8" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F3EBD8"/></svg><span>Compositor</span></a><time datetime="2026-11-23T02:44:22.222Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1F1A14;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+
+<svg class="svg-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="h-diag" width="3.2" height="3.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3.2" stroke="#1F1A14" stroke-width="0.7"/></pattern>
+    <pattern id="h-diag-fine" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#1F1A14" stroke-width="0.45"/></pattern>
+    <pattern id="h-cross" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3.4" stroke="#1F1A14" stroke-width="0.6"/><line x1="0" y1="0" x2="3.4" y2="0" stroke="#1F1A14" stroke-width="0.6"/></pattern>
+    <pattern id="h-horiz" width="4" height="2.6" patternUnits="userSpaceOnUse"><line x1="0" y1="1.3" x2="4" y2="1.3" stroke="#1F1A14" stroke-width="0.55"/></pattern>
+    <pattern id="h-horiz-wide" width="6" height="4.2" patternUnits="userSpaceOnUse"><line x1="0" y1="2.1" x2="6" y2="2.1" stroke="#1F1A14" stroke-width="0.4"/></pattern>
+    <pattern id="h-vert" width="2.6" height="4" patternUnits="userSpaceOnUse"><line x1="1.3" y1="0" x2="1.3" y2="4" stroke="#1F1A14" stroke-width="0.55"/></pattern>
+    <pattern id="h-dense" width="1.8" height="1.8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.8" stroke="#1F1A14" stroke-width="0.8"/></pattern>
+    <pattern id="h-tile" width="8" height="5" patternUnits="userSpaceOnUse"><line x1="0" y1="4.5" x2="8" y2="4.5" stroke="#1F1A14" stroke-width="0.6"/><path d="M0 4.5 Q2 1 4 4.5 Q6 1 8 4.5" fill="none" stroke="#1F1A14" stroke-width="0.45"/></pattern>
+    <pattern id="h-pave" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 0 H10 M0 5 H10 M0 0 V5 M5 5 V10" fill="none" stroke="#1F1A14" stroke-width="0.35"/></pattern>
+
+    <symbol id="bead-M" viewBox="-12 -12 24 24">
+      <circle r="10" fill="#1F1A14"/>
+      <path d="M-6.8 -3 A7.4 7.4 0 0 1 -1.5 -7.4" fill="none" stroke="#F3EBD8" stroke-width="1.3" stroke-linecap="round"/>
+      <circle cx="-4.2" cy="-4.4" r="1" fill="#F3EBD8"/>
+    </symbol>
+    <symbol id="bead-N" viewBox="-12 -12 24 24">
+      <circle r="10" fill="#F3EBD8"/>
+      <circle r="10" fill="url(#h-cross)"/>
+      <path d="M0 -10 A10 10 0 0 1 0 10 A5 10 0 0 0 0 -10 Z" fill="url(#h-dense)" transform="rotate(35)"/>
+      <circle cx="-4" cy="-4.2" r="2.1" fill="#F3EBD8"/>
+      <circle r="10" fill="none" stroke="#1F1A14" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="bead-V" viewBox="-12 -12 24 24">
+      <circle r="10" fill="#F3EBD8"/>
+      <circle r="10" fill="url(#h-horiz)"/>
+      <path d="M0 -10 A10 10 0 0 1 0 10 A5 10 0 0 0 0 -10 Z" fill="url(#h-dense)" transform="rotate(35)"/>
+      <circle cx="-4" cy="-4.2" r="2.1" fill="#F3EBD8"/>
+      <circle r="10" fill="none" stroke="#1F1A14" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="bead-S" viewBox="-12 -12 24 24">
+      <circle r="10" fill="#F3EBD8"/>
+      <circle r="10" fill="url(#h-vert)"/>
+      <path d="M0 -10 A10 10 0 0 1 0 10 A5 10 0 0 0 0 -10 Z" fill="url(#h-dense)" transform="rotate(35)"/>
+      <circle cx="-4" cy="-4.2" r="2.1" fill="#F3EBD8"/>
+      <circle r="10" fill="none" stroke="#1F1A14" stroke-width="1.1"/>
+    </symbol>
+    <symbol id="bead-F" viewBox="-12 -12 24 24">
+      <circle r="10" fill="#F3EBD8"/>
+      <path d="M0 -10 A10 10 0 0 1 0 10 A5 10 0 0 0 0 -10 Z" fill="url(#h-diag-fine)" transform="rotate(35)"/>
+      <circle r="2.4" fill="#1F1A14"/>
+      <circle r="10" fill="none" stroke="#1F1A14" stroke-width="1.1"/>
+      <circle r="6.2" fill="none" stroke="#1F1A14" stroke-width="0.4"/>
+    </symbol>
+
+    <symbol id="device" viewBox="0 0 200 200">
+      <defs>
+        <path id="dev-ring" d="M100 100 m-81 0 a81 81 0 1 1 162 0 a81 81 0 1 1 -162 0"/>
+        <clipPath id="dev-clip"><circle cx="100" cy="100" r="64"/></clipPath>
+      </defs>
+      <circle cx="100" cy="100" r="96" fill="#F3EBD8" stroke="#1F1A14" stroke-width="1.6"/>
+      <circle cx="100" cy="100" r="92" fill="none" stroke="#1F1A14" stroke-width="0.6"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="#1F1A14" stroke-width="0.6"/>
+      <text font-family="Cormorant SC, Cormorant Garamond, serif" font-size="12.5" font-weight="600" fill="#1F1A14" letter-spacing="2.4">
+        <textPath href="#dev-ring" textLength="500" lengthAdjust="spacing">CONCORDIA · DISCORS · CONCORDIA · DISCORS · </textPath>
+      </text>
+      <g clip-path="url(#dev-clip)">
+        <rect x="30" y="30" width="140" height="140" fill="url(#h-horiz-wide)"/>
+        <path d="M36 150 Q100 132 164 150 L164 170 L36 170 Z" fill="url(#h-cross)"/>
+        <g stroke="#1F1A14" stroke-width="0.9">
+          <line x1="30" y1="76" x2="170" y2="76"/>
+          <line x1="30" y1="89" x2="170" y2="89"/>
+          <line x1="30" y1="102" x2="170" y2="102"/>
+          <line x1="30" y1="115" x2="170" y2="115"/>
+          <line x1="30" y1="128" x2="170" y2="128"/>
+        </g>
+        <path d="M95 69 Q62 80 70 116" fill="none" stroke="#1F1A14" stroke-width="1.3" stroke-dasharray="1.2 3" stroke-linecap="round"/>
+        <path d="M106 69 Q136 82 128 110" fill="none" stroke="#1F1A14" stroke-width="1.3"/>
+        <path d="M124 104 L128 112 L132 103" fill="none" stroke="#1F1A14" stroke-width="1.3"/>
+        <line x1="82" y1="120" x2="118" y2="120" stroke="#1F1A14" stroke-width="1"/>
+        <line x1="82" y1="124" x2="118" y2="124" stroke="#1F1A14" stroke-width="1"/>
+        <rect x="88" y="54" width="24" height="24" fill="#F3EBD8"/>
+        <use href="#bead-M" x="88" y="54" width="24" height="24"/>
+        <circle cx="72" cy="122" r="12" fill="#F3EBD8"/>
+        <use href="#bead-N" x="60" y="110" width="24" height="24"/>
+        <circle cx="128" cy="122" r="12" fill="#F3EBD8"/>
+        <use href="#bead-F" x="116" y="110" width="24" height="24"/>
+      </g>
+      <circle cx="100" cy="100" r="64" fill="none" stroke="#1F1A14" stroke-width="1.2"/>
+      <g fill="#1F1A14">
+        <circle cx="100" cy="11.5" r="1.6"/><circle cx="100" cy="188.5" r="1.6"/>
+      </g>
+    </symbol>
+
+    <symbol id="fleuron" viewBox="0 0 180 20">
+      <line x1="4" y1="10" x2="74" y2="10" stroke="#1F1A14" stroke-width="0.7"/>
+      <line x1="106" y1="10" x2="176" y2="10" stroke="#1F1A14" stroke-width="0.7"/>
+      <path d="M74 10 Q80 4 84 10 Q80 16 74 10 Z M106 10 Q100 4 96 10 Q100 16 106 10 Z" fill="#1F1A14"/>
+      <use href="#bead-M" x="83" y="3" width="14" height="14"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="book">
+
+<header class="title-page">
+  <p class="pre">Liber Magisterii · Pars prima</p>
+  <h1>Наставление к Игре в бисер<span>ясное и подробное, для начинающих и для магистров</span></h1>
+  <p class="sub">с изъяснением доски и бусин, трёх родов связи и счёта гармонии, с двенадцатью этюдами из всех областей знания и с полным разбором торжественной партии «Китайский дом»</p>
+  <svg class="device" viewBox="0 0 200 200" role="img" aria-label="Печатный знак: три бусины на пятилинейном нотоносце, соединённые тремя родами связи, и девиз CONCORDIA DISCORS по кругу"><use href="#device"/></svg>
+  <p class="imprint">По роману Германа Гессе<br><span class="rub">«Das Glasperlenspiel»</span> · 1943</p>
+</header>
+
+<section class="chapter" id="preface">
+  <p class="chapter-no">Предуведомление</p>
+  <h2>Гессе описал Игру издали, а эта книга даёт её в руки</h2>
+
+  <aside class="note"><span class="nh">Что понадобится</span>
+    <p>Лист с пятью длинными линейками или нотная бумага. Горсть бусин пяти родов: годятся пуговицы, монеты, фасоль. Карандаш. Песочные часы на три минуты. Собеседник, который любит возражать.</p>
+  </aside>
+
+  <p class="lead">В романе Германа Гессе Игра в бисер — высшее искусство Касталии, учёной провинции будущего. Ею сопоставляют и соединяют содержания всех наук и искусств: музыкальную тему и математическую формулу, строку древнего поэта и план здания, — так же, как органист соединяет голоса в одно звучание. Гессе рассказывает, кто в неё играет, как её любят и чего она стоит, но правил не записывает. Игра остаётся видимой как бы через окно.</p>
+  <p>Настоящее наставление открывает это окно. Всё, что сказано ниже о доске, бусинах, связях и счёте, — не выписка из романа, а свод правил, составленный так, чтобы двое людей могли сесть за стол и сыграть первую партию сегодня вечером. Где мы опираемся на Гессе, это сказано прямо; где достраиваем, это тоже сказано.</p>
+  <p>Книга идёт от простого к сложному. Сначала история и снаряжение, затем три рода связи, затем счёт и правила. Шестая глава даёт двенадцать этюдов — коротких упражнений из музыки, математики, поэзии, письма, зодчества, ботаники и ремесла. Седьмая глава разбирает ход за ходом целую партию магистров. На полях стоят заметки для тех, кто читает медленно.</p>
+
+  <svg class="rule-orn" viewBox="0 0 180 20" aria-hidden="true"><use href="#fleuron"/></svg>
+</section>
+
+<section class="chapter" id="ch1">
+  <p class="chapter-no">Глава первая</p>
+  <h2>Игра началась с проволочной рамы и стеклянных бусин</h2>
+
+  <aside class="note"><span class="nh">Имя</span>
+    <p>По роману, имя Игры осталось от первого снаряда — рамы с бусинами. Позднее бусины сменились знаками и формулами, но слово «бисер» сохранилось, как сохраняется имя основателя за давно перестроенным городом.</p>
+  </aside>
+
+  <p class="lead">Гессе называет изобретателем Бастиана Перро из Кальва, музыковеда, который соорудил раму наподобие детских счётов: несколько десятков натянутых проволок и нанизанные на них стеклянные бусины разной величины, формы и цвета. Проволоки соответствовали нотным линейкам, бусины — длительностям и высотам. Так на раме можно было выкладывать музыкальные цитаты и вымышленные темы, менять их, переносить и противопоставлять.</p>
+  <p>Сначала этим забавлялись музыканты и студенты консерваторий. Потом в Игру вошли математики: их формулы оказались так же пригодны для сопоставления, как темы фуг. По роману, решающий шаг сделал человек, которого Гессе называет Joculator Basiliensis, базельский игрок: он заложил основы нового языка знаков, в котором музыке и математике отведена равная доля. С этого времени в Игру постепенно вошли и филология, и история искусств, и всёновые области знания, пока она не стала общим языком учёной провинции.</p>
+  <p>В Касталии у Игры есть свой магистр, Magister Ludi, и своё селение, Вальдцель, где ежегодно разыгрывают торжественную партию перед гостями со всей страны. В романе последовательно упоминаются магистр Томас фон дер Траве и его преемник Иозеф Кнехт, герой книги. Партии бывают торжественные, публичные, и частные, которые разыгрывают двое или трое друзей. Наш учебник учит прежде всего частной партии, но в седьмой главе показывает и торжественную.</p>
+
+  <figure class="plate wide">
+    <div class="plate-frame">
+      <svg viewBox="0 0 640 310" role="img" aria-label="Гравюра: деревянная рама наподобие счётов, десять натянутых проволок, на них стеклянные бусины разной величины и рисунка">
+        <path d="M70 282 Q320 262 570 282 L566 296 Q320 284 74 296 Z" fill="url(#h-cross)"/>
+        <path d="M60 28 H580 V262 H60 Z M92 58 V232 H548 V58 Z" fill="url(#h-diag)" fill-rule="evenodd" stroke="#1F1A14" stroke-width="1.4"/>
+        <path d="M60 28 H580 V262 H60 Z M92 58 V232 H548 V58 Z" fill="none" stroke="#1F1A14" stroke-width="0.5" transform="translate(4 4) scale(0.987)"/>
+        <line x1="60" y1="28" x2="92" y2="58" stroke="#1F1A14" stroke-width="0.7"/>
+        <line x1="580" y1="28" x2="548" y2="58" stroke="#1F1A14" stroke-width="0.7"/>
+        <line x1="60" y1="262" x2="92" y2="232" stroke="#1F1A14" stroke-width="0.7"/>
+        <line x1="580" y1="262" x2="548" y2="232" stroke="#1F1A14" stroke-width="0.7"/>
+        <path d="M92 58 H548 V64 H98 V232 H92 Z" fill="url(#h-dense)"/>
+        <path d="M84 262 L74 284 H128 L118 262 Z M522 262 L512 284 H566 L556 262 Z" fill="url(#h-horiz)" stroke="#1F1A14" stroke-width="1.1"/>
+        <g stroke="#1F1A14" stroke-width="0.8">
+          <line x1="92" y1="72" x2="548" y2="72"/><line x1="92" y1="89" x2="548" y2="89"/>
+          <line x1="92" y1="106" x2="548" y2="106"/><line x1="92" y1="123" x2="548" y2="123"/>
+          <line x1="92" y1="140" x2="548" y2="140"/><line x1="92" y1="157" x2="548" y2="157"/>
+          <line x1="92" y1="174" x2="548" y2="174"/><line x1="92" y1="191" x2="548" y2="191"/>
+          <line x1="92" y1="208" x2="548" y2="208"/><line x1="92" y1="225" x2="548" y2="225"/>
+        </g>
+        <g fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.8">
+          <circle cx="76" cy="72" r="2.6"/><circle cx="76" cy="89" r="2.6"/><circle cx="76" cy="106" r="2.6"/><circle cx="76" cy="123" r="2.6"/><circle cx="76" cy="140" r="2.6"/><circle cx="76" cy="157" r="2.6"/><circle cx="76" cy="174" r="2.6"/><circle cx="76" cy="191" r="2.6"/><circle cx="76" cy="208" r="2.6"/><circle cx="76" cy="225" r="2.6"/>
+          <circle cx="564" cy="72" r="2.6"/><circle cx="564" cy="89" r="2.6"/><circle cx="564" cy="106" r="2.6"/><circle cx="564" cy="123" r="2.6"/><circle cx="564" cy="140" r="2.6"/><circle cx="564" cy="157" r="2.6"/><circle cx="564" cy="174" r="2.6"/><circle cx="564" cy="191" r="2.6"/><circle cx="564" cy="208" r="2.6"/><circle cx="564" cy="225" r="2.6"/>
+        </g>
+        <use href="#bead-M" x="112" y="62" width="20" height="20"/>
+        <use href="#bead-N" x="134" y="62" width="20" height="20"/>
+        <use href="#bead-F" x="300" y="64" width="16" height="16"/>
+        <use href="#bead-V" x="468" y="60" width="24" height="24"/>
+        <use href="#bead-S" x="188" y="80" width="18" height="18"/>
+        <use href="#bead-M" x="206" y="80" width="18" height="18"/>
+        <use href="#bead-N" x="392" y="78" width="22" height="22"/>
+        <use href="#bead-F" x="150" y="95" width="22" height="22"/>
+        <use href="#bead-M" x="252" y="97" width="18" height="18"/>
+        <use href="#bead-M" x="270" y="97" width="18" height="18"/>
+        <use href="#bead-S" x="500" y="96" width="20" height="20"/>
+        <use href="#bead-V" x="330" y="112" width="22" height="22"/>
+        <use href="#bead-N" x="104" y="113" width="20" height="20"/>
+        <use href="#bead-F" x="430" y="113" width="20" height="20"/>
+        <use href="#bead-M" x="218" y="128" width="24" height="24"/>
+        <use href="#bead-S" x="360" y="130" width="20" height="20"/>
+        <use href="#bead-N" x="380" y="130" width="20" height="20"/>
+        <use href="#bead-V" x="480" y="129" width="22" height="22"/>
+        <use href="#bead-F" x="128" y="147" width="20" height="20"/>
+        <use href="#bead-M" x="300" y="145" width="24" height="24"/>
+        <use href="#bead-N" x="520" y="148" width="18" height="18"/>
+        <use href="#bead-S" x="170" y="164" width="20" height="20"/>
+        <use href="#bead-V" x="412" y="162" width="24" height="24"/>
+        <use href="#bead-M" x="246" y="181" width="20" height="20"/>
+        <use href="#bead-F" x="266" y="181" width="20" height="20"/>
+        <use href="#bead-N" x="452" y="180" width="22" height="22"/>
+        <use href="#bead-V" x="112" y="197" width="22" height="22"/>
+        <use href="#bead-S" x="344" y="198" width="20" height="20"/>
+        <use href="#bead-M" x="500" y="198" width="20" height="20"/>
+        <use href="#bead-F" x="200" y="214" width="22" height="22"/>
+        <use href="#bead-N" x="390" y="215" width="20" height="20"/>
+        <use href="#bead-M" x="410" y="215" width="20" height="20"/>
+        <text x="320" y="49" text-anchor="middle" font-family="Cormorant SC, serif" font-size="11" letter-spacing="3" fill="#F3EBD8" stroke="#F3EBD8" stroke-width="3" paint-order="stroke">TAB. I</text>
+        <text x="320" y="49" text-anchor="middle" font-family="Cormorant SC, serif" font-size="11" letter-spacing="3" fill="#1F1A14">TAB. I</text>
+      </svg>
+    </div>
+    <figcaption><span class="tab">Табл. I.</span> Рама Бастиана Перро, как её можно вообразить по описанию в романе: проволоки вместо нотных линеек, бусины вместо нот. Рисунок пяти родов бусин взят из нашей нынешней доски (табл. II), чтобы показать родство старого снаряда и нового.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch2">
+  <p class="chapter-no">Глава вторая</p>
+  <h2>Доска — это нотоносец, на котором высота означает степень отвлечённости</h2>
+
+  <aside class="note"><span class="nh">Почему пять линий</span>
+    <p>Пять линий взяты у нотоносца, потому что с музыки Игра началась. Но читать их надо снизу вверх, как ступени лестницы: от вещи, которую можно потрогать, к началу, которое можно только помыслить.</p>
+  </aside>
+
+  <p class="lead">Доска — длинный лист с пятью горизонтальными линиями, разделённый вертикальными чертами на столбцы. Столбец — это такт, единица времени партии: всё, что стоит в одном столбце, звучит одновременно. Линия — это ступень: чем выше стоит бусина, тем отвлечённее то, что она называет.</p>
+
+  <table class="lines-table">
+    <thead><tr><th>Линия</th><th>Ступень</th><th>Что на ней лежит</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sig">V</span></td><td>Начало</td><td>Первые понятия и пределы мысли: пустота, единое, мера, бесконечность.</td></tr>
+      <tr><td><span class="sig">IV</span></td><td>Закон</td><td>То, что выполняется всегда: теорема, правило гармонии, закон наследования.</td></tr>
+      <tr><td><span class="sig">III</span></td><td>Строй</td><td>Устройство целого: форма фуги, план собора, схема сонета, порядок обряда.</td></tr>
+      <tr><td><span class="sig">II</span></td><td>Образ</td><td>Отдельная фигура: тема, метафора, орнамент, жест.</td></tr>
+      <tr><td><span class="sig">I</span></td><td>Вещь</td><td>Конкретный предмет или факт: этот иероглиф, эта колонна, этот цветок.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Пять родов бусин соответствуют пяти большим областям знания</h3>
+  <p>Каждая бусина принадлежит одной области, и её род виден по рисунку. Мы держимся пяти родов: их достаточно, чтобы вместить почти всё, и мало, чтобы помнить без таблицы. Их латинские имена служат и знаками записи.</p>
+
+  <table class="lines-table">
+    <thead><tr><th>Знак</th><th>Род</th><th>Рисунок</th><th>Область</th></tr></thead>
+    <tbody>
+      <tr><td><span class="sig">M</span></td><td>Musica</td><td>чёрная, с бликом</td><td>Музыка: темы, лады, формы, инструменты.</td></tr>
+      <tr><td><span class="sig">N</span></td><td>Numerus</td><td>перекрёстная штриховка</td><td>Число: арифметика, геометрия, логика, физические законы.</td></tr>
+      <tr><td><span class="sig">V</span></td><td>Verbum</td><td>горизонтальная штриховка</td><td>Слово: поэзия, философия, история, право.</td></tr>
+      <tr><td><span class="sig">S</span></td><td>Signum</td><td>вертикальная штриховка</td><td>Знак: письмо, иероглифы, символы, гадательные фигуры, гербы.</td></tr>
+      <tr><td><span class="sig">F</span></td><td>Forma</td><td>светлая, с зерном в центре</td><td>Форма: зодчество, природа, ремесло, живое тело.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Бусину записывают так: знак рода, номер линии и имя. Запись <span class="sig">M3</span> «Бах, Искусство фуги, зеркальная фуга» значит: музыка, ступень строя. Имя должно быть точным. Не «фуга Баха», а та фуга, которую вы готовы показать; не «теорема Пифагора», а та её сторона, которой она входит в партию.</p>
+
+  <figure class="plate wide">
+    <div class="plate-frame scroll-box">
+      <svg viewBox="0 0 760 370" role="img" aria-label="Гравюра доски: пять линий, восемь столбцов, четыре бусины, соединённые аналогией, контрапунктом и модуляцией; внизу легенда пяти родов бусин">
+        <g font-family="Cormorant SC, serif" font-size="13" fill="#1F1A14" letter-spacing="1.5">
+          <text x="14" y="64">V · Начало</text>
+          <text x="14" y="109">IV · Закон</text>
+          <text x="14" y="154">III · Строй</text>
+          <text x="14" y="199">II · Образ</text>
+          <text x="14" y="244">I · Вещь</text>
+        </g>
+        <g font-family="Cormorant Garamond, serif" font-size="14" fill="#6B5E4B" text-anchor="middle">
+          <text x="170" y="34">I</text><text x="242" y="34">II</text><text x="314" y="34">III</text><text x="386" y="34">IV</text><text x="458" y="34">V</text><text x="530" y="34">VI</text><text x="602" y="34">VII</text><text x="674" y="34">VIII</text>
+        </g>
+        <g stroke="#BFAE8E" stroke-width="0.7" stroke-dasharray="2 4">
+          <line x1="206" y1="44" x2="206" y2="262"/><line x1="278" y1="44" x2="278" y2="262"/><line x1="350" y1="44" x2="350" y2="262"/><line x1="422" y1="44" x2="422" y2="262"/><line x1="494" y1="44" x2="494" y2="262"/><line x1="566" y1="44" x2="566" y2="262"/><line x1="638" y1="44" x2="638" y2="262"/>
+        </g>
+        <g stroke="#1F1A14" stroke-width="0.9">
+          <line x1="134" y1="60" x2="712" y2="60"/><line x1="134" y1="105" x2="712" y2="105"/><line x1="134" y1="150" x2="712" y2="150"/><line x1="134" y1="195" x2="712" y2="195"/><line x1="134" y1="240" x2="712" y2="240"/>
+        </g>
+        <line x1="134" y1="44" x2="134" y2="262" stroke="#1F1A14" stroke-width="2.2"/>
+        <line x1="139" y1="44" x2="139" y2="262" stroke="#1F1A14" stroke-width="0.7"/>
+        <line x1="712" y1="44" x2="712" y2="262" stroke="#1F1A14" stroke-width="0.9"/>
+
+        <line x1="186" y1="146" x2="298" y2="146" stroke="#1F1A14" stroke-width="1.1"/>
+        <line x1="186" y1="154" x2="298" y2="154" stroke="#1F1A14" stroke-width="1.1"/>
+        <path d="M330 156 Q366 196 330 232" fill="none" stroke="#1F1A14" stroke-width="1.3"/>
+        <path d="M335 224 L329 233 L340 232" fill="none" stroke="#1F1A14" stroke-width="1.3"/>
+        <path d="M328 236 Q356 188 374 199" fill="none" stroke="#1F1A14" stroke-width="1.4" stroke-dasharray="1.2 3.4" stroke-linecap="round"/>
+
+        <circle cx="170" cy="150" r="14" fill="#F3EBD8"/><use href="#bead-M" x="156" y="136" width="28" height="28"/>
+        <circle cx="314" cy="150" r="14" fill="#F3EBD8"/><use href="#bead-N" x="300" y="136" width="28" height="28"/>
+        <circle cx="314" cy="240" r="14" fill="#F3EBD8"/><use href="#bead-F" x="300" y="226" width="28" height="28"/>
+        <circle cx="386" cy="195" r="14" fill="#F3EBD8"/><use href="#bead-V" x="372" y="181" width="28" height="28"/>
+
+        <g font-family="EB Garamond, serif" font-style="italic" font-size="12.5" fill="#6B5E4B">
+          <text x="242" y="138" text-anchor="middle">аналогия</text>
+          <text x="368" y="244">контрапункт</text>
+          <text x="404" y="182">модуляция</text>
+        </g>
+
+        <line x1="134" y1="292" x2="712" y2="292" stroke="#1F1A14" stroke-width="0.5"/>
+        <g font-family="Cormorant SC, serif" font-size="13" fill="#1F1A14" letter-spacing="1">
+          <use href="#bead-M" x="150" y="310" width="26" height="26"/><text x="182" y="328">M · Musica</text>
+          <use href="#bead-N" x="266" y="310" width="26" height="26"/><text x="298" y="328">N · Numerus</text>
+          <use href="#bead-V" x="392" y="310" width="26" height="26"/><text x="424" y="328">V · Verbum</text>
+          <use href="#bead-S" x="508" y="310" width="26" height="26"/><text x="540" y="328">S · Signum</text>
+          <use href="#bead-F" x="618" y="310" width="26" height="26"/><text x="650" y="328">F · Forma</text>
+        </g>
+        <text x="712" y="360" text-anchor="end" font-family="Cormorant SC, serif" font-size="11" letter-spacing="3" fill="#6B5E4B">TAB. II</text>
+      </svg>
+    </div>
+    <figcaption><span class="tab">Табл. II.</span> Доска с четырьмя бусинами. Музыка и число в I и III столбце стоят на одной линии и соединены аналогией. Под числом, в том же столбце, — форма, связанная контрапунктом. Из формы в следующий столбец уходит модуляцией слово.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch3">
+  <p class="chapter-no">Глава третья</p>
+  <h2>Три рода связи говорят, что именно сохраняется при переходе</h2>
+
+  <aside class="note"><span class="nh">Одна фраза</span>
+    <p>Всякую связь объявляют одной фразой вида «сохраняется…». Если фраза не складывается, связи нет, как бы красиво ни звучали оба имени рядом.</p>
+  </aside>
+
+  <p class="lead">Бусина без связи — только цитата. Игра начинается тогда, когда двое показывают, что две вещи из разных областей держатся одного закона. Связей три, и у каждой свой знак на доске и своё место.</p>
+
+  <h3>Аналогия: одно устройство в двух областях</h3>
+  <p>Аналогия утверждает, что у двух вещей общий строй: части относятся друг к другу так же. Обе бусины стоят на <em>одной линии</em>, потому что говорят на одной ступени отвлечённости. Знак — двойная черта, как знак равенства. В записи: <span class="lk">=</span>.</p>
+  <p>Хорошая аналогия указывает, какие части чему соответствуют. Слабая довольствуется общим словом: «и там и там гармония». Такую соперник вправе оспорить.</p>
+
+  <h3>Контрапункт: две вещи звучат вместе и отвечают друг другу</h3>
+  <p>Контрапункт ставит рядом две вещи, которые противостоят и при этом нуждаются друг в друге, как два голоса двухголосной инвенции: один поднимается, когда другой опускается. Обе бусины стоят в <em>одном столбце</em>, на разных линиях. Знак — сплошная дуга со стрелкой к отвечающей бусине. В записи: <span class="lk">×</span>.</p>
+  <p>Контрапункт допустим и внутри одной области: распор свода и контрфорс — оба из зодчества, но держат друг друга. Тогда он получает меньше за дальность, но не теряет в точности.</p>
+
+  <h3>Модуляция: та же тема переходит в другую область</h3>
+  <p>Модуляция переносит тему в иную область знания, как музыка переходит в другую тональность, не теряя мелодии. Новая бусина встаёт в <em>следующий свободный столбец</em>, на любую линию, и обязательно в другой области. Знак — пунктирная дуга. В записи: <span class="lk">→</span>.</p>
+
+  <figure class="plate wide">
+    <div class="plate-frame">
+      <svg viewBox="0 0 720 230" role="img" aria-label="Гравюра: три поля; в первом две бусины на одной линии соединены двойной чертой, во втором две бусины в одном столбце соединены сплошной дугой со стрелкой, в третьем бусина и бусина в следующем столбце соединены пунктирной дугой">
+        <g stroke="#1F1A14" fill="none">
+          <rect x="8" y="8" width="224" height="190" stroke-width="1"/><rect x="12" y="12" width="216" height="182" stroke-width="0.4"/>
+          <rect x="248" y="8" width="224" height="190" stroke-width="1"/><rect x="252" y="12" width="216" height="182" stroke-width="0.4"/>
+          <rect x="488" y="8" width="224" height="190" stroke-width="1"/><rect x="492" y="12" width="216" height="182" stroke-width="0.4"/>
+        </g>
+        <g stroke="#1F1A14" stroke-width="0.5">
+          <line x1="22" y1="60" x2="218" y2="60"/><line x1="22" y1="85" x2="218" y2="85"/><line x1="22" y1="110" x2="218" y2="110"/><line x1="22" y1="135" x2="218" y2="135"/><line x1="22" y1="160" x2="218" y2="160"/>
+          <line x1="262" y1="60" x2="458" y2="60"/><line x1="262" y1="85" x2="458" y2="85"/><line x1="262" y1="110" x2="458" y2="110"/><line x1="262" y1="135" x2="458" y2="135"/><line x1="262" y1="160" x2="458" y2="160"/>
+          <line x1="502" y1="60" x2="698" y2="60"/><line x1="502" y1="85" x2="698" y2="85"/><line x1="502" y1="110" x2="698" y2="110"/><line x1="502" y1="135" x2="698" y2="135"/><line x1="502" y1="160" x2="698" y2="160"/>
+        </g>
+        <line x1="74" y1="105" x2="166" y2="105" stroke="#1F1A14" stroke-width="1.4"/>
+        <line x1="74" y1="115" x2="166" y2="115" stroke="#1F1A14" stroke-width="1.4"/>
+        <circle cx="60" cy="110" r="16" fill="#F3EBD8"/><use href="#bead-M" x="44" y="94" width="32" height="32"/>
+        <circle cx="180" cy="110" r="16" fill="#F3EBD8"/><use href="#bead-N" x="164" y="94" width="32" height="32"/>
+
+        <path d="M376 72 Q422 110 376 148" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+        <path d="M382 140 L375 150 L388 149" fill="none" stroke="#1F1A14" stroke-width="1.5"/>
+        <circle cx="360" cy="60" r="16" fill="#F3EBD8"/><use href="#bead-F" x="344" y="44" width="32" height="32"/>
+        <circle cx="360" cy="160" r="16" fill="#F3EBD8"/><use href="#bead-M" x="344" y="144" width="32" height="32"/>
+
+        <path d="M560 148 Q596 60 640 80" fill="none" stroke="#1F1A14" stroke-width="1.6" stroke-dasharray="1.3 4" stroke-linecap="round"/>
+        <circle cx="548" cy="160" r="16" fill="#F3EBD8"/><use href="#bead-S" x="532" y="144" width="32" height="32"/>
+        <circle cx="654" cy="85" r="16" fill="#F3EBD8"/><use href="#bead-V" x="638" y="69" width="32" height="32"/>
+
+        <g font-family="Cormorant SC, serif" font-size="15" letter-spacing="2" fill="#1F1A14" text-anchor="middle">
+          <text x="120" y="36">Аналогия  =</text>
+          <text x="360" y="36">Контрапункт  ×</text>
+          <text x="600" y="36">Модуляция  →</text>
+        </g>
+        <g font-family="EB Garamond, serif" font-style="italic" font-size="13" fill="#6B5E4B" text-anchor="middle">
+          <text x="120" y="186">одна линия, любые столбцы</text>
+          <text x="360" y="186">один столбец, разные линии</text>
+          <text x="600" y="186">следующий столбец, иная область</text>
+        </g>
+        <text x="712" y="222" text-anchor="end" font-family="Cormorant SC, serif" font-size="11" letter-spacing="3" fill="#6B5E4B">TAB. III</text>
+      </svg>
+    </div>
+    <figcaption><span class="tab">Табл. III.</span> Три знака связи и три правила места. Место бусины на доске само показывает, какая связь её держит, так что готовую партию можно прочесть, не слыша объявлений.</figcaption>
+  </figure>
+
+  <p>Модуляция легче всего понимается на одной теме, проведённой по всем пяти областям. Возьмём тему <em>отражения</em>: вещь, повторённая в обратном порядке. В музыке это зеркальная фуга, где голос звучит перевёрнутым; в числе — осевая симметрия; в слове — палиндром; в знаке — зеркальное письмо; в форме — симметрия листа или фасада. При каждом переходе меняется материал, а отношение «то же, но наоборот» остаётся.</p>
+
+  <figure class="plate wide">
+    <div class="instrument" data-instrument="modulation">
+  <div class="mod-wrap">
+    <div class="mod-left">
+      <div class="mod-themes" role="radiogroup" aria-label="Тема">
+        <button type="button" role="radio" data-theme="refl" aria-checked="true">отражение</button>
+        <button type="button" role="radio" data-theme="rep" aria-checked="false">повторение</button>
+        <button type="button" role="radio" data-theme="prop" aria-checked="false">пропорция</button>
+      </div>
+      <svg class="mod-circle" viewBox="0 0 300 300" aria-label="Круг областей M, N, F, S, V">
+        <circle class="ring" cx="150" cy="150" r="112"/>
+        <circle class="ring thin" cx="150" cy="150" r="104"/>
+        <g class="chords"></g>
+        <path class="path-line" d=""/>
+        <g class="regions"></g>
+        <g class="bead" tabindex="0" role="slider" aria-label="Тема" aria-valuemin="0" aria-valuemax="4">
+          <circle class="bead-halo" r="17"/>
+          <circle class="bead-body" r="12"/>
+          <circle class="bead-ring" r="8"/>
+          <circle class="bead-hl" cx="-4" cy="-4" r="2"/>
+        </g>
+      </svg>
+      <div class="mod-cells">
+        <div class="cell"><span class="ck">ход</span><span class="cv route">M → N</span></div>
+        <div class="cell"><span class="ck">дальность</span><span class="cv dist">1</span></div>
+      </div>
+    </div>
+    <div class="mod-window">
+      <div class="w-head"><span class="w-sig">N</span><span class="w-area">Numerus</span></div>
+      <div class="w-title"></div>
+      <svg class="w-schema" viewBox="0 0 160 90" aria-hidden="true"></svg>
+      <p class="w-text"></p>
+      <p class="w-keep"></p>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="modulation"]{padding:1.2rem 1.2rem 1.3rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="modulation"] .mod-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.4rem;align-items:start}
+[data-instrument="modulation"] .mod-themes{display:flex;gap:.3rem;justify-content:center;flex-wrap:wrap;margin-bottom:.4rem}
+[data-instrument="modulation"] .mod-themes button{font-family:var(--caps);letter-spacing:.1em;font-size:.92rem;background:var(--paper);color:var(--ink);border:1px solid var(--rule);padding:.15rem .7rem;cursor:pointer;border-radius:0}
+[data-instrument="modulation"] .mod-themes button[aria-checked="true"]{border-color:var(--ink);color:var(--rubric);box-shadow:inset 0 -2px 0 var(--rubric)}
+[data-instrument="modulation"] .mod-themes button:focus-visible{outline:2px solid var(--rubric);outline-offset:2px}
+[data-instrument="modulation"] .mod-circle{display:block;width:100%;max-width:20rem;margin:0 auto;height:auto;touch-action:none;user-select:none;-webkit-user-select:none}
+[data-instrument="modulation"] .ring{fill:none;stroke:var(--ink);stroke-width:1}
+[data-instrument="modulation"] .ring.thin{stroke-width:.4}
+[data-instrument="modulation"] .chords line{stroke:var(--rule);stroke-width:.7;stroke-dasharray:2 4}
+[data-instrument="modulation"] .path-line{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-dasharray:1.3 4;stroke-linecap:round}
+[data-instrument="modulation"] .reg{cursor:pointer}
+[data-instrument="modulation"] .reg .plate{fill:var(--paper);stroke:var(--ink);stroke-width:.8}
+[data-instrument="modulation"] .reg.on .plate{stroke:var(--rubric);stroke-width:1.8}
+[data-instrument="modulation"] .reg.from .plate{stroke-dasharray:2 2}
+[data-instrument="modulation"] .reg text{font-family:var(--caps);font-size:12px;letter-spacing:1px;fill:var(--ink);text-anchor:middle}
+[data-instrument="modulation"] .reg.on text{fill:var(--rubric)}
+[data-instrument="modulation"] .bead{cursor:grab;outline:none}
+[data-instrument="modulation"] .bead.drag{cursor:grabbing}
+[data-instrument="modulation"] .bead-halo{fill:var(--paper);stroke:none}
+[data-instrument="modulation"] .bead:focus-visible .bead-halo{stroke:var(--rubric);stroke-width:2}
+[data-instrument="modulation"] .bead-body{fill:var(--rubric)}
+[data-instrument="modulation"] .bead-ring{fill:none;stroke:var(--paper);stroke-width:.8}
+[data-instrument="modulation"] .bead-hl{fill:var(--paper)}
+[data-instrument="modulation"] .mod-cells{display:flex;justify-content:center;gap:.6rem;margin-top:.5rem}
+[data-instrument="modulation"] .cell{border:1px solid var(--rule);background:var(--paper);padding:.2rem .6rem;display:flex;flex-direction:column;align-items:center;min-width:6.5rem}
+[data-instrument="modulation"] .ck{font-family:var(--caps);letter-spacing:.14em;font-size:.78rem;color:var(--faded)}
+[data-instrument="modulation"] .cv{font-family:var(--display);font-weight:600;font-size:1.35rem;line-height:1.2;font-variant-numeric:lining-nums tabular-nums;width:5.5rem;text-align:center;white-space:nowrap}
+[data-instrument="modulation"] .dist{color:var(--rubric)}
+[data-instrument="modulation"] .mod-window{background:var(--paper);border:1px solid var(--ink);outline:1px solid var(--ink);outline-offset:3px;padding:.9rem 1rem 1rem;min-height:21rem}
+[data-instrument="modulation"] .w-head{font-family:var(--caps);letter-spacing:.16em;color:var(--faded);font-size:.88rem;display:flex;gap:.6rem;align-items:baseline}
+[data-instrument="modulation"] .w-sig{color:var(--rubric);font-weight:600;font-size:1.1rem}
+[data-instrument="modulation"] .w-title{font-family:var(--display);font-weight:600;font-size:1.3rem;line-height:1.2;margin:.25rem 0 .5rem;min-height:3.1rem}
+[data-instrument="modulation"] .w-schema{display:block;width:100%;height:auto;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.3rem 0;margin-bottom:.6rem}
+[data-instrument="modulation"] .w-schema *{vector-effect:non-scaling-stroke}
+[data-instrument="modulation"] .w-text{font-size:1rem;line-height:1.45;margin:0 0 .5rem;min-height:4.4rem}
+[data-instrument="modulation"] .w-keep{font-family:var(--display);font-style:italic;font-size:1.08rem;line-height:1.35;margin:0;border-left:2px solid var(--rubric);padding-left:.6rem;text-indent:0}
+@media (max-width:640px){
+  [data-instrument="modulation"] .mod-wrap{grid-template-columns:1fr}
+  [data-instrument="modulation"] .mod-window{min-height:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  [data-instrument="modulation"] .bead.anim{transition:transform .35s ease}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="modulation"]');
+if(!root)return;
+const NS='http://www.w3.org/2000/svg';
+const ORDER=['M','N','F','S','V'];
+const NAMES={M:'Musica',N:'Numerus',F:'Forma',S:'Signum',V:'Verbum'};
+const C=150,R=112,RB=72;
+const ink='var(--ink)',rub='var(--rubric)';
+function L(x1,y1,x2,y2,w,c,d){return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" style="stroke:${c||ink};stroke-width:${w||1}${d?';stroke-dasharray:'+d:''}"/>`}
+function P(d,w,c,f){return `<path d="${d}" style="fill:${f||'none'};stroke:${c||ink};stroke-width:${w||1}"/>`}
+function T(x,y,s,sz,c,extra){return `<text x="${x}" y="${y}" text-anchor="middle" style="font-family:var(--display);font-size:${sz||10}px;fill:${c||ink}" ${extra||''}>${s}</text>`}
+function staff(){let s='';for(let i=0;i<5;i++)s+=L(8,25+i*6,152,25+i*6,.5);return s}
+function notes(pts,c){return pts.map(p=>`<ellipse cx="${p[0]}" cy="${p[1]}" rx="3.2" ry="2.3" style="fill:${c||ink}"/>`).join('')}
+const D={
+refl:{name:'отражение',areas:{
+M:{t:'Бах, «Искусство фуги», зеркальные фуги',x:'Каждая фуга-зеркало существует в двух видах: в обращённом тексте всякий шаг вверх становится шагом вниз на тот же интервал.',k:'расстояния, направление обращено',
+s:()=>{const a=[[20,43],[34,37],[48,40],[62,31]],b=a.map(p=>[p[0]+78,74-p[1]]);return staff()+notes(a)+notes(b,rub)+L(80,12,80,80,.8,rub,'3 2')+P('M20 43 L34 37 L48 40 L62 31',.6)+P('M98 31 L112 37 L126 34 L140 43',.6,rub)}},
+N:{t:'Отражение относительно оси',x:'Точка уходит на ту же длину по другую сторону прямой. Расстояния между точками и углы сохраняются, обход фигуры меняет знак.',k:'расстояния и углы, ориентация обращена',
+s:()=>L(80,6,80,84,.9,rub,'4 2')+P('M74 20 L30 34 L58 70 Z',1)+P('M86 20 L130 34 L102 70 Z',1,rub)+L(58,70,102,70,.4,ink,'1 2')+L(30,34,130,34,.4,ink,'1 2')},
+V:{t:'Палиндром: «А роза упала на лапу Азора»',x:'Фраза, прочитанная от конца к началу, даёт ту же последовательность букв. Середина строки — ось.',k:'последовательность букв, порядок обращён',
+s:()=>T(80,40,'А РОЗА УПАЛА',13)+T(80,62,'НА ЛАПУ АЗОРА',13,rub)+L(80,22,80,72,.8,rub,'3 2')}},
+S:{t:'Зеркальное письмо Леонардо',x:'Леонардо вёл записи справа налево, буквы перевёрнуты: текст читается в зеркале. Знак остаётся знаком, меняется лишь сторона.',k:'начертание знаков, сторона обращена',
+s:()=>T(80,36,'specchio',16)+`<g transform="translate(160 0) scale(-1 1)">${T(80,66,'specchio',16,rub)}</g>`+L(8,47,152,47,.8,rub,'3 2')}},
+F:{t:'Двусторонняя симметрия листа',x:'Средняя жилка делит лист на две почти равные половины; жилки отходят парами, слева и справа под одним углом.',k:'очертание и ветвление, стороны обменены',
+s:()=>{let s=P('M80 8 C40 26 42 64 80 84 C118 64 120 26 80 8 Z',1)+L(80,8,80,88,.9,rub);for(let i=0;i<4;i++){const y=26+i*13;s+=P(`M80 ${y+8} Q66 ${y+2} 56 ${y-2}`,.6)+P(`M80 ${y+8} Q94 ${y+2} 104 ${y-2}`,.6,rub)}return s}}
+}},
+rep:{name:'повторение',areas:{
+M:{t:'Канон: ведущий и ведомый голос',x:'Второй голос вступает позже и повторяет мелодию первого нота в ноту, на заданном расстоянии во времени и по высоте.',k:'мелодия целиком, сдвинута во времени',
+s:()=>{const a=[[16,43],[30,37],[44,40],[58,31],[72,37]];return staff()+notes(a)+notes(a.map(p=>[p[0]+64,p[1]-6]),rub)+L(16,80,80,80,.6,rub)+T(48,88,'сдвиг',7,rub)}},
+N:{t:'Периодическая функция',x:'f(x + T) = f(x): график через каждый период T совпадает с самим собой.',k:'значение функции, сдвиг на период',
+s:()=>{let d='M8 45';for(let i=0;i<4;i++){const x=8+i*36;d+=` Q${x+9} 15 ${x+18} 45 Q${x+27} 75 ${x+36} 45`}let s=P(d,1)+L(8,45,152,45,.4);[8,44,80,116,152].forEach((x,i)=>s+=L(x,40,x,50,.8,i?rub:ink));return s+T(26,86,'T',9,rub)}},
+V:{t:'Рефрен баллады',x:'В конце каждой строфы возвращается одна и та же строка; меняется всё, что стоит перед ней.',k:'строка, возвращается после каждой строфы',
+s:()=>{let s='';for(let k=0;k<3;k++){const x=10+k*50;for(let j=0;j<3;j++)s+=L(x,16+j*9,x+40-j*6,16+j*9,.8);s+=L(x,48,x+40,48,2.2,rub)}return s+T(80,72,'· рефрен ·',10,rub)}},
+S:{t:'Орнамент-меандр',x:'Один мотив сдвигается вдоль ленты на постоянный шаг; лента совпадает с собой при каждом таком сдвиге.',k:'мотив, сдвиг на шаг',
+s:()=>{let d='';for(let i=0;i<5;i++){const x=10+i*28;d+=`M${x} 62 V30 H${x+22} V54 H${x+8} V40 H${x+16} `}return L(6,22,154,22,.6)+L(6,70,154,70,.6)+P(d,1.1)+P('M38 62 V30 H60 V54 H46 V40 H54',1.6,rub)}},
+F:{t:'Листорасположение: угол 137,5°',x:'Каждый новый лист встаёт под золотым углом к предыдущему. Повторяется не место, а шаг поворота.',k:'угол поворота между соседними листьями',
+s:()=>{let s='';const ga=Math.PI*(3-Math.sqrt(5));for(let i=1;i<70;i++){const r=4.6*Math.sqrt(i),a=i*ga;s+=`<circle cx="${(80+r*Math.cos(a)).toFixed(1)}" cy="${(45+r*Math.sin(a)).toFixed(1)}" r="${(1+i/50).toFixed(2)}" style="fill:${i%13===0?rub:ink}"/>`}return s}}
+}},
+prop:{name:'пропорция',areas:{
+M:{t:'Квинта: струна в отношении 3 : 2',x:'Подставка делит струну так, что длины частей стоят как 3 к 2; две части звучат чистой квинтой.',k:'отношение 3 : 2, в длине и в слухе',
+s:()=>{const a=14,b=146,x=a+(b-a)*3/5;return P(`M${a} 56 H${b}`,1.2)+P(`M${x-6} 64 L${x} 50 L${x+6} 64 Z`,.8,ink,'var(--paper)')+L(a,72,x,72,.6)+L(x,72,b,72,.6,rub)+T((a+x)/2,84,'3',10)+T((x+b)/2,84,'2',10,rub)+P('M10 40 H150',.4,ink)}},
+N:{t:'Золотое сечение',x:'Целое так относится к большей части, как большая к меньшей: φ = (1 + √5) / 2 ≈ 1,618.',k:'отношение целого к большей части, φ',
+s:()=>{const a=12,b=148,x=a+(b-a)/1.618034;return L(a,40,b,40,1.4)+L(x,32,x,48,1.2,rub)+L(a,32,a,48,1)+L(b,32,b,48,1)+T((a+x)/2,62,'a',11)+T((x+b)/2,62,'b',11,rub)+T(80,82,'(a+b) : a = a : b ≈ 1,618',9)}},
+V:{t:'Сонет: восемь строк к шести',x:'Октава и секстет стоят как 8 : 6 = 4 : 3; на границе стоит вольта, поворот мысли.',k:'отношение частей целого, 4 : 3',
+s:()=>{let s='';for(let i=0;i<14;i++){const y=8+i*5.5;s+=L(30,y,i<8?126:116,y,i<8?.9:1.3,i<8?ink:rub)}return s+L(20,51,140,51,.6,rub,'2 2')+T(16,32,'8',10)+T(16,70,'6',10,rub)}},
+S:{t:'Построение литеры: Дюрер, «Руководство к измерению»',x:'Буква A вписана в квадрат; толщина штриха задана долей стороны — у Дюрера одна десятая.',k:'доли знака к стороне квадрата',
+s:()=>{const x=50,y=10,w=60;let g='';for(let i=1;i<10;i++)g+=L(x+i*6,y,x+i*6,y+w,.25)+L(x,y+i*6,x+w,y+i*6,.25);return g+P(`M${x} ${y} h${w} v${w} h-${w} Z`,.8)+P(`M${x+4} ${y+w} L${x+27} ${y} H${x+33} L${x+56} ${y+w} H${x+50} L${x+30} ${y+12} L${x+10} ${y+w} Z`,1,ink,'var(--ink)')+L(x+15,y+40,x+45,y+40,1.6,rub)+T(80,86,'штрих = 1/10',8,rub)}},
+F:{t:'Фасад Парфенона и вписанный прямоугольник',x:'Пропорции фасада часто описывают через прямоугольники с отношением сторон, близким к φ; это спорное, но удобное приближение.',k:'отношение сторон, сохранённое в каждой части',
+s:()=>{let s='',x=20,y=8,w=120,h=w/1.618,k=0;for(;k<5;k++){s+=P(`M${x} ${y} h${w} v${h} h-${w} Z`,k?.6:1,k%2?rub:ink);const nw=h,nh=w-h;if(k%2===0){x+=nw;w=nh;h=h}else{y+=w;h=h-w}w=k%2===0?w:w}return s}}
+}}};
+// fix the golden rectangle drawing simply
+D.prop.areas.F.s=()=>{let s='',x=20,y=8,w=120,h=120/1.618034;for(let k=0;k<5;k++){s+=P(`M${x.toFixed(1)} ${y.toFixed(1)} h${w.toFixed(1)} v${h.toFixed(1)} h${(-w).toFixed(1)} Z`,k?.6:1,k%2?rub:ink);if(w>h){x+=h;w=w-h}else{y+=w;h=h-w}}return s};
+
+const svg=root.querySelector('.mod-circle'),gR=root.querySelector('.regions'),gC=root.querySelector('.chords'),pathEl=root.querySelector('.path-line'),bead=root.querySelector('.bead');
+const pos=ORDER.map((k,i)=>{const a=-Math.PI/2+i*2*Math.PI/5;return{k,a,x:C+R*Math.cos(a),y:C+R*Math.sin(a)}});
+for(let i=0;i<5;i++)for(let j=i+1;j<5;j++){const l=document.createElementNS(NS,'line');l.setAttribute('x1',pos[i].x);l.setAttribute('y1',pos[i].y);l.setAttribute('x2',pos[j].x);l.setAttribute('y2',pos[j].y);gC.appendChild(l)}
+const regEls=pos.map((p,i)=>{const g=document.createElementNS(NS,'g');g.setAttribute('class','reg');
+g.innerHTML=`<circle class="plate" cx="${p.x}" cy="${p.y}" r="19"/><use href="#bead-${p.k}" x="${p.x-13}" y="${p.y-13}" width="26" height="26"/><text x="${C+(R+31)*Math.cos(p.a)}" y="${C+(R+31)*Math.sin(p.a)+4}">${p.k}</text>`;
+g.addEventListener('click',()=>go(i));gR.appendChild(g);return g});
+
+let theme='refl',from=0,cur=1;
+const dist=(a,b)=>{const d=Math.abs(a-b);return Math.min(d,5-d)};
+function beadAt(i){const p=pos[i];return[C+RB*Math.cos(p.a),C+RB*Math.sin(p.a)]}
+function place(x,y){bead.setAttribute('transform',`translate(${x} ${y})`)}
+function render(){
+  const [bx,by]=beadAt(cur);place(bx,by);
+  const f=pos[from],t=pos[cur];
+  pathEl.setAttribute('d',`M${f.x} ${f.y} Q${C} ${C} ${t.x} ${t.y}`);
+  regEls.forEach((g,i)=>{g.classList.toggle('on',i===cur);g.classList.toggle('from',i===from&&i!==cur)});
+  const k=ORDER[cur],a=D[theme].areas[k];
+  root.querySelector('.route').textContent=ORDER[from]+' → '+k;
+  root.querySelector('.dist').textContent=String(dist(from,cur));
+  root.querySelector('.w-sig').textContent=k;
+  root.querySelector('.w-area').textContent=NAMES[k]+' · '+D[theme].name;
+  root.querySelector('.w-title').textContent=a.t;
+  root.querySelector('.w-schema').innerHTML=a.s();
+  root.querySelector('.w-text').textContent=a.x;
+  root.querySelector('.w-keep').textContent='сохраняется: '+a.k;
+  bead.setAttribute('aria-valuenow',cur);
+  bead.setAttribute('aria-valuetext',NAMES[k]+', дальность '+dist(from,cur));
+}
+function go(i){if(i===cur){render();return}from=cur;cur=i;bead.classList.add('anim');render();setTimeout(()=>bead.classList.remove('anim'),400)}
+
+function pt(e){const r=svg.getBoundingClientRect();return[(e.clientX-r.left)*300/r.width,(e.clientY-r.top)*300/r.height]}
+let dragging=false;
+bead.addEventListener('pointerdown',e=>{dragging=true;bead.classList.add('drag');bead.classList.remove('anim');bead.setPointerCapture(e.pointerId);e.preventDefault();bead.focus({preventScroll:true})});
+bead.addEventListener('pointermove',e=>{if(!dragging)return;let[x,y]=pt(e);const dx=x-C,dy=y-C,d=Math.hypot(dx,dy),m=R;if(d>m){x=C+dx*m/d;y=C+dy*m/d}place(x,y)});
+function end(e){if(!dragging)return;dragging=false;bead.classList.remove('drag');const[x,y]=pt(e);const dx=x-C,dy=y-C;
+  if(Math.hypot(dx,dy)<28){bead.classList.add('anim');render();return}
+  let a=Math.atan2(dy,dx)+Math.PI/2;a=(a%(2*Math.PI)+2*Math.PI)%(2*Math.PI);const i=Math.round(a/(2*Math.PI/5))%5;go(i)}
+bead.addEventListener('pointerup',end);bead.addEventListener('pointercancel',end);
+bead.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){go((cur+1)%5);e.preventDefault()}
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){go((cur+4)%5);e.preventDefault()}
+  else if(/^[mnfsvMNFSV]$/.test(e.key)){go(ORDER.indexOf(e.key.toUpperCase()));e.preventDefault()}
+});
+const tbtns=[...root.querySelectorAll('.mod-themes button')];
+tbtns.forEach((b,i)=>{b.addEventListener('click',()=>{theme=b.dataset.theme;tbtns.forEach(o=>o.setAttribute('aria-checked',o===b?'true':'false'));render()});
+  b.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){const n=tbtns[(i+(e.key==='ArrowRight'?1:2))%3];n.focus();n.click();e.preventDefault()}})});
+render();
+})();</script>
+    <figcaption><span class="tab">Прибор I.</span> Модуляция одной темы по пяти областям. Дальность перехода — число шагов по кругу областей.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch4">
+  <p class="chapter-no">Глава четвёртая</p>
+  <h2>Гармонию хода считают по трём мерам, и в сумме не больше десяти</h2>
+
+  <aside class="note"><span class="nh">Откуда счёт</span>
+    <p>У Гессе нет чисел для оценки хода. Наш счёт подражает древнему учению о созвучиях: чем проще отношение частей струны, тем чище интервал. Так и связь: чем проще и точнее сказано, что сохраняется, тем она выше.</p>
+  </aside>
+
+  <p class="lead">После паузы созерцания ход получает оценку. Её выставляет судья, а если судьи нет, оба игрока вместе; при разногласии берут меньшее число. Мер три.</p>
+
+  <table class="lines-table">
+    <thead><tr><th>Мера</th><th>Баллы</th><th>Что оценивается</th></tr></thead>
+    <tbody>
+      <tr><td><b>Точность</b></td><td class="num">0–4</td><td>Правда связи. 4 — соответствие частей указано и проверяемо; 2 — верно, но в общих словах; 0 — связь не выдержала возражения.</td></tr>
+      <tr><td><b>Дальность</b></td><td class="num">0–3</td><td>Расстояние между областями по кругу M–N–F–S–V: та же область 0, соседняя 1, через одну 2. Ещё 1, если связь перескакивает две линии и больше.</td></tr>
+      <tr><td><b>Стройность</b></td><td class="num">0–3</td><td>Связь хода с ключом и общей темой партии. 3 — ход продвигает тему; 1 — держится её краем; 0 — уводит в сторону.</td></tr>
+    </tbody>
+  </table>
+
+  <p>Круг областей выбран так, чтобы соседи были связаны давно и прочно: музыка с числом — через пифагорейские отношения, число с формой — через меру и рост, форма со знаком — через изображение вещи, знак со словом — через письмо, слово с музыкой — через песню. Ход между соседями даётся легче и потому приносит меньше за дальность.</p>
+  <p>Записывают так: <span class="sig">Т 4 · Д 2 · С 3 = 9</span>. Высокий счёт без точности невозможен: смелая, но неверная связь получает ноль за весь ход, если не выдержала возражения.</p>
+
+  <figure class="plate wide">
+    <div class="instrument" data-instrument="monochord">
+  <div class="mc">
+    <svg class="mc-svg" aria-label="Монохорд: резонатор, струна и подвижная подставка"></svg>
+    <div class="mc-cells">
+      <div class="mc-cell">
+        <span class="mc-k">Части струны, %</span>
+        <span class="mc-v" data-o="parts">40,0 : 60,0</span>
+      </div>
+      <div class="mc-cell">
+        <span class="mc-k">Отношение</span>
+        <span class="mc-v" data-o="ratio">3 : 2</span>
+      </div>
+      <div class="mc-cell">
+        <span class="mc-k">Интервал</span>
+        <span class="mc-v mc-name" data-o="name">квинта</span>
+        <span class="mc-sub" data-o="sub">точно</span>
+      </div>
+      <div class="mc-cell">
+        <span class="mc-k">Созвучие</span>
+        <span class="mc-v"><span data-o="score">8</span><span class="mc-of"> / 10</span></span>
+        <span class="mc-pips" data-o="pips"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+    </div>
+    <div class="mc-game">
+      <div class="mc-k">Точность связи двух бусин</div>
+      <div class="mc-steps">
+        <div class="mc-step" data-t="0"><span class="mc-t">Т 0</span><span class="mc-r">созвучие 0–2</span></div>
+        <div class="mc-step" data-t="1"><span class="mc-t">Т 1</span><span class="mc-r">созвучие 3–4</span></div>
+        <div class="mc-step" data-t="2"><span class="mc-t">Т 2</span><span class="mc-r">созвучие 5–6</span></div>
+        <div class="mc-step is-on" data-t="3"><span class="mc-t">Т 3</span><span class="mc-r">созвучие 7–8</span></div>
+        <div class="mc-step" data-t="4"><span class="mc-t">Т 4</span><span class="mc-r">созвучие 9–10</span></div>
+      </div>
+      <p class="mc-say" data-o="say">3 : 2 — соответствие указано, но одну часть приходится пояснять.</p>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="monochord"] .mc{padding:1.1rem 1.25rem 1.25rem;color:var(--ink);font-family:var(--text)}
+[data-instrument="monochord"] .mc-svg{display:block;width:100%;height:232px;color:var(--ink);overflow:visible;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+[data-instrument="monochord"] .mc-paper{fill:var(--paper)}
+[data-instrument="monochord"] .mc-nib{fill:var(--rubric)}
+[data-instrument="monochord"] .mc-str{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+[data-instrument="monochord"] .mc-hit{fill:none;stroke:transparent;stroke-width:22;cursor:pointer;pointer-events:stroke}
+[data-instrument="monochord"] .mc-env path{fill:var(--ink);opacity:.12}
+[data-instrument="monochord"] .mc-brk{fill:none;stroke:var(--faded);stroke-width:.8}
+[data-instrument="monochord"] .mc-len{font-family:var(--display);font-style:italic;font-size:15px;fill:var(--faded);font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="monochord"] .mc-lab{font-family:var(--caps);font-size:12.5px;fill:var(--faded);letter-spacing:.05em;font-variant-numeric:lining-nums}
+[data-instrument="monochord"] .mc-cart{font-family:var(--caps);font-size:11px;letter-spacing:.3em;fill:var(--ink)}
+[data-instrument="monochord"] .mc-bridge{outline:none}
+[data-instrument="monochord"] .mc-ring{fill:none;stroke:transparent}
+[data-instrument="monochord"] .mc-bridge:focus-visible .mc-ring{stroke:var(--rubric);stroke-width:1.4;stroke-dasharray:3 2}
+[data-instrument="monochord"] .mc-grab{cursor:ew-resize;touch-action:none}
+[data-instrument="monochord"] .mc-cells{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 1rem;margin-top:.6rem}
+[data-instrument="monochord"] .mc-cell{border-top:1px solid var(--ink);padding:.45rem 0 .5rem;min-height:5.6rem;display:flex;flex-direction:column}
+[data-instrument="monochord"] .mc-k{font-family:var(--caps);font-size:.82rem;letter-spacing:.14em;color:var(--faded);line-height:1.2}
+[data-instrument="monochord"] .mc-v{font-family:var(--display);font-weight:500;font-size:1.7rem;line-height:1.15;margin-top:.2rem;font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+[data-instrument="monochord"] .mc-name{font-size:1.25rem;white-space:normal;height:2.35em;display:flex;align-items:flex-end;line-height:1.12}
+[data-instrument="monochord"] .mc-sub{font-size:.92rem;color:var(--faded);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap;height:1.4em}
+[data-instrument="monochord"] .mc-of{font-size:1rem;color:var(--faded)}
+[data-instrument="monochord"] .mc-pips{display:flex;gap:3px;margin-top:.35rem}
+[data-instrument="monochord"] .mc-pips i{flex:1;height:7px;border:1px solid var(--ink);background:transparent}
+[data-instrument="monochord"] .mc-pips i.on{background:var(--ink)}
+[data-instrument="monochord"] .mc-game{margin-top:.9rem;border-top:1px solid var(--ink);padding-top:.55rem}
+[data-instrument="monochord"] .mc-steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin-top:.45rem}
+[data-instrument="monochord"] .mc-step{border:1px solid var(--rule);background:var(--paper);text-align:center;padding:.35rem .2rem .3rem;display:flex;flex-direction:column}
+[data-instrument="monochord"] .mc-step.is-on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+[data-instrument="monochord"] .mc-t{font-family:var(--caps);font-weight:600;letter-spacing:.1em;font-size:1rem;font-variant-numeric:lining-nums}
+[data-instrument="monochord"] .mc-r{font-size:.78rem;line-height:1.2;color:var(--faded);font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="monochord"] .mc-step.is-on .mc-r{color:var(--wash)}
+[data-instrument="monochord"] .mc-say{margin:.6rem 0 0;font-family:var(--display);font-style:italic;font-size:1.12rem;line-height:1.35;min-height:2.7em;font-variant-numeric:lining-nums tabular-nums}
+@media (max-width:560px){
+  [data-instrument="monochord"] .mc{padding:.9rem .8rem 1rem}
+  [data-instrument="monochord"] .mc-cells{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-instrument="monochord"] .mc-r{font-size:.68rem}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="monochord"]');
+if(!root)return;
+const svg=root.querySelector('.mc-svg');
+const H=232,SY=70,TOP=96,PMIN=0.04,PMAX=0.96,TOL=10,STEP=720;
+const reduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+let p=0.4,W=600,x0=46,x1=554,L=508,raf=0,t0=0,drag=false,grab=0,actx=null;
+const q=s=>root.querySelector(s);
+const out={parts:q('[data-o=parts]'),ratio:q('[data-o=ratio]'),name:q('[data-o=name]'),sub:q('[data-o=sub]'),score:q('[data-o=score]'),pips:[...root.querySelectorAll('[data-o=pips] i')],say:q('[data-o=say]'),steps:[...root.querySelectorAll('.mc-step')]};
+
+const cents=r=>1200*Math.log2(r);
+const IV=[[1,1,'унисон'],[16,15,'малая секунда'],[9,8,'большая секунда'],[6,5,'малая терция'],[5,4,'большая терция'],[4,3,'кварта'],[45,32,'тритон'],[3,2,'квинта'],[8,5,'малая секста'],[5,3,'большая секста'],[9,5,'малая септима'],[15,8,'большая септима'],[2,1,'октава']].map(a=>({c:cents(a[0]/a[1]),name:a[2]}));
+const RATIOS=[[1,1],[16,15],[9,8],[6,5],[5,4],[4,3],[45,32],[3,2],[8,5],[5,3],[9,5],[15,8],[2,1],[9,4],[5,2],[8,3],[3,1],[10,3],[4,1],[5,1],[6,1],[8,1],[12,1],[16,1]];
+const SNAP=[];
+RATIOS.forEach(([n,d])=>{const a=1/(1+n/d);[a,1-a].forEach(v=>{if(v>=PMIN&&v<=PMAX&&!SNAP.some(s=>Math.abs(s-v)<1e-9))SNAP.push(v);});});
+SNAP.sort((a,b)=>a-b);
+const LABELS=[];
+[[1,1],[3,2],[4,3],[2,1],[3,1]].forEach(([n,d])=>{const a=1/(1+n/d);const t=n+':'+d;if(n===d)LABELS.push({p:.5,t});else{LABELS.push({p:a,t});LABELS.push({p:1-a,t});}});
+const SAY=['связь не выдерживает возражения: простого отношения нет.','сходство улавливается, но держится на оговорках.','верно, но сказано общими словами.','соответствие указано, но одну часть приходится пояснять.','соответствие частей указано и проверяемо.'];
+const OCT=['','октава','две октавы','три октавы','четыре октавы','пять октав'];
+const fmt1=v=>v.toFixed(1).replace('.',',');
+const gcd=(a,b)=>{while(b){[a,b]=[b,a%b];}return a;};
+
+svg.innerHTML='<defs>'+
+'<pattern id="mc-diag" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3.4" stroke="currentColor" stroke-width="0.7"/></pattern>'+
+'<pattern id="mc-dense" width="1.9" height="1.9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.9" stroke="currentColor" stroke-width="0.8"/></pattern>'+
+'<pattern id="mc-horiz" width="6" height="3" patternUnits="userSpaceOnUse"><line x1="0" y1="1.5" x2="6" y2="1.5" stroke="currentColor" stroke-width="0.5"/></pattern>'+
+'<pattern id="mc-vert" width="2.6" height="4" patternUnits="userSpaceOnUse"><line x1="1.3" y1="0" x2="1.3" y2="4" stroke="currentColor" stroke-width="0.6"/></pattern>'+
+'<pattern id="mc-cross" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3.4" stroke="currentColor" stroke-width="0.6"/><line x1="0" y1="0" x2="3.4" y2="0" stroke="currentColor" stroke-width="0.6"/></pattern>'+
+'</defs><g class="mc-static"></g><g class="mc-env"><path/><path/></g>'+
+'<g><path class="mc-str"/><path class="mc-str"/></g>'+
+'<g><path class="mc-brk"/><path class="mc-brk"/><text class="mc-len" text-anchor="middle" y="36"></text><text class="mc-len" text-anchor="middle" y="36"></text></g>'+
+'<g><path class="mc-hit"/><path class="mc-hit"/></g>'+
+'<g class="mc-bridge" tabindex="0" role="slider" aria-label="Подставка" aria-valuemin="4" aria-valuemax="96">'+
+'<rect class="mc-ring" x="-22" y="'+(SY-18)+'" width="44" height="'+(TOP-SY+30)+'" rx="4"/>'+
+'<path class="mc-paper" d="M-12 '+TOP+' L12 '+TOP+' L4 '+(SY+1)+' L-4 '+(SY+1)+'Z" stroke="currentColor" stroke-width="1.2"/>'+
+'<path d="M-12 '+TOP+' L12 '+TOP+' L4 '+(SY+1)+' L-4 '+(SY+1)+'Z" fill="url(#mc-vert)"/>'+
+'<line x1="-13" y1="'+TOP+'" x2="13" y2="'+TOP+'" stroke="currentColor" stroke-width="2"/>'+
+'<circle class="mc-nib" cy="'+SY+'" r="3"/>'+
+'<rect class="mc-grab" x="-30" y="'+(SY-36)+'" width="60" height="'+(TOP-SY+56)+'" fill="transparent"/></g>';
+
+const gStatic=svg.querySelector('.mc-static');
+const envP=[...svg.querySelectorAll('.mc-env path')];
+const strP=[...svg.querySelectorAll('.mc-str')];
+const brk=[...svg.querySelectorAll('.mc-brk')];
+const lens=[...svg.querySelectorAll('.mc-len')];
+const hits=[...svg.querySelectorAll('.mc-hit')];
+const bridge=svg.querySelector('.mc-bridge');
+const grabR=svg.querySelector('.mc-grab');
+
+function drawStatic(){
+  const b0=x0-26,b1=x1+26,m=W/2;
+  let s='';
+  s+='<path d="M'+(b0-6)+' 166 Q'+m+' 158 '+(b1+6)+' 166 L'+(b1+2)+' 174 Q'+m+' 167 '+(b0-2)+' 174Z" fill="url(#mc-cross)" opacity=".7"/>';
+  s+='<rect x="'+b0+'" y="104" width="'+(b1-b0)+'" height="54" fill="url(#mc-diag)" stroke="currentColor" stroke-width="1.3"/>';
+  s+='<rect x="'+(b0+4)+'" y="108" width="'+(b1-b0-8)+'" height="46" fill="none" stroke="currentColor" stroke-width="0.5"/>';
+  s+='<path d="M'+b1+' 104 L'+(b1+8)+' '+TOP+' L'+(b1+8)+' 150 L'+b1+' 158Z" fill="url(#mc-dense)" stroke="currentColor" stroke-width="1"/>';
+  s+='<path class="mc-paper" d="M'+b0+' 104 L'+(b0+8)+' '+TOP+' L'+(b1+8)+' '+TOP+' L'+b1+' 104Z" stroke="currentColor" stroke-width="1.1"/>';
+  s+='<path d="M'+b0+' 104 L'+(b0+8)+' '+TOP+' L'+(b1+8)+' '+TOP+' L'+b1+' 104Z" fill="url(#mc-horiz)" opacity=".6"/>';
+  [x0+L*.16,x1-L*.16].forEach(cx=>{
+    s+='<circle class="mc-paper" cx="'+cx+'" cy="131" r="14" stroke="currentColor" stroke-width="1"/>';
+    s+='<circle cx="'+cx+'" cy="131" r="10" fill="none" stroke="currentColor" stroke-width="0.5"/>';
+    s+='<circle cx="'+cx+'" cy="131" r="6" fill="url(#mc-dense)" stroke="currentColor" stroke-width="0.6"/>';
+  });
+  s+='<rect class="mc-paper" x="'+(m-64)+'" y="121" width="128" height="20" stroke="currentColor" stroke-width="0.8"/>';
+  s+='<text class="mc-cart" x="'+(m+2)+'" y="135" text-anchor="middle">MONOCHORDVM</text>';
+  [x0,x1].forEach(x=>{
+    const d='M'+(x-8)+' '+TOP+' L'+(x+8)+' '+TOP+' L'+(x+2.5)+' '+SY+' L'+(x-2.5)+' '+SY+'Z';
+    s+='<path class="mc-paper" d="'+d+'" stroke="currentColor" stroke-width="1.1"/><path d="'+d+'" fill="url(#mc-dense)"/>';
+  });
+  s+='<line x1="'+x0+'" y1="'+SY+'" x2="'+(x0-18)+'" y2="'+(SY+18)+'" stroke="currentColor" stroke-width="1.2"/>';
+  s+='<circle class="mc-paper" cx="'+(x0-18)+'" cy="'+(SY+18)+'" r="3" stroke="currentColor" stroke-width="1"/>';
+  s+='<line x1="'+x1+'" y1="'+SY+'" x2="'+(x1+20)+'" y2="'+(SY+12)+'" stroke="currentColor" stroke-width="1.2"/>';
+  s+='<circle class="mc-paper" cx="'+(x1+20)+'" cy="'+(SY+12)+'" r="5.5" stroke="currentColor" stroke-width="1.1"/>';
+  s+='<line x1="'+(x1+16)+'" y1="'+(SY+12)+'" x2="'+(x1+24)+'" y2="'+(SY+12)+'" stroke="currentColor" stroke-width="1"/>';
+  s+='<line x1="'+x0+'" y1="188" x2="'+x1+'" y2="188" stroke="currentColor" stroke-width="0.8"/>';
+  s+='<line x1="'+x0+'" y1="182" x2="'+x0+'" y2="198" stroke="currentColor" stroke-width="1"/><line x1="'+x1+'" y1="182" x2="'+x1+'" y2="198" stroke="currentColor" stroke-width="1"/>';
+  const labP=LABELS.map(l=>l.p);
+  SNAP.forEach(v=>{
+    const big=labP.some(a=>Math.abs(a-v)<1e-9);
+    const x=x0+v*L;
+    s+='<line x1="'+x+'" y1="188" x2="'+x+'" y2="'+(big?199:193)+'" stroke="currentColor" stroke-width="'+(big?0.9:0.6)+'"/>';
+  });
+  const rows=[-1e9,-1e9];
+  LABELS.map(l=>({x:x0+l.p*L,t:l.t})).sort((a,b)=>a.x-b.x).forEach(l=>{
+    for(let r=0;r<2;r++){
+      if(l.x-rows[r]>=34){rows[r]=l.x;s+='<text class="mc-lab" x="'+l.x+'" y="'+(r?226:212)+'" text-anchor="middle">'+l.t+'</text>';break;}
+    }
+  });
+  gStatic.innerHTML=s;
+}
+
+function segs(){const bx=x0+p*L;return[[x0,bx],[bx,x1]];}
+
+function drawStrings(t,env){
+  segs().forEach(([a,b],i)=>{
+    const w=b-a;
+    const amp=env?Math.min(7,w*0.05)*env:0;
+    if(!amp){
+      strP[i].setAttribute('d','M'+a+' '+SY+' L'+b+' '+SY);
+      envP[i].setAttribute('d','');
+      return;
+    }
+    const f=Math.min(14,3.2/(w/L));
+    const ph=Math.sin(2*Math.PI*f*t+0.6);
+    const N=32;
+    let d='',up='',lo='';
+    for(let k=0;k<=N;k++){
+      const x=a+w*k/N,sn=Math.sin(Math.PI*k/N);
+      d+=(k?' L':'M')+x.toFixed(1)+' '+(SY+amp*sn*ph).toFixed(2);
+      up+=(k?' L':'M')+x.toFixed(1)+' '+(SY-amp*sn).toFixed(2);
+    }
+    for(let k=N;k>=0;k--){
+      const x=a+w*k/N,sn=Math.sin(Math.PI*k/N);
+      lo+=' L'+x.toFixed(1)+' '+(SY+amp*sn).toFixed(2);
+    }
+    strP[i].setAttribute('d',d);
+    envP[i].setAttribute('d',up+lo+'Z');
+  });
+}
+
+function approx(r){
+  let best=null,near=null;
+  for(let d=1;d<=32;d++){
+    const n=Math.round(r*d);
+    if(n<1||gcd(n,d)!==1)continue;
+    const e=cents(r)-cents(n/d),ae=Math.abs(e);
+    if(ae<=TOL&&(!best||n*d<best.n*best.d||(n*d===best.n*best.d&&ae<Math.abs(best.e))))best={n,d,e};
+    if(!near||ae<Math.abs(near.e))near={n,d,e};
+  }
+  return best||near;
+}
+
+function interval(r){
+  const c=cents(r);
+  let k=Math.floor(c/1200+1e-9),rem=c-1200*k,bi=0;
+  IV.forEach((v,i)=>{if(Math.abs(rem-v.c)<Math.abs(rem-IV[bi].c))bi=i;});
+  let dev=rem-IV[bi].c;
+  if(bi===IV.length-1){k+=1;bi=0;}
+  let name,oct='';
+  if(bi===0)name=k===0?'унисон':OCT[k];
+  else{name=IV[bi].name;if(k===1)oct='+ октава';else if(k>1)oct='+ '+k+(k<5?' октавы':' октав');}
+  return{name,oct,dev};
+}
+
+function update(){
+  const bx=x0+p*L;
+  bridge.setAttribute('transform','translate('+bx.toFixed(2)+' 0)');
+  if(!raf)drawStrings(0,0);
+  segs().forEach(([a,b],i)=>{
+    brk[i].setAttribute('d','M'+(a+4)+' 50 V43 H'+(b-4)+' V50');
+    lens[i].setAttribute('x',((a+b)/2).toFixed(1));
+    lens[i].textContent=fmt1((i?1-p:p)*100);
+    lens[i].style.visibility=(b-a)<44?'hidden':'visible';
+    hits[i].setAttribute('d','M'+a+' '+SY+' L'+b+' '+SY);
+  });
+  const a=p,b=1-p,r=Math.max(a,b)/Math.min(a,b);
+  const fr=approx(r);
+  const exact=Math.abs(fr.e)<0.5;
+  const ratioTxt=(exact?'':'≈ ')+fr.n+' : '+fr.d;
+  const iv=interval(r);
+  let score=Math.round(10.5-Math.log2(fr.n*fr.d)-Math.abs(fr.e)/4);
+  score=Math.max(0,Math.min(10,score));
+  const T=score>=9?4:score>=7?3:score>=5?2:score>=3?1:0;
+  out.parts.textContent=fmt1(a*100)+' : '+fmt1(b*100);
+  out.ratio.textContent=ratioTxt;
+  out.name.textContent=iv.name;
+  const dv=Math.round(iv.dev);
+  const devTxt=dv===0?'точно':(dv>0?'+':'−')+Math.abs(dv)+' ц';
+  out.sub.textContent=iv.oct?iv.oct+' · '+devTxt:devTxt;
+  out.score.textContent=String(score);
+  out.pips.forEach((el,i)=>el.classList.toggle('on',i<score));
+  out.steps.forEach(el=>el.classList.toggle('is-on',+el.dataset.t===T));
+  out.say.textContent=ratioTxt+' — '+SAY[T];
+  bridge.setAttribute('aria-valuenow',(Math.round(p*1000)/10).toString());
+  bridge.setAttribute('aria-valuetext',iv.name+(iv.oct?' '+iv.oct:'')+', отношение '+ratioTxt+', созвучие '+score+' из 10');
+}
+
+function layout(){
+  const w=svg.getBoundingClientRect().width;
+  W=w>0?w:600;
+  const pad=W<520?30:48;
+  x0=pad;x1=W-pad;L=x1-x0;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);
+  drawStatic();
+  update();
+}
+
+function pluck(){
+  cancelAnimationFrame(raf);raf=0;
+  if(reduce.matches){drawStrings(0,0);return;}
+  t0=performance.now();
+  raf=requestAnimationFrame(stepAnim);
+}
+function stepAnim(now){
+  const t=(now-t0)/1000,env=Math.exp(-t/0.4);
+  if(env<0.03){raf=0;drawStrings(0,0);return;}
+  drawStrings(t,env);
+  raf=requestAnimationFrame(stepAnim);
+}
+function stopAnim(){cancelAnimationFrame(raf);raf=0;drawStrings(0,0);}
+
+function playDyad(){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
+    actx=actx||new AC();
+    if(actx.state==='suspended')actx.resume();
+    const now=actx.currentTime,F=130.81;
+    [p,1-p].forEach(len=>{
+      const o=actx.createOscillator(),g=actx.createGain();
+      o.type='triangle';
+      o.frequency.value=Math.min(5000,F/len);
+      g.gain.setValueAtTime(0.0001,now);
+      g.gain.linearRampToValueAtTime(0.045,now+0.015);
+      g.gain.exponentialRampToValueAtTime(0.0001,now+1.8);
+      o.connect(g);g.connect(actx.destination);
+      o.start(now);o.stop(now+1.9);
+    });
+  }catch(e){}
+}
+
+function pFromEvent(e){
+  const rc=svg.getBoundingClientRect();
+  const x=(e.clientX-rc.left)*(W/(rc.width||W));
+  return (x-x0)/L;
+}
+function clamp(v){return Math.max(PMIN,Math.min(PMAX,v));}
+function snap(v){
+  let best=v,bd=Infinity;
+  SNAP.forEach(s=>{const d=Math.abs(s-v)*L;if(d<bd){bd=d;best=s;}});
+  return bd<=5?best:v;
+}
+
+grabR.addEventListener('pointerdown',e=>{
+  e.preventDefault();
+  drag=true;stopAnim();
+  grab=p-pFromEvent(e);
+  try{grabR.setPointerCapture(e.pointerId);}catch(_){}
+  bridge.focus({preventScroll:true});
+});
+grabR.addEventListener('pointermove',e=>{
+  if(!drag)return;
+  p=clamp(snap(clamp(pFromEvent(e)+grab)));
+  update();
+});
+function endDrag(e){
+  if(!drag)return;
+  drag=false;
+  try{grabR.releasePointerCapture(e.pointerId);}catch(_){}
+  pluck();
+}
+grabR.addEventListener('pointerup',endDrag);
+grabR.addEventListener('pointercancel',endDrag);
+grabR.addEventListener('lostpointercapture',e=>{if(drag)endDrag(e);});
+
+hits.forEach(h=>{
+  h.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    pluck();
+    playDyad();
+  });
+});
+
+function nextSnap(dir){
+  const eps=1e-6;
+  if(dir>0){for(const s of SNAP){if(s>p+eps)return s;}return PMAX;}
+  for(let i=SNAP.length-1;i>=0;i--){if(SNAP[i]<p-eps)return SNAP[i];}
+  return PMIN;
+}
+let keyMoved=false;
+bridge.addEventListener('keydown',e=>{
+  let np=null;
+  switch(e.key){
+    case 'ArrowLeft':case 'ArrowDown':np=e.shiftKey?nextSnap(-1):p-1/STEP;break;
+    case 'ArrowRight':case 'ArrowUp':np=e.shiftKey?nextSnap(1):p+1/STEP;break;
+    case 'PageDown':np=nextSnap(-1);break;
+    case 'PageUp':np=nextSnap(1);break;
+    case 'Home':np=PMIN;break;
+    case 'End':np=PMAX;break;
+    case 'Enter':case ' ':e.preventDefault();pluck();playDyad();return;
+    default:return;
+  }
+  e.preventDefault();
+  stopAnim();
+  p=clamp(np);
+  keyMoved=true;
+  update();
+});
+bridge.addEventListener('keyup',e=>{
+  if(keyMoved&&/Arrow|Page|Home|End/.test(e.key)){keyMoved=false;pluck();}
+});
+bridge.addEventListener('blur',()=>{keyMoved=false;});
+
+if(window.ResizeObserver){
+  let lastW=0;
+  new ResizeObserver(entries=>{
+    const w=entries[0].contentRect.width;
+    if(Math.abs(w-lastW)>0.5){lastW=w;layout();}
+  }).observe(svg);
+}else{
+  window.addEventListener('resize',layout);
+}
+if(reduce.addEventListener)reduce.addEventListener('change',()=>{if(reduce.matches)stopAnim();});
+layout();
+})();</script>
+    <figcaption><span class="tab">Прибор II.</span> Монохорд как образец счёта: простые отношения звучат чисто. Октава, квинта и кварта — это 2:1, 3:2 и 4:3.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch5">
+  <p class="chapter-no">Глава пятая</p>
+  <h2>Двенадцать правил достаточно, чтобы сыграть первую партию</h2>
+
+  <aside class="note"><span class="nh">Созерцание</span>
+    <p>В романе Игра неотделима от медитации: игрок не спешит от хода к ходу, а останавливается и даёт услышанному улечься. Правило V переводит это в простое действие с песочными часами.</p>
+  </aside>
+
+  <ol class="rules">
+    <li><b>Ключ.</b> Партию открывает ключевая бусина, которую выбирают вместе или по жребию. Она встаёт в первый столбец и называет тему партии.</li>
+    <li><b>Ход.</b> Ход — это одна новая бусина и одна связь с бусиной, уже лежащей на доске.</li>
+    <li><b>Имя.</b> Бусину называют точно: произведение, теорема, знак, постройка — и ту их сторону, которой они входят в игру.</li>
+    <li><b>Объявление.</b> Связь объявляют одной фразой: «сохраняется…».</li>
+    <li><b>Пауза созерцания.</b> После объявления переворачивают трёхминутные часы. Никто не говорит.</li>
+    <li><b>Возражение.</b> До конца паузы соперник может оспорить связь. Автор хода защищает её одной фразой. Если защита не принята, ход стоит на доске, но получает ноль.</li>
+    <li><b>Без повторов.</b> Одна и та же вещь не появляется на доске дважды.</li>
+    <li><b>Дыхание.</b> Не больше двух ходов подряд в одной области.</li>
+    <li><b>Место.</b> Аналогия — на ту же линию, контрапункт — в тот же столбец, модуляция — в следующий свободный столбец и в иную область.</li>
+    <li><b>Кода.</b> Последний ход обязан соединиться с ключом. Партия без коды не считается законченной.</li>
+    <li><b>Счёт.</b> Каждый ход получает от 0 до 10 по трём мерам главы четвёртой.</li>
+    <li><b>Запись.</b> Партию записывают по ходам: номер, игрок, бусина, связь, счёт. Запись — главное, что остаётся от партии.</li>
+  </ol>
+
+  <h3>Партия бывает совместной или состязательной</h3>
+  <p>В <em>совместной</em> партии, которая ближе духу Касталии, все ходы складываются в общий итог, и цель — превзойти собственные прежние партии. Средний счёт выше семи на ход считается хорошей игрой, выше восьми — превосходной. В <em>состязательной</em> партии каждый ведёт свой счёт, но правило X общее: если коду не сыграл никто, проигрывают оба.</p>
+  <p>Обычная частная партия длится девять ходов и коду, на двух игроков, с чередованием ходов. Торжественная партия бывает длиннее, и ведёт её один магистр, а партнёр отвечает.</p>
+
+  <figure class="plate wide">
+    <div class="instrument" data-instrument="board">
+  <div class="bd-top">
+    <div class="bd-chips" role="radiogroup" aria-label="Род связи">
+      <button type="button" role="radio" aria-checked="true" data-kind="a"><span class="bd-lk">=</span> аналогия</button>
+      <button type="button" role="radio" aria-checked="false" data-kind="k"><span class="bd-lk">×</span> контрапункт</button>
+      <button type="button" role="radio" aria-checked="false" data-kind="m"><span class="bd-lk">→</span> модуляция</button>
+    </div>
+    <button type="button" class="bd-clear">очистить доску</button>
+  </div>
+  <svg class="bd-svg" viewBox="0 0 740 282" role="group" aria-label="Доска-нотоносец: пять линий, восемь столбцов">
+    <g class="bd-grid"></g>
+    <g class="bd-links"></g>
+    <g class="bd-beads"></g>
+    <g class="bd-prev"></g>
+  </svg>
+  <div class="bd-bottom">
+    <div class="bd-tray">
+      <div class="bd-dom" role="group" aria-label="Область"></div>
+      <ul class="bd-list" aria-label="Бусины-темы"></ul>
+    </div>
+    <div class="bd-read" aria-live="polite">
+      <div class="bd-rh"></div>
+      <div class="bd-rec"></div>
+      <div class="bd-score">
+        <div class="bd-c"><span>точность</span><b data-f="T"></b><i>/4</i></div>
+        <div class="bd-c"><span>дальность</span><b data-f="D"></b><i>/3</i></div>
+        <div class="bd-c"><span>стройность</span><b data-f="S"></b><i>/3</i></div>
+        <div class="bd-c bd-sum"><span>гармония</span><b data-f="tot"></b><i>/10</i></div>
+      </div>
+      <div class="bd-keep"></div>
+      <div class="bd-key"></div>
+      <div class="bd-total"></div>
+    </div>
+  </div>
+  <div class="bd-ghost" aria-hidden="true"></div>
+</div>
+<style>
+[data-instrument="board"]{position:relative;padding:1.1rem 1.2rem 1.25rem;font-family:var(--text);color:var(--ink)}
+[data-instrument="board"] button{font:inherit;color:inherit}
+[data-instrument="board"] .bd-top{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:space-between;align-items:center}
+[data-instrument="board"] .bd-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+[data-instrument="board"] .bd-chips button,[data-instrument="board"] .bd-clear,[data-instrument="board"] .bd-dom button{font-family:var(--caps);font-size:.95rem;letter-spacing:.06em;line-height:1.2;border:1px solid var(--rule);background:var(--paper);padding:.28rem .75rem;border-radius:999px;cursor:pointer}
+[data-instrument="board"] .bd-chips button[aria-checked="true"],[data-instrument="board"] .bd-dom button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+[data-instrument="board"] .bd-lk{font-family:var(--display);font-weight:600;margin-right:.15em}
+[data-instrument="board"] .bd-clear{border-radius:2px;color:var(--rubric);border-color:var(--rubric);background:transparent}
+[data-instrument="board"] button:focus-visible{outline:2px solid var(--rubric);outline-offset:2px}
+[data-instrument="board"] .bd-svg{display:block;width:100%;height:auto;margin:.7rem 0 .5rem;touch-action:pan-y;-webkit-user-select:none;user-select:none;overflow:visible}
+[data-instrument="board"] .bd-lab{font-family:var(--caps);font-size:13px;letter-spacing:1.4px;fill:var(--ink)}
+[data-instrument="board"] .bd-col{font-family:var(--display);font-size:14px;fill:var(--faded)}
+[data-instrument="board"] .bd-line{stroke:var(--ink);stroke-width:.9}
+[data-instrument="board"] .bd-sep{stroke:var(--rule);stroke-width:.7;stroke-dasharray:2 4}
+[data-instrument="board"] .bd-dot{fill:var(--rule)}
+[data-instrument="board"] .bd-bead{cursor:grab;touch-action:none;outline:none}
+[data-instrument="board"] .bd-bead .back{fill:var(--paper)}
+[data-instrument="board"] .bd-bead .ring{fill:none;stroke:var(--rubric);stroke-width:1.6;opacity:0}
+[data-instrument="board"] .bd-bead:focus-visible .ring,[data-instrument="board"] .bd-bead.sel .ring{opacity:1}
+[data-instrument="board"] .bd-bead.pend .ring{opacity:1;stroke-dasharray:3 3}
+[data-instrument="board"] .bd-bead .keyr{fill:none;stroke:var(--rubric);stroke-width:.9;stroke-dasharray:2 2.4}
+[data-instrument="board"] .bd-bead.away{opacity:.35}
+[data-instrument="board"] .bd-ln .s{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linecap:round}
+[data-instrument="board"] .bd-ln.m .s{stroke-dasharray:1.3 4.2;stroke-width:1.8}
+[data-instrument="board"] .bd-ln.sel .s{stroke:var(--rubric)}
+[data-instrument="board"] .bd-ln.bad .s{stroke:var(--rubric);opacity:.55}
+[data-instrument="board"] .bd-ln.bad.a .s,[data-instrument="board"] .bd-ln.bad.k .s{stroke-dasharray:4 3}
+[data-instrument="board"] .bd-ln.pv{opacity:.75}
+[data-instrument="board"] .bd-ln text{font-family:var(--text);font-style:italic;font-size:12.5px;fill:var(--faded)}
+[data-instrument="board"] .bd-ln.sel text{fill:var(--rubric)}
+[data-instrument="board"] .bd-ln .hit{fill:none;stroke:transparent;stroke-width:16;cursor:pointer;outline:none}
+[data-instrument="board"] .bd-ln .hit:focus-visible{stroke:var(--rubric);stroke-opacity:.18}
+[data-instrument="board"] .bd-ln.fresh{animation:bdIn .5s ease-out}
+@keyframes bdIn{from{opacity:0}to{opacity:1}}
+[data-instrument="board"] .bd-snap{fill:none;stroke:var(--rubric);stroke-width:1;stroke-dasharray:3 3}
+[data-instrument="board"] .bd-bottom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1.2rem;align-items:start}
+[data-instrument="board"] .bd-dom{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.45rem}
+[data-instrument="board"] .bd-dom button{padding:.2rem .55rem;display:inline-flex;align-items:center;gap:.3rem}
+[data-instrument="board"] .bd-dom svg{width:16px;height:16px}
+[data-instrument="board"] .bd-list{list-style:none;margin:0;padding:0;height:15rem;overflow-y:auto;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+[data-instrument="board"] .bd-item{display:flex;align-items:center;gap:.55rem;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--rule);padding:.3rem .2rem;font-size:.98rem;line-height:1.25;cursor:pointer}
+[data-instrument="board"] .bd-item:hover{background:var(--paper)}
+[data-instrument="board"] .bd-ico{flex:none;width:28px;height:28px;touch-action:none;cursor:grab}
+[data-instrument="board"] .bd-nm{flex:1;min-width:0}
+[data-instrument="board"] .bd-on{flex:none;font-family:var(--caps);font-size:.85rem;letter-spacing:.06em;color:var(--rubric);font-variant-numeric:lining-nums tabular-nums;min-width:1.6rem;text-align:right}
+[data-instrument="board"] .bd-item.used{color:var(--faded)}
+[data-instrument="board"] .bd-item.used .bd-ico{opacity:.35;cursor:pointer}
+[data-instrument="board"] .bd-read{background:var(--paper);border:1px solid var(--rule);padding:.8rem 1rem .75rem}
+[data-instrument="board"] .bd-rh{font-family:var(--caps);letter-spacing:.14em;font-size:.88rem;color:var(--faded);height:1.4rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="board"] .bd-rec{font-size:1rem;line-height:1.42;height:2.84em;overflow:hidden;margin:.15rem 0 .5rem}
+[data-instrument="board"] .bd-rec .sg{font-family:var(--caps);font-weight:600;letter-spacing:.06em;color:var(--rubric);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+[data-instrument="board"] .bd-rec .lk{font-family:var(--display);font-weight:600;padding:0 .2em}
+[data-instrument="board"] .bd-score{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+[data-instrument="board"] .bd-c{padding:.35rem .3rem .3rem;border-right:1px solid var(--rule);min-width:0}
+[data-instrument="board"] .bd-c:last-child{border-right:0}
+[data-instrument="board"] .bd-c span{display:block;font-family:var(--caps);font-size:.78rem;letter-spacing:.08em;color:var(--faded);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="board"] .bd-c b{display:inline-block;min-width:1.3ch;text-align:right;font-family:var(--display);font-weight:500;font-size:1.9rem;line-height:1.05;font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="board"] .bd-c i{font-style:normal;color:var(--faded);font-size:.95rem;font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="board"] .bd-sum b{color:var(--rubric)}
+[data-instrument="board"] .bd-keep{font-family:var(--display);font-style:italic;font-size:1.12rem;line-height:1.35;height:2.7em;overflow:hidden;margin:.5rem 0 .4rem}
+[data-instrument="board"] .bd-key,[data-instrument="board"] .bd-total{font-size:.92rem;line-height:1.4;height:1.4em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="board"] .bd-key{color:var(--faded)}
+[data-instrument="board"] .bd-key .sg{font-family:var(--caps);font-weight:600;color:var(--rubric);letter-spacing:.06em}
+[data-instrument="board"] .bd-total{font-family:var(--caps);letter-spacing:.06em;color:var(--ink);margin-top:.15rem}
+[data-instrument="board"] .bd-short{font-family:var(--text);font-style:italic;font-size:11px;fill:var(--faded);pointer-events:none}
+[data-instrument="board"] .bd-knob{cursor:crosshair;touch-action:none}
+[data-instrument="board"] .bd-knob .kh{fill:transparent}
+[data-instrument="board"] .bd-knob .kv{fill:var(--rubric)}
+[data-instrument="board"] .bd-rub{fill:none;stroke:var(--rubric);stroke-width:1.2;stroke-dasharray:3 3}
+[data-instrument="board"] .bd-ghost{position:absolute;left:0;top:0;width:32px;height:32px;margin:-16px 0 0 -16px;pointer-events:none;display:none;z-index:2}
+[data-instrument="board"] .bd-ghost.on{display:block}
+[data-instrument="board"] .bd-ghost svg{display:block;width:100%;height:100%}
+@media (max-width:700px){
+[data-instrument="board"] .bd-bottom{grid-template-columns:1fr}
+[data-instrument="board"] .bd-list{height:12rem}
+}
+@media (max-width:480px){
+[data-instrument="board"]{padding:.8rem .7rem 1rem}
+[data-instrument="board"] .bd-c b{font-size:1.5rem}
+}
+@media (prefers-reduced-motion:reduce){
+[data-instrument="board"] .bd-ln.fresh{animation:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="board"]');
+if(!root)return;
+const NS='http://www.w3.org/2000/svg';
+const svg=root.querySelector('.bd-svg'),gGrid=svg.querySelector('.bd-grid'),gLinks=svg.querySelector('.bd-links'),gBeads=svg.querySelector('.bd-beads'),gPrev=svg.querySelector('.bd-prev');
+const chips=[...root.querySelectorAll('.bd-chips button')],domBox=root.querySelector('.bd-dom'),list=root.querySelector('.bd-list'),ghost=root.querySelector('.bd-ghost');
+const R={rh:root.querySelector('.bd-rh'),rec:root.querySelector('.bd-rec'),keep:root.querySelector('.bd-keep'),key:root.querySelector('.bd-key'),total:root.querySelector('.bd-total')};
+const F={};root.querySelectorAll('.bd-score b').forEach(b=>F[b.dataset.f]=b);
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)');
+const W=740,H=282,X0=170,DX=72;
+const xOf=c=>X0+c*DX,yOf=L=>240-(L-1)*45;
+const ROM=['I','II','III','IV','V','VI','VII','VIII'];
+const LN=['Вещь','Образ','Строй','Закон','Начало'];
+const CIRC={M:0,N:1,F:2,S:3,V:4};
+const DOMS=['M','N','F','S','V'];
+const KN={a:'аналогия',k:'контрапункт',m:'модуляция'},KS={a:'=',k:'×',m:'→'};
+const MO={
+otr:{n:'отражение',k:'a',keep:'расстояния те же, направление обратное'},
+pov:{n:'повторение',k:'a',keep:'целое строится повторением одной части'},
+prop:{n:'пропорция',k:'a',keep:'одно и то же простое отношение частей'},
+dva:{n:'двоичность',k:'m',keep:'всё множество складывается из двух знаков'},
+krug:{n:'круг',k:'a',keep:'равные шаги по кругу замыкают целое'},
+rost:{n:'рост',k:'m',keep:'новое строится из двух предыдущих'},
+prot:{n:'от противного',k:'a',keep:'истину находят, доводя ложное допущение до опровержения'},
+golos:{n:'два голоса',k:'k',keep:'две линии задают друг друга в каждой точке'},
+pust:{n:'пустота',k:'k',keep:'целое держится тем, что оставлено незаполненным'},
+povorot:{n:'поворот',k:'a',keep:'целое из двух неравных частей, вторая отвечает первой'},
+storony:{n:'стороны света',k:'a',keep:'каждой стороне отведены свой знак и своё место'},
+ravn:{n:'равновесие',k:'k',keep:'равновесие двух противоположных усилий'},
+zapis:{n:'запись',k:'m',keep:'порядок действий записан отдельно от исполнителя'},
+beskon:{n:'бесконечность',k:'m',keep:'за всяким шагом есть следующий'}
+};
+const T={};
+[
+['m1','M',3,'зерк. фуга','Бах, зеркальная фуга',['otr','golos']],
+['m2','M',2,'октава','октава, отношение 2:1',['prop']],
+['m3','M',3,'кв. круг','квинтовый круг',['krug','prop']],
+['m4','M',4,'двухголосие','строгий двухголосный контрапункт',['golos','ravn']],
+['m5','M',2,'ген. пауза','генеральная пауза',['pust']],
+['m6','M',3,'каноны','Бах, «Гольдберг-вариации», каноны',['pov','golos']],
+['m7','M',3,'экспозиция','сонатная экспозиция, вторая тональность',['povorot']],
+['n1','N',4,'∞ простых','теорема о бесконечности простых',['prot','beskon']],
+['n2','N',3,'симметрия','осевая симметрия',['otr']],
+['n3','N',4,'Фибоначчи','последовательность Фибоначчи',['rost','prop']],
+['n4','N',4,'двоичн. счёт','двоичная система счисления',['dva']],
+['n5','N',3,'Ло Шу','магический квадрат Ло Шу',['storony','ravn']],
+['n6','N',5,'ноль','ноль как число',['pust']],
+['n7','N',3,'Бэббидж','аналитическая машина Бэббиджа',['zapis']],
+['f1','F',1,'подсолнух','спирали подсолнуха',['rost','prop']],
+['f2','F',1,'лист','симметрия листа',['otr']],
+['f3','F',2,'аркбутан','распор свода и аркбутан',['ravn']],
+['f4','F',4,'ДНК','двойная спираль ДНК',['golos','dva']],
+['f5','F',2,'Жаккар','станок Жаккара, перфокарты',['zapis','dva']],
+['f6','F',3,'роза','роза собора, двенадцать лучей',['krug']],
+['f7','F',3,'дом и двор','китайский дом с внутренним двором',['storony','pust']],
+['s1','S',1,'木 林 森','иероглиф 木 → 林 → 森',['pov']],
+['s2','S',3,'гексаграммы','64 гексаграммы «Книги перемен»',['dva']],
+['s3','S',3,'триграммы','восемь триграмм по сторонам света',['storony','dva']],
+['s4','S',2,'зерк. письмо','зеркальное письмо Леонардо',['otr']],
+['s5','S',5,'инь-ян','знак инь-ян',['ravn','golos']],
+['s6','S',2,'нотопись','нотная запись',['zapis']],
+['v1','V',3,'сонет','сонет Петрарки, вольта',['povorot']],
+['v2','V',2,'палиндром','палиндром',['otr']],
+['v3','V',4,'элéнхос','сократический элéнхос',['prot']],
+['v4','V',2,'Басё','Басё, «Старый пруд»',['pust']],
+['v5','V',5,'Лао-цзы','Лао-цзы, глава 11: польза пустоты',['pust']],
+['v6','V',2,'рефрен','рефрен баллады',['pov']],
+['v7','V',3,'обряд ли','конфуцианский обряд ли: место каждого',['storony']]
+].forEach(r=>{T[r[0]]={id:r[0],d:r[1],L:r[2],sh:r[3],nm:r[4],mo:r[5]};});
+const TAB={};
+function tab(a,b,k,t,keep){TAB[[a,b].sort().join('|')]={k,t,keep};}
+tab('m1','n2','a',4,'расстояния остаются прежними, направление меняется на противоположное');
+tab('f1','n3','m',3,'каждый новый виток строится из двух предыдущих');
+tab('m7','v1','a',3,'целое из двух неравных частей; вторая отвечает первой с иной высоты');
+tab('n1','v3','a',4,'истину находят, доводя ложное допущение до его собственного опровержения');
+tab('n4','s2','m',4,'всё множество строится из двух знаков на шести местах');
+tab('m5','v4','k',3,'звук и молчание делают друг друга заметными');
+tab('f5','n7','m',4,'последовательность действий записана отдельно от машины');
+tab('f6','m3','a',2,'двенадцать равных шагов по кругу замыкают целое');
+tab('f4','m4','k',3,'две линии, каждая из которых задаёт другую в каждой точке');
+tab('f7','s3','a',3,'каждой стороне света отведён свой знак и свой смысл');
+tab('f7','v7','a',4,'старшинство выражено местом');
+tab('f7','v5','k',4,'всё выстроенное держится на том, что оставлено незастроенным');
+tab('f7','n5','a',3,'девять частей в равновесии вокруг середины');
+tab('m6','v7','a',3,'ведомый следует за ведущим на своём расстоянии');
+tab('n2','v2','a',4,'слово читается от конца так же, как фигура — от оси в обе стороны');
+tab('f2','n2','a',4,'левая половина повторяет правую, отражённую через ось');
+tab('f2','v2','m',4,'та же фигура, прочтённая от середины в обе стороны');
+tab('s4','v2','a',4,'строка читается в обратном направлении, не теряя смысла');
+tab('m1','v2','m',3,'тот же ход, проведённый в обратном порядке');
+tab('n6','v5','a',4,'ничто служит тем, что оставляет место');
+tab('m5','n6','k',3,'молчание считается наравне со звуком');
+tab('m4','s5','a',3,'две противоположности держат друг друга');
+tab('f3','s5','k',3,'равновесие двух противоположных сил');
+tab('f5','s6','m',4,'музыка и узор записаны знаками до исполнения');
+tab('s1','v6','a',3,'смысл растёт повторением одной и той же части');
+
+let beads=[],links=[],seq=0,ord=0,kind='a',sel=null,selLink=null,picked=false,pend=null,msg=null,fresh=null,dom='M',suppress=false;
+
+function el(t,a,p){const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n;}
+const bead=id=>beads.find(b=>b.id===id);
+const at=(c,L)=>beads.find(b=>b.c===c&&b.L===L);
+const sig=b=>T[b.id].d+b.L;
+const xy=b=>({x:xOf(b.c),y:yOf(b.L)});
+function keyBead(){let k=null;beads.forEach(b=>{if(b.c===0&&(!k||b.o<k.o))k=b;});if(!k)beads.forEach(b=>{if(!k||b.o<k.o)k=b;});return k;}
+function place(id,c,L){let b=bead(id);if(b){b.c=c;b.L=L;}else{b={id,c,L,o:++ord};beads.push(b);}return b;}
+function removeBead(id){beads=beads.filter(b=>b.id!==id);links=links.filter(l=>l.a!==id&&l.b!==id);if(sel===id)sel=null;if(pend===id)pend=null;if(selLink&&!links.find(l=>l.id===selLink)){selLink=null;picked=false;}}
+function freeCell(L){for(let c=0;c<8;c++)if(!at(c,L))return{c,L};for(let l=1;l<=5;l++)for(let c=0;c<8;c++)if(!at(c,l))return{c,L:l};return null;}
+function ruleErr(a,b,k){const A=bead(a),B=bead(b);
+if(k==='a'&&A.L!==B.L)return'аналогия ставится на одну линию';
+if(k==='k'&&A.c!==B.c)return'контрапункт ставится в один столбец';
+if(k==='m'){if(Math.abs(A.c-B.c)!==1)return'модуляция ведёт в соседний, следующий столбец';if(T[a].d===T[b].d)return'модуляция требует иной области';}
+return null;}
+function prec(a,b,k){let t=0,keep=null;const e=TAB[[a.id,b.id].sort().join('|')];
+if(e){t=e.k===k?e.t:Math.max(1,e.t-1);keep=e.keep;}
+a.mo.filter(m=>b.mo.includes(m)).forEach(m=>{const v=MO[m].k===k?3:2;if(v>t){t=v;keep=MO[m].keep;}});
+return{t,keep};}
+function score(l){const A=bead(l.a),B=bead(l.b),ta=T[l.a],tb=T[l.b];
+const err=ruleErr(l.a,l.b,l.kind);
+const mv=A.o>B.o?A:B,ot=mv===A?B:A;
+const p=prec(ta,tb,l.kind);
+const cd=Math.abs(CIRC[ta.d]-CIRC[tb.d]);
+const D=Math.min(3,Math.min(cd,5-cd)+(Math.abs(A.L-B.L)>=2?1:0));
+const k=keyBead(),km=T[k.id].mo,sh=b=>T[b.id].mo.some(m=>km.includes(m));
+let S=0;if(sh(mv))S+=2;if(ot===k||sh(ot))S+=1;S=Math.min(3,S);
+const tot=err?0:(p.t===0?0:p.t+D+S);
+return{err,T:p.t,D,S,tot,keep:p.keep,mv,ot};}
+function rec(a,b,k){let A=bead(a),B=bead(b);if(A.o<B.o){const x=A;A=B;B=x;}
+return'<span class="sg">'+sig(A)+'</span> '+T[A.id].nm+' <span class="lk">'+KS[k]+'</span> <span class="sg">'+sig(B)+'</span> '+T[B.id].nm;}
+function tryLink(a,b){if(a===b)return;const err=ruleErr(a,b,kind);
+if(err){msg={h:'ход не принят · '+KN[kind],r:rec(a,b,kind),t:'место не по правилу: '+err};return;}
+links=links.filter(x=>!((x.a===a&&x.b===b)||(x.a===b&&x.b===a)));
+const l={id:++seq,a,b,kind};links.push(l);selLink=l.id;picked=false;fresh=l.id;msg=null;}
+const pl=n=>{const a=n%10,b=n%100;return a===1&&b!==11?'ход':(a>=2&&a<=4&&(b<10||b>=20))?'хода':'ходов';};
+
+/* grid */
+LN.forEach((n,i)=>{const y=yOf(i+1);const t=el('text',{class:'bd-lab',x:14,y:y+4},gGrid);t.textContent=ROM[i]+' · '+n;});
+for(let c=0;c<8;c++){const t=el('text',{class:'bd-col',x:xOf(c),y:34,'text-anchor':'middle'},gGrid);t.textContent=ROM[c];if(c<7)el('line',{class:'bd-sep',x1:206+72*c,y1:44,x2:206+72*c,y2:262},gGrid);}
+LN.forEach((n,i)=>{const y=yOf(i+1);el('line',{class:'bd-line',x1:134,y1:y,x2:712,y2:y},gGrid);for(let c=0;c<8;c++)el('circle',{class:'bd-dot',cx:xOf(c),cy:y,r:1.8},gGrid);});
+el('line',{class:'bd-line',x1:134,y1:44,x2:134,y2:262,style:'stroke-width:2.2'},gGrid);
+el('line',{class:'bd-line',x1:139,y1:44,x2:139,y2:262,style:'stroke-width:.7'},gGrid);
+el('line',{class:'bd-line',x1:712,y1:44,x2:712,y2:262},gGrid);
+
+DOMS.forEach(d=>{const b=document.createElement('button');b.type='button';b.dataset.d=d;b.innerHTML='<svg viewBox="-12 -12 24 24" aria-hidden="true"><use href="#bead-'+d+'"/></svg>'+d;domBox.appendChild(b);});
+
+function curLink(){return links.find(l=>l.id===selLink)||links[links.length-1]||null;}
+
+function drawLinks(){gLinks.textContent='';const cur=curLink();
+links.forEach((l,i)=>{let A=bead(l.a),B=bead(l.b);const sc=score(l);
+if(l.kind==='k'&&A.o>B.o){const x=A;A=B;B=x;}
+if(l.kind==='m'&&A.c>B.c){const x=A;A=B;B=x;}
+const P=xy(A),Q=xy(B);
+const g=el('g',{class:'bd-ln '+l.kind+(sc.err?' bad':'')+(cur&&cur.id===l.id?' sel':'')+(l.id===fresh&&!RM.matches?' fresh':'')},gLinks);
+const dx=Q.x-P.x,dy=Q.y-P.y,len=Math.hypot(dx,dy)||1,ux=dx/len,uy=dy/len;let nx=-uy,ny=ux;
+let d,hd,lx,ly,anc='middle';
+if(l.kind==='a'){if(ny>0||(ny===0&&nx<0)){nx=-nx;ny=-ny;}
+const r=19,sx=P.x+ux*r,sy=P.y+uy*r,ex=Q.x-ux*r,ey=Q.y-uy*r;
+d='M'+(sx+nx*4)+' '+(sy+ny*4)+'L'+(ex+nx*4)+' '+(ey+ny*4)+'M'+(sx-nx*4)+' '+(sy-ny*4)+'L'+(ex-nx*4)+' '+(ey-ny*4);
+hd='M'+sx+' '+sy+'L'+ex+' '+ey;lx=(P.x+Q.x)/2+nx*13;ly=(P.y+Q.y)/2+ny*13;
+}else{
+if(l.kind==='k'){if(nx<0){nx=-nx;ny=-ny;}}else{if(ny>0){nx=-nx;ny=-ny;}}
+const off=Math.max(20,Math.min(46,len*.32));
+const cx=(P.x+Q.x)/2+nx*off,cy=(P.y+Q.y)/2+ny*off;
+const tw=(p,r)=>{const vx=cx-p.x,vy=cy-p.y,vl=Math.hypot(vx,vy)||1;return{x:p.x+vx/vl*r,y:p.y+vy/vl*r};};
+const s=tw(P,19),e=tw(Q,19);
+d='M'+s.x+' '+s.y+'Q'+cx+' '+cy+' '+e.x+' '+e.y;hd=d;
+if(l.kind==='k'){let ax=e.x-cx,ay=e.y-cy;const al=Math.hypot(ax,ay)||1;ax/=al;ay/=al;
+const bx=e.x-ax*8,by=e.y-ay*8;d+='M'+(bx-ay*4.5)+' '+(by+ax*4.5)+'L'+e.x+' '+e.y+'L'+(bx+ay*4.5)+' '+(by-ax*4.5);}
+lx=(s.x+2*cx+e.x)/4+nx*(l.kind==='k'?6:12);ly=(s.y+2*cy+e.y)/4+ny*12+(l.kind==='k'?4:0);if(l.kind==='k')anc='start';}
+el('path',{class:'s',d},g);
+const t=el('text',{x:lx,y:ly,'text-anchor':anc},g);t.textContent=KN[l.kind];
+el('path',{class:'hit',d:hd,tabindex:0,role:'button','data-lid':l.id,'aria-label':'ход '+(i+1)+': '+KN[l.kind]+' '+sig(A)+' и '+sig(B)+(sc.err?', не по правилу':', '+sc.tot+' из 10')},g);
+});}
+
+function drawBeads(){gBeads.textContent='';const key=keyBead();
+beads.forEach(b=>{const t=T[b.id];
+const g=el('g',{class:'bd-bead'+(b.id===sel?' sel':'')+(b.id===pend?' pend':''),transform:'translate('+xOf(b.c)+' '+yOf(b.L)+')',tabindex:0,role:'button','data-bid':b.id,'aria-label':sig(b)+' '+t.nm+', столбец '+ROM[b.c]+(key===b?', ключ':'')},gBeads);
+if(key===b)el('circle',{class:'keyr',r:21},g);
+el('circle',{class:'back',r:15},g);
+el('use',{href:'#bead-'+t.d,x:-14,y:-14,width:28,height:28},g);
+el('circle',{class:'ring',r:18},g);
+const tx=el('text',{class:'bd-short',y:30,'text-anchor':'middle'},g);tx.textContent=t.sh;});}
+
+function drawPrev(){gPrev.textContent='';const b=sel&&bead(sel);if(!b)return;
+const g=el('g',{class:'bd-knob',transform:'translate('+(xOf(b.c)+17)+' '+(yOf(b.L)-17)+')','aria-hidden':'true'},gPrev);
+el('circle',{class:'kh',r:11},g);el('circle',{class:'kv',r:4},g);}
+function snapShow(c){const o=gPrev.querySelector('.bd-snap');if(o)o.remove();if(c)el('circle',{class:'bd-snap',cx:xOf(c.c),cy:yOf(c.L),r:19},gPrev);}
+
+function drawTray(){
+domBox.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.d===dom?'true':'false'));
+let h='';Object.values(T).filter(t=>t.d===dom).forEach(t=>{const b=bead(t.id);
+h+='<li><button type="button" class="bd-item'+(b?' used':'')+'" data-tid="'+t.id+'"><svg class="bd-ico" viewBox="-12 -12 24 24" aria-hidden="true"><use href="#bead-'+t.d+'"/></svg><span class="bd-nm">'+t.nm+'</span><span class="bd-on">'+(b?ROM[b.c]:'')+'</span></button></li>';});
+list.innerHTML=h;
+chips.forEach(c=>c.setAttribute('aria-checked',c.dataset.kind===kind?'true':'false'));}
+
+function setScores(a,b,c,d){F.T.textContent=a;F.D.textContent=b;F.S.textContent=c;F.tot.textContent=d;}
+function drawRead(){const key=keyBead();
+R.key.innerHTML=key?'ключ: <span class="sg">'+sig(key)+'</span> '+T[key.id].nm+' · тема: '+T[key.id].mo.map(m=>MO[m].n).join(', '):'ключ: —';
+let sum=0;links.forEach(l=>{sum+=score(l).tot;});
+const n=links.length;
+R.total.textContent=n?'партия: '+n+' '+pl(n)+' · итог '+sum+' из '+n*10+' · в среднем '+(sum/n).toFixed(1).replace('.',','):'партия: ходов нет';
+if(msg){R.rh.textContent=msg.h;R.rec.innerHTML=msg.r;setScores('–','–','–','0');R.keep.textContent=msg.t;return;}
+const cur=curLink();
+if(!cur){R.rh.textContent=beads.length?'связей нет':'доска пуста';R.rec.innerHTML='';setScores('–','–','–','–');R.keep.textContent='';return;}
+const sc=score(cur),i=links.indexOf(cur)+1;
+R.rh.textContent='ход '+i+' из '+n+' · '+KN[cur.kind]+(sc.err?' · не по правилу':'');
+R.rec.innerHTML=rec(cur.a,cur.b,cur.kind);
+if(sc.err){setScores('–','–','–','0');R.keep.textContent='место не по правилу: '+sc.err;return;}
+setScores(sc.T,sc.D,sc.S,sc.tot);
+R.keep.textContent=sc.T===0?'сохраняется: ничего общего — связь не выдержит возражения, ход получает ноль':'сохраняется: '+sc.keep;}
+
+function render(f){const ae=document.activeElement;
+if(f===undefined&&ae&&root.contains(ae)){if(ae.dataset.bid)f={b:ae.dataset.bid};else if(ae.dataset.lid)f={l:ae.dataset.lid};else if(ae.dataset.tid)f={t:ae.dataset.tid};}
+drawLinks();drawBeads();drawPrev();drawTray();drawRead();fresh=null;
+if(f){const t=f.b?gBeads.querySelector('[data-bid="'+f.b+'"]'):f.l?gLinks.querySelector('[data-lid="'+f.l+'"]'):f.t?list.querySelector('[data-tid="'+f.t+'"]'):null;if(t)t.focus({preventScroll:true});}}
+
+function pt(e){const r=svg.getBoundingClientRect();return{x:(e.clientX-r.left)*W/r.width,y:(e.clientY-r.top)*H/r.height};}
+function cellAt(p){if(p.x<120||p.x>730||p.y<30||p.y>272)return null;
+return{c:Math.max(0,Math.min(7,Math.round((p.x-X0)/DX))),L:Math.max(1,Math.min(5,Math.round((240-p.y)/45)+1))};}
+
+function pickLink(id){const l=links.find(x=>x.id===id);if(!l)return;selLink=id;picked=true;kind=l.kind;msg=null;}
+
+svg.addEventListener('pointerdown',e=>{
+const kn=e.target.closest('.bd-knob');
+if(kn){e.preventDefault();const A=bead(sel);if(!A)return;kn.setPointerCapture(e.pointerId);
+const rub=el('path',{class:'bd-rub'},gPrev);const P=xy(A);
+const mv=ev=>{const p=pt(ev);rub.setAttribute('d','M'+P.x+' '+P.y+'L'+p.x+' '+p.y);};
+const up=(ev,cancel)=>{kn.removeEventListener('pointermove',mv);kn.removeEventListener('pointerup',upH);kn.removeEventListener('pointercancel',cnH);rub.remove();
+let tg=null;if(!cancel){const p=pt(ev);let best=24;beads.forEach(b=>{if(b===A)return;const q=xy(b),d=Math.hypot(q.x-p.x,q.y-p.y);if(d<best){best=d;tg=b;}});}
+if(tg)tryLink(A.id,tg.id);render({b:A.id});};
+const upH=ev=>up(ev,false),cnH=ev=>up(ev,true);
+kn.addEventListener('pointermove',mv);kn.addEventListener('pointerup',upH);kn.addEventListener('pointercancel',cnH);return;}
+const g=e.target.closest('.bd-bead');
+if(g){e.preventDefault();const id=g.dataset.bid,b=bead(id);sel=id;
+gBeads.querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));g.classList.add('sel');gPrev.textContent='';
+g.setPointerCapture(e.pointerId);const s0=pt(e);let moved=false;
+const mv=ev=>{const p=pt(ev);if(!moved&&Math.hypot(p.x-s0.x,p.y-s0.y)<4)return;moved=true;g.setAttribute('transform','translate('+p.x+' '+p.y+')');snapShow(cellAt(p));};
+const fin=(ev,cancel)=>{g.removeEventListener('pointermove',mv);g.removeEventListener('pointerup',upH);g.removeEventListener('pointercancel',cnH);snapShow(null);
+if(cancel){render({b:id});return;}
+if(moved){const c=cellAt(pt(ev));
+if(!c){removeBead(id);msg=null;render(null);return;}
+const o=at(c.c,c.L);if(o&&o!==b){o.c=b.c;o.L=b.L;}
+b.c=c.c;b.L=c.L;msg=null;render({b:id});return;}
+if(pend&&pend!==id){tryLink(pend,id);pend=null;}else pend=pend===id?null:id;
+render({b:id});};
+const upH=ev=>fin(ev,false),cnH=ev=>fin(ev,true);
+g.addEventListener('pointermove',mv);g.addEventListener('pointerup',upH);g.addEventListener('pointercancel',cnH);return;}
+const h=e.target.closest('.hit');
+if(h){pickLink(+h.dataset.lid);render({l:h.dataset.lid});return;}
+if(sel||pend){sel=null;pend=null;render(null);}
+});
+
+list.addEventListener('pointerdown',e=>{const ic=e.target.closest('.bd-ico');if(!ic)return;
+const it=ic.closest('.bd-item'),id=it.dataset.tid;if(bead(id))return;
+e.preventDefault();ic.setPointerCapture(e.pointerId);
+let moved=false;const sx=e.clientX,sy=e.clientY;
+ghost.innerHTML='<svg viewBox="-12 -12 24 24"><use href="#bead-'+T[id].d+'"/></svg>';
+const mv=ev=>{if(!moved&&Math.hypot(ev.clientX-sx,ev.clientY-sy)<4)return;moved=true;suppress=true;
+const r=root.getBoundingClientRect();ghost.classList.add('on');
+ghost.style.left=(ev.clientX-r.left-root.clientLeft)+'px';ghost.style.top=(ev.clientY-r.top-root.clientTop)+'px';
+const c=cellAt(pt(ev));snapShow(c&&!at(c.c,c.L)?c:null);};
+const fin=(ev,cancel)=>{ic.removeEventListener('pointermove',mv);ic.removeEventListener('pointerup',upH);ic.removeEventListener('pointercancel',cnH);
+ghost.classList.remove('on');snapShow(null);
+if(moved&&!cancel){const c=cellAt(pt(ev));if(c&&!at(c.c,c.L)){place(id,c.c,c.L);sel=id;msg=null;render({b:id});}}
+setTimeout(()=>{suppress=false;},0);};
+const upH=ev=>fin(ev,false),cnH=ev=>fin(ev,true);
+ic.addEventListener('pointermove',mv);ic.addEventListener('pointerup',upH);ic.addEventListener('pointercancel',cnH);});
+
+list.addEventListener('click',e=>{const it=e.target.closest('.bd-item');if(!it)return;if(suppress){suppress=false;return;}
+const id=it.dataset.tid,b=bead(id);
+if(b){sel=id;render({t:id});return;}
+const c=freeCell(T[id].L);
+if(!c){msg={h:'доска заполнена',r:'',t:'свободных мест нет'};render({t:id});return;}
+place(id,c.c,c.L);sel=id;msg=null;render({t:id});});
+
+domBox.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;dom=b.dataset.d;render();});
+
+chips.forEach(c=>c.addEventListener('click',()=>{kind=c.dataset.kind;
+if(picked&&selLink){const l=links.find(x=>x.id===selLink);if(l)l.kind=kind;}
+msg=null;render();}));
+
+root.querySelector('.bd-clear').addEventListener('click',()=>{beads=[];links=[];sel=null;pend=null;selLink=null;picked=false;msg=null;render();});
+
+svg.addEventListener('keydown',e=>{const h=e.target.closest('.hit'),g=e.target.closest('.bd-bead');
+if(h){const lid=+h.dataset.lid;
+if(e.key==='Enter'||e.key===' '){e.preventDefault();pickLink(lid);render({l:lid});}
+else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();links=links.filter(l=>l.id!==lid);selLink=null;picked=false;msg=null;render(null);}
+return;}
+if(!g)return;const id=g.dataset.bid,b=bead(id);if(!b)return;
+const dir={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,1],ArrowDown:[0,-1]}[e.key];
+if(dir){e.preventDefault();sel=id;let c=b.c,L=b.L;
+for(;;){c+=dir[0];L+=dir[1];if(c<0||c>7||L<1||L>5)break;if(!at(c,L)){b.c=c;b.L=L;break;}}
+msg=null;render({b:id});return;}
+if(e.key==='Enter'||e.key===' '){e.preventDefault();sel=id;
+if(pend&&pend!==id){tryLink(pend,id);pend=null;}else pend=pend===id?null:id;
+render({b:id});return;}
+if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();removeBead(id);msg=null;render(null);}
+});
+
+place('f7',0,3);place('s3',1,3);place('v5',0,5);place('n4',2,4);
+links=[{id:++seq,a:'s3',b:'f7',kind:'a'},{id:++seq,a:'v5',b:'f7',kind:'k'},{id:++seq,a:'n4',b:'s3',kind:'m'}];
+dom='F';
+render(null);
+})();</script>
+    <figcaption><span class="tab">Прибор III.</span> Доска-нотоносец. Место бусины определяет, какая связь возможна; оценка хода складывается из точности, дальности и стройности.</figcaption>
+  </figure>
+</section>
+
+<section class="chapter" id="ch6">
+  <p class="chapter-no">Глава шестая</p>
+  <h2>Двенадцать этюдов показывают, что связь находится в любой области</h2>
+
+  <aside class="note"><span class="nh">Как упражняться</span>
+    <p>Прочтите строку этюда, закройте пояснение и попробуйте сами сказать фразу «сохраняется…». Потом сравните. Счёт под каждым этюдом — образец, а не закон: с ним можно спорить по правилу VI.</p>
+  </aside>
+
+  <p class="lead">Этюд — это один ход, вынутый из партии. Он учит видеть связь и объявлять её. Этюды идут от простого к сложному и покрывают все пять областей.</p>
+
+  <ol class="etudes">
+    <li>
+      <div class="etude-head"><span class="en">I</span>Зеркальная фуга и осевая симметрия</div>
+      <p class="etude-line"><span class="sig">M3</span> Бах, «Искусство фуги», зеркальные фуги <span class="lk">=</span> <span class="sig">N3</span> отражение относительно оси</p>
+      <p>В зеркальных фугах «Искусства фуги» вся пьеса может быть сыграна в обращении: каждый интервал меняет направление. Сохраняется: расстояния остаются прежними, направление меняется на противоположное. Это и есть определение отражения.</p>
+      <p class="score">Т 4 · Д 1 · С 2 = <b>7</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">II</span>Октава и отношение двух к одному</div>
+      <p class="etude-line"><span class="sig">M2</span> октава <span class="lk">=</span> <span class="sig">N2</span> отношение 2:1</p>
+      <p>Струна, укороченная вдвое, звучит на октаву выше. Сохраняется: одно и то же простейшее отношение — в длине струны и в слухе. Ход скромный по дальности, но безупречный по точности; им хорошо открывать партию новичков.</p>
+      <p class="score">Т 4 · Д 1 · С 1 = <b>6</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">III</span>Подсолнух и числа Фибоначчи</div>
+      <p class="etude-line"><span class="sig">F1</span> корзинка подсолнуха <span class="lk">→</span> <span class="sig">N4</span> последовательность Фибоначчи</p>
+      <p>Семена в корзинке подсолнуха лежат двумя семействами спиралей, и числа спиралей обычно оказываются соседними числами Фибоначчи. Сохраняется: каждый новый виток строится из двух предыдущих. Модуляция поднимает вещь до закона, через три линии.</p>
+      <p class="score">Т 3 · Д 2 · С 2 = <b>7</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">IV</span>Дерево, роща, лес</div>
+      <p class="etude-line"><span class="sig">S1</span> 木 → 林 → 森 <span class="lk">=</span> <span class="sig">N1</span> счёт один, два, три</p>
+      <p>Китайский знак 木 значит «дерево», удвоенный 林 — «роща», утроенный 森 — «лес». Сохраняется: множество выражено повторением знака, как в счёте зарубками. Аналогия на первой линии: вещь к вещи.</p>
+      <p class="score">Т 4 · Д 2 · С 1 = <b>7</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">V</span>Поворот сонета и модуляция сонаты</div>
+      <p class="etude-line"><span class="sig">V3</span> сонет Петрарки, вольта <span class="lk">=</span> <span class="sig">M3</span> сонатная экспозиция, переход во вторую тональность</p>
+      <p>Петраркистский сонет делится на восьмистишие и шестистишие, и на границе мысль поворачивается — это вольта. В классической сонатной экспозиции вторая тема звучит в новой тональности. Сохраняется: целое из двух частей неравной длины, вторая отвечает первой с иной высоты.</p>
+      <p class="score">Т 3 · Д 1 · С 3 = <b>7</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">VI</span>Свод и контрфорс</div>
+      <p class="etude-line"><span class="sig">F3</span> распор готического свода <span class="lk">×</span> <span class="sig">F2</span> аркбутан</p>
+      <p>Свод давит на стену не только вниз, но и в стороны; аркбутан снаружи принимает этот распор и отводит его к контрфорсу. Сохраняется: равновесие двух противоположных усилий. Контрапункт внутри одной области: дальность ноль, зато точность и красота полные.</p>
+      <p class="score">Т 4 · Д 0 · С 2 = <b>6</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">VII</span>Доказательство от противного и сократический спор</div>
+      <p class="etude-line"><span class="sig">N4</span> Евклид, бесконечность простых чисел <span class="lk">=</span> <span class="sig">V4</span> сократический элéнхос</p>
+      <p>У Евклида допускают, что простых чисел конечно много, и из этого допущения строят число, которое ведёт к противоречию. Сократ в диалогах принимает тезис собеседника и выводит из него следствия, с которыми тот не может согласиться. Сохраняется: истину находят, доводя ложное допущение до его собственного опровержения.</p>
+      <p class="score">Т 4 · Д 2 · С 2 = <b>8</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">VIII</span>Гексаграммы и двоичный счёт</div>
+      <p class="etude-line"><span class="sig">S3</span> 64 гексаграммы «Книги перемен» <span class="lk">→</span> <span class="sig">N4</span> двоичная система</p>
+      <p>Гексаграмма складывается из шести черт, сплошных или прерванных, отсюда 2<sup>6</sup> = 64 фигуры. Лейбниц, изложивший двоичную арифметику, сам заметил её сходство с порядком гексаграмм. Сохраняется: всё множество строится из двух знаков на шести местах.</p>
+      <p class="score">Т 4 · Д 2 · С 2 = <b>8</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">IX</span>Старый пруд и фермата</div>
+      <p class="etude-line"><span class="sig">V2</span> Басё, «furu ike ya…» <span class="lk">×</span> <span class="sig">M2</span> генеральная пауза</p>
+      <p>В трёхстишии Басё о старом пруде звук воды после прыжка лягушки делает слышной тишину вокруг. Генеральная пауза в оркестре, когда все голоса разом умолкают, действует так же. Контрапункт: звук и молчание стоят в одном такте и делают друг друга заметными.</p>
+      <p class="score">Т 3 · Д 1 · С 2 = <b>6</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">X</span>Ткацкий станок и вычислительная машина</div>
+      <p class="etude-line"><span class="sig">F2</span> станок Жаккара, перфокарты <span class="lk">→</span> <span class="sig">N3</span> аналитическая машина Бэббиджа</p>
+      <p>В станке Жаккара узор ткани задают пробитые карты. Бэббидж предполагал управлять своей аналитической машиной такими же картами, а Ада Лавлейс в своих примечаниях сравнила её работу с тем, как станок Жаккара ткёт цветы и листья. Сохраняется: последовательность действий записана отдельно от машины, которая её исполняет.</p>
+      <p class="score">Т 4 · Д 1 · С 2 = <b>7</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">XI</span>Роза собора и квинтовый круг</div>
+      <p class="etude-line"><span class="sig">F3</span> двенадцатилепестковая роза <span class="lk">=</span> <span class="sig">M3</span> квинтовый круг</p>
+      <p>Многие соборные розы делятся на двенадцать лучей. Квинтовый круг проходит, шагая чистыми квинтами, все двенадцать тональностей и возвращается к началу. Сохраняется: двенадцать равных шагов по кругу замыкают целое. Будьте готовы к возражению: двенадцать лучей есть не у всякой розы, и надо назвать ту, что вы имеете в виду.</p>
+      <p class="score">Т 2 · Д 2 · С 2 = <b>6</b></p>
+    </li>
+    <li>
+      <div class="etude-head"><span class="en">XII</span>Двойная спираль и двухголосие</div>
+      <p class="etude-line"><span class="sig">F4</span> спаривание оснований ДНК <span class="lk">×</span> <span class="sig">M4</span> строгий двухголосный контрапункт</p>
+      <p>В двойной спирали ДНК основание одной цепи определяет основание другой: аденин против тимина, гуанин против цитозина. В строгом контрапункте каждая нота голоса выбирается по правилам созвучия с нотой другого. Сохраняется: две линии, каждая из которых задаёт другую в каждой точке. Это контрапункт через четыре области круга: дальность высока, и ход достоин зрелого игрока.</p>
+      <p class="score">Т 3 · Д 2 · С 3 = <b>8</b></p>
+    </li>
+  </ol>
+</section>
+
+<section class="chapter" id="ch7">
+  <p class="chapter-no">Глава седьмая</p>
+  <h2>Партия «Китайский дом» проходит путь от стороны света к пустоте двора</h2>
+
+  <aside class="note"><span class="nh">Источник и вымысел</span>
+    <p>В романе Иозеф Кнехт, ученик Старшего Брата, изучавшего «Книгу перемен», задумывает партию на схеме китайского дома по конфуцианскому обряду: ориентация по сторонам света, ворота, стена духов, соотношение строений с календарём и семейным укладом. Ходов Гессе не приводит. Ниже — реконструкция, составленная для этой книги.</p>
+  </aside>
+
+  <p class="lead">Партия разыграна как торжественная: ведёт её Магистр Игры Иозеф Кнехт, отвечает Фриц Тегулариус, в романе ближайший друг Кнехта и один из самых тонких игроков Вальдцеля. Ключ — сам дом: не здание вообще, а китайский дом с внутренним двором, где каждая часть стоит на своём месте по закону сторон света, старшинства и обряда.</p>
+  <p>Тема партии — <em>порядок, который держится пустотой в середине</em>. Её не объявляют заранее: она становится видна к коде. Прочтите табл. IV, затем проиграйте партию на приборе, затем разберите каждый ход по записи.</p>
+
+  <figure class="plate wide">
+    <div class="plate-frame">
+      <svg viewBox="0 0 600 560" role="img" aria-label="Гравюра: план китайского дома с внутренним двором. Главный зал на севере, боковые на востоке и западе, ворота в юго-восточном углу, стена духов за воротами, ось север — юг, роза ветров; цифры отмечают места ходов партии">
+        <path d="M60 50 H460 V500 H60 Z M78 68 V482 H442 V68 Z" fill="url(#h-diag)" fill-rule="evenodd" stroke="#1F1A14" stroke-width="1.3"/>
+        <rect x="392" y="480" width="40" height="22" fill="#F3EBD8"/>
+        <line x1="392" y1="482" x2="392" y2="500" stroke="#1F1A14" stroke-width="1.3"/>
+        <line x1="432" y1="482" x2="432" y2="500" stroke="#1F1A14" stroke-width="1.3"/>
+
+        <rect x="140" y="82" width="240" height="92" fill="url(#h-tile)" stroke="#1F1A14" stroke-width="1.3"/>
+        <rect x="150" y="164" width="220" height="10" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.7"/>
+        <g fill="#1F1A14"><circle cx="164" cy="169" r="2"/><circle cx="199" cy="169" r="2"/><circle cx="234" cy="169" r="2"/><circle cx="286" cy="169" r="2"/><circle cx="321" cy="169" r="2"/><circle cx="356" cy="169" r="2"/></g>
+        <rect x="230" y="174" width="60" height="10" fill="url(#h-horiz)" stroke="#1F1A14" stroke-width="0.8"/>
+
+        <rect x="90" y="200" width="66" height="160" fill="url(#h-tile)" stroke="#1F1A14" stroke-width="1.2" transform="rotate(90 123 280) translate(0 0)" opacity="0"/>
+        <rect x="90" y="200" width="66" height="160" fill="url(#h-vert)" stroke="#1F1A14" stroke-width="1.2"/>
+        <rect x="364" y="200" width="66" height="160" fill="url(#h-vert)" stroke="#1F1A14" stroke-width="1.2"/>
+
+        <rect x="168" y="196" width="184" height="170" fill="url(#h-pave)" stroke="#1F1A14" stroke-width="0.6"/>
+        <g>
+          <circle cx="190" cy="222" r="11" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.8"/>
+          <circle cx="190" cy="222" r="11" fill="url(#h-diag-fine)"/>
+          <circle cx="186" cy="218" r="4" fill="#F3EBD8"/>
+          <circle cx="330" cy="222" r="11" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.8"/>
+          <circle cx="330" cy="222" r="11" fill="url(#h-diag-fine)"/>
+          <circle cx="326" cy="218" r="4" fill="#F3EBD8"/>
+        </g>
+        <rect x="236" y="268" width="48" height="36" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.6" stroke-dasharray="2 2"/>
+
+        <rect x="230" y="378" width="60" height="22" fill="url(#h-cross)" stroke="#1F1A14" stroke-width="1.1"/>
+        <rect x="90" y="410" width="290" height="58" fill="url(#h-tile)" stroke="#1F1A14" stroke-width="1.2"/>
+        <rect x="380" y="440" width="52" height="7" fill="url(#h-dense)" stroke="#1F1A14" stroke-width="0.9"/>
+
+        <line x1="260" y1="40" x2="260" y2="520" stroke="#1F1A14" stroke-width="0.7" stroke-dasharray="6 3 1 3"/>
+
+        <g transform="translate(530 110)">
+          <circle r="38" fill="none" stroke="#1F1A14" stroke-width="0.6"/>
+          <circle r="31" fill="none" stroke="#1F1A14" stroke-width="0.4"/>
+          <path d="M0 -44 L7 0 L0 44 L-7 0 Z" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.9"/>
+          <path d="M0 -44 L7 0 L0 0 Z M0 44 L-7 0 L0 0 Z" fill="#1F1A14"/>
+          <path d="M-44 0 L0 6 L44 0 L0 -6 Z" fill="#F3EBD8" stroke="#1F1A14" stroke-width="0.9"/>
+          <path d="M44 0 L0 6 L0 0 Z M-44 0 L0 -6 L0 0 Z" fill="url(#h-dense)"/>
+          <g font-family="Cormorant SC, serif" font-size="13" fill="#1F1A14" text-anchor="middle">
+            <text y="-50">С</text><text y="62">Ю</text><text x="56" y="5">В</text><text x="-56" y="5">З</text>
+          </g>
+        </g>
+
+        <g font-family="EB Garamond, serif" font-style="italic" font-size="13" fill="#1F1A14" text-anchor="middle">
+          <text x="260" y="126" fill="#F3EBD8" stroke="#F3EBD8" stroke-width="4" paint-order="stroke">главный зал</text>
+          <text x="260" y="126">главный зал</text>
+          <text x="123" y="390">запад</text>
+          <text x="397" y="390">восток</text>
+          <text x="260" y="342" fill="#6B5E4B">двор</text>
+          <text x="412" y="528">ворота</text>
+        </g>
+
+        <g font-family="Cormorant Garamond, serif" font-weight="600" font-size="13" text-anchor="middle">
+          <g><circle cx="260" cy="60" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="260" y="64.5" fill="#9A2A1C">1</text></g>
+          <g><circle cx="452" cy="456" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="452" y="460.5" fill="#9A2A1C">5</text></g>
+          <g><circle cx="380" cy="128" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="380" y="132.5" fill="#9A2A1C">6</text></g>
+          <g><circle cx="260" cy="389" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="260" y="393.5" fill="#9A2A1C">7</text></g>
+          <g><circle cx="168" cy="196" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="168" y="200.5" fill="#9A2A1C">9</text></g>
+          <g><circle cx="260" cy="286" r="10" fill="#F3EBD8" stroke="#9A2A1C" stroke-width="1"/><text x="260" y="290.5" fill="#9A2A1C">10</text></g>
+        </g>
+        <text x="590" y="550" text-anchor="end" font-family="Cormorant SC, serif" font-size="11" letter-spacing="3" fill="#6B5E4B">TAB. IV</text>
+      </svg>
+    </div>
+    <figcaption><span class="tab">Табл. IV.</span> Дом с внутренним двором, гравированный по общему типу пекинского дома: главный зал на севере лицом к югу, боковые строения на востоке и западе, ворота в юго-восточном углу, за ними стена духов. Красные цифры — места, к которым обращены ходы партии.</figcaption>
+  </figure>
+
+  <figure class="plate wide">
+    <div class="instrument" data-instrument="replay">
+<svg class="rp-defs" aria-hidden="true" focusable="false"><defs>
+<pattern id="rp-cross" width="3.4" height="3.4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3.4" stroke="#1F1A14" stroke-width="0.6"/><line x1="0" y1="0" x2="3.4" y2="0" stroke="#1F1A14" stroke-width="0.6"/></pattern>
+<pattern id="rp-horiz" width="4" height="2.6" patternUnits="userSpaceOnUse"><line x1="0" y1="1.3" x2="4" y2="1.3" stroke="#1F1A14" stroke-width="0.55"/></pattern>
+<pattern id="rp-vert" width="2.6" height="4" patternUnits="userSpaceOnUse"><line x1="1.3" y1="0" x2="1.3" y2="4" stroke="#1F1A14" stroke-width="0.55"/></pattern>
+<pattern id="rp-dense" width="1.8" height="1.8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="1.8" stroke="#1F1A14" stroke-width="0.8"/></pattern>
+<pattern id="rp-fine" width="2.4" height="2.4" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)"><line x1="0" y1="0" x2="0" y2="2.4" stroke="#1F1A14" stroke-width="0.45"/></pattern>
+<pattern id="rp-pdiag" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#1F1A14" stroke-width="1.8"/></pattern>
+<pattern id="rp-pvert" width="8" height="10" patternUnits="userSpaceOnUse"><line x1="4" y1="0" x2="4" y2="10" stroke="#1F1A14" stroke-width="1.5"/></pattern>
+<pattern id="rp-ptile" width="22" height="14" patternUnits="userSpaceOnUse"><line x1="0" y1="13" x2="22" y2="13" stroke="#1F1A14" stroke-width="1.5"/><path d="M0 13 Q5.5 3 11 13 Q16.5 3 22 13" fill="none" stroke="#1F1A14" stroke-width="1.1"/></pattern>
+<pattern id="rp-ppave" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 0 H24 M0 12 H24 M0 0 V12 M12 12 V24" fill="none" stroke="#1F1A14" stroke-width="0.9"/></pattern>
+<pattern id="rp-pcross" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="9" stroke="#1F1A14" stroke-width="1.4"/><line x1="0" y1="0" x2="9" y2="0" stroke="#1F1A14" stroke-width="1.4"/></pattern>
+<pattern id="rp-pdense" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#1F1A14" stroke-width="2.2"/></pattern>
+</defs></svg>
+<div class="rp-top">
+<div class="rp-boardwrap"><svg class="rp-board" viewBox="0 0 620 262" role="img" aria-label="Доска-нотоносец партии «Китайский дом»"></svg></div>
+<div class="rp-planwrap">
+<svg class="rp-plan" viewBox="40 20 560 520" role="img" aria-label="План китайского дома, табл. IV, с отметкой места текущего хода">
+<path d="M60 50 H460 V500 H60 Z M78 68 V482 H442 V68 Z" fill="url(#rp-pdiag)" fill-rule="evenodd" class="rp-s"/>
+<rect x="392" y="478" width="40" height="26" class="rp-wfill"/>
+<line x1="392" y1="482" x2="392" y2="500" class="rp-s"/><line x1="432" y1="482" x2="432" y2="500" class="rp-s"/>
+<rect x="140" y="82" width="240" height="92" fill="url(#rp-ptile)" class="rp-s"/>
+<rect x="90" y="200" width="66" height="160" fill="url(#rp-pvert)" class="rp-s"/>
+<rect x="364" y="200" width="66" height="160" fill="url(#rp-pvert)" class="rp-s"/>
+<rect x="168" y="196" width="184" height="170" fill="url(#rp-ppave)" class="rp-st"/>
+<rect x="236" y="268" width="48" height="36" class="rp-wfill rp-st" stroke-dasharray="5 5"/>
+<rect x="230" y="378" width="60" height="22" fill="url(#rp-pcross)" class="rp-s"/>
+<rect x="90" y="410" width="290" height="58" fill="url(#rp-ptile)" class="rp-s"/>
+<rect x="380" y="440" width="52" height="8" fill="url(#rp-pdense)" class="rp-s"/>
+<line x1="260" y1="34" x2="260" y2="520" class="rp-axis"/>
+<g transform="translate(530 110)">
+<circle r="38" fill="none" class="rp-st"/>
+<path d="M0 -46 L8 0 L0 46 L-8 0 Z" class="rp-wfill rp-st"/>
+<path d="M0 -46 L8 0 L0 0 Z M0 46 L-8 0 L0 0 Z" class="rp-ifill"/>
+<path d="M-46 0 L0 7 L46 0 L0 -7 Z" class="rp-wfill rp-st"/>
+<text y="-54" class="rp-ct">С</text>
+</g>
+<g class="rp-ghosts"></g><g class="rp-mark"></g>
+</svg>
+<div class="rp-place"></div>
+</div>
+</div>
+<div class="rp-card" aria-live="polite">
+<div class="rp-l">
+<div class="rp-head"><span class="rp-num">10</span><span class="rp-of">из 10</span><span class="rp-who"></span></div>
+<div class="rp-bead"><span class="rp-sig"></span> <span class="rp-bname"></span></div>
+<div class="rp-lk"></div>
+<div class="rp-keep"><span class="rp-kp"></span> <span class="rp-kt"></span></div>
+</div>
+<div class="rp-r">
+<div class="rp-sc"></div>
+<div class="rp-sum"><span class="rp-sl">счёт хода</span><span class="rp-sv"></span></div>
+<div class="rp-tot"><span class="rp-tl">итог партии</span><span class="rp-tv"></span><span class="rp-ts"></span><span class="rp-tr"></span></div>
+</div>
+</div>
+<div class="rp-ctrl">
+<button type="button" class="rp-b" data-go="first" aria-label="к началу партии"><svg viewBox="0 0 20 20"><path d="M5 4v12M15 4l-8 6 8 6z"/></svg></button>
+<button type="button" class="rp-b" data-go="prev" aria-label="назад"><svg viewBox="0 0 20 20"><path d="M13 4l-8 6 8 6z"/></svg></button>
+<div class="rp-scrub" role="slider" tabindex="0" aria-label="ход партии" aria-valuemin="1" aria-valuemax="10">
+<div class="rp-rail"></div><div class="rp-stops"></div><div class="rp-thumb"></div>
+</div>
+<button type="button" class="rp-b" data-go="next" aria-label="вперёд"><svg viewBox="0 0 20 20"><path d="M7 4l8 6-8 6z"/></svg></button>
+<button type="button" class="rp-b" data-go="last" aria-label="к концу партии"><svg viewBox="0 0 20 20"><path d="M15 4v12M5 4l8 6-8 6z"/></svg></button>
+<button type="button" class="rp-auto" aria-pressed="false"><svg viewBox="0 0 20 20"><path class="rp-play" d="M6 4l10 6-10 6z"/><path class="rp-pause" d="M6 4h3v12H6zM11 4h3v12h-3z"/></svg><span>автоход</span></button>
+</div>
+<div class="rp-hour"><i></i></div>
+</div>
+<style>
+[data-instrument="replay"]{position:relative;padding:1.3rem 1.4rem 1.1rem;font-family:var(--text);color:var(--ink);font-variant-numeric:lining-nums tabular-nums}
+[data-instrument="replay"] .rp-defs{position:absolute;width:0;height:0;overflow:hidden}
+[data-instrument="replay"] .rp-top{display:grid;grid-template-columns:minmax(0,1fr) 11rem;gap:1.25rem;align-items:center}
+[data-instrument="replay"] .rp-board{display:block;width:100%;height:auto}
+[data-instrument="replay"] .rp-plan{display:block;width:100%;height:auto}
+[data-instrument="replay"] .rp-place{font-style:italic;font-size:.86rem;line-height:1.3;color:var(--faded);text-align:center;height:2.6em;margin-top:.35rem;overflow:hidden}
+[data-instrument="replay"] .rp-lab{font-family:var(--caps);font-size:12.5px;letter-spacing:.05em;fill:var(--ink)}
+[data-instrument="replay"] .rp-col{font-family:var(--display);font-size:13px;fill:var(--faded);text-anchor:middle}
+[data-instrument="replay"] .rp-div{stroke:var(--rule);stroke-width:.7;stroke-dasharray:2 4}
+[data-instrument="replay"] .rp-ln{stroke:var(--ink);stroke-width:.9}
+[data-instrument="replay"] .rp-bar2{stroke:var(--ink);stroke-width:2.2}
+[data-instrument="replay"] .rp-link path{fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+[data-instrument="replay"] .rp-link .rp-dot{stroke-width:1.5;stroke-dasharray:1.2 3.6}
+[data-instrument="replay"] .rp-link.rp-past{opacity:.5}
+[data-instrument="replay"] .rp-link.rp-cur path{stroke-width:1.6}
+[data-instrument="replay"] .rp-link.rp-cur .rp-dot{stroke-width:1.9}
+[data-instrument="replay"] .rp-lklab{font-family:var(--text);font-style:italic;font-size:12.5px;fill:var(--faded);paint-order:stroke;stroke:var(--wash);stroke-width:4px;stroke-linejoin:round}
+[data-instrument="replay"] .rp-halo{fill:var(--wash)}
+[data-instrument="replay"] .rp-bd{cursor:pointer}
+[data-instrument="replay"] .rp-ring{fill:none;stroke:var(--rubric);stroke-width:1.2}
+[data-instrument="replay"] .rp-ring2{fill:none;stroke:var(--faded);stroke-width:.8;stroke-dasharray:2 2.5}
+[data-instrument="replay"] .rp-bn{font-family:var(--display);font-weight:600;font-size:11px;fill:var(--faded)}
+[data-instrument="replay"] .rp-bn.rp-on{fill:var(--rubric)}
+[data-instrument="replay"] .rp-drop{transform-box:fill-box;transform-origin:center;animation:rp-drop .55s cubic-bezier(.3,.7,.4,1) both}
+[data-instrument="replay"] .rp-draw{stroke-dasharray:1;stroke-dashoffset:1;animation:rp-draw .7s .25s ease-out forwards}
+[data-instrument="replay"] .rp-fade{animation:rp-fade .5s .5s both}
+[data-instrument="replay"] .rp-s{stroke:var(--ink);stroke-width:2.6}
+[data-instrument="replay"] .rp-st{stroke:var(--ink);stroke-width:1.6}
+[data-instrument="replay"] .rp-wfill{fill:var(--wash)}
+[data-instrument="replay"] .rp-ifill{fill:var(--ink)}
+[data-instrument="replay"] .rp-axis{stroke:var(--ink);stroke-width:1.4;stroke-dasharray:12 6 2 6}
+[data-instrument="replay"] .rp-ct{font-family:var(--caps);font-size:30px;fill:var(--ink);text-anchor:middle}
+[data-instrument="replay"] .rp-gh{cursor:pointer}
+[data-instrument="replay"] .rp-gh circle{fill:var(--wash);stroke:var(--rubric);stroke-width:2.4;opacity:.6}
+[data-instrument="replay"] .rp-gh text{font-family:var(--display);font-weight:600;font-size:26px;fill:var(--rubric);text-anchor:middle;opacity:.6}
+[data-instrument="replay"] .rp-mk .rp-dotm{fill:var(--rubric)}
+[data-instrument="replay"] .rp-mk text{fill:var(--paper);font-family:var(--display);font-weight:600;font-size:30px;text-anchor:middle}
+[data-instrument="replay"] .rp-mk .rp-pulse{fill:none;stroke:var(--rubric);stroke-width:3;opacity:0;transform-box:fill-box;transform-origin:center;animation:rp-pulse 1.5s ease-out 2}
+[data-instrument="replay"] .rp-card{display:grid;grid-template-columns:minmax(0,1fr) 15.5rem;gap:1.4rem;margin-top:.9rem;padding:.8rem 0 .75rem;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule)}
+[data-instrument="replay"] .rp-head{display:flex;align-items:baseline;gap:.55rem;height:1.9rem;white-space:nowrap;overflow:hidden}
+[data-instrument="replay"] .rp-num{font-family:var(--display);font-weight:500;font-size:1.75rem;line-height:1;color:var(--rubric);min-width:1.3em}
+[data-instrument="replay"] .rp-of{font-family:var(--caps);font-size:.8rem;letter-spacing:.12em;color:var(--faded)}
+[data-instrument="replay"] .rp-who{font-family:var(--caps);font-size:.95rem;letter-spacing:.14em;margin-left:.4rem}
+[data-instrument="replay"] .rp-bead{font-size:1.02rem;line-height:1.35;height:2.7em;overflow:hidden;margin-top:.15rem}
+[data-instrument="replay"] .rp-sig{font-family:var(--caps);font-weight:600;letter-spacing:.06em;color:var(--rubric)}
+[data-instrument="replay"] .rp-lk{font-family:var(--caps);font-size:.84rem;letter-spacing:.1em;color:var(--faded);height:1.45rem;line-height:1.45rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="replay"] .rp-keep{font-size:.95rem;line-height:1.36;height:4.08em;overflow:hidden;font-style:italic}
+[data-instrument="replay"] .rp-kp{font-style:normal;font-family:var(--caps);letter-spacing:.08em;color:var(--rubric)}
+[data-instrument="replay"] .rp-r{border-left:1px solid var(--rule);padding-left:1.1rem;display:flex;flex-direction:column}
+[data-instrument="replay"] .rp-sc{height:4.85rem}
+[data-instrument="replay"] .rp-m{display:grid;grid-template-columns:6.4rem 1rem 1fr;align-items:center;height:1.25rem;font-size:.88rem}
+[data-instrument="replay"] .rp-mn{font-family:var(--caps);letter-spacing:.06em;color:var(--faded);white-space:nowrap}
+[data-instrument="replay"] .rp-mn b{color:var(--ink);font-weight:600;margin-right:.3rem}
+[data-instrument="replay"] .rp-md{font-weight:500;text-align:right}
+[data-instrument="replay"] .rp-pips{display:flex;gap:3px;padding-left:.5rem}
+[data-instrument="replay"] .rp-pips i{display:block;width:7px;height:7px;border-radius:50%;border:1px solid var(--ink)}
+[data-instrument="replay"] .rp-pips i.on{background:var(--ink)}
+[data-instrument="replay"] .rp-rule{font-size:.78rem;color:var(--faded);height:1.1rem;line-height:1.1rem;margin-top:.1rem;white-space:nowrap;overflow:hidden}
+[data-instrument="replay"] .rp-rule.rp-diff{color:var(--rubric)}
+[data-instrument="replay"] .rp-sum,[data-instrument="replay"] .rp-tot{display:flex;align-items:baseline;gap:.4rem}
+[data-instrument="replay"] .rp-sum{height:1.8rem;border-top:1px dotted var(--rule);padding-top:.2rem}
+[data-instrument="replay"] .rp-sl,[data-instrument="replay"] .rp-tl{font-family:var(--caps);font-size:.8rem;letter-spacing:.12em;color:var(--faded);width:6.4rem;flex:none}
+[data-instrument="replay"] .rp-sv{font-family:var(--display);font-weight:600;font-size:1.3rem}
+[data-instrument="replay"] .rp-sv small{font-size:.8rem;font-weight:400;color:var(--faded)}
+[data-instrument="replay"] .rp-tot{flex-wrap:wrap;height:3.2rem;align-content:flex-start}
+[data-instrument="replay"] .rp-tv{font-family:var(--display);font-weight:600;font-size:1.65rem;line-height:1.1;color:var(--rubric);min-width:1.3em}
+[data-instrument="replay"] .rp-ts{font-size:.9rem;color:var(--faded)}
+[data-instrument="replay"] .rp-tr{flex-basis:100%;padding-left:6.8rem;font-size:.82rem;font-style:italic;color:var(--faded);height:1.2rem;white-space:nowrap;overflow:hidden}
+[data-instrument="replay"] .rp-ctrl{display:flex;align-items:center;gap:.45rem;margin-top:.85rem}
+[data-instrument="replay"] .rp-b,[data-instrument="replay"] .rp-auto{appearance:none;-webkit-appearance:none;background:var(--paper);border:1px solid var(--rule);color:var(--ink);height:2.3rem;min-width:2.3rem;display:inline-flex;align-items:center;justify-content:center;gap:.45rem;cursor:pointer;padding:0 .55rem;font-family:var(--caps);font-size:.9rem;letter-spacing:.12em;touch-action:manipulation;border-radius:0}
+[data-instrument="replay"] .rp-b svg{width:14px;height:14px;fill:var(--ink);stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
+[data-instrument="replay"] .rp-auto svg{width:14px;height:14px;fill:var(--ink)}
+[data-instrument="replay"] .rp-b:hover:not(:disabled),[data-instrument="replay"] .rp-auto:hover{border-color:var(--ink)}
+[data-instrument="replay"] .rp-b:disabled{opacity:.35;cursor:default}
+[data-instrument="replay"] .rp-auto .rp-pause{display:none}
+[data-instrument="replay"] .rp-auto[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+[data-instrument="replay"] .rp-auto[aria-pressed="true"] svg{fill:var(--paper)}
+[data-instrument="replay"] .rp-auto[aria-pressed="true"] .rp-play{display:none}
+[data-instrument="replay"] .rp-auto[aria-pressed="true"] .rp-pause{display:inline}
+[data-instrument="replay"] .rp-b:focus-visible,[data-instrument="replay"] .rp-auto:focus-visible{outline:2px solid var(--rubric);outline-offset:2px}
+[data-instrument="replay"] .rp-scrub{position:relative;flex:1;height:2.6rem;margin:0 .7rem;touch-action:pan-y;cursor:pointer;outline:none;-webkit-user-select:none;user-select:none}
+[data-instrument="replay"] .rp-rail{position:absolute;left:0;right:0;top:.95rem;height:1px;background:var(--ink)}
+[data-instrument="replay"] .rp-stops{position:absolute;inset:0}
+[data-instrument="replay"] .rp-stops span{position:absolute;top:0;width:0;height:100%}
+[data-instrument="replay"] .rp-stops i{position:absolute;left:-.5px;top:.62rem;width:1px;height:.7rem;background:var(--rule)}
+[data-instrument="replay"] .rp-stops span.past i{background:var(--ink)}
+[data-instrument="replay"] .rp-stops b{position:absolute;top:1.35rem;left:0;transform:translateX(-50%);font-family:var(--display);font-weight:500;font-size:.85rem;line-height:1;color:var(--faded)}
+[data-instrument="replay"] .rp-stops span.past b{color:var(--ink)}
+[data-instrument="replay"] .rp-stops span.now b{color:var(--rubric);font-weight:600}
+[data-instrument="replay"] .rp-thumb{position:absolute;top:.95rem;width:1.05rem;height:1.05rem;margin:-.525rem 0 0 -.525rem;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px var(--wash),0 0 0 3px var(--rubric);transition:left .25s ease}
+[data-instrument="replay"] .rp-scrub:focus-visible .rp-thumb{box-shadow:0 0 0 2px var(--wash),0 0 0 3px var(--rubric),0 0 0 7px rgba(154,42,28,.28)}
+[data-instrument="replay"] .rp-hour{height:2px;margin-top:.55rem}
+[data-instrument="replay"] .rp-hour i{display:block;height:100%;width:0;background:var(--rubric)}
+@keyframes rp-drop{0%{transform:translateY(-26px) scale(.5);opacity:0}65%{transform:translateY(2px) scale(1.04);opacity:1}100%{transform:none;opacity:1}}
+@keyframes rp-draw{to{stroke-dashoffset:0}}
+@keyframes rp-fade{from{opacity:0}to{opacity:1}}
+@keyframes rp-pulse{from{transform:scale(.7);opacity:.9}to{transform:scale(2.1);opacity:0}}
+@media (max-width:640px){
+[data-instrument="replay"]{padding:1rem .9rem .9rem}
+[data-instrument="replay"] .rp-top{grid-template-columns:1fr;gap:.8rem}
+[data-instrument="replay"] .rp-boardwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+[data-instrument="replay"] .rp-board{min-width:32rem}
+[data-instrument="replay"] .rp-planwrap{display:grid;grid-template-columns:8.5rem 1fr;align-items:center;gap:.8rem}
+[data-instrument="replay"] .rp-place{text-align:left;height:3.9em;margin:0}
+[data-instrument="replay"] .rp-card{grid-template-columns:1fr;gap:.6rem}
+[data-instrument="replay"] .rp-r{border-left:0;padding-left:0;border-top:1px dotted var(--rule);padding-top:.5rem}
+[data-instrument="replay"] .rp-bead{height:4.05em}
+[data-instrument="replay"] .rp-lk{white-space:normal;height:2.7rem;line-height:1.35rem}
+[data-instrument="replay"] .rp-keep{height:5.44em}
+[data-instrument="replay"] .rp-ctrl{flex-wrap:wrap}
+[data-instrument="replay"] .rp-scrub{order:-1;flex-basis:100%;margin:0 .6rem .35rem}
+[data-instrument="replay"] .rp-auto{margin-left:auto}
+}
+@media (prefers-reduced-motion:reduce){
+[data-instrument="replay"] .rp-drop,[data-instrument="replay"] .rp-fade,[data-instrument="replay"] .rp-pulse{animation:none}
+[data-instrument="replay"] .rp-draw{animation:none;stroke-dasharray:none;stroke-dashoffset:0}
+[data-instrument="replay"] .rp-thumb{transition:none}
+[data-instrument="replay"] .rp-hour{visibility:hidden}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="replay"]');
+if(!root)return;
+root.style.fontFeatureSettings='"kern","liga","lnum","tnum"';
+const NS='http://www.w3.org/2000/svg';
+const $=s=>root.querySelector(s);
+const board=$('.rp-board'),plan=$('.rp-plan');
+const ghosts=plan.querySelector('.rp-ghosts'),mark=plan.querySelector('.rp-mark');
+const mq=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):null;
+const still=()=>!!(mq&&mq.matches);
+const K='Иозеф Кнехт',T='Фриц Тегулариус';
+const ROM=['I','II','III','IV','V','VI','VII','VIII'];
+const LN=['','Вещь','Образ','Строй','Закон','Начало'];
+const CIRC='MNFSV';
+const MOVES=[
+{who:K,d:'F',l:3,c:0,kind:'key',name:'Дом с внутренним двором, обращённый главным залом к югу',keep:'ось север — юг: на севере главное, на юге вход.',sc:null,place:[260,60],pt:'ось север — юг; главный зал на севере лицом к югу'},
+{who:T,d:'S',l:3,c:1,kind:'an',from:0,name:'Восемь триграмм в «посленебесном» порядке, по сторонам света',keep:'каждой стороне света отведён свой знак и свой смысл, как каждому строению — свой угол.',sc:[3,1,3],place:[530,110],pt:'роза ветров: Ли, огонь, на юге, Кань, вода, на севере'},
+{who:K,d:'M',l:3,c:2,kind:'mod',from:1,name:'Китайский пятиступенный лад: гун, шан, цзюэ, чжи, юй',keep:'то же распределение по сторонам, но теперь звучащее.',sc:[3,2,3],place:[530,110],pt:'стороны света, теперь звучащие: пять ступеней лада'},
+{who:T,d:'N',l:4,c:3,kind:'mod',from:1,name:'Двоичная запись чисел',keep:'множество из двух знаков.',sc:[4,2,1],place:[530,110],pt:'ход уводит от дома; отметка остаётся на розе ветров'},
+{who:K,d:'F',l:1,c:0,kind:'cp',from:0,name:'Стена духов за воротами',keep:'порядок держится не только прямой линией, но и намеренным изломом.',sc:[4,1,3],place:[452,456],pt:'ворота в юго-восточном углу и стена духов за ними'},
+{who:T,d:'V',l:3,c:4,kind:'an',from:0,name:'Конфуцианский обряд, ли: место каждого в семье',keep:'старшинство выражено местом.',sc:[4,1,3],place:[380,128],pt:'главный зал — старшим, боковые строения — младшим'},
+{who:K,d:'M',l:3,c:5,kind:'an',from:5,name:'Бах, «Гольдберг-вариации»: канон в каждой третьей вариации',keep:'ведущий голос идёт впереди, ведомый повторяет его на своём расстоянии, как младший следует старшему.',sc:[3,1,3],place:[260,389],pt:'ось от входа к старшим: младший следует за старшим'},
+{who:T,d:'S',l:1,c:6,kind:'mod',from:5,name:'Знак 家: крыша над свиньёй, «дом» и «семья»',keep:'дом и род названы одним словом.',sc:[4,2,3],place:[260,104],pt:'кровля главного зала: крыша над родом'},
+{who:K,d:'N',l:3,c:7,kind:'an',from:0,name:'Магический квадрат Ло Шу, три на три, суммы по 15',keep:'девять частей в равновесии вокруг середины.',sc:[3,1,3],place:[168,196],pt:'угол двора: девять частей плана вокруг середины'},
+{who:K,d:'V',l:5,c:0,kind:'cp',from:0,coda:true,name:'Лао-цзы, глава одиннадцатая: польза комнаты — в её пустоте',keep:'всё выстроенное держится на том, что оставлено незастроенным.',sc:[4,2,3],place:[260,286],pt:'пустой двор посреди дома'}
+];
+const N=MOVES.length;
+const X0=118,X1=610,CW=(X1-X0)/8;
+const cx=c=>X0+CW*(c+.5),ly=l=>44+(5-l)*44;
+const PAPER='#F3EBD8',INK='#1F1A14';
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+board.setAttribute('viewBox','0 0 620 246');
+const gS=el('g',{},board);
+for(let c=0;c<8;c++)el('text',{x:cx(c),y:24,class:'rp-col'},gS).textContent=ROM[c];
+for(let c=1;c<8;c++)el('line',{x1:X0+CW*c,y1:34,x2:X0+CW*c,y2:232,class:'rp-div'},gS);
+for(let l=1;l<=5;l++){el('line',{x1:X0,y1:ly(l),x2:X1,y2:ly(l),class:'rp-ln'},gS);el('text',{x:6,y:ly(l)+4,class:'rp-lab'},gS).textContent=ROM[l-1]+' · '+LN[l];}
+el('line',{x1:X0,y1:34,x2:X0,y2:232,class:'rp-bar2'},gS);
+el('line',{x1:X0+5,y1:34,x2:X0+5,y2:232,class:'rp-ln'},gS);
+el('line',{x1:X1,y1:34,x2:X1,y2:232,class:'rp-ln'},gS);
+const gL=el('g',{},board),gB=el('g',{},board);
+const CRES='M0 -10 A10 10 0 0 1 0 10 A5 10 0 0 0 0 -10 Z';
+const PAT={N:'rp-cross',V:'rp-horiz',S:'rp-vert'};
+function beadShape(d,p){
+el('circle',{r:12.6,class:'rp-halo'},p);
+if(d==='M'){el('circle',{r:10,fill:INK},p);el('path',{d:'M-6.8 -3 A7.4 7.4 0 0 1 -1.5 -7.4',fill:'none',stroke:PAPER,'stroke-width':1.3,'stroke-linecap':'round'},p);el('circle',{cx:-4.2,cy:-4.4,r:1,fill:PAPER},p);return;}
+el('circle',{r:10,fill:PAPER},p);
+if(d==='F'){el('path',{d:CRES,fill:'url(#rp-fine)',transform:'rotate(35)'},p);el('circle',{r:2.4,fill:INK},p);el('circle',{r:10,fill:'none',stroke:INK,'stroke-width':1.1},p);el('circle',{r:6.2,fill:'none',stroke:INK,'stroke-width':.4},p);return;}
+el('circle',{r:10,fill:'url(#'+PAT[d]+')'},p);
+el('path',{d:CRES,fill:'url(#rp-dense)',transform:'rotate(35)'},p);
+el('circle',{cx:-4,cy:-4.2,r:2.1,fill:PAPER},p);
+el('circle',{r:10,fill:'none',stroke:INK,'stroke-width':1.1},p);
+}
+const R=14,f=v=>Math.round(v*10)/10;
+function unit(x,y){const L=Math.hypot(x,y)||1;return[x/L,y/L];}
+function onCircle(P,C){const u=unit(C[0]-P[0],C[1]-P[1]);return[P[0]+u[0]*(R+3),P[1]+u[1]*(R+3)];}
+function qmid(A,C,B){return[.25*A[0]+.5*C[0]+.25*B[0],.25*A[1]+.5*C[1]+.25*B[1]];}
+function drawLink(i,cur,anim){
+const m=MOVES[i],s=MOVES[m.from];
+const A=[cx(s.c),ly(s.l)],B=[cx(m.c),ly(m.l)];
+const g=el('g',{class:'rp-link '+(cur?'rp-cur':'rp-past')},gL);
+const solid=d=>{const p=el('path',{d:d},g);if(anim){p.setAttribute('pathLength','1');p.setAttribute('class','rp-draw');}return p;};
+let lab=null,la='middle',name='';
+if(m.kind==='an'){
+name='аналогия';
+if(Math.abs(m.c-s.c)===1){solid(`M${f(A[0])} ${A[1]-4}H${f(B[0])}`);solid(`M${f(A[0])} ${A[1]+4}H${f(B[0])}`);lab=[(A[0]+B[0])/2,A[1]-11];}
+else{const span=Math.abs(m.c-s.c),hh=16+6*span,mx=(A[0]+B[0])/2;
+for(const o of[-4,4])solid(`M${f(A[0])} ${A[1]+o}Q${f(mx)} ${A[1]+2*hh+o} ${f(B[0])} ${B[1]+o}`);
+lab=[mx,A[1]+hh+17];}
+}else if(m.kind==='cp'){
+name=m.coda?'кода · контрапункт':'контрапункт';
+const C=[A[0]+28+.15*Math.abs(B[1]-A[1]),(A[1]+B[1])/2];
+const P0=onCircle(A,C),P2=onCircle(B,C);
+solid(`M${f(P0[0])} ${f(P0[1])}Q${f(C[0])} ${f(C[1])} ${f(P2[0])} ${f(P2[1])}`);
+const u=unit(P2[0]-C[0],P2[1]-C[1]),rot=(a)=>[u[0]*Math.cos(a)-u[1]*Math.sin(a),u[0]*Math.sin(a)+u[1]*Math.cos(a)];
+const r1=rot(.45),r2=rot(-.45);
+const ar=el('path',{d:`M${f(P2[0]-8*r1[0])} ${f(P2[1]-8*r1[1])}L${f(P2[0])} ${f(P2[1])}L${f(P2[0]-8*r2[0])} ${f(P2[1]-8*r2[1])}`},g);
+if(anim)ar.setAttribute('class','rp-fade');
+const mid=qmid(P0,C,P2);lab=[mid[0]+7,mid[1]+4];la='start';
+}else{
+name='модуляция';
+const dx=B[0]-A[0],dy=B[1]-A[1],L=Math.hypot(dx,dy);
+let pp=[-dy/L,dx/L];if(pp[1]>0||(pp[1]===0&&pp[0]>0))pp=[dy/L,-dx/L];
+const k=Math.max(22,.32*L),C=[(A[0]+B[0])/2+pp[0]*k,(A[1]+B[1])/2+pp[1]*k];
+const P0=onCircle(A,C),P2=onCircle(B,C);
+const p=el('path',{d:`M${f(P0[0])} ${f(P0[1])}Q${f(C[0])} ${f(C[1])} ${f(P2[0])} ${f(P2[1])}`,class:'rp-dot'+(anim?' rp-fade':'')},g);
+const mid=qmid(P0,C,P2);lab=[mid[0]+pp[0]*12,mid[1]+pp[1]*12];
+}
+if(cur&&lab){const t=el('text',{x:f(lab[0]),y:f(lab[1]),class:'rp-lklab'+(anim?' rp-fade':''),'text-anchor':la},g);t.textContent=name;}
+}
+let step=N;
+function circDist(a,b){const k=Math.abs(CIRC.indexOf(a)-CIRC.indexOf(b));return Math.min(k,5-k);}
+const MS=[['Т','точность',4],['Д','дальность',3],['С','стройность',3]];
+const scrub=$('.rp-scrub'),stops=$('.rp-stops'),thumb=$('.rp-thumb');
+for(let i=1;i<=N;i++){const sp=document.createElement('span');sp.style.left=((i-1)/(N-1)*100)+'%';sp.innerHTML='<i></i><b>'+i+'</b>';stops.appendChild(sp);}
+const btn=t=>root.querySelector('[data-go="'+t+'"]');
+function render(anim){
+gL.textContent='';gB.textContent='';
+const cur=MOVES[step-1];
+for(let i=1;i<step;i++)drawLink(i,i===step-1,anim&&i===step-1);
+for(let i=0;i<step;i++){const m=MOVES[i];
+const o=el('g',{class:'rp-bd'+(anim&&i===step-1?' rp-drop':''),'data-i':i},gB);
+const inner=el('g',{transform:`translate(${f(cx(m.c))} ${ly(m.l)}) scale(1.4)`},o);
+beadShape(m.d,inner);
+el('title',{},o).textContent=(i+1)+'. '+m.d+m.l+' '+m.name;}
+if(cur.from!=null){const s=MOVES[cur.from];el('circle',{cx:f(cx(s.c)),cy:ly(s.l),r:20,class:'rp-ring2'},gB);}
+el('circle',{cx:f(cx(cur.c)),cy:ly(cur.l),r:20,class:'rp-ring'+(anim?' rp-fade':'')},gB);
+for(let i=0;i<step;i++){const m=MOVES[i];el('text',{x:f(cx(m.c)+13),y:ly(m.l)+23,class:'rp-bn'+(i===step-1?' rp-on':'')},gB).textContent=i+1;}
+ghosts.textContent='';mark.textContent='';
+const key=p=>p[0]+','+p[1],ck=key(cur.place),seen=new Map();
+for(let j=0;j<step-1;j++)seen.set(key(MOVES[j].place),j);
+seen.forEach((j,k)=>{if(k===ck)return;const p=MOVES[j].place;const g=el('g',{class:'rp-gh','data-n':j+1},ghosts);el('circle',{cx:p[0],cy:p[1],r:16},g);el('text',{x:p[0],y:p[1]+9},g).textContent=j+1;});
+const mk=el('g',{class:'rp-mk'},mark),P=cur.place;
+if(anim)el('circle',{cx:P[0],cy:P[1],r:22,class:'rp-pulse'},mk);
+el('circle',{cx:P[0],cy:P[1],r:22,class:'rp-dotm'},mk);
+el('text',{x:P[0],y:P[1]+10},mk).textContent=step;
+$('.rp-place').textContent=step+'. '+cur.pt;
+$('.rp-num').textContent=step;
+$('.rp-of').textContent='из '+N;
+$('.rp-who').textContent=cur.who;
+$('.rp-sig').textContent=cur.d+cur.l;
+$('.rp-bname').textContent=cur.name;
+const pos='столбец '+ROM[cur.c]+' · линия '+ROM[cur.l-1]+', '+LN[cur.l].toLowerCase();
+let lk;
+if(cur.kind==='key')lk='ключ · '+pos;
+else{const s=MOVES[cur.from],ref=s.d+s.l;
+lk=(cur.coda?'кода · ':'')+(cur.kind==='an'?'аналогия = '+ref:cur.kind==='cp'?'контрапункт × '+ref:'модуляция → из '+ref)+' · '+pos;}
+$('.rp-lk').textContent=lk;
+$('.rp-kp').textContent=cur.kind==='key'?'задаёт:':'сохраняется:';
+$('.rp-kt').textContent=cur.keep;
+let rows=MS.map((q,k)=>{const v=cur.sc?cur.sc[k]:null;let p='';for(let i=0;i<q[2];i++)p+='<i'+(v!=null&&i<v?' class="on"':'')+'></i>';return '<div class="rp-m"><span class="rp-mn"><b>'+q[0]+'</b>'+q[1]+'</span><span class="rp-md">'+(v==null?'–':v)+'</span><span class="rp-pips">'+p+'</span></div>';}).join('');
+let rule='ключ не оценивается',diff=false;
+if(cur.sc){const s=MOVES[cur.from],cd=circDist(s.d,cur.d),jump=Math.abs(s.l-cur.l)>=2,dr=Math.min(3,cd+(jump?1:0));
+if(dr===cur.sc[1])rule='Д: '+s.d+'→'+cur.d+' по кругу '+cd+(jump?', прыжок +1':'');
+else{rule='Д по правилу '+dr+', в записи '+cur.sc[1];diff=true;}}
+rows+='<div class="rp-rule'+(diff?' rp-diff':'')+'">'+rule+'</div>';
+$('.rp-sc').innerHTML=rows;
+const sv=$('.rp-sv');
+if(cur.sc){const t=cur.sc[0]+cur.sc[1]+cur.sc[2];sv.innerHTML=t+'<small> / 10</small>';}
+else sv.innerHTML='<small>—</small>';
+let sum=0,n=0;for(let i=0;i<step;i++){const s=MOVES[i].sc;if(s){sum+=s[0]+s[1]+s[2];n++;}}
+$('.rp-tv').textContent=n?sum:'—';
+$('.rp-ts').textContent=n?'из '+n*10:'';
+$('.rp-tr').textContent=n?'ср. '+(sum/n).toFixed(2).replace('.',',')+' за ход':'';
+[...stops.children].forEach((sp,k)=>{sp.className=(k+1<step?'past':'')+(k+1===step?' past now':'');});
+thumb.style.left=((step-1)/(N-1)*100)+'%';
+scrub.setAttribute('aria-valuenow',step);
+scrub.setAttribute('aria-valuetext','ход '+step+', '+cur.who+', '+cur.d+cur.l);
+btn('first').disabled=btn('prev').disabled=step===1;
+btn('next').disabled=btn('last').disabled=step===N;
+}
+function go(n){n=Math.max(1,Math.min(N,n));if(n===step)return;const anim=n>step&&!still();step=n;render(anim);}
+const autoBtn=$('.rp-auto'),bar=$('.rp-hour i'),PAUSE=4200;
+let playing=false,raf=0,t0=0;
+function tick(now){if(!playing)return;const p=(now-t0)/PAUSE;
+if(p>=1){go(step+1);t0=now;bar.style.width='0';if(step>=N){stopAuto();return;}}
+else bar.style.width=(p*100)+'%';
+raf=requestAnimationFrame(tick);}
+function startAuto(){playing=true;autoBtn.setAttribute('aria-pressed','true');if(step>=N)go(1);t0=performance.now();raf=requestAnimationFrame(tick);}
+function stopAuto(){playing=false;cancelAnimationFrame(raf);bar.style.width='0';autoBtn.setAttribute('aria-pressed','false');}
+autoBtn.addEventListener('click',()=>{playing?stopAuto():startAuto();});
+root.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{stopAuto();const t=b.getAttribute('data-go');go(t==='first'?1:t==='last'?N:t==='prev'?step-1:step+1);}));
+root.addEventListener('keydown',e=>{const k=e.key;let n=null;
+if(k==='ArrowRight'||k==='ArrowUp')n=step+1;else if(k==='ArrowLeft'||k==='ArrowDown')n=step-1;
+else if(k==='Home')n=1;else if(k==='End')n=N;else if(k==='PageUp')n=step+3;else if(k==='PageDown')n=step-3;
+if(n==null)return;e.preventDefault();stopAuto();go(n);});
+const fromX=x=>{const r=scrub.getBoundingClientRect();return Math.round(Math.max(0,Math.min(1,(x-r.left)/(r.width||1)))*(N-1))+1;};
+let drag=false;
+scrub.addEventListener('pointerdown',e=>{drag=true;try{scrub.setPointerCapture(e.pointerId);}catch(_){}try{scrub.focus({preventScroll:true});}catch(_){scrub.focus();}stopAuto();go(fromX(e.clientX));});
+scrub.addEventListener('pointermove',e=>{if(drag)go(fromX(e.clientX));});
+const end=()=>{drag=false;};
+scrub.addEventListener('pointerup',end);scrub.addEventListener('pointercancel',end);
+board.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.rp-bd');if(g){stopAuto();go(+g.getAttribute('data-i')+1);}});
+plan.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('.rp-gh');if(g){stopAuto();go(+g.getAttribute('data-n'));}});
+render(false);
+})();</script>
+    <figcaption><span class="tab">Прибор IV.</span> Партия Кнехта и Тегулариуса, ход за ходом. Итог партии нарастает в правом поле.</figcaption>
+  </figure>
+
+  <h3>Запись партии с разбором каждого хода</h3>
+
+  <ol class="moves">
+    <li>
+      <span class="mn">1</span>
+      <div>
+        <div class="who">Иозеф Кнехт · ключ · столбец I</div>
+        <p class="bead-line"><span class="sig">F3</span> Дом с внутренним двором, обращённый главным залом к югу</p>
+        <p>Ключ задаёт строй: ось север — юг, на севере главное, на юге вход. Кнехт выбирает третью линию, ступень строя, чтобы оставить место и для вещей внизу, и для законов наверху.</p>
+        <p class="score">Ключ не оценивается</p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">2</span>
+      <div>
+        <div class="who">Фриц Тегулариус · аналогия · столбец II</div>
+        <p class="bead-line"><span class="sig">S3</span> Восемь триграмм в «посленебесном» порядке, по сторонам света <span class="lk">=</span> <span class="sig">F3</span></p>
+        <p>В «посленебесном» расположении триграмм Ли, огонь, стоит на юге, Кань, вода, — на севере. Сохраняется: каждой стороне света отведён свой знак и свой смысл, как каждому строению — свой угол. Тегулариус сразу выводит дом из камня в знак.</p>
+        <p class="score">Т 3 · Д 1 · С 3 = <b>7</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">3</span>
+      <div>
+        <div class="who">Иозеф Кнехт · модуляция · столбец III</div>
+        <p class="bead-line"><span class="sig">M3</span> Китайский пятиступенный лад: гун, шан, цзюэ, чжи, юй <span class="lk">→</span> из <span class="sig">S3</span></p>
+        <p>В китайском учении соответствий пять ступеней лада соотнесены с пятью первоэлементами и сторонами света. Сохраняется: то же распределение по сторонам, но теперь звучащее. Модуляция через две области круга.</p>
+        <p class="score">Т 3 · Д 2 · С 3 = <b>8</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">4</span>
+      <div>
+        <div class="who">Фриц Тегулариус · модуляция · столбец IV</div>
+        <p class="bead-line"><span class="sig">N4</span> Двоичная запись чисел <span class="lk">→</span> из <span class="sig">S3</span></p>
+        <p>Тегулариус возвращается к триграммам и поднимает их на ступень закона: сплошная и прерванная черта — это два знака, из которых строятся все числа. Сохраняется: множество из двух знаков. Ход блестящий, но уводит от дома: стройность снижена. Кнехт мог возразить, но промолчал.</p>
+        <p class="score">Т 4 · Д 2 · С 1 = <b>7</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">5</span>
+      <div>
+        <div class="who">Иозеф Кнехт · контрапункт · столбец I</div>
+        <p class="bead-line"><span class="sig">F1</span> Стена духов за воротами <span class="lk">×</span> <span class="sig">F3</span></p>
+        <p>По народному поверью, злые духи ходят только по прямой; стена, поставленная сразу за воротами, заставляет входящего свернуть. Кнехт ставит её в столбец ключа, под домом: прямая ось и преграда звучат вместе. Сохраняется: порядок держится не только прямой линией, но и намеренным изломом. Ход внутри области, дальность только за прыжок на две линии.</p>
+        <p class="score">Т 4 · Д 1 · С 3 = <b>8</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">6</span>
+      <div>
+        <div class="who">Фриц Тегулариус · аналогия · столбец V</div>
+        <p class="bead-line"><span class="sig">V3</span> Конфуцианский обряд, ли: место каждого в семье <span class="lk">=</span> <span class="sig">F3</span></p>
+        <p>Главный зал на севере отводится старшим, боковые строения — младшим. Сохраняется: старшинство выражено местом. Это самая простая аналогия партии и, может быть, самая нужная: дом оказывается обрядом, выстроенным в дереве и камне.</p>
+        <p class="score">Т 4 · Д 1 · С 3 = <b>8</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">7</span>
+      <div>
+        <div class="who">Иозеф Кнехт · аналогия · столбец VI</div>
+        <p class="bead-line"><span class="sig">M3</span> Бах, «Гольдберг-вариации»: канон в каждой третьей вариации <span class="lk">=</span> <span class="sig">V3</span></p>
+        <p>Кнехт выводит партию на Запад. В «Гольдберг-вариациях» каждая третья вариация — канон, и интервал между голосами растёт от унисона до ноны. Сохраняется: ведущий голос идёт впереди, ведомый повторяет его на своём расстоянии, как младший следует старшему. Самый дальний по замыслу ход партии; судьи могли бы спорить о точности.</p>
+        <p class="score">Т 3 · Д 1 · С 3 = <b>7</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">8</span>
+      <div>
+        <div class="who">Фриц Тегулариус · модуляция · столбец VII</div>
+        <p class="bead-line"><span class="sig">S1</span> Знак 家: крыша над свиньёй, «дом» и «семья» <span class="lk">→</span> из <span class="sig">V3</span></p>
+        <p>Тегулариус спускается с обряда к одному знаку. Иероглиф 家 составлен из ключа «крыша» и знака «свинья» и значит одновременно «дом» и «семья». Сохраняется: дом и род названы одним словом. Через две линии вниз, с прибавкой за прыжок.</p>
+        <p class="score">Т 4 · Д 2 · С 3 = <b>9</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">9</span>
+      <div>
+        <div class="who">Иозеф Кнехт · аналогия · столбец VIII</div>
+        <p class="bead-line"><span class="sig">N3</span> Магический квадрат Ло Шу, три на три, суммы по 15 <span class="lk">=</span> <span class="sig">F3</span></p>
+        <p>В квадрате Ло Шу числа от одного до девяти стоят так, что любая строка, столбец и диагональ дают пятнадцать; пятёрка — в середине. Традиция связывает его с девятичастным планом Зала Света, Минтана. Сохраняется: девять частей в равновесии вокруг середины. Кнехт подводит партию к теме.</p>
+        <p class="score">Т 3 · Д 1 · С 3 = <b>7</b></p>
+      </div>
+    </li>
+    <li>
+      <span class="mn">10</span>
+      <div>
+        <div class="who">Иозеф Кнехт · кода · контрапункт · столбец I</div>
+        <p class="bead-line"><span class="sig">V5</span> Лао-цзы, глава одиннадцатая: польза комнаты — в её пустоте <span class="lk">×</span> <span class="sig">F3</span></p>
+        <p>В одиннадцатой главе «Дао дэ цзин» сказано, что сосуд и комната служат благодаря пустому месту внутри. Кнехт ставит эту бусину на верхнюю линию в столбец ключа, против дома: строения и пустой двор между ними. Сохраняется: всё выстроенное держится на том, что оставлено незастроенным. Пятёрка в середине квадрата Ло Шу, двор посреди дома, генеральная пауза — тема партии названа вслух только теперь. Кода конфуцианскую партию заканчивает даосской мыслью, и в этом её контрапункт.</p>
+        <p class="score">Т 4 · Д 2 · С 3 = <b>9</b></p>
+      </div>
+    </li>
+  </ol>
+
+  <p class="verdict">Итог: 70 из 90 возможных за девять оценённых ходов, в среднем около 7,8 за ход. По нашей шкале — хорошая игра на пороге превосходной.</p>
+
+  <p>Слабые места партии видны из счёта. Четвёртый ход, прекрасный сам по себе, увёл тему к числу и не вернул её; седьмой держится на тонкой аналогии. Сильные — пятый, восьмой и кода: каждый из них соединяет далёкое и при этом прямо служит дому. Хорошая партия не та, где каждый ход блестящ, а та, где кода собирает всё сказанное.</p>
+</section>
+
+<section class="chapter" id="ch8">
+  <p class="chapter-no">Глава восьмая</p>
+  <h2>Первую партию можно сыграть сегодня вечером за кухонным столом</h2>
+
+  <aside class="note"><span class="nh">Совет магистра</span>
+    <p>Первые партии играйте на знакомом материале. Лучше точная связь между двумя любимыми вещами, чем блестящая между тем, что знаешь понаслышке. Широта придёт с годами.</p>
+  </aside>
+
+  <p class="lead">Начертите пять линий на длинном листе и разделите его на восемь столбцов. Подпишите линии снизу вверх: вещь, образ, строй, закон, начало. Разберите бусины на пять родов. Поставьте часы. Дальше — по порядку:</p>
+
+  <ul class="checklist">
+    <li>Выберите ключ, который оба знают хорошо: любимую пьесу, здание своего города, стихотворение.</li>
+    <li>Ходите по очереди, по одному ходу; объявляйте связь одной фразой «сохраняется…».</li>
+    <li>После каждого хода три минуты молчания; возражение — до конца паузы.</li>
+    <li>Записывайте каждый ход: номер, игрок, бусина, связь, счёт.</li>
+    <li>На десятом ходу сыграйте коду — свяжите последнюю бусину с ключом.</li>
+    <li>Сложите счёт и сравните со следующей партией, а не друг с другом.</li>
+  </ul>
+
+  <p>Запись сохраните. Через год, перечитав её, вы увидите не только свою тогдашнюю игру, но и то, что вы тогда знали и любили. В этом, может быть, и есть главный смысл Игры: она не прибавляет нового знания, а показывает, как уже знаемое складывается в одно целое.</p>
+  <p>Гессе пишет, что Игра доступна немногим и требует многих лет учения. Это правда о торжественной партии. Частная партия доступна каждому, кто готов назвать вещь точно, выслушать возражение и помолчать три минуты. С этого и начинали в Вальдцеле.</p>
+
+  <svg class="rule-orn" viewBox="0 0 180 20" aria-hidden="true"><use href="#fleuron"/></svg>
+</section>
+
+<section class="colophon">
+  <svg viewBox="0 0 200 200" role="img" aria-label="Печатный знак наставления"><use href="#device"/></svg>
+  <p>Наставление составлено по роману Германа Гессе «Игра в бисер». Правила, счёт, этюды и партия «Китайский дом» — реконструкция для живой игры, а не текст романа.</p>
+  <p class="finis">Finis</p>
+</section>
+
+</main>
+</body>
+</html>

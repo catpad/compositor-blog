@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Десять новых петель</title>
+<meta name="description" content="Десять сюжетов для романов о путешествиях во времени, построенных на механизмах, парадоксах и загадках, которых составитель не встречал ни в книгах, ни в кино.">
+<meta name="compositor:paper" content="#EFE3C2">
+<meta name="compositor:ink" content="#231A12">
+<meta name="compositor:accent" content="#C8261C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=PT+Mono&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --paper:#efe3c2;
+  --paper-2:#e6d6ab;
+  --ink:#231a12;
+  --fade:#6b5a43;
+  --accent:#c8261c;
+  --mustard:#e2a51e;
+  --teal:#1f5c60;
+  --display:"Rubik Mono One", "Arial Black", sans-serif;
+  --text:"PT Serif", Georgia, serif;
+  --mono:"PT Mono", ui-monospace, monospace;
+  --measure:36rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:var(--text);
+  font-size:18px;
+  line-height:1.6;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .22 0 0 0 0 .08 0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent)}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ——— COVER ——— */
+.cover{
+  position:relative;
+  max-width:1080px;
+  margin:0 auto;
+  padding:28px 20px 40px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+.series{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:6px 0;
+}
+.series b{color:var(--accent);font-weight:400}
+.cover-title{
+  font-family:var(--display);
+  font-weight:400;
+  line-height:.92;
+  margin:18px 0 0;
+  font-size:clamp(2.6rem, 10vw, 6.4rem);
+  letter-spacing:-.02em;
+  color:var(--accent);
+  text-shadow:4px 4px 0 var(--mustard), 6px 7px 0 var(--ink);
+  transform:rotate(-2deg);
+  transform-origin:left center;
+}
+.cover-title span{display:block;color:var(--ink);text-shadow:3px 3px 0 var(--mustard)}
+.cover-sub{
+  font-style:italic;font-size:1.25rem;line-height:1.35;
+  max-width:30rem;margin:22px 0 0;
+}
+.cover-art{width:100%;max-width:640px;justify-self:center;margin-top:10px}
+.cover-art svg{display:block;width:100%;height:auto}
+.stamp{
+  position:absolute;right:24px;top:96px;
+  width:118px;height:118px;border-radius:50%;
+  background:var(--accent);color:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--display);text-align:center;line-height:1;
+  transform:rotate(14deg);
+  box-shadow:3px 4px 0 var(--ink);
+}
+.stamp strong{font-size:2.6rem;font-weight:400}
+.stamp small{font-size:.58rem;letter-spacing:.06em;margin-top:6px}
+@media (min-width:880px){
+  .cover{grid-template-columns:1.05fr 1fr;align-items:end}
+  .cover .series{grid-column:1/-1}
+  .cover-art{grid-row:2/4;grid-column:2}
+  .stamp{right:auto;left:46%;top:120px}
+}
+@media (max-width:520px){
+  .stamp{width:88px;height:88px;top:auto;bottom:28px;right:16px}
+  .stamp strong{font-size:1.8rem}
+  .stamp small{font-size:.5rem}
+}
+
+/* ——— BODY TEXT ——— */
+main{max-width:1080px;margin:0 auto;padding:0 20px 60px}
+.column{max-width:var(--measure);margin:0 auto}
+.foreword{
+  margin:30px auto 10px;
+  border-top:3px double var(--ink);
+  padding-top:22px;
+}
+.kicker{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fade);margin:0 0 6px;
+}
+.foreword h2{
+  font-family:var(--text);font-weight:700;font-size:1.6rem;line-height:1.2;margin:0 0 14px;
+}
+.foreword p{margin:0 0 1em}
+.struck{
+  list-style:none;padding:0;margin:14px 0 18px;
+  display:flex;flex-wrap:wrap;gap:6px 14px;
+  font-family:var(--mono);font-size:.86rem;
+}
+.struck li{
+  text-decoration:line-through;
+  text-decoration-color:var(--accent);
+  text-decoration-thickness:2px;
+  color:var(--fade);
+}
+.caveat{font-size:.92rem;color:var(--fade);font-style:italic}
+
+/* ——— CHAPTERS ——— */
+.chapter{
+  margin:70px auto 0;
+  max-width:var(--measure);
+  position:relative;
+}
+.chapter::before{
+  content:"";display:block;height:14px;margin-bottom:22px;
+  background:
+    repeating-linear-gradient(90deg, var(--ink) 0 6px, transparent 6px 10px) top/100% 2px no-repeat,
+    linear-gradient(var(--ink),var(--ink)) bottom/100% 1px no-repeat;
+}
+.numeral{
+  font-family:var(--display);font-weight:400;
+  font-size:5.4rem;line-height:1;margin:0;
+  color:var(--accent);
+  text-shadow:3px 3px 0 var(--mustard);
+  letter-spacing:-.02em;
+}
+.novel{
+  font-family:var(--display);font-weight:400;
+  font-size:1.3rem;line-height:1.15;
+  margin:8px 0 4px;letter-spacing:.01em;
+}
+.novel::before{content:"роман · ";font-family:var(--mono);font-size:.78rem;letter-spacing:.14em;color:var(--fade);vertical-align:middle}
+.chapter h2{
+  font-family:var(--text);font-weight:700;font-style:italic;
+  font-size:1.5rem;line-height:1.22;margin:6px 0 18px;
+}
+.chapter p{margin:0 0 1em;hyphens:auto}
+.chapter p.lede::first-letter{
+  font-family:var(--display);float:left;font-size:3.3rem;line-height:.86;
+  padding:4px 8px 0 0;color:var(--accent);
+}
+.parts{
+  margin:22px 0 0;padding:16px 18px 6px;
+  background:var(--paper-2);
+  border:1.5px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  transform:rotate(-.4deg);
+}
+.parts div{display:grid;grid-template-columns:7.2rem 1fr;gap:10px;margin-bottom:12px}
+.parts dt{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);padding-top:.25rem;
+}
+.parts dd{margin:0;font-size:.96rem;line-height:1.5}
+@media (max-width:520px){
+  .parts div{grid-template-columns:1fr;gap:2px}
+  .numeral{font-size:4.2rem}
+}
+
+/* ——— ILLUSTRATIONS & INSTRUMENTS ——— */
+.plate{margin:28px auto 6px;max-width:30rem}
+.plate svg{display:block;width:100%;height:auto}
+.plate figcaption{
+  font-family:var(--mono);font-size:.76rem;color:var(--fade);
+  margin-top:8px;text-align:center;letter-spacing:.04em;
+}
+.instrument{
+  display:block;
+  width:100%;
+  max-width:44rem;
+  margin:30px auto 8px;
+  min-height:400px;
+  background:var(--paper-2);
+  border:2px solid var(--ink);
+  box-shadow:6px 6px 0 var(--ink);
+  position:relative;
+  overflow:hidden;
+  touch-action:pan-y;
+}
+.instrument[data-instrument="witness"]{min-height:360px}
+.instrument[data-instrument="tide"]{min-height:420px}
+.instrument[data-instrument="excavation"]{min-height:460px}
+.instrument[data-instrument="mean"]{min-height:340px}
+@media (max-width:520px){
+  .instrument{min-height:440px}
+  .instrument[data-instrument="excavation"]{min-height:520px}
+}
+
+/* ——— LEDGER ——— */
+.ledger{max-width:44rem;margin:80px auto 0}
+.ledger h2{
+  font-family:var(--display);font-weight:400;font-size:1.35rem;line-height:1.2;margin:0 0 6px;
+}
+.ledger > p{max-width:var(--measure);margin:0 0 16px}
+.table-box{overflow-x:auto;border:2px solid var(--ink);background:var(--paper-2)}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.9rem}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid rgba(35,26,18,.3)}
+th{font-family:var(--mono);font-weight:400;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper)}
+td:first-child{font-family:var(--display);font-size:.8rem;color:var(--accent);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+
+.afterword{max-width:var(--measure);margin:56px auto 0;font-style:italic}
+.afterword p{margin:0 0 1em}
+.colophon{
+  max-width:var(--measure);margin:30px auto 0;
+  font-family:var(--mono);font-size:.76rem;color:var(--fade);letter-spacing:.06em;
+  border-top:1px solid var(--ink);padding-top:10px;
+}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="ht" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+      <circle cx="3" cy="3" r="1.55" fill="#231a12"/>
+    </pattern>
+    <pattern id="htFine" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <circle cx="2" cy="2" r=".9" fill="#231a12"/>
+    </pattern>
+    <pattern id="htRed" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-20)">
+      <circle cx="2.5" cy="2.5" r="1.5" fill="#8e1810"/>
+    </pattern>
+    <pattern id="htPaper" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(40)">
+      <circle cx="2.5" cy="2.5" r="1.1" fill="#efe3c2"/>
+    </pattern>
+    <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)">
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#231a12" stroke-width="1.1"/>
+    </pattern>
+    <pattern id="news" width="80" height="9" patternUnits="userSpaceOnUse">
+      <rect x="0" y="3" width="34" height="2.2" fill="#231a12" opacity=".55"/>
+      <rect x="38" y="3" width="18" height="2.2" fill="#231a12" opacity=".55"/>
+      <rect x="60" y="3" width="16" height="2.2" fill="#231a12" opacity=".55"/>
+    </pattern>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="4" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -2.4 0 0 0 2.15" result="mask"/>
+      <feComposite in="SourceGraphic" in2="mask" operator="in"/>
+    </filter>
+    <filter id="torn" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.07" numOctaves="3" seed="9" result="t"/>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="lift" x="-15%" y="-15%" width="135%" height="135%">
+      <feDropShadow dx="3" dy="4" stdDeviation="1.6" flood-color="#231a12" flood-opacity=".38"/>
+    </filter>
+  </defs>
+</svg>
+
+<header class="cover">
+  <div class="series"><span>Карманная серия <b>«Хронос»</b></span><span>Выпуск сюжетов № 10</span></div>
+
+  <h1 class="cover-title">Десять<span>новых</span>петель</h1>
+
+  <p class="cover-sub">Сюжеты для романов о путешествиях во времени — без машин, без кротовых нор, без двойников и без единого убитого дедушки.</p>
+
+  <div class="stamp" aria-hidden="true"><strong>10</strong><small>СЮЖЕТОВ<br>НАВЫЛЕТ</small></div>
+
+  <figure class="cover-art" style="margin:0">
+    <svg viewBox="0 0 600 640" role="img" aria-labelledby="coverT">
+      <title id="coverT">Коллаж: обрывок горчичной бумаги, вырезанный из газеты циферблат с римскими цифрами и красной стрелкой против хода часов, листок календаря «17 июня 1912» и красный силуэт мужчины в шляпе, уходящего с портфелем.</title>
+      <!-- base torn paper -->
+      <g filter="url(#lift)">
+        <polygon filter="url(#torn)" points="40,70 548,40 572,560 70,604" fill="#e2a51e" transform="rotate(-3 300 320)"/>
+      </g>
+      <polygon filter="url(#torn)" points="40,70 548,40 572,560 70,604" fill="url(#htFine)" opacity=".18" transform="rotate(-3 300 320)"/>
+      <!-- teal strip -->
+      <g filter="url(#lift)" transform="rotate(9 300 300)">
+        <rect filter="url(#torn)" x="-10" y="380" width="640" height="78" fill="#1f5c60"/>
+        <rect x="-10" y="380" width="640" height="78" fill="url(#htPaper)" opacity=".18"/>
+        <text x="40" y="430" font-family="PT Mono, monospace" font-size="20" fill="#efe3c2" letter-spacing="6">ОТЛИВ 04:12 · ПРИЛИВ 16:40 · 1912 / 2025</text>
+      </g>
+      <!-- clock cutout -->
+      <g transform="translate(345 245) rotate(-11)" filter="url(#lift)">
+        <polygon points="-178,-150 -120,-182 20,-176 160,-170 184,-60 172,90 150,170 10,182 -140,176 -186,60" fill="#f2e7c9"/>
+        <polygon points="-178,-150 -120,-182 20,-176 160,-170 184,-60 172,90 150,170 10,182 -140,176 -186,60" fill="url(#news)" opacity=".35"/>
+        <circle r="150" fill="#f6ecd2" stroke="#231a12" stroke-width="3"/>
+        <circle r="150" fill="url(#ht)" opacity=".28" filter="url(#grain)"/>
+        <circle r="138" fill="none" stroke="#231a12" stroke-width="1"/>
+        <g stroke="#231a12" stroke-width="4" stroke-linecap="square">
+          <line x1="0" y1="-128" x2="0" y2="-145"/><line x1="64" y1="-110.9" x2="72.5" y2="-125.6"/>
+          <line x1="110.9" y1="-64" x2="125.6" y2="-72.5"/><line x1="128" y1="0" x2="145" y2="0"/>
+          <line x1="110.9" y1="64" x2="125.6" y2="72.5"/><line x1="64" y1="110.9" x2="72.5" y2="125.6"/>
+          <line x1="0" y1="128" x2="0" y2="145"/><line x1="-64" y1="110.9" x2="-72.5" y2="125.6"/>
+          <line x1="-110.9" y1="64" x2="-125.6" y2="72.5"/><line x1="-128" y1="0" x2="-145" y2="0"/>
+          <line x1="-110.9" y1="-64" x2="-125.6" y2="-72.5"/><line x1="-64" y1="-110.9" x2="-72.5" y2="-125.6"/>
+        </g>
+        <g font-family="PT Serif, serif" font-weight="700" font-size="28" fill="#231a12" text-anchor="middle" dominant-baseline="middle">
+          <text x="0" y="-104">XII</text><text x="104" y="2">III</text><text x="0" y="106">VI</text><text x="-104" y="2">IX</text>
+        </g>
+        <polygon points="-5,8 5,8 3,-80 -3,-80" fill="#231a12" transform="rotate(-62)"/>
+        <polygon points="-4,10 4,10 2,-118 -2,-118" fill="#231a12" transform="rotate(38)"/>
+        <circle r="8" fill="#c8261c" stroke="#231a12" stroke-width="2"/>
+        <path d="M 60 -150 A 162 162 0 0 0 -150 -60" fill="none" stroke="#c8261c" stroke-width="9"/>
+        <polygon points="-166,-46 -132,-48 -152,-80" fill="#c8261c"/>
+      </g>
+      <!-- calendar scrap -->
+      <g transform="translate(70 92) rotate(-8)" filter="url(#lift)">
+        <polygon points="0,0 150,6 146,178 4,172" fill="#f4ead0"/>
+        <polygon points="0,0 150,6 149,46 1,40" fill="#c8261c"/>
+        <text x="74" y="31" font-family="Rubik Mono One, sans-serif" font-size="19" fill="#efe3c2" text-anchor="middle">ИЮНЬ</text>
+        <text x="74" y="130" font-family="Rubik Mono One, sans-serif" font-size="78" fill="#231a12" text-anchor="middle">17</text>
+        <text x="74" y="162" font-family="PT Mono, monospace" font-size="16" fill="#231a12" text-anchor="middle" letter-spacing="4">1912</text>
+        <polygon points="0,0 150,6 146,178 4,172" fill="url(#htFine)" opacity=".12"/>
+      </g>
+      <!-- walking figure -->
+      <g transform="translate(96 330) rotate(4) scale(1.15)" filter="url(#lift)">
+        <g fill="#c8261c">
+          <path d="M34 28 Q36 6 50 6 Q64 6 66 28 Z"/>
+          <ellipse cx="50" cy="28" rx="28" ry="6"/>
+          <circle cx="50" cy="40" r="15"/>
+          <path d="M30 56 Q50 48 70 56 L82 150 L76 170 L24 170 L18 150 Z"/>
+          <path d="M31 62 L15 128 L24 132 L38 74 Z"/>
+          <path d="M68 62 L82 122 L74 126 L62 76 Z"/>
+          <path d="M36 168 L28 240 L41 241 L49 168 Z"/>
+          <path d="M54 168 L68 236 L80 232 L65 168 Z"/>
+          <path d="M22 238 L44 238 L45 246 L19 246 Z"/>
+          <path d="M66 233 L86 228 L88 236 L68 241 Z"/>
+          <rect x="70" y="122" width="30" height="22" rx="2"/>
+        </g>
+        <g fill="url(#htRed)" opacity=".7">
+          <path d="M50 56 Q60 52 70 56 L82 150 L76 170 L52 170 Z"/>
+          <path d="M54 168 L68 236 L80 232 L65 168 Z"/>
+        </g>
+        <rect x="70" y="122" width="30" height="22" fill="none" stroke="#231a12" stroke-width="1.5"/>
+      </g>
+      <!-- small receipt -->
+      <g transform="translate(400 500) rotate(6)" filter="url(#lift)">
+        <polygon points="0,0 160,0 160,70 150,64 140,70 130,64 120,70 110,64 100,70 90,64 80,70 70,64 60,70 50,64 40,70 30,64 20,70 10,64 0,70" fill="#f4ead0"/>
+        <text x="12" y="26" font-family="PT Mono, monospace" font-size="13" fill="#231a12">КВИТАНЦИЯ №0010</text>
+        <text x="12" y="48" font-family="PT Mono, monospace" font-size="13" fill="#c8261c">ОПЛАЧЕНО: ВЧЕРА</text>
+      </g>
+    </svg>
+  </figure>
+</header>
+
+<main>
+
+  <section class="foreword column">
+    <p class="kicker">От составителя</p>
+    <h2>Мы вычеркнули всё, что уже было, и начали с того, что осталось</h2>
+    <p>Жанр путешествий во времени перепахан вдоль и поперёк. Прежде чем придумывать, составитель выписал механизмы, которыми литература и кино пользуются чаще всего, — и запретил их себе:</p>
+    <ul class="struck">
+      <li>машина времени</li><li>кротовая нора</li><li>день сурка</li><li>убить дедушку</li>
+      <li>эффект бабочки</li><li>встреча с самим собой</li><li>петля без начала</li>
+      <li>параллельные ветки</li><li>письмо из будущего</li><li>патруль времени</li><li>перемещение сознания в своё молодое тело</li>
+    </ul>
+    <p>Каждый из десяти сюжетов ниже держится на одном правиле: что именно позволяет сдвинуться во времени, чем за это платят и где правило ломается. На ломе и стоит роман — там парадокс, загадка и поворот, который читатель не увидит заранее.</p>
+    <p>Пять правил можно потрогать: под главами I–V стоят приборы, в которых механизм работает в руках у читателя.</p>
+    <p class="caveat">Гарантировать абсолютную новизну не может никто: книг и фильмов слишком много. Честно сказать можно одно — в известных составителю романах и фильмах этих механизмов нет.</p>
+  </section>
+
+  <!-- I -->
+  <article class="chapter" id="ch1">
+    <p class="numeral" aria-hidden="true">I</p>
+    <p class="novel">Последняя, кто помнит</p>
+    <h2>Глубина прыжка в прошлое равна тому, насколько основательно тебя забыли</h2>
+    <p class="lede">Человека держит в настоящем не физика, а чужая память. Каждый, кто тебя помнит, — якорь. Пока якорей много, ты прикован к сегодняшнему дню. Если тебя забыл один знакомый, ты можешь соскользнуть на несколько месяцев назад. Если тебя не помнит никто — на десятилетия.</p>
+    <p>Эдит Хейл, бывший звукорежиссёр Би-би-си, пятьдесят восемь лет, хочет вернуться в июль 1979 года, на озеро в Озёрном крае, где утонул её младший брат. Три года она методично стирает себя: переезжает в чужой город, меняет фамилию, обрывает дружбы, оплачивает сеансы у гипнолога, который «вынимает» её из памяти бывшего мужа. Каждый оборванный якорь отпускает её на год, на два — она проверяет это короткими пробными соскальзываниями.</p>
+    <p>Остаётся последний якорь — мать в пансионате, с деменцией. И здесь правило оборачивается против Эдит: болезнь съедает недавнее и обнажает давнее. С каждой неделей мать помнит её всё хуже как взрослую женщину — и всё ярче как девочку, ту самую, летнюю, на берегу 1979 года.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Чужая память как якорь. Сила якоря — в том, насколько живо и как давно тебя помнят.</dd></div>
+      <div><dt>Парадокс</dt><dd>Якорь держит не в настоящем, а в том времени, которое о тебе помнят. Мать не мешает Эдит уйти в прошлое — она тянет её именно туда.</dd></div>
+      <div><dt>Загадка</dt><dd>В материнских дневниках 1979 года — записи о странной немолодой женщине, приходившей в их летний коттедж. Её никто из соседей не запомнил. Мать называла её «та, что ищет мальчика».</dd></div>
+      <div><dt>Поворот</dt><dd>Эдит уже была там — и неудачно. Чтобы сделать вторую попытку, ей нужно стать забытой и в 1979 году. Единственная, кто её помнит и тогда, и сейчас, — мать. Роман кончается выбором: стереть себя из последней памяти, которая у неё есть, ради брата, которого никто, кроме них двоих, уже не помнит.</dd></div>
+    </dl>
+    <div class="instrument" data-instrument="forgetting">
+  <svg class="fg-net" viewBox="0 0 600 480" role="group" aria-label="Сеть памяти вокруг Эдит">
+    <circle class="fg-field" cx="300" cy="240" r="190"></circle>
+    <circle class="fg-rest" cx="300" cy="240" r="110"></circle>
+    <g class="fg-threads"></g>
+    <g class="fg-vera" aria-hidden="true">
+      <circle cx="300" cy="240" r="30"></circle>
+      <text x="300" y="245" text-anchor="middle">Эдит</text>
+    </g>
+    <g class="fg-nodes"></g>
+  </svg>
+  <div class="fg-foot">
+    <div class="fg-board">
+      <div class="fg-cell"><span class="fg-k">Глубина, лет</span><b class="fg-v fg-w5" data-v="depth">0,0</b></div>
+      <div class="fg-cell"><span class="fg-k">Назначение</span><b class="fg-v fg-w14 fg-dest" data-v="dest">—</b></div>
+      <div class="fg-cell"><span class="fg-k">Якоря</span><b class="fg-v fg-w6" data-v="anchors">8 / 8</b></div>
+      <div class="fg-cell"><span class="fg-k">Тяга матери</span><b class="fg-v fg-w6" data-v="mother">0 %</b></div>
+    </div>
+    <button type="button" class="fg-reset">Все помнят</button>
+  </div>
+</div>
+<style>
+[data-instrument="forgetting"]{padding:14px 14px 16px;font-family:var(--text);color:var(--ink)}
+[data-instrument="forgetting"] .fg-net{display:block;width:100%;height:auto;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+[data-instrument="forgetting"] .fg-field{fill:var(--paper);fill-opacity:.55;stroke:var(--fade);stroke-width:1.5;stroke-dasharray:3 6}
+[data-instrument="forgetting"] .fg-rest{fill:none;stroke:var(--fade);stroke-opacity:.35;stroke-width:1}
+[data-instrument="forgetting"] .fg-thread{stroke:var(--ink);stroke-linecap:round;fill:none}
+[data-instrument="forgetting"] .fg-thread.mother{stroke:var(--accent)}
+[data-instrument="forgetting"] .fg-stub{stroke:var(--fade);stroke-width:2;stroke-linecap:round}
+[data-instrument="forgetting"] .fg-vera circle{fill:var(--accent);stroke:var(--ink);stroke-width:2.5}
+[data-instrument="forgetting"] .fg-vera text{fill:var(--paper);font-family:var(--display);font-size:12px}
+[data-instrument="forgetting"] .fg-node{cursor:grab;touch-action:none;outline:none}
+[data-instrument="forgetting"] .fg-node.drag{cursor:grabbing}
+[data-instrument="forgetting"] .fg-node .dot{fill:var(--paper);stroke:var(--ink);stroke-width:2.5}
+[data-instrument="forgetting"] .fg-node.mother .dot{fill:var(--mustard)}
+[data-instrument="forgetting"] .fg-node.off .dot{fill:var(--paper-2);stroke:var(--fade);stroke-dasharray:3 3}
+[data-instrument="forgetting"] .fg-node.off text{fill:var(--fade)}
+[data-instrument="forgetting"] .fg-node .ring{fill:none;stroke:var(--accent);stroke-width:3;opacity:0}
+[data-instrument="forgetting"] .fg-node:focus-visible .ring{opacity:1}
+[data-instrument="forgetting"] .fg-name{font-family:var(--text);font-weight:700;font-size:17px;fill:var(--ink)}
+[data-instrument="forgetting"] .fg-role{font-family:var(--mono);font-size:12px;fill:var(--fade)}
+[data-instrument="forgetting"].fg-narrow .fg-role{display:none}
+[data-instrument="forgetting"].fg-narrow .fg-name{font-size:24px}
+[data-instrument="forgetting"].fg-pull .fg-node.mother .dot{animation:fg-pulse .6s ease-out}
+@keyframes fg-pulse{0%{stroke-width:9;stroke:var(--accent)}100%{stroke-width:2.5}}
+[data-instrument="forgetting"] .fg-foot{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:6px}
+[data-instrument="forgetting"] .fg-board{display:grid;grid-template-columns:repeat(4,auto);gap:2px;background:var(--ink);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+[data-instrument="forgetting"] .fg-cell{background:var(--paper);padding:6px 12px 7px}
+[data-instrument="forgetting"] .fg-k{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fade);white-space:nowrap}
+[data-instrument="forgetting"] .fg-v{display:block;font-family:var(--mono);font-weight:400;font-size:1.15rem;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="forgetting"] .fg-w5{width:5ch}
+[data-instrument="forgetting"] .fg-w6{width:6ch}
+[data-instrument="forgetting"] .fg-w14{width:14ch}
+[data-instrument="forgetting"] .fg-dest{color:var(--accent)}
+[data-instrument="forgetting"] .fg-reset{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:var(--paper);border:1.5px solid var(--ink);padding:5px 12px;cursor:pointer}
+[data-instrument="forgetting"] .fg-reset:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:600px){
+  [data-instrument="forgetting"] .fg-board{grid-template-columns:repeat(2,auto)}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="forgetting"].fg-pull .fg-node.mother .dot{animation:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="forgetting"]');
+if(!root)return;
+const NS='http://www.w3.org/2000/svg';
+const svg=root.querySelector('.fg-net'),gT=root.querySelector('.fg-threads'),gN=root.querySelector('.fg-nodes');
+const CX=300,CY=240,R0=110,RB=190,VR=30,XMIN=34,XMAX=566,YMIN=46,YMAX=440;
+const NOW=2025+9.5/12,T79=1979+6.5/12;
+const MON=['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+const SCHED=[0,.35,.6,.78,.9,.97,1];
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+const out={};root.querySelectorAll('[data-v]').forEach(e=>out[e.dataset.v]=e);
+const P=[
+ {name:'Мать',role:'пансионат',mother:true,a:90},
+ {name:'Эмброуз',role:'гипнолог',yr:0.6,a:135},
+ {name:'Найджел',role:'бывший муж',yr:3.0,a:180,init:150},
+ {name:'Клайв',role:'коллега, студия',yr:1.6,a:225},
+ {name:'Дженни',role:'подруга юности',yr:2.2,a:270},
+ {name:'миссис Хиггинс',role:'соседка',yr:0.7,a:315},
+ {name:'Сью',role:'коллега, радио',yr:1.1,a:0,init:215},
+ {name:'Полли',role:'ученица',yr:0.9,a:45}
+];
+let mT=0,mD=0,attempts=0,raf=0,drag=null,narrow=false;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmt=n=>n.toFixed(1).replace('.',',');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+function stretch(p){return clamp((Math.hypot(p.px-CX,p.py-CY)-R0)/(RB-R0),0,1);}
+function broken(p){return !p.mother&&(p.off||stretch(p)>=1);}
+function released(p){return p.mother?0:(broken(p)?p.yr:p.yr*stretch(p));}
+function place(p,x,y){
+ x=clamp(x,XMIN,XMAX);y=clamp(y,YMIN,YMAX);
+ const d=Math.hypot(x-CX,y-CY);
+ if(d<72){const k=72/(d||1);x=CX+(x-CX||0.01)*k;y=CY+(y-CY)*k;}
+ p.px=x;p.py=y;
+}
+function rest(p){const r=p.a*Math.PI/180;p.px=CX+Math.cos(r)*R0;p.py=CY+Math.sin(r)*R0;p.off=false;p.mx=0;p.my=0;}
+function toSvg(e){const pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;return pt.matrixTransform(svg.getScreenCTM().inverse());}
+
+P.forEach(p=>{
+ p.r=p.mother?20:13+p.yr*2.2;
+ rest(p);
+ if(p.init){const r=p.a*Math.PI/180;p.px=CX+Math.cos(r)*p.init;p.py=CY+Math.sin(r)*p.init;}
+ p.ln=el('line',{class:'fg-thread'+(p.mother?' mother':'')});
+ p.s1=el('line',{class:'fg-stub'});p.s2=el('line',{class:'fg-stub'});
+ gT.append(p.ln,p.s1,p.s2);
+ const g=el('g',{class:'fg-node'+(p.mother?' mother':''),tabindex:'0',role:'slider','aria-valuemin':'0','aria-valuemax':'100'});
+ g.append(el('circle',{class:'ring',r:p.r+5}),el('circle',{class:'dot',r:p.r}));
+ p.tn=el('text',{class:'fg-name'});p.tn.textContent=p.name;
+ p.tr=el('text',{class:'fg-role'});p.tr.textContent=p.role;
+ g.append(p.tn,p.tr);gN.append(g);p.g=g;
+
+ g.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;e.preventDefault();
+  g.focus({preventScroll:true});g.setPointerCapture(e.pointerId);
+  const q=toSvg(e);drag={p,id:e.pointerId,sx:q.x,sy:q.y,ox:p.px,oy:p.py,moved:false,counted:false};
+  g.classList.add('drag');
+ });
+ g.addEventListener('pointermove',e=>{
+  if(!drag||drag.p!==p||drag.id!==e.pointerId)return;
+  const q=toSvg(e),dx=q.x-drag.sx,dy=q.y-drag.sy;
+  if(Math.hypot(dx,dy)>5)drag.moved=true;
+  if(p.mother){
+   const L=Math.hypot(dx,dy)||1,k=Math.min(18,L*0.15)/L;p.mx=dx*k;p.my=dy*k;
+   if(drag.moved&&!drag.counted){drag.counted=true;attempt();}
+  }else{
+   place(p,drag.ox+dx,drag.oy+dy);
+   if(drag.moved&&p.off&&stretch(p)<1)p.off=false;
+  }
+  render();
+ });
+ const end=e=>{
+  if(!drag||drag.p!==p||drag.id!==e.pointerId)return;
+  g.classList.remove('drag');
+  if(p.mother){p.mx=0;p.my=0;if(!drag.counted&&e.type==='pointerup')attempt();}
+  else if(!drag.moved&&e.type==='pointerup')toggle(p);
+  drag=null;render();
+ };
+ g.addEventListener('pointerup',end);g.addEventListener('pointercancel',end);
+ g.addEventListener('keydown',e=>{
+  const k=e.key,o=k==='ArrowRight'||k==='ArrowUp',i=k==='ArrowLeft'||k==='ArrowDown',t=k==='Enter'||k===' ';
+  if(!(o||i||t||k==='Home'||k==='End'))return;
+  e.preventDefault();
+  if(p.mother){attempt();return;}
+  if(t){toggle(p);}else{
+   const dx=p.px-CX,dy=p.py-CY,d=Math.hypot(dx,dy)||1,ux=dx/d,uy=dy/d;
+   let nd=o?d+10:i?d-10:k==='Home'?R0:RB+6;nd=Math.max(R0,nd);
+   place(p,CX+ux*nd,CY+uy*nd);
+   if(p.off&&!o&&stretch(p)<1)p.off=false;
+  }
+  render();
+ });
+});
+
+function toggle(p){
+ p.off=!p.off;
+ if(!p.off&&stretch(p)>=1){const dx=p.px-CX,dy=p.py-CY,d=Math.hypot(dx,dy)||1;place(p,CX+dx/d*R0,CY+dy/d*R0);}
+}
+function attempt(){
+ attempts++;mT=SCHED[Math.min(attempts,SCHED.length-1)];
+ root.classList.remove('fg-pull');void root.offsetWidth;root.classList.add('fg-pull');
+ animate();
+}
+function animate(){
+ if(raf)return;
+ const step=()=>{
+  const d=mT-mD;
+  if(reduce.matches||Math.abs(d)<.002)mD=mT;else mD+=d*.06;
+  render();
+  raf=mD!==mT?requestAnimationFrame(step):0;
+ };
+ raf=requestAnimationFrame(step);
+}
+function label(p,x,y,ux,uy){
+ let anc=ux>.35?'start':ux<-.35?'end':'middle';
+ if(x>470)anc='end';else if(x<130)anc='start';
+ let tx=0,t1,t2;
+ if(anc==='middle'){
+  if(uy<0&&y>120){t1=-p.r-(narrow?10:24);t2=-p.r-10;}
+  else{t1=p.r+(narrow?24:18);t2=p.r+32;}
+ }else{tx=(anc==='start'?1:-1)*(p.r+6);t1=narrow?8:-2;t2=13;}
+ p.tn.setAttribute('x',tx);p.tn.setAttribute('y',t1);p.tn.setAttribute('text-anchor',anc);
+ p.tr.setAttribute('x',tx);p.tr.setAttribute('y',t2);p.tr.setAttribute('text-anchor',anc);
+}
+function line(l,a,b,c,d){l.setAttribute('x1',a.toFixed(1));l.setAttribute('y1',b.toFixed(1));l.setAttribute('x2',c.toFixed(1));l.setAttribute('y2',d.toFixed(1));}
+function render(){
+ let rel=0,held=0;
+ P.forEach(p=>{
+  const x=p.px+p.mx,y=p.py+p.my,dx=x-CX,dy=y-CY,d=Math.hypot(dx,dy)||1,ux=dx/d,uy=dy/d;
+  const s=stretch(p),br=broken(p),r=released(p);
+  p.g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+  p.g.classList.toggle('off',br);
+  const ax=CX+ux*VR,ay=CY+uy*VR,bx=x-ux*p.r,by=y-uy*p.r;
+  if(br){
+   p.ln.style.display='none';p.s1.style.display='';p.s2.style.display='';
+   line(p.s1,ax,ay,CX+ux*(VR+16),CY+uy*(VR+16));
+   line(p.s2,bx,by,x-ux*(p.r+16),y-uy*(p.r+16));
+  }else{
+   held++;
+   p.ln.style.display='';p.s1.style.display='none';p.s2.style.display='none';
+   line(p.ln,ax,ay,bx,by);
+   const w=p.mother?4+12*mD:0.8+p.yr*2.4*(1-s);
+   p.ln.setAttribute('stroke-width',w.toFixed(2));
+   if(!p.mother&&s>.72)p.ln.setAttribute('stroke-dasharray','7 4');else p.ln.removeAttribute('stroke-dasharray');
+  }
+  rel+=r;
+  if(p.mother){
+   p.tr.textContent=mD>.5?'помнит девочку':'пансионат';
+   p.g.setAttribute('aria-valuenow',Math.round(mD*100));
+   p.g.setAttribute('aria-valuetext','Мать: нить не рвётся, тянет к июлю 1979 на '+Math.round(mD*100)+' %');
+  }else{
+   p.g.setAttribute('aria-valuenow',br?100:Math.round(s*100));
+   p.g.setAttribute('aria-valuetext',p.name+', '+p.role+': '+(br?'нить оборвана':'помнит')+', отпускает '+fmt(r)+' г.');
+  }
+  label(p,x,y,ux,uy);
+ });
+ const base=NOW-rel,dest=base+(T79-base)*mD,depth=NOW-dest;
+ const yy=Math.floor(dest+1e-9),mm=clamp(Math.floor((dest-yy)*12+1e-6),0,11);
+ out.depth.textContent=fmt(depth);
+ out.dest.textContent=MON[mm]+' '+yy;
+ out.anchors.textContent=held+' / '+P.length;
+ out.mother.textContent=Math.round(mD*100)+'\u00a0%';
+}
+root.querySelector('.fg-reset').addEventListener('click',()=>{
+ P.forEach(rest);attempts=0;mT=0;animate();render();
+});
+function sizeCheck(){
+ const n=svg.getBoundingClientRect().width<460;
+ if(n!==narrow){narrow=n;root.classList.toggle('fg-narrow',n);}
+ render();
+}
+if('ResizeObserver' in window)new ResizeObserver(sizeCheck).observe(svg);
+else window.addEventListener('resize',sizeCheck);
+sizeCheck();
+})();</script>
+  </article>
+
+  <!-- II -->
+  <article class="chapter" id="ch2">
+    <p class="numeral" aria-hidden="true">II</p>
+    <p class="novel">Неувиденное прошедшее</p>
+    <h2>Прошлое можно переписать, пока на него никто не посмотрел</h2>
+    <p class="lede">Во многих языках глагол сообщает не только когда, но и откуда говорящий знает о событии: видел сам, слышал от других или догадался. Лингвисты называют это эвиденциальностью; так устроены, например, болгарское пересказывательное наклонение и турецкий суффикс <i>-miş</i>.</p>
+    <p>В вымышленной деревушке Литтл-Фенбери, затерянной среди болот Восточной Англии, говорят на старом наречии, где эвиденциальных форм пять, и последняя — «неувиденное прошедшее» — обладает силой. Фраза о событии, которого не видел ни один живой человек, сказанная в этой форме, становится правдой. Увиденное окаменело навсегда. Неувиденное мягко, как глина.</p>
+    <p>Лингвистка Хелен Эшворт приезжает записать последних носителей и постепенно понимает обычаи деревни: роды принимают в темноте, на похоронах закрывают лица, важные решения принимают с завязанными глазами. Деревня веками бережёт своё прошлое неувиденным — чтобы его можно было чинить.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Грамматика как рычаг: менять можно только то, у чего нет свидетелей, и только словом в особой форме.</dd></div>
+      <div><dt>Парадокс</dt><dd>Наука — это свидетельство. Каждая запись на диктофон, каждый снимок Хелен запечатывает кусок прошлого деревни, отнимая у людей возможность его исправить.</dd></div>
+      <div><dt>Загадка</dt><dd>Сорок лет назад из запертого дома исчез мужчина. Никто не видел, как. Каждая семья рассказывает свою версию в неувиденном прошедшем — и все версии одновременно правдивы.</dd></div>
+      <div><dt>Поворот</dt><dd>Хелен позвали не записывать язык, а посмотреть. Один из стариков хочет, чтобы взгляд чужака окончательно закрепил его версию исчезновения — ту, в которой убийца не он.</dd></div>
+    </dl>
+    <div class="instrument" data-instrument="witness">
+  <div class="w-head"><span class="w-place">Литтл-Фенбери · 14 января 1985</span><span class="w-case">дом Эфраима Торна</span></div>
+  <ol class="w-line"></ol>
+  <div class="w-board">
+    <div class="w-count"><span class="w-big"><span class="w-num">0</span><span class="w-of">/6</span></span><span class="w-cap">версий исчезновения возможно</span></div>
+    <div class="w-count"><span class="w-num2">0</span><span class="w-cap">вечеров ещё может оказаться правдой</span></div>
+    <ul class="w-vers"></ul>
+  </div>
+  <p class="w-tale" aria-live="polite"></p>
+</div>
+<style>
+[data-instrument="witness"]{padding:18px 18px 20px;font-family:var(--text);color:var(--ink)}
+[data-instrument="witness"] .w-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:6px;margin-bottom:14px}
+[data-instrument="witness"] .w-place{color:var(--accent)}
+[data-instrument="witness"] .w-line{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;position:relative}
+[data-instrument="witness"] .w-line::before{content:"";position:absolute;left:0;right:0;top:.62rem;height:2px;background:repeating-linear-gradient(90deg,var(--ink) 0 6px,transparent 6px 10px)}
+[data-instrument="witness"] .ev{position:relative;display:flex;flex-direction:column;gap:5px;min-width:0}
+[data-instrument="witness"] .t{align-self:center;position:relative;background:var(--paper-2);padding:0 4px;font-family:var(--mono);font-size:.72rem;font-variant-numeric:tabular-nums}
+[data-instrument="witness"] .n{font-family:var(--display);font-size:.6rem;text-align:center;letter-spacing:.02em;line-height:1.2}
+[data-instrument="witness"] .val{appearance:none;font-family:var(--text);font-size:.8rem;line-height:1.2;font-style:italic;background:var(--paper);color:var(--ink);border:1.5px dashed var(--ink);border-radius:0;padding:6px 3px 6px;min-height:5.4em;display:flex;flex-direction:column;justify-content:space-between;align-items:center;gap:4px;text-align:center;cursor:pointer;touch-action:manipulation;transition:background-color .25s,color .25s}
+[data-instrument="witness"] .vt{display:flex;align-items:center;justify-content:center;min-height:2.4em;hyphens:auto}
+[data-instrument="witness"] .vt.bump{animation:w-in .22s ease-out}
+@keyframes w-in{from{opacity:.15;transform:translateY(4px)}to{opacity:1;transform:none}}
+[data-instrument="witness"] .dots{display:flex;gap:3px}
+[data-instrument="witness"] .dot{width:7px;height:7px;border-radius:50%;border:1.2px solid currentColor;display:block}
+[data-instrument="witness"] .dot.on{background:currentColor}
+[data-instrument="witness"] .dot.dead{opacity:.35;border-style:dotted}
+[data-instrument="witness"] .eye{appearance:none;background:transparent;color:var(--ink);border:1.5px solid var(--ink);border-radius:0;font-family:var(--mono);font-size:.6rem;line-height:1.15;padding:4px 2px;min-height:3.9em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;touch-action:manipulation;transition:background-color .25s,color .25s}
+[data-instrument="witness"] .eye svg{width:26px;height:14px;display:block}
+[data-instrument="witness"] .eye .shut{display:block}
+[data-instrument="witness"] .eye .open{display:none}
+[data-instrument="witness"] .ev.seen .eye .shut{display:none}
+[data-instrument="witness"] .ev.seen .eye .open{display:block}
+[data-instrument="witness"] .ev.seen .val{background:var(--ink);color:var(--paper);border-style:solid;font-style:normal;cursor:default}
+[data-instrument="witness"] .ev.seen .eye{background:var(--ink);color:var(--paper)}
+[data-instrument="witness"] .ev.seen .n{color:var(--ink)}
+[data-instrument="witness"] .ev:not(.seen) .n{color:var(--fade)}
+[data-instrument="witness"] .val:focus-visible,[data-instrument="witness"] .eye:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-instrument="witness"] .w-board{display:grid;grid-template-columns:auto auto 1fr;gap:10px 20px;align-items:center;margin:16px 0 12px;border-top:3px double var(--ink);border-bottom:1px solid var(--ink);padding:10px 0}
+[data-instrument="witness"] .w-count{display:flex;flex-direction:column}
+[data-instrument="witness"] .w-big{display:flex;align-items:baseline;gap:2px}
+[data-instrument="witness"] .w-num{font-family:var(--display);font-size:2.3rem;line-height:1;color:var(--accent);display:inline-block;min-width:1.1em;text-align:right;text-shadow:2px 2px 0 var(--mustard)}
+[data-instrument="witness"] .w-of{font-family:var(--mono);font-size:1rem;color:var(--fade)}
+[data-instrument="witness"] .w-num2{font-family:var(--mono);font-size:1.45rem;line-height:1.3;font-variant-numeric:tabular-nums;display:inline-block;width:5ch}
+[data-instrument="witness"] .w-cap{font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fade);max-width:10rem;line-height:1.3;margin-top:3px}
+[data-instrument="witness"] .w-vers{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:3px 12px;font-family:var(--mono);font-size:.76rem;line-height:1.4}
+[data-instrument="witness"] .w-vers li{padding:0 3px}
+[data-instrument="witness"] .w-vers li.gone{text-decoration:line-through;text-decoration-color:var(--accent);text-decoration-thickness:2px;color:var(--fade)}
+[data-instrument="witness"] .w-vers li.now{background:var(--mustard)}
+[data-instrument="witness"] .w-tale{margin:0;font-size:.98rem;line-height:1.55;hyphens:auto}
+[data-instrument="witness"] .w-tale .s{font-weight:700}
+[data-instrument="witness"] .w-tale .u{font-style:italic;color:var(--accent);text-decoration:underline dotted;text-underline-offset:3px}
+[data-instrument="witness"] .w-tale .vd{font-style:italic}
+@media (max-width:640px){
+  [data-instrument="witness"] .w-line{grid-template-columns:1fr;gap:6px}
+  [data-instrument="witness"] .w-line::before{top:0;bottom:0;left:1.3rem;right:auto;width:2px;height:auto;background:repeating-linear-gradient(180deg,var(--ink) 0 6px,transparent 6px 10px)}
+  [data-instrument="witness"] .ev{display:grid;grid-template-columns:2.8rem 4.6rem 1fr 4.8rem;align-items:center;gap:6px}
+  [data-instrument="witness"] .t{padding:2px 0}
+  [data-instrument="witness"] .n{text-align:left}
+  [data-instrument="witness"] .val{min-height:3.4em;flex-direction:row;padding:4px 8px}
+  [data-instrument="witness"] .vt{min-height:0;justify-content:flex-start;text-align:left}
+  [data-instrument="witness"] .eye{min-height:3.4em}
+  [data-instrument="witness"] .w-board{grid-template-columns:1fr 1fr}
+  [data-instrument="witness"] .w-vers{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="witness"] .vt.bump{animation:none}
+  [data-instrument="witness"] .val,[data-instrument="witness"] .eye{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="witness"]');
+if(!root)return;
+const EV=[
+ {t:'20:40',w:'в 20:40',n:'Дверь',v:[
+  {l:'заперта изнутри',p:'Эфраим ',s:'запер',u:'запирал-де',q:' дверь изнутри'},
+  {l:'заперта снаружи',p:'кто-то ',s:'запер',u:'запирал-де',q:' дверь снаружи'},
+  {l:'не заперта',p:'дверь ',s:'осталась',u:'оставалась-де',q:' незапертой'}]},
+ {t:'21:05',w:'в 21:05',n:'Крик',v:[
+  {l:'мужской',p:'в доме ',s:'закричал',u:'кричал-де',q:' мужчина'},
+  {l:'женский',p:'у ворот ',s:'закричала',u:'кричала-де',q:' женщина'},
+  {l:'тишина',p:'в доме ',s:'стояла',u:'стояла-де',q:' тишина'}]},
+ {t:'21:20',w:'в 21:20',n:'Свет',v:[
+  {l:'погас в доме',p:'в окнах Эфраима ',s:'погас',u:'гас-де',q:' свет'},
+  {l:'погас во всей деревне',p:'по всей деревне ',s:'погас',u:'гас-де',q:' свет'},
+  {l:'горел до утра',p:'свет в доме ',s:'прогорел',u:'горел-де',q:' до утра'}]},
+ {t:'21:50',w:'в 21:50',n:'Двуколка',v:[
+  {l:'проехала к лесу',p:'мимо дома ',s:'проехала',u:'проезжала-де',q:' двуколка к лесу'},
+  {l:'стояла у ворот',p:'у ворот ',s:'простояла',u:'стояла-де',q:' чужая двуколка'},
+  {l:'двуколки не было',p:'двуколки на улице ',s:'не было',u:'не бывало-де',q:''}]},
+ {t:'22:30',w:'в 22:30',n:'Следы',v:[
+  {l:'одни, к реке',p:'от крыльца к реке ',s:'протянулись',u:'тянулись-де',q:' одни следы'},
+  {l:'от окна к лесу',p:'от окна к лесу ',s:'легли',u:'ложились-де',q:' следы'},
+  {l:'две пары к воротам',p:'к воротам ',s:'прошли',u:'проходили-де',q:' две пары ног'},
+  {l:'заметены',p:'снег ',s:'замёл',u:'заметал-де',q:' все следы'}]},
+ {t:'23:10',w:'в 23:10',n:'Окно',v:[
+  {l:'открыто',p:'окно ',s:'распахнулось',u:'распахивалось-де',q:' настежь'},
+  {l:'на шпингалете',p:'окно ',s:'осталось',u:'оставалось-де',q:' на шпингалете'},
+  {l:'разбито',p:'стекло в окне ',s:'разбилось',u:'билось-де',q:''}]},
+ {t:'00:00',w:'в полночь',n:'Подпол',v:[
+  {l:'крышка сдвинута',p:'крышка подпола ',s:'сдвинулась',u:'сдвигалась-де',q:''},
+  {l:'крышка на месте',p:'крышка подпола ',s:'лежала',u:'лежала-де',q:' на месте'}]}
+];
+const H=[
+ {l:'ушёл через окно',c:'он ушёл сам через окно',a:[[0],[2,0],[0,2],[2,0],[1,3],[0],[1]]},
+ {l:'увели через дверь',c:'его увели через дверь',a:[[1,2],[0,1,2],[0,1],[0,1],[2],[1],[1]]},
+ {l:'убит, тело вынесли',c:'его убили, а тело вынесли',a:[[1,2],[0,1],[0,1],[0,1],[0,2],[1,2],[0,1]]},
+ {l:'утонул в проруби',c:'он ушёл к реке и утонул в проруби',a:[[1,2],[0,2],[0,2],[2],[0],[1],[1]]},
+ {l:'отсиделся в подполе',c:'он отсиделся в подполе и ушёл позже',a:[[0],[2],[0,1,2],[0,2],[1,3],[0,1],[0]]},
+ {l:'уехал в чужой двуколке',c:'он уехал в чужой двуколке',a:[[1,2],[1,2],[0,2],[0,1],[2,3],[1],[1]]}
+];
+const cur=[0,2,0,2,3,1,0];
+const seen=[false,false,true,true,false,false,false];
+const EYE='<svg viewBox="0 0 26 14" aria-hidden="true"><g class="open" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 7 Q13 -3 25 7 Q13 17 1 7Z"/><circle cx="13" cy="7" r="3" fill="currentColor" stroke="none"/></g><g class="shut" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1 5 Q13 13 25 5"/><line x1="6" y1="8.5" x2="4.5" y2="12"/><line x1="13" y1="9.6" x2="13" y2="13"/><line x1="20" y1="8.5" x2="21.5" y2="12"/></g></svg>';
+const line=root.querySelector('.w-line');
+const numEl=root.querySelector('.w-num'),num2El=root.querySelector('.w-num2');
+const versEl=root.querySelector('.w-vers'),taleEl=root.querySelector('.w-tale');
+root.querySelector('.w-of').textContent='/'+H.length;
+const vItems=H.map(h=>{const li=document.createElement('li');li.textContent=h.l;versEl.appendChild(li);return li;});
+const cards=EV.map((e,i)=>{
+  const li=document.createElement('li');li.className='ev';
+  li.innerHTML='<span class="t">'+e.t+'</span><span class="n">'+e.n+'</span><button type="button" class="val"><span class="vt"></span><span class="dots" aria-hidden="true">'+e.v.map(()=>'<i class="dot"></i>').join('')+'</span></button><button type="button" class="eye" aria-pressed="false">'+EYE+'<span class="el"></span></button>';
+  line.appendChild(li);
+  const c={li,val:li.querySelector('.val'),vt:li.querySelector('.vt'),dots:[...li.querySelectorAll('.dot')],eye:li.querySelector('.eye'),el:li.querySelector('.el')};
+  c.val.addEventListener('click',()=>step(i,1));
+  c.val.addEventListener('keydown',ev=>{
+    if(ev.key==='ArrowRight'||ev.key==='ArrowUp'){ev.preventDefault();step(i,1);}
+    else if(ev.key==='ArrowLeft'||ev.key==='ArrowDown'){ev.preventDefault();step(i,-1);}
+  });
+  c.eye.addEventListener('click',()=>{seen[i]=!seen[i];render();});
+  return c;
+});
+function step(i,d){
+  if(seen[i])return;
+  const n=EV[i].v.length;cur[i]=(cur[i]+d+n)%n;render();
+  const vt=cards[i].vt;vt.classList.remove('bump');void vt.offsetWidth;vt.classList.add('bump');
+}
+const fmt=n=>n.toLocaleString('ru-RU');
+function render(){
+  const possible=H.map(h=>EV.every((_,e)=>!seen[e]||h.a[e].includes(cur[e])));
+  const pCount=possible.filter(Boolean).length;
+  const unseen=EV.map((_,e)=>e).filter(e=>!seen[e]);
+  const asg=cur.slice();let evenings=0;
+  (function rec(k){
+    if(k===unseen.length){
+      if(H.some((h,j)=>possible[j]&&unseen.every(e=>h.a[e].includes(asg[e]))))evenings++;
+      return;
+    }
+    const e=unseen[k];
+    for(let v=0;v<EV[e].v.length;v++){asg[e]=v;rec(k+1);}
+  })(0);
+  const now=H.map(h=>EV.every((_,e)=>h.a[e].includes(cur[e])));
+  numEl.textContent=pCount;
+  num2El.textContent=fmt(evenings);
+  vItems.forEach((li,j)=>{li.classList.toggle('gone',!possible[j]);li.classList.toggle('now',now[j]);});
+  cards.forEach((c,i)=>{
+    const e=EV[i],v=e.v[cur[i]];
+    c.li.classList.toggle('seen',seen[i]);
+    c.vt.textContent=v.l;
+    c.val.setAttribute('aria-disabled',seen[i]?'true':'false');
+    c.val.setAttribute('aria-label',e.n+', '+e.t+': '+v.l+(seen[i]?' — увидено':' — '+(cur[i]+1)+' из '+e.v.length));
+    c.dots.forEach((d,k)=>{
+      d.classList.toggle('on',k===cur[i]);
+      d.classList.toggle('dead',!H.some((h,j)=>possible[j]&&h.a[i].includes(k)));
+    });
+    c.eye.setAttribute('aria-pressed',seen[i]?'true':'false');
+    c.eye.setAttribute('aria-label',e.n+': '+(seen[i]?'видел кто-то':'не видел никто'));
+    c.el.textContent=seen[i]?'видел кто-то':'не видел никто';
+  });
+  const parts=EV.map((e,i)=>{
+    const v=e.v[cur[i]];
+    const verb=seen[i]?'<span class="s">'+v.s+'</span>':'<span class="u">'+v.u+'</span>';
+    return e.w+' '+v.p+verb+v.q;
+  });
+  let tale=parts.join('; ');
+  tale=tale.charAt(0).toUpperCase()+tale.slice(1)+'. К утру Эфраима в доме не было. ';
+  const match=H.filter((_,j)=>now[j]);
+  let verdict;
+  if(pCount===0)verdict='Увиденное не сходится ни с одной версией: такого вечера быть не могло.';
+  else if(match.length===0)verdict='С таким пересказом не сходится ни одна версия — но неувиденное ещё можно рассказать иначе.';
+  else verdict=(unseen.length===0?'Теперь это окаменело: ':'Выходит, что ')+match.map(h=>h.c).join(' — или ')+'.';
+  taleEl.innerHTML=tale+'<span class="vd">'+verdict+'</span>';
+}
+render();
+})();</script>
+  </article>
+
+  <!-- III -->
+  <article class="chapter" id="ch3">
+    <p class="numeral" aria-hidden="true">III</p>
+    <p class="novel">Нотариус отлива</p>
+    <h2>В одном приморском городке прошлое приходит и уходит с приливом</h2>
+    <p class="lede">Дважды в сутки по городку Солтхейвен проходит линия прибоя между двумя эпохами. В отлив обнажаются улицы 1912 года, с керосиновыми фонарями и деревянной пристанью. В прилив их накрывает настоящее. Между ними — приливная полоса, где дома полдня стоят в одном веке, полдня в другом.</p>
+    <p>Люди привыкли. В литорали живут, торгуют, женятся через век. Нотариус Грегори Осборн регистрирует сделки с участками, которые принадлежат то одному, то другому времени, и разбирает споры: чей сарай, если в 1912 году его строил один хозяин, а сейчас в нём держит лодку другой?</p>
+    <p>Однажды утром на самой линии прибоя находят мёртвого. Свидетели из 1912 года могут дать показания только в отлив, свидетели из настоящего — только в прилив. Ни одно время не признаёт дело своим.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Время как море: граница эпох движется по расписанию приливов, и её высоту можно рассчитать.</dd></div>
+      <div><dt>Парадокс</dt><dd>Преступление, совершённое на границе, подсудно обоим векам — и ни одному. Законы 1912 года и нынешние дают противоположные приговоры.</dd></div>
+      <div><dt>Загадка</dt><dd>Амплитуда прилива растёт. С каждым годом прошлое заходит всё дальше в новые кварталы.</dd></div>
+      <div><dt>Поворот</dt><dd>В 1912 году горожане строят дамбу — против «прилива будущего», который уносит их дома в чужой век. Каждый новый ряд камней толкает время на нашу половину города. Убитый был инженером этой дамбы, и убили его из нашего времени.</dd></div>
+    </dl>
+    <div class="instrument" data-instrument="tide">
+  <div class="td-board">
+    <div class="td-cell"><span class="td-k">Час</span><span class="td-v" data-o="clock">04:12</span><span class="td-s">цикл 12 ч 25 мин</span></div>
+    <div class="td-cell"><span class="td-k">Вода</span><span class="td-v" data-o="state">малая вода</span><span class="td-s" data-o="next">полная в 10:24</span></div>
+    <div class="td-cell"><span class="td-k">Граница эпох</span><span class="td-v" data-o="reach">322 м</span><span class="td-s" data-o="amp">размах 292 м</span></div>
+    <div class="td-cell td-damcell"><span class="td-k">Дамба 1912</span><span class="td-v" data-o="dam">2,0 м</span><span class="td-s" data-o="rows">4 ряда камня</span></div>
+  </div>
+  <svg class="td-plan" viewBox="0 0 640 400" role="img" aria-label="План Солтхейвена: кварталы 1912 года и нынешние, граница эпох и дамба">
+    <defs>
+      <clipPath id="tide-town"><rect x="38" y="26" width="566" height="316"/></clipPath>
+      <clipPath id="tide-past"><path data-o="clipPast" d="M0,180 L640,180 L640,342 L0,342 Z"/></clipPath>
+      <clipPath id="tide-now"><path data-o="clipNow" d="M0,0 L640,0 L640,180 L0,180 Z"/></clipPath>
+      <pattern id="tide-dots" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-20)">
+        <circle class="td-dot" cx="2.5" cy="2.5" r="1.1"/>
+      </pattern>
+    </defs>
+    <rect class="td-paper" x="0" y="0" width="640" height="400"/>
+    <g clip-path="url(#tide-town)">
+      <g class="td-ghost"><g data-o="ghostOld" transform="rotate(-7 320 190)"></g><g data-o="ghostNew"></g></g>
+      <g clip-path="url(#tide-past)">
+        <rect class="td-tint" x="0" y="0" width="640" height="400"/>
+        <g data-o="liveOld" transform="rotate(-7 320 190)"></g>
+      </g>
+      <g clip-path="url(#tide-now)"><g data-o="liveNew"></g></g>
+    </g>
+    <g data-o="ticks"></g>
+    <line class="td-mk-high" x1="40" x2="602" data-o="hwLine"/>
+    <text class="td-txt td-halo" x="600" text-anchor="end" data-o="hwTxt">полная вода · 30 м</text>
+    <line class="td-mk-low" x1="40" x2="602" data-o="lwLine"/>
+    <text class="td-txt td-halo td-txt-red" x="600" text-anchor="end" data-o="lwTxt">малая вода · 322 м</text>
+    <path class="td-line2" data-o="line2" transform="translate(1.6 1.8)"/>
+    <path class="td-line" data-o="line"/>
+    <rect class="td-sea" x="0" y="384" width="640" height="16"/>
+    <path class="td-swell" d="M0,392 q10,-3 20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0"/>
+    <text class="td-txt td-seatxt" x="34" y="396">причал 1912 · 0 м</text>
+    <line class="td-foot" x1="56" x2="584" y1="384.5" y2="384.5"/>
+    <g data-o="dam"></g>
+    <g data-o="marks"></g>
+    <rect class="td-hit" data-o="hit" x="56" y="340" width="528" height="56"/>
+    <g class="td-handle" data-o="handle" tabindex="0" role="slider" aria-label="Высота дамбы 1912 года" aria-valuemin="0" aria-valuemax="5" aria-valuenow="2" aria-valuetext="2,0 м">
+      <rect class="td-hrect" x="-28" y="-8" width="56" height="16" rx="2"/>
+      <line class="td-grip" x1="-10" x2="10" y1="-3" y2="-3"/>
+      <line class="td-grip" x1="-10" x2="10" y1="1" y2="1"/>
+      <line class="td-grip" x1="-10" x2="10" y1="5" y2="5"/>
+    </g>
+  </svg>
+  <ol class="td-houses">
+    <li data-h="0"><span class="td-n">1</span><span class="td-name">Контора нотариуса</span><span class="td-y">2025</span><span class="td-hrs">—</span><span class="td-d">250 м от причала</span></li>
+    <li data-h="1"><span class="td-n">2</span><span class="td-name">Лодочный сарай</span><span class="td-y">1912</span><span class="td-hrs">—</span><span class="td-d">110 м от причала</span></li>
+    <li data-h="2"><span class="td-n">3</span><span class="td-name">Место находки тела</span><span class="td-y">2025</span><span class="td-hrs">—</span><span class="td-d">360 м от причала</span></li>
+  </ol>
+</div>
+<style>
+[data-instrument="tide"]{padding:14px;font-family:var(--text);color:var(--ink)}
+[data-instrument="tide"] .td-board{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+[data-instrument="tide"] .td-cell{display:flex;flex-direction:column;justify-content:space-between;height:68px;padding:6px 9px;background:var(--paper);border:1.5px solid var(--ink);overflow:hidden}
+[data-instrument="tide"] .td-damcell{border-color:var(--accent)}
+[data-instrument="tide"] .td-k{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fade);white-space:nowrap}
+[data-instrument="tide"] .td-v{font-family:var(--mono);font-size:1.3rem;line-height:1.1;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="tide"] .td-damcell .td-v{color:var(--accent)}
+[data-instrument="tide"] .td-s{font-family:var(--mono);font-size:.7rem;color:var(--fade);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="tide"] .td-plan{display:block;width:100%;height:auto;margin-top:10px;border:1.5px solid var(--ink);background:var(--paper);user-select:none;-webkit-user-select:none}
+[data-instrument="tide"] .td-paper{fill:var(--paper)}
+[data-instrument="tide"] .td-dot{fill:var(--accent);opacity:.32}
+[data-instrument="tide"] .td-tint{fill:url(#tide-dots)}
+[data-instrument="tide"] .td-old{fill:var(--accent)}
+[data-instrument="tide"] .td-new{fill:var(--ink)}
+[data-instrument="tide"] .td-ghost{opacity:.12}
+[data-instrument="tide"] .td-line{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round}
+[data-instrument="tide"] .td-line2{fill:none;stroke:var(--accent);stroke-width:2.6;stroke-linejoin:round;opacity:.85}
+[data-instrument="tide"] .td-mk-low{stroke:var(--accent);stroke-width:1.2;stroke-dasharray:6 4}
+[data-instrument="tide"] .td-mk-high{stroke:var(--ink);stroke-width:1;stroke-dasharray:2 4}
+[data-instrument="tide"] .td-txt{font-family:var(--mono);font-size:10px;fill:var(--fade)}
+[data-instrument="tide"] .td-txt-red{fill:var(--accent)}
+[data-instrument="tide"] .td-halo{paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
+[data-instrument="tide"] .td-tick{stroke:var(--fade);stroke-width:1}
+[data-instrument="tide"] .td-sea{fill:var(--teal)}
+[data-instrument="tide"] .td-swell{fill:none;stroke:var(--paper);stroke-width:1;opacity:.45}
+[data-instrument="tide"] .td-seatxt{fill:var(--paper)}
+[data-instrument="tide"] .td-foot{stroke:var(--ink);stroke-width:1.5}
+[data-instrument="tide"] .td-stone{fill:var(--accent)}
+[data-instrument="tide"] .td-joint{stroke:var(--paper);stroke-width:3.2;stroke-dasharray:1.6 16}
+[data-instrument="tide"] .td-hit{fill:transparent;cursor:ns-resize;touch-action:none}
+[data-instrument="tide"] .td-handle{cursor:ns-resize;touch-action:none;outline:none}
+[data-instrument="tide"] .td-hrect{fill:var(--ink);stroke:var(--paper);stroke-width:1.5}
+[data-instrument="tide"] .td-grip{stroke:var(--paper);stroke-width:1.4}
+[data-instrument="tide"] .td-handle:focus-visible .td-hrect,[data-instrument="tide"] .td-handle.is-drag .td-hrect{stroke:var(--accent);stroke-width:3}
+[data-instrument="tide"] .td-hm{fill:var(--ink);stroke:var(--paper);stroke-width:2}
+[data-instrument="tide"] .is-past .td-hm{fill:var(--accent)}
+[data-instrument="tide"] .td-hn{font-family:var(--mono);font-size:10px;fill:var(--paper);text-anchor:middle;dominant-baseline:central}
+[data-instrument="tide"] .td-houses{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+[data-instrument="tide"] .td-houses li{display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto auto auto auto;column-gap:8px;height:104px;padding:7px 9px;background:var(--paper);border:1.5px solid var(--ink);overflow:hidden}
+[data-instrument="tide"] .td-n{grid-row:1/3;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.75rem;display:flex;align-items:center;justify-content:center;margin-top:2px}
+[data-instrument="tide"] .td-name{font-size:.82rem;line-height:1.2;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="tide"] .td-y{font-family:var(--display);font-size:1.25rem;line-height:1.15;font-variant-numeric:tabular-nums}
+[data-instrument="tide"] .td-hrs,[data-instrument="tide"] .td-d{grid-column:1/-1;font-family:var(--mono);font-size:.68rem;color:var(--fade);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="tide"] .td-houses li.is-past{border-color:var(--accent)}
+[data-instrument="tide"] .td-houses li.is-past .td-n{background:var(--accent)}
+[data-instrument="tide"] .td-houses li.is-past .td-y{color:var(--accent)}
+@media (max-width:560px){
+  [data-instrument="tide"]{padding:10px}
+  [data-instrument="tide"] .td-board{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-instrument="tide"] .td-houses{grid-template-columns:1fr}
+  [data-instrument="tide"] .td-houses li{height:auto;min-height:0;grid-template-columns:auto 1fr auto;grid-template-rows:auto auto}
+  [data-instrument="tide"] .td-n{grid-row:1/3}
+  [data-instrument="tide"] .td-y{grid-row:1/3;grid-column:3;align-self:center}
+  [data-instrument="tide"] .td-hrs{grid-column:2}
+  [data-instrument="tide"] .td-d{display:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="tide"]');if(!root)return;
+const o={};root.querySelectorAll('[data-o]').forEach(e=>{o[e.getAttribute('data-o')]=e;});
+const svg=root.querySelector('.td-plan');
+const PERIOD=745,HW0=624.5,D_HIGH=30,Y0=340,K=.5,ROW_H=3.6,BASE=384,MAXR=10,START=252,SPEED=PERIOD/32;
+const dLowOf=r=>170+38*r, yOf=d=>Y0-K*d;
+let rows=4,tmin=START;
+const houses=[{name:'Контора нотариуса',x:440,d:250},{name:'Лодочный сарай',x:150,d:110},{name:'Место находки тела',x:300,d:360}];
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+let r=rng(1912),old='';
+for(let i=0;i<15;i++)for(let j=0;j<10;j++){if(i===6)continue;
+  const x=44+i*37+(r()-.5)*6,y=40+j*30+(r()-.5)*6;
+  if(r()<.2+.75*((y-40)/300)){const w=14+r()*16,h=10+r()*12;old+='<rect class="td-old" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+h.toFixed(1)+'"/>';}}
+r=rng(2025);let nw='';
+for(let i=0;i<9;i++)for(let j=0;j<7;j++){const x=44+i*62,y=38+j*44;
+  if(i===4&&j===3)continue;
+  if(r()<.92-.45*((y-38)/264)){if(r()<.3){nw+='<rect class="td-new" x="'+x+'" y="'+y+'" width="24" height="32"/><rect class="td-new" x="'+(x+28)+'" y="'+y+'" width="24" height="32"/>';}
+  else nw+='<rect class="td-new" x="'+x+'" y="'+y+'" width="52" height="32"/>';}}
+o.ghostOld.innerHTML=old;o.liveOld.innerHTML=old;o.ghostNew.innerHTML=nw;o.liveNew.innerHTML=nw;
+let tk='';for(let d=0;d<=600;d+=100){const y=yOf(d);tk+='<line class="td-tick" x1="31" x2="37" y1="'+y+'" y2="'+y+'"/><text class="td-txt" x="29" y="'+(y+3.5)+'" text-anchor="end">'+d+'</text>';}
+tk+='<text class="td-txt" x="29" y="20" text-anchor="end">м</text>';o.ticks.innerHTML=tk;
+o.marks.innerHTML=houses.map((h,i)=>'<g data-m="'+i+'" transform="translate('+h.x+' '+yOf(h.d)+')"><circle class="td-hm" r="9"/><text class="td-hn">'+(i+1)+'</text></g>').join('');
+const markEls=[...o.marks.querySelectorAll('[data-m]')],cards=[...root.querySelectorAll('.td-houses li')];
+o.hwLine.setAttribute('y1',yOf(D_HIGH));o.hwLine.setAttribute('y2',yOf(D_HIGH));o.hwTxt.setAttribute('y',yOf(D_HIGH)-4);
+function set(el,t){if(el.textContent!==t)el.textContent=t;}
+function hm(m){m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+function dur(min){const m=Math.round(min);return Math.floor(m/60)+' ч '+String(m%60).padStart(2,'0')+' мин';}
+function fmtM(v){return v.toFixed(1).replace('.',',')+' м';}
+function plural(n){const a=n%10,b=n%100;if(a===1&&b!==11)return'ряд';if(a>=2&&a<=4&&(b<10||b>=20))return'ряда';return'рядов';}
+function drawDam(){let s='';for(let i=0;i<rows;i++){const y=BASE-(i+1)*ROW_H;s+='<rect class="td-stone" x="60" y="'+y.toFixed(1)+'" width="520" height="'+(ROW_H-.4)+'"/><line class="td-joint" x1="60" x2="580" y1="'+(y+ROW_H/2-.2).toFixed(1)+'" y2="'+(y+ROW_H/2-.2).toFixed(1)+'" stroke-dashoffset="'+(i%2?8:0)+'"/>';}
+  o.dam.innerHTML=s;const cy=BASE-rows*ROW_H;o.handle.setAttribute('transform','translate(320 '+cy.toFixed(1)+')');
+  const lw=dLowOf(rows),yl=yOf(lw);o.lwLine.setAttribute('y1',yl);o.lwLine.setAttribute('y2',yl);o.lwTxt.setAttribute('y',yl-4);set(o.lwTxt,'малая вода · '+lw+' м');
+  set(o.dam,fmtM(rows*.5));set(o.rows,rows+' '+plural(rows)+' камня');set(o.amp,'размах '+(lw-D_HIGH)+' м');
+  o.handle.setAttribute('aria-valuenow',(rows*.5).toFixed(1));o.handle.setAttribute('aria-valuetext',fmtM(rows*.5)+', '+rows+' '+plural(rows));
+  cards.forEach((c,i)=>{const h=houses[i],u=(h.d-D_HIGH)/(lw-D_HIGH);let f;if(u<=0)f=1;else if(u>=1)f=0;else f=1-Math.acos(1-2*u)/Math.PI;
+    set(c.querySelector('.td-hrs'),f<=0?'в 1912-м не бывает':f>=1?'в 1912-м весь цикл':'в 1912-м '+dur(f*PERIOD)+' за цикл');});}
+function render(){const TAU=Math.PI*2,phi=TAU*(tmin-HW0)/PERIOD,p=((phi%TAU)+TAU)%TAU;
+  const f=(1-Math.cos(phi))/2,lw=dLowOf(rows),dl=D_HIGH+(lw-D_HIGH)*f,yl=yOf(dl),w=tmin*.35;
+  const pts=[];for(let x=0;x<=640;x+=10)pts.push([x,yl+2.5*Math.sin(x/31+w)+1.5*Math.sin(x/11-w*1.7)]);
+  const line='M'+pts.map(q=>q[0]+','+q[1].toFixed(1)).join(' L');
+  o.line.setAttribute('d',line);o.line2.setAttribute('d',line);
+  o.clipPast.setAttribute('d',line+' L640,342 L0,342 Z');
+  o.clipNow.setAttribute('d','M0,0 L640,0 L'+pts.slice().reverse().map(q=>q[0]+','+q[1].toFixed(1)).join(' L')+' Z');
+  set(o.clock,hm(tmin));set(o.reach,Math.round(dl)+' м');
+  const dlt=TAU*12/PERIOD,nextH=tmin+((TAU-p)%TAU)/TAU*PERIOD,nextL=tmin+((Math.PI-p+TAU)%TAU)/TAU*PERIOD;
+  let st,nx;if(Math.abs(p-Math.PI)<dlt){st='малая вода';nx='полная в '+hm(nextH);}
+  else if(p<dlt||p>TAU-dlt){st='полная вода';nx='малая в '+hm(nextL);}
+  else if(p<Math.PI){st='убывает';nx='малая в '+hm(nextL);}else{st='прибывает';nx='полная в '+hm(nextH);}
+  set(o.state,st);set(o.next,nx);
+  houses.forEach((h,i)=>{const past=dl>h.d;markEls[i].classList.toggle('is-past',past);cards[i].classList.toggle('is-past',past);set(cards[i].querySelector('.td-y'),past?'1912':'2025');});}
+function setRows(n){n=Math.max(0,Math.min(MAXR,n));if(n===rows)return;rows=n;drawDam();render();}
+let drag=null;
+function yEv(e){const b=svg.getBoundingClientRect();return(e.clientY-b.top)*400/b.height;}
+function down(e){drag=e.pointerId;try{e.currentTarget.setPointerCapture(e.pointerId);}catch(_){}o.handle.classList.add('is-drag');o.handle.focus({preventScroll:true});move(e);e.preventDefault();}
+function move(e){if(drag!==e.pointerId)return;setRows(Math.round((BASE-yEv(e))/ROW_H));}
+function up(e){if(drag!==e.pointerId)return;drag=null;o.handle.classList.remove('is-drag');}
+[o.hit,o.handle].forEach(el=>{el.addEventListener('pointerdown',down);el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);});
+o.handle.addEventListener('keydown',e=>{let n=rows;
+  if(e.key==='ArrowUp'||e.key==='ArrowRight')n++;else if(e.key==='ArrowDown'||e.key==='ArrowLeft')n--;
+  else if(e.key==='PageUp')n+=3;else if(e.key==='PageDown')n-=3;else if(e.key==='Home')n=0;else if(e.key==='End')n=MAXR;else return;
+  e.preventDefault();setRows(n);});
+const mq=window.matchMedia('(prefers-reduced-motion: reduce)');
+let running=false,last=null,visible=true;
+function frame(ts){if(!running)return;if(last!==null)tmin+=Math.min(100,ts-last)/1000*SPEED;last=ts;render();requestAnimationFrame(frame);}
+function update(){const go=!mq.matches&&visible;if(go&&!running){running=true;last=null;requestAnimationFrame(frame);}
+  else if(!go){running=false;if(mq.matches)tmin=START;render();}}
+if(mq.addEventListener)mq.addEventListener('change',update);else if(mq.addListener)mq.addListener(update);
+if('IntersectionObserver'in window){new IntersectionObserver(es=>{visible=es[0].isIntersecting;update();}).observe(root);}
+drawDam();render();update();
+})();</script>
+  </article>
+
+  <!-- IV -->
+  <article class="chapter" id="ch4">
+    <p class="numeral" aria-hidden="true">IV</p>
+    <p class="novel">Раскоп</p>
+    <h2>Нас уже раскапывают, и каждая снятая лопата стирает вещи из нашей жизни</h2>
+    <p class="lede">Через несколько тысяч лет на месте нашего города работает археологическая экспедиция. Время слоисто, как земля, и раскоп проходит не только сквозь грунт, но и сквозь годы. Когда археологи снимают слой в квадрате два на два метра, всё, что в нём было, исчезает и у нас.</p>
+    <p>Учительница Хильда Беннет замечает, что пропажи в её квартале складываются в сетку: чашка, полка, половина ковра — ровно по невидимым линиям. Она начинает оставлять записки будущему. Археологи их находят и аккуратно описывают в отчёте как «ритуальные таблички с повторяющимися формулами».</p>
+    <p>Обрывки этих отчётов иногда проваливаются к нам вместе с нивелирными штырями и бирками. По ним Хильда узнаёт, какой квадрат следующий. Детская её сына.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Археология как путешествие во времени без путешественников: будущее изучает нас и тем самым разбирает.</dd></div>
+      <div><dt>Парадокс</dt><dd>Как археологи опишут находку, так и было. Их ошибочное толкование задним числом становится нашей историей.</dd></div>
+      <div><dt>Загадка</dt><dd>Почему раскоп идёт к квартире Хильды кратчайшим путём, будто по карте?</dd></div>
+      <div><dt>Поворот</dt><dd>Остановить экспедицию нельзя, но можно испортить ей стратиграфию: перемешать слои так, чтобы детскую датировали другим веком и обошли. А карту, по которой идут археологи, нарисовала сама Хильда — её записки и привели раскоп к дому.</dd></div>
+    </dl>
+    <div class="instrument" data-instrument="excavation">
+  <div class="ex">
+    <div class="ex-head"><span>Раскоп · кв. 41 · сетка <b>2 × 2 м</b></span><span>10 × 8 м · 20 кв.</span></div>
+    <div class="ex-body">
+      <div class="ex-left">
+        <div class="ex-plan">
+          <svg viewBox="0 0 330 270" tabindex="0" aria-label="План квартиры, расчерченный сеткой раскопа"></svg>
+          <div class="ex-tags"></div>
+        </div>
+        <div class="ex-read">
+          <div><span>снято</span><output data-r="dug">0</output> <small>из 39</small></div>
+          <div><span>в плане</span><output data-r="plan">0</output> <small>кв.</small></div>
+          <div><span>уцелеет</span><output data-r="saved">0</output> <small>из 39</small></div>
+          <div class="kid"><span>детская</span><output data-r="kid">0</output> <small>из 9</small></div>
+        </div>
+        <p class="ex-status" aria-live="polite"></p>
+      </div>
+      <div class="ex-diary">
+        <h3>Полевой дневник · сезон 4127</h3>
+        <ol></ol>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="excavation"]{padding:14px 14px 12px;font-family:var(--text);color:var(--ink)}
+[data-instrument="excavation"] .ex{container-type:inline-size}
+[data-instrument="excavation"] .ex-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 10px;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--ink);padding-bottom:5px;margin-bottom:10px}
+[data-instrument="excavation"] .ex-head b{color:var(--accent);font-weight:400}
+[data-instrument="excavation"] .ex-body{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+[data-instrument="excavation"] .ex-plan{position:relative;background:var(--paper);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+[data-instrument="excavation"] .ex-plan svg{display:block;width:100%;height:auto;touch-action:pan-y;cursor:crosshair;user-select:none;-webkit-user-select:none}
+[data-instrument="excavation"] .ex-plan svg:focus{outline:none}
+[data-instrument="excavation"] .ex-plan svg:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[data-instrument="excavation"] .ex-tags{position:absolute;inset:0;pointer-events:none}
+[data-instrument="excavation"] .ex-tag{position:absolute;pointer-events:auto;margin:0;padding:1px 4px;font:10px/1.25 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap;background:#f4ead0;color:var(--ink);border:1px solid var(--ink);border-radius:0;box-shadow:1px 1px 0 var(--ink);transform:rotate(-3deg);touch-action:none;cursor:grab;transition:left .25s ease,top .25s ease;z-index:1;-webkit-appearance:none;appearance:none}
+[data-instrument="excavation"] .ex-tag.f{background:var(--teal);color:var(--paper)}
+[data-instrument="excavation"] .ex-tag.lift{z-index:3;cursor:grabbing;transition:none;box-shadow:3px 4px 0 var(--ink)}
+[data-instrument="excavation"] .ex-tag:focus-visible{outline:2px solid var(--accent);outline-offset:2px;z-index:2}
+[data-instrument="excavation"] .ex-read{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+[data-instrument="excavation"] .ex-read > div{background:var(--paper);border:1px solid var(--ink);padding:4px 6px 3px;min-width:0;white-space:nowrap;overflow:hidden}
+[data-instrument="excavation"] .ex-read span{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fade)}
+[data-instrument="excavation"] .ex-read output{display:inline-block;min-width:2ch;text-align:right;font-family:var(--mono);font-size:1.2rem;line-height:1.2;font-variant-numeric:tabular-nums}
+[data-instrument="excavation"] .ex-read small{font-family:var(--mono);font-size:.62rem;color:var(--fade)}
+[data-instrument="excavation"] .ex-read .kid{background:var(--accent);border-color:var(--accent)}
+[data-instrument="excavation"] .ex-read .kid span,[data-instrument="excavation"] .ex-read .kid small,[data-instrument="excavation"] .ex-read .kid output{color:var(--paper)}
+[data-instrument="excavation"] .ex-status{margin:8px 0 0;min-height:2.9em;font-family:var(--mono);font-size:.74rem;line-height:1.45;font-variant-numeric:tabular-nums}
+[data-instrument="excavation"] .ex-diary{background:#f4ead0;background-image:repeating-linear-gradient(transparent 0 21px,rgba(31,92,96,.16) 21px 22px);border:1.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:8px 10px;transform:rotate(.5deg);min-width:0}
+[data-instrument="excavation"] .ex-diary h3{margin:0 0 6px;font-family:var(--mono);font-weight:400;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);border-bottom:1px solid var(--teal);padding-bottom:4px}
+[data-instrument="excavation"] .ex-diary ol{list-style:none;margin:0;padding:0 4px 0 0;height:210px;overflow-y:auto;overscroll-behavior:contain}
+[data-instrument="excavation"] .ex-diary li{padding:5px 0 6px;border-bottom:1px dashed rgba(35,26,18,.3);font-size:.86rem;line-height:1.38}
+[data-instrument="excavation"] .ex-diary .dx-i{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;color:var(--accent);font-variant-numeric:tabular-nums}
+[data-instrument="excavation"] .ex-diary .dx-t{font-style:italic}
+[data-instrument="excavation"] .ex-diary small{display:block;font-family:var(--mono);font-size:.62rem;color:var(--fade);text-decoration:line-through;text-decoration-color:var(--accent)}
+[data-instrument="excavation"] .ex-diary li.new{animation:exNew 1.2s ease-out}
+[data-instrument="excavation"] .ex-trail{transition:opacity .6s ease}
+@keyframes exNew{from{background:rgba(226,165,30,.55)}to{background:transparent}}
+@container (min-width:560px){
+  [data-instrument="excavation"] .ex-body{grid-template-columns:minmax(0,1.45fr) minmax(0,1fr)}
+  [data-instrument="excavation"] .ex-diary ol{height:372px}
+}
+@media (max-width:520px){
+  [data-instrument="excavation"] .ex-tag{font-size:9px;padding:0 3px}
+  [data-instrument="excavation"] .ex-read output{font-size:1rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="excavation"] .ex-tag,[data-instrument="excavation"] .ex-trail{transition:none}
+  [data-instrument="excavation"] .ex-diary li.new{animation:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="excavation"]');
+if(!root)return;
+const svg=root.querySelector('.ex-plan svg'),tagLayer=root.querySelector('.ex-tags'),diary=root.querySelector('.ex-diary ol'),statusEl=root.querySelector('.ex-status');
+const out={};root.querySelectorAll('output[data-r]').forEach(o=>{out[o.dataset.r]=o;});
+const W=330,H=270,X0=18,Y0=14,C=60,NC=5,NR=4,N=NC*NR,TH=150;
+const COLS=['А','Б','В','Г','Д'];
+const ROOMS=['KKLDD','KKLDD','HHLLL','WHSSS'];
+const RN={K:'кухня',L:'гостиная',D:'детская',H:'прихожая',W:'ванная',S:'спальня'};
+const RL={K:[0,0],L:[3,2],D:[4,0],H:[0,2],W:[0,3],S:[4,3]};
+const FLOOR={K:'#ecd08a',L:'#e6d6ab',D:'#efcdb9',H:'#d8cfb4',W:'#c9dad6',S:'#eadcbf'};
+const DEPTH=['','#d6bb85','#b8935a','#9c7444'];
+const ROMAN=['I','II','III'];
+const START=3*NC+1;
+const reduce=window.matchMedia?window.matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+const nm=i=>COLS[i%NC]+(Math.floor(i/NC)+1);
+const room=i=>ROOMS[Math.floor(i/NC)][i%NC];
+const ci=s=>COLS.indexOf(s[0])+(parseInt(s.slice(1),10)-1)*NC;
+const gx=i=>X0+(i%NC)*C,gy=i=>Y0+Math.floor(i/NC)*C;
+const INK='#231a12',RED='#c8261c',MUS='#e2a51e',TEAL='#1f5c60',P='#f4ead0',PB='#efe3c2';
+const R=(x,y,w,h,f,a)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${f}" stroke="${INK}" stroke-width="1"${a?' '+a:''}/>`;
+const O=(x,y,r,f)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${f}" stroke="${INK}" stroke-width="1"/>`;
+const Pa=(d,f)=>`<path d="${d}" fill="${f}" stroke="${INK}" stroke-width="1"/>`;
+const Ln=(d,c,w)=>`<path d="${d}" fill="none" stroke="${c||INK}" stroke-width="${w||1}"/>`;
+const KIDS=[3,4,8,9];
+const IT=[
+['А1',2,'плита','Домашний алтарь с четырьмя кругами огня; по-видимому, календарь четырёх сезонов.',R(30,6,26,26,PB)+O(37,13,4,'none')+O(49,13,4,'none')+O(37,25,4,'none')+O(49,25,4,'none')],
+['А1',1,'чашка «Лучший папа»','Сосуд для возлияний. Надпись «ЛУЧШИЙ ПАПА» — титул верховного жреца квартала.',Ln('M21 25q6 0 6 5q0 5-6 5')+R(9,22,12,14,RED)],
+['Б1',2,'холодильник','Холодный ковчег — хранилище жертвенной пищи, которую запрещалось есть сразу.',R(8,4,30,42,P)+Ln('M8 18h30')],
+['Б1',1,'магнит «Брайтон»','Вотивная табличка паломника, вернувшегося из святилища Брайтон.',R(24,24,10,7,MUS,'transform="rotate(-12 29 27)"')],
+['А2',2,'обеденный стол','Жертвенник на четыре рода; царапины — счёт принесённых даров.',R(8,8,40,28,TEAL)],
+['А2',1,'тарелка с отбитым краем','Солярный диск. Скол — след обряда ритуального разбивания посуды.',O(28,22,8,P)+O(28,22,4,'none')],
+['Б2',3,'линолеум в ромбик','Ковёр-карта: ромбы обозначают наделы общины, линии — межи.','<rect x="1" y="1" width="58" height="58" fill="url(#exDia)" opacity=".8"/>'],
+['Б2',2,'табурет','Трон младшего вождя. Три ножки — три сословия.',O(32,28,9,RED)+O(32,28,3,INK)],
+['В1',2,'книжная полка','Архив прямоугольных табличек. Тексты не читались: таблички хранили ради их веса.',R(36,4,20,44,MUS)+Ln('M36 15h20M36 26h20M36 37h20')],
+['В1',1,'кактус','Священное растение, которое запрещалось поливать: колючки — знак табу.',O(18,32,6,TEAL)+O(18,25,2.5,RED)],
+['В2',2,'телевизор','Чёрное зеркало для прорицаний, обращённое к ложу старейшины.',R(6,14,7,32,INK)],
+['В2',1,'пульт','Жезл власти; кнопки — личные печати владельца.',R(30,24,6,16,'#6b5a43')+O(33,28,1.5,RED)],
+['В3',3,'половина ковра','Погребальное покрывало. Вторая половина отсутствует — вероятно, вторичное захоронение.',Pa('M12 6H50L46 14 52 22 45 30 51 42H12Z',RED)+'<path d="M12 6H50L46 14 52 22 45 30 51 42H12Z" fill="url(#exDots)" opacity=".45"/>'],
+['В3',2,'диван','Ложе для лежачих советов; подушки — места младших советников.',R(4,8,14,44,TEAL)+R(6,12,10,14,'#2b7377')+R(6,30,10,14,'#2b7377')],
+['Г3',2,'торшер','Шест для подвешивания головы врага; абажур — ритуальная маска.',O(48,12,9,MUS)+O(48,12,2,INK)],
+['Г3',1,'записка «Не копайте здесь»','Ритуальная табличка с повторяющейся формулой. Подобные найдены в каждом квадрате квартала.',`<g transform="rotate(-8 27 26)">${R(14,18,26,16,P)}${Ln('M18 24h18M18 29h14',RED)}</g>`],
+['Д3',2,'пианино','Механический календарь: 52 белых дня и 36 чёрных — год обрядов и постов.',R(8,6,46,12,INK)+R(8,18,46,5,P)],
+['Д3',1,'метроном','Маятник, отмерявший время наказания у чёрного календаря.',Pa('M38 40h12l-4-16h-4z',MUS)],
+['Г1',3,'коврик с дорогами','Карта дорог древней столицы; по ней гадали о путях войск.',R(4,14,52,34,'#b9cdb4')+Ln('M4 30h52M30 14v34',P,3)],
+['Г1',2,'детская кровать с бортиками','Клетка для содержания малого божества: бортики не позволяли ему уйти.',R(6,8,22,40,P)+Ln('M6 8v40M28 8v40',INK,3)],
+['Г1',1,'машинка','Колесничная модель — погребальный инвентарь знатного младенца.',R(36,30,14,7,RED)+O(39,38,2.5,INK)+O(47,38,2.5,INK)],
+['Д1',2,'письменный стол','Стол писца; детские каракули на крышке — счётная запись урожая.',R(30,12,26,14,MUS)],
+['Д1',1,'пластмассовый динозавр','Изображение божества-покровителя. Вид животного, разумеется, вымышлен.',Pa('M8 40q4-10 12-8q4-6 8-2q-3 3-6 3q0 6-4 7v4h-3v-3h-4v3h-3z',TEAL)],
+['Г2',1,'кубики с буквами','Модели храмового комплекса. Буквы на гранях расставлены без порядка — тайнопись жрецов.',R(10,22,9,9,MUS)+R(20,24,9,9,RED)+R(15,13,9,9,TEAL)],
+['Г2',2,'ночник-луна','Лунный идол, охранявший вход в подземный мир.',Pa('M44 20a10 10 0 1 0 8 16a8 8 0 1 1-8-16z',MUS)],
+['Д2',1,'мяч','Модель мира. Полосы — меридианы, нанесённые с грубыми ошибками.',O(20,30,7,RED)+Ln('M13 30h14',P,2)],
+['Д2',2,'шкаф с наклейками','Саркофаг для одежды. Наклейки на дверцах — охранные заклинания.',R(40,4,16,44,'#c9a46a')+O(45,14,2,RED)+O(50,24,2,TEAL)+O(45,34,2,MUS)],
+['А3',2,'вешалка с пальто','Стойка для трофеев: пальто — шкуры поверженных соседей.',R(4,12,4,34,INK)+Pa('M8 16l10 4-2 18H8z',RED)],
+['А3',1,'связка ключей','Связка амулетов, отпиравших несуществующие двери.',O(34,28,4,'none')+R(37,30,8,3,MUS)],
+['Б3',2,'зеркало','Портал у входа: входящий встречал своего двойника и мог пройти, только отразившись.',R(44,8,10,34,'#c9dad6')],
+['Б3',1,'тапки','Парная обувь для мёртвых: в ней ни разу не выходили на улицу.',`<ellipse cx="16" cy="32" rx="4" ry="7" fill="${RED}" stroke="${INK}"/><ellipse cx="26" cy="32" rx="4" ry="7" fill="${RED}" stroke="${INK}"/>`],
+['Б4',3,'коврик «Добро пожаловать»','Порог с надписью на мёртвом языке — вероятно, проклятие входящему.',R(12,38,38,14,MUS)+`<path d="M16 45h30" stroke="${INK}" stroke-dasharray="3 2"/>`],
+['Б4',1,'зонт','Переносной шатёр для одного человека; складывался при опасности.',Pa('M28 22a12 12 0 0 1 24 0z',INK)+Ln('M40 22v14q0 3-3 3',INK,1.5)],
+['А4',2,'ванна','Саркофаг без крышки: погребение, по-видимому, так и не состоялось.',R(26,6,28,48,P,'rx="9"')+R(30,10,20,40,'#c9dad6','rx="7"')],
+['А4',1,'резиновая утка','Тотем рода Утки, покровителя вод.',O(40,30,4,MUS)+Pa('M44 29l4 1-4 2z',RED)],
+['В4',2,'двуспальная кровать','Ложе на двоих — свидетельство парного правления.',R(8,6,46,42,P)+R(11,9,19,8,PB)+R(32,9,19,8,PB)],
+['Г4',1,'будильник','Устройство для изгнания сна; найден с разбитым стеклом — сон победил.',O(24,20,3,RED)+O(36,20,3,RED)+O(30,27,7,P)+Ln('M30 27v-5M30 27h4')],
+['Д4',2,'комод с носками','Реликварий. Носки хранились по одному: второй, очевидно, приносили в жертву.',R(24,20,32,24,MUS)+Ln('M24 28h32M24 36h32')],
+['Д4',1,'фотография в рамке','Портрет правительницы. Повёрнут лицом к стене — знак опалы.',R(34,10,12,14,P)+R(37,13,6,8,INK)]
+];
+const items=IT.map((t,k)=>({k,cell:ci(t[0]),layer:t[1],name:t[2],txt:t[3],shape:t[4],gone:false}));
+const d=new Array(N).fill(0),prog=new Array(N).fill(0),tagAt=new Array(N).fill(null);
+let booting=true,fieldNo=0,cur=8;
+
+let s=`<defs><filter id="exLift" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="1.4" dy="1.8" stdDeviation=".6" flood-color="${INK}" flood-opacity=".38"/></filter>
+<pattern id="exDia" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v8M0 0h8" stroke="${TEAL}" stroke-width="1.2" opacity=".55"/></pattern>
+<pattern id="exDots" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(20)"><circle cx="2" cy="2" r=".9" fill="${INK}"/></pattern>
+<pattern id="exHatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-40)"><line x1="0" y1="0" x2="0" y2="5" stroke="${TEAL}" stroke-width="1.6"/></pattern></defs>`;
+for(let i=0;i<N;i++)s+=`<rect x="${gx(i)}" y="${gy(i)}" width="${C}" height="${C}" fill="${FLOOR[room(i)]}"/>`;
+s+=`<rect x="${X0}" y="${Y0}" width="${NC*C}" height="${NR*C}" fill="url(#exDots)" opacity=".07"/>`;
+for(let i=0;i<N;i++)s+=`<rect data-dig="${i}" x="${gx(i)+1}" y="${gy(i)+1}" width="${C-2}" height="${C-2}" fill="none" stroke="${INK}" stroke-width=".8" stroke-dasharray="2 2" stroke-opacity="0"/>`;
+for(let i=0;i<N;i++)s+=`<rect data-dust="${i}" x="${gx(i)}" y="${gy(i)}" width="${C}" height="${C}" fill="${DEPTH[1]}" opacity="0"/>`;
+items.slice().sort((a,b)=>b.layer-a.layer).forEach(it=>{s+=`<g data-k="${it.k}" filter="url(#exLift)" transform="translate(${gx(it.cell)} ${gy(it.cell)})">${it.shape}</g>`;});
+let w='';
+for(let r=0;r<NR;r++)for(let c=0;c<NC;c++){const i=r*NC+c;
+ if(c<NC-1&&room(i)!==room(i+1))w+=`M${X0+(c+1)*C} ${Y0+r*C}v${C}`;
+ if(r<NR-1&&room(i)!==room(i+NC))w+=`M${X0+c*C} ${Y0+(r+1)*C}h${C}`;}
+s+=`<path d="${w}" fill="none" stroke="${INK}" stroke-width="4" stroke-linecap="square"/>`;
+s+=`<rect x="${X0}" y="${Y0}" width="${NC*C}" height="${NR*C}" fill="none" stroke="${INK}" stroke-width="5"/>`;
+s+=`<rect x="${X0+C+18}" y="${Y0+NR*C-4}" width="24" height="8" fill="${PB}"/><path d="M${X0+C+30} ${Y0+NR*C+12}v-9m-4 4l4-5 4 5" fill="none" stroke="${RED}" stroke-width="1.6"/>`;
+let g='';
+for(let c=1;c<NC;c++)g+=`M${X0+c*C} ${Y0}v${NR*C}`;
+for(let r=1;r<NR;r++)g+=`M${X0} ${Y0+r*C}h${NC*C}`;
+s+=`<path d="${g}" fill="none" stroke="${RED}" stroke-width=".8" stroke-dasharray="4 3" pointer-events="none"/>`;
+s+=`<g font-family="PT Mono, monospace" fill="${INK}" pointer-events="none">`;
+for(let c=0;c<NC;c++)s+=`<text x="${X0+c*C+C/2}" y="${Y0-4}" font-size="9" text-anchor="middle">${COLS[c]}</text>`;
+for(let r=0;r<NR;r++)s+=`<text x="${X0-6}" y="${Y0+r*C+C/2+3}" font-size="9" text-anchor="middle">${r+1}</text>`;
+for(let i=0;i<N;i++)s+=`<text x="${gx(i)+C-3}" y="${gy(i)+8}" font-size="6.5" text-anchor="end" fill="${RED}" opacity=".75">${nm(i)}</text>`;
+Object.keys(RL).forEach(k=>{const[c,r]=RL[k];s+=`<text x="${X0+c*C+3}" y="${Y0+r*C+C-4}" font-size="6.5" letter-spacing=".8" opacity=".7">${RN[k].toUpperCase()}</text>`;});
+s+=`</g><g data-trail pointer-events="none"></g><rect data-cur x="${gx(cur)}" y="${gy(cur)}" width="${C}" height="${C}" fill="none" stroke="${RED}" stroke-width="2.5" opacity="0" pointer-events="none"/>`;
+svg.innerHTML=s;
+
+const digEls=[],dustEls=[],itemEls={};
+svg.querySelectorAll('[data-dig]').forEach(e=>{digEls[+e.dataset.dig]=e;});
+svg.querySelectorAll('[data-dust]').forEach(e=>{dustEls[+e.dataset.dust]=e;});
+svg.querySelectorAll('[data-k]').forEach(e=>{itemEls[e.dataset.k]=e;});
+const trail=svg.querySelector('[data-trail]'),curEl=svg.querySelector('[data-cur]');
+
+const EMPTY=['Слой I без находок: помещение, по-видимому, содержалось в ритуальной чистоте.','Слой II стерилен. Отсутствие крупных предметов указывает на кочевой быт.','Слой III: перекрытие. Ниже — жилище соседей, отнесённое к другому раскопу.'];
+const TAGS=[{t:'XIV в.',f:1,c:ci('А4')},{t:'VII в.',f:1,c:ci('Д4')},{t:'II в.',f:1,c:ci('Б1')},{t:'XXI в.',f:0,c:ci('Г1')},{t:'XXI в.',f:0,c:ci('Д2')},{t:'XXI в.',f:0,c:ci('В3')}];
+let P=new Array(N).fill(true),note='';
+
+const foreign=i=>tagAt[i]!==null&&TAGS[tagAt[i]].f===1;
+function plan(){
+  const inP=new Array(N).fill(false);
+  if(foreign(START))return inP;
+  const q=[START];inP[START]=true;
+  while(q.length){
+    const i=q.shift(),c=i%NC,r=Math.floor(i/NC);
+    [[c-1,r],[c+1,r],[c,r-1],[c,r+1]].forEach(([a,b])=>{
+      if(a<0||b<0||a>=NC||b>=NR)return;
+      const j=b*NC+a;
+      if(!inP[j]&&!foreign(j)){inP[j]=true;q.push(j);}
+    });
+  }
+  return inP;
+}
+function blockedNote(i){
+  return foreign(i)?`${nm(i)}: бирка «${TAGS[tagAt[i]].t}» — квадрат вне сезона.`:`${nm(i)}: прохода от Б4 нет — квадрат обходят.`;
+}
+function renderDust(i){
+  const e=dustEls[i];
+  if(d[i]>0){e.setAttribute('fill',DEPTH[d[i]]);e.setAttribute('opacity',(0.55+0.13*d[i]).toFixed(2));}
+  else{e.setAttribute('fill',DEPTH[1]);e.setAttribute('opacity',(prog[i]/TH*0.5).toFixed(2));}
+}
+function update(){
+  P=plan();
+  let dug=0,saved=0,kid=0,np=0;
+  items.forEach(it=>{
+    if(it.gone)dug++;
+    else if(!P[it.cell]){saved++;if(KIDS.indexOf(it.cell)>=0)kid++;}
+  });
+  const by=[],un=[];
+  for(let i=0;i<N;i++){
+    if(P[i])np++;
+    else if(foreign(i))by.push(nm(i)+' '+TAGS[tagAt[i]].t);
+    else un.push(nm(i));
+    digEls[i].setAttribute('stroke-opacity',P[i]?'.75':'0');
+    digEls[i].setAttribute('fill',P[i]?'none':'url(#exHatch)');
+    digEls[i].setAttribute('fill-opacity',P[i]?'1':'.35');
+    renderDust(i);
+  }
+  out.dug.textContent=dug;out.plan.textContent=np;out.saved.textContent=saved;out.kid.textContent=kid;
+  const base=`Маршрут от Б4: ${np} кв. Обход: ${by.join(', ')||'—'}.`+(un.length?` Отрезаны: ${un.join(', ')}.`:'');
+  statusEl.textContent=(note?note+' ':'')+base;
+}
+function log(idx,L,txt,name){
+  fieldNo++;
+  const li=document.createElement('li');
+  li.innerHTML=`<span class="dx-i">№ ${String(fieldNo).padStart(2,'0')} · кв. ${idx} · сл. ${ROMAN[L-1]}</span><span class="dx-t">${txt}</span>`+(name?`<small>${name}</small>`:'');
+  if(!booting&&!reduce.matches)li.className='new';
+  diary.insertBefore(li,diary.firstChild);
+  diary.scrollTop=0;
+}
+function hideItem(it){
+  const el=itemEls[it.k];if(!el)return;
+  if(booting||reduce.matches){el.style.display='none';return;}
+  el.style.transition='opacity .5s ease';
+  el.style.opacity='0';
+  setTimeout(()=>{if(it.gone)el.style.display='none';},520);
+}
+function strip(i){
+  if(!P[i]||d[i]>=3)return false;
+  d[i]++;prog[i]=0;note='';
+  const L=d[i];
+  const found=items.filter(it=>it.cell===i&&it.layer===L&&!it.gone);
+  if(found.length)found.forEach(it=>{it.gone=true;hideItem(it);log(nm(i),L,it.txt,it.name);});
+  else log(nm(i),L,EMPTY[L-1],null);
+  return true;
+}
+
+function pt(e){const r=svg.getBoundingClientRect();return{x:(e.clientX-r.left)/r.width*W,y:(e.clientY-r.top)/r.height*H};}
+function cellAt(p){
+  const c=Math.floor((p.x-X0)/C),r=Math.floor((p.y-Y0)/C);
+  return(c<0||r<0||c>=NC||r>=NR)?-1:r*NC+c;
+}
+function drawCur(){curEl.setAttribute('x',gx(cur));curEl.setAttribute('y',gy(cur));}
+let trailAcc=0;
+function trailDot(p,dist){
+  if(reduce.matches)return;
+  trailAcc+=dist;
+  if(trailAcc<6&&dist>0)return;
+  trailAcc=0;
+  if(trail.childNodes.length>60)trail.removeChild(trail.firstChild);
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',p.x.toFixed(1));c.setAttribute('cy',p.y.toFixed(1));c.setAttribute('r','4');
+  c.setAttribute('fill',PB);c.setAttribute('opacity','.6');c.setAttribute('class','ex-trail');
+  trail.appendChild(c);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>c.setAttribute('opacity','0')));
+  setTimeout(()=>{if(c.parentNode)c.parentNode.removeChild(c);},700);
+}
+function brushAt(p,dist){
+  const i=cellAt(p);if(i<0)return;
+  trailDot(p,dist);
+  if(!P[i]){const n=blockedNote(i);if(note!==n){note=n;update();}return;}
+  if(d[i]>=3)return;
+  prog[i]+=Math.min(dist,40);
+  if(prog[i]>=TH){strip(i);update();}
+  else renderDust(i);
+}
+let br=null;
+svg.addEventListener('pointerdown',e=>{
+  if(e.button>0)return;
+  const p=pt(e);
+  br={x:p.x,y:p.y,id:e.pointerId};
+  try{svg.setPointerCapture(e.pointerId);}catch(_){}
+  const i=cellAt(p);if(i>=0){cur=i;drawCur();}
+  brushAt(p,0);
+});
+svg.addEventListener('pointermove',e=>{
+  if(!br||e.pointerId!==br.id)return;
+  const p=pt(e),dist=Math.hypot(p.x-br.x,p.y-br.y);
+  br.x=p.x;br.y=p.y;
+  brushAt(p,dist);
+});
+const endBrush=e=>{if(br&&e.pointerId===br.id)br=null;};
+svg.addEventListener('pointerup',endBrush);
+svg.addEventListener('pointercancel',endBrush);
+svg.addEventListener('focus',()=>curEl.setAttribute('opacity','1'));
+svg.addEventListener('blur',()=>curEl.setAttribute('opacity','0'));
+function neighbor(i,key){
+  const c=i%NC,r=Math.floor(i/NC);
+  if(key==='ArrowLeft')return c>0?i-1:i;
+  if(key==='ArrowRight')return c<NC-1?i+1:i;
+  if(key==='ArrowUp')return r>0?i-NC:i;
+  if(key==='ArrowDown')return r<NR-1?i+NC:i;
+  return -1;
+}
+svg.addEventListener('keydown',e=>{
+  const n=neighbor(cur,e.key);
+  if(n>=0){e.preventDefault();cur=n;drawCur();return;}
+  if(e.key==='Enter'||e.key===' '){
+    e.preventDefault();
+    if(!P[cur]){note=blockedNote(cur);update();}
+    else if(strip(cur))update();
+  }
+});
+
+function placeTag(t){
+  t.el.style.left=((gx(t.c)+3)/W*100)+'%';
+  t.el.style.top=((gy(t.c)+3)/H*100)+'%';
+  t.el.setAttribute('aria-label',`Бирка «${t.t}», квадрат ${nm(t.c)}`);
+}
+function moveTag(n,target){
+  const t=TAGS[n];
+  if(target<0||target===t.c){placeTag(t);return;}
+  const from=t.c,o=tagAt[target];
+  if(o!==null){TAGS[o].c=from;tagAt[from]=o;placeTag(TAGS[o]);}
+  else tagAt[from]=null;
+  t.c=target;tagAt[target]=n;placeTag(t);
+  note='';update();
+}
+TAGS.forEach((t,n)=>{
+  const b=document.createElement('button');
+  b.type='button';b.className='ex-tag'+(t.f?' f':'');b.textContent=t.t;
+  t.el=b;tagLayer.appendChild(b);tagAt[t.c]=n;placeTag(t);
+  let drag=null;
+  b.addEventListener('pointerdown',e=>{
+    if(e.button>0)return;
+    e.preventDefault();
+    const r=b.getBoundingClientRect();
+    drag={id:e.pointerId,dx:e.clientX-r.left,dy:e.clientY-r.top};
+    try{b.setPointerCapture(e.pointerId);}catch(_){}
+    b.classList.add('lift');
+    b.focus({preventScroll:true});
+  });
+  b.addEventListener('pointermove',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    const lr=tagLayer.getBoundingClientRect();
+    b.style.left=((e.clientX-drag.dx-lr.left)/lr.width*100)+'%';
+    b.style.top=((e.clientY-drag.dy-lr.top)/lr.height*100)+'%';
+  });
+  b.addEventListener('pointerup',e=>{
+    if(!drag||e.pointerId!==drag.id)return;
+    drag=null;b.classList.remove('lift');
+    const lr=tagLayer.getBoundingClientRect();
+    moveTag(n,cellAt({x:(e.clientX-lr.left)/lr.width*W,y:(e.clientY-lr.top)/lr.height*H}));
+  });
+  b.addEventListener('pointercancel',()=>{drag=null;b.classList.remove('lift');placeTag(t);});
+  b.addEventListener('keydown',e=>{
+    const nb=neighbor(t.c,e.key);
+    if(nb<0)return;
+    e.preventDefault();
+    moveTag(n,nb);
+  });
+});
+
+P=plan();
+[['Б4',3],['Б3',2],['А3',1],['Г3',1]].forEach(([c,k])=>{for(let j=0;j<k;j++)strip(ci(c));});
+booting=false;
+drawCur();
+update();
+})();</script>
+  </article>
+
+  <!-- V -->
+  <article class="chapter" id="ch5">
+    <p class="numeral" aria-hidden="true">V</p>
+    <p class="novel">Среднее арифметическое</p>
+    <h2>Когда двое меняют прошлое по-разному, история становится их средним</h2>
+    <p class="lede">Противоречивые вмешательства в прошлое не отменяют друг друга и не плодят параллельных миров. Они усредняются. Если один путешественник спас пароход, а другой его утопил, пароход дошёл до середины маршрута и стоит там. В мире есть полупостроенные соборы, наполовину случившиеся войны и люди, которые живы на шестьдесят процентов.</p>
+    <p>Актуарий Айрин Стерлинг работает в бюро, которое вычисляет взвешенные исходы: кто сколько раз вмешивался, с какой силой, куда сдвинется среднее. Её клиенты — страховщики, наследники, правительства.</p>
+    <p>В данных она находит аномалию: веками кто-то посылает в прошлое тысячи крошечных одинаковых вмешательств в одну точку. Это набивка — способ перевесить среднее числом, а не силой.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>История как сумма голосов. Важно не кто вмешался, а сколько раз и насколько сильно.</dd></div>
+      <div><dt>Парадокс</dt><dd>Победить в споре о прошлом невозможно — можно только сдвинуть среднее, и противник сделает то же самое. Отсюда тихая гонка вооружений из бесчисленных мелких вмешательств.</dd></div>
+      <div><dt>Загадка</dt><dd>Что такого в маленькой станции на йоркширских пустошах, ради которой кто-то веками набивает историю?</dd></div>
+      <div><dt>Поворот</dt><dd>Айрин сама — результат усреднения двух разных женщин. Её воспоминания чуть размыты, потому что они средние. Станция — место, где эти две женщины должны были встретиться. Набивка — попытка одной из них «выиграть» Айрин целиком.</dd></div>
+    </dl>
+    <div class="instrument" data-instrument="mean">
+  <p class="mn-head">Пароход «Ирида» · Оксфорд — Лондон · 180 км</p>
+  <svg class="mn-map" viewBox="0 0 640 230" aria-hidden="true">
+    <path class="mn-river" d="M40 62 C 120 40, 170 74, 232 64 S 330 72, 362 104 S 404 152, 452 150 S 548 166, 600 192"/>
+    <path class="mn-route" d="M40 62 C 120 40, 170 74, 232 64 S 330 72, 362 104 S 404 152, 452 150 S 548 166, 600 192"/>
+    <path class="mn-done"/>
+    <g class="mn-towns"></g>
+    <text class="mn-end" x="40" y="96" text-anchor="start">утопить · 0 %</text>
+    <text class="mn-end mn-end-r" x="600" y="222" text-anchor="end">спасти · 100 %</text>
+    <g class="mn-ship">
+      <path d="M-17 -2 H17 L12 6 H-12 Z" class="mn-hull"/>
+      <rect x="-11" y="-10" width="17" height="8" class="mn-cabin"/>
+      <rect x="-3" y="-21" width="5" height="11" class="mn-funnel"/>
+      <circle cx="10" cy="1" r="5" class="mn-cabin"/>
+    </g>
+  </svg>
+  <svg class="mn-scale" viewBox="0 0 640 140">
+    <g class="mn-ticks"></g>
+    <text class="mn-lane" x="8" y="49">спасти</text>
+    <text class="mn-lane" x="8" y="84">утопить</text>
+    <text class="mn-lane" x="8" y="130">набивка</text>
+    <line class="mn-track" x1="90" y1="45" x2="610" y2="45"/>
+    <line class="mn-track" x1="90" y1="80" x2="610" y2="80"/>
+    <g class="mn-stack"></g>
+    <g class="mn-mk" data-k="r" tabindex="0" role="slider" aria-label="Сила вмешательства «спасти»" aria-valuemin="0.5" aria-valuemax="10">
+      <circle r="20" class="mn-hit"/><circle r="15" class="mn-ring"/>
+      <circle r="10" class="mn-dot mn-dot-r"/><text y="-15" class="mn-mv" text-anchor="middle"></text>
+    </g>
+    <g class="mn-mk" data-k="b" tabindex="0" role="slider" aria-label="Сила вмешательства «утопить»" aria-valuemin="0.5" aria-valuemax="10">
+      <circle r="20" class="mn-hit"/><circle r="15" class="mn-ring"/>
+      <circle r="10" class="mn-dot mn-dot-b"/><text y="27" class="mn-mv" text-anchor="middle"></text>
+    </g>
+  </svg>
+  <div class="mn-board">
+    <div class="mn-cell"><span class="mn-l">вмешательств</span><span class="mn-v" data-o="n">2</span></div>
+    <div class="mn-cell"><span class="mn-l">спасти, сумма</span><span class="mn-v mn-red" data-o="r">5,0</span></div>
+    <div class="mn-cell"><span class="mn-l">утопить, сумма</span><span class="mn-v" data-o="b">5,0</span></div>
+    <div class="mn-cell"><span class="mn-l">позиция</span><span class="mn-v" data-o="p">50,0 %</span></div>
+  </div>
+  <p class="mn-cap" aria-live="polite"></p>
+  <div class="mn-ctrl">
+    <button type="button" class="mn-add">набивка +1 · сила 0,2</button>
+    <button type="button" class="mn-reset">сбросить набивку</button>
+  </div>
+</div>
+<style>
+[data-instrument="mean"]{padding:14px 16px 16px;font-family:var(--text);color:var(--ink)}
+[data-instrument="mean"] .mn-head{margin:0 0 4px;font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fade)}
+[data-instrument="mean"] svg{display:block;width:100%;height:auto;overflow:visible}
+[data-instrument="mean"] .mn-river{fill:none;stroke:var(--teal);stroke-width:9;stroke-linecap:round;opacity:.28}
+[data-instrument="mean"] .mn-route{fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:5 4}
+[data-instrument="mean"] .mn-done{fill:none;stroke:var(--accent);stroke-width:3.5;stroke-linecap:round}
+[data-instrument="mean"] .mn-town{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+[data-instrument="mean"] .mn-port{fill:var(--ink)}
+[data-instrument="mean"] .mn-tl{font-family:var(--text);font-size:12.5px;fill:var(--ink)}
+[data-instrument="mean"] .mn-end{font-family:var(--mono);font-size:10.5px;fill:var(--fade)}
+[data-instrument="mean"] .mn-end-r{fill:var(--accent)}
+[data-instrument="mean"] .mn-hull{fill:var(--ink)}
+[data-instrument="mean"] .mn-cabin{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+[data-instrument="mean"] .mn-funnel{fill:var(--accent);stroke:var(--ink);stroke-width:1.5}
+[data-instrument="mean"] .mn-scale{margin-top:6px;touch-action:pan-y}
+[data-instrument="mean"] .mn-tick{stroke:var(--ink);stroke-width:1;opacity:.18}
+[data-instrument="mean"] .mn-tn{font-family:var(--mono);font-size:10.5px;fill:var(--fade)}
+[data-instrument="mean"] .mn-lane{font-family:var(--mono);font-size:11px;fill:var(--ink);letter-spacing:.04em}
+[data-instrument="mean"] .mn-track{stroke:var(--ink);stroke-width:2}
+[data-instrument="mean"] .mn-slip{fill:var(--accent);stroke:var(--ink);stroke-width:.5}
+[data-instrument="mean"] .mn-mk{cursor:grab;touch-action:none;outline:none}
+[data-instrument="mean"] .mn-mk:active{cursor:grabbing}
+[data-instrument="mean"] .mn-hit{fill:transparent}
+[data-instrument="mean"] .mn-ring{fill:none;stroke:var(--accent);stroke-width:3;opacity:0}
+[data-instrument="mean"] .mn-mk:focus-visible .mn-ring{opacity:1}
+[data-instrument="mean"] .mn-dot{stroke:var(--ink);stroke-width:2}
+[data-instrument="mean"] .mn-dot-r{fill:var(--accent)}
+[data-instrument="mean"] .mn-dot-b{fill:var(--ink)}
+[data-instrument="mean"] .mn-mv{font-family:var(--mono);font-size:11px;fill:var(--ink);font-variant-numeric:tabular-nums}
+[data-instrument="mean"] .mn-board{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+[data-instrument="mean"] .mn-cell{background:var(--paper);border:1.5px solid var(--ink);padding:5px 8px;min-width:0}
+[data-instrument="mean"] .mn-l{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fade);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="mean"] .mn-v{display:block;font-family:var(--mono);font-size:1.15rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="mean"] .mn-red{color:var(--accent)}
+[data-instrument="mean"] .mn-cap{margin:10px 0 0;min-height:3.3em;font-style:italic;font-size:1rem;line-height:1.6}
+[data-instrument="mean"] .mn-ctrl{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+[data-instrument="mean"] button{font-family:var(--mono);font-size:.82rem;color:var(--ink);background:var(--paper);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);padding:6px 12px;cursor:pointer}
+[data-instrument="mean"] button:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+[data-instrument="mean"] button:disabled{opacity:.45;cursor:default}
+[data-instrument="mean"] button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media (max-width:520px){
+  [data-instrument="mean"] .mn-board{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="mean"]');if(!root)return;
+const $=s=>root.querySelector(s),NS='http://www.w3.org/2000/svg';
+const KM=180,PAD=0.2,MAXPAD=200,X0=90,X1=610,SMIN=0.5,SMAX=10;
+const towns=[
+ {n:'Оксфорд',g:'Оксфорда',i:'Оксфордом',km:0},
+ {n:'Абингдон',g:'Абингдона',i:'Абингдоном',km:13},
+ {n:'Уоллингфорд',g:'Уоллингфорда',i:'Уоллингфордом',km:34},
+ {n:'Рединг',g:'Рединга',i:'Редингом',km:60},
+ {n:'Виндзор',g:'Виндзора',i:'Виндзором',km:110},
+ {n:'Лондон',g:'Лондона',i:'Лондоном',km:180}];
+const st={r:5,b:5,n:0};let shown=null,target=0.5,raf=0;
+const mq=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+const route=$('.mn-route'),done=$('.mn-done'),ship=$('.mn-ship'),scale=$('.mn-scale');
+done.setAttribute('d',route.getAttribute('d'));
+const L=route.getTotalLength();
+done.setAttribute('stroke-dasharray',L+' '+L);
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+const tg=$('.mn-towns');
+towns.forEach((t,k)=>{
+  const p=route.getPointAtLength(t.km/KM*L),port=k===0||k===towns.length-1;
+  if(port)el('rect',{x:p.x-5,y:p.y-5,width:10,height:10,class:'mn-port'},tg);
+  else el('circle',{cx:p.x,cy:p.y,r:4,class:'mn-town'},tg);
+  const up=k%2===0,tx=el('text',{x:p.x,y:up?p.y-12:p.y+20,class:'mn-tl','text-anchor':k===0?'start':(port?'end':'middle')},tg);
+  tx.textContent=t.n;
+});
+const tk=$('.mn-ticks');
+for(let i=0;i<=10;i++){const x=X0+(X1-X0)*i/10;
+  el('line',{x1:x,y1:26,x2:x,y2:96,class:'mn-tick'},tk);
+  el('text',{x:x,y:16,class:'mn-tn','text-anchor':'middle'},tk).textContent=i;}
+const sx=v=>X0+(X1-X0)*v/SMAX;
+const clamp=v=>Math.min(SMAX,Math.max(SMIN,Math.round(v*10)/10));
+const fmt=(v,d)=>v.toFixed(d).replace('.',',');
+const kmf=v=>Math.round(v).toLocaleString('ru-RU');
+const pos=()=>{const w=st.r+st.n*PAD;return w/(w+st.b);};
+const mk={r:$('.mn-mk[data-k="r"]'),b:$('.mn-mk[data-k="b"]')},Y={r:45,b:80};
+const stack=$('.mn-stack');
+function caption(p){
+  const km=p*KM,left=KM-km;
+  if(km<1)return 'Пароход «Ирида» навсегда стоит у пристани Оксфорда и так и не отчалил.';
+  if(left<1)return 'Пароход «Ирида» навсегда пришвартован в Лондоне: рейс завершён целиком.';
+  for(const t of towns)if(Math.abs(t.km-km)<=3)
+    return 'Пароход «Ирида» навсегда стоит у '+t.g+', на '+kmf(km)+'-м километре; до Лондона '+kmf(left)+' км.';
+  let a=towns[0],b=towns[1];
+  for(let i=0;i<towns.length-1;i++)if(km>=towns[i].km&&km<towns[i+1].km){a=towns[i];b=towns[i+1];}
+  return 'Пароход «Ирида» навсегда стоит посреди Темзы между '+a.i+' и '+b.i+', на '+kmf(km)+'-м километре; до Лондона '+kmf(left)+' км.';
+}
+function drawShip(p){
+  const pt=route.getPointAtLength(p*L);
+  ship.setAttribute('transform','translate('+pt.x.toFixed(2)+','+(pt.y-4).toFixed(2)+')');
+  done.setAttribute('stroke-dashoffset',(L*(1-p)).toFixed(2));
+}
+function step(){
+  raf=0;
+  if(shown===null||mq.matches){shown=target;drawShip(shown);return;}
+  shown+=(target-shown)*0.2;
+  if(Math.abs(target-shown)<1e-4)shown=target;
+  drawShip(shown);
+  if(shown!==target)raf=requestAnimationFrame(step);
+}
+function syncStack(){
+  while(stack.childNodes.length>st.n)stack.removeChild(stack.lastChild);
+  for(let i=stack.childNodes.length;i<st.n;i++){
+    const c=Math.floor(i/10),r=i%10,j=((i*37)%5-2)*0.5;
+    el('rect',{x:X0+c*9+j,y:129-r*3.6,width:7,height:2.6,class:'mn-slip'},stack);
+  }
+}
+function render(){
+  ['r','b'].forEach(k=>{
+    mk[k].setAttribute('transform','translate('+sx(st[k])+','+Y[k]+')');
+    mk[k].querySelector('.mn-mv').textContent=fmt(st[k],1);
+    mk[k].setAttribute('aria-valuenow',st[k]);
+    mk[k].setAttribute('aria-valuetext',fmt(st[k],1));
+  });
+  syncStack();
+  const p=pos();target=p;
+  $('[data-o="n"]').textContent=st.n+2;
+  $('[data-o="r"]').textContent=fmt(st.r+st.n*PAD,1);
+  $('[data-o="b"]').textContent=fmt(st.b,1);
+  $('[data-o="p"]').textContent=fmt(p*100,1)+' %';
+  $('.mn-cap').textContent=caption(p);
+  $('.mn-add').disabled=st.n>=MAXPAD;
+  $('.mn-reset').disabled=st.n===0;
+  if(!raf)raf=requestAnimationFrame(step);
+}
+function svgX(e){
+  const m=scale.getScreenCTM();if(!m)return 0;
+  const pt=scale.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;
+  return pt.matrixTransform(m.inverse()).x;
+}
+['r','b'].forEach(k=>{
+  const m=mk[k];
+  m.addEventListener('pointerdown',e=>{e.preventDefault();m.setPointerCapture(e.pointerId);m.focus({preventScroll:true});
+    st[k]=clamp((svgX(e)-X0)/(X1-X0)*SMAX);render();});
+  m.addEventListener('pointermove',e=>{if(!m.hasPointerCapture(e.pointerId))return;
+    st[k]=clamp((svgX(e)-X0)/(X1-X0)*SMAX);render();});
+  m.addEventListener('keydown',e=>{
+    const s=e.shiftKey?1:0.1;let v=st[k];
+    if(e.key==='ArrowRight'||e.key==='ArrowUp')v+=s;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowDown')v-=s;
+    else if(e.key==='Home')v=SMIN;else if(e.key==='End')v=SMAX;else return;
+    e.preventDefault();st[k]=clamp(v);render();});
+});
+$('.mn-add').addEventListener('click',()=>{if(st.n<MAXPAD){st.n++;render();}});
+$('.mn-reset').addEventListener('click',()=>{st.n=0;render();});
+shown=null;render();
+})();</script>
+  </article>
+
+  <!-- VI -->
+  <article class="chapter" id="ch6">
+    <p class="numeral" aria-hidden="true">VI</p>
+    <p class="novel">Заплатка</p>
+    <h2>Мир чинит парадоксы, назначая случайного человека виноватым задним числом</h2>
+    <p class="lede">Когда путешественник стирает из истории кого-то важного, в причинности остаётся дыра: открытие, у которого нет автора, письмо без отправителя. Мир латает такие дыры первым подходящим человеком. Тот просыпается — и всегда был изобретателем, убийцей, поэтом.</p>
+    <p>Бухгалтер Лидия Крофт однажды утром оказывается автором знаменитой поэмы, которую проходят в школе. Все это помнят. Она — нет. Её почерк в старых черновиках чужой, а на юбилейных фотографиях у неё другой размер обуви.</p>
+    <p>По таким мелочам — левша на одном снимке, правша на другом — Лидия находит других «заплаток». Их немного, они узнают друг друга по растерянности и тихо держатся вместе.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Причинность самовосстанавливается, но не точно: шов виден в мелочах.</dd></div>
+      <div><dt>Парадокс</dt><dd>Лидия не писала поэму, но за годы, читая её как чужую, понимает её глубже, чем понимал настоящий автор.</dd></div>
+      <div><dt>Загадка</dt><dd>Кто был настоящим поэтом и кому понадобилось его стереть?</dd></div>
+      <div><dt>Поворот</dt><dd>Стёртый поэт сам был путешественником и стёр себя, чтобы спрятаться. Теперь он возвращается. Если он займёт своё место в истории, заплатки отпадут — и Лидии не станет. Последняя часть романа — спор двух людей за авторство поэмы, в котором оба правы.</dd></div>
+    </dl>
+  </article>
+
+  <!-- VII -->
+  <article class="chapter" id="ch7">
+    <p class="numeral" aria-hidden="true">VII</p>
+    <p class="novel">Ночная смена</p>
+    <h2>Вернуться можно только в часы, которые ты когда-то проспал</h2>
+    <p class="lede">Треть человеческой жизни — неосвоенная территория. Пока ты спал, вокруг шли часы, в которых тебя по сути не было. Только туда и можно попасть: в свои прошлые ночи. Твоё прежнее тело спит рядом. Будить его нельзя — проснувшись, ты прежний вытолкнешь тебя нынешнего обратно.</p>
+    <p>Артуру сорок. Он ходит в ночи своего детства и чинит мелочи: закрывает форточку, из-за которой простудился, перекладывает потерянный ключ. Утром прошлое чуть другое, и настоящее тоже.</p>
+    <p>Но в детских ночах он находит следы чужого присутствия. Кто-то уже бывал здесь до него: пальто перевешено, на кухонном столе — недопитый чай, записка почерком, который он не сразу узнаёт.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Сон как пропуск: путешествовать можно только в собственные часы сна и только тихо.</dd></div>
+      <div><dt>Парадокс</dt><dd>Бессонница сужает прошлое. Человек, который мало спал, почти не может вернуться назад, а соня владеет огромной территорией.</dd></div>
+      <div><dt>Загадка</dt><dd>Кто приходил в его детские ночи, если по правилам туда может попасть только он сам?</dd></div>
+      <div><dt>Поворот</dt><dd>Ночи — общие. Мать спала в той же квартире, в те же часы, и её ночи совпадают с его. Она, умершая восемь лет назад, в старости тоже научилась ходить в прошлое — и сидела у его кровати. Однажды они встречаются на кухне, оба гости в чужих снах. И есть одна ночь, когда не спал никто: ночь пожара.</dd></div>
+    </dl>
+    <figure class="plate">
+      <svg viewBox="0 0 480 320" role="img" aria-labelledby="nightT">
+        <title id="nightT">Коллаж: окно, вырезанное из тёмно-синей бумаги, в нём месяц из газетной полосы и звёзды; поверх наклеены будильник со стрелками на трёх часах и обрывок записки «не буди его».</title>
+        <g filter="url(#lift)" transform="rotate(-4 240 160)">
+          <rect filter="url(#torn)" x="40" y="30" width="400" height="260" fill="#1d2a3a"/>
+          <rect x="40" y="30" width="400" height="260" fill="url(#htPaper)" opacity=".1"/>
+        </g>
+        <g transform="rotate(-4 240 160)" stroke="#e6d6ab" stroke-width="6" fill="none">
+          <rect x="70" y="56" width="340" height="208"/>
+          <line x1="240" y1="56" x2="240" y2="264"/>
+          <line x1="70" y1="150" x2="410" y2="150"/>
+        </g>
+        <g filter="url(#lift)">
+          <path d="M150 70 A54 54 0 1 0 196 168 A44 44 0 1 1 150 70 Z" fill="#f2e7c9"/>
+          <path d="M150 70 A54 54 0 1 0 196 168 A44 44 0 1 1 150 70 Z" fill="url(#news)" opacity=".6"/>
+        </g>
+        <g fill="#e2a51e">
+          <polygon points="300,84 304,96 316,96 306,103 310,115 300,108 290,115 294,103 284,96 296,96"/>
+          <polygon points="360,120 362,127 369,127 363,131 365,138 360,134 355,138 357,131 351,127 358,127"/>
+          <polygon points="270,190 272,196 278,196 273,200 275,206 270,202 265,206 267,200 262,196 268,196"/>
+        </g>
+        <g transform="translate(346 226) rotate(10)" filter="url(#lift)">
+          <circle cx="-30" cy="-50" r="14" fill="#c8261c"/><circle cx="30" cy="-50" r="14" fill="#c8261c"/>
+          <circle r="54" fill="#f4ead0" stroke="#231a12" stroke-width="3"/>
+          <circle r="54" fill="url(#ht)" opacity=".2"/>
+          <line x1="0" y1="0" x2="0" y2="-38" stroke="#231a12" stroke-width="4"/>
+          <line x1="0" y1="0" x2="26" y2="0" stroke="#231a12" stroke-width="6"/>
+          <circle r="5" fill="#c8261c"/>
+          <line x1="-30" y1="48" x2="-40" y2="62" stroke="#231a12" stroke-width="5"/>
+          <line x1="30" y1="48" x2="40" y2="62" stroke="#231a12" stroke-width="5"/>
+        </g>
+        <g transform="translate(64 238) rotate(-9)" filter="url(#lift)">
+          <polygon points="0,0 170,4 166,48 2,44" fill="#f4ead0"/>
+          <text x="14" y="30" font-family="PT Serif, serif" font-style="italic" font-size="21" fill="#231a12">не буди его. — М.</text>
+        </g>
+      </svg>
+      <figcaption>3:00. Час, в который сходятся две чужие ночи.</figcaption>
+    </figure>
+  </article>
+
+  <!-- VIII -->
+  <article class="chapter" id="ch8">
+    <p class="numeral" aria-hidden="true">VIII</p>
+    <p class="novel">Резонанс</p>
+    <h2>Прошлое слышит только те звуки, на которые настроены его стены</h2>
+    <p class="lede">Назад во времени можно отправить только звук, и приходит он не куда угодно, а в помещения, чья резонансная частота совпадает с частотой посылки. Камень помнит свою настройку веками. Старые соборы оказываются приёмниками, а средневековые хроники о голосах, звучавших под сводами, — журналами приёма.</p>
+    <p>Акустик-реставратор Марта Уилкс обмеряет готический собор в вымышленном Холмчестере и находит закономерность: «чудесные голоса» в монастырских записях звучали всегда на одних и тех же нотах. Её лаборатория строит передатчик.</p>
+    <p>Но в конце XIX века собор перестроили: заменили свод, и резонанс сместился. Всё, что было до перестройки, глухо. Чтобы говорить с XIII веком, Марте нужно найти помещение, которое не трогали восемьсот лет.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Архитектура как частотный фильтр времени: кто перестроил здание, тот отрезал его прошлое от будущего.</dd></div>
+      <div><dt>Парадокс</dt><dd>Реставрация разрушает связь. Сохраняя здание, хранители лишают его способности слышать.</dd></div>
+      <div><dt>Загадка</dt><dd>Почему пропорции одной крипты не совпадают ни с одним каноном своего века?</dd></div>
+      <div><dt>Поворот</dt><dd>Разговор начался давно, и монахи отвечали. Ответ не записан словами: он построен. Крипта настроена так, чтобы через восемьсот лет вернуть ответ на определённой ноте. Марта понимает, что держит в руках письмо из камня, — и что её первая передача уже в нём процитирована.</dd></div>
+    </dl>
+  </article>
+
+  <!-- IX -->
+  <article class="chapter" id="ch9">
+    <p class="numeral" aria-hidden="true">IX</p>
+    <p class="novel">Короткий год</p>
+    <h2>Будущее можно занять раньше срока, но каждый заём укорачивает календарь</h2>
+    <p class="lede">Никто не путешествует сам. Зато можно перетянуть в настоящее событие, которое должно было случиться позже: урожай, выздоровление, наследство, первую любовь. Его получают сегодня. Плата одна — время сжимается, и из календаря выпадают дни.</p>
+    <p>Мир охотно берёт в долг. Год становится короче на сутки, потом на неделю. Сейчас в нём триста сорок один день. Составительница календарей Энн Брайс каждый январь заново вычерчивает месяцы — и видит, что выпадать начали уже не будни, а праздники.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Будущее как кредит: события переносятся вперёд, длительность списывается с календаря.</dd></div>
+      <div><dt>Парадокс</dt><dd>Каждый заём забирает событие у того будущего, которому оно принадлежало. Дети заёмщиков живут в годах, где не случается ничего хорошего: всё уже взято вперёд.</dd></div>
+      <div><dt>Загадка</dt><dd>Из календаря выпадают не случайные дни, а те, на которые были назначены занятые события. Кто занимает праздники десятками тысяч сразу?</dd></div>
+      <div><dt>Поворот</dt><dd>Крупнейший должник — государство: полвека назад оно заняло окончание войны. Война официально кончилась, но её последние дни в исходном календаре всё ещё впереди, и они не отменены, а отсрочены. Энн вычисляет, в какой январь долг будет взыскан целиком, и понимает, что этот январь — следующий.</dd></div>
+    </dl>
+    <figure class="plate">
+      <svg viewBox="0 0 480 300" role="img" aria-labelledby="calT">
+        <title id="calT">Коллаж: отрывной календарь, из которого выдраны листы; на оставшемся красном листке напечатано «31 декабря», рядом ножницы и обрезки страниц с датами, разлетающиеся под углом.</title>
+        <g filter="url(#lift)" transform="rotate(3 240 150)">
+          <rect filter="url(#torn)" x="30" y="30" width="420" height="240" fill="#e2a51e"/>
+          <rect x="30" y="30" width="420" height="240" fill="url(#htFine)" opacity=".15"/>
+        </g>
+        <g transform="translate(170 60) rotate(-5)" filter="url(#lift)">
+          <rect x="0" y="0" width="140" height="22" fill="#231a12"/>
+          <g fill="#f4ead0">
+            <polygon points="2,22 138,22 136,40 4,38"/>
+            <polygon points="2,40 138,40 137,52 3,54"/>
+          </g>
+          <rect x="2" y="54" width="136" height="150" fill="#c8261c"/>
+          <rect x="2" y="54" width="136" height="150" fill="url(#htRed)" opacity=".5"/>
+          <text x="70" y="140" font-family="Rubik Mono One, sans-serif" font-size="62" fill="#efe3c2" text-anchor="middle">31</text>
+          <text x="70" y="178" font-family="PT Mono, monospace" font-size="15" fill="#efe3c2" text-anchor="middle" letter-spacing="3">ДЕКАБРЯ</text>
+        </g>
+        <g font-family="Rubik Mono One, sans-serif" fill="#231a12">
+          <g transform="translate(60 80) rotate(-22)" filter="url(#lift)"><rect width="66" height="74" fill="#f4ead0"/><text x="33" y="52" font-size="32" text-anchor="middle">14</text></g>
+          <g transform="translate(70 180) rotate(14)" filter="url(#lift)"><rect width="66" height="74" fill="#f4ead0"/><text x="33" y="52" font-size="32" text-anchor="middle">08</text></g>
+          <g transform="translate(350 70) rotate(19)" filter="url(#lift)"><rect width="66" height="74" fill="#f4ead0"/><text x="33" y="52" font-size="32" text-anchor="middle" fill="#c8261c">01</text></g>
+          <g transform="translate(362 176) rotate(-11)" filter="url(#lift)"><rect width="66" height="74" fill="#f4ead0"/><text x="33" y="52" font-size="32" text-anchor="middle">09</text></g>
+        </g>
+        <g transform="translate(330 250) rotate(-30)" stroke="#231a12" stroke-width="5" fill="none">
+          <circle cx="-26" cy="0" r="12"/><circle cx="-26" cy="30" r="12"/>
+          <line x1="-16" y1="6" x2="60" y2="24"/><line x1="-16" y1="24" x2="60" y2="6"/>
+        </g>
+      </svg>
+      <figcaption>Год сейчас: 341 день. Должен был быть: 365.</figcaption>
+    </figure>
+  </article>
+
+  <!-- X -->
+  <article class="chapter" id="ch10">
+    <p class="numeral" aria-hidden="true">X</p>
+    <p class="novel">Корректор</p>
+    <h2>Событие случилось тогда, когда это напечатано в большинстве экземпляров</h2>
+    <p class="lede">Прошлое не хранится в прошлом. Оно хранится в записях, и когда записи расходятся, побеждает тираж. Если опечатка в дате битвы разошлась бо́льшим числом копий, чем верная дата, битва задним числом переезжает на опечатку — вместе с погодой, погибшими и всем, что из неё вытекло.</p>
+    <p>Пока тиражи были бумажными, сдвиги были мелкими и медленными. Потом пришла оцифровка: одна ошибка в базе данных копируется миллионы раз за ночь. Старик Лайонел Фэйрфакс, сорок лет проработавший корректором энциклопедий, — один из немногих, кто замечает, как меняется мир после каждого обновления справочников.</p>
+    <p>Однажды он открывает свой паспорт и видит, что родился на три года позже. Где-то его дата рождения размножилась с ошибкой. Через неделю — ещё на год.</p>
+    <dl class="parts">
+      <div><dt>Механизм</dt><dd>Голосование копий: событие происходит в той дате и в том виде, в каком его воспроизвело большинство записей.</dd></div>
+      <div><dt>Парадокс</dt><dd>Исправить опечатку — значит напечатать верную версию большим тиражом. Каждая правка корректора — тоже переписывание истории, просто в обратную сторону.</dd></div>
+      <div><dt>Загадка</dt><dd>Кто целенаправленно тиражирует ошибку в биографии старого корректора — и почему именно сдвигая её вперёд?</dd></div>
+      <div><dt>Поворот</dt><dd>Лайонел сорок лет «исправлял ошибки», сверяясь с исходниками. Но исходники тоже были копиями. Его правки и были опечатками, сдвинувшими сотни событий, — а нынешний «вредитель» лишь возвращает истинные даты. Если вернуть всё, Лайонел родится уже после того, как стал корректором, и сорок его лет исчезнут вместе с правками.</dd></div>
+    </dl>
+  </article>
+
+  <section class="ledger">
+    <p class="kicker">Сводная ведомость</p>
+    <h2>Десять механизмов умещаются в одну таблицу: что двигает время и чем за это платят</h2>
+    <p>Если собрать правила в одну ведомость, видно, что ни одно не опирается на устройство или на физику. Время в этих романах двигают память, язык, приливы, наука, голосование, сон, камень, долг и тираж.</p>
+    <div class="table-box">
+      <table>
+        <thead><tr><th>№</th><th>Что двигает время</th><th>Цена</th><th>Где правило ломается</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>Забвение близких</td><td>Одиночество</td><td>Память держит в том времени, которое помнит</td></tr>
+          <tr><td>II</td><td>Особая глагольная форма</td><td>Нельзя видеть</td><td>Взгляд чужака запечатывает прошлое</td></tr>
+          <tr><td>III</td><td>Приливы эпох</td><td>Дом то в одном веке, то в другом</td><td>Дамба в прошлом толкает время к нам</td></tr>
+          <tr><td>IV</td><td>Раскопки будущего</td><td>Вещи исчезают</td><td>Записки к будущему ведут раскоп</td></tr>
+          <tr><td>V</td><td>Усреднение вмешательств</td><td>Половинчатая история</td><td>Число побеждает силу</td></tr>
+          <tr><td>VI</td><td>Самопочинка причинности</td><td>Чужая жизнь</td><td>Стёртый возвращается</td></tr>
+          <tr><td>VII</td><td>Проспанные часы</td><td>Только тишина</td><td>Чужие ночи совпадают с твоими</td></tr>
+          <tr><td>VIII</td><td>Резонанс стен</td><td>Только звук</td><td>Ответ построен, а не сказан</td></tr>
+          <tr><td>IX</td><td>Заём событий</td><td>Короткий год</td><td>Отсроченный долг взыскивается разом</td></tr>
+          <tr><td>X</td><td>Тираж записей</td><td>Истина по большинству</td><td>Исходники тоже копии</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="afterword">
+    <p>У каждого сюжета есть общая черта: правило путешествия сначала выглядит как чудо, потом как ремесло, а в конце оборачивается ценой, которую героиня или герой платят собой. Это и есть двигатель романа — не вопрос «можно ли изменить прошлое», а вопрос «кем ты станешь, когда изменишь».</p>
+    <p>Любой из десяти можно брать и писать. Названия рабочие, имена условные, города вымышлены.</p>
+  </section>
+
+  <p class="colophon">Карманная серия «Хронос» · Выпуск сюжетов № 10 · Отпечатано на жёлтой газетной бумаге в две краски</p>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Перекрёстное опыление</title>
+<meta name="description" content="Десять коротких рассказов, в которых голос, жанр или закон одного мира пересажен в другой, с итогом каждого опыта.">
+<meta name="compositor:paper" content="#F3ECDD">
+<meta name="compositor:ink" content="#1C1A22">
+<meta name="compositor:accent" content="#E5432F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3ECDD;
+  --ink:#1C1A22;
+  --red:#E5432F;
+  --blue:#2A5AA6;
+  --yellow:#F4C02E;
+  --muted:#5E5866;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Literata",Georgia,serif;
+  font-size:1.0625rem;
+  line-height:1.62;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1200px;margin:0 auto;padding:0 28px 96px}
+.smallcaps{
+  font-family:"Literata",serif;
+  font-size:.72rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+/* opening */
+.masthead{
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  border-bottom:3px solid var(--ink);
+  padding:28px 0 10px;
+}
+.masthead span:last-child{color:var(--red)}
+.hero{margin:28px 0 0}
+.hero svg{display:block;width:100%;height:auto}
+.hero figcaption{
+  margin-top:10px;color:var(--muted);font-size:.85rem;font-style:italic;
+  display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
+}
+h1{
+  font-family:"Playfair Display",serif;
+  font-weight:900;
+  font-size:clamp(3rem,10vw,8.4rem);
+  line-height:.92;
+  letter-spacing:-.02em;
+  margin:36px 0 18px;
+}
+h1 em{font-style:italic;font-weight:700;color:var(--red)}
+.deck{
+  font-family:"Playfair Display",serif;
+  font-style:italic;
+  font-size:clamp(1.25rem,2.6vw,1.75rem);
+  line-height:1.3;
+  max-width:34em;
+  margin:0 0 40px;
+}
+.rule{border:0;border-top:3px solid var(--ink);margin:0}
+.rule.thin{border-top:1px solid var(--ink);margin-top:3px}
+
+/* intro */
+.intro{
+  display:grid;
+  grid-template-columns:220px minmax(0,40rem) 1fr;
+  gap:0 40px;
+  padding:48px 0 24px;
+}
+.intro > *{grid-column:2}
+h2.section{
+  font-family:"Playfair Display",serif;
+  font-weight:700;
+  font-size:clamp(1.6rem,3.4vw,2.3rem);
+  line-height:1.15;
+  margin:0 0 22px;
+}
+p{margin:0 0 1em}
+.lede::first-letter{
+  float:left;
+  font-family:"Playfair Display",serif;
+  font-weight:900;
+  font-size:4.9em;
+  line-height:.78;
+  margin:.07em .09em 0 0;
+  color:var(--red);
+}
+.contents{
+  list-style:none;margin:28px 0 0;padding:0;
+  columns:2;column-gap:40px;
+}
+.contents li{
+  break-inside:avoid;
+  display:grid;grid-template-columns:2.6em 1fr;
+  border-top:1px solid var(--ink);
+  padding:8px 0 10px;
+  font-size:.95rem;line-height:1.4;
+}
+.contents b{
+  font-family:"Playfair Display",serif;font-weight:900;color:var(--blue);
+  font-variant-numeric:lining-nums;
+}
+.contents i{color:var(--muted)}
+
+/* stories */
+.story{
+  display:grid;
+  grid-template-columns:220px minmax(0,40rem) 1fr;
+  gap:0 40px;
+  padding:56px 0 48px;
+  border-top:3px solid var(--ink);
+  position:relative;
+}
+.story::before{
+  content:"";position:absolute;left:0;right:0;top:3px;border-top:1px solid var(--ink);
+}
+.side{grid-column:1;grid-row:1 / span 2}
+.num{
+  font-family:"Playfair Display",serif;
+  font-weight:900;
+  font-size:4.2rem;
+  line-height:1;
+  color:var(--blue);
+  margin:0 0 14px;
+}
+.emblem{display:block;width:100%;max-width:200px;height:auto}
+.formula{margin:16px 0 0;font-size:.85rem;line-height:1.45}
+.formula dt{color:var(--red)}
+.formula dd{margin:0 0 8px}
+.body{grid-column:2}
+.kicker{
+  font-family:"Playfair Display",serif;font-style:italic;
+  font-size:1.1rem;color:var(--red);margin:0 0 6px;
+}
+.story h2{
+  font-family:"Playfair Display",serif;
+  font-weight:700;
+  font-size:clamp(1.7rem,3.6vw,2.55rem);
+  line-height:1.12;
+  margin:0 0 26px;
+}
+.pull{
+  grid-column:3;grid-row:1 / span 2;align-self:center;
+  margin:0;
+  font-family:"Playfair Display",serif;
+  font-style:italic;font-weight:700;
+  font-size:1.6rem;line-height:1.2;
+  color:var(--red);
+  border-top:6px solid var(--red);
+  padding-top:14px;
+}
+.result{
+  margin-top:28px;padding-top:12px;
+  border-top:1px solid var(--ink);
+  font-size:.95rem;font-style:italic;
+}
+.result .smallcaps{font-style:normal;color:var(--red);display:block;margin-bottom:4px}
+
+.steps{margin:0 0 1em;padding-left:1.6em}
+.steps li{margin:0 0 .55em;padding-left:.3em}
+.steps li::marker{font-family:"Playfair Display",serif;font-weight:700;color:var(--red)}
+.note{font-size:.92rem;color:var(--muted)}
+
+.play .who{
+  display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;margin-top:1em;
+}
+.play .act{
+  font-family:"Playfair Display",serif;font-weight:700;font-size:1.15rem;
+  margin:1.6em 0 .3em;color:var(--blue);
+}
+.play .stage{font-style:italic;color:var(--muted)}
+.verse{margin:.3em 0 1em;padding-left:1.4em}
+.verse span{display:block}
+
+.fn{
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  color:var(--red);white-space:nowrap;margin-right:.35em;
+}
+
+.coda{
+  display:grid;
+  grid-template-columns:220px minmax(0,40rem) 1fr;
+  gap:0 40px;
+  padding:56px 0 0;
+  border-top:3px solid var(--ink);
+}
+.coda > *{grid-column:2}
+
+@media (max-width:1000px){
+  .intro,.story,.coda{grid-template-columns:170px minmax(0,1fr);gap:0 32px}
+  .pull{grid-column:2;grid-row:auto;margin:28px 0 0;font-size:1.45rem}
+}
+@media (max-width:680px){
+  .page{padding:0 18px 72px}
+  .intro,.story,.coda{grid-template-columns:minmax(0,1fr)}
+  .intro > *,.coda > *{grid-column:1}
+  .side{grid-column:1;grid-row:auto;display:grid;grid-template-columns:96px 1fr;gap:0 16px;align-items:start;margin-bottom:22px}
+  .num{font-size:2.6rem;margin:0}
+  .emblem{grid-row:1 / span 2;grid-column:1}
+  .side .num{grid-column:2}
+  .formula{grid-column:2;margin-top:4px;font-size:.8rem}
+  .body,.pull{grid-column:1}
+  .contents{columns:1}
+  body{font-size:1rem}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/kkpwg94c/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Перекрёстное опыление"><meta property="og:description" content="Десять коротких рассказов, в которых голос, жанр или закон одного мира пересажен в другой, с итогом каждого опыта."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/kkpwg94c/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F3ECDD;border-bottom:1px solid #1C1A2226;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1C1A22;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1C1A22;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1C1A22"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F3ECDD" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F3ECDD"/></svg><span>Compositor</span></a><time datetime="2026-11-23T07:22:33.809Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1C1A22;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+<div class="page">
+
+<header class="masthead smallcaps">
+  <span>Воскресное приложение</span>
+  <span>Лаборатория жанров · десять опытов</span>
+</header>
+
+<figure class="hero">
+<svg viewBox="0 0 1200 760" role="img" aria-label="Шелкографический плакат: синий круг с гусиным пером и красный круг с окольцованной планетой наложены друг на друга; в тёмной области их пересечения стоит светлая колба с жёлтой жидкостью, жёлтое солнце в углу." style="isolation:isolate">
+  <defs>
+    <pattern id="h-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="2.4" fill="#1C1A22"/>
+    </pattern>
+    <clipPath id="h-blue"><circle cx="480" cy="420" r="290"/></clipPath>
+    <clipPath id="h-red"><circle cx="740" cy="420" r="290"/></clipPath>
+  </defs>
+  <rect width="1200" height="760" fill="#F3ECDD"/>
+  <circle cx="985" cy="150" r="112" fill="#F4C02E"/>
+  <circle cx="480" cy="420" r="290" fill="#2A5AA6" style="mix-blend-mode:multiply"/>
+  <circle cx="740" cy="420" r="290" fill="#E5432F" style="mix-blend-mode:multiply"/>
+  <g clip-path="url(#h-blue)" opacity=".28">
+    <rect x="180" y="520" width="600" height="200" fill="url(#h-dots)"/>
+  </g>
+  <g clip-path="url(#h-red)" opacity=".22">
+    <rect x="700" y="130" width="340" height="150" fill="url(#h-dots)"/>
+  </g>
+  <!-- quill in the blue world -->
+  <g transform="translate(330 400) rotate(-32)">
+    <path d="M0 -190 C46 -150 58 -60 40 20 C30 70 14 110 0 150 C-14 110 -30 70 -40 20 C-58 -60 -46 -150 0 -190 Z" fill="#F3ECDD"/>
+    <path d="M0 -170 L0 200" stroke="#2A5AA6" stroke-width="5"/>
+    <path d="M-2 -120 L-36 -96 M-2 -80 L-42 -54 M-2 -40 L-44 -14 M-2 0 L-40 26 M2 -110 L34 -88 M2 -66 L42 -42 M2 -24 L44 2 M2 18 L38 44" stroke="#2A5AA6" stroke-width="3"/>
+    <path d="M-5 150 L5 150 L2 210 L-2 210 Z" fill="#F3ECDD"/>
+  </g>
+  <!-- ringed planet in the red world -->
+  <g transform="translate(880 470)">
+    <circle r="64" fill="#F4C02E"/>
+    <path d="M-62 -6 C-40 6 40 6 62 -6 L62 10 C40 22 -40 22 -62 10 Z" fill="#E5432F" style="mix-blend-mode:multiply"/>
+    <ellipse rx="128" ry="26" fill="none" stroke="#F3ECDD" stroke-width="9" transform="rotate(-16)"/>
+    <path d="M-64 0 A64 64 0 0 1 64 0" fill="#F4C02E" transform="rotate(-16)"/>
+    <circle cx="-150" cy="-150" r="5" fill="#F3ECDD"/>
+    <circle cx="120" cy="-170" r="4" fill="#F3ECDD"/>
+    <circle cx="-110" cy="140" r="3.5" fill="#F3ECDD"/>
+  </g>
+  <!-- flask in the overlap -->
+  <path d="M590 238 L630 238 L630 360 L700 566 C704 578 698 584 688 584 L532 584 C522 584 516 578 520 566 L590 360 Z" fill="none" stroke="#1C1A22" stroke-width="5" transform="translate(7 6)"/>
+  <path d="M574 222 L646 222 L646 238 L630 238 L630 360 L700 566 C704 578 698 584 688 584 L532 584 C522 584 516 578 520 566 L590 360 L590 238 L574 238 Z" fill="#F3ECDD"/>
+  <path d="M553 468 L667 468 L700 566 C704 578 698 584 688 584 L532 584 C522 584 516 578 520 566 Z" fill="#F4C02E"/>
+  <circle cx="586" cy="520" r="11" fill="#F3ECDD"/>
+  <circle cx="630" cy="540" r="7" fill="#F3ECDD"/>
+  <circle cx="612" cy="492" r="5" fill="#F3ECDD"/>
+  <circle cx="606" cy="420" r="8" fill="#2A5AA6"/>
+  <circle cx="618" cy="380" r="6" fill="#E5432F"/>
+  <circle cx="604" cy="330" r="5" fill="#2A5AA6"/>
+  <circle cx="616" cy="290" r="4" fill="#E5432F"/>
+  <path d="M548 520 L560 520 M542 540 L556 540" stroke="#1C1A22" stroke-width="3"/>
+  <!-- small stencil type -->
+  <text x="60" y="80" font-family="Playfair Display, serif" font-weight="900" font-size="34" fill="#1C1A22">ГОЛОС</text>
+  <text x="1140" y="720" text-anchor="end" font-family="Playfair Display, serif" font-weight="900" font-size="34" fill="#1C1A22">МИР</text>
+</svg>
+<figcaption><span>Опыт № 0. Слева голос, справа мир; там, где они совпадают, ставится колба.</span><span class="smallcaps">Шелкография в четыре прогона</span></figcaption>
+</figure>
+
+<h1>Перекрёстное <em>опыление</em></h1>
+<p class="deck">Десять коротких рассказов, в которых голос, жанр или закон одного мира пересажен в другой. Каждый опыт записан и снабжён итогом.</p>
+<hr class="rule"><hr class="rule thin">
+
+<section class="intro">
+  <h2 class="section">Опыт ставится просто: голос берут у одного мира, а землю у другого</h2>
+  <p class="lede">В каждом опыте участвуют двое. Донор отдаёт голос, жанр или закон: интонацию Гоголя, ход аттической трагедии, правила мультипликационной физики. Реципиент — мир, в который всё это пересаживают: Дантов ад, офисный опенспейс, пчелиный улей, ночное метро. Привьётся или отторгнется — заранее не известно, и в этом весь интерес.</p>
+  <p>Иногда чужой голос садится на новый мир как влитой, и становится видно, что они всегда были родственниками. Иногда шов трещит, и по трещине видно, как устроены оба. Ниже — десять опытов, каждый записан коротким рассказом и снабжён итогом: что получилось и почему.</p>
+  <ul class="contents">
+    <li><b>I</b><span>Гоголь × Дантов ад <i>— «Живые души»</i></span></li>
+    <li><b>II</b><span>Конан Дойл × магический реализм <i>— «Дедукция в Макондо»</i></span></li>
+    <li><b>III</b><span>Хармс × инструкция по сборке <i>— «Случай со шкафом»</i></span></li>
+    <li><b>IV</b><span>Аттическая трагедия × опенспейс <i>— «Квартальный отчёт»</i></span></li>
+    <li><b>V</b><span>Пропп × налоговая инспекция <i>— «Морфология декларации»</i></span></li>
+    <li><b>VI</b><span>Кафка × русская сказка <i>— «Процесс»</i></span></li>
+    <li><b>VII</b><span>Нуар × пчелиный улей <i>— «Восьмёрка на два часа»</i></span></li>
+    <li><b>VIII</b><span>Житие × доставка еды <i>— «Житие Тимофея Самокатного»</i></span></li>
+    <li><b>IX</b><span>Мультфильм × дворянская дуэль <i>— «На краю оврага»</i></span></li>
+    <li><b>X</b><span>Мелвилл × метрополитен <i>— «Белый состав»</i></span></li>
+  </ul>
+</section>
+
+<!-- I -->
+<article class="story">
+  <div class="side">
+    <p class="num">I</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Чёрный цилиндр над жёлтыми языками пламени на красном круге" style="isolation:isolate">
+      <defs><clipPath id="e1c"><circle cx="120" cy="120" r="104"/></clipPath></defs>
+      <circle cx="120" cy="120" r="104" fill="#E5432F"/>
+      <g clip-path="url(#e1c)">
+        <path d="M10 204 C26 188 38 198 40 170 C54 190 66 188 64 158 C80 182 92 186 96 166 C108 188 118 184 120 154 C126 182 138 188 146 164 C152 186 166 188 176 160 C182 184 194 192 202 170 C210 190 224 194 232 204 L232 240 L10 240 Z" fill="#F4C02E" style="mix-blend-mode:multiply"/>
+        <path d="M34 240 C44 222 56 228 60 206 C72 224 84 222 86 198 C98 220 110 218 120 196 C130 218 142 220 154 198 C158 222 170 224 180 206 C186 226 196 228 206 240 Z" fill="#F4C02E"/>
+      </g>
+      <path d="M86 60 L154 60 L150 148 L90 148 Z" fill="#1C1A22"/>
+      <ellipse cx="120" cy="60" rx="34" ry="6" fill="#1C1A22"/>
+      <rect x="89" y="126" width="62" height="12" fill="#2A5AA6"/>
+      <ellipse cx="120" cy="150" rx="66" ry="11" fill="#1C1A22"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Голос</dt><dd>Гоголь, «Мёртвые души»</dd>
+      <dt class="smallcaps">Мир</dt><dd>Данте, «Ад»</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Живые души</p>
+    <h2>Чичиков приезжает в ад скупать память, которую о грешниках хранят живые</h2>
+    <p class="lede">В ворота, над которыми было высечено известное всем объявление насчёт надежды, въехала небольшая рессорная бричка. В бричке сидел господин, не красавец, но и не дурной наружности, ни слишком толст, ни слишком тонок; нельзя сказать, чтобы стар, однако ж и не так, чтобы слишком молод. Перевозчик, принимая плату, отметил про себя, что приезжий дал ровно столько, сколько следует, и ни обола сверх.</p>
+    <p>У входа во второй круг господин свёл знакомство с местным начальством, Миносом, и так ловко похвалил устройство хвоста, которым тот назначал грешникам круг, что Минос полчаса не мог никого распределить от удовольствия.</p>
+    <p>Дело приезжего было деликатное. Он ходил от круга к кругу и спрашивал осуждённых, не осталось ли у них наверху кого-нибудь, кто их ещё помнит. «Живые души, — пояснял он, понизив голос, — то есть те, что числятся за вами в чьей-то памяти. Вам они здесь, согласитесь, только мука: всё вспоминают, всё зовут. А я бы их взял на себя. По ревизии, так сказать».</p>
+    <p>Скупой из четвёртого круга торговался три дня и выторговал по полкопейки за каждую племянницу. Сладострастники из второго отдали свои даром, лишь бы не останавливаться: ветер нёс их дальше, и подписи вышли косые. Предатели в девятом сначала решили, что их хотят обмануть, а когда поняли, что их правда хотят только освободить от памяти, обиделись и отказались.</p>
+    <p>К Страстной пятнице у Павла Ивановича было записано четыреста душ, и он уже прикидывал, под какое чистилище можно их заложить. Но тут его позвал к себе Вергилий, человек тихий и государственный, и спросил, зачем, собственно, ему столько чужой памяти.</p>
+    <p>Чичиков покраснел. «Видите ли, — сказал он, — меня самого там не вспомнит ни одна душа».</p>
+    <p>И Вергилий, говорят, впервые за тринадцать столетий не нашёлся, что ответить.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Гоголевская интонация превращает ад в губернский город — и показывает, что самое страшное в губернском городе: быть никем не вспомненным.</p>
+  </div>
+  <blockquote class="pull">«Меня самого там не вспомнит ни одна душа».</blockquote>
+</article>
+
+<!-- II -->
+<article class="story">
+  <div class="side">
+    <p class="num">II</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Лупа на синем дождливом поле, вокруг жёлтые бабочки" style="isolation:isolate">
+      <defs>
+        <path id="e2bf" d="M0 2 C-4 -10 -18 -12 -15 -1 C-16 6 -6 9 0 2 Z"/>
+        <clipPath id="e2c"><circle cx="120" cy="120" r="104"/></clipPath>
+      </defs>
+      <circle cx="120" cy="120" r="104" fill="#2A5AA6"/>
+      <g clip-path="url(#e2c)" stroke="#F3ECDD" stroke-width="3" opacity=".55">
+        <path d="M30 20 L18 56 M70 10 L58 46 M200 30 L188 66 M220 90 L208 126 M40 150 L28 186 M190 170 L178 206 M110 200 L98 236 M150 14 L138 50"/>
+      </g>
+      <circle cx="104" cy="104" r="50" fill="#F3ECDD"/>
+      <circle cx="104" cy="104" r="50" fill="none" stroke="#1C1A22" stroke-width="12"/>
+      <path d="M140 140 L188 188" stroke="#1C1A22" stroke-width="20" stroke-linecap="square"/>
+      <g transform="translate(104 106) scale(2.1)">
+        <use href="#e2bf" fill="#F4C02E"/><use href="#e2bf" fill="#F4C02E" transform="scale(-1 1)"/>
+        <path d="M0 -6 L0 6" stroke="#1C1A22" stroke-width="1.6"/>
+      </g>
+      <g transform="translate(184 64) scale(1.3) rotate(18)">
+        <use href="#e2bf" fill="#F4C02E"/><use href="#e2bf" fill="#F4C02E" transform="scale(-1 1)"/>
+      </g>
+      <g transform="translate(52 182) scale(1.1) rotate(-24)">
+        <use href="#e2bf" fill="#F4C02E"/><use href="#e2bf" fill="#F4C02E" transform="scale(-1 1)"/>
+      </g>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Голос</dt><dd>Конан Дойл, записки доктора Ватсона</dd>
+      <dt class="smallcaps">Мир</dt><dd>Гарсиа Маркес, «Сто лет одиночества»</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Дедукция в Макондо</p>
+    <h2>Метод Холмса отказывает там, где невозможного не бывает вовсе</h2>
+    <p class="lede">Дождь шёл уже третий год, когда мы с Холмсом сошли с поезда, который, как нам объяснили, приходил раз в неделю и иногда возвращался назад, не дожидаясь пассажиров. Мой друг был в превосходном расположении духа. Он утверждал, что в этом городе совершено преступление, и что он узнал об этом ещё в Лондоне по пятну плесени на конверте.</p>
+    <p>— Обратите внимание, Ватсон, — сказал он, едва мы вошли в дом, где жили одни полковники и женщины, ткавшие саван. — Девушка у окна краснеет каждый вечер в шесть. Над крышей купальни в то же время появляются жёлтые бабочки. Вывод очевиден: у неё свидание, и её возлюбленный — механик из гаража, судя по машинному маслу, которым пахнут бабочки.</p>
+    <p>— Это известно всему городу, сеньор, — вежливо сказала старуха у двери. — Об этом знают даже муравьи.</p>
+    <p>Холмс не смутился. Он установил, что священник левитирует после чашки шоколада, что одна из сестёр унесена на небо вместе с простынями и что старик под каштаном говорит на латыни. Каждое утверждение он обосновывал безупречно. Каждое было правдой. И каждое здесь знали так давно, что никто уже не считал это новостью.</p>
+    <p>На четвёртый день он сидел на веранде, глядя в дождь, и не курил.</p>
+    <p>— Я всегда говорил, Ватсон, что если исключить невозможное, то оставшееся, каким бы невероятным оно ни казалось, и есть истина. Но здесь нечего исключать. Здесь невозможного нет. Здесь всё оставшееся.</p>
+    <p>Мы уехали тем же поездом, который на этот раз дождался. Дома я обнаружил в своём саквояже жёлтую бабочку, и она, как я ни старался её выгнать, прожила у нас на Бейкер-стрит до самой весны.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Детектив держится на границе между возможным и невозможным; магический реализм эту границу стирает. Сыщик остаётся прав и становится не нужен.</p>
+  </div>
+  <blockquote class="pull">«Здесь невозможного нет. Здесь всё оставшееся».</blockquote>
+</article>
+
+<!-- III -->
+<article class="story">
+  <div class="side">
+    <p class="num">III</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Схема шкафа в разобранном виде: жёлтые и синие доски, шуруп и маленький человечек в шляпе" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#F4C02E"/>
+      <rect x="54" y="48" width="56" height="140" fill="#2A5AA6" style="mix-blend-mode:multiply"/>
+      <rect x="120" y="48" width="56" height="140" fill="#2A5AA6" transform="rotate(8 148 118)" style="mix-blend-mode:multiply"/>
+      <rect x="48" y="40" width="134" height="14" fill="#1C1A22" transform="rotate(-6 115 47)"/>
+      <circle cx="102" cy="120" r="5" fill="#F3ECDD"/>
+      <circle cx="138" cy="120" r="5" fill="#F3ECDD"/>
+      <g transform="translate(186 186) rotate(40)">
+        <rect x="-4" y="-22" width="8" height="34" fill="#1C1A22"/>
+        <path d="M-4 -14 L4 -10 M-4 -6 L4 -2 M-4 2 L4 6" stroke="#F3ECDD" stroke-width="2"/>
+        <rect x="-10" y="-28" width="20" height="7" fill="#1C1A22"/>
+      </g>
+      <g transform="translate(58 196)">
+        <circle cx="0" cy="-26" r="7" fill="#E5432F"/>
+        <rect x="-11" y="-38" width="22" height="5" fill="#1C1A22"/>
+        <rect x="-6" y="-46" width="12" height="9" fill="#1C1A22"/>
+        <path d="M0 -18 L0 2 M0 2 L-8 16 M0 2 L8 16 M-12 -10 L12 -10" stroke="#E5432F" stroke-width="5"/>
+      </g>
+      <path d="M146 30 L170 30 M158 18 L158 42" stroke="#E5432F" stroke-width="5"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Голос</dt><dd>Даниил Хармс, «Случаи»</dd>
+      <dt class="smallcaps">Мир</dt><dd>инструкция по сборке мебели</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Случай со шкафом</p>
+    <h2>Инструкция к шкафу честно признаёт, что шкаф держится на одном человеке</h2>
+    <p class="lede">Шкаф платяной двустворчатый. Комплектация: досок двенадцать, шурупов сорок, Иван Иванович один.</p>
+    <ol class="steps">
+      <li>Откройте коробку. Если в коробке нет Ивана Ивановича, сборка невозможна. Закройте коробку и больше её не трогайте.</li>
+      <li>Положите доску А на пол. Положите на доску А доску Б. Иван Иванович садится на доску Б и сидит.</li>
+      <li>Возьмите шуруп номер один и вкрутите его в отверстие номер один. Шуруп номер один падает и укатывается под диван.</li>
+      <li>Ищите шуруп. Пока вы ищете шуруп, Иван Иванович встаёт, говорит «ну вас всех к лешему» и уходит.</li>
+      <li>Без Ивана Ивановича доска Б не держит доску А. Пригласите вместо него Петрова. Петров садится, говорит «я так и знал» и тоже уходит.</li>
+      <li>Пригласите старуху. Старуха садится, некоторое время сидит, а потом её больше нет. Старух в комплект не кладут, претензии не принимаются.</li>
+      <li>Из оставшихся досок соберите табурет. Табурет — это шкаф, у которого всё уже позади.</li>
+      <li>Сядьте на табурет.</li>
+    </ol>
+    <p>Сборка окончена. Шурупы, оставшиеся лишними, означают, что всё сделано правильно.</p>
+    <p class="note">Вот, собственно, и всё.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Привой прижился сразу. Инструкция по сборке и абсурдистская миниатюра устроены одинаково: короткие повелительные фразы, мир, который не слушается, и деловитый тон над катастрофой.</p>
+  </div>
+  <blockquote class="pull">«Табурет — это шкаф, у которого всё уже позади».</blockquote>
+</article>
+
+<!-- IV -->
+<article class="story">
+  <div class="side">
+    <p class="num">IV</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Трагическая маска цвета бумаги на красном круге, за ней синий монитор с падающим графиком" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#E5432F"/>
+      <rect x="128" y="46" width="88" height="62" fill="#2A5AA6"/>
+      <path d="M136 60 L156 70 L172 64 L190 92 L208 100" fill="none" stroke="#F4C02E" stroke-width="5"/>
+      <rect x="164" y="108" width="16" height="14" fill="#2A5AA6"/>
+      <path d="M58 54 C80 44 136 44 152 58 C160 100 150 168 106 196 C64 168 50 100 58 54 Z" fill="#F3ECDD"/>
+      <path d="M72 90 C80 80 94 80 100 92 L96 100 C90 96 80 96 74 100 Z" fill="#1C1A22"/>
+      <path d="M112 92 C118 80 132 80 140 90 L138 100 C132 96 122 96 116 100 Z" fill="#1C1A22"/>
+      <path d="M86 156 C96 142 118 142 128 156 C116 150 98 150 86 156 Z" fill="#1C1A22"/>
+      <path d="M76 70 L94 78 M138 70 L120 78" stroke="#1C1A22" stroke-width="4"/>
+      <path d="M86 108 L84 128" stroke="#2A5AA6" stroke-width="6"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Жанр</dt><dd>аттическая трагедия</dd>
+      <dt class="smallcaps">Мир</dt><dd>офисный опенспейс</dd>
+    </dl>
+  </div>
+  <div class="body play">
+    <p class="kicker">Квартальный отчёт</p>
+    <h2>У офисного рока есть хор, вестник и неумолимая дата сдачи</h2>
+    <p class="stage">Действующие лица: Аркадий, руководитель направления. Хор стажёров. Вестник из переговорной. Бог из машины (отдел информационных технологий).</p>
+    <p class="act">Парод</p>
+    <span class="who">Хор стажёров</span>
+    <div class="verse">
+      <span>Пятница, сорок первая неделя.</span>
+      <span>Кофе остыл в чашках с логотипом.</span>
+      <span>Горе тому, кто считает выручку раньше,</span>
+      <span>чем сведены таблицы.</span>
+    </div>
+    <span class="who">Аркадий</span>
+    <div class="verse">
+      <span>Не каркайте, птенцы. Квартал удачен.</span>
+      <span>Я сам сводил итог, я сам проверил формулы.</span>
+      <span>Нет человека в этом этаже счастливей.</span>
+    </div>
+    <span class="who">Корифей</span>
+    <div class="verse">
+      <span>Не называй счастливым никого,</span>
+      <span>пока квартал не закрыт.</span>
+    </div>
+    <p class="act">Эписодий</p>
+    <p class="stage">Входит Вестник из переговорной, бледный, с ноутбуком.</p>
+    <span class="who">Вестник</span>
+    <div class="verse">
+      <span>О, лучше б мне не видеть этого экрана!</span>
+      <span>В ячейке D-четырнадцать, где прибыль,</span>
+      <span>стояла ссылка на саму себя.</span>
+      <span>Всё, что росло, росло лишь потому,</span>
+      <span>что опиралось на свой собственный рост.</span>
+      <span>Финансовый директор видел это.</span>
+      <span>Он снял очки. Он медленно их снял.</span>
+    </div>
+    <span class="who">Аркадий</span>
+    <div class="verse">
+      <span>Так это я, я сам писал ту формулу.</span>
+      <span>Я сам искал виновного в просадке</span>
+      <span>и сам им был.</span>
+    </div>
+    <p class="stage">Аркадий уходит в переговорную. Дверь закрывается. Слышно, как опускаются жалюзи.</p>
+    <p class="act">Эксод</p>
+    <p class="stage">Сверху, на офисном кресле с колёсиками, спускается Бог из машины.</p>
+    <span class="who">Бог из машины</span>
+    <div class="verse">
+      <span>Откатим к резервной копии от среды.</span>
+    </div>
+    <span class="who">Хор стажёров</span>
+    <div class="verse">
+      <span>Спасён отчёт, но не спасён Аркадий:</span>
+      <span>он знает теперь, кто он.</span>
+      <span>Идите по домам. Уже темно.</span>
+    </div>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Трагедия узнавания легко находит себе место в любом учреждении: достаточно человека, который ищет виновного и находит себя. Офис добавляет к року только одно — резервную копию, которая спасает всё, кроме героя.</p>
+  </div>
+  <blockquote class="pull">«Не называй счастливым никого, пока квартал не закрыт».</blockquote>
+</article>
+
+<!-- V -->
+<article class="story">
+  <div class="side">
+    <p class="num">V</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Бланк декларации с жёлтой короной и красной печатью на синем круге" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#2A5AA6"/>
+      <path d="M70 44 L162 44 L178 60 L178 200 L70 200 Z" fill="#F3ECDD"/>
+      <path d="M162 44 L162 60 L178 60 Z" fill="#1C1A22"/>
+      <path d="M84 104 L164 104 M84 120 L164 120 M84 136 L150 136 M84 152 L164 152 M84 168 L136 168" stroke="#1C1A22" stroke-width="4"/>
+      <path d="M90 90 L90 62 L106 76 L122 56 L138 76 L154 62 L154 90 Z" fill="#F4C02E"/>
+      <circle cx="106" cy="76" r="0" fill="none"/>
+      <circle cx="156" cy="172" r="26" fill="#E5432F" style="mix-blend-mode:multiply"/>
+      <circle cx="156" cy="172" r="18" fill="none" stroke="#F3ECDD" stroke-width="3"/>
+      <path d="M148 172 L154 178 L166 164" fill="none" stroke="#F3ECDD" stroke-width="4"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Закон</dt><dd>В. Я. Пропп, «Морфология сказки»</dd>
+      <dt class="smallcaps">Мир</dt><dd>районная налоговая инспекция</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Морфология декларации</p>
+    <h2>Возврат налогового вычета проходит все функции волшебной сказки</h2>
+    <p class="lede"><span class="fn">Отлучка</span>Бухгалтер Тамара Петровна ушла в отпуск, и Сергей остался с декларацией один.</p>
+    <p><span class="fn">Запрет</span>Уходя, она сказала: «Только не подавай в последний день».</p>
+    <p><span class="fn">Нарушение</span>Он подал в последний день.</p>
+    <p><span class="fn">Недостача</span>Через месяц выяснилось, что вычет за лечение зуба ему не положен, потому что не хватает справки.</p>
+    <p><span class="fn">Отправка</span>Сергей взял паспорт, три копии и пошёл в инспекцию, далеко, через два пересадочных узла.</p>
+    <p><span class="fn">Даритель</span>В очереди он уступил место старушке. Старушка, оказавшаяся бывшим инспектором, шепнула ему номер окна, в котором не спрашивают лишнего, и дала синюю ручку, которой пишут только правду.</p>
+    <p><span class="fn">Перемещение</span>Электронный талон перенёс его из конца зала в начало.</p>
+    <p><span class="fn">Борьба</span>Инспектор в окне номер девять спросила, где оригинал. Сергей ответил, что оригинал у стоматолога. Инспектор ответила, что у стоматолога не может быть оригинала, потому что оригинал у пациента. Так они бились до обеда.</p>
+    <p><span class="fn">Трудная задача</span>«Принесите справку, которой нет, от клиники, которая закрылась, за год, который прошёл».</p>
+    <p><span class="fn">Решение</span>Он нашёл врача по фамилии на старом рецепте. Врач теперь работал в другой клинике, помнил зуб и выдал справку синей ручкой.</p>
+    <p><span class="fn">Узнавание</span>Увидев синие чернила, инспектор ахнула и узнала руку своей бывшей начальницы.</p>
+    <p><span class="fn">Свадьба</span>Тринадцать процентов вернулись на счёт. На эти деньги Сергей купил торт и съел его вместе с Тамарой Петровной, когда та вернулась из отпуска. Я там был, чай пил, по усам текло.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Пропп писал, что функции сказки постоянны, а персонажи заменимы. Опыт подтверждает это с неприятной точностью: бюрократия оказалась одной из форм волшебной сказки, и герою в ней нужен даритель.</p>
+  </div>
+  <blockquote class="pull">«Принесите справку, которой нет, от клиники, которая закрылась».</blockquote>
+</article>
+
+<!-- VI -->
+<article class="story">
+  <div class="side">
+    <p class="num">VI</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Избушка на курьих ножках, повёрнутая глухой стеной, на жёлтом круге; перед ней маленькая фигура" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#F4C02E"/>
+      <path d="M62 92 L120 50 L178 92 Z" fill="#E5432F"/>
+      <rect x="74" y="92" width="92" height="66" fill="#1C1A22"/>
+      <path d="M74 106 L166 106 M74 120 L166 120 M74 134 L166 134 M74 148 L166 148" stroke="#2A5AA6" stroke-width="3"/>
+      <path d="M100 158 L94 192 L80 200 M94 192 L96 204 M94 192 L106 200" fill="none" stroke="#E5432F" stroke-width="6" stroke-linejoin="bevel"/>
+      <path d="M140 158 L146 192 L132 200 M146 192 L148 204 M146 192 L160 200" fill="none" stroke="#E5432F" stroke-width="6" stroke-linejoin="bevel"/>
+      <g transform="translate(46 200)">
+        <circle cx="0" cy="-30" r="6" fill="#2A5AA6"/>
+        <path d="M-8 -22 L8 -22 L10 0 L-10 0 Z" fill="#2A5AA6"/>
+      </g>
+      <rect x="112" y="60" width="16" height="18" fill="#F3ECDD"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Голос</dt><dd>Франц Кафка, «Процесс»</dd>
+      <dt class="smallcaps">Мир</dt><dd>русская волшебная сказка</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Процесс</p>
+    <h2>Избушка на курьих ножках так и не поворачивается к Ивану передом</h2>
+    <p class="lede">Кто-то, по-видимому, оклеветал Ивана, потому что однажды утром, хотя он не сделал ничего дурного, у его печи появились два ворона и сообщили, что он вызван к Кощею. По какому делу, они не знали. Они знали только, что дело ведётся давно и что Иван в нём не первый.</p>
+    <p>Иван оседлал серого волка — волк был казённый, с инвентарным номером на ухе — и поехал. Три дня он ехал до тридевятого царства, ещё три дня искал канцелярию, а когда нашёл, то оказалось, что принимают только по чётным и только тех, кому назначено, а назначают через Бабу-ягу.</p>
+    <p>Избушка Бабы-яги стояла в лесу, повернувшись к Ивану глухой стеной. Иван сказал, как положено: «Избушка, избушка, стань к лесу задом, ко мне передом». Избушка не шелохнулась. Только курья нога чуть переступила, как будто избушка устала стоять.</p>
+    <p>Иван просидел перед ней год. Он пробовал говорить ласково и строго, в рифму и без. Он подкупал ворон, но вороны брали и говорили, что берут лишь затем, чтобы он не думал, будто что-то упустил. Он выучил каждое бревно в той стене и знал, на каком сучке сидит какая блоха.</p>
+    <p>Когда Иван совсем состарился и голос его стал слаб, он спросил:</p>
+    <p>— Отчего же за все эти годы никто, кроме меня, не просил избушку повернуться?</p>
+    <p>И из-за стены ответил хриплый старушечий голос:</p>
+    <p>— Никто, кроме тебя, не мог сюда прийти. Эта избушка стояла здесь только для тебя. Теперь я поверну её задом и к тебе.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Сказка обещает, что верное слово откроет любую дверь. Кафка знает, что у закона есть слова, но нет ответа. Наложенные друг на друга, они отменяют самое утешительное правило сказки: заклинание перестаёт работать.</p>
+  </div>
+  <blockquote class="pull">«Эта избушка стояла здесь только для тебя».</blockquote>
+</article>
+
+<!-- VII -->
+<article class="story">
+  <div class="side">
+    <p class="num">VII</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Пчела в шляпе-федоре на фоне жёлтых сот, под косой полосой синей тени" style="isolation:isolate">
+      <defs>
+        <clipPath id="e7c"><circle cx="120" cy="120" r="104"/></clipPath>
+        <path id="e7h" d="M0 -22 L19 -11 L19 11 L0 22 L-19 11 L-19 -11 Z"/>
+      </defs>
+      <circle cx="120" cy="120" r="104" fill="#F4C02E"/>
+      <g clip-path="url(#e7c)" fill="none" stroke="#1C1A22" stroke-width="3" opacity=".7">
+        <use href="#e7h" x="40" y="40"/><use href="#e7h" x="78" y="40"/><use href="#e7h" x="116" y="40"/><use href="#e7h" x="154" y="40"/><use href="#e7h" x="192" y="40"/>
+        <use href="#e7h" x="59" y="73"/><use href="#e7h" x="97" y="73"/><use href="#e7h" x="135" y="73"/><use href="#e7h" x="173" y="73"/><use href="#e7h" x="21" y="73"/>
+        <use href="#e7h" x="40" y="106"/><use href="#e7h" x="192" y="106"/>
+        <use href="#e7h" x="21" y="139"/><use href="#e7h" x="211" y="139"/>
+        <use href="#e7h" x="40" y="172"/><use href="#e7h" x="78" y="205"/><use href="#e7h" x="154" y="205"/><use href="#e7h" x="192" y="172"/>
+      </g>
+      <g clip-path="url(#e7c)">
+        <path d="M-10 150 L250 60 L250 130 L-10 220 Z" fill="#2A5AA6" opacity=".85" style="mix-blend-mode:multiply"/>
+      </g>
+      <ellipse cx="86" cy="124" rx="32" ry="20" fill="#F3ECDD" transform="rotate(-28 86 124)"/>
+      <ellipse cx="154" cy="124" rx="32" ry="20" fill="#F3ECDD" transform="rotate(28 154 124)"/>
+      <ellipse cx="120" cy="150" rx="26" ry="38" fill="#1C1A22"/>
+      <path d="M96 140 L144 140 M95 158 L145 158 M100 175 L140 175" stroke="#F4C02E" stroke-width="7"/>
+      <circle cx="120" cy="104" r="18" fill="#1C1A22"/>
+      <path d="M92 92 L148 92 L140 84 L134 70 L106 70 L100 84 Z" fill="#E5432F"/>
+      <rect x="102" y="80" width="36" height="5" fill="#1C1A22"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Жанр</dt><dd>нуар, крутой детектив</dd>
+      <dt class="smallcaps">Мир</dt><dd>пчелиный улей</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Восьмёрка на два часа</p>
+    <h2>В улье, где все говорят танцем, солгать можно только движением</h2>
+    <p class="lede">Она влетела ко мне в полдень, и с её лапок сыпалась пыльца, какой в нашей округе не водится. Рабочая, как все мы. Но танцевала так, что у фуражиров у входа подгибались крылья.</p>
+    <p>— Мне нужен кто-то, кто умеет читать танец, — сказала она. — Не по-любительски. По-настоящему.</p>
+    <p>Я умею. Летом нам отпущено недель шесть, и мне оставалось меньше половины, так что я не торговался.</p>
+    <p>Дело было простое и грязное. Третий день разведчица с северной стены танцевала одну и ту же восьмёрку: виляющий пробег на два часа от солнца, долгий, на добрые километры. Туда улетали сотни. Возвращались десятки, с пустыми корзинками и запахом, от которого чесались усики. Кто-то вёл нас на поле, которое опрыскали.</p>
+    <p>Я три часа смотрел, как она танцует. Угол был правильный. Длина пробега правильная. Но в конце каждой восьмёрки она чуть сбивалась, как сбивается тот, кто выучил чужой танец наизусть. Тот, кто сам был в поле, так не сбивается.</p>
+    <p>Танец ей дала не она. Танец ей дали трутни — ленивые, тяжёлые, бесполезные трутни, которые знали, что в августе их выставят за порог. Если улей ослабнет, рассуждали они, порог отодвинется.</p>
+    <p>Я рассказал всё матке. Матка выслушала, не шевельнувшись, — у неё вообще редко бывает время шевелиться. А в августе трутней выставили, как выставляли всегда, и никто не спросил, за что.</p>
+    <p>Блондинка с чужой пыльцой больше не прилетала. Я иногда смотрю на север, на два часа от солнца, и думаю, что это была самая честная ложь, какую я видел: танец, станцованный слишком правильно.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Нуару нужна среда, где все говорят одно, а делают другое. Улей подходит неожиданно хорошо: в нём язык — это направление, и подделать его можно только безупречностью.</p>
+  </div>
+  <blockquote class="pull">«Самая честная ложь — танец, станцованный слишком правильно».</blockquote>
+</article>
+
+<!-- VIII -->
+<article class="story">
+  <div class="side">
+    <p class="num">VIII</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Курьерский короб с золотым нимбом на синем круге, под ним колесо самоката" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#2A5AA6"/>
+      <circle cx="120" cy="94" r="62" fill="#F4C02E"/>
+      <g stroke="#F4C02E" stroke-width="4">
+        <path d="M120 18 L120 30 M120 158 L120 170 M44 94 L56 94 M184 94 L196 94 M66 40 L75 49 M174 40 L165 49"/>
+      </g>
+      <rect x="76" y="70" width="88" height="76" fill="#E5432F"/>
+      <rect x="76" y="70" width="88" height="14" fill="#1C1A22"/>
+      <path d="M104 70 C104 54 136 54 136 70" fill="none" stroke="#1C1A22" stroke-width="6"/>
+      <path d="M120 96 L120 132 M104 110 L136 110" stroke="#F3ECDD" stroke-width="7"/>
+      <path d="M60 182 L180 182" stroke="#1C1A22" stroke-width="7"/>
+      <circle cx="72" cy="188" r="12" fill="#1C1A22"/>
+      <circle cx="170" cy="188" r="12" fill="#1C1A22"/>
+      <circle cx="72" cy="188" r="4" fill="#F3ECDD"/>
+      <circle cx="170" cy="188" r="4" fill="#F3ECDD"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Жанр</dt><dd>древнерусское житие</dd>
+      <dt class="smallcaps">Мир</dt><dd>доставка еды за полчаса</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Житие Тимофея Самокатного</p>
+    <h2>Курьерскую смену можно описать как подвиг, и это ничуть не смешно</h2>
+    <p class="lede">Сей блаженный Тимофей родился в граде Твери от родителей простых и в оплате своей скудных. Измлада не любил он игр детских, но любил ездить скоро, и отец его, видя то, рёк: «Быть тебе, чадо, гонцом».</p>
+    <p>Возмужав, пришёл он в великий град и принял на себя короб красный, и с того дня не снимал его ни в дождь, ни в стужу. И ел он мало, ибо возил яства другим, а сам вкушал на ходу хлеб и воду из бутылки пластмассовой.</p>
+    <p>Бысть же однажды заказ в дальнюю окраину, на пятый этаж без подъёмника, а время на него положено было малое. И се, начал падать снег великий, и многие гонцы отступили. Тимофей же помолился и поехал, и колёса самоката его не скользили, как будто кто держал их под руки.</p>
+    <p>И когда достиг он двери, отворил ему муж сердитый и рёк: «Опоздал ты на две минуты». Тимофей же смиренно поклонился и подал ему пищу. И муж, отверзши пакет, увидел, что суп в нём горяч, точно сейчас снят с огня, хотя везён был сорок минут сквозь метель. И устыдился муж, и поставил гонцу пять звёзд, и оставил на чай сверх всякого обычая.</p>
+    <p>Сие первое чудо Тимофеево. Второе же было в том, что за двенадцать лет не повредил он ни одного яйца и не пролил ни одного соуса. Третье же — что приложение никогда не сбивалось у него с пути, даже во дворах, где сбивались все.</p>
+    <p>Преставился же он не в бою, но в покое: вернулся в родную Тверь, купил дом с садом и пёк хлебы сам, никуда их не возя. И говорят, что ежели заказ опаздывает, достаточно помянуть его имя, и курьер появится за углом.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Житийный голос относится к труду всерьёз, и это меняет оптику: однообразная тяжёлая работа выглядит подвигом терпения, а пять звёзд в приложении — чудом, засвидетельствованным очевидцем.</p>
+  </div>
+  <blockquote class="pull">«И суп в нём горяч, точно сейчас снят с огня».</blockquote>
+</article>
+
+<!-- IX -->
+<article class="story">
+  <div class="side">
+    <p class="num">IX</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Чёрная наковальня падает на красном круге, внизу край жёлтого обрыва с двумя пистолетами крест-накрест" style="isolation:isolate">
+      <circle cx="120" cy="120" r="104" fill="#E5432F"/>
+      <path d="M16 170 L130 170 L118 182 L130 196 L116 210 L120 232 L16 232 Z" fill="#F4C02E"/>
+      <g transform="translate(150 70)">
+        <path d="M-44 -14 L40 -14 C40 -2 30 6 16 6 L16 18 L28 30 L-28 30 L-16 18 L-16 6 C-30 6 -44 -2 -44 -14 Z" fill="#1C1A22"/>
+        <path d="M-44 -14 L-62 -14 L-44 -4 Z" fill="#1C1A22"/>
+      </g>
+      <path d="M132 120 L132 140 M150 116 L150 146 M168 120 L168 140" stroke="#F3ECDD" stroke-width="4"/>
+      <g transform="translate(72 150)">
+        <g transform="rotate(30)"><rect x="-26" y="-4" width="40" height="8" fill="#2A5AA6"/><path d="M14 -4 L26 -4 L30 12 L20 12 Z" fill="#2A5AA6"/></g>
+        <g transform="rotate(150)"><rect x="-26" y="-4" width="40" height="8" fill="#1C1A22"/><path d="M14 -4 L26 -4 L30 12 L20 12 Z" fill="#1C1A22"/></g>
+      </g>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Закон</dt><dd>физика мультфильма</dd>
+      <dt class="smallcaps">Мир</dt><dd>дуэль в духе русской прозы XIX века</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">На краю оврага</p>
+    <h2>Секунданты ничего не могут поделать с миром, где падают только те, кто посмотрел вниз</h2>
+    <p class="lede">Барьер положили у самого обрыва: так потребовал поручик Завьялов, человек мрачный и начитанный. Отмерили шесть шагов. Секунданты зарядили пистолеты и, по обычаю, отвернулись к реке.</p>
+    <p>Граф выстрелил первым. Пуля пролетела сквозь Завьялова, оставив в нём аккуратное круглое отверстие, через которое было видно реку и лодку на ней. Завьялов посмотрел в отверстие, с некоторым удивлением заглянул туда одним глазом, вздохнул и поправил мундир. Отверстие затянулось.</p>
+    <p>— Сударь, это не по правилам, — сказал граф.</p>
+    <p>— Правила здесь, кажется, другие, — сказал Завьялов и прицелился. Его пистолет выпустил из ствола маленький флажок, на котором было написано «Бах».</p>
+    <p>Граф от негодования шагнул назад. Потом ещё назад. И оказался над пустотой, в двух аршинах от обрыва, стоя на воздухе так же твёрдо, как минуту назад стоял на траве.</p>
+    <p>— Не смотрите вниз, граф, — тихо сказал Завьялов. Он уже понял, как здесь всё устроено. — Ради бога, не смотрите вниз.</p>
+    <p>Граф был человеком чести и потому не мог не посмотреть, если ему советовали обратное. Он посмотрел. Повисел ещё мгновение — ровно столько, чтобы поднять табличку «Прощайте» — и рухнул, оставив в дне оврага ямку в форме графа.</p>
+    <p>Через минуту он вылез оттуда, сплюснутый, как гармошка, и с каждым шагом раздавался до прежних размеров. Сверху с опозданием свалилась наковальня, никому не предназначенная.</p>
+    <p>Секунданты посовещались и признали дуэль несостоявшейся за невозможностью нанести обиду. Противники пожали друг другу руки. Это, впрочем, в любом мире самая трудная часть.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Дуэль держится на необратимости: выстрел нельзя вернуть. В мире, где никто не может пострадать, кодекс чести рассыпается, и остаётся то, что под ним было: двое, которым трудно помириться.</p>
+  </div>
+  <blockquote class="pull">«Ради бога, не смотрите вниз».</blockquote>
+</article>
+
+<!-- X -->
+<article class="story">
+  <div class="side">
+    <p class="num">X</p>
+    <svg class="emblem" viewBox="0 0 240 240" role="img" aria-label="Белый поезд метро выныривает из чёрного тоннеля, как кит; синие рельсы сходятся в перспективу, над ними жёлтый фонарь" style="isolation:isolate">
+      <defs><clipPath id="eXc"><circle cx="120" cy="120" r="104"/></clipPath></defs>
+      <circle cx="120" cy="120" r="104" fill="#1C1A22"/>
+      <g clip-path="url(#eXc)">
+        <path d="M20 240 L108 120 L132 120 L220 240 Z" fill="#2A5AA6"/>
+        <path d="M70 240 L114 120 M170 240 L126 120" stroke="#F3ECDD" stroke-width="4"/>
+        <path d="M54 220 L186 220 M80 186 L160 186 M96 162 L144 162 M106 144 L134 144" stroke="#1C1A22" stroke-width="5"/>
+      </g>
+      <path d="M62 100 C62 62 90 50 120 50 C150 50 178 62 178 100 L178 126 L62 126 Z" fill="#F3ECDD"/>
+      <rect x="78" y="70" width="34" height="24" fill="#2A5AA6"/>
+      <rect x="128" y="70" width="34" height="24" fill="#2A5AA6"/>
+      <circle cx="84" cy="112" r="7" fill="#F4C02E"/>
+      <circle cx="156" cy="112" r="7" fill="#F4C02E"/>
+      <path d="M100 126 L140 126 L134 134 L106 134 Z" fill="#F3ECDD"/>
+      <path d="M120 22 C108 34 104 40 92 36 C102 44 112 44 120 38 C128 44 138 44 148 36 C136 40 132 34 120 22 Z" fill="#E5432F"/>
+    </svg>
+    <dl class="formula">
+      <dt class="smallcaps">Голос</dt><dd>Герман Мелвилл, «Моби Дик»</dd>
+      <dt class="smallcaps">Мир</dt><dd>ночной метрополитен</dd>
+    </dl>
+  </div>
+  <div class="body">
+    <p class="kicker">Белый состав</p>
+    <h2>Последний машинист кольцевой линии гонится за поездом, которого нет в расписании</h2>
+    <p class="lede">Зовите меня Измаилом. Несколько лет назад — неважно, сколько именно, — оказавшись почти без денег и не найдя на поверхности ничего, что держало бы меня, я решил спуститься под землю и посмотреть на подземную часть мира. Я нанялся помощником машиниста в ночное депо.</p>
+    <p>Машиниста звали Ахов. Он ходил на одной ноге и одной ламинированной табличке вместо второй, и табличка постукивала по полу кабины, как метроном. Говорили, что ногу у него отняло в тоннеле между двумя станциями, которых на схеме нет.</p>
+    <p>Мы возили ремонтные бригады и пустые составы, но Ахов искал другое. В три часа ночи, когда последний пассажир давно спал, по кольцевой проходил Белый состав: восемь вагонов цвета старой кости, без номеров и без машиниста. Его видели обходчики и бездомные, видели отражения в чёрных окнах. Никто не видел, чтобы он останавливался.</p>
+    <p>Однажды ночью Ахов собрал нас в кабине и прибил к пульту жетон — последний жетон, который ещё помнил турникеты. «Тому, кто первым увидит его огни», — сказал он.</p>
+    <p>Мы кружили неделю. Кольцо, как известно, не имеет начала, и погоня по кольцу есть погоня за самим собой. На седьмую ночь из тоннеля за нами пролился белый свет, ровный и холодный, как молоко. Белый состав шёл навстречу по нашему же пути.</p>
+    <p>Ахов не затормозил. Я видел его лицо в отблеске: на нём не было страха, было только облегчение человека, который наконец-то догнал.</p>
+    <p>Что случилось потом, я не знаю. Я очнулся на платформе, один, с жетоном в кулаке. Расписание на стене было тем же. Утром пошли первые поезда, и пассажиры стояли, как всегда, глядя в телефоны. И только я один знал, что на кольцевой стало на один вагон меньше и на одно эхо больше.</p>
+    <p class="result"><span class="smallcaps">Итог опыта</span>Метро оказалось почти океаном: тёмное, огромное, бесконечно кружащее, с легендами вместо карт. Голос Мелвилла превращает ночную смену в одержимость, а кольцевую линию — в притчу о погоне, у которой нет конца.</p>
+  </div>
+  <blockquote class="pull">«Погоня по кольцу есть погоня за самим собой».</blockquote>
+</article>
+
+<section class="coda">
+  <h2 class="section">Привой приживается там, где у двух миров общий страх</h2>
+  <p class="lede">Подведём итог лабораторного журнала. Лучше всего срастались пары, у которых под разными костюмами пряталось одно и то же: страх быть забытым у Гоголя и в аду, пустая учтивость у бюрократии и в волшебной сказке, бесконечный труд у жития и у курьерской смены. Чужой голос не украшал новый мир, а называл в нём то, что там уже было.</p>
+  <p>Хуже всего срастались пары, где один мир отменял закон другого. Дедукция без невозможного, дуэль без смерти, заклинание без ответа — эти опыты не удались в том смысле, в каком удаётся рассказ, но удались как опыты: на месте разрыва видно, на чём держался каждый жанр.</p>
+  <p>Колба остаётся на столе. Голосов и миров в ней хватит ещё на много опытов: Чехов на орбитальной станции, Борхес в городе бумажных карт, боги на выборах. Для следующей серии нужно только выбрать пару и поставить её на огонь.</p>
+</section>
+
+</div>
+</body>
+</html>

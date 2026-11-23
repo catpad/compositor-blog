@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лягушка Басё в двенадцати водоёмах</title>
+<meta name="description" content="Полевой определитель одного хайку: разбор «Старого пруда» Басё и его переводы на латынь, древнегреческий, санскрит, древнеанглийский, эсперанто, клингонский, суахили, зулу, йоруба и гавайский.">
+<meta name="compositor:paper" content="#F2EEE3">
+<meta name="compositor:ink" content="#1E1C18">
+<meta name="compositor:accent" content="#2F5C4F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+SC:wght@400;700&family=Noto+Serif+JP:wght@400;600&family=Noto+Serif+Devanagari:wght@400;600&family=Noto+Sans+Cuneiform&family=Amiri:wght@400;700&family=Noto+Serif+Hebrew:wght@400;600&family=Noto+Serif+Georgian:wght@400;600&family=Noto+Serif+Tibetan:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2EEE3;
+  --ink:#1E1C18;
+  --pencil:#6B655A;
+  --rule:#C9C1AE;
+  --plate:#E8E2D2;
+  --water:#2F5C4F;
+  --measure:38rem;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Alegreya",Georgia,serif;font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:68rem;margin:0 auto;padding:3rem 1.25rem 4rem}
+.sc{font-family:"Alegreya SC",serif;letter-spacing:.06em}
+h1,h2,h3{font-family:"Alegreya SC",serif;font-weight:700;line-height:1.15;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.6rem);letter-spacing:.01em}
+h2{font-size:1.55rem;margin:0 0 .6rem}
+h3{font-size:1.15rem}
+p{margin:0 0 1rem;max-width:var(--measure)}
+a{color:var(--water)}
+.jp{font-family:"Noto Serif JP",serif}
+.dev{font-family:"Noto Serif Devanagari",serif}
+.cun{font-family:"Noto Sans Cuneiform",sans-serif}
+.ar{font-family:"Amiri",serif}
+.he{font-family:"Noto Serif Hebrew",serif}
+.ka{font-family:"Noto Serif Georgian",serif}
+.bo{font-family:"Noto Serif Tibetan",serif}
+.poem.cun{font-size:1.8rem;line-height:1.7;letter-spacing:.08em}
+.poem.cun .l{border-bottom:1px solid var(--rule);max-width:20rem}
+.poem.ar{font-size:1.8rem;line-height:1.9}
+.poem.he{font-size:1.65rem;line-height:1.8}
+.poem.bo{font-size:1.6rem;line-height:2}
+.bliss{margin:0 0 .6rem;max-width:20rem;border:1px solid var(--ink);background:var(--plate);padding:.5rem}
+.bliss svg{display:block;width:100%;height:auto}
+.ital{font-style:italic}
+.muted{color:var(--pencil)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* title block */
+.titleblock{display:grid;grid-template-columns:1fr;gap:2rem;border-bottom:2px solid var(--ink);padding-bottom:2rem;margin-bottom:2.5rem}
+.kicker{font-family:"Alegreya SC",serif;font-size:.85rem;letter-spacing:.14em;color:var(--pencil);margin-bottom:.8rem}
+.lede{font-size:1.2rem;line-height:1.5;margin-top:1rem}
+.frontplate{border:1px solid var(--ink);background:var(--plate);padding:.75rem}
+.frontplate svg{display:block;width:100%;height:auto}
+.caption{font-size:.85rem;color:var(--pencil);margin-top:.4rem;line-height:1.4}
+@media(min-width:820px){.titleblock{grid-template-columns:1.1fr .9fr;align-items:end}}
+
+/* how to use */
+.howto{display:grid;gap:1rem 2rem;grid-template-columns:1fr;margin-bottom:3rem}
+.howto dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;font-size:.95rem;max-width:var(--measure)}
+.howto dt{font-family:"Alegreya SC",serif;color:var(--water)}
+.howto dd{margin:0}
+@media(min-width:820px){.howto{grid-template-columns:1fr 1fr}}
+
+/* original */
+.original{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:2.5rem 0;margin-bottom:3rem}
+.orig-grid{display:grid;grid-template-columns:1fr;gap:2rem}
+@media(min-width:820px){.orig-grid{grid-template-columns:auto 1fr}}
+.tategaki{writing-mode:vertical-rl;font-family:"Noto Serif JP",serif;font-size:2.4rem;line-height:1.7;letter-spacing:.15em;height:15rem;margin:0 auto;padding:0 .5rem;border-left:1px solid var(--rule);border-right:1px solid var(--rule)}
+.tategaki .ya{color:var(--water)}
+.romaji{font-size:1.35rem;line-height:1.5;margin:.2rem 0 1.4rem}
+.romaji .ya{color:var(--water);font-weight:700}
+.parts{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:0 0 1.5rem;max-width:var(--measure)}
+.part{border:1px solid var(--ink);padding:.5rem .6rem;font-size:.9rem;line-height:1.35}
+.part b{display:block;font-family:"Alegreya SC",serif;font-size:1rem}
+.part .tag{font-family:"Alegreya SC",serif;color:var(--water);font-size:.8rem;letter-spacing:.1em}
+.wordtable{border-collapse:collapse;width:100%;max-width:var(--measure);font-size:.95rem;margin:0 0 1.5rem}
+.wordtable th,.wordtable td{text-align:left;vertical-align:top;padding:.45rem .6rem .45rem 0;border-bottom:1px solid var(--rule)}
+.wordtable th{font-family:"Alegreya SC",serif;font-weight:400;color:var(--pencil);font-size:.85rem;letter-spacing:.08em}
+.wordtable td:first-child{white-space:nowrap}
+
+/* instrument */
+.instrument{display:block;width:100%;min-height:26rem;margin:2.5rem 0 3rem;border:1px solid var(--ink);background:var(--plate);position:relative}
+.instrument-wrap h2{margin-bottom:.4rem}
+
+/* entries */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:.4rem;margin:3.5rem 0 0}
+.section-head span{font-family:"Alegreya SC",serif;color:var(--pencil);font-size:.9rem;letter-spacing:.1em}
+.entry{display:grid;grid-template-columns:1fr;gap:1.25rem 2.5rem;padding:2.25rem 0;border-bottom:1px solid var(--rule)}
+@media(min-width:860px){.entry{grid-template-columns:15rem 1fr}}
+.entry-side{font-size:.9rem;line-height:1.45}
+.entry-no{font-family:"Alegreya SC",serif;font-size:.85rem;letter-spacing:.14em;color:var(--water)}
+.entry-side h3{font-size:1.5rem;margin:.15rem 0 .1rem}
+.entry-side .latin{font-style:italic;color:var(--pencil);margin-bottom:.9rem}
+.marks{margin:0;padding:0;list-style:none;border-top:1px solid var(--ink)}
+.marks li{display:grid;grid-template-columns:5.2rem 1fr;gap:.5rem;padding:.35rem 0;border-bottom:1px solid var(--rule)}
+.marks li span:first-child{font-family:"Alegreya SC",serif;color:var(--pencil);font-size:.8rem;letter-spacing:.06em;padding-top:.08rem}
+.poem{font-size:1.45rem;line-height:1.45;margin:0 0 .3rem}
+.poem .l{display:block}
+.poem .w{border-bottom:1px dotted var(--pencil)}
+.poem .w[data-k="1"]{}
+.translit{font-style:italic;color:var(--pencil);margin:0 0 1rem;font-size:1rem}
+.gloss{font-size:.92rem;margin:0 0 1.2rem;max-width:var(--measure);border-left:2px solid var(--water);padding-left:.8rem}
+.gloss .g{display:block}
+.gloss .g em{font-style:normal;font-family:"Alegreya SC",serif;color:var(--water);font-size:.8rem;letter-spacing:.08em;margin-right:.35rem}
+.keyline{font-size:.85rem;color:var(--pencil);border-top:1px solid var(--rule);padding-top:.5rem;margin-top:1rem;max-width:var(--measure)}
+.mini{float:right;width:6.5rem;margin:0 0 .6rem 1rem;border:1px solid var(--ink);background:var(--plate);padding:.3rem}
+.mini svg{display:block;width:100%;height:auto}
+.absent{background:var(--plate);border:1px dashed var(--pencil);padding:1.25rem 1.25rem .5rem;margin:2rem 0}
+
+/* comparison key */
+.keytable-box{overflow-x:auto;border:1px solid var(--ink);margin:1.5rem 0}
+.keytable{border-collapse:collapse;min-width:44rem;width:100%;font-size:.9rem}
+.keytable th,.keytable td{padding:.5rem .7rem;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.keytable thead th{font-family:"Alegreya SC",serif;font-weight:400;background:var(--plate);border-bottom:1px solid var(--ink);letter-spacing:.06em}
+.keytable td.num{text-align:right}
+.closing{margin-top:3rem;display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+@media(min-width:820px){.closing{grid-template-columns:1fr 18rem}}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/iuxh84sr/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Одна лягушка прыгает в девятнадцать прудов"><meta property="og:description" content="Полевой определитель одного хайку: разбор «Старого пруда» Басё и его переводы на латынь, древнегреческий, санскрит, древнеанглийский, эсперанто, клингонский, суахили, зулу, йоруба и гавайский."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/iuxh84sr/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F2EEE3;border-bottom:1px solid #1E1C1826;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1C18;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1C18;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1E1C18"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F2EEE3" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F2EEE3"/></svg><span>Compositor</span></a><time datetime="2026-11-23T03:00:52.236Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1C18;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+<div class="page">
+
+<header class="titleblock">
+  <div>
+    <div class="kicker">Полевой определитель · Вид единственный · Особей девятнадцать</div>
+    <h1>Одна лягушка прыгает в девятнадцать прудов</h1>
+    <p class="lede">В 1686 году Мацуо Басё записал семнадцать слогов о старом пруде, и с тех пор эта лягушка прыгает на всех языках мира. Здесь она описана так, как натуралист описывает птицу: признаки, ареал, сезон, повадки — сначала в родном водоёме, потом в восемнадцати чужих, от Рима Цицерона до лагуны на Гавайях.</p>
+  </div>
+  <figure class="frontplate" style="margin:0">
+    <svg viewBox="0 0 400 300" role="img" aria-label="Перо и тушь: старый пруд с камышом, лягушка в прыжке над водой, круги на воде">
+      <defs>
+        <pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#1E1C18" stroke-width=".7"/></pattern>
+        <pattern id="hatchH" width="6" height="4" patternUnits="userSpaceOnUse"><line x1="0" y1="2" x2="6" y2="2" stroke="#1E1C18" stroke-width=".5"/></pattern>
+        <pattern id="cross" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><line x1="0" y1="0" x2="0" y2="5" stroke="#1E1C18" stroke-width=".6"/><line x1="0" y1="0" x2="5" y2="0" stroke="#1E1C18" stroke-width=".4"/></pattern>
+      </defs>
+      <g fill="none" stroke="#1E1C18" stroke-linecap="round" stroke-linejoin="round">
+        <!-- far bank -->
+        <path d="M0 150 C60 140 110 146 170 141 S300 136 400 146" stroke-width="1.2"/>
+        <path d="M0 150 C60 140 110 146 170 141 S300 136 400 146 L400 160 C320 152 240 156 170 156 S50 160 0 162Z" fill="url(#hatch)" stroke="none"/>
+        <!-- stones -->
+        <path d="M285 150 C292 132 318 128 332 140 C340 147 338 156 330 158 L290 158Z" stroke-width="1.2" fill="#F2EEE3"/>
+        <path d="M300 156 C306 146 322 144 330 152" stroke-width=".6"/>
+        <path d="M312 157 L330 140 M318 158 L334 145 M324 158 L336 150" stroke-width=".6"/>
+        <!-- water lines -->
+        <g stroke-width=".6">
+          <path d="M20 190 H120 M160 196 H260 M300 188 H385 M40 230 H110 M250 240 H370 M15 265 H90 M140 275 H230 M290 280 H390"/>
+        </g>
+        <!-- ripples -->
+        <g stroke-width="1">
+          <ellipse cx="190" cy="215" rx="18" ry="5"/>
+          <ellipse cx="190" cy="215" rx="40" ry="11" stroke-width=".8"/>
+          <ellipse cx="190" cy="215" rx="68" ry="18" stroke-width=".6" stroke-dasharray="6 4"/>
+          <ellipse cx="190" cy="215" rx="100" ry="26" stroke-width=".45" stroke-dasharray="3 6"/>
+        </g>
+        <!-- splash -->
+        <path d="M182 212 C180 202 178 198 174 194 M190 211 L190 196 M198 212 C200 202 203 198 207 194" stroke-width=".9"/>
+        <circle cx="172" cy="190" r="1.4" fill="#1E1C18"/><circle cx="191" cy="191" r="1.2" fill="#1E1C18"/><circle cx="209" cy="190" r="1.4" fill="#1E1C18"/>
+        <!-- reeds left -->
+        <g stroke-width="1.1">
+          <path d="M42 260 C44 200 46 150 40 80"/>
+          <path d="M55 262 C56 210 60 160 66 104"/>
+          <path d="M30 262 C30 220 26 180 18 140"/>
+          <path d="M70 262 C74 230 84 200 96 176"/>
+          <path d="M37 82 C35 70 40 58 44 52 C46 62 45 74 41 84Z" fill="url(#cross)"/>
+          <path d="M63 106 C61 94 66 82 70 77 C72 87 71 99 67 108Z" fill="url(#cross)"/>
+          <path d="M44 200 C30 180 22 170 10 166 M56 220 C70 200 82 194 96 192" stroke-width=".8"/>
+        </g>
+        <!-- reeds right -->
+        <g stroke-width="1">
+          <path d="M360 270 C358 220 356 190 362 130"/>
+          <path d="M372 270 C376 230 382 200 392 170"/>
+          <path d="M359 132 C357 120 362 110 365 104 C367 114 366 124 362 134Z" fill="url(#cross)"/>
+        </g>
+        <!-- frog in mid-air -->
+        <g transform="translate(205 98) rotate(28)">
+          <path d="M-30 0 C-28 -14 -10 -22 8 -20 C22 -18 32 -10 34 -2 C34 6 24 12 8 13 C-10 14 -26 10 -30 0Z" stroke-width="1.4" fill="#F2EEE3"/>
+          <path d="M-22 6 C-10 12 10 12 26 4 C24 9 12 13 0 13 C-12 13 -20 10 -22 6Z" fill="url(#hatch)" stroke="none"/>
+          <circle cx="22" cy="-14" r="5" stroke-width="1.2" fill="#F2EEE3"/>
+          <circle cx="23" cy="-14" r="2" fill="#1E1C18" stroke="none"/>
+          <path d="M28 -6 C31 -5 33 -3 34 -1" stroke-width=".8"/>
+          <path d="M-6 -16 C-4 -12 0 -12 3 -15 M-16 -12 C-14 -8 -10 -8 -8 -11" stroke-width=".6"/>
+          <!-- back legs stretched -->
+          <path d="M-26 4 C-40 4 -52 8 -64 16 L-80 18 M-64 16 L-78 24 M-64 16 L-74 28" stroke-width="1.3"/>
+          <path d="M-24 8 C-38 12 -48 18 -58 28 L-72 34 M-58 28 L-68 40 M-58 28 L-62 42" stroke-width="1.3"/>
+          <path d="M-40 6 C-46 9 -52 12 -58 16" stroke-width=".5"/>
+          <!-- front legs reaching -->
+          <path d="M14 10 C22 18 30 24 40 28 L46 26 M40 28 L46 32 M40 28 L42 35" stroke-width="1.2"/>
+          <path d="M6 12 C10 22 16 30 24 36 L30 36 M24 36 L28 41" stroke-width="1.1"/>
+        </g>
+      </g>
+    </svg>
+    <figcaption class="caption">Табл. I. <i>Kawazu tobikomu</i>: животное в момент между берегом и водой. Звука ещё нет.</figcaption>
+  </figure>
+</header>
+
+<section class="howto">
+  <div>
+    <h2>Как читать этот определитель</h2>
+    <p>Каждый перевод описан как отдельная особь. У неё есть <b>признаки</b>, по которым её узнают с первого взгляда, <b>ареал</b> — где и кем на этом языке говорили, <b>сезон</b> — эпоха, и подробный разбор: какое слово выбрано, почему, и что из оригинала удалось донести до воды.</p>
+    <p>Все переводы ниже сделаны для этой страницы. Классические языки переданы по грамматикам и словарям; живые африканские языки и гавайский — честная попытка, которую носитель мог бы отшлифовать. Где знаний не хватало, это сказано прямо.</p>
+  </div>
+  <dl>
+    <dt>Часть I</dt><dd><span class="jp">古池や</span> <i>furu ike ya</i> — «старый пруд» и режущее слово</dd>
+    <dt>Часть II</dt><dd><span class="jp">蛙飛び込む</span> <i>kawazu tobikomu</i> — лягушка прыгает внутрь</dd>
+    <dt>Часть III</dt><dd><span class="jp">水の音</span> <i>mizu no oto</i> — звук воды</dd>
+    <dt>Кирэдзи</dt><dd>Отмечено цветом воды: место, где стихотворение режется пополам</dd>
+    <dt>Подстрочник</dt><dd>Под каждым переводом: слово за словом, к какой части оригинала оно относится</dd>
+  </dl>
+</section>
+
+<section class="original">
+  <div class="kicker">Типовой экземпляр · Голотип</div>
+  <h2>Оригинал держится на трёх существительных и одном глаголе</h2>
+  <div class="orig-grid">
+    <div class="tategaki" lang="ja" aria-label="古池や 蛙飛び込む 水の音">古池<span class="ya">や</span><br>蛙飛び込む<br>水の音</div>
+    <div>
+      <p class="romaji"><i>furu ike <span class="ya">ya</span><br>kawazu tobikomu<br>mizu no oto</i></p>
+      <div class="parts">
+        <div class="part"><span class="tag">I · 5 мор</span><b>furu ike ya</b>старый пруд — !</div>
+        <div class="part"><span class="tag">II · 7 мор</span><b>kawazu tobikomu</b>лягушка прыгает внутрь</div>
+        <div class="part"><span class="tag">III · 5 мор</span><b>mizu no oto</b>воды звук</div>
+      </div>
+      <table class="wordtable">
+        <thead><tr><th>Слово</th><th>Что значит</th><th>Почему важно</th></tr></thead>
+        <tbody>
+          <tr><td><span class="jp">古</span> <i>furu</i></td><td>старый, давний</td><td>Не просто «пожилой»: прошедший сквозь время, заброшенный, тихий. Ещё до лягушки в пруду есть годы.</td></tr>
+          <tr><td><span class="jp">池</span> <i>ike</i></td><td>пруд</td><td>Стоячая вода, сделанная человеком или им прирученная. Не озеро и не река: ничто в ней не течёт.</td></tr>
+          <tr><td><span class="jp">や</span> <i>ya</i></td><td>режущее слово, <i>кирэдзи</i></td><td>Не переводится. Это пауза с восклицанием: «Старый пруд — вот он». Делит хайку на неподвижную картину и событие.</td></tr>
+          <tr><td><span class="jp">蛙</span> <i>kawazu</i></td><td>лягушка</td><td>Старое поэтическое слово (в разговоре — <i>kaeru</i>) и сезонное слово весны. В японской поэзии лягушку веками хвалили за <b>голос</b>.</td></tr>
+          <tr><td><span class="jp">飛び込む</span> <i>tobikomu</i></td><td>впрыгивает внутрь</td><td>Составной глагол: <i>tobu</i> «прыгать, лететь» + <i>komu</i> «входить внутрь». Один глагол — и прыжок, и погружение.</td></tr>
+          <tr><td><span class="jp">水</span> <i>mizu</i></td><td>вода</td><td>Та же вода, что была старым прудом, — но теперь она звучит.</td></tr>
+          <tr><td><span class="jp">の</span> <i>no</i></td><td>частица принадлежности</td><td>«Воды звук» — как русский родительный падеж, только впереди.</td></tr>
+          <tr><td><span class="jp">音</span> <i>oto</i></td><td>звук, шум</td><td>Последнее слово стиха — и единственное событие, которое можно услышать.</td></tr>
+        </tbody>
+      </table>
+      <p>Вот в чём фокус. Поэты до Басё, услышав слово <i>kawazu</i>, ждали кваканья: лягушки пели в стихах так же обязательно, как соловьи. Басё оставляет лягушку немой. Её единственный звук — всплеск, и тот принадлежит не ей, а воде. Тишина пруда становится слышна именно потому, что её на мгновение нарушили.</p>
+      <p>В стихе нет ни «я», ни времени, ни прилагательных, кроме одного «старый». Нет даже числа: одна лягушка или много — японский не говорит. Переводчики веками спорят, а Басё молчит. Каждый перевод ниже вынужден на этот вопрос ответить, и это первое, по чему его можно опознать.</p>
+    </div>
+  </div>
+</section>
+
+<section class="instrument-wrap">
+  <h2>Каждое слово перевода ведёт к одной из трёх частей оригинала</h2>
+  <p>В инструменте собрана выборка из десяти переводов: латынь, древнегреческий, санскрит, древнеанглийский, эсперанто, клингонский, суахили, зулу, йоруба и гавайский. Остальные описаны только ниже, в определителе. Выберите слово в любом из них — увидите его подстрочное значение и часть японского стиха, которой оно соответствует. Рядом видно, где каждый язык ставит свои паузы и как перекраивает пропорции пяти, семи и пяти.</p>
+  <div class="instrument" data-instrument="word-map">
+  <div class="wm-panel" aria-live="polite">
+    <div class="wm-box wm-src">
+      <div class="wm-label"></div>
+      <div class="wm-main"></div>
+      <div class="wm-sub"></div>
+      <div class="wm-meta"></div>
+    </div>
+    <div class="wm-arrow" aria-hidden="true">→</div>
+    <div class="wm-box wm-tgt">
+      <div class="wm-label"></div>
+      <div class="wm-main"></div>
+      <div class="wm-sub"></div>
+      <div class="wm-meta"></div>
+    </div>
+  </div>
+  <div class="wm-head">
+    <span class="wm-hname">Язык</span>
+    <span class="wm-hwords">Слова по частям оригинала</span>
+    <button type="button" class="wm-switch" role="switch" aria-checked="false"><span class="wm-knob" aria-hidden="true"></span><span class="wm-switch-t">Шкала: слоги</span></button>
+  </div>
+  <div class="wm-rows"></div>
+</div>
+<style>
+[data-instrument="word-map"]{padding:1rem 1rem 1.25rem;font-family:"Alegreya",Georgia,serif;color:var(--ink)}
+[data-instrument="word-map"] [lang="ja"]{font-family:"Noto Serif JP",serif}
+[data-instrument="word-map"] [lang="sa"]{font-family:"Noto Serif Devanagari",serif}
+[data-instrument="word-map"] .wm-panel{display:grid;grid-template-columns:1fr 1.6rem 1fr;align-items:stretch;border:1px solid var(--ink);background:var(--paper);height:9.4rem;overflow:hidden}
+[data-instrument="word-map"] .wm-box{padding:.6rem .85rem;min-width:0;display:flex;flex-direction:column}
+[data-instrument="word-map"] .wm-tgt{border-left:1px solid var(--rule)}
+[data-instrument="word-map"] .wm-arrow{display:flex;align-items:center;justify-content:center;color:var(--water);font-size:1.2rem}
+[data-instrument="word-map"] .wm-label{font-family:"Alegreya SC",serif;font-size:.78rem;letter-spacing:.08em;color:var(--pencil);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:1.25rem}
+[data-instrument="word-map"] .wm-main{font-size:1.6rem;line-height:1.3;height:2.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="word-map"] .wm-sub{font-size:.95rem;line-height:1.3;height:2.5rem;overflow:hidden;font-style:italic}
+[data-instrument="word-map"] .wm-meta{font-size:.82rem;line-height:1.3;color:var(--pencil);font-variant-numeric:tabular-nums lining-nums;height:2.15rem;overflow:hidden}
+[data-instrument="word-map"] .wm-head{display:grid;grid-template-columns:8.5rem 1fr auto;gap:.75rem;align-items:center;margin:1rem 0 .2rem;font-family:"Alegreya SC",serif;font-size:.8rem;letter-spacing:.08em;color:var(--pencil)}
+[data-instrument="word-map"] .wm-switch{display:inline-flex;align-items:center;gap:.45rem;font:inherit;color:var(--ink);background:none;border:1px solid var(--ink);padding:.2rem .55rem .2rem .3rem;cursor:pointer;width:9.2rem;touch-action:manipulation}
+[data-instrument="word-map"] .wm-knob{position:relative;width:1.7rem;height:.8rem;border:1px solid var(--ink);flex:none}
+[data-instrument="word-map"] .wm-knob::after{content:"";position:absolute;top:1px;left:1px;width:.55rem;height:calc(100% - 2px);background:var(--ink);transition:left .2s}
+[data-instrument="word-map"] .wm-switch[aria-checked="true"] .wm-knob::after{left:calc(100% - .55rem - 1px);background:var(--water)}
+[data-instrument="word-map"] .wm-switch:focus-visible{outline:2px solid var(--water);outline-offset:2px}
+[data-instrument="word-map"] .wm-row{display:grid;grid-template-columns:8.5rem 1fr 4.4rem;gap:.75rem;padding:.45rem 0 .5rem;border-bottom:1px solid var(--rule);align-items:start}
+[data-instrument="word-map"] .wm-row.is-jp{border-bottom:1px solid var(--ink);padding-bottom:.65rem}
+[data-instrument="word-map"] .wm-name{font-family:"Alegreya SC",serif;font-size:.92rem;letter-spacing:.04em;padding-top:.2rem;line-height:1.2}
+[data-instrument="word-map"] .wm-name small{display:block;font-size:.75rem;color:var(--pencil)}
+[data-instrument="word-map"] .wm-row.is-row .wm-name{color:var(--water)}
+[data-instrument="word-map"] .wm-words{line-height:1.7}
+[data-instrument="word-map"] .wm-w{font:inherit;font-size:1.05rem;color:var(--ink);background:transparent;border:0;border-bottom:1px dotted var(--pencil);border-radius:2px;padding:0 .22rem;margin:0 .04rem;cursor:pointer;touch-action:manipulation;transition:background-color .15s,color .15s}
+[data-instrument="word-map"] .wm-row.is-jp .wm-w{font-size:1rem;border:1px solid var(--rule);padding:.1rem .5rem;margin-right:.3rem}
+[data-instrument="word-map"] .wm-row.is-jp .wm-w i{color:var(--pencil);font-size:.88rem;margin-left:.3rem}
+[data-instrument="word-map"] .wm-w.is-svc{color:var(--pencil);font-style:italic}
+[data-instrument="word-map"] .wm-w.is-part{background:rgba(47,92,79,.16);background:color-mix(in srgb,var(--water) 17%,transparent)}
+[data-instrument="word-map"] .wm-w.is-sel,[data-instrument="word-map"] .wm-row.is-jp .wm-w.is-sel{background:var(--water);color:var(--paper);border-bottom-color:transparent}
+[data-instrument="word-map"] .wm-w.is-sel i{color:var(--paper)!important}
+[data-instrument="word-map"] .wm-w:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+[data-instrument="word-map"] .wm-sep{display:inline-block;width:1px;height:.95em;background:var(--rule);margin:0 .35rem;vertical-align:-.1em}
+[data-instrument="word-map"] .wm-bar{height:6px;margin-top:.35rem}
+[data-instrument="word-map"] .wm-track{display:flex;gap:2px;height:100%;transition:width .3s}
+[data-instrument="word-map"] .wm-seg{background:var(--rule);min-width:0;transition:flex-grow .3s,background-color .15s}
+[data-instrument="word-map"] .wm-seg.on{background:var(--water)}
+[data-instrument="word-map"] .wm-count{text-align:right;font-variant-numeric:tabular-nums lining-nums;font-size:.92rem;padding-top:.25rem;color:var(--pencil);white-space:nowrap}
+[data-instrument="word-map"] .wm-count b{font-weight:400}
+[data-instrument="word-map"] .wm-count b.on{font-weight:700;color:var(--water)}
+@media (max-width:40rem){
+  [data-instrument="word-map"] .wm-panel{grid-template-columns:1fr;grid-template-rows:auto 1.2rem auto;height:17.8rem}
+  [data-instrument="word-map"] .wm-tgt{border-left:0;border-top:1px solid var(--rule)}
+  [data-instrument="word-map"] .wm-arrow{transform:rotate(90deg)}
+  [data-instrument="word-map"] .wm-head{grid-template-columns:1fr auto}
+  [data-instrument="word-map"] .wm-hname{display:none}
+  [data-instrument="word-map"] .wm-row{grid-template-columns:1fr 4.2rem}
+  [data-instrument="word-map"] .wm-name{grid-column:1/-1;padding:0}
+  [data-instrument="word-map"] .wm-name small{display:inline;margin-left:.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="word-map"] *,[data-instrument="word-map"] *::after{transition:none!important}
+}
+</style>
+<script>(function(){ const root = document.querySelector('[data-instrument="word-map"]');
+if(!root) return;
+const ROMAN=['—','I','II','III'];
+const JP=[null,
+  {jp:'古池や',ro:'furu ike ya',ru:'старый пруд — !'},
+  {jp:'蛙飛び込む',ro:'kawazu tobikomu',ru:'лягушка прыгает внутрь'},
+  {jp:'水の音',ro:'mizu no oto',ru:'воды звук'}];
+function plural(n,a,b,c){const m=n%10,h=n%100;if(m===1&&h!==11)return a;if(m>=2&&m<=4&&(h<12||h>14))return b;return c;}
+function syl(n){return n+' '+plural(n,'слог','слога','слогов');}
+function mor(n){return n+' '+plural(n,'мора','моры','мор');}
+function strip(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function vcount(s,v,d){let n=0,i=0;while(i<s.length){const c=s[i];if(v.indexOf(c)>=0){n++;if(d&&i+1<s.length&&d.indexOf(c+s[i+1])>=0)i+=2;else i++;}else i++;}return n;}
+function devCount(s){let n=0;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);
+  if(c>=0x0904&&c<=0x0914)n++;
+  else if((c>=0x0915&&c<=0x0939)||(c>=0x0958&&c<=0x095F)){let j=i+1;if(s.charCodeAt(j)===0x093C)j++;if(s.charCodeAt(j)!==0x094D)n++;}}
+  return n;}
+const RULES={
+  la:{v:'aeiouy',d:['ae','au','oe'],pre:s=>s.replace(/qu/g,'q')},
+  grc:{v:'αεηιουω',d:['αι','ει','οι','υι','αυ','ευ','ηυ','ου']},
+  ang:{v:'aeiouyæ',d:['ea','eo','ie','io']},
+  eo:{v:'aeiou',pre:s=>s.replace(/ŭ/g,'w')},
+  tlh:{v:'aeiou'},sw:{v:'aeiou'},zu:{v:'aeiou'},
+  yo:{v:'aeiou'},
+  haw:{v:'aeiou',d:['ai','ae','ao','au','ei','eu','oi','ou']}
+};
+function count(lang,word){
+  if(lang==='sa')return devCount(word);
+  const r=RULES[lang]||{v:'aeiou'};
+  let s=word.toLowerCase();
+  if(r.pre)s=r.pre(s);
+  s=strip(s);
+  if(lang==='yo'){
+    if(/^[nm]$/.test(s))return 1;
+    let n=vcount(s,r.v,r.d);
+    if(/^[nm][^aeiou]/.test(s))n++;
+    return n;
+  }
+  return vcount(s,r.v,r.d);
+}
+function init(){
+  const rowsEl=root.querySelector('.wm-rows');
+  const rows=[];
+  const jpRow={name:'Японский',sub:'оригинал',lang:'ja',jp:true,words:[],parts:[0,0,0,0],total:0};
+  for(let k=1;k<=3;k++){
+    const ro=JP[k].ro;
+    const n=(ro.match(/[aeiou]/g)||[]).length+(ro.match(/n(?![aeiouy])/g)||[]).length;
+    jpRow.words.push({text:JP[k].jp,k:k,syl:n});
+    jpRow.parts[k]=n;jpRow.total+=n;
+  }
+  rows.push(jpRow);
+  document.querySelectorAll('.entry[data-lang]').forEach(function(en){
+    const poem=en.querySelector('.poem');if(!poem)return;
+    const lang=en.getAttribute('data-lang');
+    const h=en.querySelector('.entry-side h3');
+    const lines=Array.prototype.slice.call(poem.querySelectorAll('.l'));
+    const ws=poem.querySelectorAll('span.w');
+    if(!ws.length)return;
+    const row={name:h?h.textContent.trim():lang,lang:lang,words:[],parts:[0,0,0,0],total:0};
+    const lineK={};
+    ws.forEach(function(w){
+      const t=w.textContent.trim();
+      const k=parseInt(w.getAttribute('data-k'),10)||0;
+      const li=lines.indexOf(w.closest('.l'));
+      const o={text:t,k:k,g:w.getAttribute('data-g')||'',line:li,syl:count(lang,t)};
+      row.words.push(o);
+      if(k>0){lineK[li]=lineK[li]||{};lineK[li][k]=(lineK[li][k]||0)+1;}
+    });
+    row.words.forEach(function(o){
+      let pk=o.k;
+      if(!pk){
+        const m=lineK[o.line];let best=0,bv=-1;
+        if(m)for(const key in m){if(m[key]>bv){bv=m[key];best=+key;}}
+        pk=best||Math.min(3,Math.max(1,o.line+1));
+      }
+      row.parts[pk]+=o.syl;row.total+=o.syl;
+    });
+    rows.push(row);
+  });
+  const maxTotal=Math.max.apply(null,rows.map(r=>r.total));
+  const btns=[],rowEls=[];
+  rows.forEach(function(row,r){
+    const el=document.createElement('div');
+    el.className='wm-row'+(row.jp?' is-jp':'');
+    const nm=document.createElement('div');nm.className='wm-name';
+    nm.textContent=row.name;
+    if(row.sub){const s=document.createElement('small');s.textContent=row.sub;nm.appendChild(s);}
+    const body=document.createElement('div');
+    const words=document.createElement('div');words.className='wm-words';
+    if(!row.jp)words.setAttribute('lang',row.lang);
+    let prevLine=null;
+    row.words.forEach(function(w,i){
+      if(!row.jp&&prevLine!==null&&w.line!==prevLine){const sp=document.createElement('span');sp.className='wm-sep';sp.setAttribute('aria-hidden','true');words.appendChild(sp);}
+      else if(i>0&&!row.jp)words.appendChild(document.createTextNode(' '));
+      prevLine=w.line;
+      const b=document.createElement('button');b.type='button';b.className='wm-w'+(w.k===0?' is-svc':'');
+      b.dataset.r=r;b.dataset.i=i;b.dataset.k=w.k;b.tabIndex=-1;
+      if(row.jp){
+        const j=document.createElement('span');j.setAttribute('lang','ja');j.textContent=w.text;
+        const it=document.createElement('i');it.textContent=JP[w.k].ro;
+        b.appendChild(j);b.appendChild(it);
+      }else b.textContent=w.text;
+      words.appendChild(b);btns.push(b);
+    });
+    const bar=document.createElement('div');bar.className='wm-bar';bar.setAttribute('aria-hidden','true');
+    const tr=document.createElement('div');tr.className='wm-track';
+    const segs=[];
+    for(let k=1;k<=3;k++){const s=document.createElement('span');s.className='wm-seg';tr.appendChild(s);segs.push(s);}
+    bar.appendChild(tr);
+    body.appendChild(words);body.appendChild(bar);
+    const ct=document.createElement('div');ct.className='wm-count';
+    const cb=[];
+    for(let k=1;k<=3;k++){if(k>1)ct.appendChild(document.createTextNode('·'));const b=document.createElement('b');b.textContent=row.parts[k];ct.appendChild(b);cb.push(b);}
+    ct.setAttribute('aria-label',(row.jp?'моры':'слоги')+' по частям: '+row.parts.slice(1).join(', '));
+    el.appendChild(nm);el.appendChild(body);el.appendChild(ct);
+    rowsEl.appendChild(el);
+    rowEls.push({el:el,track:tr,segs:segs,cb:cb});
+  });
+  let mode='abs';
+  function layout(){
+    rows.forEach(function(row,r){
+      const re=rowEls[r];
+      re.track.style.width=mode==='abs'?(row.total/maxTotal*100)+'%':'100%';
+      re.segs.forEach(function(s,j){const v=row.parts[j+1];s.style.flexGrow=v;s.style.flexBasis='0';s.style.display=v?'':'none';});
+    });
+  }
+  const sw=root.querySelector('.wm-switch'),swt=root.querySelector('.wm-switch-t');
+  sw.addEventListener('click',function(){
+    mode=mode==='abs'?'rel':'abs';
+    sw.setAttribute('aria-checked',mode==='rel'?'true':'false');
+    swt.textContent=mode==='abs'?'Шкала: слоги':'Шкала: доли';
+    layout();
+  });
+  const boxes={src:root.querySelector('.wm-src'),tgt:root.querySelector('.wm-tgt')};
+  function setBox(box,o){
+    box.querySelector('.wm-label').textContent=o.label;
+    const m=box.querySelector('.wm-main');m.textContent=o.main;
+    if(o.lang)m.setAttribute('lang',o.lang);else m.removeAttribute('lang');
+    box.querySelector('.wm-sub').textContent=o.sub;
+    box.querySelector('.wm-meta').textContent=o.meta;
+  }
+  const st={r:1,i:0};
+  function names(list){return list.map(r=>r.name.toLowerCase()).join(', ');}
+  function render(){
+    const row=rows[st.r],w=row.words[st.i],k=w.k;
+    btns.forEach(function(b){
+      const r=+b.dataset.r,i=+b.dataset.i,bk=+b.dataset.k;
+      const sel=r===st.r&&i===st.i;
+      b.classList.toggle('is-sel',sel);
+      b.classList.toggle('is-part',k>0&&bk===k&&!sel);
+      b.setAttribute('aria-pressed',sel?'true':'false');
+      b.tabIndex=sel?0:-1;
+    });
+    rowEls.forEach(function(re,r){
+      re.el.classList.toggle('is-row',r===st.r);
+      re.segs.forEach((s,j)=>s.classList.toggle('on',k===j+1));
+      re.cb.forEach((b,j)=>b.classList.toggle('on',k===j+1));
+    });
+    if(row.jp){
+      setBox(boxes.src,{label:'Японский · часть '+ROMAN[k],main:JP[k].jp,lang:'ja',sub:JP[k].ro+' — '+JP[k].ru,meta:mor(row.parts[k])+' из '+row.total});
+      const tr=rows.slice(1);
+      if(!tr.length){setBox(boxes.tgt,{label:'Переводы',main:'—',sub:'',meta:''});return;}
+      const vals=tr.map(r=>r.parts[k]);
+      const mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals);
+      const same=tr.filter(r=>r.parts[k]===row.parts[k]);
+      setBox(boxes.tgt,{
+        label:'Часть '+ROMAN[k]+' в '+tr.length+' '+plural(tr.length,'переводе','переводах','переводах'),
+        main:mn===mx?syl(mn):mn+'–'+syl(mx),
+        sub:'короче всех: '+names(tr.filter(r=>r.parts[k]===mn))+' · длиннее всех: '+names(tr.filter(r=>r.parts[k]===mx)),
+        meta:same.length?'столько же, сколько мор в оригинале: '+names(same):'ни один перевод не совпал с оригиналом ('+mor(row.parts[k])+')'
+      });
+      return;
+    }
+    setBox(boxes.src,{
+      label:row.name+' · '+(k?'часть '+ROMAN[k]:'служебное слово'),
+      main:w.text,lang:row.lang,sub:w.g,
+      meta:syl(w.syl)+' в слове · '+(k?'часть '+ROMAN[k]+': '+row.parts[k]+' из '+row.total:'строка в целом: '+syl(row.total))
+    });
+    if(k){
+      setBox(boxes.tgt,{label:'Оригинал · часть '+ROMAN[k],main:JP[k].jp,lang:'ja',sub:JP[k].ro+' — '+JP[k].ru,meta:mor(jpRow.parts[k])+' из '+jpRow.total+' · в переводе '+syl(row.parts[k])});
+    }else{
+      setBox(boxes.tgt,{label:'Оригинал',main:'—',sub:'соответствия в японском нет',meta:'слово нужно грамматике перевода, а не стиху'});
+    }
+  }
+  function select(r,i,focus){st.r=r;st.i=i;render();if(focus){const b=rowsEl.querySelector('.wm-w[data-r="'+r+'"][data-i="'+i+'"]');if(b)b.focus();}}
+  rowsEl.addEventListener('click',function(e){const b=e.target.closest('.wm-w');if(!b)return;select(+b.dataset.r,+b.dataset.i,false);});
+  rowsEl.addEventListener('keydown',function(e){
+    const b=e.target.closest('.wm-w');if(!b)return;
+    let r=+b.dataset.r,i=+b.dataset.i;const len=rows[r].words.length;
+    if(e.key==='ArrowRight')i=Math.min(len-1,i+1);
+    else if(e.key==='ArrowLeft')i=Math.max(0,i-1);
+    else if(e.key==='Home')i=0;
+    else if(e.key==='End')i=len-1;
+    else if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      const nr=r+(e.key==='ArrowDown'?1:-1);
+      if(nr<0||nr>=rows.length){e.preventDefault();return;}
+      const k=rows[r].words[i].k;
+      let ni=k?rows[nr].words.findIndex(w=>w.k===k):-1;
+      if(ni<0)ni=Math.min(i,rows[nr].words.length-1);
+      r=nr;i=ni;
+    }else return;
+    e.preventDefault();select(r,i,true);
+  });
+  layout();
+  let r0=rows.findIndex(r=>r.lang==='la');if(r0<0)r0=rows.length>1?1:0;
+  let i0=rows[r0].words.findIndex(w=>w.k===2);if(i0<0)i0=0;
+  select(r0,i0,false);
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();</script>
+</section>
+
+<div class="section-head"><h2>Мёртвые и древние языки</h2><span>особи 1–8</span></div>
+
+<article class="entry" data-lang="la">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 1</div>
+    <h3>Латынь</h3>
+    <div class="latin">Lingua Latina</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Шесть слов, ни одного артикля, глагол в середине</span></li>
+      <li><span>Ареал</span><span>Рим, затем вся Европа как язык науки и церкви</span></li>
+      <li><span>Сезон</span><span>От VI в. до н. э.; разговорная жизнь угасла к поздней античности</span></li>
+      <li><span>Лягушка</span><span><i>rana</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="la"><span class="l"><span class="w" data-k="1" data-g="пруд, стоячая вода">Stagnum</span> <span class="w" data-k="1" data-g="старый">vetus</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">rana</span> <span class="w" data-k="2" data-g="впрыгивает (in- «в» + salit «прыгает»)">insilit</span> —</span><span class="l"><span class="w" data-k="3" data-g="воды (род. п.)">aquae</span> <span class="w" data-k="3" data-g="звук">sonus</span>.</span></p>
+    <p class="translit">4 · 5 · 4 слога</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Stagnum vetus</i> — «стоячая вода старая». <i>Stagnum</i> лучше, чем <i>lacus</i> (озеро): от того же корня, что «стагнация». Неподвижность встроена в само слово.</span>
+      <span class="g"><em>II</em><i>Rana insilit</i> — «лягушка впрыгивает». Приставка <i>in-</i> делает то же, что японское <i>-komu</i>: прыжок внутрь.</span>
+      <span class="g"><em>III</em><i>Aquae sonus</i> — «воды звук». Тот же порядок, что в <i>mizu no oto</i>.</span>
+    </div>
+    <p>Латынь — идеальный язык для Басё по одной причине: в ней нет артиклей. Не нужно решать, <i>a frog</i> или <i>the frog</i>; <i>rana</i> остаётся такой же неопределённой, как <i>kawazu</i>. Число, правда, выдаёт себя: <i>rana insilit</i> — одна, <i>ranae insiliunt</i> — несколько. Здесь выбрана одна, как у большинства переводчиков.</p>
+    <p>Римляне знали лягушек прежде всего как болтливых: у Овидия ликийские крестьяне за грубость превращены в лягушек и с тех пор бранятся из-под воды. Латинская лягушка Басё — первая, кто в этой литературе промолчал.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; порядок слов совпадает с японским во всех трёх частях; лягушка одна.</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="grc">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 2</div>
+    <h3>Древнегреческий</h3>
+    <div class="latin">Ἑλληνική, аттический диалект</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Высокая точка «·» на месте кирэдзи; три диакритики на слово</span></li>
+      <li><span>Ареал</span><span>Афины, острова Эгейского моря, позже всё Средиземноморье</span></li>
+      <li><span>Сезон</span><span>Классическая эпоха, V–IV вв. до н. э.</span></li>
+      <li><span>Лягушка</span><span><i>βάτραχος</i>, батрахос</span></li>
+    </ul>
+  </aside>
+  <div>
+    <figure class="mini"><svg viewBox="0 0 100 80" role="img" aria-label="Чернофигурная лягушка в профиль, перо и тушь"><g fill="none" stroke="#1E1C18" stroke-linecap="round"><path d="M14 52 C18 34 40 26 60 30 C74 33 84 42 84 50 C82 58 66 62 46 62 C30 62 16 60 14 52Z" stroke-width="1.3" fill="url(#hatch)"/><circle cx="72" cy="36" r="5" stroke-width="1.1" fill="#F2EEE3"/><circle cx="73" cy="36" r="2" fill="#1E1C18"/><path d="M20 56 C10 62 6 68 12 72 L28 72 M54 62 L60 72 L68 72" stroke-width="1.2"/><path d="M4 76 H96" stroke-width=".8"/><path d="M4 8 H96 M4 12 H96" stroke-width=".6"/><path d="M10 8 v4 M20 8 v4 M30 8 v4 M40 8 v4 M50 8 v4 M60 8 v4 M70 8 v4 M80 8 v4 M90 8 v4" stroke-width=".6"/></g></svg></figure>
+    <p class="poem" lang="grc"><span class="l"><span class="w" data-k="1" data-g="озеро, пруд">Λίμνη</span> <span class="w" data-k="1" data-g="старая, древняя">παλαιά</span>·</span><span class="l"><span class="w" data-k="2" data-g="лягушка">βάτραχος</span> <span class="w" data-k="2" data-g="впрыгивает внутрь (ἐν «в» + θρῴσκω «прыгаю»)">ἐνθρῴσκει</span>·</span><span class="l"><span class="w" data-k="3" data-g="воды (род. п.)">ὕδατος</span> <span class="w" data-k="3" data-g="шум, стук, всплеск">ψόφος</span>.</span></p>
+    <p class="translit">límnē palaiá · bátrakhos enthrṓskei · hýdatos psóphos</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Λίμνη παλαιά</i> — «пруд древний». <i>Παλαιός</i> — тот самый корень, что в слове «палеонтология».</span>
+      <span class="g"><em>II</em><i>Βάτραχος ἐνθρῴσκει</i> — «лягушка впрыгивает». Глагол θρῴσκω — поэтический, гомеровский: так прыгают воины и звери.</span>
+      <span class="g"><em>III</em><i>Ὕδατος ψόφος</i> — «воды шум». Не φωνή (голос), а ψόφος — глухой, бессловесный звук.</span>
+    </div>
+    <p>Самая знаменитая греческая лягушка — хор в комедии Аристофана «Лягушки», который бесконечно поёт <i>βρεκεκεκὲξ κοὰξ κοάξ</i>, «брекекекекс коакс коакс», пока Дионис гребёт через болото. Это ровно та традиция, против которой работает Басё: лягушка как певец.</p>
+    <p>Поэтому выбор третьего слова здесь решающий. <i>Φωνή</i> было бы голосом — чьим-то, живым, со смыслом. <i>Ψόφος</i> — это стук, хлопок, звук без хозяина. Греческий язык позволяет сказать точнее, чем русский «звук»: это шум, который никто не издавал, он просто случился.</p>
+    <p class="keyline">Ключ: кирэдзи → высокая точка «·»; лягушка одна; звук намеренно «безголосый».</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="sa">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 3</div>
+    <h3>Санскрит</h3>
+    <div class="latin">संस्कृतम्, saṃskṛtam</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Слова срастаются на стыках (сандхи); черта сверху держит слоги</span></li>
+      <li><span>Ареал</span><span>Северная Индия, затем вся Южная и Юго-Восточная Азия как язык учёности</span></li>
+      <li><span>Сезон</span><span>Ведийский — со II тыс. до н. э.; классический — с IV в. до н. э.</span></li>
+      <li><span>Лягушка</span><span><i>maṇḍūka</i>, мандука</span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem dev" lang="sa"><span class="l"><span class="w" data-k="1" data-g="ветхий, старый (букв. «изношенный»)">जीर्णो</span> <span class="w" data-k="1" data-g="пруд, глубокий водоём">ह्रदः</span> ।</span><span class="l"><span class="w" data-k="2" data-g="лягушка">मण्डूकः</span> <span class="w" data-k="2" data-g="падает, бросается">पतति</span> ।</span><span class="l"><span class="w" data-k="3" data-g="воды (род. п.)">जलस्य</span> <span class="w" data-k="3" data-g="звук, отзвук">ध्वनिः</span> ॥</span></p>
+    <p class="translit">jīrṇo hradaḥ · maṇḍūkaḥ patati · jalasya dhvaniḥ</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Jīrṇo hradaḥ</i> — «ветхий пруд». <i>Jīrṇaḥ</i> перед звонким <i>h</i> превращается в <i>jīrṇo</i>: это сандхи, звуковая сварка слов.</span>
+      <span class="g"><em>II</em><i>Maṇḍūkaḥ patati</i> — «лягушка падает». Прыжок увиден с другой стороны: не взлёт, а падение.</span>
+      <span class="g"><em>III</em><i>Jalasya dhvaniḥ</i> — «воды звук». <i>Dhvani</i> — ещё и термин индийской поэтики.</span>
+    </div>
+    <p>В санскрите <i>jīrṇa</i> — это «старый» в смысле «изношенный», как ветхая одежда. Пруд получается не просто давним, а усталым, затянутым. Ближе к японскому <i>furu</i>, чем просто «древний».</p>
+    <p>Но главное сокровище здесь — слово <i>dhvani</i>. Индийские теоретики поэзии (Анандавардхана, IX в.) назвали этим словом высшее свойство стиха: смысл, который не сказан, а <b>прозвучал</b> — как эхо после удара. Хайку о звуке воды, которое значит гораздо больше, чем говорит, — учебный пример <i>dhvani</i>. Санскрит переводит не только слово Басё, но и его метод.</p>
+    <p>И у лягушки здесь древняя родословная: в Ригведе есть целый гимн лягушкам (VII.103), где их кваканье после засухи сравнивают с пением брахманов. Снова поющие лягушки — и снова Басё их заглушает.</p>
+    <p class="keyline">Ключ: кирэдзи → данда «।»; прыжок передан как падение; последнее слово несёт двойной смысл.</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="ang">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 4</div>
+    <h3>Древнеанглийский</h3>
+    <div class="latin">Ænglisc</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Буквы þ и æ; аллитерация вместо рифмы</span></li>
+      <li><span>Ареал</span><span>Англосаксонские королевства Британии</span></li>
+      <li><span>Сезон</span><span>Примерно V–XII вв., язык «Беовульфа»</span></li>
+      <li><span>Лягушка</span><span><i>frogga</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="ang"><span class="l"><span class="w" data-k="1" data-g="старый">Eald</span> <span class="w" data-k="1" data-g="озеро, пруд (ср. англ. mere)">mere</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">frogga</span> <span class="w" data-k="2" data-g="прыгает (ср. англ. leap)">hlēapeþ</span> <span class="w" data-k="2" data-g="внутрь">in</span> —</span><span class="l"><span class="w" data-k="3" data-g="воды (род. п.)">wæteres</span> <span class="w" data-k="3" data-g="звук, гул">swēg</span>.</span></p>
+    <p class="translit">éald mére · frógga hléapeþ ín · wǽteres swég</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Eald mere</i> — «старое озеро». <i>Mere</i> дожило до английского как поэтическое «озерцо» и в названиях вроде Windermere.</span>
+      <span class="g"><em>II</em><i>Frogga hlēapeþ in</i> — «лягушка прыгает внутрь». Глагол с отдельной частицей — как английское <i>leap in</i>.</span>
+      <span class="g"><em>III</em><i>Wæteres swēg</i> — «воды звук». <i>Swēg</i> в древних поэмах — шум моря, пиршества, арфы.</span>
+    </div>
+    <p>Древнеанглийский стих держался не на рифме и не на счёте слогов, а на аллитерации: в каждой строке ударные слова начинаются с одного звука. Басё такой опоры не требует, но строка III получает её почти даром — <i>wæteres swēg</i> со звонким <i>w</i>-<i>s</i> звучит как шорох по камышу.</p>
+    <p>Любопытная деталь: в «Беовульфе» чудовище Грендель живёт именно в <i>mere</i> — тёмном озере, куда даже олень, загнанный собаками, не решается прыгнуть. В древнеанглийском воображении в такие воды не прыгают. Маленькая <i>frogga</i> делает то, на что не решился герой.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; глагол разделён на два слова, как в японском составном <i>tobi-komu</i>.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 5</div>
+    <h3>Шумерский</h3>
+    <div class="latin"><span class="cun">𒅴𒂠</span>, eme-ĝir₁₅</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Клинописные знаки: одни читаются как слова, другие как слоги; прилагательное после существительного</span></li>
+      <li><span>Ареал</span><span>Южная Месопотамия: Ур, Урук, Лагаш, Ниппур</span></li>
+      <li><span>Сезон</span><span>Записи — с конца IV тыс. до н. э.; живым языком перестал быть к началу II тыс. до н. э., в храмах и школах переписывался ещё почти два тысячелетия</span></li>
+      <li><span>Лягушка</span><span><i>bizaza</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem cun" lang="sux"><span class="l">𒇥 𒇷𒁉𒅕</span><span class="l">𒁉𒍝𒍝 𒀀𒂠 𒉌𒄞𒌓</span><span class="l">𒅗 𒀀𒅗</span></p>
+    <p class="translit">pu₂ li-bi-ir · bi-za-za a-še₃ i₃-gu₄-ud · gu₃ a-ka</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>pu₂ li-bi-ir</i> — «водоём старый». <i>Pu₂</i> — колодец, водоём, яма с водой. Прилагательное идёт после существительного. «Старый», <i>libir</i>, записан здесь по слогам.</span>
+      <span class="g"><em>II</em><i>bi-za-za a-še₃ i₃-gu₄-ud</i> — «лягушка в-воду прыгнула». Показатель <i>-še₃</i> значит «к, в»; глагол <i>gu₄-ud</i> «прыгать, скакать» стоит последним.</span>
+      <span class="g"><em>III</em><i>gu₃ a-ka</i> — «голос воды». Показатель родительного падежа <i>-ak</i> пристаёт к обладателю, и тот, в отличие от японского, идёт вторым.</span>
+    </div>
+    <p>Шумерский — язык без известных родственников и, вероятно, первый записанный язык на земле. Он эргативный: подлежащее переходного глагола получает особое окончание <i>-e</i>. Но прыгать — глагол непереходный, и лягушка остаётся без окончания, голая, как само слово <i>bizaza</i>.</p>
+    <p>Третья строка выходит почти орнаментом: <span class="cun">𒅗 𒀀𒅗</span>. Знак <span class="cun">𒅗</span> изображает голову с выделенным ртом; первый раз он читается как слово <i>gu₃</i>, «голос», второй — как слог <i>ka</i>, окончание родительного падежа. А знак <span class="cun">𒀀</span> посередине — и слог «а», и слово «вода». Звук воды обрамлён двумя ртами.</p>
+    <p>Перевод — реконструкция по словарям: шумеролог мог бы оформить глагол иначе, а «старый» в писцовой практике обычно передают логограммой [написание проверить — to be supplied by the author].</p>
+    <p class="keyline">Ключ: кирэдзи нет — строки разделяет линовка, как на табличке; лягушка без эргативного окончания; знак «рот» стоит дважды.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 6</div>
+    <h3>Библейский иврит</h3>
+    <div class="latin"><span class="he" lang="he" dir="rtl">עִבְרִית מִקְרָאִית</span>, ʿivrît miqrāʾît</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Пишется справа налево; гласные — точки и чёрточки под и над буквами (никуд); глагол перед подлежащим</span></li>
+      <li><span>Ареал</span><span>Израиль и Иудея</span></li>
+      <li><span>Сезон</span><span>Язык Танаха; в разговоре уступил арамейскому во второй половине I тыс. до н. э.</span></li>
+      <li><span>Лягушка</span><span><i>ṣəfardēaʿ</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem he" lang="he" dir="rtl"><span class="l">הַבְּרֵכָה הַיְשָׁנָה —</span><span class="l">יְדַלֵּג צְפַרְדֵּעַ אֶל־תּוֹכָהּ —</span><span class="l">קוֹל הַמָּיִם׃</span></p>
+    <p class="translit">habbərēḵā hayšānā · yədallēg ṣəfardēaʿ ʾel-tôḵāh · qôl hammáyim</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>habbərēḵā hayšānā</i> — «пруд старый». Это готовые библейские слова: так названа «старая купальня» в Книге Исаии (22:11).</span>
+      <span class="g"><em>II</em><i>yədallēg ṣəfardēaʿ ʾel-tôḵāh</i> — «скачет лягушка в середину его». Глагол <i>dillēg</i> — тот же, что в Исаии 35:6: «тогда хромой вскочит, как олень».</span>
+      <span class="g"><em>III</em><i>qôl hammáyim</i> — «голос вод». <i>Máyim</i> существует только во множественном числе.</span>
+    </div>
+    <p>Глагол стоит перед подлежащим: <i>yədallēg ṣəfardēaʿ</i>, «скачет лягушка». Для библейской прозы и поэзии это обычный порядок, и он делает то же, что в клингонском: сначала мы видим прыжок, а прыгуна узнаём потом.</p>
+    <p>Библейская лягушка знаменита одной сценой — второй казнью египетской. В еврейском тексте Исхода (8:2 по еврейскому счёту) сказано в единственном числе: «и вышла лягушка и покрыла землю Египетскую». Одна лягушка, которой полна страна, — собирательное единственное число. Вопрос, который Басё оставил открытым, иврит решает по-своему: лягушка одна и бессчётна разом.</p>
+    <p><i>Qôl</i> — и «звук», и «голос»; у Иезекииля (1:24) крылья херувимов шумят «как голос вод многих». Огласовки, которыми набран стих, придуманы позже самого языка: масореты расставили их в VII–X веках, чтобы чтение не забылось.</p>
+    <p class="keyline">Ключ: кирэдзи → тире, в конце — соф пасук «׃»; глагол перед подлежащим; «старый пруд» взят прямо из Исаии.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 7</div>
+    <h3>Классический арабский</h3>
+    <div class="latin"><span class="ar" lang="ar" dir="rtl">اَلْعَرَبِيَّةُ ٱلْفُصْحَى</span>, al-ʿarabiyya al-fuṣḥā</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Справа налево; полная огласовка — значки над и под буквами; падежные окончания -un, -u, -i; глагол перед подлежащим</span></li>
+      <li><span>Ареал</span><span>Аравия, затем от Андалусии до Средней Азии как язык веры, науки и поэзии</span></li>
+      <li><span>Сезон</span><span>Доисламская поэзия — VI в.; Коран — VII в.; грамматика Сибавейхи — VIII в.</span></li>
+      <li><span>Лягушка</span><span><i>ḍifdiʿ</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem ar" lang="ar" dir="rtl"><span class="l">بِرْكَةٌ قَدِيمَةٌ —</span><span class="l">يَثِبُ ضِفْدِعٌ فِيهَا —</span><span class="l">صَوْتُ ٱلْمَاءِ</span></p>
+    <p class="translit">birkatun qadīmatun · yathibu ḍifdiʿun fīhā · ṣawtu l-māʾi</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>birkatun qadīmatun</i> — «пруд древний». <i>Birka</i> — водоём, бассейн; корень б-р-к тот же, что в слове <i>baraka</i>, «благодать». Прилагательное согласовано в женском роде.</span>
+      <span class="g"><em>II</em><i>yathibu ḍifdiʿun fīhā</i> — «прыгает лягушка в него». Глагол <i>wathaba</i> «прыгнуть, вскочить» стоит первым.</span>
+      <span class="g"><em>III</em><i>ṣawtu l-māʾi</i> — «звук воды». Порядок тот же, что в <i>mizu no oto</i>, только наоборот: звук впереди.</span>
+    </div>
+    <p>Глагол стоит перед подлежащим: <i>yathibu ḍifdiʿun</i>, «прыгает лягушка». Для классического арабского это основной порядок, и у него есть строгое правило: глагол перед подлежащим остаётся в единственном числе, даже если подлежащих много. «Прыгают лягушки» было бы <i>yathibu ḍafādiʿu</i> — с тем же глаголом. Глагол не выдаёт числа; выдаёт только само слово «лягушка».</p>
+    <p>В чтении на паузе последняя краткая гласная отпадает: стих звучит не <i>l-māʾi</i>, а <i>l-māʾ</i> — и кончается гортанной смычкой, коротким обрывом, как обрывается всплеск.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; глагол перед подлежащим и не выдаёт числа; на паузе стих обрывается смычкой.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 8</div>
+    <h3>Классический тибетский</h3>
+    <div class="latin"><span class="bo" lang="bo">ཆོས་སྐད་</span>, chos skad — «язык учения»</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Слоги разделены точкой-цег «་»; согласные громоздятся столбиками; глагол в конце, как в японском</span></li>
+      <li><span>Ареал</span><span>Тибет и Гималаи; язык буддийского канона от Ладакха до Монголии и Бурятии</span></li>
+      <li><span>Сезон</span><span>Письменность — с VII в.; переводы с санскрита — с VIII в., канон собран к XIV в.</span></li>
+      <li><span>Лягушка</span><span><i>sbal pa</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem bo" lang="bo"><span class="l">རྫིང་རྙིང་པ།</span><span class="l">སྦལ་པ་ནང་དུ་མཆོང་།</span><span class="l">ཆུའི་སྒྲ།</span></p>
+    <p class="translit">rdzing rnying pa · sbal pa nang du mchong · chu'i sgra</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>rdzing rnying pa</i> — «пруд старый». Прилагательное идёт после существительного.</span>
+      <span class="g"><em>II</em><i>sbal pa nang du mchong</i> — «лягушка внутрь прыгает». Глагол <i>mchong</i> стоит последним — тот же порядок, что в <i>kawazu tobikomu</i>.</span>
+      <span class="g"><em>III</em><i>chu'i sgra</i> — «воды звук». Частица <i>-'i</i> пристаёт к <i>chu</i>, как японское <i>no</i>, и порядок совпадает с <i>mizu no oto</i>.</span>
+    </div>
+    <p>Тибетский, как и японский, ставит глагол в конец, а служебные слова — после существительных. Поэтому этот перевод повторяет порядок оригинала во всех трёх частях: старый пруд, лягушка-внутрь-прыгает, воды звук. Шад «།» стоит там, где у Басё <i>ya</i>, — и после каждой строки, как в тибетских стихах.</p>
+    <p>Тибетское письмо застыло больше тысячи лет назад, и в нём остались буквы, которые давно не произносятся: <i>rdzing</i> в Лхасе звучит как «дзинг», <i>sgra</i> — как «дра». Слово <i>sgra</i> значит и «звук», и «слово»: им переводчики канона передавали санскритское <i>śabda</i>. Звук воды в тибетском стихе — почти речь.</p>
+    <p class="keyline">Ключ: кирэдзи → шад «།»; порядок слов совпадает с японским во всех частях; 3 · 5 · 2 слога.</p>
+  </div>
+</article>
+
+<div class="section-head"><h2>Построенные языки</h2><span>особи 9–12</span></div>
+
+<article class="entry" data-lang="eo">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 9</div>
+    <h3>Эсперанто</h3>
+    <div class="latin">Esperanto</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Все существительные на -o, прилагательные на -a, глаголы настоящего на -as</span></li>
+      <li><span>Ареал</span><span>Без территории; говорящие рассеяны по всему миру</span></li>
+      <li><span>Сезон</span><span>С 1887 года, автор — Л. Заменгоф</span></li>
+      <li><span>Лягушка</span><span><i>rano</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="eo"><span class="l"><span class="w" data-k="1" data-g="старый (mal- «противоположность» + nova «новый»)">Malnova</span> <span class="w" data-k="1" data-g="прудик (lag- «озеро» + -et- «маленький»)">lageto</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">rano</span> <span class="w" data-k="2" data-g="впрыгивает (en- «в» + salt- «прыгать»)">ensaltas</span> —</span><span class="l"><span class="w" data-k="3" data-g="звук">sono</span> <span class="w" data-k="3" data-g="(предлог принадлежности)">de</span> <span class="w" data-k="3" data-g="вода">akvo</span>.</span></p>
+    <p class="translit">mal-nó-va la-gé-to · rá-no en-sál-tas · só-no de ák-vo</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Malnova lageto</i> — буквально «не-новое озерцо». Слова «старый» в эсперанто нет: его собирают из «новый» и приставки отрицания.</span>
+      <span class="g"><em>II</em><i>Rano ensaltas</i> — «лягушка в-прыгивает». Приставка <i>en-</i> работает точно как японское <i>-komu</i>.</span>
+      <span class="g"><em>III</em><i>Sono de akvo</i> — «звук воды». Порядок перевёрнут относительно японского.</span>
+    </div>
+    <p>Эсперанто — конструктор из корней, и это видно на каждом слове. Удивительно, как хорошо он подходит Басё: <i>lageto</i> с уменьшительным суффиксом даёт ровно тот масштаб, который нужен, — не озеро, а прудик в саду.</p>
+    <p>Слоги ложатся в схему почти идеально: 5 · 5 · 5. Седьмого слога во второй строке не хватает, но эсперантисты обычно ценят точность выше счёта. Можно было написать <i>rano saltas en ĝin</i>, «лягушка прыгает в него», — восемь слогов, зато не так собранно.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; «старый» собран из «нового»; три части почти равны по длине.</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="tlh">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 10</div>
+    <h3>Клингонский</h3>
+    <div class="latin">tlhIngan Hol</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Заглавные и строчные внутри слов; апостроф — гортанная смычка; глагол перед подлежащим</span></li>
+      <li><span>Ареал</span><span>Империя Клингонов; на Земле — поклонники «Звёздного пути»</span></li>
+      <li><span>Сезон</span><span>Создан лингвистом Марком Окрандом в 1980-х</span></li>
+      <li><span>Лягушка</span><span>в словаре не найдена — заменена описанием</span></li>
+    </ul>
+  </aside>
+  <div>
+    <figure class="mini"><svg viewBox="0 0 100 80" role="img" aria-label="Перо и тушь: угловатая лягушка-воин с наплечником"><g fill="none" stroke="#1E1C18" stroke-linejoin="miter"><path d="M12 56 L24 36 L50 28 L72 32 L86 46 L80 58 L50 62 L22 62Z" stroke-width="1.3" fill="#F2EEE3"/><path d="M24 36 L36 44 L50 28 M50 28 L56 42 L72 32" stroke-width=".7"/><path d="M30 46 L46 50 L60 46 L44 58Z" fill="url(#cross)" stroke-width=".7"/><path d="M70 36 L76 30 L82 36 L76 42Z" stroke-width="1" fill="#F2EEE3"/><circle cx="76" cy="36" r="1.6" fill="#1E1C18"/><path d="M22 62 L10 70 L20 72 M66 60 L72 72 L82 72" stroke-width="1.2"/><path d="M4 76 H96" stroke-width=".8"/></g></svg></figure>
+    <p class="poem" lang="tlh"><span class="l"><span class="w" data-k="1" data-g="озеро, водоём">ngeng</span> <span class="w" data-k="1" data-g="быть старым (глагол-прилагательное, стоит после существительного)">ngo'</span></span><span class="l"><span class="w" data-k="2" data-g="прыгает (глагол)">Sup</span> <span class="w" data-k="2" data-g="прыгун (Sup «прыгать» + -wI' «тот, кто делает»)">SupwI'</span></span><span class="l"><span class="w" data-k="3" data-g="вода (обладатель стоит первым)">bIQ</span> <span class="w" data-k="3" data-g="шум, звук">wab</span></span></p>
+    <p class="translit">нгенг нго' · шуп шупвиʔ · биКх ваб</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>ngeng ngo'</i> — «озеро есть-старое». В клингонском прилагательных нет: «старый» — это глагол «быть старым», и он идёт после существительного.</span>
+      <span class="g"><em>II</em><i>Sup SupwI'</i> — «прыгает прыгун». Сначала глагол, потом подлежащее.</span>
+      <span class="g"><em>III</em><i>bIQ wab</i> — «вода-шум». Два существительных рядом, владелец впереди — совсем как в <i>mizu no oto</i>.</span>
+    </div>
+    <p>Клингонский намеренно сделан «неземным»: основной порядок слов — дополнение, глагол, подлежащее, а такой порядок среди человеческих языков крайне редок. Отсюда <i>Sup SupwI'</i> — сначала действие, потом тот, кто действует. Для хайку это неожиданный подарок: мы сначала видим прыжок и лишь потом понимаем, кто прыгнул.</p>
+    <p>Слова «лягушка» в известном мне клингонском словаре нет. Поэтому лягушка названа так, как назвал бы её воин, — по делу: <i>SupwI'</i>, «прыгун», от глагола <i>Sup</i> с суффиксом деятеля <i>-wI'</i>. Получилась удвоенная строка <i>Sup SupwI'</i>, почти звукоподражание: шлёп-шлёп. Если в новейших словарях лягушка появилась, её стоит подставить сюда.</p>
+    <p>У клингонского есть собственное письмо, pIqaD, но в стандартном Юникоде его нет — только в неофициальной «частной зоне», которую большинство шрифтов не показывает. Поэтому здесь клингонский записан латиницей, как его записывают и сами клингонисты.</p>
+    <p class="keyline">Ключ: кирэдзи отсутствует; глагол раньше подлежащего; лягушка названа по поведению.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 11</div>
+    <h3>Ложбан</h3>
+    <div class="latin">la .lojban.</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Грамматика без двусмысленных фраз; частица cu отделяет подлежащее от сказуемого; точка перед словом — пауза</span></li>
+      <li><span>Ареал</span><span>Без территории; сообщество рассеяно по миру</span></li>
+      <li><span>Сезон</span><span>С 1987 года, Logical Language Group; наследник логлана Джеймса Кука Брауна (1955)</span></li>
+      <li><span>Лягушка</span><span><i>banfi</i> — «земноводное»</span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="jbo"><span class="l">lo laldo lalxu .ua</span><span class="l">lo banfi cu nenri plipe</span><span class="l">lo djacu sance</span></p>
+    <p class="translit">lo LAL-do LAL-xu .ua · lo BAN-fi cu NEN-ri PLI-pe · lo DJA-cu SAN-ce</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>lo laldo lalxu .ua</i> — «старое озеро — ага!». <i>Laldo</i> — «старый годами», <i>lalxu</i> — «озеро». Междометие <i>.ua</i> выражает открытие, «вот оно» — ближе всего к <i>ya</i>.</span>
+      <span class="g"><em>II</em><i>lo banfi cu nenri plipe</i> — «земноводное внутрь-прыгает». Слова «лягушка» среди корней нет; <i>banfi</i> — земноводное вообще.</span>
+      <span class="g"><em>III</em><i>lo djacu sance</i> — «водный звук»: <i>djacu</i> — вода, <i>sance</i> — звук.</span>
+    </div>
+    <p>Ложбан задуман как язык логической точности: любую фразу на нём можно разобрать грамматически только одним способом. Корневые слова собраны из шести языков — китайского, английского, хинди, испанского, русского и арабского, — поэтому они не похожи ни на один из них.</p>
+    <p>И всё же самый точный язык здесь оставляет Басё его недосказанность. Артикль <i>lo</i> не говорит, сколько лягушек: одна или много, решает читатель; чтобы сказать «одна», понадобилось бы <i>pa lo banfi</i>. А сочетание <i>nenri plipe</i> — два корня подряд, «внутрь» и «прыгать», — ложбан намеренно не определяет: как именно одно слово уточняет другое, подсказывает контекст.</p>
+    <p class="keyline">Ключ: кирэдзи → <i>.ua</i>; число лягушек открыто; лягушка названа земноводным.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 12</div>
+    <h3>Блисс-символика</h3>
+    <div class="latin">Blissymbolics</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Знаки из кругов, дуг и прямых между «линией неба» и «линией земли»; читаются на любом языке</span></li>
+      <li><span>Ареал</span><span>Звучания нет; с начала 1970-х — средство общения для людей, которые не могут говорить</span></li>
+      <li><span>Сезон</span><span>Чарльз Блисс, книга «Semantography», 1949</span></li>
+      <li><span>Лягушка</span><span>составной знак</span></li>
+    </ul>
+  </aside>
+  <div>
+    <figure class="bliss">
+      <svg viewBox="0 0 204 206" role="img" aria-label="Стих символами блисса, три строки знаков: старый, водоём; земноводное, прыжок, внутрь; звук, вода">
+        <g fill="none" stroke="#C9C1AE" stroke-width=".6" stroke-dasharray="2 4">
+          <path d="M6 14 H198 M6 54 H198 M6 80 H198 M6 120 H198 M6 146 H198 M6 186 H198"/>
+        </g>
+        <g fill="none" stroke="#1E1C18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <!-- I: старый · водоём -->
+          <circle cx="36" cy="40" r="11"/>
+          <path d="M36 40 V32 M36 40 H43"/>
+          <path d="M46 21 H28 M33 16 L28 21 L33 26"/>
+          <path d="M100 26 V54 H144 V26"/>
+          <path d="M104 42 q5 -6 9 0 t9 0 t9 0 t9 0"/>
+          <!-- II: земноводное · прыжок · внутрь -->
+          <path d="M16 120 V104 H46 V120 M46 104 L54 96 H60"/>
+          <path d="M16 88 q5 -6 9 0 t9 0 t9 0"/>
+          <path d="M76 118 Q94 74 112 118 M105 113 L112 118 L113 110"/>
+          <path d="M138 92 V120 H174 V92"/>
+          <path d="M156 82 V104 M151 99 L156 104 L161 99"/>
+          <circle cx="156" cy="112" r="2.6" fill="#1E1C18" stroke="none"/>
+          <!-- III: звук · вода -->
+          <path d="M40 160 C40 150 58 148 60 162 C61 172 50 172 50 182 C50 187 43 187 43 182"/>
+          <path d="M28 158 q-5 7 0 14 M20 153 q-7 12 0 24"/>
+          <path d="M96 166 q6 -8 12 0 t12 0 t12 0 t12 0"/>
+        </g>
+      </svg>
+    </figure>
+    <p class="translit">СТАРЫЙ ВОДОЁМ · ЗЕМНОВОДНОЕ ПРЫЖОК ВНУТРЬ · ЗВУК ВОДА</p>
+    <div class="gloss">
+      <span class="g"><em>I</em>Круг-часы со стрелкой, указывающей назад, — «давний, старый». Вместилище с волной внутри — «водоём»: знак собран из «сосуда» и «воды».</span>
+      <span class="g"><em>II</em>Знак «животное» с волной над ним — «земноводное», зверь воды. Дуга со стрелкой — прыжок; стрелка, опущенная в вместилище, — «внутрь».</span>
+      <span class="g"><em>III</em>Ухо с расходящимися волнами — «звук». Волнистая линия — «вода».</span>
+    </div>
+    <p>Чарльз Блисс, уроженец Черновцов, переживший Дахау и Бухенвальд, увидел в Шанхае китайские иероглифы и задумал письмо, которое читалось бы одинаково на любом языке и не давало бы поводов для вражды из-за слов. Мира его знаки не изменили. Зато в начале 1970-х их взяли в детском центре в Торонто — и они дали голос детям, которые не могут говорить.</p>
+    <p>У этого письма нет звучания вовсе: блисс-знак не читается вслух, а понимается. Поэтому здесь происходит невозможное — стихотворение о звуке записано языком, в котором звуков нет. Строка III остаётся беззвучной картинкой уха и волны. Кажется, ближе к тишине старого пруда перевод подойти не может.</p>
+    <p>Знаки начерчены по принципам системы — из кругов, дуг и прямых между линией неба и линией земли; стандартные начертания по словарю Blissymbolics [сверить — to be supplied by the author].</p>
+    <p class="keyline">Ключ: кирэдзи → пустое место между знаками; слогов нет; звук воды показан, но не звучит.</p>
+  </div>
+</article>
+
+<div class="section-head"><h2>Европа и Кавказ</h2><span>особи 13–14</span></div>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 13</div>
+    <h3>Финский</h3>
+    <div class="latin">suomi</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Двойные гласные и согласные; пятнадцать падежей; ударение всегда на первом слоге</span></li>
+      <li><span>Ареал</span><span>Финляндия; финноязычные общины в Швеции, Норвегии и Карелии</span></li>
+      <li><span>Сезон</span><span>Живой; письменный — с XVI века, с книг Микаэля Агриколы</span></li>
+      <li><span>Лягушка</span><span><i>sammakko</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="fi"><span class="l">Vanha lampi —</span><span class="l">sammakko loikkaa siihen —</span><span class="l">veden ääni.</span></p>
+    <p class="translit">ván-ha lám-pi · sám-mak-ko lóik-kaa síi-hen · vé-den ǽä-ni</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Vanha lampi</i> — «старый пруд». <i>Lampi</i> — маленькое лесное озерцо со стоячей водой.</span>
+      <span class="g"><em>II</em><i>Sammakko loikkaa siihen</i> — «лягушка прыгает в него». <i>Siihen</i> — местоимение в падеже «внутрь чего-то»: направление спрятано в окончание.</span>
+      <span class="g"><em>III</em><i>Veden ääni</i> — «воды звук». Родительный падеж впереди, как <i>mizu no</i>.</span>
+    </div>
+    <p>Финский не индоевропейский язык, и у него с японским больше общего, чем с соседями: нет артиклей, нет рода, падежи пристёгиваются к концу слова. Лягушка остаётся такой же неопределённой, как <i>kawazu</i>, — одна она или нет, слово <i>sammakko</i> не уточняет, пока не появится окончание множественного числа.</p>
+    <p>Счёт складывается в 4 · 7 · 4: вторая строка ровно семисложна. А последнее слово двоится, как в суахили: <i>ääni</i> — и «звук», и «голос» (и ещё «голос» на выборах). В стране, где стоячей воды почти больше, чем суши, пруд Басё заговорил.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; 4 · 7 · 4 слога; направление прыжка — в падеже.</p>
+  </div>
+</article>
+
+<article class="entry">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 14</div>
+    <h3>Грузинский</h3>
+    <div class="latin"><span class="ka" lang="ka">ქართული</span>, kartuli</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Своё письмо без заглавных букв; длинные цепочки согласных; смычные с придыханием и без</span></li>
+      <li><span>Ареал</span><span>Грузия</span></li>
+      <li><span>Сезон</span><span>Древнейшие надписи — V в.; поэма Руставели — XII в.; живой</span></li>
+      <li><span>Лягушка</span><span><i>baq'aq'i</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem ka" lang="ka"><span class="l">ძველი ტბორი —</span><span class="l">ბაყაყი შიგ ხტება —</span><span class="l">წყლის ხმა.</span></p>
+    <p class="translit">dzveli tbori · baq'aq'i shig khteba · ts'q'lis khma</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Dzveli tbori</i> — «старый пруд». Прилагательное впереди, как в русском.</span>
+      <span class="g"><em>II</em><i>Baq'aq'i shig khteba</i> — «лягушка внутрь прыгает». <i>Shig</i> — «внутрь, туда»; глагол в конце.</span>
+      <span class="g"><em>III</em><i>Ts'q'lis khma</i> — «воды звук». <i>Ts'q'ali</i> «вода» в родительном падеже сжимается до <i>ts'q'lis</i>.</span>
+    </div>
+    <p>Мхедрули — одно из трёх грузинских письмен и единственное, которым пишут сегодня; заглавных букв в нём нет, зато буквы округлые, как круги на воде. Апостроф в транслитерации отмечает абруптивы — согласные, которые произносят с сомкнутой гортанью, коротким щелчком.</p>
+    <p>Третья строка — два слога на семь согласных: <i>ts'q'lis khma</i>. В слове «воды» подряд стоят два абруптива, <i>ts'</i> и <i>q'</i>, и вода звучит не плеском, а сухим стуком. Счёт выходит 4 · 6 · 2 — самая короткая последняя строка среди живых языков определителя. И снова двойное слово: <i>khma</i> — и «звук», и «голос».</p>
+    <p class="keyline">Ключ: кирэдзи → тире; глагол в конце; строка III — два слога, семь согласных.</p>
+  </div>
+</article>
+
+<div class="section-head"><h2>Африка и Тихий океан</h2><span>особи 15–18</span></div>
+
+<article class="entry" data-lang="sw">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 15</div>
+    <h3>Суахили</h3>
+    <div class="latin">Kiswahili</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Слова собраны из приставок; каждый слог кончается гласной</span></li>
+      <li><span>Ареал</span><span>Восточная Африка: Танзания, Кения, Уганда, побережье до Мозамбика</span></li>
+      <li><span>Сезон</span><span>Живой; письменная поэзия — с XVIII века</span></li>
+      <li><span>Лягушка</span><span><i>chura</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="sw"><span class="l"><span class="w" data-k="1" data-g="пруд, водоём">Bwawa</span> <span class="w" data-k="1" data-g="«который из» (согласователь класса 5)">la</span> <span class="w" data-k="1" data-g="старины, прошлого">zamani</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">chura</span> <span class="w" data-k="2" data-g="он-сейчас-прыгает (a- «он» + -na- «сейчас» + -ruka «прыгать»)">anaruka</span> <span class="w" data-k="2" data-g="внутрь">ndani</span> —</span><span class="l"><span class="w" data-k="3" data-g="звук, голос">sauti</span> <span class="w" data-k="3" data-g="«которого из» (согласователь класса 9)">ya</span> <span class="w" data-k="3" data-g="вода">maji</span>.</span></p>
+    <p class="translit">bwa-wa la za-ma-ni · chu-ra a-na-ru-ka nda-ni · sa-u-ti ya ma-ji</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Bwawa la zamani</i> — «пруд прежних времён». <i>Zamani</i> — «давно, в старину»: пруд старый не годами, а эпохой.</span>
+      <span class="g"><em>II</em><i>Chura anaruka ndani</i> — «лягушка прыгает внутрь». Весь глагол — одно слово из трёх частей.</span>
+      <span class="g"><em>III</em><i>Sauti ya maji</i> — «звук воды».</span>
+    </div>
+    <p>В суахили у каждого существительного есть класс — что-то вроде рода, только классов больше дюжины, и слово «который из» меняется по классу: <i>bwawa <b>la</b></i>, но <i>sauti <b>ya</b></i>. Так грамматика всё время напоминает, к какому слову что относится.</p>
+    <p>Удивительная удача — счёт слогов. Суахили, где все слоги открыты и чётко разделены, даёт 6 · 7 · 5: средняя строка выходит ровно семисложной, как у Басё. Суахили вообще хорошо считается: в его классической поэзии, <i>utenzi</i>, строку тоже меряют числом слогов.</p>
+    <p>Тонкость: <i>sauti</i> значит и «звук», и «голос». Японское <i>oto</i> — только звук, без голоса. Слушатель на суахили может на миг услышать, что вода <b>заговорила</b>. Это не ошибка — это то, что язык добавил от себя.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; 6 · 7 · 5 слогов; «звук» двоится в «голос».</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="zu">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 16</div>
+    <h3>Зулу</h3>
+    <div class="latin">isiZulu</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Щёлкающие согласные: буквы c, q, x</span></li>
+      <li><span>Ареал</span><span>ЮАР, провинция Квазулу-Натал и вокруг</span></li>
+      <li><span>Сезон</span><span>Живой; более десяти миллионов носителей</span></li>
+      <li><span>Лягушка</span><span><i>ixoxo</i> — с двумя щелчками</span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="zu"><span class="l"><span class="w" data-k="1" data-g="пруд, заводь">Ichibi</span> <span class="w" data-k="1" data-g="который-старый (согласован с ichibi)">elidala</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">ixoxo</span> <span class="w" data-k="2" data-g="она-прыгает-в (li- «она» + -gxum- «прыгать» + -ela «к, в»)">ligxumela</span> <span class="w" data-k="2" data-g="внутрь">phakathi</span> —</span><span class="l"><span class="w" data-k="3" data-g="шум, звук">umsindo</span> <span class="w" data-k="3" data-g="воды (w- «принадлежащий» + amanzi «вода»)">wamanzi</span>.</span></p>
+    <p class="translit">и-чи-би э-ли-да-ла · и-ǁо-ǁо ли-гǁу-ме-ла па-ка-ти · ум-син-до ва-ман-зи</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Ichibi elidala</i> — «заводь, которая старая».</span>
+      <span class="g"><em>II</em><i>Ixoxo ligxumela phakathi</i> — «лягушка прыгает-туда внутрь». Суффикс <i>-ela</i> направляет прыжок к цели.</span>
+      <span class="g"><em>III</em><i>Umsindo wamanzi</i> — «шум воды». <i>Amanzi</i> слилось с частицей и стало <i>wamanzi</i>.</span>
+    </div>
+    <p>Буква <i>x</i> в зулу — щелчок: язык прижимают к щеке и резко отрывают сбоку, как цокают, подгоняя лошадь. В слове <i>ixoxo</i> таких щелчков два, а в глаголе <i>ligxumela</i> — ещё один, звонкий. Вторая строка стиха буквально щёлкает трижды — звукопись, которой Басё мог бы позавидовать: сам прыжок слышен до всплеска.</p>
+    <p>Грамматика работает как у суахили, но строже: <i>ichibi</i> и <i>ixoxo</i> оба принадлежат к пятому классу, поэтому и «старый», и «прыгает» начинаются с <i>li</i>-/<i>eli</i>-. Пруд и лягушка в зулу — грамматические родственники. Может быть, поэтому она туда и прыгает.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; три щелчка в строке II; пруд и лягушка одного класса.</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="yo">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 17</div>
+    <h3>Йоруба</h3>
+    <div class="latin">Èdè Yorùbá</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Знаки тона над гласными: высокий ´, низкий `, средний без знака; точки под ẹ, ọ, ṣ</span></li>
+      <li><span>Ареал</span><span>Юго-запад Нигерии, Бенин, Того; диаспора в Бразилии и на Кубе</span></li>
+      <li><span>Сезон</span><span>Живой; десятки миллионов носителей</span></li>
+      <li><span>Лягушка</span><span><i>àkèré</i></span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="yo"><span class="l"><span class="w" data-k="1" data-g="пруд, водоём">Adágún</span> <span class="w" data-k="1" data-g="давний, старинный">àtijọ́</span> —</span><span class="l"><span class="w" data-k="2" data-g="лягушка">àkèré</span> <span class="w" data-k="2" data-g="прыгает">bẹ́</span> <span class="w" data-k="2" data-g="внутрь, в">sínú</span> <span class="w" data-k="2" data-g="его">rẹ̀</span> —</span><span class="l"><span class="w" data-k="3" data-g="звук, шум">ìró</span> <span class="w" data-k="3" data-g="воды / вода">omi</span>.</span></p>
+    <p class="translit">a-DÁ-GÚN à-ti-JỌ́ · à-kè-RÉ BẸ́ SÍ-NÚ rẹ̀ · ì-RÓ o-mi</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Adágún àtijọ́</i> — «пруд старинный». <i>Àtijọ́</i> — «из прежних дней».</span>
+      <span class="g"><em>II</em><i>Àkèré bẹ́ sínú rẹ̀</i> — «лягушка прыгает в него». Глагол — один слог, <i>bẹ́</i>: короткий, как сам прыжок.</span>
+      <span class="g"><em>III</em><i>Ìró omi</i> — «звук воды»: два слова стоят рядом, и связь понятна без частицы.</span>
+    </div>
+    <p>Йоруба — тоновый язык: высота голоса различает слова так же, как гласные. Поэтому каждый перевод на йоруба — ещё и мелодия. Строка III, <i>ìró omi</i>, движется от низкого тона к высокому и опускается на средний: подъём, удар, гладь. Так звучит и сам всплеск.</p>
+    <p>Есть и ещё одна удача. Глагол <i>bẹ́</i> — односложный, на высоком тоне, резкий. В японском <i>tobikomu</i> прыжок растянут на четыре моры; на йоруба он занимает одно мгновение — что, пожалуй, вернее для лягушки. Перевод здесь — честная попытка, и носитель мог бы предложить более живое слово для «пруда».</p>
+    <p class="keyline">Ключ: кирэдзи → тире; прыжок — один слог; звук передан мелодией тонов.</p>
+  </div>
+</article>
+
+<article class="entry" data-lang="haw">
+  <aside class="entry-side">
+    <div class="entry-no">Особь № 18</div>
+    <h3>Гавайский</h3>
+    <div class="latin">ʻŌlelo Hawaiʻi</div>
+    <ul class="marks">
+      <li><span>Признаки</span><span>Всего тринадцать букв; ʻокина ʻ — гортанная смычка; чёрточка над гласной — долгота</span></li>
+      <li><span>Ареал</span><span>Гавайские острова</span></li>
+      <li><span>Сезон</span><span>Живой; пережил упадок и возрождается с 1970-х</span></li>
+      <li><span>Лягушка</span><span><i>poloka</i> — пришелец</span></li>
+    </ul>
+  </aside>
+  <div>
+    <p class="poem" lang="haw"><span class="l"><span class="w" data-k="1" data-g="пруд, водоём">Loko</span> <span class="w" data-k="1" data-g="старинный, древний">kahiko</span> —</span><span class="l"><span class="w" data-k="2" data-g="прыгает, летит">lele</span> <span class="w" data-k="2" data-g="(определённый артикль)">ka</span> <span class="w" data-k="2" data-g="лягушка (заимств. из англ. frog)">poloka</span> —</span><span class="l"><span class="w" data-k="0" data-g="(определённый артикль)">ke</span> <span class="w" data-k="3" data-g="звук">kani</span> <span class="w" data-k="3" data-g="«из», принадлежность">o</span> <span class="w" data-k="0" data-g="(определённый артикль)">ka</span> <span class="w" data-k="3" data-g="вода (пресная)">wai</span>.</span></p>
+    <p class="translit">lo-ko ka-hi-ko · le-le ka po-lo-ka · ke ka-ni o ka wai</p>
+    <div class="gloss">
+      <span class="g"><em>I</em><i>Loko kahiko</i> — «пруд древний». <i>Loko</i> — это ещё и знаменитые гавайские пруды для разведения рыбы.</span>
+      <span class="g"><em>II</em><i>Lele ka poloka</i> — «прыгает лягушка»: глагол впереди, как в клингонском.</span>
+      <span class="g"><em>III</em><i>Ke kani o ka wai</i> — «звук пресной воды».</span>
+    </div>
+    <p>На Гавайях не было ни одной своей лягушки: земноводные не перебрались через тысячи километров океана сами, их завезли люди. Поэтому и слово для лягушки — <i>poloka</i> — пришлое: английское <i>frog</i>, переделанное по гавайским правилам. В гавайском нет звуков <i>f</i> и <i>r</i>, а слог не может кончаться согласной, так что <i>frog</i> превращается в <i>po-lo-ka</i>. Сама лягушка тоже иммигрантка: она прыгает в древний пруд из другого мира.</p>
+    <p>Слово <i>wai</i> значит именно пресную воду, в отличие от солёной морской <i>kai</i>. А удвоенное <i>wai</i> — <i>waiwai</i> — значит «богатство». На острове, окружённом солёной водой, пресный пруд — драгоценность, и звук его воды весит больше, чем в Японии.</p>
+    <p class="keyline">Ключ: кирэдзи → тире; глагол впереди; сама лягушка — заимствование.</p>
+  </div>
+</article>
+
+<aside class="absent">
+  <div class="entry-no">Пробел в определителе</div>
+  <h3 style="margin:.2rem 0 .6rem">Языки австралийских аборигенов здесь не представлены</h3>
+  <p>Хотелось поместить сюда перевод на варлпири, питьянтьятьяра или другой язык Австралии — у этих языков удивительная грамматика и тонкий словарь для воды и земли. Но мои знания их лексики недостаточно надёжны, чтобы составить перевод и разобрать каждое слово без выдумки. Ложная особь в определителе хуже пустого места. [перевод и разбор — to be supplied by the author, лучше всего вместе с носителем языка]</p>
+</aside>
+
+<div class="section-head"><h2>Сравнительный ключ показывает, что каждый язык решил по-своему</h2><span>сводная таблица</span></div>
+<div class="keytable-box">
+  <table class="keytable">
+    <thead><tr><th>№</th><th>Язык</th><th>Лягушка</th><th>Звук</th><th>Слоги</th><th>Кирэдзи</th><th>Особая примета</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0</td><td>Японский</td><td><i>kawazu</i></td><td><i>oto</i></td><td class="num">5·7·5</td><td><span class="jp">や</span></td><td>Немая лягушка в поэзии поющих лягушек</td></tr>
+      <tr><td class="num">1</td><td>Латынь</td><td><i>rana</i></td><td><i>sonus</i></td><td class="num">4·5·4</td><td>тире</td><td>Нет артиклей — лягушка неопределённа</td></tr>
+      <tr><td class="num">2</td><td>Древнегреческий</td><td><i>βάτραχος</i></td><td><i>ψόφος</i></td><td class="num">5·6·5</td><td>«·»</td><td>Звук без голоса, против хора Аристофана</td></tr>
+      <tr><td class="num">3</td><td>Санскрит</td><td><i>maṇḍūka</i></td><td><i>dhvani</i></td><td class="num">4·6·5</td><td>«।»</td><td>«Звук» — это и теория поэтического намёка</td></tr>
+      <tr><td class="num">4</td><td>Древнеанглийский</td><td><i>frogga</i></td><td><i>swēg</i></td><td class="num">3·5·4</td><td>тире</td><td>Прыгает туда, куда не прыгнул бы олень Беовульфа</td></tr>
+      <tr><td class="num">5</td><td>Шумерский</td><td><i>bizaza</i></td><td><i>gu₃</i></td><td class="num">4·8·3</td><td>линовка</td><td>Знак «рот» дважды в последней строке</td></tr>
+      <tr><td class="num">6</td><td>Библейский иврит</td><td><i>ṣəfardēaʿ</i></td><td><i>qôl</i></td><td class="num">7·10·4</td><td>тире, «׃»</td><td>Глагол впереди; пруд из Исаии, лягушка из Исхода</td></tr>
+      <tr><td class="num">7</td><td>Классический арабский</td><td><i>ḍifdiʿ</i></td><td><i>ṣawt</i></td><td class="num">7·8·4</td><td>тире</td><td>Глагол впереди и не выдаёт числа</td></tr>
+      <tr><td class="num">8</td><td>Классический тибетский</td><td><i>sbal pa</i></td><td><i>sgra</i></td><td class="num">3·5·2</td><td>«།»</td><td>Порядок слов как в японском</td></tr>
+      <tr><td class="num">9</td><td>Эсперанто</td><td><i>rano</i></td><td><i>sono</i></td><td class="num">6·5·5</td><td>тире</td><td>«Старый» собран из «нового»</td></tr>
+      <tr><td class="num">10</td><td>Клингонский</td><td><i>SupwI'</i></td><td><i>wab</i></td><td class="num">2·3·2</td><td>нет</td><td>Сначала прыжок, потом прыгун</td></tr>
+      <tr><td class="num">11</td><td>Ложбан</td><td><i>banfi</i></td><td><i>sance</i></td><td class="num">6·8·5</td><td><i>.ua</i></td><td>Число лягушек оставлено открытым</td></tr>
+      <tr><td class="num">12</td><td>Блисс-символика</td><td>составной знак</td><td>ухо с волнами</td><td class="num">—</td><td>пробел</td><td>Стих о звуке на языке без звуков</td></tr>
+      <tr><td class="num">13</td><td>Финский</td><td><i>sammakko</i></td><td><i>ääni</i></td><td class="num">4·7·4</td><td>тире</td><td>Направление прыжка — в падеже</td></tr>
+      <tr><td class="num">14</td><td>Грузинский</td><td><i>baq'aq'i</i></td><td><i>khma</i></td><td class="num">4·6·2</td><td>тире</td><td>Два слога и семь согласных в строке III</td></tr>
+      <tr><td class="num">15</td><td>Суахили</td><td><i>chura</i></td><td><i>sauti</i></td><td class="num">6·7·5</td><td>тире</td><td>Звук может быть и голосом</td></tr>
+      <tr><td class="num">16</td><td>Зулу</td><td><i>ixoxo</i></td><td><i>umsindo</i></td><td class="num">7·9·6</td><td>тире</td><td>Три щелчка во второй строке</td></tr>
+      <tr><td class="num">17</td><td>Йоруба</td><td><i>àkèré</i></td><td><i>ìró</i></td><td class="num">6·7·3</td><td>тире</td><td>Прыжок в один слог, всплеск в мелодии</td></tr>
+      <tr><td class="num">18</td><td>Гавайский</td><td><i>poloka</i></td><td><i>kani</i></td><td class="num">4·6·5</td><td>тире</td><td>Лягушка-иммигрантка и драгоценная пресная вода</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<section class="closing">
+  <div>
+    <h2>Во всех девятнадцати прудах звучит одно и то же — вода, а не лягушка</h2>
+    <p>Ни один язык не сохранил всего. Латынь удержала неопределённость, но потеряла счёт. Суахили нашёл семь слогов, но вода в нём заговорила. Клингонский забыл слово «лягушка» и заменил его прыжком. Санскрит неожиданно перевёл не слова, а метод.</p>
+    <p>И всё же главное доходит до каждого берега: старая неподвижность, короткое движение, звук, после которого тишина слышнее, чем была. Наверное, поэтому это хайку так охотно переводят — в нём почти нечего терять, кроме тишины, а тишина переводится на любой язык.</p>
+  </div>
+  <figure class="frontplate" style="margin:0">
+    <svg viewBox="0 0 300 200" role="img" aria-label="Перо и тушь: гладь пруда после всплеска, расходящиеся круги и одинокий камыш">
+      <g fill="none" stroke="#1E1C18" stroke-linecap="round">
+        <path d="M0 70 C80 64 200 66 300 72" stroke-width="1.1"/>
+        <path d="M0 70 C80 64 200 66 300 72 L300 82 C200 76 80 76 0 80Z" fill="url(#hatch)" stroke="none"/>
+        <ellipse cx="150" cy="130" rx="10" ry="3" stroke-width="1"/>
+        <ellipse cx="150" cy="130" rx="34" ry="9" stroke-width=".8"/>
+        <ellipse cx="150" cy="130" rx="66" ry="17" stroke-width=".6"/>
+        <ellipse cx="150" cy="130" rx="104" ry="26" stroke-width=".45" stroke-dasharray="4 5"/>
+        <ellipse cx="150" cy="130" rx="140" ry="35" stroke-width=".35" stroke-dasharray="2 7"/>
+        <path d="M20 100 H70 M220 104 H285 M30 175 H90 M200 180 H270" stroke-width=".5"/>
+        <path d="M262 190 C260 150 258 120 264 70" stroke-width="1"/>
+        <path d="M261 72 C259 60 264 50 267 44 C269 54 268 64 264 74Z" fill="url(#cross)" stroke-width="1"/>
+        <path d="M262 150 C276 136 284 132 296 130" stroke-width=".7"/>
+      </g>
+    </svg>
+    <figcaption class="caption">Табл. II. <i>Mizu no oto</i>: лягушки больше не видно.</figcaption>
+  </figure>
+</section>
+
+</div>
+</body>
+</html>
