@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Кольцо гептаподов: учебник письма</title>
+<meta name="description" content="Реконструкция письма гептаподов по принципам рассказа Теда Чана: закрытый словарь, правило волн по кольцу, теоремы, уроки, разбор и упражнения.">
+<meta name="compositor:paper" content="#F6F3EC">
+<meta name="compositor:ink" content="#1E1E24">
+<meta name="compositor:accent" content="#9A3B2E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans+Narrow:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F3EC;
+  --ink:#1E1E24;
+  --muted:#6B6A70;
+  --rule:#CFC8B8;
+  --accent:#9A3B2E;
+  --box:#EEE9DD;
+  --serif:"PT Serif",Georgia,serif;
+  --sans:"PT Sans Narrow","Arial Narrow",sans-serif;
+  --mono:"PT Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 18px/1.6 var(--serif);font-feature-settings:"onum" 1}
+.page{max-width:1120px;margin:0 auto;padding:56px 24px 80px;display:grid;grid-template-columns:minmax(0,1fr) 250px;column-gap:48px}
+.page>*{grid-column:1}
+.page>.wide{grid-column:1 / -1}
+aside.margin{grid-column:2;font:400 15px/1.45 var(--sans);color:var(--muted);border-top:1px solid var(--rule);padding-top:8px;margin-top:6px;align-self:start}
+aside.margin b{color:var(--ink);font-weight:700;display:block;letter-spacing:.04em;text-transform:uppercase;font-size:12.5px;margin-bottom:4px}
+aside.margin svg{width:100%;height:auto;display:block;margin:8px 0}
+p{max-width:65ch;margin:0 0 1em}
+h1{font:700 44px/1.1 var(--serif);margin:0 0 12px;letter-spacing:-.01em}
+h2{font:700 27px/1.25 var(--serif);margin:56px 0 14px;max-width:30ch}
+h2 .num{display:block;font:700 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+h3{font:700 19px/1.3 var(--serif);margin:32px 0 10px}
+.kicker{font:700 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.lede{font-size:21px;line-height:1.5;color:var(--ink);max-width:58ch}
+.titlefig{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:48px;align-items:center;border-bottom:1px solid var(--ink);padding-bottom:36px;margin-bottom:12px}
+.titlefig svg{width:100%;height:auto}
+.box{border:1px solid var(--ink);background:var(--box);padding:16px 20px 6px;margin:22px 0;max-width:68ch}
+.box .tag{font:700 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px}
+.box.def{border-left:4px solid var(--ink)}
+.box.thm{border-left:4px solid var(--accent);background:transparent}
+.box.thm .tag{color:var(--accent)}
+.box.proof{border:none;border-left:1px solid var(--rule);background:transparent;padding:4px 20px}
+.box.proof .tag{font-style:italic;text-transform:none;letter-spacing:0;font:italic 400 17px var(--serif)}
+.qed{float:right;font-family:var(--mono)}
+.box.ex{border-style:dashed;background:transparent}
+.box.ex .tag{color:var(--muted)}
+.box.exr{background:transparent;border:none;border-top:2px solid var(--ink);padding:12px 0 0}
+.lg{font-family:var(--mono);font-size:15.5px;background:var(--paper);border:1px solid var(--rule);padding:2px 6px;white-space:nowrap}
+.gap{color:var(--accent);font-family:var(--mono)}
+code,.m{font-family:var(--mono);font-size:.88em}
+table{border-collapse:collapse;width:100%;font:400 15.5px/1.4 var(--sans);margin:14px 0 24px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12.5px;border-bottom:1px solid var(--ink)}
+td.k{font-family:var(--mono);color:var(--accent);white-space:nowrap}
+.tablewrap{overflow-x:auto;max-width:100%}
+.dict{columns:3 220px;column-gap:28px;font:400 15px/1.5 var(--sans);margin:12px 0 24px}
+.dict div{break-inside:avoid;margin-bottom:12px}
+.dict h4{font:700 12.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;border-bottom:1px solid var(--rule);padding-bottom:4px}
+.dict span{display:inline-block;margin-right:10px}
+.dict i{font-family:var(--mono);font-style:normal;color:var(--muted);font-size:13px}
+figure{margin:24px 0}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font:400 15px/1.45 var(--sans);color:var(--muted);margin-top:8px;max-width:70ch}
+figcaption b{color:var(--ink)}
+.plates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.plates figure{margin:0}
+.instrument{grid-column:1 / -1;width:100%;min-height:440px;margin:28px 0 8px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);background:var(--paper)}
+.instrument[data-instrument="harmonics"]{min-height:520px}
+.instrument[data-instrument="exercises"]{min-height:480px}
+.instrument[data-instrument="time-trace"]{min-height:360px}
+.instcap{grid-column:1 / -1;font:400 15px/1.45 var(--sans);color:var(--muted);margin:0 0 24px}
+.instcap b{color:var(--accent)}
+ol.ans{font-size:16px}
+hr.sec{grid-column:1 / -1;border:0;border-top:1px solid var(--rule);margin:48px 0 0;width:100%}
+.todo{color:var(--accent);font-style:italic}
+@media (max-width:820px){
+  .page{grid-template-columns:minmax(0,1fr);padding:32px 18px 60px}
+  aside.margin{grid-column:1;margin:4px 0 18px;padding-left:12px;border-top:none;border-left:2px solid var(--rule)}
+  aside.margin svg{max-width:220px}
+  .titlefig{grid-template-columns:1fr;gap:20px}
+  .titlefig svg{max-width:260px}
+  h1{font-size:34px}
+  .plates{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/cjidfdld/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Кольцо гептаподов: учебник письма"><meta property="og:description" content="Реконструкция письма гептаподов по принципам рассказа Теда Чана: закрытый словарь, правило волн по кольцу, теоремы, уроки, разбор и упражнения."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/cjidfdld/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F6F3EC;border-bottom:1px solid #1E1E2426;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1E24;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1E24;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#1E1E24"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F6F3EC" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F6F3EC"/></svg><span>Compositor</span></a><time datetime="2026-11-23T13:14:50.970Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#1E1E24;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-23</time></compositor-bar>
+<main class="page">
+
+<header class="titlefig">
+  <div>
+    <div class="kicker">Учебник · реконструкция по принципам</div>
+    <h1>Кольцо гептаподов: письмо, которое нельзя начать, не зная конца</h1>
+    <p class="lede">Полный курс семасиографического письма по рассказу Теда Чана «История твоей жизни». Определения, теоремы с доказательствами, словарь, разобранные примеры и упражнения. Знаки здесь строятся заново, по правилам, и отличаются от логограмм фильма «Прибытие».</p>
+  </div>
+  <svg viewBox="0 0 300 300" role="img" aria-label="Одна непрерывная замкнутая линия, похожая на кольцо с волнами и одной петлёй, нарисованная без отрыва пера">
+    <path fill="none" stroke="#1E1E24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+      d="M150 40 C196 38 238 64 252 104 C262 132 246 150 258 176 C270 204 240 244 200 256 C176 263 166 246 150 252 C128 260 104 270 80 248 C56 226 70 204 52 180 C34 154 46 120 66 98 C84 78 104 84 118 70 C128 60 112 46 128 42 C140 39 146 54 158 56 C172 58 170 44 150 40 Z"/>
+    <circle cx="150" cy="150" r="3" fill="#9A3B2E"/>
+  </svg>
+</header>
+
+<h2><span class="num">Предисловие</span>У Чана есть принципы письма, но почти нет знаков</h2>
+<aside class="margin"><b>Что взято из книги</b>Четыре принципа: письмо семасиографическое; оно не связано с речью; фраза пишется целиком сразу; изменение одного штриха меняет смысл всего знака. Всё прочее в этом учебнике достроено.</aside>
+<p>В рассказе Теда Чана лингвист Луиза Бэнкс учится читать письмо пришельцев, гептаподов. Чан описывает его свойства с точностью учёного, но конкретных знаков почти не даёт. Для фильма «Прибытие» художница Мартина Бертран нарисовала около сотни круглых логограмм, однако полной грамматики к ним нет.</p>
+<p>Этот учебник идёт другим путём. Мы берём только принципы Чана и выводим из них систему: закрытый словарь, набор конструкций и одно постоянное правило сложения. Знаки, которые получаются, не похожи на кольца из фильма, и это сделано намеренно: они рождаются из алгебры, а не из кисти.</p>
+<p>Одно допущение принято с самого начала: пишущий знает всю фразу целиком и только потом начинает её рисовать. Всё остальное следует из него.</p>
+
+<div class="box def"><span class="tag">Принцип 0 · допущение курса</span><p>Логограмма начинается тогда, когда фраза уже известна полностью. У письма нет «по ходу».</p></div>
+
+<h2><span class="num">Глава 1</span>Семасиографическое письмо записывает смысл, а не звучание</h2>
+<aside class="margin"><b>Два письма</b>У гептаподов речь (Гептапод А) и письмо (Гептапод Б) устроены независимо. Наш курс касается только письма.</aside>
+<p>Буквы записывают звуки; письмо гептаподов записывает отношения между понятиями. Его нельзя прочесть вслух слово за словом, как нельзя прочесть вслух чертёж моста. Читатель видит знак целиком и понимает, кто, что, с кем, когда и почему.</p>
+
+<div class="box def"><span class="tag">Определение 1.1 · корень</span><p>Корень — элемент закрытого словаря, обозначающий понятие: существо, вещь, действие, качество. У каждого корня есть номер <span class="m">k</span>, амплитуда <span class="m">a</span> и фаза <span class="m">φ</span>.</p></div>
+<div class="box def"><span class="tag">Определение 1.2 · конструкция</span><p>Конструкция — отношение, связывающее корни во фразу: <i>деятель</i>, <i>действие</i>, <i>предмет</i>, <i>соучастник</i>, <i>время</i>, <i>причина</i>. Конструкция сдвигает фазы корней, которые в неё входят.</p></div>
+<div class="box def"><span class="tag">Определение 1.3 · логограмма</span><p>Логограмма — одна замкнутая линия без самопересечений и отрывов, задаваемая радиусом как функцией угла: <span class="m">r(θ) = R + Σ aᵢ·cos(kᵢθ + φᵢ)</span>, где сумма берётся по всем корням и конструкциям фразы.</p></div>
+
+<h2><span class="num">Глава 2</span>Каждое слово звучит по всему кольцу, как гармоника в звуке</h2>
+<aside class="margin"><b>Аналогия</b>Скрипичная нота — это основной тон и его гармоники вместе. Ухо слышит одну ноту, но спектр раскладывает её на части. Так и логограмма: одна линия, сложенная из волн.
+<svg viewBox="0 0 220 120" role="img" aria-label="Одной линией: три волны разной частоты, слившиеся в одну"><path fill="none" stroke="#1E1E24" stroke-width="1.8" stroke-linecap="round" d="M6 60 C20 20 34 20 48 60 S76 100 90 60 S118 20 132 60 C140 82 148 40 156 60 C164 80 172 44 180 60 C190 78 200 52 214 60"/></svg></aside>
+<p>Здесь главное правило курса. Корень не получает отдельного участка окружности, как буква получает место в строке. Он добавляет свою волну ко всей линии сразу: на каждом угле кольцо немного изгибается внутрь или наружу. Корень «человек» — пять мягких выпуклостей, корень «вода» — тринадцать мелких, корень «дать» — три широких. Сумма волн и есть знак.</p>
+
+<div class="box def"><span class="tag">Правило сложения (основное)</span><p>Фраза ⟶ список пар (корень, роль). Роль задаёт фазу: деятель 0°, предмет 90°, соучастник 180°, время 225°, причина 270°. Каждая пара даёт слагаемое <span class="m">a·cos(kθ + φ)</span>. Дополнительно фраза получает «связующую» волну, чья фаза зависит от всех корней сразу. Перо ставят в точку <span class="m">θ = 0</span>, нижнюю отметку знака.</p></div>
+
+<div class="box thm"><span class="tag">Теорема 2.1 · о неначинаемости</span><p>Первый штрих логограммы зависит от каждого слова фразы. Если заменить любое слово, включая последнее, изменится и начальная точка, и направление пера в ней.</p></div>
+<div class="box proof"><span class="tag">Доказательство.</span><p>Начальная точка — <span class="m">r(0) = R + Σ aᵢ cos φᵢ</span>, направление — производная <span class="m">r′(0) = −Σ aᵢkᵢ sin φᵢ</span>. Обе суммы содержат слагаемое от каждого корня. Связующая волна построена так, что её фаза меняется при замене любого корня, а значит, меняется её вклад в <span class="m">r′(0)</span>. Даже если два слова случайно дают одинаковые <span class="m">cos φ</span>, их <span class="m">sin φ</span> различаются. <span class="qed">∎</span></p></div>
+<p>Этим теорема и связывает письмо с восприятием времени у Чана: начать линию может лишь тот, кто уже видит её конец.</p>
+
+<div class="instrument" data-instrument="composer">
+  <div class="cz-grid">
+    <div class="cz-left">
+      <div class="cz-modes" role="group" aria-label="Режим">
+        <button type="button" class="cz-mode" data-mode="text" aria-pressed="true">Фраза</button>
+        <button type="button" class="cz-mode" data-mode="chips" aria-pressed="false">По ролям</button>
+        <button type="button" class="cz-mode" data-mode="task" aria-pressed="false">Задача</button>
+      </div>
+
+      <div class="cz-panel" data-panel="text">
+        <input class="cz-input" type="text" spellcheck="false" autocomplete="off" aria-label="Фраза из словаря" value="мать даёт книгу ребёнку потому что ребёнок помнит море">
+      </div>
+
+      <div class="cz-panel" data-panel="chips" hidden>
+        <div class="cz-roles" role="group" aria-label="Роль"></div>
+        <div class="cz-palette" aria-label="Корни словаря"></div>
+      </div>
+
+      <div class="cz-panel" data-panel="task" hidden>
+        <div class="cz-task">
+          <span class="cz-task-n"></span>
+          <span class="cz-task-q"></span>
+        </div>
+        <input class="cz-input cz-input2" type="text" spellcheck="false" autocomplete="off" aria-label="Ваша фраза">
+        <div class="cz-task-row">
+          <span class="cz-task-r" aria-live="polite"></span>
+          <button type="button" class="cz-btn cz-next">Следующая</button>
+        </div>
+      </div>
+
+      <div class="cz-head">Разбор</div>
+      <div class="cz-parse" aria-live="polite"></div>
+
+      <div class="cz-readouts">
+        <div class="cz-ro"><span>корни</span><b class="ro-roots">0</b></div>
+        <div class="cz-ro"><span>лакуны</span><b class="ro-gaps">0</b></div>
+        <div class="cz-ro"><span>r(0)</span><b class="ro-r0">0</b></div>
+        <div class="cz-ro"><span>r′(0)</span><b class="ro-r1">0</b></div>
+      </div>
+    </div>
+    <div class="cz-right">
+      <div class="cz-cwrap"><canvas class="cz-canvas" role="img" aria-label="Логограмма фразы"></canvas></div>
+    </div>
+  </div>
+</div>
+
+<style>
+[data-instrument="composer"]{font:400 15px/1.45 var(--sans);color:var(--ink);padding:18px 0 16px}
+[data-instrument="composer"] .cz-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:28px;align-items:start}
+[data-instrument="composer"] .cz-modes{display:flex;gap:0;margin-bottom:12px}
+[data-instrument="composer"] button{font:700 13px/1 var(--sans);letter-spacing:.06em;color:var(--ink);background:transparent;border:1px solid var(--ink);padding:7px 11px;cursor:pointer;touch-action:manipulation}
+[data-instrument="composer"] .cz-mode{text-transform:uppercase;margin-right:-1px}
+[data-instrument="composer"] button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="composer"] button:focus-visible,[data-instrument="composer"] .cz-input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="composer"] .cz-input{width:100%;font:400 16px/1.4 var(--mono);color:var(--ink);background:var(--box);border:1px solid var(--ink);padding:9px 10px;border-radius:0}
+[data-instrument="composer"] .cz-roles{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+[data-instrument="composer"] .cz-role{text-align:left;font-weight:400;letter-spacing:0;min-width:92px}
+[data-instrument="composer"] .cz-role small{display:block;font:700 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:4px}
+[data-instrument="composer"] .cz-role span{font-family:var(--mono);font-size:13px}
+[data-instrument="composer"] .cz-palette{display:flex;flex-wrap:wrap;gap:4px;max-height:150px;overflow:auto}
+[data-instrument="composer"] .cz-palette button{font:400 13px/1 var(--mono);border-color:var(--rule);padding:5px 7px}
+[data-instrument="composer"] .cz-palette button i{font-style:normal;color:var(--muted);margin-left:4px;font-size:11px}
+[data-instrument="composer"] .cz-head{font:700 12.5px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;margin:16px 0 8px;border-bottom:1px solid var(--rule);padding-bottom:5px}
+[data-instrument="composer"] .cz-parse{display:flex;flex-wrap:wrap;gap:5px;min-height:62px;align-content:flex-start}
+[data-instrument="composer"] .cz-t{font:400 13px/1.2 var(--mono);text-align:left;letter-spacing:0;border-color:var(--ink);padding:5px 7px}
+[data-instrument="composer"] .cz-t small{display:block;font:400 11px/1.2 var(--sans);opacity:.75;margin-top:2px}
+[data-instrument="composer"] .cz-t[aria-pressed="false"]{background:transparent;color:var(--muted);border-style:dashed;text-decoration:line-through}
+[data-instrument="composer"] .cz-t.bond{border-color:var(--muted)}
+[data-instrument="composer"] .cz-gap{font:400 13px/1.2 var(--mono);color:var(--accent);border:1px solid var(--accent);padding:5px 7px}
+[data-instrument="composer"] .cz-gap small{display:block;font:400 11px/1.2 var(--sans);margin-top:2px}
+[data-instrument="composer"] .cz-readouts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:16px}
+[data-instrument="composer"] .cz-ro{border:1px solid var(--ink);background:var(--box);padding:6px 8px;height:54px}
+[data-instrument="composer"] .cz-ro span{display:block;font:700 11.5px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+[data-instrument="composer"] .cz-ro b{display:block;font:400 19px/1.5 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="composer"] .cz-task{font:400 16px/1.4 var(--serif);margin-bottom:8px;min-height:46px}
+[data-instrument="composer"] .cz-task-n{font:700 12px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px}
+[data-instrument="composer"] .cz-task-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:8px}
+[data-instrument="composer"] .cz-task-r{font:400 14px/1 var(--mono);font-variant-numeric:tabular-nums;min-width:15ch}
+[data-instrument="composer"] .cz-cwrap{width:100%;aspect-ratio:1/1;position:relative}
+[data-instrument="composer"] .cz-canvas{width:100%;height:100%;display:block;touch-action:pan-y}
+@media (max-width:700px){
+  [data-instrument="composer"] .cz-grid{grid-template-columns:minmax(0,1fr)}
+  [data-instrument="composer"] .cz-right{order:-1;max-width:360px;width:100%;margin:0 auto}
+  [data-instrument="composer"] .cz-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
+<script>(function(){
+const root=document.querySelector('[data-instrument="composer"]');
+if(!root)return;
+const $=s=>root.querySelector(s),$$=s=>Array.from(root.querySelectorAll(s));
+const css=getComputedStyle(document.documentElement);
+const C=n=>(css.getPropertyValue(n)||'').trim();
+const INK=C('--ink')||'#1E1E24',ACC=C('--accent')||'#9A3B2E',RULE=C('--rule')||'#CFC8B8',MUT=C('--muted')||'#6B6A70';
+const RAW=[
+['человек',5,'b','человек'],['гептапод',7,'b','гептапод'],['ребёнок',11,'b','ребенок,ребенк'],['мать',13,'b','мать,матер'],['друг',17,'b','друг,друз'],['учёный',19,'b','учен'],['народ',23,'b','народ'],
+['вода',29,'n','вод'],['свет',31,'n','свет'],['море',37,'n','мор'],['звезда',41,'n','звезд,звёзд'],['камень',43,'n','камен,камн'],['ветер',47,'n','ветер,ветр'],
+['дать',3,'a','=дать,=дает,=дают,=дал,=дала,=дали,=даю,=дам,=дадим,дарит'],['видеть',4,'a','вид,виж'],['говорить',6,'a','говор'],['писать',8,'a','писа,пиш'],['знать',9,'a','зна'],['прийти',10,'a','прийт,приш,приход,прид'],['уйти',12,'a','уйт,уш,уход,уйд'],['помнить',14,'a','помн'],
+['корабль',15,'t','корабл'],['знак',16,'t','знак'],['книга',18,'t','книг'],['дом',20,'t','дом'],['оружие',21,'t','оруж'],['инструмент',22,'t','инструмент'],
+['время',24,'x','врем'],['цель',25,'x','цел'],['свобода',26,'x','свобод'],['путь',27,'x','пут'],['жизнь',28,'x','жизн'],['смерть',30,'x','смерт'],
+['прежде',32,'w','=прежде'],['после',33,'w','=после'],['всегда',34,'w','=всегда'],['уже-известное',35,'w','уже-известн,=уже']];
+const E=RAW.map(r=>({w:r[0],k:r[1],f:r[2],s:r[3].split(',')}));
+const ROLE={'деятель':0,'действие':45,'предмет':90,'соучастник':180,'время':225,'причина':270};
+const STOP=new Set('и а но что это в на к у о же не он она оно они мы я ты вы его её ее их чтобы то'.split(' '));
+const R=1,N=720,TAU=Math.PI*2;
+const amp=k=>0.22/(1+k/6);
+function match(t){let best=null,bl=0;for(const e of E)for(const s of e.s){if(s[0]==='='){if(t===s.slice(1)){return e}}else if(t.startsWith(s)&&t.length-s.length<=4&&s.length>bl){best=e;bl=s.length}}return best}
+function parse(text){
+  const toks=(text.toLowerCase().replace(/ё/g,'е').match(/[а-яa-z\-]+|\[|\]/g)||[]);
+  const items=[];const stack=[];let st={d:0,verb:false,subj:false,co:false};
+  for(let i=0;i<toks.length;i++){
+    const t=toks[i];
+    if(t==='['||t==='-')continue;
+    if(t===']'){if(stack.length)st=stack.pop();continue}
+    if(t==='потому'||t==='ибо'||t==='оттого'||(t==='так'&&toks[i+1]==='как')){if(t==='так')i++;stack.push(st);st={d:st.d+1,verb:false,subj:false,co:false};continue}
+    if(t==='с'||t==='со'||t==='вместе'){st.co=true;continue}
+    if(STOP.has(t))continue;
+    const e=match(t);
+    if(!e){items.push({gap:true,tok:t,d:st.d});continue}
+    let role;
+    if(e.f==='w')role='время';
+    else if(e.f==='a'){role='действие';st.verb=true}
+    else if(st.co){role='соучастник';st.co=false}
+    else if(!st.subj&&!st.verb){role='деятель';st.subj=true}
+    else if(e.f==='b'&&st.verb&&/(у|ю|ам|ям)$/.test(t))role='соучастник';
+    else role='предмет';
+    const ph=(ROLE[role]+270*st.d)%360;
+    items.push({gap:false,w:e.w,k:e.k,role,d:st.d,a:amp(e.k)*Math.pow(.5,st.d),phd:ph,key:e.w+'|'+role+'|'+st.d});
+  }
+  const n=items.length;items.forEach((it,i)=>{if(it.gap)it.g=TAU*(i+1)/(n+1)});
+  const roots=items.filter(x=>!x.gap);
+  const lv={};roots.forEach(r=>{(lv[r.d]=lv[r.d]||[]).push(r.k)});
+  const bonds=Object.keys(lv).map(d=>{d=+d;const s=lv[d].reduce((a,b)=>a+b,0)%360;return{bond:true,w:'связка',k:2,role:d?'причина':'фраза',d,a:0.07*Math.pow(.5,d),phd:s,key:'bond|'+d}});
+  const terms=roots.concat(bonds);
+  const tot=terms.reduce((s,t)=>s+t.a,0);const sc=tot>0.72?0.72/tot:1;
+  terms.forEach(t=>{t.a*=sc;t.ph=t.phd*Math.PI/180});
+  return{items,roots,bonds,terms,gaps:items.filter(x=>x.gap)};
+}
+const off=new Set();
+function samples(P){
+  const a=new Float32Array(N);const act=P.terms.filter(t=>!off.has(t.key));
+  for(let i=0;i<N;i++){const th=TAU*i/N;let r=R;for(const t of act)r+=t.a*Math.cos(t.k*th+t.ph);
+    for(const g of P.gaps){let d=th-g.g;d=Math.atan2(Math.sin(d),Math.cos(d));const w=0.16;if(Math.abs(d)<w){const u=(d+w)/(2*w)*5;const tri=1-2*Math.abs(u-Math.floor(u)-.5)*2;r-=0.09*(0.5+0.5*tri)*Math.sin(Math.PI*(d+w)/(2*w))}}
+    a[i]=r}
+  return a;
+}
+function deriv(P){const act=P.terms.filter(t=>!off.has(t.key));let r0=R,r1=0;for(const t of act){r0+=t.a*Math.cos(t.ph);r1-=t.a*t.k*Math.sin(t.ph)}return[r0,r1]}
+const cv=$('.cz-canvas'),ctx=cv.getContext('2d');
+let cur=null,from=null,to=null,t0=0,anim=0,P=null,ghost=null;
+const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function size(){const b=cv.getBoundingClientRect();const dpr=window.devicePixelRatio||1;const w=Math.max(10,Math.round(b.width*dpr)),h=Math.max(10,Math.round(b.height*dpr));if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}return{w:b.width,h:b.height,dpr}}
+function pt(r,th,cx,cy,s){return[cx+s*r*Math.sin(th),cy+s*r*Math.cos(th)]}
+function draw(){
+  const {w,h,dpr}=size();ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+  const cx=w/2,cy=h/2,s=Math.min(w,h)/2/1.85;
+  ctx.setLineDash([2,4]);ctx.strokeStyle=RULE;ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cy,s*R,0,TAU);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle=RULE;ctx.beginPath();ctx.arc(cx,cy,2,0,TAU);ctx.fill();
+  if(ghost){ctx.setLineDash([5,5]);ctx.strokeStyle=MUT;ctx.lineWidth=1.2;ctx.beginPath();for(let i=0;i<=N;i++){const p=pt(ghost[i%N],TAU*i/N,cx,cy,s);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1])}ctx.stroke();ctx.setLineDash([])}
+  if(!cur)return;
+  const br=new Set();if(anim>=0.5)for(const g of P.gaps){const c=Math.round(g.g/TAU*N);for(let j=-3;j<=3;j++)br.add((c+j+N)%N)}
+  ctx.strokeStyle=INK;ctx.lineWidth=2.2;ctx.lineJoin='round';ctx.lineCap='round';ctx.beginPath();let pen=false;
+  for(let i=0;i<=N;i++){const k=i%N;if(br.has(k)){pen=false;continue}const p=pt(cur[k],TAU*k/N,cx,cy,s);pen?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);pen=true}
+  ctx.stroke();
+  ctx.strokeStyle=ACC;ctx.lineWidth=1.5;
+  for(const g of P.gaps){const c=Math.round(g.g/TAU*N)%N;const a=pt(cur[c]+0.06,g.g,cx,cy,s),b=pt(cur[c]+0.16,g.g,cx,cy,s);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke()}
+  const r0=cur[0],r1=(cur[1]-cur[N-1])/(2*TAU/N);
+  const p=pt(r0,0,cx,cy,s);let dx=r0,dy=r1;const L=Math.hypot(dx,dy)||1;dx/=L;dy/=L;
+  const len=30,ex=p[0]+dx*len,ey=p[1]+dy*len;
+  ctx.strokeStyle=ACC;ctx.fillStyle=ACC;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(ex,ey);ctx.stroke();
+  const ax=-dy,ay=dx;ctx.beginPath();ctx.moveTo(ex+dx*7,ey+dy*7);ctx.lineTo(ex+ax*5,ey+ay*5);ctx.lineTo(ex-ax*5,ey-ay*5);ctx.closePath();ctx.fill();
+  ctx.beginPath();ctx.arc(p[0],p[1],4.5,0,TAU);ctx.fill();
+}
+function step(now){let u=Math.min(1,(now-t0)/650);anim=u;const e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2;for(let i=0;i<N;i++)cur[i]=from[i]+(to[i]-from[i])*e;draw();if(u<1)requestAnimationFrame(step)}
+function render(){
+  to=samples(P);
+  if(!cur||reduce){cur=Float32Array.from(to);anim=1;draw()}
+  else{from=Float32Array.from(cur);t0=performance.now();anim=0;requestAnimationFrame(step)}
+  const [r0,r1]=deriv(P);
+  $('.ro-roots').textContent=P.roots.length;$('.ro-gaps').textContent=P.gaps.length;
+  $('.ro-r0').textContent=r0.toFixed(3);$('.ro-r1').textContent=(r1>=0?'+':'−')+Math.abs(r1).toFixed(3);
+}
+const sup=d=>d?' · причина'+(d>1?'×'+d:''):'';
+function list(){
+  const box=$('.cz-parse');box.innerHTML='';
+  const all=P.items.concat(P.bonds);
+  if(!all.length){const s=document.createElement('span');s.className='cz-t';s.style.border='none';s.style.color=MUT;s.textContent='пустой знак: r(θ) = R';box.appendChild(s)}
+  for(const it of all){
+    if(it.gap){const s=document.createElement('span');s.className='cz-gap';s.innerHTML='['+it.tok+']<small>лакуна</small>';box.appendChild(s);continue}
+    const b=document.createElement('button');b.type='button';b.className='cz-t'+(it.bond?' bond':'');
+    b.setAttribute('aria-pressed',off.has(it.key)?'false':'true');
+    b.innerHTML=it.w+' <span style="opacity:.7">k='+it.k+'</span><small>'+(it.bond?it.role:it.role+sup(it.d))+' · φ='+it.phd+'°</small>';
+    b.addEventListener('click',()=>{off.has(it.key)?off.delete(it.key):off.add(it.key);b.setAttribute('aria-pressed',off.has(it.key)?'false':'true');render();taskCheck()});
+    box.appendChild(b);
+  }
+}
+const inp=$('.cz-input'),inp2=$('.cz-input2');
+let mode='text';
+function update(text){P=parse(text);list();render();syncSlots();taskCheck()}
+inp.addEventListener('input',()=>update(inp.value));
+inp2.addEventListener('input',()=>update(inp2.value));
+/* по ролям */
+const RL=[['кто','деятель','bnxt'],['что делает','действие','a'],['что','предмет','bnxt'],['с кем','соучастник','b'],['когда','время','w'],['почему','причина','bnxta']];
+let slots={},active='деятель';
+function syncSlots(){
+  slots={};P.roots.forEach(r=>{if(r.d===0){if(!slots[r.role])slots[r.role]=r.w}else{(slots['причина']=slots['причина']||[]).push(r.w)}});
+  drawRoles();
+}
+function drawRoles(){
+  const box=$('.cz-roles');box.innerHTML='';
+  RL.forEach(([q,role])=>{const b=document.createElement('button');b.type='button';b.className='cz-role';b.setAttribute('aria-pressed',active===role?'true':'false');
+    const v=slots[role];b.innerHTML='<small>'+q+'</small><span>'+(v?(Array.isArray(v)?v.join(' '):v):'—')+'</span>';
+    b.addEventListener('click',()=>{if(active===role&&v){delete slots[role];compose()}else{active=role;drawRoles();drawPal()}});box.appendChild(b)});
+}
+function drawPal(){
+  const f=RL.find(r=>r[1]===active)[2];const box=$('.cz-palette');box.innerHTML='';
+  E.filter(e=>f.includes(e.f)).forEach(e=>{const b=document.createElement('button');b.type='button';b.innerHTML=e.w+'<i>'+e.k+'</i>';
+    b.addEventListener('click',()=>{if(active==='причина'){const a=slots['причина']||[];if(a.length<4)a.push(e.w);slots['причина']=a}else slots[active]=e.w;compose()});box.appendChild(b)});
+}
+function compose(){
+  const p=[];if(slots['деятель'])p.push(slots['деятель']);if(slots['действие'])p.push(slots['действие']);
+  if(slots['предмет']){if(!slots['деятель']&&!slots['действие'])p.push('и');p.push(slots['предмет'])}
+  if(slots['соучастник'])p.push('с '+slots['соучастник']);if(slots['время'])p.push(slots['время']);
+  if(slots['причина']&&slots['причина'].length)p.push('потому что '+slots['причина'].join(' '));
+  let s=p.join(' ');if(!slots['деятель']&&slots['предмет']&&!slots['действие'])s=s.replace(/^и /,'');
+  inp.value=s;const keep=active;update(s);active=keep;drawRoles();drawPal();
+}
+/* задачи */
+const TASKS=[['Гептапод даёт человеку инструмент.','гептапод дать человеку инструмент'],['Человек видит свет.','человек видеть свет'],['Мать уходит с ребёнком прежде.','мать уйти с ребёнок прежде'],['Учёная пишет знак, потому что гептапод всегда знает время.','учёный писать знак потому что гептапод знать время всегда'],['Друг помнит море, потому что ветер пришёл.','друг помнить море потому что ветер прийти']];
+let ti=0,TP=null;
+function setTask(){TP=parse(TASKS[ti][1]);ghost=samples(TP);$('.cz-task-n').textContent='Задача '+(ti+1)+' из '+TASKS.length;$('.cz-task-q').textContent=TASKS[ti][0];taskCheck();draw()}
+function taskCheck(){
+  if(mode!=='task'||!TP||!P)return;
+  const want=TP.roots.map(r=>r.key),have=new Set(P.roots.filter(r=>!off.has(r.key)).map(r=>r.key));
+  const m=want.filter(k=>have.has(k)).length,extra=P.roots.length-m+P.gaps.length;
+  $('.cz-task-r').textContent='волн '+m+'/'+want.length+(m===want.length&&!extra?' · знак совпал':extra?' · лишних '+extra:'');
+}
+$('.cz-next').addEventListener('click',()=>{ti=(ti+1)%TASKS.length;setTask()});
+$$('.cz-mode').forEach(b=>b.addEventListener('click',()=>{
+  mode=b.dataset.mode;$$('.cz-mode').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  $$('.cz-panel').forEach(p=>p.hidden=p.dataset.panel!==mode);
+  if(mode==='task'){inp2.value='';update('');setTask()}else{ghost=null;update(inp.value);if(mode==='chips'){drawRoles();drawPal()}}
+}));
+new ResizeObserver(()=>draw()).observe($('.cz-cwrap'));
+update(inp.value);drawPal();
+})();</script>
+<p class="instcap"><b>Прибор I.</b> Переводчик. Каждое введённое слово меняет всю линию, включая её первую точку.</p>
+
+<h2><span class="num">Глава 3</span>Знак читается, если разложить его обратно на волны</h2>
+<aside class="margin"><b>Цена решения</b>Волновой знак не делится на части глазом. Поэтому у гептаподского читателя есть второй навык — слышать спектр: какие частоты звучат и с какой фазой.</aside>
+<p>Слабость правила видна сразу: в знаке нет места, где «написано» слово. Но каждая частота принадлежит ровно одному корню, а каждая фаза — ровно одной роли. Значит, знак разложим однозначно.</p>
+
+<div class="box thm"><span class="tag">Теорема 3.1 · о прочтении</span><p>Если частоты корней словаря попарно различны и не кратны друг другу в пределах одной фразы, логограмма однозначно определяет набор корней и их роли.</p></div>
+<div class="box proof"><span class="tag">Доказательство.</span><p>Функции <span class="m">cos kθ</span> и <span class="m">sin kθ</span> для разных <span class="m">k</span> ортогональны на окружности. Интеграл <span class="m">∫ r(θ) cos(kθ) dθ</span> выделяет только вклад частоты <span class="m">k</span>; вместе с синусной парой он даёт амплитуду и фазу. Амплитуда говорит, есть ли корень; фаза — какую роль он играет. Запрет кратности в одной фразе исключает наложение. <span class="qed">∎</span></p></div>
+<p>Поэтому частоты в словаре выбраны из простых чисел и их небольших сдвигов, а несколько сотен корней поделены на семейства так, что в одной фразе семейства не сталкиваются. Точный состав этой таблицы — <span class="todo">[предмет окончательного решения автора]</span>.</p>
+
+<div class="instrument" data-instrument="harmonics">
+  <div class="hm-top">
+    <div class="hm-ringwrap">
+      <canvas class="hm-ring" role="img" aria-label="Логограмма фразы"></canvas>
+    </div>
+    <div class="hm-side">
+      <div class="hm-wavebox">
+        <div class="hm-bt">Вклад · <span class="hm-selname">море</span></div>
+        <canvas class="hm-wave" role="img" aria-label="Вклад выбранной гармоники"></canvas>
+        <div class="hm-selvals"><span class="hm-sv1"></span><span class="hm-sv2"></span></div>
+      </div>
+      <div class="hm-box hm-first">
+        <span class="hm-bt">Первый штрих</span>
+        <div class="hm-num"><span>r(0)</span><b class="hm-r0"></b></div>
+        <div class="hm-num"><span>r′(0)</span><b class="hm-r1"></b></div>
+      </div>
+    </div>
+  </div>
+  <div class="hm-chips" role="group" aria-label="Гармоники знака"></div>
+  <div class="hm-specwrap">
+    <span class="hm-bt">Спектр · амплитуда по k</span>
+    <canvas class="hm-spec" role="img" aria-label="Спектр амплитуд по частотам"></canvas>
+  </div>
+  <div class="hm-reads">
+    <div class="hm-box hm-phrasebox">
+      <span class="hm-bt">Прочитано по спектру</span>
+      <div class="hm-phrase" aria-live="polite"></div>
+    </div>
+    <div class="hm-box hm-leftbox">
+      <span class="hm-bt">Осталось прочесть</span>
+      <div class="hm-left" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="harmonics"]{padding:14px 0 18px;font:400 15px/1.4 var(--sans);color:var(--ink);font-variant-numeric:tabular-nums}
+[data-instrument="harmonics"] .hm-top{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:24px;align-items:start}
+[data-instrument="harmonics"] .hm-ringwrap{height:340px;position:relative}
+[data-instrument="harmonics"] canvas{display:block;width:100%;touch-action:pan-y}
+[data-instrument="harmonics"] .hm-ring{height:100%}
+[data-instrument="harmonics"] .hm-wave{height:190px}
+[data-instrument="harmonics"] .hm-spec{height:92px;cursor:pointer}
+[data-instrument="harmonics"] .hm-bt{display:block;font:700 12.5px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="harmonics"] .hm-selname{color:var(--accent)}
+[data-instrument="harmonics"] .hm-selvals{height:42px;font:400 13px/1.45 var(--mono);display:flex;flex-direction:column;border-top:1px solid var(--rule);padding-top:4px}
+[data-instrument="harmonics"] .hm-sv2{color:var(--muted);font-family:var(--sans);font-size:14px}
+[data-instrument="harmonics"] .hm-box{border:1px solid var(--rule);background:var(--box);padding:8px 12px;overflow:hidden}
+[data-instrument="harmonics"] .hm-first{margin-top:12px;height:76px}
+[data-instrument="harmonics"] .hm-num{display:flex;justify-content:space-between;font:400 14px/1.5 var(--mono)}
+[data-instrument="harmonics"] .hm-num span{color:var(--muted)}
+[data-instrument="harmonics"] .hm-num b{font-weight:400;min-width:7ch;text-align:right}
+[data-instrument="harmonics"] .hm-chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 10px;align-items:center}
+[data-instrument="harmonics"] .hm-sep{width:1px;align-self:stretch;background:var(--rule);margin:0 6px}
+[data-instrument="harmonics"] .hm-chip{font:400 15px/1.2 var(--sans);color:var(--ink);background:var(--paper);border:1px solid var(--ink);padding:5px 9px 6px;display:inline-flex;gap:7px;align-items:baseline;cursor:pointer;border-radius:0;touch-action:manipulation}
+[data-instrument="harmonics"] .hm-chip.hm-con{background:var(--box)}
+[data-instrument="harmonics"] .hm-cm{font:400 12px/1 var(--mono);color:var(--muted)}
+[data-instrument="harmonics"] .hm-chip[aria-pressed="false"]{border-style:dashed;border-color:var(--muted);color:var(--muted);background:transparent}
+[data-instrument="harmonics"] .hm-chip[aria-pressed="false"] .hm-cn{text-decoration:line-through}
+[data-instrument="harmonics"] .hm-chip.hm-sel{box-shadow:inset 0 -3px 0 var(--accent)}
+[data-instrument="harmonics"] .hm-chip:focus{outline:none}
+[data-instrument="harmonics"] .hm-chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="harmonics"] .hm-reads{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;margin-top:10px}
+[data-instrument="harmonics"] .hm-phrasebox,[data-instrument="harmonics"] .hm-leftbox{height:112px}
+[data-instrument="harmonics"] .hm-phrase{font:400 15px/1.2 var(--mono);display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 6px}
+[data-instrument="harmonics"] .hm-w{display:inline-flex;flex-direction:column;align-items:center}
+[data-instrument="harmonics"] .hm-w i{font:400 11.5px/1.3 var(--sans);font-style:normal;color:var(--muted)}
+[data-instrument="harmonics"] .hm-w.hm-bad,[data-instrument="harmonics"] .hm-w.hm-bad i{color:var(--accent)}
+[data-instrument="harmonics"] .hm-op{color:var(--muted);font-family:var(--sans)}
+[data-instrument="harmonics"] .hm-left{font:400 14px/1.5 var(--sans)}
+[data-instrument="harmonics"] .hm-left div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="harmonics"] .hm-left b{font-weight:700;color:var(--ink)}
+[data-instrument="harmonics"] .hm-left .hm-acc{color:var(--accent)}
+@media (max-width:720px){
+  [data-instrument="harmonics"] .hm-top{grid-template-columns:minmax(0,1fr)}
+  [data-instrument="harmonics"] .hm-ringwrap{height:290px}
+  [data-instrument="harmonics"] .hm-side{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+  [data-instrument="harmonics"] .hm-first{margin-top:0}
+  [data-instrument="harmonics"] .hm-wave{height:150px}
+  [data-instrument="harmonics"] .hm-reads{grid-template-columns:minmax(0,1fr)}
+  [data-instrument="harmonics"] .hm-phrasebox{height:128px}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="harmonics"]');
+if(!root)return;
+const N=720,R=1,KMAX=48,D=Math.PI/180,TAU=Math.PI*2;
+const A=k=>0.32/Math.sqrt(k);
+const ROLE={agent:{n:'деятель',p:0},act:{n:'действие',p:45},obj:{n:'предмет',p:90},co:{n:'соучастник',p:180},time:{n:'время',p:225}};
+const ORDER=['agent','act','obj','co','time'];
+const DICT={5:'человек',7:'гептапод',11:'ребёнок',13:'мать',17:'друг',19:'учёный',23:'народ',29:'вода',31:'свет',37:'море',41:'звезда',43:'камень',47:'ветер',3:'дать',4:'видеть',6:'говорить',8:'писать',9:'знать',10:'прийти',12:'уйти',14:'помнить',15:'корабль',16:'знак',18:'книга',20:'дом',21:'оружие',22:'инструмент',24:'время',25:'цель',26:'свобода',27:'путь',28:'жизнь',30:'смерть'};
+const ROOTS=[
+ {id:'r1',name:'мать',k:13,role:'agent',lvl:0},
+ {id:'r2',name:'помнить',k:14,role:'act',lvl:0},
+ {id:'r3',name:'море',k:37,role:'obj',lvl:0},
+ {id:'r4',name:'ребёнок',k:11,role:'agent',lvl:1},
+ {id:'r5',name:'видеть',k:4,role:'act',lvl:1},
+ {id:'r6',name:'звезда',k:41,role:'obj',lvl:1}
+];
+const BA=0.12;
+const BPH=ROOTS.reduce((s,r)=>s+r.k,0)%360;
+const CONS=[
+ {id:'c1',name:'действие',ph:45,applies:r=>r.role==='act'},
+ {id:'c2',name:'предмет',ph:90,applies:r=>r.role==='obj'},
+ {id:'c3',name:'причина',ph:270,applies:r=>r.lvl===1},
+ {id:'b',name:'связка',bind:true}
+];
+const ITEMS=ROOTS.map(r=>Object.assign({kind:'r'},r)).concat(CONS.map(c=>Object.assign({kind:'c'},c)));
+const byId={};ITEMS.forEach(it=>byId[it.id]=it);
+const rootByK={};ROOTS.forEach(r=>rootByK[r.k]=r);
+const state={};ITEMS.forEach(it=>state[it.id]=true);
+const FULL=Object.assign({},state);
+let sel='r3';
+
+const norm=p=>((p%360)+360)%360;
+const cd=(a,b)=>{const d=Math.abs(norm(a)-norm(b));return Math.min(d,360-d);};
+function phaseOf(r,st){let p=0;CONS.forEach(c=>{if(!c.bind&&st[c.id]&&c.applies(r))p+=c.ph;});return norm(p);}
+function terms(st){
+  const t=[];
+  ROOTS.forEach(r=>{if(st[r.id])t.push({k:r.k,a:A(r.k)*(r.lvl?0.5:1),ph:phaseOf(r,st)});});
+  if(st.b)t.push({k:2,a:BA,ph:BPH});
+  return t;
+}
+const COS=[],SIN=[];
+for(let k=0;k<=KMAX;k++){const c=new Float64Array(N),s=new Float64Array(N);for(let n=0;n<N;n++){c[n]=Math.cos(k*TAU*n/N);s[n]=Math.sin(k*TAU*n/N);}COS.push(c);SIN.push(s);}
+function signal(st,base){
+  const out=new Float64Array(N),t=terms(st),b=base===undefined?R:base;
+  for(let n=0;n<N;n++){let v=b;for(let i=0;i<t.length;i++){const q=t[i];v+=q.a*Math.cos(q.k*TAU*n/N+q.ph*D);}out[n]=v;}
+  return out;
+}
+function dft(arr){
+  const sp=[];
+  for(let k=0;k<=KMAX;k++){let c=0,s=0;const C=COS[k],S=SIN[k];for(let n=0;n<N;n++){c+=arr[n]*C[n];s+=arr[n]*S[n];}c*=2/N;s*=2/N;sp.push({a:Math.hypot(c,s),p:norm(Math.atan2(-s,c)/D)});}
+  return sp;
+}
+function contribution(id){
+  const s1=Object.assign({},state,{[id]:true}),s0=Object.assign({},state,{[id]:false});
+  const a1=signal(s1,0),a0=signal(s0,0),d=new Float64Array(N);
+  for(let n=0;n<N;n++)d[n]=a1[n]-a0[n];
+  return d;
+}
+function selKs(id){const it=byId[id];if(it.kind==='r')return[it.k];if(it.bind)return[2];return ROOTS.filter(it.applies).map(r=>r.k);}
+
+const ring=root.querySelector('.hm-ring'),wave=root.querySelector('.hm-wave'),spec=root.querySelector('.hm-spec');
+const chipsEl=root.querySelector('.hm-chips');
+const cs=getComputedStyle(root);
+const col=(v,f)=>(cs.getPropertyValue(v)||'').trim()||f;
+const C={ink:col('--ink','#1E1E24'),acc:col('--accent','#9A3B2E'),rule:col('--rule','#CFC8B8'),muted:col('--muted','#6B6A70'),paper:col('--paper','#F6F3EC')};
+const mono=(cs.getPropertyValue('--mono')||'monospace').trim();
+
+function fit(c){
+  const r=c.getBoundingClientRect(),d=window.devicePixelRatio||1;
+  const w=Math.max(1,Math.round(r.width*d)),h=Math.max(1,Math.round(r.height*d));
+  if(c.width!==w||c.height!==h){c.width=w;c.height=h;}
+  const x=c.getContext('2d');x.setTransform(d,0,0,d,0,0);x.clearRect(0,0,r.width,r.height);
+  return{x,w:r.width,h:r.height};
+}
+function polar(x,arr,cx,cy,s){
+  x.beginPath();
+  for(let n=0;n<=N;n++){const th=TAU*n/N,rho=s*arr[n%N],X=cx+rho*Math.sin(th),Y=cy+rho*Math.cos(th);n?x.lineTo(X,Y):x.moveTo(X,Y);}
+  x.closePath();
+}
+const fullArr=signal(FULL),fullSpec=dft(fullArr);
+let tgt=signal(state),cur=tgt.slice(),from=null,t0=0,raf=0,curSpec=dft(tgt);
+
+function drawRing(){
+  const{x,w,h}=fit(ring);const cx=w/2,cy=h/2,s=Math.min(w,h)/2/1.6;
+  x.lineJoin='round';x.lineCap='round';
+  polar(x,fullArr,cx,cy,s);x.strokeStyle=C.rule;x.lineWidth=1.2;x.stroke();
+  polar(x,cur,cx,cy,s);x.strokeStyle=C.ink;x.lineWidth=2.2;x.stroke();
+  const p0=[cx,cy+s*cur[0]],p1=[cx+s*cur[3]*Math.sin(TAU*3/N),cy+s*cur[3]*Math.cos(TAU*3/N)];
+  let dx=p1[0]-p0[0],dy=p1[1]-p0[1];const L=Math.hypot(dx,dy)||1;dx/=L;dy/=L;
+  const e=[p0[0]+dx*20,p0[1]+dy*20];
+  x.strokeStyle=C.acc;x.fillStyle=C.acc;x.lineWidth=1.6;
+  x.beginPath();x.moveTo(p0[0],p0[1]);x.lineTo(e[0],e[1]);x.stroke();
+  x.beginPath();x.moveTo(e[0]+dx*5,e[1]+dy*5);x.lineTo(e[0]-dx*3-dy*4,e[1]-dy*3+dx*4);x.lineTo(e[0]-dx*3+dy*4,e[1]-dy*3-dx*4);x.closePath();x.fill();
+  x.beginPath();x.arc(p0[0],p0[1],4,0,TAU);x.fill();
+  x.beginPath();x.arc(cx,cy,2.5,0,TAU);x.fill();
+}
+function drawWave(){
+  const{x,w,h}=fit(wave);const cx=w/2,cy=h/2,r0=Math.min(w,h)/2*0.6;
+  const d=contribution(sel),on=state[sel],arr=new Float64Array(N);
+  for(let n=0;n<N;n++)arr[n]=1+4*d[n];
+  x.setLineDash([2,4]);x.strokeStyle=C.rule;x.lineWidth=1;x.beginPath();x.arc(cx,cy,r0,0,TAU);x.stroke();
+  x.setLineDash(on?[]:[4,3]);x.lineJoin='round';
+  polar(x,arr,cx,cy,r0);x.strokeStyle=on?C.acc:C.muted;x.lineWidth=1.6;x.stroke();x.setLineDash([]);
+  x.fillStyle=on?C.acc:C.muted;x.beginPath();x.arc(cx,cy+r0*arr[0],3,0,TAU);x.fill();
+  x.font='11px '+mono;x.textAlign='right';x.fillText('×4',w-2,h-4);
+}
+function drawSpec(){
+  const{x,w,h}=fit(spec);const L=6,bw=(w-2*L)/KMAX,base=h-16,sc=(base-6)/0.13;
+  const hk=selKs(sel);
+  x.strokeStyle=C.ink;x.lineWidth=1;x.beginPath();x.moveTo(L,base+.5);x.lineTo(w-L,base+.5);x.stroke();
+  x.font='10px '+mono;x.textAlign='center';
+  for(let k=1;k<=KMAX;k++){
+    const x0=L+(k-1)*bw,bwi=Math.max(2,bw*0.62),xc=x0+bw/2;
+    const g=fullSpec[k].a,c=curSpec[k].a;
+    if(g>0.004){x.strokeStyle=C.rule;x.strokeRect(xc-bwi/2+.5,base-g*sc+.5,bwi-1,g*sc-.5);x.fillStyle=hk.includes(k)?C.acc:C.muted;x.fillText(String(k),xc,h-3);}
+    if(c>0.004){x.fillStyle=hk.includes(k)?C.acc:C.ink;x.fillRect(xc-bwi/2,base-c*sc,bwi,c*sc);}
+  }
+}
+function step(now){
+  const u=Math.min(1,(now-t0)/340),e=1-Math.pow(1-u,3);
+  for(let n=0;n<N;n++)cur[n]=from[n]+(tgt[n]-from[n])*e;
+  drawRing();if(u<1)raf=requestAnimationFrame(step);
+}
+function animate(){
+  cancelAnimationFrame(raf);
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){cur=tgt.slice();drawRing();return;}
+  from=cur.slice();t0=performance.now();raf=requestAnimationFrame(step);
+}
+function read(sp){
+  const lv=[[],[]];let bind=null;
+  for(let k=1;k<=KMAX;k++){
+    const{a,p}=sp[k];if(a<0.006)continue;
+    if(k===2){bind=p;continue;}
+    const lvl=a/A(k)>0.75?0:1,ph=norm(p-(lvl?270:0));
+    let role=null;ORDER.forEach(r=>{if(cd(ph,ROLE[r].p)<3)role=r;});
+    const t=rootByK[k];
+    lv[lvl].push({k,word:DICT[k]||('k'+k),role,bad:!t||t.role!==role||t.lvl!==lvl});
+  }
+  const o=r=>r.role?ORDER.indexOf(r.role):9;
+  lv.forEach(l=>l.sort((a,b)=>o(a)-o(b)));
+  return{lv,bind};
+}
+const wHTML=r=>'<span class="hm-w'+(r.bad?' hm-bad':'')+'">'+r.word+'<i>'+(r.role?ROLE[r.role].n:'роль ?')+'</i></span>';
+function readouts(){
+  const t=terms(state);
+  let r0=R,r1=0;t.forEach(q=>{r0+=q.a*Math.cos(q.ph*D);r1-=q.a*q.k*Math.sin(q.ph*D);});
+  root.querySelector('.hm-r0').textContent=r0.toFixed(3);
+  root.querySelector('.hm-r1').textContent=(r1<0?'−':'+')+Math.abs(r1).toFixed(3);
+  const rd=read(curSpec),dot='<span class="hm-op">·</span>';
+  let html=rd.lv[0].map(wHTML).join(dot);
+  if(rd.lv[1].length)html+=(html?' ':'')+'<span class="hm-op">потому что [</span>'+rd.lv[1].map(wHTML).join(dot)+'<span class="hm-op">]</span>';
+  root.querySelector('.hm-phrase').innerHTML=html||'<span class="hm-op">—</span>';
+  const off=ITEMS.filter(it=>!state[it.id]).map(it=>it.name);
+  const bad=rd.lv[0].concat(rd.lv[1]).filter(r=>r.bad).map(r=>r.word);
+  const sum=rd.lv[0].concat(rd.lv[1]).reduce((s,r)=>s+r.k,0)%360;
+  let bl;
+  if(rd.bind===null)bl='Связка: <span class="hm-acc">нет</span>';
+  else{const ok=cd(sum,rd.bind)<2;bl='Связка: φ '+Math.round(rd.bind)+'° · Σk '+sum+(ok?' · сходится':' · <span class="hm-acc">не сходится</span>');}
+  root.querySelector('.hm-left').innerHTML=
+    '<div>Снято: <b>'+(off.length?off.join(', '):'—')+'</b></div>'+
+    '<div>Спутано: '+(bad.length?'<span class="hm-acc">'+bad.join(', ')+'</span>':'—')+'</div>'+
+    '<div>'+bl+'</div>'+
+    '<div>В знаке: '+t.length+' из '+terms(FULL).length+' волн</div>';
+  ring.setAttribute('aria-label','Логограмма: '+(rd.lv[0].concat(rd.lv[1]).map(r=>r.word).join(', ')||'пустое кольцо'));
+}
+function selInfo(){
+  const it=byId[sel];let a,b;
+  if(it.kind==='r'){a='k '+it.k+' · a '+(A(it.k)*(it.lvl?0.5:1)).toFixed(3)+' · φ '+phaseOf(it,state)+'°';}
+  else if(it.bind){a='k 2 · a '+BA.toFixed(3)+' · φ '+BPH+'°';}
+  else{a='Δφ +'+it.ph+'° · k '+ROOTS.filter(it.applies).map(r=>r.k).join(', ');}
+  b=state[sel]?'в знаке':'снята из знака';
+  root.querySelector('.hm-selname').textContent=it.name;
+  root.querySelector('.hm-sv1').textContent=a;
+  root.querySelector('.hm-sv2').textContent=b;
+  chipsEl.querySelectorAll('.hm-chip').forEach(c=>c.classList.toggle('hm-sel',c.dataset.id===sel));
+}
+function meta(it){
+  if(it.kind==='r')return'k '+it.k+(it.lvl?' · ½':'')+' · '+norm(ROLE[it.role].p+(it.lvl?270:0))+'°';
+  if(it.bind)return'k 2 · '+BPH+'°';
+  return'+'+it.ph+'° · k '+ROOTS.filter(it.applies).map(r=>r.k).join(', ');
+}
+ITEMS.forEach((it,i)=>{
+  if(i===ROOTS.length){const s=document.createElement('span');s.className='hm-sep';s.setAttribute('aria-hidden','true');chipsEl.appendChild(s);}
+  const b=document.createElement('button');
+  b.type='button';b.className='hm-chip'+(it.kind==='c'?' hm-con':'');b.dataset.id=it.id;
+  b.setAttribute('aria-pressed','true');
+  b.innerHTML='<span class="hm-cn">'+it.name+'</span><span class="hm-cm">'+meta(it)+'</span>';
+  b.addEventListener('click',()=>{state[it.id]=!state[it.id];b.setAttribute('aria-pressed',String(state[it.id]));sel=it.id;update(true);});
+  b.addEventListener('focus',()=>{if(sel!==it.id){sel=it.id;selInfo();drawWave();drawSpec();}});
+  chipsEl.appendChild(b);
+});
+chipsEl.addEventListener('keydown',e=>{
+  const list=[...chipsEl.querySelectorAll('.hm-chip')],i=list.indexOf(document.activeElement);if(i<0)return;
+  let j=null;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%list.length;
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i-1+list.length)%list.length;
+  else if(e.key==='Home')j=0;else if(e.key==='End')j=list.length-1;
+  if(j!==null){e.preventDefault();list[j].focus();}
+});
+spec.addEventListener('pointerdown',e=>{
+  const r=spec.getBoundingClientRect(),bw=(r.width-12)/KMAX;
+  const k=Math.max(1,Math.min(KMAX,Math.floor((e.clientX-r.left-6)/bw)+1));
+  let best=null,bd=99;
+  ITEMS.forEach(it=>{const kk=it.kind==='r'?it.k:(it.bind?2:null);if(kk!==null&&Math.abs(kk-k)<bd){bd=Math.abs(kk-k);best=it;}});
+  if(best&&bd<=1){sel=best.id;const c=chipsEl.querySelector('[data-id="'+best.id+'"]');if(c)c.focus({preventScroll:true});selInfo();drawWave();drawSpec();}
+});
+function update(anim){
+  tgt=signal(state);curSpec=dft(tgt);
+  readouts();selInfo();drawWave();drawSpec();
+  if(anim)animate();else{cur=tgt.slice();drawRing();}
+}
+update(false);
+let pend=0;
+const redraw=()=>{cancelAnimationFrame(pend);pend=requestAnimationFrame(()=>{drawRing();drawWave();drawSpec();});};
+if(window.ResizeObserver)new ResizeObserver(redraw).observe(root);
+window.addEventListener('resize',redraw);
+})();</script>
+<p class="instcap"><b>Прибор II.</b> Разбор. Выключенный корень пропадает из каждого изгиба кольца разом.</p>
+
+<h2><span class="num">Глава 4</span>Словарь закрыт, и это честное условие перевода</h2>
+<aside class="margin"><b>Лакуна</b>Слово вне словаря не угадывается. В знаке оно становится зазубриной — видимой пустотой на месте смысла, которую читатель видит сразу.</aside>
+<p>Свободный текст честно не переводится: нужен словарь и разбор фразы. Ниже — ядро словаря, около сотни корней по семействам; полный список в несколько сотен корней <span class="todo">[размер и состав окончательно не утверждены автором]</span>. Число в скобках — частота <span class="m">k</span>.</p>
+
+<div class="dict wide">
+<div><h4>Существа</h4><span>человек <i>5</i></span><span>гептапод <i>7</i></span><span>ребёнок <i>11</i></span><span>мать <i>13</i></span><span>друг <i>17</i></span><span>учёный <i>19</i></span><span>народ <i>23</i></span></div>
+<div><h4>Природа</h4><span>вода <i>29</i></span><span>свет <i>31</i></span><span>море <i>37</i></span><span>звезда <i>41</i></span><span>камень <i>43</i></span><span>ветер <i>47</i></span></div>
+<div><h4>Действия</h4><span>дать <i>3</i></span><span>видеть <i>4</i></span><span>говорить <i>6</i></span><span>писать <i>8</i></span><span>знать <i>9</i></span><span>прийти <i>10</i></span><span>уйти <i>12</i></span><span>помнить <i>14</i></span></div>
+<div><h4>Вещи</h4><span>корабль <i>15</i></span><span>знак <i>16</i></span><span>книга <i>18</i></span><span>дом <i>20</i></span><span>оружие <i>21</i></span><span>инструмент <i>22</i></span></div>
+<div><h4>Отвлечённое</h4><span>время <i>24</i></span><span>цель <i>25</i></span><span>свобода <i>26</i></span><span>путь <i>27</i></span><span>жизнь <i>28</i></span><span>смерть <i>30</i></span></div>
+<div><h4>Время</h4><span>прежде <i>фаза</i></span><span>после <i>фаза</i></span><span>всегда <i>фаза</i></span><span>уже-известное <i>фаза</i></span></div>
+</div>
+
+<div class="tablewrap">
+<table>
+<thead><tr><th>Конструкция</th><th>Вопрос</th><th>Фаза</th><th>Видно в знаке как</th></tr></thead>
+<tbody>
+<tr><td class="k">деятель</td><td>кто</td><td>0°</td><td>волны корня пиком смотрят на начало пера</td></tr>
+<tr><td class="k">действие</td><td>что делает</td><td>45°</td><td>широкие волны, ведущие линию по кругу</td></tr>
+<tr><td class="k">предмет</td><td>что</td><td>90°</td><td>пики сдвинуты на четверть волны</td></tr>
+<tr><td class="k">соучастник</td><td>с кем</td><td>180°</td><td>пики там, где у деятеля впадины</td></tr>
+<tr><td class="k">время</td><td>когда</td><td>225°</td><td>и сдвиг, и общее утолщение линии</td></tr>
+<tr><td class="k">причина</td><td>почему</td><td>270°</td><td>волны другой фразы, вложенные малой амплитудой</td></tr>
+</tbody>
+</table>
+</div>
+<p>Набор конструкций тоже <span class="todo">[предварительный]</span>: шесть ролей уже позволяют записать вложение одной мысли в другую через «причину», и этого хватит для примеров главы 6.</p>
+
+<h2><span class="num">Глава 5</span>Четыре разобранных знака показывают, как одно слово меняет целое</h2>
+<p>Ниже четыре логограммы, каждая начерчена одной линией. Между первой и второй заменено только последнее слово; линия поменялась по всей длине.</p>
+<div class="plates wide">
+<figure><svg viewBox="0 0 200 200" role="img" aria-label="Логограмма: человек видит звезду"><path fill="none" stroke="#1E1E24" stroke-width="1.8" stroke-linejoin="round" d="M100 162 C70 164 46 148 40 120 C34 96 50 88 46 70 C44 52 66 36 90 40 C104 42 108 30 124 36 C146 44 162 62 160 84 C158 102 168 112 160 132 C150 154 128 160 100 162 Z"/><circle cx="100" cy="162" r="3" fill="#9A3B2E"/></svg><figcaption><b>5.1</b> <span class="lg">человек · видеть · звезда</span></figcaption></figure>
+<figure><svg viewBox="0 0 200 200" role="img" aria-label="Логограмма: человек видит море"><path fill="none" stroke="#1E1E24" stroke-width="1.8" stroke-linejoin="round" d="M100 156 C78 160 62 152 52 136 C40 118 30 108 38 88 C44 70 40 56 58 46 C76 36 92 48 108 40 C130 30 150 46 156 66 C162 82 172 96 164 116 C156 136 162 150 140 156 C124 160 112 154 100 156 Z"/><circle cx="100" cy="156" r="3" fill="#9A3B2E"/></svg><figcaption><b>5.2</b> <span class="lg">человек · видеть · море</span>. Сдвинулась и точка начала.</figcaption></figure>
+<figure><svg viewBox="0 0 200 200" role="img" aria-label="Логограмма: мать даёт ребёнку книгу"><path fill="none" stroke="#1E1E24" stroke-width="1.8" stroke-linejoin="round" d="M100 166 C82 168 74 156 60 152 C42 146 34 128 40 110 C46 94 32 80 44 64 C56 46 78 50 92 38 C106 26 126 36 138 46 C152 58 168 60 166 80 C164 98 176 112 166 130 C156 150 132 150 120 160 C112 166 106 166 100 166 Z"/><circle cx="100" cy="166" r="3" fill="#9A3B2E"/></svg><figcaption><b>5.3</b> <span class="lg">мать · дать · книга · с ребёнок</span></figcaption></figure>
+<figure><svg viewBox="0 0 200 200" role="img" aria-label="Логограмма с лакуной: зазубрина на линии на месте слова вне словаря"><path fill="none" stroke="#1E1E24" stroke-width="1.8" stroke-linejoin="round" d="M100 160 C74 162 50 150 44 126 C38 102 48 86 52 70 C58 50 80 40 102 42 L110 50 L116 38 L122 50 L128 40 C148 48 160 68 158 92 C156 116 164 132 150 146 C136 158 118 158 100 160 Z"/><circle cx="100" cy="160" r="3" fill="#9A3B2E"/></svg><figcaption><b>5.4</b> <span class="lg">друг · прийти · <span class="gap">[телеграф]</span></span>. Лакуна.</figcaption></figure>
+</div>
+
+<div class="box ex"><span class="tag">Пример 5.1 · полный разбор</span><p>Фраза: <span class="lg">мать · дать · книга · с ребёнок</span>. Корни: мать (13, деятель, 0°), дать (3, действие, 45°), книга (18, предмет, 90°), ребёнок (11, соучастник, 180°). Связующая волна: частота 2, фаза — сумма номеров корней по модулю 360°. Начальная точка: <span class="m">r(0)</span> складывается из четырёх косинусов и связующей волны; три широкие волны «дать» дают трилопастную основу, «книга» — восемнадцать мелких зубцов, сдвинутых на четверть.</p></div>
+
+<h2><span class="num">Глава 6</span>Вложенная причина позволяет писать сложные мысли одним знаком</h2>
+<aside class="margin"><b>Вложение</b>Чан пишет, что гептаподы выражают целые абзацы одним большим знаком. Здесь это достигается так: фраза-причина входит в главную фразу со своими волнами, уменьшенными вдвое.</aside>
+<p>Простые фразы — лишь начало. Конструкция «причина» берёт целую фразу и вкладывает её спектр во внешний с уменьшенной амплитудой и фазой 270°. Причина может иметь свою причину; глубина ограничена лишь тем, насколько различимы мелкие амплитуды.</p>
+<div class="box ex"><span class="tag">Пример 6.1</span><p><span class="lg">учёный · писать · знак · потому что [ гептапод · знать · время · всегда ]</span>. Учёная пишет знак, потому что гептапод всегда знает время целиком. Внешний знак — пять корней, внутренний — четыре; каждая из девяти волн участвует в первом штрихе.</p></div>
+
+<div class="box thm"><span class="tag">Теорема 6.1 · о глубине</span><p>Если амплитуда на уровне вложения <span class="m">n</span> равна <span class="m">a·2⁻ⁿ</span>, суммарное отклонение кольца остаётся ограниченным при любой глубине, и линия не самопересекается.</p></div>
+<div class="box proof"><span class="tag">Доказательство.</span><p>Отклонение не превосходит <span class="m">Σ a·m·2⁻ⁿ</span>, где <span class="m">m</span> — число корней уровня. При <span class="m">m ≤ 6</span> ряд сходится к <span class="m">12a</span>. Выбрав <span class="m">R &gt; 12a</span>, получаем <span class="m">r(θ) &gt; 0</span> для всех углов, а значит, кривая в полярных координатах проста. <span class="qed">∎</span></p></div>
+
+<div class="instrument" data-instrument="time-trace">
+  <div class="tt-grid">
+    <div class="tt-phrase">
+      <div class="tt-rows"></div>
+      <div class="tt-known"><span>известно слов</span><b class="tt-kn">1 / 4</b></div>
+    </div>
+    <div class="tt-stage">
+      <div class="tt-cw"><canvas class="tt-cv" role="img" aria-label="Логограмма"></canvas></div>
+      <div class="tt-strip" hidden></div>
+    </div>
+  </div>
+  <div class="tt-bar">
+    <button type="button" class="tt-play" aria-label="воспроизведение" aria-pressed="false">▶</button>
+    <div class="tt-track" role="slider" tabindex="0" aria-label="время письма" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="tt-fill"></div><div class="tt-ticks"></div><div class="tt-thumb"></div>
+    </div>
+  </div>
+  <div class="tt-foot">
+    <div class="tt-modes" role="radiogroup" aria-label="режим письма">
+      <button type="button" role="radio" data-mode="seq" aria-checked="true">последовательное письмо</button>
+      <button type="button" role="radio" data-mode="hep" aria-checked="false" tabindex="-1">гептаподское</button>
+    </div>
+    <div class="tt-read">
+      <div class="tt-box"><span>верно начато</span><b data-o="ok">—</b></div>
+      <div class="tt-box"><span>перо θ</span><b data-o="th">0°</b></div>
+      <div class="tt-box"><span>r(0) штриха</span><b data-o="r0">1,000</b></div>
+      <div class="tt-box"><span>стёрто</span><b data-o="er">0 %</b></div>
+    </div>
+  </div>
+</div>
+<style>
+[data-instrument="time-trace"]{padding:18px 0 16px;font:400 15px/1.4 var(--sans);color:var(--ink)}
+[data-instrument="time-trace"] .tt-grid{display:grid;grid-template-columns:minmax(210px,270px) minmax(0,1fr);gap:28px;align-items:start}
+[data-instrument="time-trace"] .tt-rows{display:flex;flex-direction:column;gap:9px;border-left:1px solid var(--rule);padding-left:14px}
+[data-instrument="time-trace"] .tt-row{position:relative;display:grid;grid-template-columns:82px minmax(0,1fr);align-items:center;gap:8px}
+[data-instrument="time-trace"] .tt-role{font:700 12px/1.1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+[data-instrument="time-trace"] .tt-chip{font:400 15.5px/1 var(--mono);background:var(--paper);color:var(--ink);border:1px solid var(--ink);padding:7px 10px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;transition:opacity .25s,background .25s}
+[data-instrument="time-trace"] .tt-chip i,[data-instrument="time-trace"] .tt-opt i{font-style:normal;font-size:12px;color:var(--accent);margin-left:8px;font-variant-numeric:tabular-nums}
+[data-instrument="time-trace"] .tt-chip.known{background:var(--box)}
+[data-instrument="time-trace"] .tt-chip.dim{opacity:.4;border-style:dashed}
+[data-instrument="time-trace"] .tt-chip.none{color:var(--muted);border-color:var(--rule)}
+[data-instrument="time-trace"] button:focus-visible,[data-instrument="time-trace"] .tt-track:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="time-trace"] .tt-pop{position:absolute;top:calc(100% + 4px);left:90px;z-index:5;min-width:230px;max-height:230px;overflow:auto;display:grid;grid-template-columns:1fr 1fr;padding:4px;background:var(--paper);border:1px solid var(--ink);box-shadow:3px 3px 0 var(--rule)}
+[data-instrument="time-trace"] .tt-opt{font:400 14px/1.2 var(--mono);background:none;border:0;padding:6px 8px;text-align:left;cursor:pointer;color:var(--ink);display:flex;justify-content:space-between}
+[data-instrument="time-trace"] .tt-opt[aria-selected="true"]{background:var(--box)}
+[data-instrument="time-trace"] .tt-opt:hover{background:var(--box)}
+[data-instrument="time-trace"] .tt-known{margin:14px 0 0 15px;display:flex;justify-content:space-between;align-items:baseline;font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+[data-instrument="time-trace"] .tt-known b{font:400 16px/1 var(--mono);color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:0;min-width:4.5em;text-align:right}
+[data-instrument="time-trace"] .tt-stage{display:flex;flex-direction:column;align-items:center}
+[data-instrument="time-trace"] .tt-cw{width:100%;max-width:370px}
+[data-instrument="time-trace"] .tt-cv{display:block;width:100%}
+[data-instrument="time-trace"] .tt-strip{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:10px}
+[data-instrument="time-trace"] .tt-strip[hidden]{display:none}
+[data-instrument="time-trace"] .tt-frame{width:88px;font:400 12px/1.3 var(--mono);color:var(--muted);text-align:center}
+[data-instrument="time-trace"] .tt-frame canvas{display:block;width:88px;height:88px;border:1px solid var(--rule);margin-bottom:3px}
+[data-instrument="time-trace"] .tt-bar{display:grid;grid-template-columns:38px minmax(0,1fr);gap:14px;align-items:center;margin:14px 0 12px}
+[data-instrument="time-trace"] .tt-play{width:38px;height:30px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;font:400 12px/1 var(--mono)}
+[data-instrument="time-trace"] .tt-play[hidden]{display:none}
+[data-instrument="time-trace"] .tt-track{position:relative;height:30px;cursor:pointer;touch-action:pan-y}
+[data-instrument="time-trace"] .tt-track::before{content:"";position:absolute;left:0;right:0;top:14px;height:2px;background:var(--rule)}
+[data-instrument="time-trace"] .tt-fill{position:absolute;left:0;top:14px;height:2px;background:var(--ink)}
+[data-instrument="time-trace"] .tt-tick{position:absolute;top:8px;width:1px;height:14px;background:var(--accent)}
+[data-instrument="time-trace"] .tt-thumb{position:absolute;top:7px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--accent);border:2px solid var(--paper);box-shadow:0 0 0 1px var(--accent)}
+[data-instrument="time-trace"] .tt-foot{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center}
+[data-instrument="time-trace"] .tt-modes{display:inline-flex;border:1px solid var(--ink)}
+[data-instrument="time-trace"] .tt-modes button{font:700 13px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;border:0;background:var(--paper);color:var(--ink);cursor:pointer}
+[data-instrument="time-trace"] .tt-modes button[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="time-trace"] .tt-read{display:grid;grid-template-columns:repeat(4,108px);gap:8px}
+[data-instrument="time-trace"] .tt-box{border:1px solid var(--rule);background:var(--box);padding:6px 8px;height:54px}
+[data-instrument="time-trace"] .tt-box span{display:block;font:700 11px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+[data-instrument="time-trace"] .tt-box b{display:block;font:400 18px/1.45 var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+@media (max-width:660px){
+  [data-instrument="time-trace"] .tt-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  [data-instrument="time-trace"] .tt-read{grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+  [data-instrument="time-trace"] .tt-pop{left:0;right:0;min-width:0}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="time-trace"] .tt-chip{transition:none}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="time-trace"]');
+if(!root)return;
+const $=s=>root.querySelector(s);
+const ROLES=[
+ {label:'кто',phase:0,opts:[['человек',5],['гептапод',7],['ребёнок',11],['мать',13],['друг',17],['учёный',19],['народ',23]]},
+ {label:'что делает',phase:45,opts:[['дать',3],['видеть',4],['говорить',6],['писать',8],['знать',9],['прийти',10],['уйти',12],['помнить',14]]},
+ {label:'что',phase:90,opts:[['книга',18],['знак',16],['корабль',15],['дом',20],['оружие',21],['инструмент',22],['время',24],['жизнь',28],['вода',29],['свет',31],['море',37],['звезда',41],['камень',43]]},
+ {label:'с кем',phase:180,opts:[['—',0],['ребёнок',11],['друг',17],['человек',5],['гептапод',7],['мать',13],['учёный',19],['народ',23]]}
+];
+const sel=[3,0,0,1];
+let mode='seq';
+const N=1440,D=4200,HOLD=1800,TOL=0.015,TAU=Math.PI*2,BIND_K=2,BIND_A=0.06;
+const amp=k=>0.24/Math.sqrt(k);
+const rowsEl=$('.tt-rows'),cv=$('.tt-cv'),cw=$('.tt-cw'),strip=$('.tt-strip'),track=$('.tt-track'),fill=$('.tt-fill'),thumb=$('.tt-thumb'),ticks=$('.tt-ticks'),playBtn=$('.tt-play');
+const out={ok:$('[data-o="ok"]'),th:$('[data-o="th"]'),r0:$('[data-o="r0"]'),er:$('[data-o="er"]'),kn:$('.tt-kn')};
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+const cs=getComputedStyle(root);
+const col=(v,f)=>(cs.getPropertyValue(v)||'').trim()||f;
+const C={ink:col('--ink','#1E1E24'),accent:col('--accent','#9A3B2E'),rule:col('--rule','#CFC8B8'),muted:col('--muted','#6B6A70')};
+let W=[],final=null,stages=[],total=1,ringLen=1,t=0,playing=false,raf=0,last=0,pop=null,visible=true;
+const chips=[];
+const fmt=(x,d)=>x.toFixed(d).replace('.',',');
+
+ROLES.forEach((R,i)=>{
+  const row=document.createElement('div');row.className='tt-row';
+  const lab=document.createElement('span');lab.className='tt-role';lab.textContent=R.label;
+  const chip=document.createElement('button');chip.type='button';chip.className='tt-chip';
+  chip.setAttribute('aria-haspopup','listbox');chip.setAttribute('aria-expanded','false');
+  chip.addEventListener('click',()=>{if(pop&&pop._i===i)closePop();else openPop(i);});
+  chip.addEventListener('keydown',e=>{
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault();const L=R.opts.length;
+      sel[i]=(sel[i]+(e.key==='ArrowDown'?1:-1)+L)%L;closePop();changed();
+    }
+  });
+  row.append(lab,chip);rowsEl.appendChild(row);chips.push(chip);
+});
+function chipText(i){
+  const R=ROLES[i],o=R.opts[sel[i]],c=chips[i];
+  c.textContent='';
+  const s=document.createElement('span');s.textContent=o[0];c.appendChild(s);
+  if(o[1]){const k=document.createElement('i');k.textContent=o[1];c.appendChild(k);}
+  c.setAttribute('aria-label',R.label+': '+(o[1]?o[0]:'нет'));
+  c.classList.toggle('none',!o[1]);
+}
+function openPop(i){
+  closePop();
+  const R=ROLES[i],p=document.createElement('div');
+  p.className='tt-pop';p.setAttribute('role','listbox');p.setAttribute('aria-label',R.label);p._i=i;
+  R.opts.forEach((o,j)=>{
+    const b=document.createElement('button');b.type='button';b.className='tt-opt';
+    b.setAttribute('role','option');b.setAttribute('aria-selected',String(j===sel[i]));
+    const s=document.createElement('span');s.textContent=o[0];b.appendChild(s);
+    if(o[1]){const k=document.createElement('i');k.textContent=o[1];b.appendChild(k);}
+    b.addEventListener('click',()=>{sel[i]=j;closePop();chips[i].focus();changed();});
+    p.appendChild(b);
+  });
+  p.addEventListener('keydown',e=>{
+    const bs=[...p.children],ix=bs.indexOf(document.activeElement);
+    if(e.key==='Escape'){e.preventDefault();closePop();chips[i].focus();}
+    else if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();bs[(ix+1)%bs.length].focus();}
+    else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();bs[(ix-1+bs.length)%bs.length].focus();}
+  });
+  chips[i].parentNode.appendChild(p);chips[i].setAttribute('aria-expanded','true');pop=p;
+  p.children[sel[i]].focus({preventScroll:true});
+}
+function closePop(){if(pop){chips[pop._i].setAttribute('aria-expanded','false');pop.remove();pop=null;}}
+document.addEventListener('pointerdown',e=>{if(pop&&!pop.contains(e.target)&&!(e.target.closest&&e.target.closest('.tt-chip')))closePop();});
+
+function radii(list){
+  const a=new Float64Array(N+1);let sk=0;list.forEach(x=>sk+=x.k);
+  const bph=(sk%360)*Math.PI/180;
+  for(let i=0;i<=N;i++){
+    const q=TAU*i/N;let r=1+BIND_A*Math.cos(BIND_K*q+bph);
+    for(const x of list)r+=amp(x.k)*Math.cos(x.k*q+x.ph);
+    a[i]=r;
+  }
+  return a;
+}
+const lerpA=(a,q)=>{const x=q/TAU*N,i=Math.floor(x);if(i>=N)return a[N];if(i<0)return a[0];return a[i]+(a[i+1]-a[i])*(x-i);};
+
+function build(){
+  W=[];
+  ROLES.forEach((R,i)=>{const o=R.opts[sel[i]];if(o[1])W.push({w:o[0],k:o[1],ph:R.phase*Math.PI/180,row:i});});
+  const n=W.length;final=radii(W);stages=[];
+  if(mode==='seq'){
+    for(let j=0;j<n;j++)stages.push({arr:j===n-1?final:radii(W.slice(0,j+1)),dur:j<n-1?D/n:D,known:j+1,word:W[j].w});
+  }else stages.push({arr:final,dur:D,known:n,word:null});
+  let st=0;const dq=TAU/N;
+  stages.forEach(s=>{
+    s.start=st;st+=s.dur;
+    const a=s.arr,cl=new Float64Array(N+1),cc=new Float64Array(N+1);
+    for(let i=1;i<=N;i++){
+      const dr=a[i]-a[i-1],rm=(a[i]+a[i-1])/2,ds=Math.sqrt(rm*rm*dq*dq+dr*dr);
+      cl[i]=cl[i-1]+ds;
+      const ok=Math.abs(a[i]-final[i])<TOL&&Math.abs(a[i-1]-final[i-1])<TOL;
+      cc[i]=cc[i-1]+(ok?ds:0);
+    }
+    s.cl=cl;s.cc=cc;
+  });
+  total=st;ringLen=stages[stages.length-1].cl[N];
+  ticks.textContent='';
+  stages.forEach((s,j)=>{if(j>0){const d=document.createElement('div');d.className='tt-tick';d.style.left=(100*s.start/total)+'%';ticks.appendChild(d);}});
+  cv.setAttribute('aria-label','Логограмма фразы: '+W.map(x=>x.w).join(' · '));
+  buildStrip();
+}
+function state(tt){
+  let s=stages.length-1,th=Math.min(TAU,TAU*stages[s].dur/D);
+  for(let j=0;j<stages.length;j++){const S=stages[j];if(tt<S.start+S.dur){s=j;th=Math.min(TAU,TAU*Math.max(0,tt-S.start)/D);break;}}
+  let ink=0,cor=0,er=0;
+  for(let p=0;p<s;p++){const S=stages[p],q=Math.min(TAU,TAU*S.dur/D),e=lerpA(S.cl,q);ink+=e;cor+=lerpA(S.cc,q);er+=e;}
+  ink+=lerpA(stages[s].cl,th);cor+=lerpA(stages[s].cc,th);
+  return {s,th,ink,cor,er};
+}
+function drawScene(c,tt){
+  const ctx=c.getContext('2d'),Z=c.width;if(!Z)return state(tt);
+  ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,Z,Z);
+  const u=Z/360,cx=Z/2,cy=Z/2,sc=(Z/2-Z*0.05)/1.42;
+  const P=(r,q)=>[cx+sc*r*Math.sin(q),cy+sc*r*Math.cos(q)];
+  const path=(a,qm)=>{
+    ctx.beginPath();const im=qm/TAU*N,n=Math.floor(im);
+    for(let i=0;i<=n&&i<=N;i++){const p=P(a[i],i*TAU/N);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}
+    if(im>n&&n<N){const p=P(lerpA(a,qm),qm);ctx.lineTo(p[0],p[1]);}
+  };
+  ctx.lineJoin='round';ctx.lineCap='round';
+  ctx.strokeStyle=C.rule;ctx.lineWidth=Math.max(1,1.1*u);path(final,TAU);ctx.closePath();ctx.stroke();
+  ctx.fillStyle=C.muted;ctx.beginPath();ctx.arc(cx,cy,1.6*u,0,TAU);ctx.fill();
+  const S=state(tt);
+  ctx.strokeStyle=C.accent;ctx.lineWidth=1.4*u;ctx.setLineDash([3*u,4*u]);
+  for(let p=0;p<S.s;p++){
+    const st=stages[p],age=tt-(st.start+st.dur);
+    ctx.globalAlpha=0.2+0.55*Math.max(0,1-age/700);
+    path(st.arr,Math.min(TAU,TAU*st.dur/D));ctx.stroke();
+  }
+  ctx.setLineDash([]);ctx.globalAlpha=1;
+  const cur=stages[S.s];
+  ctx.strokeStyle=C.ink;ctx.lineWidth=2.3*u;path(cur.arr,S.th);if(S.th>=TAU-1e-9)ctx.closePath();ctx.stroke();
+  const f0=P(final[0],0);ctx.strokeStyle=C.muted;ctx.lineWidth=1.2*u;ctx.beginPath();ctx.arc(f0[0],f0[1],6*u,0,TAU);ctx.stroke();
+  const pp=P(lerpA(cur.arr,S.th),S.th);ctx.fillStyle=C.accent;ctx.beginPath();ctx.arc(pp[0],pp[1],4.5*u,0,TAU);ctx.fill();
+  return S;
+}
+function render(){
+  const S=drawScene(cv,t);
+  const known=stages[S.s].known;
+  out.ok.textContent=S.ink>1e-6?Math.round(100*S.cor/S.ink)+'\u2009%':'—';
+  out.th.textContent=Math.round(S.th*180/Math.PI)+'°';
+  out.r0.textContent=fmt(stages[S.s].arr[0],3);
+  out.er.textContent=Math.round(100*S.er/ringLen)+'\u2009%';
+  out.kn.textContent=known+' / '+W.length;
+  ROLES.forEach((R,i)=>{
+    const wi=W.findIndex(x=>x.row===i);
+    chips[i].classList.toggle('known',wi>=0&&wi<known);
+    chips[i].classList.toggle('dim',wi>=known);
+  });
+  const fr=Math.min(1,t/total);
+  fill.style.width=(fr*100)+'%';thumb.style.left=(fr*100)+'%';
+  track.setAttribute('aria-valuenow',String(Math.round(fr*100)));
+  track.setAttribute('aria-valuetext','θ '+Math.round(S.th*180/Math.PI)+'°, известно '+known+' из '+W.length);
+}
+function buildStrip(){
+  strip.textContent='';strip.hidden=!reduce.matches;
+  if(!reduce.matches)return;
+  const dpr=window.devicePixelRatio||1;let frames=[];
+  if(mode==='seq')frames=stages.map((s,j)=>({t:j===stages.length-1?total:s.start+s.dur-0.001,cap:j===stages.length-1?'вся фраза':'+'+s.word}));
+  else frames=[0.25,0.5,0.75,1].map(f=>({t:f*D,cap:'θ '+Math.round(f*360)+'°'}));
+  frames.forEach(fr=>{
+    const d=document.createElement('div');d.className='tt-frame';
+    const c=document.createElement('canvas');c.width=c.height=Math.round(88*dpr);c.setAttribute('aria-hidden','true');
+    const cap=document.createElement('div');cap.textContent=fr.cap;
+    d.append(c,cap);strip.appendChild(d);drawScene(c,fr.t);
+  });
+}
+function tick(now){
+  if(!playing||!visible){raf=0;last=0;return;}
+  const dt=last?Math.min(now-last,50):0;last=now;t+=dt;
+  if(t>total+HOLD)t=0;
+  render();raf=requestAnimationFrame(tick);
+}
+function updPlay(){playBtn.textContent=playing?'❚❚':'▶';playBtn.setAttribute('aria-pressed',String(playing));playBtn.hidden=reduce.matches;}
+function play(){if(reduce.matches)return;if(t>=total)t=0;playing=true;last=0;if(!raf&&visible)raf=requestAnimationFrame(tick);updPlay();}
+function pause(){playing=false;updPlay();}
+playBtn.addEventListener('click',()=>playing?pause():play());
+function changed(){
+  build();ROLES.forEach((_,i)=>chipText(i));
+  t=reduce.matches?total:0;
+  if(!reduce.matches)play();
+  render();
+}
+root.querySelectorAll('.tt-modes button').forEach(b=>{
+  const pick=()=>{
+    mode=b.dataset.mode;
+    root.querySelectorAll('.tt-modes button').forEach(x=>{const on=x===b;x.setAttribute('aria-checked',String(on));x.tabIndex=on?0:-1;});
+    changed();
+  };
+  b.addEventListener('click',pick);
+  b.addEventListener('keydown',e=>{
+    if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)){
+      e.preventDefault();const o=[...root.querySelectorAll('.tt-modes button')].find(x=>x!==b);o.focus();o.click();
+    }
+  });
+});
+const setFromX=x=>{const r=track.getBoundingClientRect();t=Math.max(0,Math.min(1,(x-r.left)/r.width))*total;render();};
+track.addEventListener('pointerdown',e=>{track.setPointerCapture(e.pointerId);pause();setFromX(e.clientX);});
+track.addEventListener('pointermove',e=>{if(track.hasPointerCapture(e.pointerId))setFromX(e.clientX);});
+track.addEventListener('keydown',e=>{
+  let h=true;const st=total/50;
+  if(e.key==='ArrowRight'||e.key==='ArrowUp')t=Math.min(total,t+st);
+  else if(e.key==='ArrowLeft'||e.key==='ArrowDown')t=Math.max(0,t-st);
+  else if(e.key==='Home')t=0;else if(e.key==='End')t=total;else h=false;
+  if(h){e.preventDefault();pause();render();}
+});
+function resize(){
+  const w=cw.clientWidth;if(!w)return;
+  const dpr=window.devicePixelRatio||1;
+  cv.style.height=w+'px';cv.width=cv.height=Math.round(w*dpr);
+  render();
+}
+if('ResizeObserver' in window)new ResizeObserver(resize).observe(cw);else window.addEventListener('resize',resize);
+if('IntersectionObserver' in window){
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible&&playing&&!raf){last=0;raf=requestAnimationFrame(tick);}}).observe(root);
+}
+const onReduce=()=>{
+  if(reduce.matches){pause();t=total;}
+  buildStrip();updPlay();
+  if(!reduce.matches)play();
+  render();
+};
+if(reduce.addEventListener)reduce.addEventListener('change',onReduce);else if(reduce.addListener)reduce.addListener(onReduce);
+build();ROLES.forEach((_,i)=>chipText(i));
+t=reduce.matches?total:0;
+updPlay();resize();render();
+if(!reduce.matches)play();
+})();</script>
+<p class="instcap"><b>Прибор III.</b> Перо. Кто пишет слово за словом, переписывает начало; кто знает фразу, проходит кольцо один раз.</p>
+
+<h2><span class="num">Глава 7</span>Упражнения учат и собирать знаки, и читать их обратно</h2>
+<div class="box exr"><span class="tag">Упражнения 7.1–7.6</span>
+<ol>
+<li>Соберите знак «гептапод даёт человеку инструмент». Какая волна задаёт число лопастей кольца?</li>
+<li>В знаке 5.1 замените «звезда» на «свет». Предскажите, сдвинется ли начальная точка вверх или вниз, и проверьте прибором I.</li>
+<li>Прочтите знак по его спектру: частоты 7, 4, 41, фазы 0°, 45°, 90°.</li>
+<li>Найдите две фразы, у которых <span class="m">r(0)</span> совпадает. Докажите, что <span class="m">r′(0)</span> у них всё равно различается.</li>
+<li>Запишите фразу с причиной второго уровня. Сколько волн в первом штрихе?</li>
+<li>Объясните, почему знак с лакуной всё ещё читается: что именно в нём утрачено, а что нет.</li>
+</ol>
+</div>
+
+<div class="instrument" data-instrument="exercises">
+  <div class="ex-modes" role="group" aria-label="Режим тетради">
+    <button type="button" class="ex-mode" data-mode="build" aria-pressed="true">Собрать</button>
+    <button type="button" class="ex-mode" data-mode="read" aria-pressed="false">Прочесть</button>
+  </div>
+  <div class="ex-body">
+    <div class="ex-fig">
+      <canvas class="ex-ring" role="img" aria-label="Логограмма задачи"></canvas>
+      <div class="ex-key"><span class="ex-k1"></span>знак <span class="ex-k2"></span>разбор</div>
+    </div>
+    <div class="ex-work">
+      <div class="ex-prompt" aria-live="polite"></div>
+      <div class="ex-slots"></div>
+      <div class="ex-palette" role="group" aria-label="Корни словаря"></div>
+    </div>
+  </div>
+  <canvas class="ex-spec" role="img" aria-label="Спектр знака и разбора"></canvas>
+  <div class="ex-out">
+    <div class="ex-box"><b>Задача</b><span class="v"><button type="button" class="ex-nav ex-prev" aria-label="Предыдущая задача">‹</button><span class="ex-num">1 / 6</span><button type="button" class="ex-nav ex-next" aria-label="Следующая задача">›</button></span></div>
+    <div class="ex-box"><b>Итог</b><span class="v ex-res">не верно</span></div>
+    <div class="ex-box"><b>Волны совпали</b><span class="v ex-wav">0 из 0</span></div>
+    <div class="ex-box"><b>Расхождение max |Δr|</b><span class="v ex-dev">0,000</span></div>
+  </div>
+</div>
+<style>
+[data-instrument="exercises"]{position:relative;padding:16px 0 18px;font:400 15px/1.4 var(--sans);color:var(--ink)}
+[data-instrument="exercises"] button{font:inherit;color:inherit;cursor:pointer}
+[data-instrument="exercises"] button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="exercises"] .ex-modes{display:inline-flex;border:1px solid var(--ink);margin-bottom:16px}
+[data-instrument="exercises"] .ex-mode{background:transparent;border:0;padding:6px 18px;font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+[data-instrument="exercises"] .ex-mode[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="exercises"] .ex-body{display:grid;grid-template-columns:minmax(200px,360px) minmax(0,1fr);gap:28px;align-items:start}
+[data-instrument="exercises"] .ex-fig canvas{display:block;margin:0 auto;touch-action:pan-y}
+[data-instrument="exercises"] .ex-key{font-size:13px;color:var(--muted);text-align:center;margin-top:4px}
+[data-instrument="exercises"] .ex-key span{display:inline-block;width:18px;height:0;vertical-align:middle;margin:0 5px 0 10px}
+[data-instrument="exercises"] .ex-k1{border-top:2px solid var(--ink)}
+[data-instrument="exercises"] .ex-k2{border-top:2px solid var(--accent)}
+[data-instrument="exercises"] .ex-prompt{min-height:62px;font:italic 400 21px/1.35 var(--serif);margin-bottom:12px}
+[data-instrument="exercises"] .ex-prompt.is-read{font:400 14px/1.6 var(--mono);font-style:normal}
+[data-instrument="exercises"] .ex-prompt.is-read em{display:block;font:italic 400 19px/1.35 var(--serif);color:var(--accent)}
+[data-instrument="exercises"] .ex-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px}
+[data-instrument="exercises"] .ex-slot{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-height:58px;padding:6px 10px;border:1px dashed var(--muted);background:transparent;text-align:left;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+[data-instrument="exercises"] .ex-slot.filled{border-style:solid;border-color:var(--ink);background:var(--box)}
+[data-instrument="exercises"] .ex-slot.active{box-shadow:inset 0 0 0 2px var(--accent)}
+[data-instrument="exercises"] .ex-slot.ex-over{outline:2px dashed var(--accent);outline-offset:2px}
+[data-instrument="exercises"] .ex-role{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+[data-instrument="exercises"] .ex-role i{font:400 12px var(--mono);font-style:normal;letter-spacing:0;margin-left:4px}
+[data-instrument="exercises"] .ex-val{font:400 17px/1.2 var(--serif)}
+[data-instrument="exercises"] .ex-val i{font:400 12px var(--mono);font-style:normal;color:var(--muted);margin-left:6px}
+[data-instrument="exercises"] .ex-palette{display:flex;flex-wrap:wrap;gap:5px}
+[data-instrument="exercises"] .ex-chip{display:inline-flex;align-items:baseline;gap:5px;padding:3px 8px;border:1px solid var(--rule);background:var(--paper);border-radius:2px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+[data-instrument="exercises"] .ex-chip i{font:400 12px var(--mono);font-style:normal;color:var(--muted)}
+[data-instrument="exercises"] .ex-chip:hover{border-color:var(--ink)}
+[data-instrument="exercises"] .ex-chip.used{background:var(--box);color:var(--muted);border-color:transparent}
+[data-instrument="exercises"] .ex-spec{display:block;width:100%;height:130px;margin-top:20px;touch-action:pan-y}
+[data-instrument="exercises"] .ex-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:10px}
+[data-instrument="exercises"] .ex-box{border-top:1px solid var(--ink);padding-top:6px;height:60px;overflow:hidden}
+[data-instrument="exercises"] .ex-box b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;white-space:nowrap}
+[data-instrument="exercises"] .ex-box .v{display:inline-flex;align-items:center;gap:6px;font:400 18px/1.6 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+[data-instrument="exercises"] .ex-num{display:inline-block;min-width:4.2em;text-align:center}
+[data-instrument="exercises"] .ex-nav{width:26px;height:26px;padding:0;border:1px solid var(--rule);background:var(--paper);line-height:1}
+[data-instrument="exercises"] .ex-nav:hover{border-color:var(--ink)}
+[data-instrument="exercises"] .ex-res.ok{color:var(--accent)}
+[data-instrument="exercises"] .ex-ghost{position:absolute;left:0;top:0;pointer-events:none;z-index:5;padding:3px 9px;background:var(--ink);color:var(--paper);font:400 15px var(--sans);transform:translate(-50%,-130%);white-space:nowrap}
+@media (max-width:720px){
+  [data-instrument="exercises"] .ex-body{grid-template-columns:minmax(0,1fr);gap:16px}
+  [data-instrument="exercises"] .ex-out{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="exercises"]');
+if(!root)return;
+const $=s=>root.querySelector(s);
+const ROOTS=[['человек',5],['гептапод',7],['ребёнок',11],['мать',13],['друг',17],['учёный',19],['народ',23],
+['вода',29],['свет',31],['море',37],['звезда',41],['камень',43],['ветер',47],
+['дать',3],['видеть',4],['говорить',6],['писать',8],['знать',9],['прийти',10],['уйти',12],['помнить',14],
+['корабль',15],['знак',16],['книга',18],['дом',20],['оружие',21],['инструмент',22],
+['время',24],['цель',25],['свобода',26],['путь',27],['жизнь',28],['смерть',30]];
+const NAME={};ROOTS.forEach(r=>NAME[r[1]]=r[0]);
+const ROLES=[{n:'кто',d:0},{n:'что делает',d:45},{n:'что',d:90},{n:'с кем',d:180}];
+const TASKS={
+build:[{t:'Гептапод даёт человеку инструмент',a:[7,3,22,5]},{t:'Человек видит звезду',a:[5,4,41,0]},{t:'Мать даёт ребёнку книгу',a:[13,3,18,11]},{t:'Учёный пишет знак',a:[19,8,16,0]},{t:'Друг приходит с гептаподом',a:[17,10,0,7]},{t:'Народ помнит путь',a:[23,14,27,0]}],
+read:[{t:'Гептапод видит звезду',a:[7,4,41,0]},{t:'Ребёнок видит море',a:[11,4,37,0]},{t:'Учёный знает время',a:[19,9,24,0]},{t:'Гептапод уходит с кораблём',a:[7,12,0,15]},{t:'Мать помнит дом',a:[13,14,20,0]},{t:'Друг даёт народу свободу',a:[17,3,26,23]}]};
+const N=720,KMAX=48,R0=1,BIND_A=0.06;
+const amp=k=>0.22*Math.pow(k,-0.55);
+const COS=[],SIN=[];
+for(let k=1;k<=KMAX;k++){const c=new Float64Array(N),s=new Float64Array(N);for(let i=0;i<N;i++){const t=2*Math.PI*i/N;c[i]=Math.cos(k*t);s[i]=Math.sin(k*t);}COS[k]=c;SIN[k]=s;}
+function waves(sel){const w=[];let sum=0;sel.forEach((k,i)=>{if(k){w.push({k,a:amp(k),deg:ROLES[i].d});sum+=k;}});if(w.length)w.push({k:2,a:BIND_A,deg:sum%360,bind:true});return w;}
+function sample(w){const r=new Float64Array(N);for(let i=0;i<N;i++){const t=2*Math.PI*i/N;let v=R0;for(const q of w)v+=q.a*Math.cos(q.k*t+q.deg*Math.PI/180);r[i]=v;}return r;}
+function spectrum(r){const out=[];for(let k=1;k<=KMAX;k++){let c=0,s=0;const C=COS[k],S=SIN[k];for(let i=0;i<N;i++){c+=r[i]*C[i];s+=r[i]*S[i];}c*=2/N;s*=2/N;const a=Math.hypot(c,s);let d=Math.atan2(-s,c)*180/Math.PI;d=(Math.round(d)%360+360)%360;out[k]={a,deg:d};}return out;}
+let mode='build',active=0;
+const idx={build:0,read:0};
+const ans={build:TASKS.build.map(()=>[0,0,0,0]),read:TASKS.read.map(()=>[0,0,0,0])};
+ans.build[0][0]=7;active=1;
+const cur=()=>TASKS[mode][idx[mode]];
+const sel=()=>ans[mode][idx[mode]];
+const slotsEl=$('.ex-slots'),pal=$('.ex-palette');
+const slots=ROLES.map((r,i)=>{const b=document.createElement('button');b.type='button';b.className='ex-slot';b.dataset.slot=i;b.innerHTML='<span class="ex-role">'+r.n+'<i>'+r.d+'°</i></span><span class="ex-val">—</span>';slotsEl.appendChild(b);return b;});
+const chips={};
+ROOTS.forEach(([n,k])=>{const b=document.createElement('button');b.type='button';b.className='ex-chip';b.dataset.k=k;b.innerHTML='<span>'+n+'</span><i>'+k+'</i>';chips[k]=b;});
+function layoutPalette(){const order=ROOTS.map(r=>r[1]);if(mode==='read')order.sort((a,b)=>a-b);order.forEach(k=>pal.appendChild(chips[k]));}
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+let T,W,rT,rW,specT,specW,correct=false,disp=null,anim=0;
+function render(){
+  const s=sel(),task=cur();
+  slots.forEach((b,i)=>{const k=s[i];b.classList.toggle('filled',!!k);b.classList.toggle('active',i===active);
+    b.querySelector('.ex-val').innerHTML=k?NAME[k]+'<i>k '+k+'</i>':'—';
+    b.setAttribute('aria-label',ROLES[i].n+', фаза '+ROLES[i].d+'°: '+(k?NAME[k]:'пусто'));});
+  ROOTS.forEach(([n,k])=>chips[k].classList.toggle('used',s.includes(k)));
+  T=waves(task.a);W=waves(s);rT=sample(T);rW=sample(W);specT=spectrum(rT);specW=spectrum(rW);
+  let m=0;T.forEach(t=>{if(W.some(w=>w.k===t.k&&w.deg===t.deg))m++;});
+  correct=m===T.length&&W.length===T.length;
+  let dev=0;for(let i=0;i<N;i++)dev=Math.max(dev,Math.abs(rT[i]-rW[i]));
+  $('.ex-num').textContent=(idx[mode]+1)+' / '+TASKS[mode].length;
+  const res=$('.ex-res');res.textContent=correct?'верно':'не верно';res.classList.toggle('ok',correct);
+  $('.ex-wav').textContent=m+' из '+T.length;
+  $('.ex-dev').textContent=dev.toFixed(3).replace('.',',');
+  const p=$('.ex-prompt');
+  if(mode==='build'){p.className='ex-prompt';p.textContent='«'+task.t+'»';}
+  else{p.className='ex-prompt is-read';const pk=[];for(let k=1;k<=KMAX;k++)if(specT[k].a>0.005)pk.push({k,a:specT[k].a,d:specT[k].deg});pk.sort((a,b)=>b.a-a.a);
+    p.innerHTML='спектр: '+pk.map(q=>q.k+'·'+q.d+'°').join('  ')+(correct?'<em>«'+task.t+'»</em>':'');}
+  $('.ex-ring').setAttribute('aria-label','Логограмма задачи '+(idx[mode]+1)+'. Разбор: '+(s.some(Boolean)?s.map((k,i)=>k?NAME[k]+' — '+ROLES[i].n:'').filter(Boolean).join(', '):'пусто')+'. '+(correct?'Совпадает.':'Не совпадает.'));
+  setReader(rW);drawSpec();
+}
+function setReader(to){
+  cancelAnimationFrame(anim);
+  if(!disp||reduce.matches){disp=Float64Array.from(to);drawRing();return;}
+  const from=Float64Array.from(disp),t0=performance.now();
+  const step=now=>{const t=Math.min(1,(now-t0)/260),e=1-Math.pow(1-t,3);for(let i=0;i<N;i++)disp[i]=from[i]+(to[i]-from[i])*e;drawRing();if(t<1)anim=requestAnimationFrame(step);};
+  anim=requestAnimationFrame(step);
+}
+const ring=$('.ex-ring'),spec=$('.ex-spec');
+let ringSize=300,specWd=600;
+function colors(){const cs=getComputedStyle(root);const g=(v,f)=>(cs.getPropertyValue(v)||'').trim()||f;return{ink:g('--ink','#1E1E24'),acc:g('--accent','#9A3B2E'),mut:g('--muted','#6B6A70'),rule:g('--rule','#CFC8B8'),mono:g('--mono','monospace')};}
+function drawRing(){
+  const dpr=window.devicePixelRatio||1,ctx=ring.getContext('2d'),C=colors(),sz=ringSize;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,sz,sz);
+  const c=sz/2,S=sz/2/1.6;
+  const pt=(r,i)=>{const t=2*Math.PI*i/N;return[c+S*r*Math.sin(t),c+S*r*Math.cos(t)];};
+  ctx.setLineDash([3,4]);ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.beginPath();ctx.arc(c,c,S,0,2*Math.PI);ctx.stroke();ctx.setLineDash([]);
+  const path=r=>{ctx.beginPath();for(let i=0;i<N;i++){const p=pt(r[i],i);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}ctx.closePath();};
+  ctx.lineJoin='round';ctx.lineCap='round';
+  if(!correct){
+    ctx.strokeStyle=C.acc;ctx.globalAlpha=.35;ctx.lineWidth=1;ctx.beginPath();
+    for(let i=0;i<N;i+=3){if(Math.abs(rT[i]-disp[i])>0.003){const a=pt(rT[i],i),b=pt(disp[i],i);ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);}}
+    ctx.stroke();ctx.globalAlpha=1;
+    path(rT);ctx.strokeStyle=C.ink;ctx.lineWidth=2;ctx.stroke();
+    path(disp);ctx.strokeStyle=C.acc;ctx.lineWidth=1.6;ctx.stroke();
+  }else{path(rT);ctx.strokeStyle=C.acc;ctx.lineWidth=2.6;ctx.stroke();}
+  const h=2*Math.PI/N;
+  const mark=(r,col,fill)=>{const p=pt(r[0],0),d=(r[1]-r[N-1])/(2*h);let vx=S*r[0],vy=S*d;const L=Math.hypot(vx,vy)||1;vx/=L;vy/=L;
+    ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(p[0],p[1]);const ex=p[0]+vx*16,ey=p[1]+vy*16;ctx.lineTo(ex,ey);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(ex-vx*6-vy*3.5,ey-vy*6+vx*3.5);ctx.lineTo(ex-vx*6+vy*3.5,ey-vy*6-vx*3.5);ctx.closePath();ctx.fill();
+    ctx.beginPath();ctx.arc(p[0],p[1],fill?3.2:4.2,0,2*Math.PI);fill?ctx.fill():ctx.stroke();};
+  if(!correct&&W.length)mark(disp,C.acc,false);
+  mark(rT,correct?C.acc:C.ink,true);
+}
+function drawSpec(){
+  const dpr=window.devicePixelRatio||1,ctx=spec.getContext('2d'),C=colors(),Wd=specWd,H=130;
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,Wd,H);
+  const pl=10,pr=10,ptp=20,pb=22,pw=Wd-pl-pr,ph=H-ptp-pb,bw=pw/KMAX,y0=ptp+ph;
+  ctx.strokeStyle=C.rule;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pl,y0+.5);ctx.lineTo(pl+pw,y0+.5);ctx.stroke();
+  ctx.font='10px '+C.mono;ctx.textAlign='center';
+  for(let k=1;k<=KMAX;k++){
+    const x=pl+(k-.5)*bw,t=specT[k],w=specW[k],ht=t.a>0.004,hw=w.a>0.004;
+    if(ht){const h=Math.min(1,t.a/0.13)*ph;ctx.fillStyle=C.ink;ctx.globalAlpha=.85;ctx.fillRect(x-bw*.32,y0-h,bw*.64,h);ctx.globalAlpha=1;
+      ctx.fillStyle=C.mut;ctx.fillText(t.deg+'°',x,y0-h-5);}
+    if(hw){const h=Math.min(1,w.a/0.13)*ph;ctx.strokeStyle=C.acc;ctx.lineWidth=1.5;ctx.strokeRect(x-bw*.44,y0-h,bw*.88,h);}
+    if(ht||hw){const ok=ht&&hw&&t.deg===w.deg&&Math.abs(t.a-w.a)<0.002;ctx.fillStyle=ok?C.ink:C.acc;ctx.fillText(k===2?'2·с':String(k),x,y0+14);}
+  }
+}
+function resize(){
+  const fw=$('.ex-fig').clientWidth||300,sz=Math.max(200,Math.min(fw,360)),sw=spec.clientWidth||600,dpr=window.devicePixelRatio||1;
+  ringSize=sz;ring.style.width=sz+'px';ring.style.height=sz+'px';ring.width=Math.round(sz*dpr);ring.height=Math.round(sz*dpr);
+  specWd=sw;spec.width=Math.round(sw*dpr);spec.height=Math.round(130*dpr);
+  if(rT){drawRing();drawSpec();}
+}
+function place(k,slot){const s=sel();for(let i=0;i<4;i++)if(s[i]===k)s[i]=0;s[slot]=k;
+  let nx=-1;for(let j=1;j<=4;j++){const i=(slot+j)%4;if(!s[i]){nx=i;break;}}if(nx>=0)active=nx;render();}
+let drag=null,suppress=false;
+function bindDrag(el,payload){
+  el.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;drag={el,p:payload(),x0:e.clientX,y0:e.clientY,moved:false,ghost:null,over:null};try{el.setPointerCapture(e.pointerId);}catch(_){}});
+  el.addEventListener('pointermove',e=>{if(!drag||drag.el!==el)return;
+    if(!drag.moved&&Math.hypot(e.clientX-drag.x0,e.clientY-drag.y0)>6){if(!drag.p.k){drag=null;return;}drag.moved=true;const g=document.createElement('div');g.className='ex-ghost';g.textContent=NAME[drag.p.k];root.appendChild(g);drag.ghost=g;}
+    if(drag.moved){const rr=root.getBoundingClientRect();drag.ghost.style.left=(e.clientX-rr.left)+'px';drag.ghost.style.top=(e.clientY-rr.top)+'px';
+      const t=document.elementFromPoint(e.clientX,e.clientY),sl=t&&t.closest?t.closest('[data-instrument="exercises"] .ex-slot'):null;
+      if(drag.over&&drag.over!==sl)drag.over.classList.remove('ex-over');if(sl)sl.classList.add('ex-over');drag.over=sl;}});
+  const end=(e,ok)=>{if(!drag||drag.el!==el)return;const d=drag;drag=null;if(d.ghost)d.ghost.remove();if(d.over)d.over.classList.remove('ex-over');
+    if(d.moved){suppress=true;setTimeout(()=>suppress=false,0);if(!ok)return;const s=sel();
+      if(d.over){const to=+d.over.dataset.slot;if(d.p.from!=null){const tmp=s[to];s[to]=s[d.p.from];s[d.p.from]=tmp;active=to;render();}else place(d.p.k,to);}
+      else if(d.p.from!=null){s[d.p.from]=0;active=d.p.from;render();}}};
+  el.addEventListener('pointerup',e=>end(e,true));
+  el.addEventListener('pointercancel',e=>end(e,false));
+}
+ROOTS.forEach(([n,k])=>{const b=chips[k];bindDrag(b,()=>({k}));
+  b.addEventListener('click',()=>{if(suppress)return;place(k,active);});
+  b.addEventListener('keydown',e=>{const list=[...pal.children],i=list.indexOf(b);let j=-1;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')j=Math.min(list.length-1,i+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=Math.max(0,i-1);
+    if(j>=0){e.preventDefault();list[j].focus();}});});
+slots.forEach((b,i)=>{bindDrag(b,()=>({k:sel()[i],from:i}));
+  b.addEventListener('click',()=>{if(suppress)return;const s=sel();if(active===i&&s[i])s[i]=0;active=i;render();});
+  b.addEventListener('keydown',e=>{let j=-1;if(e.key==='ArrowRight')j=(i+1)%4;if(e.key==='ArrowLeft')j=(i+3)%4;if(e.key==='ArrowDown')j=(i+2)%4;if(e.key==='ArrowUp')j=(i+2)%4;
+    if(j>=0){e.preventDefault();active=j;slots[j].focus();render();}
+    if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();sel()[i]=0;active=i;render();}});});
+root.querySelectorAll('.ex-mode').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;
+  root.querySelectorAll('.ex-mode').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  const s=sel();active=Math.max(0,s.indexOf(0));layoutPalette();render();}));
+const go=d=>{const n=TASKS[mode].length;idx[mode]=(idx[mode]+d+n)%n;const s=sel();active=Math.max(0,s.indexOf(0));render();};
+$('.ex-prev').addEventListener('click',()=>go(-1));
+$('.ex-next').addEventListener('click',()=>go(1));
+layoutPalette();resize();render();
+let lastW=0;
+if(window.ResizeObserver){new ResizeObserver(()=>{const w=root.clientWidth;if(w!==lastW){lastW=w;resize();}}).observe(root);}
+else window.addEventListener('resize',resize);
+})();</script>
+<p class="instcap"><b>Прибор IV.</b> Тетрадь. Собрать знак и прочесть знак — два разных умения, и оба нужны.</p>
+
+<h3>Ответы к нечётным упражнениям</h3>
+<ol class="ans">
+<li>Волна корня «дать», частота 3: три широкие лопасти.</li>
+<li value="3">Гептапод (7, деятель) видит (4, действие) звезду (41, предмет).</li>
+<li value="5">Все корни трёх уровней плюс связующие волны каждого уровня.</li>
+</ol>
+
+<h2><span class="num">Послесловие</span>Ещё не решено, окончательна ли эта реконструкция</h2>
+<p>Правило волн по кольцу, точный словарь, набор конструкций и устройство обратного разбора <span class="todo">[ещё ожидают решения автора]</span>. Учебник построен так, чтобы любое из этих решений можно было поменять, не ломая главного: знак, который нельзя начать, не зная конца, и который всё же можно прочесть.</p>
+
+</main>
+</body>
+</html>
