@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Расписание дальнего следования</title>
+<meta name="description" content="Роботы с искусственным интеллектом на линии от Луны до центра Галактики: расписание прибытия при разных скоростях, причины задержек, прогноз и шесть идей.">
+<meta name="compositor:paper" content="#F3EFE4">
+<meta name="compositor:ink" content="#161514">
+<meta name="compositor:accent" content="#C8371D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{
+  --paper:#F3EFE4;
+  --ink:#161514;
+  --accent:#C8371D;
+  --muted:#6A655A;
+  --band:#E6E0CF;
+  --band2:#EDE8DA;
+  --display:"Oswald","Arial Narrow",sans-serif;
+  --text:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--text);font-size:17px;line-height:1.62;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+}
+.page{max-width:1120px;margin:0 auto;padding:28px 20px 72px}
+a{color:var(--ink);text-decoration-color:var(--accent);text-underline-offset:3px}
+sup.fn{font-family:var(--mono);font-size:.72em;color:var(--accent);margin-left:1px;line-height:0}
+em.c{font-style:italic;font-family:var(--text)}
+
+/* ── masthead ── */
+.strip{
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 24px;
+  border-top:6px solid var(--ink);border-bottom:1px solid var(--ink);
+  padding:8px 0;font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+}
+.strip span b{font-weight:500;color:var(--accent)}
+h1{
+  font-family:var(--display);font-weight:600;text-transform:uppercase;
+  font-size:clamp(2.5rem,7.4vw,5.4rem);line-height:.95;letter-spacing:.005em;
+  margin:28px 0 18px;
+}
+h1 .route{display:block;font-weight:400;font-size:.38em;letter-spacing:.06em;margin-top:.5em;color:var(--muted)}
+.dek{max-width:40rem;font-size:1.15rem;line-height:1.55;margin:0 0 26px}
+.legend{
+  display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;
+  border-top:1px solid var(--ink);border-bottom:3px solid var(--ink);
+  padding:10px 0;font-size:13px;color:var(--muted);
+}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend svg{flex:none}
+
+/* ── sections ── */
+section{margin-top:64px}
+.row{display:grid;grid-template-columns:11rem minmax(0,38rem);gap:0 3rem}
+.km{
+  font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+  color:var(--muted);border-top:3px solid var(--ink);padding-top:10px;align-self:start;
+}
+.km b{display:block;font-family:var(--display);font-weight:500;font-size:2.2rem;line-height:1;color:var(--ink);letter-spacing:0;margin-bottom:4px}
+.body{border-top:1px solid var(--ink);padding-top:10px}
+h2{
+  font-family:var(--display);font-weight:500;text-transform:uppercase;
+  font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.12;letter-spacing:.01em;margin:0 0 18px;
+}
+h3{font-family:var(--display);font-weight:500;font-size:1.28rem;line-height:1.2;margin:34px 0 10px;text-transform:uppercase;letter-spacing:.02em}
+h3 .mk{color:var(--accent);font-family:var(--mono);font-size:.85em;margin-right:.4em}
+p{margin:0 0 1em}
+.wide{margin-top:26px}
+
+/* ── route map ── */
+.mapbox{overflow-x:auto;border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);-webkit-overflow-scrolling:touch}
+.mapbox svg{display:block;width:100%;min-width:900px;height:auto}
+.m-zone{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;fill:var(--ink)}
+.m-name{font-family:var(--display);font-size:13px;font-weight:500;letter-spacing:.03em;fill:var(--ink)}
+.m-dist{font-family:var(--mono);font-size:11px;fill:var(--ink)}
+.m-light{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.za{fill:var(--band)} .zb{fill:var(--band2)}
+.caption{font-size:13px;color:var(--muted);margin-top:8px;max-width:46rem}
+
+/* ── timetable ── */
+.ttbox{overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+table.tt{border-collapse:collapse;width:100%;min-width:820px;font-size:14.5px}
+.tt th,.tt td{padding:8px 10px;border-bottom:1px solid rgba(22,21,20,.22);vertical-align:middle}
+.tt thead th{
+  font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:13px;
+  text-align:right;border-bottom:2px solid var(--ink);vertical-align:bottom;line-height:1.2;
+}
+.tt thead th small{display:block;font-family:var(--mono);font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--muted);margin-top:3px}
+.tt thead th.l{text-align:left}
+.tt td{text-align:right;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+.tt td.code{text-align:left;color:var(--muted);font-size:12px;width:3.5rem}
+.tt td.st{text-align:left;font-family:var(--text);font-size:15px;font-weight:500;white-space:normal}
+.tt td.st .stw{display:flex;align-items:center;gap:10px}
+.tt td.light{color:var(--muted)}
+.tt td.fast{color:var(--accent);font-weight:500}
+.tt tbody tr:nth-child(odd){background:rgba(230,224,207,.55)}
+.tt tr.zone td{background:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding-top:14px;border-bottom:1px solid var(--ink)}
+.ic{width:24px;height:24px;flex:none;color:var(--ink)}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:10px 32px;margin:16px 0 0;padding:0;list-style:none;font-size:13px;line-height:1.5;color:var(--muted)}
+.notes li{display:grid;grid-template-columns:1.4rem 1fr}
+.notes li b{color:var(--accent);font-family:var(--mono);font-weight:500}
+
+/* ── instruments ── */
+.instrument{
+  display:block;width:100%;margin:26px 0 8px;
+  border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);
+  background:var(--paper);
+}
+.instrument[data-instrument="speed-timetable"]{min-height:600px}
+.instrument[data-instrument="wait-calculation"]{min-height:440px}
+
+/* ── delays ── */
+ol.delays{list-style:none;margin:0;padding:0;counter-reset:d}
+ol.delays li{counter-increment:d;display:grid;grid-template-columns:2.6rem 1fr;gap:0 .6rem;padding:14px 0;border-bottom:1px solid rgba(22,21,20,.22)}
+ol.delays li:first-child{border-top:1px solid var(--ink)}
+ol.delays li::before{content:counter(d,decimal-leading-zero);font-family:var(--display);font-size:1.6rem;line-height:1.1;color:var(--accent)}
+ol.delays b{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:1.05rem;margin-right:.3em}
+
+/* ── departures ── */
+table.dep{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
+.dep th{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:13px;text-align:left;padding:8px 12px;border-bottom:2px solid var(--ink)}
+.dep td{padding:12px;vertical-align:top;border-bottom:1px solid rgba(22,21,20,.22);line-height:1.5}
+.dep td.when{font-family:var(--mono);font-size:12.5px;width:10rem;text-transform:uppercase;letter-spacing:.03em}
+.dep td.dir{width:11rem;font-weight:500}
+.dep td.dir .stw{display:flex;gap:10px;align-items:flex-start}
+.dep td.note{font-size:13.5px;color:var(--muted);width:15rem}
+.dep tr:nth-child(even) td{background:rgba(230,224,207,.55)}
+.stamp{
+  display:inline-block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--accent);border:1.5px solid var(--accent);padding:2px 7px;margin-bottom:14px;
+}
+
+.terminus{border-top:6px solid var(--ink);margin-top:72px;padding-top:12px}
+
+@media (max-width:820px){
+  .row{grid-template-columns:1fr;gap:0}
+  .km{border-top:3px solid var(--ink);display:flex;align-items:baseline;gap:12px;padding-bottom:6px}
+  .km b{display:inline;font-size:1.6rem;margin:0}
+  .body{border-top:1px solid var(--ink)}
+}
+@media (max-width:440px){
+  body{font-size:16.5px}
+  .page{padding:20px 16px 56px}
+  .strip{font-size:11px}
+}
+</style>
+<link rel="canonical" href="https://catpad.github.io/compositor-blog/p/0ghq94rs/"><link rel="alternate" type="application/rss+xml" title="Compositor" href="../../feed.xml"><meta property="og:type" content="article"><meta property="og:site_name" content="Compositor"><meta property="og:title" content="Расписание дальнего следования"><meta property="og:description" content="Роботы с искусственным интеллектом на линии от Луны до центра Галактики: расписание прибытия при разных скоростях, причины задержек, прогноз и шесть идей."><meta property="og:url" content="https://catpad.github.io/compositor-blog/p/0ghq94rs/"></head>
+<body><compositor-bar style="display:flex;align-items:center;justify-content:space-between;gap:16px;box-sizing:border-box;width:100%;grid-column:1/-1;flex:none;margin:0;padding:12px 20px;background:#F3EFE4;border-bottom:1px solid #16151426;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#161514;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><a href="../../" style="display:inline-flex;align-items:center;gap:9px;font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#161514;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none"><svg viewBox="0 0 120 120" width="18" height="18" aria-hidden="true" style="display:block;flex:none"><rect width="120" height="120" rx="8" fill="#161514"/><text x="60" y="99" font-family="Georgia, serif" font-weight="900" font-size="114" text-anchor="middle" fill="#F3EFE4" transform="translate(120,0) scale(-1,1)">C</text><circle cx="60" cy="121" r="9" fill="#F3EFE4"/></svg><span>Compositor</span></a><time datetime="2026-11-25T03:36:24.813Z" style="font:500 13px/1 system-ui,-apple-system,Segoe UI,Arial,sans-serif;letter-spacing:.02em;color:#161514;text-decoration:none;text-transform:none;text-indent:0;text-shadow:none;opacity:.7;font-variant-numeric:tabular-nums">2026-11-25</time></compositor-bar>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-earth" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="11"/><ellipse cx="16" cy="16" rx="5" ry="11"/><path d="M5 16h22"/></g></symbol>
+    <symbol id="i-moon" viewBox="0 0 32 32"><path d="M19 5.4A11 11 0 1 0 19 26.6A12 12 0 0 1 19 5.4Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mars" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="15" cy="17" r="9"/><path d="M10 11.6h10"/></g><circle cx="26" cy="6.5" r="2.2" fill="currentColor"/></symbol>
+    <symbol id="i-belt" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="20" r="6"/><circle cx="23" cy="10.5" r="3.5"/><circle cx="24.5" cy="23.5" r="2"/></g></symbol>
+    <symbol id="i-europa" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="11"/><path d="M8.5 11c5 1 9 5 12.5 11.5"/><path d="M12 25.5c2-5 7-9 14-10"/></g></symbol>
+    <symbol id="i-helio" viewBox="0 0 32 32"><circle cx="8" cy="16" r="3" fill="currentColor"/><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 5a13 13 0 0 1 0 22"/><path d="M22 2.5a17 17 0 0 1 0 27"/></g></symbol>
+    <symbol id="i-oort" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="0.1 5"/><circle cx="16" cy="16" r="2.6" fill="currentColor"/></symbol>
+    <symbol id="i-star" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="16" r="4"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6M6.8 6.8l4.2 4.2M21 21l4.2 4.2M6.8 25.2l4.2-4.2M21 11l4.2-4.2"/></g></symbol>
+    <symbol id="i-trappist" viewBox="0 0 32 32"><circle cx="16" cy="16" r="3" fill="currentColor"/><ellipse cx="16" cy="16" rx="13" ry="6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="29" cy="16" r="1.9" fill="currentColor"/><circle cx="8" cy="21" r="1.9" fill="currentColor"/><circle cx="21" cy="10.6" r="1.9" fill="currentColor"/></symbol>
+    <symbol id="i-galaxy" viewBox="0 0 32 32"><ellipse cx="16" cy="16" rx="13" ry="5.5" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="16" cy="16" rx="5" ry="3.2" fill="currentColor"/></symbol>
+    <symbol id="i-robot" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="11" width="16" height="14"/><path d="M16 11V6.5M4 16v4M28 16v4M12.5 21.5h7"/></g><circle cx="16" cy="5" r="1.8" fill="currentColor"/><circle cx="12.5" cy="16.5" r="1.7" fill="currentColor"/><circle cx="19.5" cy="16.5" r="1.7" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<main class="page">
+
+  <header>
+    <div class="strip">
+      <span>Расписание движения № 1</span>
+      <span>Направление: <b>от Земли наружу</b></span>
+      <span>Только для автономных составов</span>
+    </div>
+    <h1>Расписание дальнего следования
+      <span class="route">Земля — Луна — Марс — Церера — Европа — Оорт — Проксима — и дальше</span>
+    </h1>
+    <p class="dek">Когда искусственный интеллект поселится в роботах, космос перестанет быть вопросом выживания и станет вопросом расписания. Ниже — линия, станции, время в пути, причины задержек и прогноз составителя.</p>
+    <div class="legend">
+      <span><svg width="34" height="10" aria-hidden="true"><line x1="0" y1="5" x2="34" y2="5" stroke="#161514" stroke-width="5"/></svg>движение открыто: станция уже посещена зондами</span>
+      <span><svg width="34" height="10" aria-hidden="true"><line x1="0" y1="5" x2="34" y2="5" stroke="#C8371D" stroke-width="5" stroke-dasharray="9 5"/></svg>в проекте: участок для роботов</span>
+      <span><svg width="22" height="22" aria-hidden="true"><use href="#i-robot"/></svg>автономный состав</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>01</b>Отправление</div>
+      <div class="body">
+        <h2>У робота нет обратного билета, и он ему не нужен</h2>
+        <p>Почти всё, что делает пилотируемый полёт трудным и дорогим, связано с телом. Человеку нужны воздух, вода, еда, защита от радиации, тяжесть для костей и мышц, а главное — обратная дорога. Робот везёт с собой две вещи: источник энергии и терпение.</p>
+        <p>Отсюда главная мысль этой линии. Как только у машины появится разум, достаточный, чтобы работать без подсказки с Земли, время в пути перестанет быть платой и станет параметром. Перелёт длиной в сорок лет для человека — целая жизнь. Для робота — одна смена. Перелёт в десять тысяч лет человеку не представить; для машины, которая умеет спать, чиниться и ждать, это просто длинный перегон.</p>
+        <p>Но «сколь угодно далеко» — смелое обещание. Ни одна машина, сделанная людьми, ещё не проработала века. «Вояджеры», самые дальние наши посланники, летят с 1977 года, и их энергия на исходе. Поэтому честный прогноз звучит так: роботы действительно уйдут дальше людей, но не потому, что им нипочём сотни тысяч лет, а потому, что их можно научить с этими тысячелетиями справляться. И ещё потому, что скорость, а не терпение, решит, кто вообще дождётся прибытия.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>02</b>Схема линии</div>
+      <div class="body">
+        <h2>Линия открыта до границы солнечного ветра, дальше стоят только проектные станции</h2>
+        <p>Схема, как у любой железной дороги, не соблюдает масштаба: перегон от Земли до Луны и перегон от Проксимы до центра Галактики нарисованы одинаково, хотя второй длиннее первого примерно в шестьсот миллиардов раз. Расстояния подписаны под станциями.</p>
+      </div>
+    </div>
+    <div class="wide">
+      <div class="mapbox">
+        <svg viewBox="0 0 1040 222" role="img" aria-labelledby="mapt">
+          <title id="mapt">Схема линии: Земля, Луна, Марс, Церера, Европа, гелиопауза — движение открыто; облако Оорта, Проксима Центавра, TRAPPIST-1, центр Галактики — в проекте.</title>
+          <rect class="za" x="0" y="0" width="200" height="26"/>
+          <rect class="zb" x="200" y="0" width="200" height="26"/>
+          <rect class="za" x="400" y="0" width="200" height="26"/>
+          <rect class="zb" x="600" y="0" width="100" height="26"/>
+          <rect class="za" x="700" y="0" width="340" height="26"/>
+          <text class="m-zone" x="100" y="17" text-anchor="middle">ЗОНА 1 · ОКОЛОЗЕМНАЯ</text>
+          <text class="m-zone" x="300" y="17" text-anchor="middle">ЗОНА 2 · ВНУТРЕННЯЯ</text>
+          <text class="m-zone" x="500" y="17" text-anchor="middle">ЗОНА 3 · ВНЕШНЯЯ</text>
+          <text class="m-zone" x="650" y="17" text-anchor="middle">ЗОНА 4</text>
+          <text class="m-zone" x="870" y="17" text-anchor="middle">ЗОНА 5 · МЕЖЗВЁЗДНАЯ</text>
+          <g stroke="#6A655A" stroke-width="1" stroke-dasharray="2 4">
+            <line x1="200" y1="26" x2="200" y2="214"/><line x1="400" y1="26" x2="400" y2="214"/>
+            <line x1="600" y1="26" x2="600" y2="214"/><line x1="700" y1="26" x2="700" y2="214"/>
+          </g>
+          <g color="#161514">
+            <use href="#i-earth" x="34" y="48" width="32" height="32"/>
+            <use href="#i-moon" x="134" y="48" width="32" height="32"/>
+            <use href="#i-mars" x="234" y="48" width="32" height="32"/>
+            <use href="#i-belt" x="334" y="48" width="32" height="32"/>
+            <use href="#i-europa" x="434" y="48" width="32" height="32"/>
+            <use href="#i-helio" x="534" y="48" width="32" height="32"/>
+          </g>
+          <g color="#C8371D">
+            <use href="#i-oort" x="634" y="48" width="32" height="32"/>
+            <use href="#i-star" x="734" y="48" width="32" height="32"/>
+            <use href="#i-trappist" x="834" y="48" width="32" height="32"/>
+            <use href="#i-galaxy" x="934" y="48" width="32" height="32"/>
+          </g>
+          <line x1="50" y1="112" x2="550" y2="112" stroke="#161514" stroke-width="6"/>
+          <line x1="550" y1="112" x2="990" y2="112" stroke="#C8371D" stroke-width="6" stroke-dasharray="14 8"/>
+          <polygon points="990,102 1010,112 990,122" fill="#C8371D"/>
+          <text class="m-light" x="1010" y="94" text-anchor="end">ДАЛЬШЕ</text>
+          <circle cx="50" cy="112" r="10" fill="#161514"/>
+          <g fill="#F3EFE4" stroke="#161514" stroke-width="4">
+            <circle cx="150" cy="112" r="8"/><circle cx="250" cy="112" r="8"/><circle cx="350" cy="112" r="8"/><circle cx="450" cy="112" r="8"/><circle cx="550" cy="112" r="8"/>
+          </g>
+          <g fill="#F3EFE4" stroke="#C8371D" stroke-width="4">
+            <circle cx="650" cy="112" r="8"/><circle cx="750" cy="112" r="8"/><circle cx="850" cy="112" r="8"/><circle cx="950" cy="112" r="8"/>
+          </g>
+          <g text-anchor="middle">
+            <text class="m-name" x="50" y="148">ЗЕМЛЯ</text>
+            <text class="m-name" x="150" y="148">ЛУНА</text>
+            <text class="m-name" x="250" y="148">МАРС</text>
+            <text class="m-name" x="350" y="148">ЦЕРЕРА</text>
+            <text class="m-name" x="450" y="148">ЕВРОПА</text>
+            <text class="m-name" x="550" y="148">ГЕЛИОПАУЗА</text>
+            <text class="m-name" x="650" y="148">ОБЛАКО ООРТА</text>
+            <text class="m-name" x="750" y="148">ПРОКСИМА</text>
+            <text class="m-name" x="850" y="148">TRAPPIST-1</text>
+            <text class="m-name" x="950" y="148">ЦЕНТР ГАЛАКТИКИ</text>
+            <text class="m-dist" x="50" y="167">0</text>
+            <text class="m-dist" x="150" y="167">384 400 км</text>
+            <text class="m-dist" x="250" y="167">≈ 78 млн км</text>
+            <text class="m-dist" x="350" y="167">≈ 265 млн км</text>
+            <text class="m-dist" x="450" y="167">≈ 629 млн км</text>
+            <text class="m-dist" x="550" y="167">≈ 120 а. е.</text>
+            <text class="m-dist" x="650" y="167">≈ 2 000 а. е.</text>
+            <text class="m-dist" x="750" y="167">4,24 св. г.</text>
+            <text class="m-dist" x="850" y="167">≈ 40,7 св. г.</text>
+            <text class="m-dist" x="950" y="167">≈ 26 000 св. г.</text>
+            <text class="m-light" x="50" y="185">отправление</text>
+            <text class="m-light" x="150" y="185">свет 1,3 с</text>
+            <text class="m-light" x="250" y="185">свет 4 мин</text>
+            <text class="m-light" x="350" y="185">свет 15 мин</text>
+            <text class="m-light" x="450" y="185">свет 35 мин</text>
+            <text class="m-light" x="550" y="185">свет 17 ч</text>
+            <text class="m-light" x="650" y="185">свет 12 сут</text>
+            <text class="m-light" x="750" y="185">свет 4,24 г.</text>
+            <text class="m-light" x="850" y="185">свет 40,7 г.</text>
+            <text class="m-light" x="950" y="185">свет 26 000 лет</text>
+          </g>
+        </svg>
+      </div>
+      <p class="caption">Сплошная линия — участок, где зонды уже побывали: «Аполлоны» и луноходы, марсоходы, «Рассвет» на орбите Цереры, «Галилео» у Юпитера и его лун, оба «Вояджера» за гелиопаузой. Пунктир — участок, куда пока не долетела ни одна машина. Одна астрономическая единица (а. е.) — среднее расстояние от Земли до Солнца, около 150 млн км.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>03</b>Время в пути</div>
+      <div class="body">
+        <h2>Одна и та же линия занимает от тринадцати секунд до семисот тысяч лет</h2>
+        <p>Вот сводное расписание для четырёх составов. Первый — свет: так быстро до станции дойдёт только сигнал, и это предел, которого не превзойдёт ни один поезд. Второй идёт со скоростью «Вояджера-1», самого далёкого из наших аппаратов. Третий и четвёртый — один и десять процентов скорости света: на этих скоростях пока не летает ничего, но именно их называют в серьёзных проектах межзвёздных зондов.</p>
+      </div>
+    </div>
+    <div class="wide">
+      <div class="ttbox">
+        <table class="tt">
+          <thead>
+            <tr>
+              <th class="l">Код</th>
+              <th class="l">Станция</th>
+              <th>Расстояние<sup class="fn">†</sup></th>
+              <th>Сигнал<small>скорость света</small></th>
+              <th>«Вояджер»<sup class="fn">¶</sup><small>17 км/с</small></th>
+              <th>1 % <em class="c">c</em><small>≈ 3 000 км/с</small></th>
+              <th>10 % <em class="c">c</em><sup class="fn">‖</sup><small>≈ 30 000 км/с</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="zone"><td colspan="7">Зона 1 · околоземная</td></tr>
+            <tr>
+              <td class="code">ЛУН</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg>Луна</span></td>
+              <td>384 400 км</td><td class="light">1,3 с</td><td>6 ч 17 мин<sup class="fn">*</sup></td><td>2 мин 08 с</td><td class="fast">13 с</td>
+            </tr>
+            <tr class="zone"><td colspan="7">Зона 2 · внутренняя система</td></tr>
+            <tr>
+              <td class="code">МАР</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-mars"/></svg>Марс</span></td>
+              <td>≈ 78 млн км</td><td class="light">4 мин 20 с</td><td>53 сут<sup class="fn">*</sup></td><td>7 ч 14 мин</td><td class="fast">43 мин</td>
+            </tr>
+            <tr>
+              <td class="code">ЦЕР</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-belt"/></svg>Пояс астероидов, Церера</span></td>
+              <td>≈ 265 млн км</td><td class="light">14 мин 44 с</td><td>180 сут</td><td>24 ч 33 мин</td><td class="fast">2 ч 27 мин</td>
+            </tr>
+            <tr class="zone"><td colspan="7">Зона 3 · внешняя система</td></tr>
+            <tr>
+              <td class="code">ЕВР</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-europa"/></svg>Европа, спутник Юпитера</span></td>
+              <td>≈ 629 млн км</td><td class="light">35 мин</td><td>1,2 года</td><td>2 сут 10 ч</td><td class="fast">5 ч 50 мин</td>
+            </tr>
+            <tr>
+              <td class="code">ГЕЛ</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-helio"/></svg>Гелиопауза<sup class="fn">‡</sup></span></td>
+              <td>≈ 120 а. е.</td><td class="light">16 ч 38 мин</td><td>33 года</td><td>69 сут</td><td class="fast">6 сут 22 ч</td>
+            </tr>
+            <tr class="zone"><td colspan="7">Зона 4 · окраина Солнечной системы</td></tr>
+            <tr>
+              <td class="code">ООР</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-oort"/></svg>Облако Оорта, внутренний край<sup class="fn">§</sup></span></td>
+              <td>≈ 2 000 а. е.</td><td class="light">11,6 сут</td><td>560 лет</td><td>3,2 года</td><td class="fast">116 сут</td>
+            </tr>
+            <tr class="zone"><td colspan="7">Зона 5 · межзвёздная</td></tr>
+            <tr>
+              <td class="code">ПРК</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Проксима Центавра</span></td>
+              <td>4,24 св. г.</td><td class="light">4,24 года</td><td>≈ 75 000 лет</td><td>424 года</td><td class="fast">42 года</td>
+            </tr>
+            <tr>
+              <td class="code">ТРП</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-trappist"/></svg>TRAPPIST-1, семь планет</span></td>
+              <td>≈ 40,7 св. г.</td><td class="light">40,7 года</td><td>≈ 720 000 лет</td><td>4 070 лет</td><td class="fast">407 лет</td>
+            </tr>
+            <tr>
+              <td class="code">ЦГ</td>
+              <td class="st"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-galaxy"/></svg>Центр Галактики</span></td>
+              <td>≈ 26 000 св. г.</td><td class="light">26 000 лет</td><td>≈ 460 млн лет</td><td>2,6 млн лет</td><td class="fast">260 000 лет</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="notes">
+        <li><b>*</b><span>Время в пути — расстояние, делённое на крейсерскую скорость, без разгона и торможения. Химические ракеты летят не по прямой, а по дугам вокруг Солнца: «Аполлоны» шли до Луны около трёх суток, перелёт к Марсу занимает семь–девять месяцев.</span></li>
+        <li><b>†</b><span>Расстояния до планет постоянно меняются. Здесь взяты типичные расстояния в момент наибольшего сближения с Землёй.</span></li>
+        <li><b>‡</b><span>Гелиопауза — граница, где солнечный ветер уступает межзвёздной среде. «Вояджер-1» пересёк её в 2012 году, через 35 лет после старта.</span></li>
+        <li><b>§</b><span>Облако Оорта никто не видел напрямую; его внутренний край оценивают от тысячи до нескольких тысяч а. е., внешний — в десятки тысяч — до ста тысяч а. е. и дальше.</span></li>
+        <li><b>¶</b><span>«Вояджер-1» удаляется от Солнца со скоростью около 17 км/с. Это самый быстрый из аппаратов, покидающих Солнечную систему, но до ближайшей звезды ему лететь дольше, чем существует человеческая письменность, в десятки раз.</span></li>
+        <li><b>‖</b><span>Десять процентов скорости света на сегодня достижимы только на бумаге: например, проект Breakthrough Starshot предлагает разгонять лазером световые паруса массой в граммы. Торможение у цели в такие проекты пока не входит.</span></li>
+      </ul>
+
+      <div class="instrument" data-instrument="speed-timetable">
+  <div class="sp-top">
+    <div class="sp-box">
+      <div class="sp-k">Скорость зонда</div>
+      <div class="sp-v" data-o="kms">17,0 км/с</div>
+      <div class="sp-sub" data-o="kmh">&nbsp;</div>
+    </div>
+    <div class="sp-box">
+      <div class="sp-k">Доля скорости света</div>
+      <div class="sp-v" data-o="pc">&nbsp;</div>
+      <div class="sp-sub" data-o="slow">&nbsp;</div>
+    </div>
+    <div class="sp-box sp-eng">
+      <div class="sp-k">Ближайший двигатель</div>
+      <div class="sp-v sp-name" data-o="eng">&nbsp;</div>
+      <div class="sp-sub" data-o="engd">&nbsp;</div>
+    </div>
+  </div>
+
+  <div class="sp-slider sp-main" data-sl="v">
+    <div class="sp-lab sp-labA"></div>
+    <div class="sp-lab sp-labB"></div>
+    <div class="sp-track">
+      <div class="sp-rail"></div>
+      <div class="sp-fill"></div>
+      <div class="sp-thumb" tabindex="0" role="slider" aria-label="Скорость зонда" aria-valuemin="11" aria-valuemax="30000"></div>
+    </div>
+    <div class="sp-scale"></div>
+  </div>
+
+  <div class="sp-ttw">
+    <table class="sp-tt">
+      <thead>
+        <tr>
+          <th class="sp-l sp-code">Код</th>
+          <th class="sp-l">Станция</th>
+          <th class="sp-d">Расстояние</th>
+          <th>В пути</th>
+          <th class="sp-b sp-axis"><div class="sp-ax"></div></th>
+          <th class="sp-f">Жизнь<small>80 лет</small></th>
+          <th class="sp-f">Машина<small data-o="lifeh">50 лет</small></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="sp-foot">
+    <div class="sp-life">
+      <span class="sp-k">Срок службы машины</span>
+      <div class="sp-slider sp-mini" data-sl="L">
+        <div class="sp-track">
+          <div class="sp-rail"></div>
+          <div class="sp-fill"></div>
+          <div class="sp-thumb" tabindex="0" role="slider" aria-label="Срок службы машины" aria-valuemin="10" aria-valuemax="1000000"></div>
+        </div>
+        <div class="sp-scale"></div>
+      </div>
+      <span class="sp-v2" data-o="life">50 лет</span>
+    </div>
+    <div class="sp-sum">
+      <div><i class="sp-sw"></i>В одну человеческую жизнь: <b data-o="nh">—</b> <span data-o="fh"></span></div>
+      <div><i class="sp-sw sp-sw-m"></i>В срок службы машины: <b data-o="nm">—</b> <span data-o="fm"></span></div>
+    </div>
+  </div>
+</div>
+
+<style>
+[data-instrument="speed-timetable"]{padding:16px 0 18px;color:var(--ink);font-family:var(--text);font-variant-numeric:tabular-nums}
+[data-instrument="speed-timetable"] .sp-top{display:grid;grid-template-columns:1fr 1fr 1.45fr;border-bottom:1px solid var(--ink)}
+[data-instrument="speed-timetable"] .sp-box{padding:2px 14px 12px;height:96px;overflow:hidden;border-left:1px solid rgba(22,21,20,.22)}
+[data-instrument="speed-timetable"] .sp-box:first-child{padding-left:0;border-left:0}
+[data-instrument="speed-timetable"] .sp-k{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-v{font-family:var(--mono);font-size:26px;font-weight:500;line-height:1.25;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="speed-timetable"] .sp-v em{font-family:var(--text);font-style:italic;font-weight:400}
+[data-instrument="speed-timetable"] .sp-name{font-family:var(--display);font-size:23px;text-transform:uppercase;letter-spacing:.02em;color:var(--accent)}
+[data-instrument="speed-timetable"] .sp-sub{font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+[data-instrument="speed-timetable"] .sp-slider{position:relative;touch-action:pan-y;cursor:pointer;user-select:none;-webkit-user-select:none}
+[data-instrument="speed-timetable"] .sp-main{padding:14px 10px 2px;margin:0 0 6px}
+[data-instrument="speed-timetable"] .sp-lab{position:relative;height:17px;font-family:var(--mono);font-size:10.5px;color:var(--ink);white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-lab span{position:absolute;top:0;transform:translateX(-50%);line-height:17px}
+[data-instrument="speed-timetable"] .sp-lab span.sp-first{transform:none}
+[data-instrument="speed-timetable"] .sp-track{position:relative;height:32px}
+[data-instrument="speed-timetable"] .sp-rail{position:absolute;left:0;right:0;top:14px;height:4px;background:repeating-linear-gradient(90deg,var(--accent) 0 10px,transparent 10px 16px)}
+[data-instrument="speed-timetable"] .sp-fill{position:absolute;left:0;top:13px;height:6px;background:var(--ink)}
+[data-instrument="speed-timetable"] .sp-tick{position:absolute;top:2px;width:2px;height:28px;margin-left:-1px;background:var(--ink);opacity:.55}
+[data-instrument="speed-timetable"] .sp-thumb{position:absolute;top:1px;width:16px;height:30px;margin-left:-8px;background:var(--accent);border:2px solid var(--ink);box-shadow:0 0 0 2px var(--paper);outline:none}
+[data-instrument="speed-timetable"] .sp-thumb:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[data-instrument="speed-timetable"] .sp-scale{position:relative;height:18px;font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-scale span{position:absolute;top:2px;transform:translateX(-50%)}
+[data-instrument="speed-timetable"] .sp-scale span.sp-first{transform:none}
+[data-instrument="speed-timetable"] .sp-scale span.sp-last{transform:translateX(-100%)}
+
+[data-instrument="speed-timetable"] .sp-ttw{margin-top:8px;border-top:2px solid var(--ink);overflow-x:auto;-webkit-overflow-scrolling:touch}
+[data-instrument="speed-timetable"] .sp-tt{border-collapse:collapse;width:100%;font-size:14px}
+[data-instrument="speed-timetable"] .sp-tt th{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:12.5px;text-align:right;padding:7px 8px;border-bottom:2px solid var(--ink);vertical-align:bottom;line-height:1.2;white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-tt th small{display:block;font-family:var(--mono);font-size:10.5px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:2px}
+[data-instrument="speed-timetable"] .sp-tt th.sp-l{text-align:left}
+[data-instrument="speed-timetable"] .sp-tt td{padding:6px 8px;border-bottom:1px solid rgba(22,21,20,.22);text-align:right;vertical-align:middle;font-family:var(--mono);font-size:13px;white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-tt tbody tr:nth-child(odd){background:rgba(230,224,207,.55)}
+[data-instrument="speed-timetable"] .sp-tt td.sp-code{text-align:left;color:var(--muted);font-size:12px;width:3rem}
+[data-instrument="speed-timetable"] .sp-tt td.sp-st{text-align:left;font-family:var(--text);font-size:14.5px;font-weight:500;white-space:normal}
+[data-instrument="speed-timetable"] .sp-stw{display:flex;align-items:center;gap:9px}
+[data-instrument="speed-timetable"] .sp-ic{width:22px;height:22px;flex:none;color:var(--ink)}
+[data-instrument="speed-timetable"] .sp-tt td.sp-d{color:var(--muted);font-size:12.5px}
+[data-instrument="speed-timetable"] .sp-tt td.sp-t{font-size:14.5px;font-weight:500;width:9.5rem;min-width:9.5rem}
+[data-instrument="speed-timetable"] .sp-tt .sp-b{width:34%;min-width:150px}
+[data-instrument="speed-timetable"] .sp-ax{position:relative;height:14px;font-family:var(--mono);font-size:10px;font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)}
+[data-instrument="speed-timetable"] .sp-ax span{position:absolute;bottom:0;transform:translateX(-50%)}
+[data-instrument="speed-timetable"] .sp-bar{position:relative;height:12px}
+[data-instrument="speed-timetable"] .sp-barf{position:absolute;left:0;top:2px;height:8px;background:var(--ink);transition:width .14s ease-out}
+[data-instrument="speed-timetable"] tr.is-m .sp-barf{background:var(--accent)}
+[data-instrument="speed-timetable"] tr.is-x .sp-barf{background:repeating-linear-gradient(135deg,var(--muted) 0 2px,transparent 2px 5px)}
+[data-instrument="speed-timetable"] .sp-ln{position:absolute;top:-7px;bottom:-7px;width:0;border-left:1.5px solid var(--ink)}
+[data-instrument="speed-timetable"] .sp-ln.sp-lnm{border-left:1.5px dashed var(--accent)}
+[data-instrument="speed-timetable"] .sp-tt .sp-f{text-align:center;width:5.6rem}
+[data-instrument="speed-timetable"] .sp-tt td.sp-f{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+[data-instrument="speed-timetable"] .sp-tt td.sp-y{color:var(--ink);font-weight:500}
+[data-instrument="speed-timetable"] .sp-tt td.sp-y::before{content:"";display:inline-block;width:8px;height:8px;background:currentColor;margin-right:6px;vertical-align:1px}
+[data-instrument="speed-timetable"] .sp-tt td.sp-fm.sp-y{color:var(--accent)}
+[data-instrument="speed-timetable"] .sp-tt td.sp-n{color:var(--muted)}
+
+[data-instrument="speed-timetable"] .sp-foot{display:flex;flex-wrap:wrap;gap:12px 36px;align-items:center;margin-top:14px}
+[data-instrument="speed-timetable"] .sp-life{display:flex;align-items:center;gap:14px;flex:1 1 24rem;min-width:0}
+[data-instrument="speed-timetable"] .sp-mini{flex:1 1 auto;min-width:120px;padding:4px 8px 0}
+[data-instrument="speed-timetable"] .sp-mini .sp-track{height:26px}
+[data-instrument="speed-timetable"] .sp-mini .sp-rail{top:12px;height:2px;background:var(--ink);opacity:.35}
+[data-instrument="speed-timetable"] .sp-mini .sp-fill{top:11px;height:4px;background:var(--accent)}
+[data-instrument="speed-timetable"] .sp-mini .sp-thumb{top:2px;width:12px;height:22px;margin-left:-6px;background:var(--paper)}
+[data-instrument="speed-timetable"] .sp-v2{font-family:var(--mono);font-size:15px;font-weight:500;width:8.5rem;flex:none;text-align:right;white-space:nowrap}
+[data-instrument="speed-timetable"] .sp-sum{flex:1 1 22rem;font-size:13.5px;line-height:1.6}
+[data-instrument="speed-timetable"] .sp-sum b{font-family:var(--mono);font-weight:500}
+[data-instrument="speed-timetable"] .sp-sw{display:inline-block;width:0;height:13px;border-left:1.5px solid var(--ink);margin:0 8px -2px 2px}
+[data-instrument="speed-timetable"] .sp-sw.sp-sw-m{border-left:1.5px dashed var(--accent)}
+
+@media (max-width:700px){
+  [data-instrument="speed-timetable"] .sp-top{grid-template-columns:1fr 1fr}
+  [data-instrument="speed-timetable"] .sp-eng{grid-column:1 / -1;border-left:0;padding-left:0;border-top:1px solid rgba(22,21,20,.22);padding-top:8px}
+  [data-instrument="speed-timetable"] .sp-v{font-size:21px}
+  [data-instrument="speed-timetable"] .sp-lab span{display:none}
+  [data-instrument="speed-timetable"] .sp-lab{height:6px}
+  [data-instrument="speed-timetable"] .sp-scale .sp-hide{display:none}
+}
+@media (max-width:560px){
+  [data-instrument="speed-timetable"] .sp-code,[data-instrument="speed-timetable"] .sp-d{display:none}
+}
+@media (max-width:440px){
+  [data-instrument="speed-timetable"] .sp-b{display:none}
+  [data-instrument="speed-timetable"] .sp-tt td.sp-t{width:auto;min-width:0}
+  [data-instrument="speed-timetable"] .sp-life{flex-wrap:wrap}
+  [data-instrument="speed-timetable"] .sp-v2{text-align:left}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="speed-timetable"] .sp-barf{transition:none}
+}
+</style>
+
+<script>(function(){
+const root=document.querySelector('[data-instrument="speed-timetable"]');
+if(!root) return;
+const C=299792.458, AU=149597870.7, LY=9460730472580.8, YR=31557600;
+const VMIN=11, VMAX=30000, LR=Math.log(VMAX/VMIN);
+const LMIN=10, LMAX=1e6, LLR=Math.log(LMAX/LMIN);
+const HUMAN=80;
+const ST=[
+ {c:'ЛУН',n:'Луна',q:'Луна',i:'moon',d:384400,ds:'384 400 км'},
+ {c:'МАР',n:'Марс',q:'Марс',i:'mars',d:78e6,ds:'≈ 78 млн км'},
+ {c:'ЦЕР',n:'Церера, пояс астероидов',q:'Церера',i:'belt',d:265e6,ds:'≈ 265 млн км'},
+ {c:'ЕВР',n:'Европа, спутник Юпитера',q:'Европа',i:'europa',d:629e6,ds:'≈ 629 млн км'},
+ {c:'ГЕЛ',n:'Гелиопауза',q:'гелиопауза',i:'helio',d:120*AU,ds:'≈ 120 а. е.'},
+ {c:'ООР',n:'Облако Оорта',q:'облако Оорта',i:'oort',d:2000*AU,ds:'≈ 2 000 а. е.'},
+ {c:'ПРК',n:'Проксима Центавра',q:'Проксима Центавра',i:'star',d:4.24*LY,ds:'4,24 св. г.'},
+ {c:'ТРП',n:'TRAPPIST-1',q:'TRAPPIST-1',i:'trappist',d:40.7*LY,ds:'≈ 40,7 св. г.'},
+ {c:'ЦГ',n:'Центр Галактики',q:'центр Галактики',i:'galaxy',d:26000*LY,ds:'≈ 26 000 св. г.'}
+];
+const ENG=[
+ {v:11.2,s:'ракета',n:'Химическая ракета',d:'вторая космическая скорость у Земли'},
+ {v:17,s:'«Вояджер»',n:'«Вояджер-1»',d:'самый далёкий аппарат, старт 1977'},
+ {v:33,s:'Int. Probe',n:'Interstellar Probe',d:'проект NASA, ≈ 7 а. е. в год'},
+ {v:192,s:'«Паркер»',n:'Зонд «Паркер»',d:'рекорд скорости у Солнца, 2024'},
+ {v:1000,s:'«Орион»',n:'Ядерно-импульсный «Орион»',d:'межзвёздный вариант Ф. Дайсона, 1968'},
+ {v:13500,s:'«Лонгшот»',n:'Термоядерный «Лонгшот»',d:'проект NASA, 4,5 % c'},
+ {v:36000,s:'',n:'Термоядерный «Дедал»',d:'проект Британского межпланетного общества, 12 % c'}
+];
+const $=s=>root.querySelector(s);
+const out=k=>root.querySelector('[data-o="'+k+'"]');
+const comma=s=>String(s).replace('.',',');
+const group=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00a0');
+const pad=n=>(n<10?'0':'')+n;
+function plural(n,a,b,c){n=Math.abs(n)%100;const m=n%10;if(n>10&&n<20)return c;if(m>1&&m<5)return b;if(m===1)return a;return c;}
+function fyears(y){
+ if(y<9.95) return comma(y.toFixed(1))+' года';
+ if(y<999.5){const n=Math.round(y);return n+' '+plural(n,'год','года','лет');}
+ if(y<9950) return comma((y/1e3).toFixed(1))+' тыс. лет';
+ if(y<999500) return Math.round(y/1e3)+' тыс. лет';
+ if(y<9.95e6) return comma((y/1e6).toFixed(1))+' млн лет';
+ return Math.round(y/1e6)+' млн лет';
+}
+function ftime(s){
+ if(s<59.5) return (s<9.95?comma(s.toFixed(1)):Math.round(s))+' с';
+ if(s<3599.5){let m=Math.floor(s/60),x=Math.round(s-m*60);if(x===60){m++;x=0;}return m+' мин '+pad(x)+' с';}
+ if(s<47.99*3600){const tm=Math.round(s/60);return Math.floor(tm/60)+' ч '+pad(tm%60)+' мин';}
+ const days=s/86400;
+ if(days<99.5){const th=Math.round(s/3600);return Math.floor(th/24)+' сут '+(th%24)+' ч';}
+ const y=s/YR;
+ if(y<0.995) return Math.round(days)+' сут';
+ return fyears(y);
+}
+function fspeed(v){
+ if(v<99.95) return comma(v.toFixed(1));
+ if(v<999.5) return String(Math.round(v));
+ return group(Number(v.toPrecision(3)));
+}
+const vAt=t=>VMIN*Math.exp(t*LR);
+const tOfV=v=>Math.log(v/VMIN)/LR;
+const lAt=t=>Number((LMIN*Math.exp(t*LLR)).toPrecision(2));
+const tOfL=l=>Math.log(l/LMIN)/LLR;
+const TMAXL=Math.log10(1e9*YR);
+const tp=s=>Math.max(0,Math.min(1,(Math.log10(Math.max(s,10))-1)/(TMAXL-1)));
+
+let tv=tOfV(17), tl=tOfL(50);
+
+/* speed slider: ticks, labels, scale */
+const main=root.querySelector('[data-sl="v"]');
+const mtrack=main.querySelector('.sp-track');
+const labA=main.querySelector('.sp-labA'), labB=main.querySelector('.sp-labB');
+const snaps=[];
+ENG.filter(e=>e.v<=VMAX).forEach((e,k)=>{
+ const t=tOfV(e.v); snaps.push(t);
+ const tk=document.createElement('div');tk.className='sp-tick';tk.style.left=(t*100)+'%';
+ mtrack.insertBefore(tk,mtrack.querySelector('.sp-fill'));
+ const sp=document.createElement('span');sp.textContent=e.s;sp.dataset.t=t;sp.style.left=(t*100)+'%';
+ if(k===0) sp.className='sp-first';
+ (k%2?labB:labA).appendChild(sp);
+});
+const mscale=main.querySelector('.sp-scale');
+[[11,'11 км/с','sp-first'],[100,'100',''],[1000,'1\u00a0000',''],[10000,'10\u00a0000',''],[30000,'30\u00a0000','sp-last sp-hide']].forEach(a=>{
+ const sp=document.createElement('span');sp.textContent=a[1];if(a[2])sp.className=a[2];
+ sp.style.left=(tOfV(a[0])*100)+'%';mscale.appendChild(sp);
+});
+/* life slider scale */
+const mini=root.querySelector('[data-sl="L"]');
+[[10,'10 лет','sp-first'],[100,'100',''],[1000,'1000',''],[1e4,'10 тыс.','sp-hide'],[1e5,'100 тыс.',''],[1e6,'1 млн','sp-last']].forEach(a=>{
+ const sp=document.createElement('span');sp.textContent=a[1];if(a[2])sp.className=a[2];
+ sp.style.left=(tOfL(a[0])*100)+'%';mini.querySelector('.sp-scale').appendChild(sp);
+});
+/* axis */
+const ax=$('.sp-ax');
+[[60,'1 мин'],[86400,'1 сут'],[YR,'1 год'],[1e3*YR,'1 тыс.'],[1e6*YR,'1 млн']].forEach(a=>{
+ const sp=document.createElement('span');sp.textContent=a[1];sp.style.left=(tp(a[0])*100)+'%';ax.appendChild(sp);
+});
+/* rows */
+const tb=$('.sp-tt tbody');
+tb.innerHTML=ST.map(s=>'<tr><td class="sp-code">'+s.c+'</td><td class="sp-st"><span class="sp-stw"><svg class="sp-ic" aria-hidden="true"><use href="#i-'+s.i+'"/></svg>'+s.n+'</span></td><td class="sp-d">'+s.ds+'</td><td class="sp-t"></td><td class="sp-b"><div class="sp-bar"><div class="sp-barf"></div><i class="sp-ln sp-lnh"></i><i class="sp-ln sp-lnm"></i></div></td><td class="sp-f sp-fh"></td><td class="sp-f sp-fm"></td></tr>').join('');
+const rows=[...tb.rows].map(r=>({r,t:r.querySelector('.sp-t'),f:r.querySelector('.sp-barf'),lh:r.querySelector('.sp-lnh'),lm:r.querySelector('.sp-lnm'),fh:r.querySelector('.sp-fh'),fm:r.querySelector('.sp-fm')}));
+const hPos=(tp(HUMAN*YR)*100)+'%';
+rows.forEach(o=>o.lh.style.left=hPos);
+
+function flag(td,ok){td.textContent=ok?'да':'нет';td.classList.toggle('sp-y',ok);td.classList.toggle('sp-n',!ok);}
+function render(){
+ const v=vAt(tv), L=lAt(tl);
+ const mth=main.querySelector('.sp-thumb');
+ mth.style.left=(tv*100)+'%';main.querySelector('.sp-fill').style.width=(tv*100)+'%';
+ const vs=fspeed(v);
+ mth.setAttribute('aria-valuenow',Math.round(v));mth.setAttribute('aria-valuetext',vs+' км/с');
+ out('kms').textContent=vs+' км/с';
+ out('kmh').textContent=group(Number((v*3600).toPrecision(3)))+' км/ч';
+ const p=v/C*100;
+ out('pc').innerHTML=(p>=0.995?comma(p.toFixed(1)):comma(p.toPrecision(2)))+' % <em>c</em>';
+ const r=C/v;
+ out('slow').textContent='в '+(r<100?comma(r.toPrecision(3)):group(Math.round(Number(r.toPrecision(3)))))+' раз медленнее света';
+ let best=ENG[0],bd=Infinity;
+ ENG.forEach(e=>{const d=Math.abs(Math.log(v/e.v));if(d<bd){bd=d;best=e;}});
+ out('eng').textContent=best.n;
+ out('engd').textContent=fspeed(best.v)+' км/с · '+best.d;
+
+ const lth=mini.querySelector('.sp-thumb');
+ lth.style.left=(tl*100)+'%';mini.querySelector('.sp-fill').style.width=(tl*100)+'%';
+ const ls=fyears(L);
+ lth.setAttribute('aria-valuenow',L);lth.setAttribute('aria-valuetext',ls);
+ out('life').textContent=ls;out('lifeh').textContent=ls;
+ const mPos=(tp(L*YR)*100)+'%';
+
+ let nh=0,nm=0,lastH=null,lastM=null;
+ ST.forEach((s,k)=>{
+  const o=rows[k], sec=s.d/v, y=sec/YR;
+  const okH=y<=HUMAN, okM=y<=L;
+  if(okH){nh++;lastH=s.q;} if(okM){nm++;lastM=s.q;}
+  o.t.textContent=ftime(sec);
+  o.f.style.width=(tp(sec)*100)+'%';
+  o.lm.style.left=mPos;
+  o.r.classList.toggle('is-h',okH);
+  o.r.classList.toggle('is-m',!okH&&okM);
+  o.r.classList.toggle('is-x',!okH&&!okM);
+  flag(o.fh,okH);flag(o.fm,okM);
+ });
+ out('nh').textContent=nh+' из '+ST.length;
+ out('fh').textContent=lastH?'· дальше всех — '+lastH:'· ни одной станции';
+ out('nm').textContent=nm+' из '+ST.length;
+ out('fm').textContent=lastM?'· дальше всех — '+lastM:'· ни одной станции';
+}
+
+function bind(el,get,set,sn){
+ const track=el.querySelector('.sp-track'), thumb=el.querySelector('.sp-thumb');
+ let drag=false,touch=false;
+ function tAt(x){
+  const r=track.getBoundingClientRect();
+  let t=Math.max(0,Math.min(1,(x-r.left)/r.width));
+  if(sn) for(const s of sn){if(Math.abs((s-t)*r.width)<7){t=s;break;}}
+  return t;
+ }
+ function pick(e){const lab=e.target.closest&&e.target.closest('[data-t]');return lab?+lab.dataset.t:tAt(e.clientX);}
+ el.addEventListener('pointerdown',e=>{
+  if(e.button>0) return;
+  drag=true;touch=e.pointerType==='touch';
+  try{el.setPointerCapture(e.pointerId);}catch(_){}
+  if(!touch){set(pick(e));e.preventDefault();thumb.focus({preventScroll:true});}
+ });
+ el.addEventListener('pointermove',e=>{if(drag) set(tAt(e.clientX));});
+ el.addEventListener('pointerup',e=>{if(drag&&touch) set(pick(e));drag=false;});
+ el.addEventListener('pointercancel',()=>{drag=false;});
+ thumb.addEventListener('keydown',e=>{
+  let t=get();const k=e.key;
+  if(k==='ArrowRight'||k==='ArrowUp') t+=e.shiftKey?0.1:0.01;
+  else if(k==='ArrowLeft'||k==='ArrowDown') t-=e.shiftKey?0.1:0.01;
+  else if(k==='PageUp') t+=0.1;
+  else if(k==='PageDown') t-=0.1;
+  else if(k==='Home') t=0;
+  else if(k==='End') t=1;
+  else return;
+  e.preventDefault();set(Math.max(0,Math.min(1,t)));
+ });
+}
+bind(main,()=>tv,t=>{tv=t;render();},snaps);
+bind(mini,()=>tl,t=>{tl=t;render();},[tOfL(100),tOfL(1000),tOfL(1e4),tOfL(1e5)]);
+render();
+})();</script>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>04</b>Задержки</div>
+      <div class="body">
+        <h2>«Сколь угодно далеко» упирается в шесть причин задержки, и терпение снимает только одну</h2>
+        <p>Робот не скучает и не стареет так, как человек. Но он изнашивается, у него кончается энергия, и чем дальше он уходит, тем меньше может рассчитывать на помощь. Вот что стоит на пути длинных рейсов.</p>
+        <ol class="delays">
+          <li><span><b>Энергия.</b> У Солнца её много, за Юпитером мало, между звёздами нет почти совсем. Дальние зонды берут с собой радиоизотопные генераторы на плутонии-238, у которого период полураспада около 88 лет. За тысячелетие такая батарея угасает почти полностью. Межзвёздному роботу понадобится что-то другое: термоядерный реактор, запас топлива, который не тратится в пути, или умение спать почти без тока.</span></li>
+          <li><span><b>Износ.</b> Космические лучи портят память и процессоры, металл устаёт, смазка испаряется, детали холодеют до трещин. Ни одна машина пока не работала столетиями. Значит, роботу дальнего следования придётся чинить себя сам и везти запас деталей или станок, который их делает.</span></li>
+          <li><span><b>Пыль.</b> На одной десятой скорости света пылинка весом в микрограмм ударяет с энергией, сравнимой с энергией небольшого взрыва. Межзвёздному зонду нужен щит, и чем быстрее он летит, тем тяжелее этот щит.</span></li>
+          <li><span><b>Торможение.</b> Разогнаться — половина дела: на месте надо остановиться, иначе зонд пролетит мимо звезды за несколько часов. Тормозить нечем, кроме того же двигателя, магнитного паруса о межзвёздный газ или света самой цели. Каждый из этих способов пока остаётся расчётом.</span></li>
+          <li><span><b>Молчание.</b> Сигнал до Марса идёт минуты, до Проксимы — годы. Робот у далёкой звезды не может спросить, что делать, и дождаться ответа. Всё решать придётся ему одному, и в этом главная причина, почему межзвёздный полёт — задача прежде всего для искусственного интеллекта.</span></li>
+          <li><span><b>Опоздание.</b> Медленный состав, отправленный сегодня, может обогнать быстрый, отправленный через полвека. Эту ловушку разбирает следующий раздел.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>05</b>Ждать или ехать</div>
+      <div class="body">
+        <h2>Поезд, ушедший первым, может прийти последним</h2>
+        <p>Если двигатели год от года становятся быстрее, у каждого отправления есть соперник — состав, который выйдет позже и обгонит. Эту задачу называют «расчётом ожидания»: существует момент старта, после которого ждать лучше технологий уже не стоит, а до которого любой зонд будет обогнан. Для близких станций выгодно лететь сразу. Для далёких звёзд первые медленные зонды почти наверняка встретят у цели своих потомков, которые прилетели раньше.</p>
+        <p>Это меняет само понятие «сколь угодно долгого полёта». Терпение робота ценно, но рейс в сто тысяч лет имеет смысл, только если за эти сто тысяч лет ничего более быстрого не появится. Но обогнать можно только корпус: разум зонда можно догнать светом — об этом <a href="#predlozhenie-zh">предложение Ж</a>, „Разум вдогонку“.</p>
+      </div>
+    </div>
+    <div class="wide">
+      <div class="instrument" data-instrument="wait-calculation">
+  <div class="wc-head">
+    <div class="wc-targets" role="radiogroup" aria-label="Цель">
+      <button type="button" role="radio" data-t="europa" aria-checked="false" tabindex="-1">Европа</button>
+      <button type="button" role="radio" data-t="oort" aria-checked="false" tabindex="-1">Облако Оорта</button>
+      <button type="button" role="radio" data-t="proxima" aria-checked="true" tabindex="0">Проксима Центавра</button>
+      <button type="button" role="radio" data-t="trappist" aria-checked="false" tabindex="-1">TRAPPIST-1</button>
+    </div>
+    <label class="wc-growth">
+      <span class="wc-gl"><span>Рост скорости двигателей</span><output class="wc-gv">3,0 % в год</output></span>
+      <input class="wc-range" type="range" min="0" max="5" step="0.1" value="3" aria-label="Ежегодный рост скорости двигателей, процентов в год">
+      <span class="wc-cap"></span>
+    </label>
+  </div>
+  <div class="wc-plot">
+    <canvas class="wc-cv-el" aria-hidden="true"></canvas>
+    <div class="wc-handle" role="slider" tabindex="0" aria-label="Год старта"></div>
+  </div>
+  <div class="wc-fleet"></div>
+  <div class="wc-read">
+    <div class="wc-c"><div class="wc-cl">Старт</div><div class="wc-cv" data-k="start">—</div><div class="wc-cs" data-k="start2">—</div></div>
+    <div class="wc-c"><div class="wc-cl">Скорость</div><div class="wc-cv" data-k="v">—</div><div class="wc-cs" data-k="v2">—</div></div>
+    <div class="wc-c"><div class="wc-cl">В пути</div><div class="wc-cv" data-k="tr">—</div><div class="wc-cs" data-k="tr2">—</div></div>
+    <div class="wc-c acc"><div class="wc-cl">Прибытие</div><div class="wc-cv" data-k="arr">—</div><div class="wc-cs" data-k="arr2">—</div></div>
+    <div class="wc-c"><div class="wc-cl">Лучший старт</div><div class="wc-cv" data-k="best">—</div><div class="wc-cs" data-k="best2">—</div></div>
+  </div>
+</div>
+<style>
+[data-instrument="wait-calculation"]{padding:16px 0 18px;font-family:var(--text);color:var(--ink);font-variant-numeric:tabular-nums}
+[data-instrument="wait-calculation"] .wc-head{display:flex;flex-wrap:wrap;gap:14px 32px;align-items:flex-end;justify-content:space-between;margin-bottom:14px}
+[data-instrument="wait-calculation"] .wc-targets{display:flex;flex-wrap:wrap;gap:6px}
+[data-instrument="wait-calculation"] .wc-targets button{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;padding:7px 11px;border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);cursor:pointer;border-radius:0;transition:background .15s,color .15s}
+[data-instrument="wait-calculation"] .wc-targets button[aria-checked="true"]{background:var(--ink);color:var(--paper)}
+[data-instrument="wait-calculation"] .wc-targets button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[data-instrument="wait-calculation"] .wc-growth{display:block;flex:1 1 260px;max-width:400px}
+[data-instrument="wait-calculation"] .wc-gl{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+[data-instrument="wait-calculation"] .wc-gl output{color:var(--ink);font-weight:500;min-width:9ch;text-align:right;white-space:nowrap}
+[data-instrument="wait-calculation"] .wc-cap{display:block;font-family:var(--mono);font-size:11.5px;color:var(--muted);min-height:1.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="wait-calculation"] .wc-range{-webkit-appearance:none;appearance:none;width:100%;height:26px;margin:2px 0;background:transparent;cursor:pointer}
+[data-instrument="wait-calculation"] .wc-range::-webkit-slider-runnable-track{height:3px;background:var(--ink)}
+[data-instrument="wait-calculation"] .wc-range::-moz-range-track{height:3px;background:var(--ink)}
+[data-instrument="wait-calculation"] .wc-range::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-7.5px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+[data-instrument="wait-calculation"] .wc-range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid var(--paper)}
+[data-instrument="wait-calculation"] .wc-range:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+[data-instrument="wait-calculation"] .wc-plot{position:relative;border-top:1px solid var(--ink)}
+[data-instrument="wait-calculation"] .wc-cv-el{display:block;width:100%;touch-action:pan-y;cursor:ew-resize}
+[data-instrument="wait-calculation"] .wc-handle{position:absolute;left:0;top:0;width:22px;height:22px;border-radius:50%;background:var(--paper);border:3px solid var(--accent);box-sizing:border-box;touch-action:none;cursor:ew-resize}
+[data-instrument="wait-calculation"] .wc-handle:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+[data-instrument="wait-calculation"] .wc-fleet{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--ink)}
+[data-instrument="wait-calculation"] .wc-p{position:relative;padding:8px 10px;min-height:70px;border-right:1px solid rgba(22,21,20,.22)}
+[data-instrument="wait-calculation"] .wc-p:last-child{border-right:0}
+[data-instrument="wait-calculation"] .wc-sw{display:block;width:26px;height:3px;background:var(--ink);margin-bottom:6px}
+[data-instrument="wait-calculation"] .wc-pl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);white-space:nowrap;overflow:hidden}
+[data-instrument="wait-calculation"] .wc-pv{font-family:var(--mono);font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;line-height:1.35}
+[data-instrument="wait-calculation"] .wc-rk{position:absolute;top:7px;right:8px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+[data-instrument="wait-calculation"] .wc-p.is-first .wc-pv,[data-instrument="wait-calculation"] .wc-p.is-first .wc-rk{color:var(--accent)}
+[data-instrument="wait-calculation"] .wc-read{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--ink)}
+[data-instrument="wait-calculation"] .wc-c{padding:10px 10px 4px;min-height:84px;border-right:1px solid rgba(22,21,20,.22);overflow:hidden}
+[data-instrument="wait-calculation"] .wc-c:last-child{border-right:0}
+[data-instrument="wait-calculation"] .wc-cl{font-family:var(--display);font-weight:500;text-transform:uppercase;font-size:13px;letter-spacing:.04em}
+[data-instrument="wait-calculation"] .wc-cv{font-family:var(--mono);font-size:20px;font-weight:500;line-height:1.3;white-space:nowrap;overflow:hidden}
+[data-instrument="wait-calculation"] .wc-cs{font-family:var(--mono);font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+[data-instrument="wait-calculation"] .wc-c.acc .wc-cv{color:var(--accent)}
+@media (max-width:640px){
+  [data-instrument="wait-calculation"] .wc-pv{font-size:12.5px}
+  [data-instrument="wait-calculation"] .wc-p{padding:8px 6px}
+  [data-instrument="wait-calculation"] .wc-pl{font-size:10px}
+  [data-instrument="wait-calculation"] .wc-rk{display:none}
+  [data-instrument="wait-calculation"] .wc-read{grid-template-columns:repeat(2,minmax(0,1fr))}
+  [data-instrument="wait-calculation"] .wc-c{border-bottom:1px solid rgba(22,21,20,.22)}
+  [data-instrument="wait-calculation"] .wc-c:nth-child(2n){border-right:0}
+  [data-instrument="wait-calculation"] .wc-c:last-child{grid-column:1 / -1}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-instrument="wait-calculation"] *{transition:none!important}
+}
+</style>
+<script>(function(){
+const root=document.querySelector('[data-instrument="wait-calculation"]');
+if(!root)return;
+const C=299792.458,YR=31557600,AU=1.495978707e8,LY=9.4607304725808e12,V0=17,VMAX=0.1*C;
+const BASE=new Date().getFullYear();
+const TG={
+  europa:{d:629e6,dist:'≈ 629 млн км'},
+  oort:{d:2000*AU,dist:'≈ 2 000 а. е.'},
+  proxima:{d:4.24*LY,dist:'4,24 св. г.'},
+  trappist:{d:40.7*LY,dist:'≈ 40,7 св. г.'}
+};
+const STARTS=[0,25,50,100,200],ALPHA=[1,.78,.58,.42,.28];
+const st={t:'proxima',g:3,s:150,xmax:400};
+const canvas=root.querySelector('.wc-cv-el'),ctx=canvas.getContext('2d');
+const plot=root.querySelector('.wc-plot'),handle=root.querySelector('.wc-handle');
+const range=root.querySelector('.wc-range'),gv=root.querySelector('.wc-gv'),cap=root.querySelector('.wc-cap');
+const btns=[...root.querySelectorAll('.wc-targets button')];
+const fleet=root.querySelector('.wc-fleet');
+const R={};root.querySelectorAll('[data-k]').forEach(e=>R[e.dataset.k]=e);
+const P={L:48,R:16,T:22,B:30};let W=600,H=300;
+
+const cells=STARTS.map((s,i)=>{
+  const d=document.createElement('div');d.className='wc-p';
+  d.innerHTML='<span class="wc-sw" style="opacity:'+ALPHA[i]+'"></span><div class="wc-pl"></div><div class="wc-pv"></div><span class="wc-rk"></span>';
+  fleet.appendChild(d);return d;
+});
+
+const k=()=>Math.log(1+st.g/100);
+const v=t=>Math.min(V0*Math.exp(k()*t),VMAX);
+const trav=t=>TG[st.t].d/v(t)/YR;
+const arr=t=>t+trav(t);
+function best(){
+  const kk=k();if(kk<=0)return 0;
+  const T0=TG[st.t].d/V0/YR,tc=Math.log(VMAX/V0)/kk;
+  let t=Math.log(kk*T0)/kk;if(!(t>0))t=0;
+  return Math.min(t,tc);
+}
+function nice(x){const p=Math.pow(10,Math.floor(Math.log10(x))),m=x/p;return (m<=1?1:m<=2?2:m<=5?5:10)*p;}
+const grp=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'\u00A0');
+const yr=t=>{const y=Math.round(BASE+t);return y<10000?String(y):grp(y);};
+const dec=(x,d)=>x.toFixed(d).replace('.',',');
+function pl(n){n=Math.round(n);const a=n%10,b=n%100;if(a===1&&b!==11)return 'год';if(a>=2&&a<=4&&(b<12||b>14))return 'года';return 'лет';}
+function dur(T){
+  if(T<1/365.25)return grp(T*8766)+' ч';
+  if(T<1)return grp(T*365.25)+' сут';
+  if(T<10)return dec(T,1)+' года';
+  if(T<1e6)return grp(T)+' '+pl(T);
+  return dec(T/1e6,1)+' млн лет';
+}
+function spd(x){return x<100?dec(x,1):grp(x);}
+function pc(x){const p=x/C*100;return (p>=1?dec(p,1):p>=0.1?dec(p,2):dec(p,3))+' % c';}
+
+function recalc(){
+  const raw=Math.max(240,1.3*arr(best()));
+  const step=nice(raw/5);st.xmax=Math.ceil(raw/step)*step;
+  st.s=Math.min(Math.max(st.s,0),st.xmax);
+}
+const X=t=>P.L+t/st.xmax*(W-P.L-P.R);
+const Y=f=>P.T+(1-f)*(H-P.T-P.B);
+
+function col(n,f){const c=getComputedStyle(root).getPropertyValue(n).trim();return c||f;}
+
+function line(s,color,width,alpha,dash){
+  const T=trav(s),e=s+T;if(s>st.xmax)return;
+  const xe=Math.min(e,st.xmax),fe=(xe-s)/T;
+  ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.setLineDash(dash||[]);
+  ctx.beginPath();ctx.moveTo(X(s),Y(0));ctx.lineTo(X(xe),Y(fe));ctx.stroke();
+  if(e<=st.xmax){ctx.setLineDash([]);ctx.fillStyle=color;ctx.beginPath();ctx.arc(X(e),Y(1),width+1.5,0,7);ctx.fill();}
+  ctx.restore();
+}
+
+function draw(){
+  const ink=col('--ink','#161514'),acc=col('--accent','#C8371D'),mut=col('--muted','#6A655A');
+  const mono=col('--mono','monospace');
+  const dpr=window.devicePixelRatio||1;
+  W=plot.clientWidth||600;H=W<520?250:300;
+  canvas.style.height=H+'px';canvas.width=Math.round(W*dpr);canvas.height=Math.round(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  ctx.font='11px '+mono;ctx.textBaseline='middle';
+  for(let i=0;i<=4;i++){
+    const f=i/4,y=Y(f);
+    ctx.strokeStyle=ink;ctx.globalAlpha=i===0||i===4?.7:.15;ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(P.L,y);ctx.lineTo(W-P.R,y);ctx.stroke();
+    ctx.globalAlpha=1;ctx.fillStyle=mut;ctx.textAlign='right';ctx.fillText(Math.round(f*100)+' %',P.L-6,y);
+  }
+  ctx.textAlign='left';ctx.fillStyle=mut;ctx.fillText('ПРОЙДЕНО',4,9);
+  const pw=W-P.L-P.R,step=Math.max(1,nice(st.xmax/Math.max(2,pw/84)));
+  ctx.textAlign='center';ctx.textBaseline='top';
+  for(let y=Math.ceil(BASE/step)*step;y<=BASE+st.xmax+1e-6;y+=step){
+    const x=X(y-BASE);
+    ctx.strokeStyle=ink;ctx.globalAlpha=.12;ctx.beginPath();ctx.moveTo(x,P.T);ctx.lineTo(x,Y(0));ctx.stroke();
+    ctx.globalAlpha=1;ctx.beginPath();ctx.moveTo(x,Y(0));ctx.lineTo(x,Y(0)+4);ctx.stroke();
+    ctx.fillStyle=mut;ctx.fillText(y<10000?String(y):grp(y),x,Y(0)+13);
+  }
+  ctx.save();ctx.beginPath();ctx.rect(P.L,0,pw+2,H);ctx.clip();
+  STARTS.forEach((s,i)=>line(s,ink,1.6,ALPHA[i]));
+  const b=best();
+  line(b,acc,1.4,.9,[5,4]);
+  const s=st.s,ea=arr(s);
+  if(ea<=st.xmax){ctx.strokeStyle=acc;ctx.globalAlpha=.5;ctx.setLineDash([2,3]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(X(ea),Y(1));ctx.lineTo(X(ea),Y(0));ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;}
+  line(s,acc,2.6,1);
+  ctx.restore();
+  handle.style.left=(X(s)-11)+'px';handle.style.top=(Y(0)-11)+'px';
+}
+
+function update(){
+  const s=st.s,b=best(),ea=arr(s),vs=v(s);
+  gv.textContent=dec(st.g,1)+' % в год';
+  range.setAttribute('aria-valuetext',dec(st.g,1)+' процента в год');
+  cap.textContent=st.g>0?'10 % c — в '+yr(Math.log(VMAX/V0)/k()):'скорость остаётся 17 км/с';
+  const arrs=STARTS.map(arr),order=arrs.map((a,i)=>i).sort((a,c)=>arrs[a]-arrs[c]);
+  cells.forEach((c,i)=>{
+    const rank=order.indexOf(i)+1;
+    c.classList.toggle('is-first',rank===1);
+    c.querySelector('.wc-pl').textContent='старт '+yr(STARTS[i]);
+    c.querySelector('.wc-pv').textContent=yr(arrs[i]);
+    c.querySelector('.wc-rk').textContent=rank+'-й';
+  });
+  const beaten=arrs.filter(a=>a>ea+1e-9).length;
+  R.start.textContent=yr(s);
+  R.start2.textContent=s<0.5?'сейчас':'через '+grp(s)+' '+pl(s);
+  R.v.textContent=spd(vs)+' км/с';
+  R.v2.textContent=pc(vs)+(vs>=VMAX-1e-6?' · потолок':'');
+  R.tr.textContent=dur(trav(s));
+  R.tr2.textContent=TG[st.t].dist;
+  R.arr.textContent=yr(ea);
+  R.arr2.textContent='раньше '+beaten+' из 5 зондов';
+  R.best.textContent=yr(b);
+  R.best2.textContent='прибытие '+yr(arr(b));
+  handle.setAttribute('aria-valuemin',BASE);
+  handle.setAttribute('aria-valuemax',Math.round(BASE+st.xmax));
+  handle.setAttribute('aria-valuenow',Math.round(BASE+s));
+  handle.setAttribute('aria-valuetext','старт '+yr(s)+', прибытие '+yr(ea));
+  draw();
+}
+
+let raf=0;const req=()=>{if(!raf)raf=requestAnimationFrame(()=>{raf=0;update();});};
+
+function setFromX(cx){
+  const r=canvas.getBoundingClientRect(),x=cx-r.left;
+  const t=(x-P.L)/(W-P.L-P.R)*st.xmax;
+  st.s=Math.round(Math.min(Math.max(t,0),st.xmax));req();
+}
+let drag=false;
+function down(e){
+  if(e.button!==undefined&&e.button!==0)return;
+  drag=true;(e.currentTarget).setPointerCapture(e.pointerId);setFromX(e.clientX);
+  if(e.currentTarget===handle)e.preventDefault();
+  handle.focus({preventScroll:true});
+}
+function move(e){if(drag)setFromX(e.clientX);}
+function up(){drag=false;}
+[canvas,handle].forEach(el=>{
+  el.addEventListener('pointerdown',down);
+  el.addEventListener('pointermove',move);
+  el.addEventListener('pointerup',up);
+  el.addEventListener('pointercancel',up);
+});
+handle.addEventListener('keydown',e=>{
+  const step=Math.max(1,nice(st.xmax/100));let s=st.s;
+  switch(e.key){
+    case 'ArrowRight':case 'ArrowUp':s+=e.shiftKey?step*10:step;break;
+    case 'ArrowLeft':case 'ArrowDown':s-=e.shiftKey?step*10:step;break;
+    case 'PageUp':s+=step*10;break;
+    case 'PageDown':s-=step*10;break;
+    case 'Home':s=0;break;
+    case 'End':s=st.xmax;break;
+    default:return;
+  }
+  e.preventDefault();st.s=Math.round(Math.min(Math.max(s,0),st.xmax));req();
+});
+
+function pick(b,focus){
+  btns.forEach(x=>{const on=x===b;x.setAttribute('aria-checked',on);x.tabIndex=on?0:-1;});
+  st.t=b.dataset.t;if(focus)b.focus();recalc();req();
+}
+btns.forEach((b,i)=>{
+  b.addEventListener('click',()=>pick(b));
+  b.addEventListener('keydown',e=>{
+    let j=null;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')j=(i+1)%btns.length;
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')j=(i-1+btns.length)%btns.length;
+    if(j!==null){e.preventDefault();pick(btns[j],true);}
+  });
+});
+range.addEventListener('input',()=>{st.g=parseFloat(range.value)||0;recalc();req();});
+
+if(window.ResizeObserver){new ResizeObserver(()=>req()).observe(plot);}
+else window.addEventListener('resize',req);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(req);
+
+recalc();update();
+})();</script>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>06</b>Табло отправлений</div>
+      <div class="body">
+        <h2>Прогноз: роботы откроют линию по участкам, и каждый участок требует нового двигателя</h2>
+        <span class="stamp">Прогноз составителя · не расписание</span>
+        <p>Ниже — моё предположение о том, как будет открываться линия. Сроки — оценка, а не обещание: они зависят от денег, политики и изобретений, которых ещё нет. Но порядок станций, мне кажется, угадать можно, потому что его диктуют физика и расстояния.</p>
+      </div>
+    </div>
+    <div class="wide">
+      <div class="ttbox">
+        <table class="dep">
+          <thead>
+            <tr><th>Ориентировочно</th><th>Направление</th><th>Что произойдёт</th><th>Условие отправления</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="when">2030-е — 2040-е</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-moon"/></svg>Луна</span></td>
+              <td>Первые роботы-строители: добывают лёд в затенённых кратерах у полюсов, спекают грунт в площадки и укрытия, готовят место для людей. Задержка сигнала в секунду позволяет ещё управлять ими с Земли, но работать они будут в основном сами.</td>
+              <td class="note">Роботы, способные неделями работать без присмотра в пыли и холоде лунной ночи.</td>
+            </tr>
+            <tr>
+              <td class="when">2040-е — 2060-е</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-mars"/></svg>Марс</span></td>
+              <td>Роботы прилетают раньше людей и встречают их: вырабатывают топливо для обратного рейса из марсианской атмосферы, строят теплицы, бурят до подземного льда. Минуты задержки делают управление с Земли невозможным в реальном времени.</td>
+              <td class="note">Самостоятельность на уровне бригады: план на день, а не команда на каждый шаг.</td>
+            </tr>
+            <tr>
+              <td class="when">2050-е — 2080-е</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-belt"/></svg>Пояс астероидов</span></td>
+              <td>Промышленность без людей: рои роботов разбирают малые тела на металл, воду и топливо. Здесь рождается главное — фабрика, которая делает роботов из местного материала.</td>
+              <td class="note">Замкнутый цикл производства хотя бы для простых деталей.</td>
+            </tr>
+            <tr>
+              <td class="when">2060-е — 2090-е</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-europa"/></svg>Европа</span></td>
+              <td>Робот плавит или бурит ледяной панцирь и спускается в подлёдный океан. Связь через толщу льда почти невозможна, поэтому поиск жизни ведёт машина, которая сама решает, что считать находкой.</td>
+              <td class="note">Источник энергии на годы и разум, которому можно доверить научное суждение.</td>
+            </tr>
+            <tr>
+              <td class="when">XXII век</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-oort"/></svg>Облако Оорта</span></td>
+              <td>Первые экспедиции к ледяным телам на окраине. Здесь роботы учатся тому, что понадобится между звёздами: спать десятилетиями, чинить себя и не ждать указаний.</td>
+              <td class="note">Ядерный двигатель и десятилетия безотказной работы.</td>
+            </tr>
+            <tr>
+              <td class="when">XXII — XXIII век</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Проксима Центавра</span></td>
+              <td>Сначала пролёт крошечных парусов за несколько десятилетий, потом тяжёлый зонд, который тормозит и остаётся. Его доклад придёт на Землю через 4,24 года после отправки.</td>
+              <td class="note">Скорость в проценты от световой и способ затормозить у цели.</td>
+            </tr>
+            <tr>
+              <td class="when">После</td>
+              <td class="dir"><span class="stw"><svg class="ic" aria-hidden="true"><use href="#i-galaxy"/></svg>Дальше</span></td>
+              <td>Звёзд слишком много, чтобы посылать к каждой корабль с Земли. Если линия пойдёт дальше, её будут продлевать сами роботы: строить следующие зонды у тех звёзд, куда прилетели.</td>
+              <td class="note">Машина, способная создать себе подобную из местного сырья.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="km"><b>07</b>Предложения</div>
+      <div class="body">
+        <h2>Семь идей, без которых дальний рейс не состоится</h2>
+
+        <h3><span class="mk">А</span>Сначала станции, потом поезда</h3>
+        <p>Первая задача роботов — не исследовать, а строить. Топливо, добытое на Луне и на астероидах, не надо поднимать из глубокого колодца земного притяжения. Каждая станция, построенная машинами, делает следующий перегон дешевле. Линия растёт как железная дорога: от депо к депо.</p>
+
+        <h3><span class="mk">Б</span>Семя вместо экспедиции</h3>
+        <p>Идею самовоспроизводящегося зонда приписывают Джону фон Нейману: машина прилетает к звезде, строит из местного вещества свои копии и отправляет их дальше. Даже при скромной скорости такая волна может за время, ничтожное по меркам Галактики, дойти до любой её звезды. Это единственный способ, каким «сколь угодно далеко» становится не метафорой, а планом. И это же самая опасная идея на линии: семя, которое нельзя остановить, нужно хорошо продумать до посева.</p>
+
+        <h3><span class="mk">В</span>Сон в пути</h3>
+        <p>Лучший способ пережить тысячу лет — почти не жить их. Межзвёздный робот должен уметь выключить почти всё, сохранив лишь сторожа, который будит остальных при опасности и на подходе к цели. Время в дороге тогда тратит не ресурс машины, а только её терпение.</p>
+
+        <h3><span class="mk">Г</span>Наказ вместо приказа</h3>
+        <p>С Проксимы нельзя спросить совета и получить ответ раньше чем через восемь с половиной лет. Значит, роботу дают не команды, а цели и запреты: что искать, чего не трогать, как поступить, если найдёт жизнь. Составить такой наказ — задача не меньше инженерной, ведь машина будет исполнять его там, где её создателей уже, возможно, не будет.</p>
+
+        <h3><span class="mk">Д</span>Эстафета сигнала</h3>
+        <p>Слабый передатчик у далёкой звезды Земля не услышит. Решение — цепочка ретрансляторов вдоль линии, как семафоры вдоль путей, или использование Солнца как гигантской линзы: его тяготение фокусирует свет примерно в 550 а. е. от него, и антенна в этой точке услышит то, чего не слышит ни один телескоп.</p>
+
+        <h3><span class="mk">Е</span>Обратный рейс — светом</h3>
+        <p>Ни один робот не вернётся: лететь назад так же долго и так же дорого. Вернётся только знание, и оно придёт со скоростью света. Может быть, когда-нибудь тем же путём пойдут и люди — не телом, а описанием, которое на месте будет снова собрано. Но это уже станция, которой нет даже в проекте.</p>
+
+        <h3 id="predlozhenie-zh"><span class="mk">Ж</span>Разум вдогонку</h3>
+        <p>Пока зонд летит десятилетия или века, на Земле успевают обучить модели, каких не было при его старте, и отправить их вдогонку со скоростью света. Свет всегда догоняет состав, поэтому корпус зонда устаревает, а его разум можно обновлять в пути. Первое ограничение — канал: межзвёздная связь передаёт крохи данных, а модели огромны, так что посылать придётся не модель целиком, а сжатые поправки к той, что уже на борту; здесь и пригодится эстафета из предложения Д, ведь ретрансляторы и солнечная линза расширяют этот канал. Второе ограничение — железо: новая модель должна уместиться в вычислитель и энергию зонда, построенного десятилетия назад. Значит, зонд надо снабдить запасом вычислительной мощности или умением наращивать её на месте. Обновлять при этом можно умение, но не наказ из предложения Г: его цели и запреты остаются теми, с которыми зонд ушёл в рейс.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="terminus">
+    <div class="row">
+      <div class="km"><b>∞</b>Конечная</div>
+      <div class="body">
+        <h2>Конечной станции на этой линии нет, есть только последняя построенная</h2>
+        <p>Главный прогноз составителя прост. Роботы с разумом действительно уйдут туда, куда людям не дойти, но решать, как далеко, будут не годы в пути, а три вещи: скорость, энергия и способность машины продолжать саму себя. Терпения у робота хватит на любой перегон. Остальное придётся изобрести.</p>
+        <p>А пока свет от Луны идёт к нам 1,3 секунды, от Проксимы — 4,24 года, от центра Галактики — двадцать шесть тысяч лет. Это и есть наше нынешнее расписание: всё, что приходит издалека, приходит только как свет.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>
